@@ -1,0 +1,32 @@
+\begin{tikzpicture}[fs, x=1pt, y=1pt]
+\node[fs box, anchor=south] (P) at (0,62)
+  {$O^{+}$\\[2pt]
+   $(\FigVec{x}^{+},\FigVec{v}^{+},\FigVec{L}^{+})$\\[2pt]
+   \textcolor{fsRed}{$\FigVec{T}^{+}=\mathcal{G}^{+}(\FigVec{x}^{+},
+   \FigVec{v}^{+},\FigVec{L}^{+})$}};
+\node[fs box, anchor=north] (A) at (-78,20)
+  {$O$, first relative motion\\[2pt]
+   $(\FigVec{x}_{1},\FigVec{v}_{1},\FigVec{L}_{1})$\\[2pt]
+   \textcolor{fsRed}{$\FigVec{T}_{1}=\mathcal{G}(\FigVec{x}_{1},
+   \FigVec{v}_{1},\FigVec{L}_{1})$}};
+\node[fs box, anchor=north] (B) at (78,20)
+  {$O$, second relative motion\\[2pt]
+   $(\FigVec{x}_{2},\FigVec{v}_{2},\FigVec{L}_{2})$\\[2pt]
+   \textcolor{fsRed}{$\FigVec{T}_{2}=\mathcal{G}(\FigVec{x}_{2},
+   \FigVec{v}_{2},\FigVec{L}_{2})$}};
+\draw[fs vec] (-46,21.5) -- (-46,60.5);
+\draw[fs vec] (46,21.5) -- (46,60.5);
+\node[fs label, anchor=east] at (-50,45) {$\FigVec{Q}_{1},\ \FigVec{c}_{1}$};
+\node[fs slabel, anchor=west] at (-42,37)
+  {$\FigVec{Q}_{1}\FigVec{T}_{1}\FigVec{Q}_{1}^{t}$};
+\node[fs label, anchor=west] at (50,45) {$\FigVec{Q}_{2},\ \FigVec{c}_{2}$};
+\node[fs slabel, anchor=east] at (42,37)
+  {$\FigVec{Q}_{2}\FigVec{T}_{2}\FigVec{Q}_{2}^{t}$};
+\draw[fs vec] ($(A.south)+(0,-1.5)$) to[out=-28, in=-152]
+  coordinate[pos=0.5] (mc) ($(B.south)+(0,-1.5)$);
+\node[fs label, anchor=north] (qd) at ($(mc)+(0,-3.5)$)
+  {$\FigVec{Q}=\FigVec{Q}_{2}^{t}\FigVec{Q}_{1},\quad
+   \FigVec{d}=\FigVec{Q}_{2}^{t}(\FigVec{c}_{1}-\FigVec{c}_{2})$};
+\node[fs formula, anchor=north] at ($(qd.south)+(0,-3)$)
+  {$\FigVec{T}_{2}=\FigVec{Q}\FigVec{T}_{1}\FigVec{Q}^{t}$};
+\end{tikzpicture}

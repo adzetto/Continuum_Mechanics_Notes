@@ -160,68 +160,68 @@
 \contentsline {section}{\numberline {8.3}Noll's rule}{508}{section.1815}%
 \contentsline {section}{\numberline {8.4}Frame invariance}{516}{section.1836}%
 \contentsline {chapter}{\numberline {9}Viscous Fluids}{527}{chapter.1864}%
-\contentsline {section}{\numberline {9.1}Material frame indifference}{531}{section.1875}%
-\contentsline {subsection}{\numberline {9.1.1}Isotropic symmetric tensor-valued functions of a symmetric tensor}{542}{subsection.1926}%
-\contentsline {section}{\numberline {9.2}The heat flux}{553}{section.1970}%
-\contentsline {section}{\numberline {9.3}Thermodynamical considerations}{566}{section.2030}%
-\contentsline {section}{\numberline {9.4}Problems}{580}{section.2090}%
-\contentsline {subsection}{Problem 1: The two relative motions, verified}{580}{problemenv.2091}%
-\contentsline {subsection}{Problem 2: The same laws as the second observer writes them}{581}{problemenv.2092}%
-\contentsline {subsection}{Problem 3: Sufficiency of the heat-flux representation}{583}{problemenv.2093}%
-\contentsline {subsection}{Problem 4: Observers agree on the reaction pressure}{584}{problemenv.2094}%
-\contentsline {subsection}{Problem 5: Axial flow along a pipe, and the elliptical cross section}{585}{problemenv.2095}%
-\contentsline {subsection}{Problem 6: Two classical unidirectional flows}{589}{problemenv.2096}%
-\contentsline {subsection}{Problem 7: Rigid rotation, and the shape of the free surface}{592}{problemenv.2097}%
-\contentsline {subsection}{Problem 8: Circular Couette flow in an annulus}{594}{problemenv.2098}%
-\contentsline {subsection}{Problem 9: Archimedes}{598}{problemenv.2099}%
-\contentsline {subsection}{Problem 10: The thermal energy balance for an incompressible fluid}{602}{problemenv.2100}%
-\contentsline {subsection}{Problem 11: The temperature field between rotating cylinders}{604}{problemenv.2101}%
-\contentsline {subsection}{Problem 12: A spherically symmetric flow}{606}{problemenv.2102}%
-\contentsline {chapter}{\numberline {10}Kinematic Constraints}{611}{chapter.2103}%
-\contentsline {section}{\numberline {10.1}Observer consensus}{612}{section.2107}%
-\contentsline {section}{\numberline {10.2}Modification of the stress to accommodate constraints}{618}{section.2139}%
-\contentsline {section}{\numberline {10.3}Problems}{633}{section.2194}%
-\contentsline {subsection}{Problem 1: The three constraints as $O^{+}$ writes them}{633}{problemenv.2195}%
-\contentsline {subsection}{Problem 2: The reactive stress seen by another observer}{635}{problemenv.2196}%
-\contentsline {subsection}{Problem 3: A laminate of inextensible sheets}{637}{problemenv.2197}%
-\contentsline {subsection}{Problem 4: A laminate whose sheets preserve area}{639}{problemenv.2198}%
-\contentsline {chapter}{\numberline {11}Elastic Solids}{643}{chapter.2199}%
-\contentsline {section}{\numberline {11.1}Clausius--Duhem inequality}{645}{section.2221}%
-\contentsline {section}{\numberline {11.2}Stress response}{647}{section.2237}%
-\contentsline {subsection}{\numberline {11.2.1}Material symmetry}{649}{subsection.2255}%
-\contentsline {section}{\numberline {11.3}Heat flux}{657}{section.2302}%
-\contentsline {subsection}{\numberline {11.3.1}General form of the heat flux}{659}{subsection.2320}%
-\contentsline {section}{\numberline {11.4}Problems}{661}{section.2342}%
-\contentsline {subsection}{Problem 1: The three rearrangement rules}{661}{problemenv.2343}%
-\contentsline {subsection}{Problem 2: The isotropic Cauchy stress}{662}{problemenv.2344}%
-\contentsline {subsection}{Problem 3: $\vek {C}$ and $\vek {B}$ have the same invariants}{663}{problemenv.2345}%
-\contentsline {subsection}{Problem 4: The isotropic response as $O^{+}$ writes it}{664}{problemenv.2346}%
-\contentsline {subsection}{Problem 5: Are the laminate constraints compatible with isotropy?}{665}{problemenv.2347}%
-\contentsline {subsection}{Problem 6: The invariants in simple shear}{667}{problemenv.2348}%
-\contentsline {subsection}{Problem 7: The universal relation}{668}{problemenv.2349}%
-\contentsline {subsection}{Problem 8: The neo-Hookean material, and a bar in tension}{669}{problemenv.2350}%
-\contentsline {subsection}{Problem 9: Anti-plane shear of a neo-Hookean tube}{671}{problemenv.2351}%
-\contentsline {subsection}{Problem 10: Residual stress in an isotropic solid}{673}{problemenv.2352}%
-\contentsline {subsection}{Problem 11: An azimuthal anti-plane shear, and what it is}{674}{problemenv.2353}%
-\contentsline {subsection}{Problem 12: Torsion of a neo-Hookean bar, and the Poynting effect}{676}{problemenv.2354}%
-\contentsline {subsection}{Problem 13: Closing a wedge: the cylinder with a sector removed}{678}{problemenv.2356}%
-\contentsline {subsection}{Problem 14: The referential energy balance for an elastic solid}{682}{problemenv.2357}%
-\contentsline {subsection}{Problem 15: The referential heat flux}{683}{problemenv.2359}%
-\contentsline {subsection}{Problem 16: A torsion with an axial temperature gradient}{685}{problemenv.2360}%
-\contentsline {chapter}{\numberline {12}Linear Elasticity}{688}{chapter.2361}%
-\contentsline {section}{\numberline {12.1}Kinematics}{688}{section.2362}%
-\contentsline {section}{\numberline {12.2}Stress--deformation relation}{696}{section.2431}%
-\contentsline {section}{\numberline {12.3}Equation of motion}{702}{section.2514}%
-\contentsline {section}{\numberline {12.4}Problems}{704}{section.2535}%
-\contentsline {subsection}{Problem 1: The kinematic transformations}{704}{problemenv.2536}%
-\contentsline {subsection}{Problem 2: Energy balance in the purely mechanical theory}{705}{problemenv.2537}%
-\contentsline {subsection}{Problem 3: Residual stress in the linear theory}{706}{problemenv.2538}%
-\contentsline {subsection}{Problem 4: The cofactor at leading order, and the two volume formulas}{707}{problemenv.2539}%
-\contentsline {subsection}{Problem 5: The symmetries of the spatial stiffness}{709}{problemenv.2540}%
-\contentsline {subsection}{Problem 6: The strain energy as a quadratic form}{710}{problemenv.2541}%
-\contentsline {subsection}{Problem 7: Isotropic moduli, and when the energy is positive definite}{711}{problemenv.2542}%
-\contentsline {subsection}{Problem 8: The spatial equation of motion}{713}{problemenv.2543}%
-\contentsline {subsection}{Problem 9: The equation of motion for a second inertial observer}{714}{problemenv.2544}%
-\contentsline {subsection}{Problem 10: A non-inertial second observer}{715}{problemenv.2545}%
-\contentsline {chapter}{\numberline {A}Dictionary to the book: Chapter 1 notation}{717}{appendix.2547}%
-\contentsline {chapter}{\numberline {B}Dictionary to the book: Chapter 2 notation}{718}{appendix.2548}%
+\contentsline {section}{\numberline {9.1}Material frame indifference}{530}{section.1873}%
+\contentsline {subsection}{\numberline {9.1.1}Isotropic symmetric tensor-valued functions of a symmetric tensor}{547}{subsection.1928}%
+\contentsline {section}{\numberline {9.2}The heat flux}{558}{section.1972}%
+\contentsline {section}{\numberline {9.3}Thermodynamical considerations}{572}{section.2034}%
+\contentsline {section}{\numberline {9.4}Problems}{587}{section.2095}%
+\contentsline {subsection}{Problem 1: The two relative motions, verified}{587}{problemenv.2096}%
+\contentsline {subsection}{Problem 2: The same laws as the second observer writes them}{589}{problemenv.2097}%
+\contentsline {subsection}{Problem 3: Sufficiency of the heat-flux representation}{591}{problemenv.2098}%
+\contentsline {subsection}{Problem 4: Observers agree on the reaction pressure}{592}{problemenv.2099}%
+\contentsline {subsection}{Problem 5: Axial flow along a pipe, and the elliptical cross section}{593}{problemenv.2100}%
+\contentsline {subsection}{Problem 6: Two classical unidirectional flows}{597}{problemenv.2101}%
+\contentsline {subsection}{Problem 7: Rigid rotation, and the shape of the free surface}{601}{problemenv.2103}%
+\contentsline {subsection}{Problem 8: Circular Couette flow in an annulus}{603}{problemenv.2104}%
+\contentsline {subsection}{Problem 9: Archimedes}{608}{problemenv.2106}%
+\contentsline {subsection}{Problem 10: The thermal energy balance for an incompressible fluid}{612}{problemenv.2107}%
+\contentsline {subsection}{Problem 11: The temperature field between rotating cylinders}{614}{problemenv.2108}%
+\contentsline {subsection}{Problem 12: A spherically symmetric flow}{616}{problemenv.2109}%
+\contentsline {chapter}{\numberline {10}Kinematic Constraints}{621}{chapter.2110}%
+\contentsline {section}{\numberline {10.1}Observer consensus}{622}{section.2114}%
+\contentsline {section}{\numberline {10.2}Modification of the stress to accommodate constraints}{628}{section.2146}%
+\contentsline {section}{\numberline {10.3}Problems}{643}{section.2201}%
+\contentsline {subsection}{Problem 1: The three constraints as $O^{+}$ writes them}{643}{problemenv.2202}%
+\contentsline {subsection}{Problem 2: The reactive stress seen by another observer}{645}{problemenv.2203}%
+\contentsline {subsection}{Problem 3: A laminate of inextensible sheets}{647}{problemenv.2204}%
+\contentsline {subsection}{Problem 4: A laminate whose sheets preserve area}{649}{problemenv.2205}%
+\contentsline {chapter}{\numberline {11}Elastic Solids}{653}{chapter.2206}%
+\contentsline {section}{\numberline {11.1}Clausius--Duhem inequality}{655}{section.2228}%
+\contentsline {section}{\numberline {11.2}Stress response}{657}{section.2244}%
+\contentsline {subsection}{\numberline {11.2.1}Material symmetry}{659}{subsection.2262}%
+\contentsline {section}{\numberline {11.3}Heat flux}{667}{section.2309}%
+\contentsline {subsection}{\numberline {11.3.1}General form of the heat flux}{669}{subsection.2327}%
+\contentsline {section}{\numberline {11.4}Problems}{671}{section.2349}%
+\contentsline {subsection}{Problem 1: The three rearrangement rules}{671}{problemenv.2350}%
+\contentsline {subsection}{Problem 2: The isotropic Cauchy stress}{672}{problemenv.2351}%
+\contentsline {subsection}{Problem 3: $\vek {C}$ and $\vek {B}$ have the same invariants}{673}{problemenv.2352}%
+\contentsline {subsection}{Problem 4: The isotropic response as $O^{+}$ writes it}{674}{problemenv.2353}%
+\contentsline {subsection}{Problem 5: Are the laminate constraints compatible with isotropy?}{675}{problemenv.2354}%
+\contentsline {subsection}{Problem 6: The invariants in simple shear}{677}{problemenv.2355}%
+\contentsline {subsection}{Problem 7: The universal relation}{678}{problemenv.2356}%
+\contentsline {subsection}{Problem 8: The neo-Hookean material, and a bar in tension}{679}{problemenv.2357}%
+\contentsline {subsection}{Problem 9: Anti-plane shear of a neo-Hookean tube}{682}{problemenv.2358}%
+\contentsline {subsection}{Problem 10: Residual stress in an isotropic solid}{683}{problemenv.2359}%
+\contentsline {subsection}{Problem 11: An azimuthal anti-plane shear, and what it is}{684}{problemenv.2360}%
+\contentsline {subsection}{Problem 12: Torsion of a neo-Hookean bar, and the Poynting effect}{686}{problemenv.2361}%
+\contentsline {subsection}{Problem 13: Closing a wedge: the cylinder with a sector removed}{688}{problemenv.2363}%
+\contentsline {subsection}{Problem 14: The referential energy balance for an elastic solid}{692}{problemenv.2364}%
+\contentsline {subsection}{Problem 15: The referential heat flux}{694}{problemenv.2366}%
+\contentsline {subsection}{Problem 16: A torsion with an axial temperature gradient}{695}{problemenv.2367}%
+\contentsline {chapter}{\numberline {12}Linear Elasticity}{698}{chapter.2368}%
+\contentsline {section}{\numberline {12.1}Kinematics}{698}{section.2369}%
+\contentsline {section}{\numberline {12.2}Stress--deformation relation}{706}{section.2438}%
+\contentsline {section}{\numberline {12.3}Equation of motion}{712}{section.2521}%
+\contentsline {section}{\numberline {12.4}Problems}{714}{section.2542}%
+\contentsline {subsection}{Problem 1: The kinematic transformations}{714}{problemenv.2543}%
+\contentsline {subsection}{Problem 2: Energy balance in the purely mechanical theory}{715}{problemenv.2544}%
+\contentsline {subsection}{Problem 3: Residual stress in the linear theory}{716}{problemenv.2545}%
+\contentsline {subsection}{Problem 4: The cofactor at leading order, and the two volume formulas}{717}{problemenv.2546}%
+\contentsline {subsection}{Problem 5: The symmetries of the spatial stiffness}{719}{problemenv.2547}%
+\contentsline {subsection}{Problem 6: The strain energy as a quadratic form}{720}{problemenv.2548}%
+\contentsline {subsection}{Problem 7: Isotropic moduli, and when the energy is positive definite}{721}{problemenv.2549}%
+\contentsline {subsection}{Problem 8: The spatial equation of motion}{723}{problemenv.2550}%
+\contentsline {subsection}{Problem 9: The equation of motion for a second inertial observer}{724}{problemenv.2551}%
+\contentsline {subsection}{Problem 10: A non-inertial second observer}{725}{problemenv.2552}%
+\contentsline {chapter}{\numberline {A}Dictionary to the book: Chapter 1 notation}{727}{appendix.2554}%
+\contentsline {chapter}{\numberline {B}Dictionary to the book: Chapter 2 notation}{728}{appendix.2555}%

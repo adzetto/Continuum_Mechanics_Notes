@@ -543,21 +543,25 @@ across a surface
 
 ### remark
 - `\ref{rem:ch9nokappa}` : what has just been bought
-- `\ref{rem:ch9defn}` : why \eqr{9.5} alone forbids nothing
-- `\ref{rem:ch9enote}` : a clash of symbols, and the book's numbering
+- `\ref{rem:ch9defn}` : how this relates to ``the same function'' of Chapter 8
+- `\ref{rem:ch9enote}` : two letters, and the book's grouping
 - `\ref{rem:ch9mirror}` : this is \eqr{7.34} in a mirror
+- `\ref{rem:ch9murdoch}` : a superposed rigid motion, and why the book does not say so
 - `\ref{rem:ch9mis14}` : a misprint in the printed \eqr{9.14}
-- `\ref{rem:ch9samelet}` : the same letter for two functions
+- `\ref{rem:ch9samelet}` : three functions, two letters
+- `\ref{rem:ch9exp}` : where the bracket in \eqr{9.18} belongs
 - `\ref{rem:ch9noW}` : what \eqr{9.21} really rules out
 - `\ref{rem:ch9twoisos}` : two things called isotropy
 - `\ref{rem:ch9CH}` : why the series stops at $\bD^{2}$
 - `\ref{rem:ch9mis35}` : a misprint in the printed \eqr{9.35}
-- `\ref{rem:ch9degen}` : why the degenerate cases are not a gap
+- `\ref{rem:ch9degen}` : the degenerate cases, and what continuity costs
 - `\ref{rem:ch9count}` : the size of the reduction
 - `\ref{rem:ch9pressure}` : what \eqr{9.38} says about a fluid at rest
 - `\ref{rem:ch9Kwarn}` : $\bK$ here is not the $\bK$ of Chapter 7
 - `\ref{rem:ch9dyad}` : the point of trading $\bd$ for $\bd\otimes\bd$
+- `\ref{rem:ch9generic}` : the claim that opens Part 2 is too strong
 - `\ref{rem:ch9linq}` : why the heat flux is forced to be a linear map of $\grad\theta$
+- `\ref{rem:ch9mis57}` : a misprint in the printed \eqr{9.57}
 - `\ref{rem:ch9signfix}` : a step in the book's proof that needs one more line
 - `\ref{rem:ch9Ksign}` : the sign convention in \eqr{9.61}
 - `\ref{rem:ch9NSderived}` : what was postulated and what was derived
@@ -570,8 +574,14 @@ across a surface
 - `\ref{rem:ch9react}` : why the pressure is not a constitutive quantity
 
 ### sekil
-- `\ref{fig:ch9coaxial}` : What Part 2 proves. The stretching $\bD$ has principal axes $\{\bnu_{i}\}$ and...
-- `\ref{fig:ch9viscosity}` : The two viscosities, and the two motions that isolate them. Any $\bD$ splits b...
+- `\ref{fig:ch9xplus}` : What the subscripts in \eqr{9.6} mean. Panel a is drawn in the space of $O^{+}...
+- `\ref{fig:ch9triangle}` : The logic of \eqr{9.9} and \eqr{9.10} as a diagram; $\theta$, $\rho$ and $p$ a...
+- `\ref{fig:ch9spin}` : The second choice, \eqr{9.18} to \eqr{9.20}, drawn for a square element (dashe...
+- `\ref{fig:ch9coaxial}` : What Part 2 proves. a: the stretching $\bD$ has principal axes $\{\bnu_{i}\}$,...
+- `\ref{fig:ch9ray}` : The two uses of ``for all'' in Section~\ref{sec:ch9thermo}. a: along the ray $...
+- `\ref{fig:ch9viscosity}` : The two viscosities, and the two motions that isolate them, drawn for a square...
+- `\ref{fig:ch9couette}` : The profiles of part (a), drawn in the dimensionless form $v_{1}/V=\xi+\Pi\,\x...
+- `\ref{fig:ch9annulus}` : Circular Couette flow. a: the annulus between the inner cylinder, of radius $a...
 
 ### kisimlar
 - `\ref{sec:ch9mfi}` : Material frame indifference
@@ -581,7 +591,7 @@ across a surface
 - `\ref{sec:problems:c9}` : Problems
 
 ### kitap denklem numaralari (\eqr ile baglanir)
-`9.1`, `$\ast$`, `9.2`, `9.3`, `9.4`, `9.5`, `9.6`, `9.7`, `9.8`, `9.9`, `9.10`, `9.11`, `9.12`, `9.13`, `$\ast\ast$`, `9.14`, `9.15`, `9.16`, `9.17`, `9.18`, `9.19`, `9.20`, `9.21`, `9.22`, `9.23`, `9.24`, `9.25`, `9.26`, `9.27`, `9.28`, `9.29`, `9.30`, `9.31`, `9.32`, `9.33`, `9.34`, `9.35`, `9.36`, `9.37`, `9.38`, `9.39`, `9.40`, `9.41`, `9.42`, `9.43`, `9.44`, `9.45`, `9.46`, `9.47`, `9.48`, `9.49`, `9.50`, `9.51`, `9.52`, `9.53`, `9.54`, `9.55`, `9.56`, `9.57`, `9.58`, `9.59`, `9.60`, `9.61`, `9.62`, `9.63`, `9.64`, `9.65`, `9.66`, `9.67`, `9.68`, `9.69`, `9.70`, `9.71`, `9.72`, `9.73`, `9.74`, `9.75`, `9.76`, `9.77`, `9.78`, `9.79`, `9.80`, `9.81`, `9.82`, `9.83`, `9.84`, `9.85`
+`9.1`, `9.2`, `9.3`, `9.4`, `9.5`, `9.6`, `9.7`, `9.8`, `9.9`, `9.10`, `9.11`, `9.12`, `9.13`, `9.14`, `9.15`, `9.16`, `9.17`, `9.18`, `9.19`, `9.20`, `9.21`, `9.22`, `9.23`, `9.24`, `9.25`, `9.26`, `9.27`, `9.28`, `9.29`, `9.30`, `9.31`, `9.32`, `9.33`, `9.34`, `9.35`, `9.36`, `9.37`, `9.38`, `9.39`, `9.40`, `9.41`, `9.42`, `9.43`, `9.44`, `9.45`, `9.46`, `9.47`, `9.48`, `9.49`, `9.50`, `9.51`, `9.52`, `9.53`, `9.54`, `9.55`, `9.56`, `9.57`, `9.58`, `9.59`, `9.60`, `9.61`, `9.62`, `9.63`, `9.64`, `9.65`, `9.66`, `9.67`, `9.68`, `9.69`, `9.70`, `9.71`, `9.72`, `9.73`, `9.74`, `9.75`, `9.76`, `9.77`, `9.78`, `9.79`, `9.80`, `9.81`, `9.82`, `9.83`, `9.84`, `9.85`
 
 ## body_ch10.tex
 

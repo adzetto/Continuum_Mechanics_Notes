@@ -1,0 +1,23 @@
+\input{ch9f_viscosity_geom.tex}
+\begin{tikzpicture}[fs, x=1pt, y=1pt]
+\filldraw[fs body] \Fela;
+\draw[fs hidden] \Fgrow;
+\draw[fs stress] \Fnr;
+\draw[fs stress] \Fnl;
+\draw[fs stress] \Fnt;
+\draw[fs stress] \Fnb;
+\node[fs slabel, anchor=west] at \Fnlab {$\kappa\,\FigTr\FigVec{D}$};
+\node[fs label, anchor=north] at \Funda
+  {$\FigVec{D}=\tfrac13(\FigTr\FigVec{D})\,\FigVec{I}$};
+\filldraw[fs body] \Felb;
+\draw[fs hidden] \Fshear;
+\draw[fs stress] \Fst;
+\draw[fs stress] \Fsb;
+\draw[fs stress] \Fsr;
+\draw[fs stress] \Fsl;
+\node[fs slabel, anchor=south] at \Fslab {$2\mu D_{12}$};
+\node[fs label, anchor=north] at \Fundb
+  {$\FigVec{D}=\operatorname{Dev}\FigVec{D}$};
+\FigPanel{\Fpanela}{a}
+\FigPanel{\Fpanelb}{b}
+\end{tikzpicture}

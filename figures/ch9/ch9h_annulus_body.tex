@@ -1,0 +1,33 @@
+\input{ch9h_annulus_geom.tex}
+\begin{tikzpicture}[fs, x=1pt, y=1pt]
+\draw[fs hatch] \Hhatch;
+\filldraw[fs body, fill=fsBodyFill] \Houter;
+\filldraw[fs body] \Hinner;
+\draw[fs angle] \Hwa;
+\node[fs anglabel] at \Hwalab {$\omega_{a}$};
+\draw[fs angle] \Hwb;
+\node[fs anglabel, anchor=south west] at \Hwblab {$\omega_{b}$};
+\draw[fs thin, -{fs tip dim}] \Hda;
+\draw[fs thin, -{fs tip dim}] \Hdb;
+\node[fs anglabel] at \Hdalab {$a$};
+\node[fs anglabel] at \Hdblab {$b$};
+\node[fs point] at \Hc {};
+\draw[fs axis] \Hax;
+\draw[fs axis] \Hay;
+\node[fs axlabel, anchor=north west] at \Haxlab {$r/a$};
+\node[fs axlabel, anchor=west] at \Haylab {$v_{\theta}/(a\omega_{a})$};
+\draw[fs thin] \Hticks;
+\node[fs label, anchor=north] at \Htxa {$1$};
+\node[fs label, anchor=north] at \Htxb {$1.5$};
+\node[fs label, anchor=north] at \Htxc {$2$};
+\node[fs label, anchor=east] at \Htya {$1$};
+\node[fs label, anchor=east] at \Htyb {$2$};
+\draw[fs curve] \Hcrigid;
+\draw[fs curve] \Hcvortex;
+\draw[fs curve] \Hcrest;
+\node[fs label, anchor=west] at \Hlrigid {$\omega_{b}=\omega_{a}$};
+\node[fs label, anchor=south west] at \Hlvortex {$\omega_{b}=\omega_{a}/4$};
+\node[fs label, anchor=west] at \Hlrest {$\omega_{b}=0$};
+\FigPanel{\Hpanela}{a}
+\FigPanel{\Hpanelb}{b}
+\end{tikzpicture}

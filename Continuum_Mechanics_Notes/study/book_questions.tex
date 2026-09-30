@@ -228,7 +228,7 @@ would equal $2T_{kl,l}$ on solutions of (6.110), and the symmetry of the
 Cauchy stress would not follow.
 \end{query}
 
-\begin{query}{6. A missing transpose in equation (9.14), p.~183.}
+\begin{query}{6. A misplaced factor in equation (9.14), p.~181.}
 The second term of the printed (9.14) is
 $\dot\bQ_{1}\bQ^{t}_{1}(\bc_{1}-\bc_{2})$. It should be
 $\dot\bQ^{t}_{1}(\bc_{1}-\bc_{2})$.
@@ -239,16 +239,36 @@ factors live in. The vectors $\bc_{k}$ lie in $\mathbb{E}^{3+}$, since
 $\mathbb{E}^{3+}$ to $\Et$ and $\dot\bQ_{1}$ carries $\Et$ back to
 $\mathbb{E}^{3+}$, so the printed expression lands in
 $\mathbb{E}^{3+}$. But the vector it is added to must lie in $\Et$,
-because (9.13) adds it to $\bQ\bv_{1}$ there. Exactly one transpose is
-missing.
+because (9.12) adds $\be$ to $\bQ\bv_{1}$ there. Since
+$\bQ_{1}\bQ^{t}_{1}$ is the identity of $\mathbb{E}^{3+}$, the correct
+term can also be written $-\bQ^{t}_{1}\dot\bQ_{1}\bQ^{t}_{1}
+(\bc_{1}-\bc_{2})$; compared with that form, the printed one has lost
+the leading factor $\bQ^{t}_{1}$ and the sign.
 
 A check of the corrected form: with $\bQ_{2}=\bQ_{1}$ one has
-$\bQ=\I$ and (9.12) reduces to a pure translation, for which the
-corrected term reproduces the relative velocity correctly while the
-printed one does not.
+$\bQ=\I$ and (9.12) reduces to the pure translation
+$\bx_{2}=\bx_{1}+\bd$ with $\bd=\bQ^{t}_{1}(\bc_{1}-\bc_{2})$, for which
+the relative velocity must be
+$\be=\dot\bd=\bQ^{t}_{1}(\dot\bc_{1}-\dot\bc_{2})
++\dot\bQ^{t}_{1}(\bc_{1}-\bc_{2})$. The corrected (9.14) is exactly this
+and the printed one is not.
 \end{query}
 
-\begin{query}{7. A repeated index in equation (9.35), p.~191.}
+\begin{query}{7. The bracket in equation (9.18), p.~182.}
+The orthogonal tensor that prescribes the spin is printed as
+$\bQ(t)=[\exp(t-t_{*})\hat{\vek{\Omega}}]\hat\bQ$. Read literally,
+$\exp(t-t_{*})$ is the number $e^{t-t_{*}}$, and the expression is then
+$e^{t-t_{*}}\hat{\vek{\Omega}}\hat\bQ$, a skew tensor times an orthogonal
+one: it is not orthogonal, and at $t=t_{*}$ it equals
+$\hat{\vek{\Omega}}\hat\bQ$ rather than the $\hat\bQ$ asserted in the
+next sentence. The intended expression is
+$\bQ(t)=\exp[(t-t_{*})\hat{\vek{\Omega}}]\,\hat\bQ$, the tensor
+exponential of (C.24) applied to $(t-t_{*})\hat{\vek{\Omega}}$, for which
+$\bQ(t_{*})=\hat\bQ$ and $\dot\bQ\bQ^{t}=\hat{\vek{\Omega}}$ hold as
+stated.
+\end{query}
+
+\begin{query}{8. A repeated index in equation (9.35), p.~185.}
 The determinant is printed as
 \[
    (\eta_{1}-\eta_{1})(\eta_{2}-\eta_{3})(\eta_{3}-\eta_{1}),
@@ -261,7 +281,48 @@ three principal values are distinct, and with the printed factor it
 vanishes always, which would destroy the conclusion.
 \end{query}
 
-\begin{query}{8. The $11$ component of $\bB^{2}$ in (11.37) and (11.39),
+\begin{query}{9. Two verbal slips in Chapter 9, pp.~186 and 192.}
+In the paragraph preceding (9.37): ``This result subsumes the case in
+which $\vek{D}$ has only two distinct principal values, or just one. The
+first of these is covered by taking $\varphi_{2}=0$, and the third by
+taking $\varphi_{1}=\varphi_{2}=0$.'' Only two cases have been named, and
+``the third'' should read ``the second''. In the paragraph after (9.68),
+``and hence that that the free energy is a function'' has a doubled
+``that''.
+\end{query}
+
+\begin{query}{10. The last row of the matrix in equation (9.57), p.~189.}
+The third row of the coefficient matrix is printed as
+$(\lambda_{1}^{2},\lambda_{2}^{2},\lambda_{2}^{2})$. It should be
+$(\lambda_{1}^{2},\lambda_{2}^{2},\lambda_{3}^{2})$: the row expresses
+the equality of $I_{5}$, and $\ba\cdot\bA^{2}\ba$ weights the square of
+each component of $\ba$ by the square of the corresponding principal
+value. The determinant quoted on p.~190,
+$(\lambda_{1}-\lambda_{2})(\lambda_{2}-\lambda_{3})(\lambda_{3}-\lambda_{1})$,
+is that of the corrected matrix. With the printed row, expansion along
+the first row gives instead
+\[
+   \lambda_{2}^{2}(\lambda_{2}-\lambda_{3})
+   +\lambda_{1}^{2}(\lambda_{3}-\lambda_{2})
+   =-(\lambda_{1}-\lambda_{2})(\lambda_{2}-\lambda_{3})
+    (\lambda_{1}+\lambda_{2}),
+\]
+which vanishes for distinct principal values with
+$\lambda_{1}+\lambda_{2}=0$, for instance $(1,-1,2)$, and the conclusion
+that every $c_{i}$ vanishes would then fail.
+\end{query}
+
+\begin{query}{11. A reference in the solution of Problem 4 of Chapter 9,
+Appendix E, p.~288.}
+The solution ends with ``where, from (7.1) and (7.2),
+$p^{+}(\bx^{+},t^{+})=p\big(\bQ(t^{+}-a)^{t}(\bx^{+}-\bc(t^{+}-a)),
+t^{+}-a\big)$''. The inversion $\bx=\bQ^{t}(\bx^{+}-\bc)$ used there is
+that of (7.3), and the shift of time is (7.1); (7.2), the equality of
+distances, plays no part. ``From (7.1) and (7.3)'' appears to be
+intended.
+\end{query}
+
+\begin{query}{12. The $11$ component of $\bB^{2}$ in (11.37) and (11.39),
 p.~213--214.}
 Both displays print the $11$ component of $\bB^{2}$ in simple shear as
 $(1+\gamma^{2})+\gamma^{2}$. It should be
@@ -286,7 +347,7 @@ $T_{11}-T_{22}=\gamma^{2}(f_{1}+f_{2})$, which is not $\gamma T_{12}$
 unless $f_{2}=0$. With the corrected value it comes out exactly.
 \end{query}
 
-\begin{query}{9. A spurious factor $\gamma$ in equation (11.40),
+\begin{query}{13. A spurious factor $\gamma$ in equation (11.40),
 p.~214.}
 The printed shear response is
 \[
@@ -311,7 +372,7 @@ factor also breaks (11.42), which is derived from $\mu$ two lines later.
 \section*{Part II. Statements that appear stronger or looser than intended}
 %=======================================================================
 
-\begin{query}{10. The sign of $\det\bF$ and occupiability, p.~50.}
+\begin{query}{14. The sign of $\det\bF$ and occupiability, p.~50.}
 The text states: ``If $\kappa$ is not occupiable, then $\det\bF<0$ and
 (2.50)$_2$ is replaced by $J=|\det\bF|$.''
 
@@ -329,7 +390,7 @@ in the book where the reader is asked to accept a sign convention on
 faith.
 \end{query}
 
-\begin{query}{11. Equation (2.9) and the term ``material velocity'', p.~40.}
+\begin{query}{15. Equation (2.9) and the term ``material velocity'', p.~40.}
 Equation (2.9) introduces
 $\tilde\bv(\bx,t)=\bv(\bchi^{-1}(\bx,t),t)$ with the words
 ``Alternatively, the material velocity is given by the function
@@ -343,7 +404,7 @@ velocity'' one page earlier is likely to be read as a contradiction. Is
 recurs after (2.17).
 \end{query}
 
-\begin{query}{12. Equation (3.19) and the labels $\lambda_1,\lambda_2$, p.~66.}
+\begin{query}{16. Equation (3.19) and the labels $\lambda_1,\lambda_2$, p.~66.}
 In \S3.2, $\lambda_1$ and $\lambda_2$ are defined as the minimum and
 maximum of $f(\bu)=\bu\cdot\bA\bu$ on the unit sphere, and $\bu_1,\bu_2$
 as the corresponding minimizers and maximizers. Everywhere else in the
@@ -357,7 +418,7 @@ $\lambda_-,\lambda_+$) in \S3.2 avoid the clash? Equation (3.26) is where
 the two conventions are hardest to hold apart.
 \end{query}
 
-\begin{query}{13. Problem 21(g), Chapter 1, p.~35.}
+\begin{query}{17. Problem 21(g), Chapter 1, p.~35.}
 The identity $\det(\bA+\ba\otimes\bb)=(\det\bA)(1+\ba\cdot\bA^{-t}\bb)$
 presupposes that $\bA$ is invertible, but the hypothesis is not stated,
 and parts (a)--(f) of the same problem carry no such restriction. Part (d)
@@ -367,7 +428,7 @@ right-hand side, which a student is likely to reach only after having
 attempted the general case.
 \end{query}
 
-\begin{query}{14. Equation (3.53), third line, p.~73.}
+\begin{query}{18. Equation (3.53), third line, p.~73.}
 The cross terms are printed as
 $\gamma(\hbE_2\otimes\vek{1}^{t}\bE_1+\vek{1}^{t}\bE_1\otimes\hbE_2)$.
 Expanding $(\vek{1}+\gamma\be_1\otimes\hbE_2)^{t}
@@ -383,21 +444,75 @@ explicitly at this step? As it stands, the example silently uses a
 convention adopted four equations earlier for an unrelated purpose.
 \end{query}
 
-\begin{query}{15. Equation (3.57), p.~74.}
+\begin{query}{19. Equation (3.57), p.~74.}
 The chain
-$\det\bU=[\bU\bu_1,\bU\bu_2,\bU\bu_3]/[\bu_1,\bu_2,\bu_3]
-=[\lambda_1\bu_1,\lambda_2\bu_2,\lambda_3\bu_3]=\lambda_1\lambda_2\lambda_3$
+\[
+   \det\bU=[\bU\bu_1,\bU\bu_2,\bU\bu_3]/[\bu_1,\bu_2,\bu_3]
+   =[\lambda_1\bu_1,\lambda_2\bu_2,\lambda_3\bu_3]=\lambda_1\lambda_2\lambda_3
+\]
 drops the denominator between the second and third members. The step is
 of course legitimate, since $[\bu_1,\bu_2,\bu_3]=\pm1$ for an orthonormal
 triad and the sign cancels against the numerator, but as printed the
 equality signs do not hold term by term.
 \end{query}
 
+\begin{query}{20. The degenerate cases of (9.24), p.~186.}
+Parts 3 and 4 of the proof of (9.24) assume the principal values of
+$\vek{D}$ distinct, and the text then disposes of the remaining cases by
+taking $\varphi_{2}=0$, or $\varphi_{1}=\varphi_{2}=0$. The
+representation does exist there, but with that rule the coefficient
+functions need not be continuous, which (9.38) goes on to assume. For
+$\bG(\vek{D})=\vek{D}^{2}$ one has $\varphi_{0}=\varphi_{1}=0$ and
+$\varphi_{2}=1$ wherever the principal values are distinct, while at a
+$\vek{D}$ with $\eta_{1}\neq\eta_{2}=\eta_{3}$ the identity
+$\vek{D}^{2}=(\eta_{1}+\eta_{2})\vek{D}-\eta_{1}\eta_{2}\I$ and the rule
+$\varphi_{2}=0$ give $\varphi_{1}=\eta_{1}+\eta_{2}$ and
+$\varphi_{0}=-\eta_{1}\eta_{2}$: the coefficients jump. Would it be
+better to say that on the degenerate set the coefficients are fixed by
+continuity? At $\vek{D}=\vek{O}$, the one degenerate point that (9.38)
+uses, nothing is affected, since only $\varphi_{0}$ survives there.
+\end{query}
+
+\begin{query}{21. The claim that opens Part 2 of Section 9.2, p.~188.}
+The text states: ``if $\bd$ is arbitrary and $\vek{D}$ is an arbitrary
+symmetric tensor, then $\{\bd,\vek{D}\bd,\vek{D}^{2}\bd\}$ is a basis for
+$E^{3}$'', and it passes from (9.48) to $a+b\eta_{i}+c\eta_{i}^{2}=0$
+``as $\bd$ is arbitrary''. As stated the claim is false: for $\bd$ along
+a principal direction of $\vek{D}$ the three vectors are parallel. What
+the argument proves is that the set is a basis if and only if the
+principal values are distinct and every component
+$d_{i}=\vek{\nu}_{i}\cdot\bd$ is non-zero. Nor is the appeal to the
+arbitrariness of $\bd$ available, since $\bd$ is the fixed argument at
+which the heat flux is being represented and $a,b,c$ may depend on it.
+The representation (9.41), (9.42) is therefore proved on a dense set of
+pairs $(\vek{D},\bd)$ and extends to the rest by continuity. The
+exceptional pairs can also be handled directly, with reflections that
+fix $\vek{D}$ and $\bd$; this is one place where the full orthogonal
+group, and not only the rotations, is needed.
+\end{query}
+
+\begin{query}{22. The signs in $\ba=\pm\tilde\bQ\bb$, p.~190.}
+From $c_{i}=0$ the text obtains
+$\tilde\bQ^{t}\ba\cdot\vek{v}_{i}=\pm\bb\cdot\vek{v}_{i}$ and concludes
+``Since $\{\vek{v}_{i}\}$ is a basis for $E^{3}$ it follows that
+$\ba=\pm\tilde\bQ\bb$''. The three signs need not agree. Take
+$\bA=\bB$ diagonal on $\{\be_{i}\}$ with distinct entries, so that
+$\tilde\bQ=\I$ is admissible, and $\ba=\be_{1}+\be_{2}$,
+$\bb=\be_{1}-\be_{2}$: all six invariants agree, yet $\ba\neq\pm\bb$ and
+$\ba\otimes\ba\neq\bb\otimes\bb$. The conclusion
+$\varphi(\bA,\ba\otimes\ba)=\varphi(\bB,\bb\otimes\bb)$ survives. With
+$s_{i}=\pm1$ the sign found for each $i$, the tensor
+$\bS=\sum_{i}s_{i}\vek{v}_{i}\otimes\vek{v}_{i}$ is orthogonal and
+commutes with $\bB$, and $\hat\bQ=\tilde\bQ\bS$ carries $\bB$ to $\bA$
+and $\bb$ to $\ba$. One further line to this effect would close the
+gap.
+\end{query}
+
 %=======================================================================
 \section*{Part III. Notation and points where a clarifying sentence would help}
 %=======================================================================
 
-\begin{query}{16. The symbol $e$ for both basis vectors and the permutation
+\begin{query}{23. The symbol $e$ for both basis vectors and the permutation
 symbol, Chapter 1.}
 In (1.164) the single line
 \[
@@ -413,7 +528,7 @@ collision occurs in Problem 11(a) of Chapter 1 and in Problem 1 of
 Chapter 2.
 \end{query}
 
-\begin{query}{17. The symbol $\dd_{iA}$ in (2.70), p.~54.}
+\begin{query}{24. The symbol $\dd_{iA}$ in (2.70), p.~54.}
 The shifter is decomposed as $\vek{1}=\dd_{iA}\be_i\otimes\hbE_A$, and the
 text then observes that ``$\dd_{iA}$ are the components of the usual
 Kronecker delta if, and only if, $\{\bE_A\}=\{\be_i\}$. Otherwise, they
@@ -430,7 +545,7 @@ extra letter? This is the one place in Chapter 2 where I had to reread
 several times to be sure which object was which.
 \end{query}
 
-\begin{query}{18. Equation (2.12), p.~40: the absence of the subscript
+\begin{query}{25. Equation (2.12), p.~40: the absence of the subscript
 $\kappa$.}
 I record this as a query answered rather than as a correction, since it is
 the first thing a reader checks. Equation (2.12) reads
@@ -451,7 +566,7 @@ misread the entire section. A parenthetical ``(note that (2.1) rather than
 argument)'' would settle it.
 \end{query}
 
-\begin{query}{19. $\bx'=\bze$ in the sanity check preceding \S2.4, p.~44.}
+\begin{query}{26. $\bx'=\bze$ in the sanity check preceding \S2.4, p.~44.}
 The line ``application of (2.20) to the position vector $\bx$, combined
 with $\bx'=\bze$, yields
 $\dot x_i=x_{i,j}\tilde v_j=\dd_{ij}\tilde v_j=\tilde v_i$, as expected''
@@ -468,7 +583,7 @@ believe the step is routine when in fact it is the sharpest test of
 whether \S2.2 has been understood.
 \end{query}
 
-\begin{query}{20. Section title of \S2.2 versus the order in (2.11).}
+\begin{query}{27. Section title of \S2.2 versus the order in (2.11).}
 The section is titled ``Material, referential and spatial descriptions'',
 whereas (2.11) lists $\bar f$, $\tilde f$, $\hat f$ and the sentence after
 (2.13) reads ``the material, spatial and referential descriptions,
@@ -477,7 +592,7 @@ uses the section title as a mnemonic for which decoration is which will be
 misled.
 \end{query}
 
-\begin{query}{21. Equation (2.96), p.~58.}
+\begin{query}{28. Equation (2.96), p.~58.}
 The step $\tfrac12(\bM\cdot\bC\bM-1)=\bM\cdot\bE\bM$ uses
 $1=\bM\cdot\hat{\I}\bM$, which holds because $|\bM|=1$. The unit-length
 hypothesis is stated at (2.66) but is not recalled here, and the reader
@@ -488,7 +603,7 @@ tracking the algebra will look for a missing factor. Similarly at (2.98).
 \section*{Part IV. Figures}
 %=======================================================================
 
-\begin{query}{22. Figure 2.5, p.~41.}
+\begin{query}{29. Figure 2.5, p.~41.}
 The caption reads ``Different material points occupy position $\bx$ at
 different times'', but the figure shows two disjoint regions. Since the
 whole point of the spatial description is that \emph{one} body sweeps past
@@ -499,7 +614,7 @@ As drawn, the reader can come away believing that $\bx$ is a point of each
 region rather than a point of space.
 \end{query}
 
-\begin{query}{23. Figure 2.9, p.~50.}
+\begin{query}{30. Figure 2.9, p.~50.}
 In the rendering of the deformation of oriented surface measure, the
 normals $\vek{N}$ and $\bn$ read as though they lie in the respective
 tangent planes rather than perpendicular to them; the parallelograms
@@ -510,7 +625,7 @@ would remove the ambiguity. This figure carries the Piola--Nanson formula,
 which is one of the results students most often get the geometry of wrong.
 \end{query}
 
-\begin{query}{24. Figure 2.8, p.~49.}
+\begin{query}{31. Figure 2.8, p.~49.}
 The three material curves intersecting at a point are shown with a
 parallelepiped whose hidden edges are omitted rather than dashed, which
 makes the orientation of the triad $d\bX,d\bY,d\bZ$ ambiguous, and with it
@@ -524,13 +639,13 @@ unmistakable from the figure.
 %=======================================================================
 
 \noindent
-Items 1 to 9 are, I believe, straightforward misprints and are verified
-above by independent computation. Item 10 is a mathematical statement that
-appears stronger than the argument supports. Items 11--15 are places where
-the printed equalities or terminology do not quite hold as written, though
-the intended meaning is recoverable. Items 16--21 are requests for a
-clarifying phrase at points where a careful reader is likely to stall, and
-items 22--24 concern figures whose geometry conflicts with, or fails to
-support, the accompanying text.
+In Part I, items 1--13 are, I believe, straightforward misprints, each
+verified above by independent computation. In Part II, items 14--22 are
+statements that appear stronger or looser than the argument supports,
+or steps of a proof that need one more line; each item says whether
+the conclusion survives. In Part III, items 23--28 are requests for a
+clarifying phrase at points where a careful reader is likely to stall,
+and in Part IV, items 29--31 concern figures whose geometry conflicts with,
+or fails to support, the accompanying text.
 
 \end{document}
