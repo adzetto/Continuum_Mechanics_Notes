@@ -18,6 +18,11 @@
 % book style: boldface is rendered by an under-tilde
 \DeclareRobustCommand{\vek}[1]{\underaccent{\tilde}{#1}}
 \usepackage{xcolor}
+% formula boxes in the house style of the figures: \boxed is filled with
+% lavender (199,196,226) instead of being framed
+\definecolor{formulabox}{RGB}{199,196,226}
+\DeclareRobustCommand{\boxed}[1]{{\setlength{\fboxsep}{0.35em}%
+  \colorbox{formulabox}{\mathsurround=0pt$\displaystyle#1$}}}
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage{array}

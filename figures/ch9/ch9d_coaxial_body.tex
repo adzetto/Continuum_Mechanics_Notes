@@ -1,0 +1,30 @@
+\input{ch9d_coaxial_geom.tex}
+\begin{tikzpicture}[fs, x=1pt, y=1pt]
+\filldraw[fs body] \Dela;
+\draw[fs axis] \Dtrionea;
+\draw[fs axis] \Dtritwoa;
+\node[fs axlabel, anchor=west] at \Dnuonea {$\FigVec{\nu}_{1}$};
+\node[fs axlabel, anchor=south] at \Dnutwoa {$\FigVec{\nu}_{2}$};
+\draw[fs vec] \Dvr;
+\draw[fs vec] \Dvl;
+\draw[fs vec] \Dvt;
+\draw[fs vec] \Dvb;
+\node[fs label, anchor=west] at \Detaone {$\eta_{1}>0$};
+\node[fs label, anchor=west] at \Detatwo {$\eta_{2}<0$};
+\filldraw[fs body] \Delb;
+\draw[fs axis] \Dtrioneb;
+\draw[fs axis] \Dtritwob;
+\node[fs axlabel, anchor=west] at \Dnuoneb {$\FigVec{\nu}_{1}$};
+\node[fs axlabel, anchor=south] at \Dnutwob {$\FigVec{\nu}_{2}$};
+\draw[fs stress] \Dsr;
+\draw[fs stress] \Dsl;
+\draw[fs stress] \Dst;
+\draw[fs stress] \Dsb;
+\node[fs slabel, anchor=west] at \Dbetaone {$\beta_{1}$};
+\node[fs slabel, anchor=west] at \Dbetatwo {$\beta_{2}$};
+\node[fs slabel, anchor=north west] at \Dtau {$\tau=0$};
+\draw[fs vec] \Dmap;
+\node[fs label, anchor=south] at \Dmaplab {$\FigVec{G}$};
+\FigPanel{\Dpanela}{a}
+\FigPanel{\Dpanelb}{b}
+\end{tikzpicture}

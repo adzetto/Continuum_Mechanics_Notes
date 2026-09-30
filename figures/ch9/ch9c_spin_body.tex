@@ -1,0 +1,26 @@
+\input{ch9c_spin_geom.tex}
+\begin{tikzpicture}[fs, x=1pt, y=1pt]
+\filldraw[fs body] \Crecta;
+\draw[fs hidden] \Csqa;
+\draw[fs axis] \Caxonea;
+\draw[fs axis] \Caxtwoa;
+\node[fs axlabel, anchor=west] at \Cnuonea {$\FigVec{\nu}_{1}$};
+\node[fs axlabel, anchor=south west] at \Cnutwoa {$\FigVec{\nu}_{2}$};
+\draw[fs thin] \Cfibre;
+\draw[fs angle] \Cturn;
+\node[fs anglabel, anchor=east] at \Cturnlab {$\omega\,\mathrm{d}t$};
+\node[fs label, anchor=north] at \Cundera
+  {$\FigVec{L}_{*}=\FigVec{D}_{*}+\FigVec{W}_{*}$};
+\filldraw[fs body] \Crectb;
+\draw[fs hidden] \Csqb;
+\draw[fs axis] \Caxoneb;
+\draw[fs axis] \Caxtwob;
+\node[fs axlabel, anchor=west] at \Cnuoneb {$\FigVec{\nu}_{1}$};
+\node[fs axlabel, anchor=south west] at \Cnutwob {$\FigVec{\nu}_{2}$};
+\node[fs label, anchor=north] at \Cunderb {$\FigVec{D}_{*}$};
+\draw[fs vec] \Cmap;
+\node[fs label, anchor=south] at \Cmaplab
+  {$\hat{\FigVec{Q}}=\FigVec{I},\ \hat{\FigVec{\Omega}}=-\FigVec{W}_{*}$};
+\FigPanel{\Cpanela}{a}
+\FigPanel{\Cpanelb}{b}
+\end{tikzpicture}

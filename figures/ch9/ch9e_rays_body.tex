@@ -1,0 +1,27 @@
+\input{ch9e_rays_geom.tex}
+\begin{tikzpicture}[fs, x=1pt, y=1pt]
+\fill[fs region] \Eregiona;
+\draw[fs axis] \Eaxda;
+\draw[fs axis] \Eaxfa;
+\node[fs axlabel, anchor=west] at \Edlab {$\delta$};
+\node[fs axlabel, anchor=west] at \Eflab {$\FigVec{a}\cdot\FigVec{w}+b$};
+\draw[fs aux] \Eflat;
+\draw[fs curve] \Eline;
+\node[fs label, anchor=west] at \Elinelab {$\FigVec{a}\neq\FigVec{0}$};
+\node[fs label, anchor=west] at \Eflatlab {$\FigVec{a}=\FigVec{0}$};
+\node[fs label, anchor=south east] at \Eblab {$b$};
+\node[fs point] at \Ecross {};
+\node[fs label, anchor=south east] at \Ecrosslab {$-b/|\FigVec{a}|^{2}$};
+\fill[fs region] \Eregionb;
+\draw[fs axis] \Eaxsb;
+\draw[fs axis] \Eaxfb;
+\node[fs axlabel, anchor=west] at \Eslab {$s$};
+\node[fs axlabel, anchor=west] at \Eflabb {$f(s\,\mathrm{d}\FigVec{D})$};
+\draw[fs curve] \Eallowed;
+\draw[fs curve, dash pattern=on 3.5pt off 2pt] \Eexcluded;
+\node[fs label, anchor=west] at \Eallowedlab {allowed};
+\node[fs label, anchor=west] at \Eexcludedlab {excluded};
+\node[fs point] at \Eo {};
+\FigPanel{\Epanela}{a}
+\FigPanel{\Epanelb}{b}
+\end{tikzpicture}

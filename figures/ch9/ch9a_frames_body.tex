@@ -1,0 +1,39 @@
+\input{ch9a_frames_geom.tex}
+\begin{tikzpicture}[fs, x=1pt, y=1pt]
+\path \Aop coordinate (op) \Aoone coordinate (oone) \Aotwo coordinate (otwo)
+  \Ap coordinate (p) \Ao coordinate (o);
+\Abasesa
+\draw[fs vec thin] \Acone;
+\node[fs label, anchor=\AconeN] at \AconeL {$\FigVec{c}_{1}$};
+\draw[fs vec thin] \Actwo;
+\node[fs label, anchor=\ActwoN] at \ActwoL {$\FigVec{c}_{2}$};
+\draw[fs vec] \Axplus;
+\node[fs label, anchor=\AxplusN] at \AxplusL {$\FigVec{x}^{+}$};
+\draw[fs vec] \AQxone;
+\node[fs label, anchor=\AQxoneN] at \AQxoneL {$\FigVec{Q}_{1}\FigVec{x}_{1}$};
+\draw[fs vec] \AQxtwo;
+\node[fs label, anchor=\AQxtwoN] at \AQxtwoL {$\FigVec{Q}_{2}\FigVec{x}_{2}$};
+\node[fs point] at \Aop {};
+\node[fs point] at \Aoone {};
+\node[fs point] at \Aotwo {};
+\node[fs point] at \Ap {};
+\node[fs label, anchor=north east] at ($(op)+(-2.6,-2.4)$) {$o^{+}$};
+\node[fs label, anchor=east] at ($(oone)+(-3.6,1.2)$) {$o_{1}$};
+\node[fs label, anchor=north] at ($(otwo)+(0,-3.8)$) {$o_{2}$};
+\node[fs label, anchor=south west] at ($(p)+(2.8,2.4)$) {$p$};
+\Abasesb
+\draw[fs vec aux] \AQxonep;
+\node[fs label, anchor=\AQxonepN] at \AQxonepL {$\FigVec{Q}\FigVec{x}_{1}$};
+\draw[fs vec thin] \Ad;
+\node[fs label, anchor=\AdN] at \AdL {$\FigVec{d}$};
+\draw[fs vec] \Axone;
+\node[fs label, anchor=\AxoneN] at \AxoneL {$\FigVec{x}_{1}$};
+\draw[fs vec] \Axtwo;
+\node[fs label, anchor=\AxtwoN] at \AxtwoL {$\FigVec{x}_{2}$};
+\draw[fs angle] \AQarc;
+\node[fs anglabel, anchor=west] at \AQlab {$\FigVec{Q}$};
+\node[fs point] at \Ao {};
+\node[fs label, anchor=north east] at ($(o)+(-2.6,-2.4)$) {$o$};
+\FigPanel{\Apanela}{a}
+\FigPanel{\Apanelb}{b}
+\end{tikzpicture}

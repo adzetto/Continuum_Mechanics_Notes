@@ -1,0 +1,23 @@
+\input{ch9g_couette_geom.tex}
+\begin{tikzpicture}[fs, x=1pt, y=1pt]
+\draw[fs hatch] \Ghatch;
+\draw[fs wall] \Gwallb;
+\draw[fs wall] \Gwallt;
+\draw[fs aux] \Gguide;
+\draw[fs axis] \Gaxis;
+\node[fs axlabel, anchor=west] at \Gaxislab {$x_{2}$};
+\draw[fs vec] \GV;
+\node[fs label, anchor=west] at \GVlab {$V$};
+\draw[fs thin, {fs tip dim}-{fs tip dim}] \Gdim;
+\node[fs anglabel, anchor=east] at \Gdimlab {$d$};
+\node[fs label, anchor=north] at \Gzero {$0$};
+\node[fs label, anchor=north] at \Gone {$V$};
+\draw[fs curve] \Gca;
+\draw[fs curve] \Gcb;
+\draw[fs curve] \Gcc;
+\draw[fs curve] \Gcd;
+\node[fs label, anchor=east] at \Gla {$-2$};
+\node[fs label, anchor=east] at \Glb {$0$};
+\node[fs label, anchor=west] at \Glc {$2$};
+\node[fs label, anchor=west] at \Gld {$4$};
+\end{tikzpicture}
