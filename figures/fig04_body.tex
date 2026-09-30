@@ -1,0 +1,17 @@
+\begin{tikzpicture}[fs]
+\input{\FigDir fig04_geom.tex}
+\begin{scope}[x=1pt, y=1pt]
+  \begin{scope}[line join=round]\FigCutFace{\DFY} \FigCutFace{\DFZ} \FigCutFace{\DFX}\end{scope}
+  \draw[line width=\FigBodyW, line join=round] \Doutline;
+  \fill[fsFaceTop]   \EQ -- \EX -- \EXZ -- \EZ -- cycle;
+  \fill[fsFaceLeft]  \EQ -- \EX -- \EXY -- \EY -- cycle;
+  \fill[fsFaceRight] \EQ -- \EZ -- \EYZ -- \EY -- cycle;
+  \draw[fs edge] \EX -- \EXZ -- \EZ -- \EYZ -- \EY -- \EXY -- cycle
+                 \EQ -- \EX \EQ -- \EY \EQ -- \EZ;
+  \node[fs point] at \EQ {};
+  \path \EQ coordinate (q);
+  \node[fs label, anchor=west] at ($(q)+(7.8,-2.2)$) {$Q$};
+  \path \Dtriad coordinate (tri);
+  \begin{scope}[shift={(tri)}]\FigTriad{(0,0,0)}\end{scope}
+\end{scope}
+\end{tikzpicture}

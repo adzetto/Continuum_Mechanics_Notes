@@ -1,0 +1,29 @@
+\input{\FigDir fig06_geom.tex}
+\pgfdeclarelayer{fsfaces}\pgfdeclarelayer{fsghost}\pgfsetlayers{fsfaces,fsghost,main}
+\begin{tikzpicture}[fs]
+  \useasboundingbox (-63.2pt,-55.7pt) rectangle (86.5pt,85.6pt); %
+  \begin{scope}[fs cam]
+    \def\a{66}
+    \begin{pgfonlayer}{fsfaces}
+    \FigFaceShade{(0,0,0) -- (0,\a,0) -- (0,\a,\a) -- (0,0,\a) -- cycle}{fsFaceX}{fsFaceXd}{(0,\a,\a)}{(0,0,0)}
+    \FigFaceShade{(0,0,0) -- (\a,0,0) -- (\a,0,\a) -- (0,0,\a) -- cycle}{fsFaceY}{fsFaceYd}{(\a,0,\a)}{(0,0,0)}
+    \FigFaceShade{(0,0,0) -- (\a,0,0) -- (\a,\a,0) -- (0,\a,0) -- cycle}{fsFaceZ}{fsFaceZd}{(\a,\a,0)}{(0,0,0)}
+    \end{pgfonlayer}
+    \draw[fs thin, draw=fsLine] (0,0,0) -- (\a,0,0) (0,0,0) -- (0,\a,0) (0,0,0) -- (0,0,\a);
+  \end{scope}
+  \tikzset{fs hidden/.style={draw=none}}%
+  \let\FigKnockReset\relax
+elax
+elax
+  \FigStressCube[faces=negative, fig06, fill faces=false, glass=true,
+    normal length=36, shear length=21, min length=16,
+    root x={0.55,0.65}, root y={0.62,0.62}, root z={0.88,0.45},
+    dir xx=60,  dir xy=0,   dir xz=72,
+    dir yy=31,  dir yx=192, dir yz=345,
+    dir zz=100, dir zx=130, dir zy=159]
+  \begin{pgfonlayer}{fsghost}
+    \FigHidden[fs cam, draw=fsLine!45, line width=\FigThin, dash pattern=on 2.5pt off 2.5pt, line join=round]{(0,66,66) -- (66,66,66) -- (66,66,0) (66,66,66) -- (66,0,66)}
+  \end{pgfonlayer}
+  \pgfpointanchor{current bounding box}{south west}\pgfgetlastxy\bbx\bby\pgfpointanchor{current bounding box}{north east}\pgfgetlastxy\bbX\bbY\typeout{BBOX \bbx\space\bby\space\bbX\space\bbY}%
+\end{tikzpicture}
+

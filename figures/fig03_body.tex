@@ -1,0 +1,37 @@
+\begin{tikzpicture}[fs]
+\input{\FigDir fig03_geom.tex}
+\begin{scope}[x=1pt, y=1pt]
+  \fill[fsPlaneFill] \Aquad;                               %
+  \draw[fs thin] \Awall;                                   %
+  \FigWall[angle=135, line=false]{\AwFB}{\AwFT}            %
+  \FigWall[angle=71.4, line=false]{\AwFT}{\AwBT}           %
+  \fill[fsBodyFill] \Abody;                                %
+  \FigCutFace{\Aend}                                       %
+  \draw[fs body, fill=none] \Abody;                        %
+  \fill[fsPlaneFill, opacity=0.72, even odd rule] \Afront; %
+  \begin{scope}\clip \Aedges; \draw[fs plane, fill=none] \Aquad;\end{scope}
+  \draw[fs thin, line join=round] \Arimfront;              %
+  \draw[fs hidden, line join=round] \Arimback;
+  \draw[fs thin] \AA -- \AR;
+  \path \AqBR coordinate (qBR) \AqBL coordinate (qBL);     %
+  \node[fs label, anchor=south west] (la) at \Alabel {cutting plane};
+  \path ($(qBR)!0.08!(qBL)$) coordinate (ta);
+  \draw[fs leader] (ta) -- (ta |- la.south);
+  \FigPanel{\Apanel}{a}
+  \fill[fsPlaneFill] \Bquad;                               %
+  \begin{scope}[line join=round]                           %
+    \FigCutFace{\BFY} \FigCutFace{\BFX}
+  \end{scope}
+  \draw[line width=\FigBodyW, line join=round] \Bctop \Bcend;
+  \fill[fsPlaneFill, opacity=0.72, even odd rule] \Bglass; %
+  \begin{scope}[line join=round]\FigCutFace{\BFZ}\end{scope}%
+  \draw[line width=\FigBodyW, line join=round] \Bcfront;
+  \draw[fs plane, fill=none] \Bquad;                       %
+  \FigPoint{\BQ}{$Q$}[225]                                 %
+  \path \BqTR coordinate (qTR) \BqTL coordinate (qTL);     %
+  \node[fs label, anchor=south east] (lb) at \Blabel {cutting plane};
+  \path ($(qTR)!0.12!(qTL)$) coordinate (tb);
+  \draw[fs leader] (tb) -- (tb |- lb.south);
+  \FigPanel{\Bpanel}{b}
+\end{scope}
+\end{tikzpicture}

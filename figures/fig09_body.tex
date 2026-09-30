@@ -1,0 +1,58 @@
+\input{\FigDir fig09_geom.tex}
+\providecommand*\FnineLayout{inset}
+\edef\FnineTmp{\FnineLayout}\def\FnineSide{side}
+\ifx\FnineTmp\FnineSide
+  \def\FnineAx{-122pt}\def\FnineAy{-1.7pt}%
+  \def\FnineTx{-40pt}\def\FnineTy{50pt}%
+  \def\FnineOut{55}\def\FnineIn{195}%
+  \def\FnineLax{-172.5pt}\def\FnineLay{-50.8pt}%
+  \def\FnineLbx{-62pt}\def\FnineLby{-50.8pt}%
+\else
+  \def\FnineAx{-124pt}\def\FnineAy{58pt}%
+  \def\FnineTx{-32pt}\def\FnineTy{66pt}%
+  \def\FnineOut{25}\def\FnineIn{165}%
+  \def\FnineLax{-180pt}\def\FnineLay{16pt}%
+  \def\FnineLbx{-92pt}\def\FnineLby{-50.8pt}%
+\fi
+\def\FnineAxes#1#2#3{\FnineAxesX{#1}{#2}{#3}{a}}
+\def\FnineAxesX#1#2#3#4{%
+  \FigAxis{($#1+(1.779,0,0)$)}{($#1+(14.824,0,0)$)}{$x$}[#4]%
+  \FigAxis{($#2+(0,1.600,0)$)}{($#2+(0,13.336,0)$)}{$y$}%
+  \FigAxis{($#3+(0,0,2.342)$)}{($#3+(0,0,19.513)$)}{$z$}}
+\makeatletter
+\def\FnineBody{%
+  \FigTetra[fig09b]
+  \begin{scope}[fs cam]\FnineAxes{(A)}{(B)}{(C)}\end{scope}
+  \begin{scope}[shift={(\FnineAx,\FnineAy)}, x=1pt, y=1pt]
+    \FnineAcoords
+    \FigFaceGrad{Y}{(f9aQ)}{(f9aC)}{(f9aA)}\FigFaceGrad{Z}{(f9aQ)}{(f9aA)}{(f9aB)}%
+    \FigFaceGrad{X}{(f9aQ)}{(f9aB)}{(f9aC)}%
+    \draw[fs thin] (f9aQ) -- (f9aA) (f9aQ) -- (f9aB) (f9aQ) -- (f9aC);
+    \FnineAhidden
+    \draw[fs edge] (f9aA) -- (f9aB) -- (f9aC) -- cycle;
+    \draw[fs thin, line join=miter] (f9aY) -- (f9aXY) -- (f9aX) -- (f9aXZ) -- (f9aZ) -- (f9aYZ) -- cycle
+          (f9aXYZ) -- (f9aXY) (f9aXYZ) -- (f9aXZ) (f9aXYZ) -- (f9aYZ);
+    \node[fs point] at (f9aQ) {};
+    \node[fs label, anchor=225, name=f9aQL] at ($(f9aQ)+(45:1.4pt)$) {$Q$};\FigKnockNode[0.6pt]{f9aQL}%
+    \begin{scope}[fs cam]\FnineAxesX{(f9aX)}{(f9aY)}{(f9aZ)}{l}\end{scope}%
+    \path ($(f9aA)!0.35!(f9aB)$) coordinate (f9aS);
+  \end{scope}
+  \draw[fs vec] (f9aS) to[out=\FnineOut, in=\FnineIn] (\FnineTx,\FnineTy);
+  \FigPanel{(\FnineLax,\FnineLay)}{a}
+  \FigPanel{(\FnineLbx,\FnineLby)}{b}}
+\def\FnineHX{45}\def\FnineHY{0}\def\FnineHZ{135}
+\let\FnineFaceGrad\FigFaceGrad
+\def\FnineHatch#1#2#3#4{\FnineFaceGrad{#1}{#2}{#3}{#4}%
+  \begin{scope}\FnineKnock\clip #2 -- #3 -- #4 -- cycle;
+    \fill[pattern={Lines[angle=\csname FnineH#1\endcsname, distance=2.8pt, line width=\FigHair]}, pattern color=fsLine!55] #2 -- #3 -- #4 -- cycle;
+  \end{scope}}
+\FigKnockReset
+\begin{tikzpicture}[fs]
+  \setbox0\hbox{\begin{pgfinterruptboundingbox}\begingroup
+    \let\FigKnockReset\relax\FnineBody\global\let\FnineKnock\fs@knocklist
+  \endgroup\end{pgfinterruptboundingbox}}
+  \FigKnockReset
+  \let\FigFaceGrad\FnineHatch
+  \FnineBody
+\end{tikzpicture}
+\makeatother

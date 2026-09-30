@@ -1,0 +1,29 @@
+\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}[fs]
+\input{\FigDir fig02_geom.tex}
+\tikzset{fig02 force/.style={fs load, color=fsTraction}}
+\begin{scope}[x=1pt, y=1pt]
+  \fill[fs load fill] \Gqoneblock;  \fill[fs load fill] \Gqtwoblock;
+  \filldraw[fs body] \Gbody;
+  \FigCutFace{\Gface}
+  \draw[fs body, fill=none] \Gbody;
+  \draw[fs load envelope] \Gqoneenv;  \draw[fs load envelope] \Gqtwoenv;
+  \Gqonearrows{fs load}\Gqtwoarrows{fs load}
+  \Gfield{fig02 force}
+  \node[fs label] (lab) at \Glab {internal forces};
+  \draw[fs leader] (lab) -- \Glabtip;
+  \filldraw[fs patch] \Gpatch;
+  \FigZoom[r=\Grmark, R=\Grzoom]{\Gmark}{\Gzoom}
+  \fill[fsCutFill] \Gzoom circle[radius=\Grzoomin];
+  \filldraw[fs patch] \Gdpatch;
+  \node[fs label] at \GpAlab {$\Delta A$};
+  \draw[fs leader, -{fs tip arc}, decorate, decoration={snake, amplitude=0.9pt,
+    segment length=4.2pt, pre length=0.8pt, post length=3.2pt}] \GpAfrom -- \GpAtip;
+  \FigAxis{\GAxa}{\GAxb}{$x$}
+  \FigAxis{\GAya}{\GAyb}{$y$}[r]
+  \FigAxis{\GAza}{\GAzb}{$z$}
+  \FigStress[-{fs tip med}]{x}{\GO}{\GFx}{$\Delta F_x$}[r]
+  \FigStress[-{fs tip med}]{y}{\GO}{\GFy}{$\Delta F_y$}[l]
+  \FigStress[-{fs tip med}]{z}{\GO}{\GFz}{$\Delta F_z$}[n][anchor=south east, at=\GFzl]
+\end{scope}
+\end{tikzpicture}

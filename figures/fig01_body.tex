@@ -1,0 +1,17 @@
+\begin{tikzpicture}[fs]
+\input{\FigDir fig01_geom.tex}
+\begin{scope}[x=1pt, y=1pt]
+  \fill[fsPlaneFill] \Fquad;
+  \fill[fs load fill] \Fqoneblock;  \fill[fs load fill] \Fqtwoblock;  \fill[fs load fill] \Fqthreeblock;
+  \filldraw[fs body] \Fbody;
+  \fill[fsPlaneFill, opacity=0.72] \Fplanefront;
+  \begin{scope}\clip \Fplaneedges; \draw[fs plane, fill=none] \Fquad;\end{scope}
+  \draw[fs thin, line join=round] \Frimvis;
+  \draw[fs hidden, line join=round, fig01 hidden dash] \Frimhid;
+  \draw[fs load envelope] \Fqoneenv; \draw[fs load envelope] \Fqtwoenv; \draw[fs load envelope] \Fqthreeenv;
+  \Fqonearrows{fs load}\Fqtwoarrows{fs load}\Fqthreearrows{fs load}
+  \draw[fs hatch] \Fsupport;
+  \node[fs label, anchor=west] (lab) at \Flabel {cutting plane};
+  \draw[fs leader] (lab.west) -- \Flabeltip;
+\end{scope}
+\end{tikzpicture}

@@ -1,0 +1,39 @@
+\begin{tikzpicture}[fs]
+  \def\figviiiS{46.7}        %
+  \def\figviiiT{35}          %
+  \def\figviiiH{74}          %
+  \def\figviiiX{127}         %
+  \def\figviiiY{0}           %
+  \tikzset{
+    fs el sx-/.style={anchor=south west, xshift=0.6pt, yshift=2.3pt},
+    fs el sx+/.style={anchor=north east, xshift=0.9pt, yshift=-1.6pt},
+    fs el sy+/.style={anchor=west, xshift=1.6pt, yshift=-4pt},
+    fs el sy-/.style={anchor=west, xshift=1.6pt, yshift=4pt},
+    fs el txy-/.style={xshift=3.3pt, yshift=0.3pt},
+    fs el tyx-/.style={xshift=0.9pt, yshift=4.5pt},
+    fs el txy+/.style={xshift=-1.74pt, yshift=-3.35pt},
+    fs el tyx+/.style={xshift=-0.1pt, yshift=-4.9pt},
+  }
+  \FigElement[taylor=false, body force=false, axes=false, dims=false,
+    width=\figviiiS, height=\figviiiS, shear lag=0.28,
+    sx=\sigma_{xx}, sy=\sigma_{yy}, sx key=xx, sy key=yy]
+  \begin{scope}[x=1pt, y=1pt]
+    \path (0,\figviiiS) coordinate (C);
+    \draw[fs section] ($(C)+(90+\figviiiT:14.9)$) -- ($(C)+(\figviiiT-90:{\figviiiS/cos(\figviiiT)+14.9})$);
+    \draw[fs arc plain] (C) ++(270:12) arc[start angle=270, end angle=270+\figviiiT, radius=12];
+    \node[fs anglabel] at ($(C)+(270+\figviiiT/2:17.5)$) {$\theta$};
+    \FigPanel{(-28,-30)}{a}
+    \FigPanel{(\figviiiX-28,-30)}{b}
+  \end{scope}
+  \tikzset{
+    fs wd sx/.style={anchor=south west, at={(-25.6,\figviiiH/2+2.3)}},
+    fs wd txy/.style={anchor=north east, at={(-4.3,\figviiiH/2-15.36+6)}},
+    fs wd tyx/.style={anchor=north east, at={({\figviiiH*tan(\figviiiT)/2-9.46},-2.0)}},
+    fs wd tn/.style={xshift=-1.2pt, yshift=-3.6pt},
+    fs wd sn/.style={xshift=-0.75pt, yshift=-0.5pt},
+    fs wd th/.style={xshift=1pt, yshift=0.6pt},
+  }
+  \begin{scope}[shift={(\figviiiX pt,\figviiiY pt)}]
+    \FigWedge[height=\figviiiH, angle=\figviiiT, yp length=16]
+  \end{scope}
+\end{tikzpicture}

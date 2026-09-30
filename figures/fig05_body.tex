@@ -1,0 +1,10 @@
+\begin{tikzpicture}[fs]
+  \useasboundingbox (-63.2pt,-55.7pt) rectangle (86.5pt,85.6pt); %
+  \FigStressCube[faces=positive,
+    normal length=36, shear length=21, min length=16, length xx=37.05, length zz=38.78,
+    root x={0.35,0.30}, root y={0.50,0.50}, root z={0.50,0.60},
+    dir xx=70 , dir xy=113, dir xz=240,
+    dir yy=341, dir yx=94,  dir yz=114,
+    dir zz=314, dir zx=73,  dir zy=205]
+  \pgfpointanchor{current bounding box}{south west}\pgfgetlastxy\bbx\bby\pgfpointanchor{current bounding box}{north east}\pgfgetlastxy\bbX\bbY\typeout{BBOX \bbx\space\bby\space\bbX\space\bbY}%
+\end{tikzpicture}

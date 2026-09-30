@@ -1,0 +1,36 @@
+\input{\FigDir fig10_geom.tex}
+\def\FtenAxes#1#2#3{%
+  \FigAxis{($#1+(1.779,0,0)$)}{($#1+(14.824,0,0)$)}{$x$}%
+  \FigAxis{($#2+(0,1.600,0)$)}{($#2+(0,13.336,0)$)}{$y$}%
+  \FigAxis{($#3+(0,0,2.342)$)}{($#3+(0,0,19.513)$)}{$z$}}
+\makeatletter
+\def\FtenBody{%
+  \begin{scope}
+    \tikzset{fs hidden/.append style={dash phase=2.6pt}}
+    \FigTetra[fig10, Q={}, dir Q=270, dir px=-20, dir py=90, dir pz=200, dir n=150]
+  \end{scope}
+  \begin{scope}[fs cam]
+    \FtenAxes{(A)}{(B)}{(C)}
+    \draw[fs aux] \FtenPx -- \FtenPxy -- \FtenPy \FtenPx -- \FtenPxz -- \FtenPz
+      \FtenPy -- \FtenPyz -- \FtenPz \FtenPxy -- \FtenP \FtenPxz -- \FtenP \FtenPyz -- \FtenP;
+    \draw[fs traction] \FtenG -- \FtenP
+      node[fs tlabel, pos=1, anchor=north west, xshift=1.5pt, yshift=-0.5pt, name=f10p] {$\FigVec{p}$};
+    \FigKnockSeg[2.4pt]{\FtenG}{\FtenP}%
+  \end{scope}
+  \FigKnockNode{f10p}%
+  \node[fs label, name=f10Q] at (1.0pt,-8.6pt) {$Q$};\FigKnockNode{f10Q}}
+\let\FtenCutFace\FigCutFace
+\def\FtenHatch#1{\FtenCutFace{#1}%
+  \begin{scope}\FtenKnock\clip #1;
+    \fill[pattern={Lines[angle=45, distance=3.4pt, line width=\FigHair]}, pattern color=fsLine!45] #1;
+  \end{scope}}
+\FigKnockReset
+\begin{tikzpicture}[fs]
+  \setbox0\hbox{\begin{pgfinterruptboundingbox}\begingroup
+    \let\FigKnockReset\relax\FtenBody\global\let\FtenKnock\fs@knocklist
+  \endgroup\end{pgfinterruptboundingbox}}
+  \FigKnockReset
+  \let\FigCutFace\FtenHatch
+  \FtenBody
+\end{tikzpicture}
+\makeatother
