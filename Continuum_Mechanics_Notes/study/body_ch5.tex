@@ -1,0 +1,1253 @@
+%=======================================================================
+\chapter{Transport Formulas}
+%=======================================================================
+
+The balance laws of the next chapter are statements about \emph{integrals}:
+how much mass, momentum or energy a lump of material carries, and how fast
+that amount changes. Every one of them therefore needs an answer to a
+single question:
+\[
+   \frac{\dl}{\dl t}\int_{P_{t}}(\,\cdot\,)\,\dl v=\ ?
+\]
+The question is harder than it looks because \emph{both} the integrand and
+the region of integration depend on time. This chapter answers it, in four
+settings of increasing generality: a material region (Reynolds' formula),
+a moving surface (the flux derivative), a region that is not material at
+all, and a region across which the integrand jumps. Nothing here is
+physics yet; it is the calculus the physics will be written in.
+
+Chapter 1 already proved the divergence theorem and the two variants that
+follow from it, Theorem~\ref{thm:div} and Corollary~\ref{cor:divforms}. We
+do not prove them again. Section~\ref{sec:divvar} instead collects them in
+the form the balance laws will use and then makes a point Chapter 1 had no
+reason to make: two of the three are \emph{symbolic} statements, and it
+matters to know exactly what they mean.
+
+%=======================================================================
+\section{The divergence theorem and its variants}\label{sec:divvar}
+%=======================================================================
+
+For a vector field $\ba(\bx)$ on a volume $R\subset\Et$ bounded by a
+piecewise smooth surface $\partial R$, with $\bn$ the piecewise continuous
+exterior unit normal, Theorem~\ref{thm:div} is
+\begin{equation}
+   \int_{R}\dvg\ba\,\dl v=\int_{\partial R}\ip\ba\bn\,\dl a ,
+   \tag{5.1}\label{eq:5.1}
+\end{equation}
+or, in Cartesian coordinates and components,
+\begin{equation}
+   \int_{R}a_{i,i}\,\dl v=\int_{\partial R}a_{i}n_{i}\,\dl a .
+   \tag{5.2}\label{eq:5.2}
+\end{equation}
+
+Both of the variants we need come from \eqr{5.1} by the same device: feed
+it a field built from an \emph{arbitrary constant vector} $\bc$, and then
+let the arbitrariness of $\bc$ do the work. It is worth isolating the
+device, because it is used four times in this chapter and a dozen more in
+the next.
+
+\begin{lemma}[the constant-vector argument]\label{lem:cvec}
+Let $\bu$ be a fixed vector and suppose $\ip\bc\bu=0$ for every vector
+$\bc$. Then $\bu=\bze$.
+\end{lemma}
+
+\begin{proof}
+The hypothesis holds for \emph{every} $\bc$, so in particular for
+$\bc=\bu$, giving $\ip\bu\bu=|\bu|^{2}=0$; positive definiteness of the
+inner product, Definition~\ref{def:ip}(d), then forces $\bu=\bze$.
+\end{proof}
+
+\begin{remark}[why one may not simply ``cancel $\bc$'']\label{rem:cancel}
+The step is worth stating as a lemma because the tempting shortcut is
+wrong. From $\ip\bc\bu=\ip\bc\bw$ one may \emph{not} conclude $\bu=\bw$
+for a \emph{particular} $\bc$: any $\bu-\bw$ perpendicular to that $\bc$
+satisfies it. It is the quantifier ``for all $\bc$'' that carries the
+argument, and the choice $\bc=\bu$ is what converts it into a statement
+about a norm. The same pattern will reappear in the localization theorem,
+where ``for all subvolumes'' plays the role that ``for all $\bc$'' plays
+here.
+\end{remark}
+
+\subsection*{The gradient of a scalar}
+
+Let $\varphi(\bx)$ be a smooth scalar field and put $\ba=\varphi\bc$ with
+$\bc$ spatially uniform. The choice looks arbitrary; it is not. We want a
+statement about $\grad\varphi$, and \eqr{5.1} only knows how to handle a
+divergence, so we need a vector field whose divergence produces
+$\grad\varphi$. Multiplying $\varphi$ by a constant vector is the simplest
+thing that does it, and keeping the vector constant is what makes the
+product rule collapse to a single term.
+
+In components $a_{i}=\varphi c_{i}$. Differentiate, remembering that the
+$c_{i}$ are numbers and not functions of position, so they pass through
+$\partial/\partial x_{i}$ untouched:
+\[
+   \dvg\ba=a_{i,i}=(\varphi c_{i})_{,i}=\varphi_{,i}c_{i}+\varphi\,c_{i,i}
+   =\varphi_{,i}c_{i},
+\]
+the last term vanishing because $c_{i,i}=0$ for a uniform field. On the
+boundary,
+\[
+   \ip\ba\bn=a_{i}n_{i}=\varphi c_{i}n_{i}.
+\]
+Put both into \eqr{5.2}:
+\[
+   \int_{R}\varphi_{,i}c_{i}\,\dl v=\int_{\partial R}\varphi c_{i}n_{i}\,\dl a .
+\]
+The $c_{i}$ are constants, so they may be taken outside the integral
+signs. Doing that on both sides and moving everything to one side,
+\[
+   c_{i}\left[\int_{R}\varphi_{,i}\,\dl v
+              -\int_{\partial R}\varphi n_{i}\,\dl a\right]=0 .
+\]
+The bracket depends on $i$ but not on $\bc$, so the display says
+$\ip\bc\bu=0$ where $\bu=u_{i}\be_{i}$ has components
+\begin{equation}
+   u_{i}=\int_{R}\varphi_{,i}\,\dl v-\int_{\partial R}\varphi n_{i}\,\dl a .
+   \tag{5.3}\label{eq:5.3}
+\end{equation}
+As $\bc$ is arbitrary, Lemma~\ref{lem:cvec} gives $\bu=\bze$, i.e.
+\begin{equation}
+   \int_{R}\varphi_{,i}\,\dl v=\int_{\partial R}\varphi n_{i}\,\dl a ,
+   \tag{5.4}\label{eq:5.4}
+\end{equation}
+valid for every smooth scalar field $\varphi$.
+
+\subsection*{The divergence of a tensor}
+
+Let $\bA(\bx)$ be a smooth tensor field and put $\ba=\bA^{t}\bc$, again
+with $\bc$ uniform. Then $a_{j}=(\bA^{t}\bc)_{j}=A_{ij}c_{i}$, so
+\[
+   \dvg\ba=a_{j,j}=c_{i}A_{ij,j},
+   \qquad
+   \ip\ba\bn=a_{j}n_{j}=c_{i}A_{ij}n_{j},
+\]
+and \eqr{5.2} yields $\ip\bc\bu=0$ with
+\begin{equation}
+   u_{i}=\int_{R}A_{ij,j}\,\dl v-\int_{\partial R}A_{ij}n_{j}\,\dl a .
+   \tag{5.5}\label{eq:5.5}
+\end{equation}
+The arbitrariness of $\bc$ again gives $\bu=\bze$, hence
+\begin{equation}
+   \int_{R}A_{ij,j}\,\dl v=\int_{\partial R}A_{ij}n_{j}\,\dl a
+   \tag{5.6}\label{eq:5.6}
+\end{equation}
+for every smooth tensor field. We may write \eqr{5.4} and \eqr{5.6} in the
+symbolic forms
+\begin{equation}
+   \int_{R}\grad\varphi\,\dl v=\int_{\partial R}\varphi\,\bn\,\dl a
+   \qquad\text{and}\qquad
+   \int_{R}\dvg\bA\,\dl v=\int_{\partial R}\bA\bn\,\dl a ,
+   \tag{5.7}\label{eq:5.7}
+\end{equation}
+which are Corollary~\ref{cor:divforms}. There is an important caveat
+attached to them, and it is the subject of the next few paragraphs.
+
+\subsection*{What ``symbolic'' means here}
+
+\begin{remark}[the integrals in \eqr{5.7} are not integrals of
+vectors]\label{rem:symbolic}
+An integral is a limit of sums, and to add vectors that live at different
+points of $R$ one must first agree on how to compare them. In $\Et$ with a
+\emph{fixed} orthonormal basis there is such an agreement, because parallel transport is trivial there,
+and that is exactly what \eqr{5.3} and \eqr{5.5}
+use when they integrate \emph{components}. The symbolic forms \eqr{5.7}
+are shorthand for those component statements. They are not independent
+definitions, and they are not valid for an arbitrary basis field.
+\end{remark}
+
+The point deserves the check the book gives it. What we must verify is
+that the object $\bu$ built in \eqr{5.3} really is a vector: that its
+components in two fixed orthonormal bases are related the way components
+of a vector are. Let $\{\be_{i}'\}$ be a second fixed orthonormal basis
+and $a_{ij}=\ip{\be_{i}}{\be_{j}'}$, so that by Section~\ref{ss:cob} the
+rule to be confirmed is $u_{i}=a_{ij}u_{j}'$. With
+$\bx=x_{i}\be_{i}=x_{j}'\be_{j}'$, hence $x_{j}'=a_{ij}x_{i}$, and with
+$\varphi_{,j}'=\partial\varphi/\partial x_{j}'$, the chain rule turns
+\eqr{5.3} into
+\begin{equation}
+   u_{i}=\int_{R}a_{ij}\varphi_{,j}'\,\dl v
+        -\int_{\partial R}a_{ij}n_{j}'\,\dl a
+        =a_{ij}\Big(\int_{R}\varphi_{,j}'\,\dl v
+        -\int_{\partial R}\varphi n_{j}'\,\dl a\Big)
+        =a_{ij}u_{j}' ,
+   \tag{5.8}\label{eq:5.8}
+\end{equation}
+as required. The whole step turns on being able to move $a_{ij}$ across
+the integral sign, and that is legitimate precisely because the $a_{ij}$
+are \emph{constants}. Consequently the statement $\bu=\bze$ is basis
+independent: $u_{i}'=0$ if and only if $u_{i}=0$.
+
+\begin{remark}[where it fails]\label{rem:polarfail}
+Replace the fixed basis by the polar frame of \eqr{1.122}. Then the
+matrix relating the two sets of components depends on position, cannot be
+taken outside the integral, and \eqr{5.8} collapses. So an equation like
+$\int\grad\varphi\,\dl v=\int\varphi\bn\,\dl a$ read with $\grad\varphi$
+and $\bn$ resolved on $\{\ber,\bet,\be_{3}\}$ is simply false. Equation
+\eqr{5.1}, by contrast, needs no caveat at all: its integrands
+$\dvg\ba$ and $\ip\ba\bn$ are scalars, and a scalar is the same number in
+every basis.
+\end{remark}
+
+%-----------------------------------------------------------------------
+\subsection{Example: The Piola identity}\label{sec:piolaid}
+%-----------------------------------------------------------------------
+
+Here is the first use, and a good one: a purely kinematical identity
+falls out of \eqr{5.7} with the most trivial integrand imaginable.
+
+\begin{remark}[why one feeds an identity its most boring
+input]\label{rem:whyphione}
+The choice $\varphi=1$ below looks like it must give nothing, and that
+impression is worth correcting, because the move is standard and will be
+used again.
+
+A general identity holds for \emph{every} admissible input. Its content is
+therefore a whole family of statements, and one is free to pick the member
+that says the most. Picking a complicated $\varphi$ makes both sides
+complicated and relates two hard things; picking $\varphi=1$ annihilates the left side, since $\grad 1=\bze$, and
+leaves the right side standing alone with nothing to be balanced
+against. A statement of the form ``this expression
+equals zero'' is far stronger than ``this expression equals that one'', so
+the most trivial input yields the sharpest conclusion. This is the same
+logic by which $\bc=\bu$ was the useful choice in Lemma~\ref{lem:cvec},
+and by which $\varphi=1$ will give \eqr{5.16} in the next section.
+
+The general principle: to extract something specific from something
+general, look for the input that makes one side collapse.
+\end{remark}
+
+Let $S\subset B$ be an arbitrary part of the body, occupying $P_{t}\subset
+\kappa_{t}$ now and $P\subset\kappa$ in the reference configuration, so
+that $P_{t}=\bchi_{\kappa}(P,t)$. Apply \eqr{5.7}$_{1}$ on $P_{t}$ with
+$\varphi=1$. Its gradient vanishes, so the left side is zero and
+\begin{equation}
+   \bze=\int_{\partial P_{t}}\bn\,\dl a
+       =\int_{\partial P}\bF^{*}\bN\,\dl A
+       =\int_{P}\Dvg\bF^{*}\,\dl V ,
+   \tag{5.9}\label{eq:5.9}
+\end{equation}
+where the middle step is the Piola--Nanson formula \eqr{2.54},
+$\bn\,\dl a=\bF^{*}\bN\,\dl A$, with $\bN$ the exterior unit normal on
+$\partial P$ and $\bF^{*}$ the cofactor of the deformation gradient
+(Definition~\ref{def:cof}), and the last step is the referential form of
+\eqr{5.7}$_{2}$. Here $\Dvg$ differentiates with respect to
+$\bX\in\kappa$; in components
+\begin{equation}
+   \Dvg\bF^{*}=F^{*}_{iA,A}\be_{i}.
+   \tag{5.10}\label{eq:5.10}
+\end{equation}
+
+What \eqr{5.9} has established is that
+\[
+   \int_{P}\Dvg\bF^{*}\,\dl V=\bze
+\]
+for one particular $P$. That alone says nothing pointwise: an integral can
+vanish while its integrand does not, as $\int_{-1}^{1}x\,\dl x=0$ shows.
+The extra ingredient is that $S$ was an arbitrary part of the body, so $P$
+is an arbitrary subvolume of $\kappa$, and the integral vanishes for
+\emph{every} one of them at once.
+
+That is exactly the hypothesis of the localization theorem,
+Theorem~\ref{thm:localization}, whose other hypothesis, continuity of the
+integrand, holds because $\bF^{*}$ is built polynomially from $\bF$ and
+$\bF$ is continuously differentiable. The theorem's argument is worth
+recalling in one line, since it is the same shape as
+Lemma~\ref{lem:cvec}: if the integrand were non-zero at some point, it
+would be non-zero with one sign throughout a small ball around that point
+by continuity, and integrating over that ball alone would give a non-zero
+answer, contradicting the hypothesis. Freedom to choose the region plays
+here the part that freedom to choose $\bc$ played there.
+
+Applying it componentwise gives the \emph{Piola identity}
+\begin{equation}
+   \boxed{\ \Dvg\bF^{*}=\bze\quad\text{at every }\bX\in\kappa.\ }
+   \tag{5.11}\label{eq:5.11}
+\end{equation}
+
+\begin{remark}[what has just happened]\label{rem:piolawhat}
+Read \eqr{5.9} from left to right and the identity looks like a fact about
+integrals; read it from right to left and it is a fact about the
+deformation alone, with no integral in sight. That is the pattern of the
+whole subject: an integral statement, valid for every part, plus
+localization, equals a pointwise statement. Chapter 6 will run the same
+argument on mass, momentum and energy. Here the ``physics'' is the empty
+statement that a closed surface has zero total normal. Read geometrically,
+$\int_{\partial P_{t}}\bn\,\dl a=\bze$ says that a uniform pressure
+acting all round a closed surface cannot push the body anywhere. Even
+that empty-looking statement yields something: the nine derivatives of $\bF^{*}$ are not independent.
+\end{remark}
+
+%=======================================================================
+\section{Reynolds' transport formula}\label{sec:reynolds}
+%=======================================================================
+
+Let $\varphi$ be a scalar field on the body, the volumetric density of
+some quantity, so that $\varphi=\hat\varphi(\bX,t)=\tilde\varphi(\bx,t)$
+with $\bx=\bchi_{\kappa}(\bX,t)$. We want
+\begin{equation}
+   \frac{\dl}{\dl t}\int_{P_{t}}\tilde\varphi(\bx,t)\,\dl v
+   \qquad\text{at fixed }S,
+   \tag{5.12}\label{eq:5.12}
+\end{equation}
+the derivative following a fixed set of \emph{material points}. Both the
+integrand and the domain move, and there is no rule for differentiating
+under an integral sign whose limits are unknown functions of $t$. The
+remedy is the one used throughout Chapter 2: pull back to the reference
+configuration, where the domain does not move at all.
+
+With $\dl v=J\,\dl V$ and $P$ fixed in time,
+\begin{equation}
+\begin{aligned}
+   \frac{\dl}{\dl t}\int_{P_{t}}\tilde\varphi(\bx,t)\,\dl v
+   &=\frac{\dl}{\dl t}\int_{P}\hat\varphi(\bX,t)\,J\,\dl V\\
+   &=\int_{P}(\varphi J)^{\textstyle\cdot}\,\dl V\\
+   &=\int_{P}\big(\dot\varphi J+\varphi\dot J\big)\,\dl V ,
+\end{aligned}
+   \tag{5.13}\label{eq:5.13}
+\end{equation}
+the interchange of $\dl/\dl t$ with $\int_{P}$ being permissible because
+$P$ no longer depends on $t$, provided $\varphi J$ and $(\varphi J)^{
+\textstyle\cdot}$ are continuous in $\bX$ and $t$ jointly and dominated on
+$P$ by an integrable function of $\bX$.
+
+\begin{remark}[the one move this chapter keeps making]\label{rem:pullback}
+Step \eqr{5.13}$_{1}$ is the whole method, and it will be made three more
+times, so it is worth naming: \emph{when a domain moves, change variables
+until it does not, then differentiate}.
+
+The obstacle was never the integrand, since differentiating under an
+integral sign is routine. The obstacle was the domain. There is no general rule for
+$\frac{\dl}{\dl t}\int_{D(t)}$, and the substitution $\dl v=J\,\dl V$
+removes the difficulty entirely by trading a moving region $P_{t}$ for the
+fixed region $P$ and paying with an extra factor $J$ inside. All the time
+dependence is then in the integrand, where the ordinary rules apply. The
+price is that we must know how $J$ changes, and that is exactly what
+Problem 2 of Chapter 4 supplied.
+
+This is the same manoeuvre as pulling back to the reference configuration
+in Chapter 2, and it is the reason the reference configuration is worth
+carrying around at all: not because it is physically distinguished, for it is not and
+Remark~\ref{rem:whyL} of Chapter 4 insisted on the point, but because it
+holds still. Watch for it again at \eqr{5.20}, where
+Piola--Nanson plays the role $J$ plays here and converts a moving surface
+into a fixed one.
+
+And watch for where it \emph{fails}: in Section~\ref{sec:nonmat} the
+region is not material, so there is no fixed $P$ to pull back to, the
+method has nothing to bite on, and we are thrown back on the definition of
+the derivative. That is the reason \eqr{5.23}, alone in this chapter, is
+proved from first principles.
+\end{remark}
+
+Now dispose of the $\dot J$ that appeared in \eqr{5.13}. By Problem 2 of
+Chapter 4, $\dot J=J\tr\bL$ with $\bL=\grad\bv$, and
+$\tr\bL=\tr(\grad\bv)=\dvg\bv$ by Proposition~\ref{prop:divv}. Substitute
+this into the integrand of \eqr{5.13} and factor out the $J$ that both
+terms then contain:
+\[
+   \dot\varphi J+\varphi\dot J
+   =\dot\varphi J+\varphi J\dvg\bv
+   =J\big(\dot\varphi+\varphi\dvg\bv\big).
+\]
+This factoring is the point of the whole calculation. The integral now
+reads
+\[
+   \int_{P}\big(\dot\varphi+\varphi\dvg\bv\big)J\,\dl V ,
+\]
+and $J\,\dl V$ is $\dl v$, which is the substitution of \eqr{5.13}$_{1}$
+run backwards. Undoing it carries the integral back to the moving region
+and leaves
+\begin{equation}
+   \frac{\dl}{\dl t}\int_{P_{t}}\varphi\,\dl v
+   =\int_{P_{t}}\big(\dot\varphi+\varphi\dvg\bv\big)\,\dl v .
+   \tag{5.14}\label{eq:5.14}
+\end{equation}
+Notice what the round trip accomplished. We went to the reference
+configuration only to be allowed to differentiate, and came straight back.
+Nothing referential survives in \eqr{5.14}: both sides are integrals over
+$P_{t}$ and every symbol in it is spatial. The reference configuration was
+scaffolding, put up to make one step legal and taken down immediately
+afterwards. That is why the formula holds even for materials for which no
+natural reference configuration exists.
+
+This is already a transport formula, and a useful one, but it is written
+in terms of the material derivative $\dot\varphi$. For a spatial
+description we want $\varphi'$ instead. Substitute
+$\dot\varphi=\varphi'+\ip{\grad\varphi}\bv$ from \eqr{2.20} into the
+integrand of \eqr{5.14}:
+\[
+   \dot\varphi+\varphi\dvg\bv
+   =\varphi'+\ip{\grad\varphi}\bv+\varphi\dvg\bv .
+\]
+The last two terms are exactly the two halves of a product rule. By
+Problem 24(c) of Chapter 1,
+\[
+   \dvg(\varphi\bv)=\ip{\grad\varphi}\bv+\varphi\dvg\bv ,
+\]
+so those two terms collapse into a single divergence and the integrand
+becomes $\varphi'+\dvg(\varphi\bv)$. Splitting the integral in two,
+\[
+   \frac{\dl}{\dl t}\int_{P_{t}}\varphi\,\dl v
+   =\int_{P_{t}}\varphi'\,\dl v+\int_{P_{t}}\dvg(\varphi\bv)\,\dl v .
+\]
+The second integral is a divergence over a volume, which is precisely what
+\eqr{5.1} converts into a surface integral, with $\ba=\varphi\bv$:
+\[
+   \int_{P_{t}}\dvg(\varphi\bv)\,\dl v
+   =\int_{\partial P_{t}}\ip{\varphi\bv}\bn\,\dl a
+   =\int_{\partial P_{t}}\varphi\,\ip\bv\bn\,\dl a ,
+\]
+the scalar $\varphi$ coming out of the inner product. Therefore
+\begin{equation}
+   \boxed{\ \frac{\dl}{\dl t}\int_{P_{t}}\varphi\,\dl v
+   =\int_{P_{t}}\varphi'\,\dl v
+   +\int_{\partial P_{t}}\varphi\,\ip\bv\bn\,\dl a\ }
+   \tag{5.15}\label{eq:5.15}
+\end{equation}
+This is \emph{Reynolds' transport formula}.
+
+It is worth seeing why the product rule was the right thing to look for.
+We had a volume integral and wanted a surface integral, and \eqr{5.1} is
+the only tool that makes that conversion. But \eqr{5.1} accepts a
+divergence and nothing else, so the whole step amounted to asking whether
+the leftover terms could be assembled into one. They could, and not by
+luck: $\ip{\grad\varphi}\bv+\varphi\dvg\bv$ is the full expansion of
+$\dvg(\varphi\bv)$, so the two terms that appeared were never anything
+but a divergence written out. Recognising a product rule run backwards is
+the recurring skill in this subject, and it is worth practising on the
+simpler scalar case $\frac{\dl}{\dl x}(fg)=f'g+fg'$ until the pattern is
+automatic.
+
+\begin{remark}[the two clocks: $\dot\varphi$ against
+$\varphi'$]\label{rem:twoclocks}
+Three different time derivatives appear between \eqr{5.12} and
+\eqr{5.15}, and the whole formula is really a statement about how they
+relate. It is worth setting them side by side, since every term of
+\eqr{5.15} is an answer to ``which one?''.
+
+\[
+\begin{aligned}
+&\frac{\dl}{\dl t}\int_{P_{t}}\varphi\,\dl v
+  &&\text{follows a fixed lump of \emph{material}; the domain moves,}\\
+&\dot\varphi
+  &&\text{follows a fixed material \emph{point}; hold }\bX\text{ fixed,}\\
+&\varphi'
+  &&\text{follows a fixed \emph{place}; hold }\bx\text{ fixed.}
+\end{aligned}
+\]
+
+The first is what a balance law asks about, since it weighs the same piece
+of matter twice. The second is what a particle experiences. The third is what
+a fixed probe records. Chapter 2 already tied the last two together in
+\eqr{2.20}, $\dot\varphi=\varphi'+\ip{\grad\varphi}\bv$: the difference is
+the convective term, the change you meet merely by being carried to a new
+place where $\varphi$ happens to differ.
+
+Equation \eqr{5.14} is the transport formula stated in the second clock,
+\eqr{5.15} the same content in the third. Neither is more correct; they
+differ in what has to be known to use them. If the data come as $\hat\varphi(\bX,t)$, as a constitutive statement
+about the material would, then the overdot is the native derivative and
+\eqr{5.14} is the shorter road. If the data come
+as $\tilde\varphi(\bx,t)$, read off a field in space, the prime is native
+and \eqr{5.15} is. The convective term is the toll paid at the border, and
+Remark~\ref{rem:xprime} of Chapter 2 is the warning about forgetting to
+pay it.
+\end{remark}
+
+\begin{remark}[how to read \eqr{5.15}]\label{rem:readreynolds}
+The amount of $\varphi$-stuff inside the moving lump changes for exactly
+two reasons, and the formula separates them. The volume integral is the
+change you would measure standing still at each point of space: it is
+local creation. The surface integral is the change that comes from the
+boundary sweeping over new material: $\ip\bv\bn$ is the outward normal
+speed of the boundary, $\varphi\ip\bv\bn\,\dl a$ the rate at which
+$\varphi$-stuff is swept past $\dl a$. Nothing is created there; the lump
+merely takes in territory. Equation \eqr{5.14} says the same thing in the
+other split, following the material rather than the place. Both are exact;
+which one is convenient depends on whether the data are given as
+$\hat\varphi$ or $\tilde\varphi$.
+\end{remark}
+
+Taking $\varphi=1$, so that $\varphi'=0$, gives the rate of change of a
+material volume as the flux of material velocity through its boundary:
+\begin{equation}
+   \frac{\dl}{\dl t}\int_{P_{t}}\dl v=\int_{\partial P_{t}}\ip\bv\bn\,\dl a .
+   \tag{5.16}\label{eq:5.16}
+\end{equation}
+Comparing with \eqr{5.14} at $\varphi=1$ recovers $\dot J/J=\dvg\bv$ in
+integrated form, which is a useful consistency check and also the reason
+$\dvg\bv=0$ is the pointwise statement of isochoric motion.
+
+%=======================================================================
+\section{Extensions and generalizations}\label{sec:extensions}
+%=======================================================================
+
+%-----------------------------------------------------------------------
+\subsection{Reynolds' formula for vector fields}\label{sec:reyvec}
+%-----------------------------------------------------------------------
+
+Apply \eqr{5.15} to $\varphi=u_{i}$, one Cartesian component of a vector
+field $\bu$ resolved on the fixed basis $\{\be_{i}\}$:
+\begin{equation}
+   \frac{\dl}{\dl t}\int_{P_{t}}u_{i}\,\dl v
+   =\int_{P_{t}}u_{i}'\,\dl v
+   +\int_{\partial P_{t}}u_{i}\,\ip\bv\bn\,\dl a ;
+   \qquad i\in\{1,2,3\}.
+   \tag{5.17}\label{eq:5.17}
+\end{equation}
+Multiply by $\be_{i}$ and sum. The basis vectors are constants and pass
+through both integrals; on the right, $u_{i}(\ip\bv\bn)\be_{i}
+=(\ip\bv\bn)\bu=(\bu\otimes\bv)\bn$ by the definition of the tensor
+product. Hence, with the caveat of Remark~\ref{rem:symbolic} still in
+force,
+\begin{equation}
+   \frac{\dl}{\dl t}\int_{P_{t}}\bu\,\dl v
+   =\int_{P_{t}}\bu'\,\dl v
+   +\int_{\partial P_{t}}(\bu\otimes\bv)\bn\,\dl a .
+   \tag{5.18}\label{eq:5.18}
+\end{equation}
+
+%-----------------------------------------------------------------------
+\subsection{The flux derivative}\label{sec:fluxder}
+%-----------------------------------------------------------------------
+
+Balance laws for electromagnetic fields need the rate of change not of a
+volume integral but of the \emph{flux} of a vector field through a moving
+material surface. The claim is that
+\begin{equation}
+   \frac{\dl}{\dl t}\int_{\partial P_{t}}\ip\bu\bn\,\dl a
+   =\int_{\partial P_{t}}\ip{\bu^{*}}\bn\,\dl a
+   \tag{5.19}\label{eq:5.19}
+\end{equation}
+for a field $\bu^{*}$, the \emph{flux derivative} of $\bu$, to be
+determined. As before the derivative follows a fixed set of material
+points, here the ones occupying the evolving surface $\partial P_{t}$, and
+as before we transform to a fixed domain before differentiating.
+
+\begin{remark}[why the cofactor, and not $\bF$]\label{rem:whycof}
+The pull-back of Remark~\ref{rem:pullback} needs a conversion factor for
+whatever measure is being integrated, and the factor is different for each
+of the three. Chapter 2 produced all three, and this chapter uses all
+three:
+\[
+\begin{aligned}
+   \text{line:}\quad &\dl\bx=\bF\,\dl\bX
+     &&\text{(the definition of }\bF\text{),}\\
+   \text{area:}\quad &\bn\,\dl a=\bF^{*}\bN\,\dl A
+     &&\text{(Piola--Nanson, \eqr{2.54}),}\\
+   \text{volume:}\quad &\dl v=J\,\dl V
+     &&\text{(}J=\det\bF\text{).}
+\end{aligned}
+\]
+$\bF$ maps a line element because a line element \emph{is} a vector
+attached to a material fibre. An area element is not that kind of object:
+$\bn\,\dl a$ is built from a \emph{pair} of fibres through their cross
+product, and the tensor that carries cross products is by definition the
+cofactor, $\bF^{*}(\ba\times\bb)=\bF\ba\times\bF\bb$
+(Remark~\ref{rem:cofgeom}). Feeding $\bn$ to $\bF$ would deform the normal
+as if it were a fibre, and normals are not fibres. Under a simple shear a normal tilts the
+opposite way to a fibre lying in the shearing plane. That is the whole reason $\bF^{*}$ exists, and it is
+why every surface integral in this chapter goes through Piola--Nanson
+while every volume integral goes through $J$.
+
+The identity $\bF^{*}=J\bF^{-t}$ of Proposition~\ref{prop:I2cof} then says
+these are not three unrelated facts: the area factor is the volume factor
+divided by the line factor, transposed, which is dimensionally exactly
+what one would guess from ``area $=$ volume per length''.
+\end{remark}
+
+Piola--Nanson, $\bn\,\dl a=\bF^{*}\bN\,\dl A$, moves the integral to
+$\partial P$; then $\bF^{*}=J\bF^{-t}$ (Proposition~\ref{prop:I2cof})
+lets us shift $\bF$ across the inner product,
+$\ip\bu{J\bF^{-t}\bN}=J\ip{\bF^{-1}\bu}\bN$:
+\begin{equation}
+\begin{aligned}
+   \frac{\dl}{\dl t}\int_{\partial P_{t}}\ip\bu\bn\,\dl a
+   &=\frac{\dl}{\dl t}\int_{\partial P}\ip\bu{\bF^{*}\bN}\,\dl A
+    =\frac{\dl}{\dl t}\int_{\partial P}\ip{J\bF^{-1}\bu}\bN\,\dl A\\
+   &=\int_{\partial P}\ip{\big(J\bF^{-1}\bu\big)^{\textstyle\cdot}}\bN\,\dl A\\
+   &=\int_{\partial P}\ip{\big[J\bF^{-1}\dot\bu+\dot J\bF^{-1}\bu
+     +J\big(\bF^{-1}\big)^{\textstyle\cdot}\bu\big]}\bN\,\dl A .
+\end{aligned}
+   \tag{5.20}\label{eq:5.20}
+\end{equation}
+
+The middle factor is reduced by a trick already used in Problem 1(d) of
+Chapter 4. Differentiate $\bF\bF^{-1}=\I$:
+\[
+   \dot\bF\bF^{-1}+\bF\big(\bF^{-1}\big)^{\textstyle\cdot}=\Ob
+   \quad\Longrightarrow\quad
+   \bF\big(\bF^{-1}\big)^{\textstyle\cdot}=-\dot\bF\bF^{-1}=-\bL ,
+\]
+using $\bL=\dot\bF\bF^{-1}$ from \eqr{4.3}. To free
+$\big(\bF^{-1}\big)^{\textstyle\cdot}$, multiply on the left by
+$\bF^{-1}$:
+\[
+   \bF^{-1}\bF\big(\bF^{-1}\big)^{\textstyle\cdot}
+   =\big(\bF^{-1}\big)^{\textstyle\cdot}
+   =-\bF^{-1}\bL .
+\]
+Now substitute this and $\dot J=J\tr\bL$ into the bracket of \eqr{5.20},
+taking the three terms in order:
+\[
+\begin{aligned}
+   J\bF^{-1}\dot\bu
+     &\quad\text{stays as it is,}\\
+   \dot J\bF^{-1}\bu
+     &=J(\tr\bL)\bF^{-1}\bu
+      =J\bF^{-1}(\tr\bL)\bu ,\\
+   J\big(\bF^{-1}\big)^{\textstyle\cdot}\bu
+     &=J\big(-\bF^{-1}\bL\big)\bu
+      =-J\bF^{-1}\bL\bu .
+\end{aligned}
+\]
+In the second line the scalar $\tr\bL$ was moved across $\bF^{-1}$, which
+is allowed because scalars commute with everything. Every term now carries
+the same left factor $J\bF^{-1}$, so it can be taken out:
+\[
+   J\bF^{-1}\dot\bu+J\bF^{-1}(\tr\bL)\bu-J\bF^{-1}\bL\bu
+   =J\bF^{-1}\big[\dot\bu+(\tr\bL)\bu-\bL\bu\big].
+\]
+That was the point of the whole manipulation. The bracket is a single
+spatial vector, and the factor in front is exactly the one that converts
+back to the current configuration. Reversing the step that produced it,
+$\ip{J\bF^{-1}\bs}\bN=\ip\bs{J\bF^{-t}\bN}=\ip\bs{\bF^{*}\bN}$ for any
+$\bs$, and then reading $\bF^{*}\bN\,\dl A$ as $\bn\,\dl a$ once more,
+\begin{equation}
+\begin{aligned}
+   \frac{\dl}{\dl t}\int_{\partial P_{t}}\ip\bu\bn\,\dl a
+   &=\int_{\partial P}\ip{\big[\dot\bu+(\tr\bL)\bu-\bL\bu\big]}{\bF^{*}\bN}\,\dl A
+   \\
+   &=\int_{\partial P_{t}}\ip{\big[\dot\bu+(\tr\bL)\bu-\bL\bu\big]}\bn\,\dl a .
+\end{aligned}
+   \tag{5.21}\label{eq:5.21}
+\end{equation}
+Comparison with \eqr{5.19} identifies $\bu^{*}=\dot\bu+(\dvg\bv)\bu
+-\bL\bu$. Finally trade the material derivative for the spatial one with
+\eqr{2.20}, $\dot\bu=\bu'+(\grad\bu)\bv$, and note that
+$(\grad\bu)\bv+(\dvg\bv)\bu=\dvg(\bu\otimes\bv)$ by
+Proposition~\ref{prop:divprod}:
+\begin{equation}
+   \boxed{\ \bu^{*}=\bu'+\dvg(\bu\otimes\bv)-(\grad\bv)\bu .\ }
+   \tag{5.22}\label{eq:5.22}
+\end{equation}
+
+\begin{remark}[why $\bu^{*}$ is not $\dot\bu$]\label{rem:fluxwhy}
+Three things change when a material surface is carried along by the
+motion: the field on it, its area, and its orientation. The first term of
+$\bu^{*}$ accounts for the field, the second for the stretching of the
+area element, and the third, $-\bL\bu$, for the tilting of $\bn$. Drop the
+motion, $\bv=\bze$, and $\bu^{*}$ collapses to $\bu'$ as it must. Problem 2
+gives $\bu^{*}$ a second form in which the same three effects are
+repackaged as a curl, which is how it is usually met in electrodynamics.
+\end{remark}
+
+%-----------------------------------------------------------------------
+\subsection{Non-material regions}\label{sec:nonmat}
+%-----------------------------------------------------------------------
+
+Reynolds' formula assumed the region was material, meaning that it pulls
+back to a fixed $P\subset\kappa$. Control volumes in fluid mechanics do not, and
+neither will the shock surfaces of Section~\ref{sec:ch5disc}. Let
+$V(t)\subset\kappa_{t}$ be a region whose boundary moves with local normal
+speed $u(\bx,t)$ in the direction of its exterior unit normal $\bn$, with
+$\varphi$ defined on $V$. The formula to be proved is
+\begin{equation}
+   \frac{\dl}{\dl t}\int_{V}\varphi\,\dl v
+   =\int_{V}\varphi'\,\dl v+\int_{\partial V}\varphi\,u\,\dl a .
+   \tag{5.23}\label{eq:5.23}
+\end{equation}
+It reduces to \eqr{5.15} when $V$ is material, for then the boundary is
+carried by the motion and $u=\ip\bv\bn$.
+
+The pull-back of Remark~\ref{rem:pullback} is unavailable here, because
+there is no fixed domain to pull back to. We therefore go back to the
+definition of the derivative:
+\begin{equation}
+   \frac{\dl}{\dl t}\int_{V(t)}\varphi\,\dl v
+   =\lim_{\eps\to0}\frac1\eps\left[
+     \int_{V(t+\eps)}\tilde\varphi(\bx,t+\eps)\,\dl v
+     -\int_{V(t)}\tilde\varphi(\bx,t)\,\dl v\right].
+   \tag{5.24}\label{eq:5.24}
+\end{equation}
+Two things differ between the two integrals in \eqr{5.24}: the integrand
+has moved from time $t$ to time $t+\eps$, and so has the domain. A
+difference in which two things changed at once is hard to estimate, so we
+separate them by the standard device of adding and subtracting an
+intermediate term. The intermediate we want is the one that agrees with
+the first integral in its integrand and with the second in its domain,
+namely
+\[
+   \int_{V(t)}\tilde\varphi(\bx,t+\eps)\,\dl v ,
+\]
+the integral over the \emph{old} domain of the \emph{new} integrand.
+Adding and subtracting it inside the bracket of \eqr{5.24} costs nothing,
+since the two copies cancel, and it splits the bracket into two
+differences in each of which only one thing has changed. The first
+difference has the same integrand on two different domains; the second has
+two different integrands on the same domain. Writing the limit of the sum
+as the sum of the limits, which is legitimate once both limits are known
+to exist,
+\begin{equation}
+\begin{aligned}
+   \frac{\dl}{\dl t}\int_{V(t)}\varphi\,\dl v
+   &=\lim_{\eps\to0}\frac1\eps\left[
+     \int_{V(t+\eps)}\tilde\varphi(\bx,t+\eps)\,\dl v
+     -\int_{V(t)}\tilde\varphi(\bx,t+\eps)\,\dl v\right]\\
+   &\quad+\lim_{\eps\to0}\frac1\eps\left[
+     \int_{V(t)}\tilde\varphi(\bx,t+\eps)\,\dl v
+     -\int_{V(t)}\tilde\varphi(\bx,t)\,\dl v\right]\\
+   &=\lim_{\eps\to0}\frac1\eps
+     \int_{V(t+\eps)\setminus V(t)}\tilde\varphi(\bx,t+\eps)\,\dl v
+     \;+\;\int_{V(t)}\varphi'\,\dl v .
+\end{aligned}
+   \tag{5.25}\label{eq:5.25}
+\end{equation}
+Both simplifications in the last line deserve a word.
+
+The second limit is now an ordinary derivative. The domain $V(t)$ is held
+fixed while $\eps$ runs to zero, so the limit may be taken inside the
+integral, and what is left inside is
+\[
+   \lim_{\eps\to0}\frac{\tilde\varphi(\bx,t+\eps)-\tilde\varphi(\bx,t)}{\eps}
+   =\frac{\partial\tilde\varphi}{\partial t}\Big|_{\bx}=\varphi' ,
+\]
+the derivative at fixed place, by definition. This is where the prime of
+Remark~\ref{rem:twoclocks} enters the formula, and it enters for a plain
+reason: the domain was frozen at $V(t)$ for this piece, so the only thing
+still moving was the field, and a field watched at a frozen place is
+watched at fixed $\bx$.
+
+The first limit simplifies because the two domains overlap. The region
+$V(t)$ sits inside $V(t+\eps)$ when the boundary is advancing, so the
+integral over $V(t)$ cancels the part of the integral over $V(t+\eps)$
+taken over the same points, and what survives is the integral over the
+thin shell $V(t+\eps)\setminus V(t)$ between the two boundaries. Where the
+boundary is receding the shell counts with the opposite sign, which is
+handled automatically once $u$ is allowed to be negative there. That
+shell integral is the whole content of the formula, and evaluating it is
+the business of the next paragraph.
+
+\bookfig{1}\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.2mm]},thick}]
+% region at time t
+\draw[thick,fill=blue!6]
+  plot[smooth cycle,tension=0.85] coordinates
+  {(0,1.15) (1.30,0.75) (1.55,-0.45) (0.55,-1.25) (-0.85,-1.00) (-1.35,0.10)};
+% region at time t+eps: slightly inflated
+\draw[thick,dashed,red!65!black]
+  plot[smooth cycle,tension=0.85] coordinates
+  {(0.06,1.55) (1.66,0.95) (1.92,-0.58) (0.66,-1.58) (-1.10,-1.28) (-1.70,0.12)};
+\node[font=\small] at (-0.15,0.05) {$V(t)$};
+\node[font=\small,text=red!65!black] at (1.62,1.35) {$V(t+\eps)$};
+% the swept shell
+\node[font=\footnotesize,align=center,text=gray!85] at (3.75,0.95)
+  {shell $V(t+\eps)\setminus V(t)$\\ thickness $u\eps+o(\eps)$};
+\draw[gray!70,-{Stealth[length=1.8mm]}] (3.05,0.72) .. controls (2.35,0.55) .. (1.72,0.28);
+% normal and speed at a boundary point
+\coordinate (P) at (1.52,-0.05);
+\draw[ar] (P) -- ++(0.62,0.05) node[right,font=\small] {$\bn$};
+\draw[ar,red!65!black] (P) -- ++(0.36,0.03)
+   node[below right=-1pt,font=\small,text=red!65!black] {$u\eps$};
+\fill (P) circle (1.1pt);
+% area element
+\draw[thick] (1.44,-0.42) -- (1.58,0.32);
+\node[font=\small,anchor=north east] at (1.50,-0.40) {$\dl a$};
+\end{tikzpicture}
+\caption{Evolution of a non-material region. In time $\eps$ the boundary
+advances a distance $u\eps$ along its own normal, so the shell swept out
+has volume measure $\dl v=u\eps\,\dl a+o(\eps)$ over each element $\dl a$
+of $\partial V(t)$. Dividing by $\eps$ and letting $\eps\to0$ leaves
+$\int_{\partial V}\varphi u\,\dl a$: only the normal motion of the
+boundary contributes, since sliding the boundary along itself sweeps no
+volume.}
+\label{fig:ch5nonmat}
+\end{figure}
+
+The shell is thin, and that is what makes it computable. Take one element
+$\dl a$ of $\partial V(t)$ and ask how much volume the boundary sweeps
+over it in time $\eps$. The boundary moves with normal speed $u$, so in
+time $\eps$ it advances a distance $u\eps$ along $\bn$. The piece of shell
+standing over $\dl a$ is therefore a slab of base $\dl a$ and height
+$u\eps$, of volume $u\eps\,\dl a$, together with a correction.
+
+The correction is $o(\eps)$, meaning it vanishes faster than $\eps$ does,
+and it has two sources. The boundary need not move exactly along $\bn$;
+but by the argument after \eqr{5.27} the tangential part sweeps no volume
+to first order, since sliding a surface along itself moves no material
+across it. And the surface curves, so the slab is not exactly a cylinder;
+but the deviation is of order $\eps^{2}$, being a product of the advance
+$u\eps$ with the change in $\bn$ over that advance, itself of order
+$\eps$. Both corrections therefore disappear on dividing by $\eps$ and
+letting $\eps$ tend to zero, which is the only thing we will do with them.
+
+So, with reference to Figure~\ref{fig:ch5nonmat}, the volume measure on
+the shell is
+\[
+   \dl v=u\eps\,\dl a+o(\eps),
+\]
+and the integral over the shell becomes an integral over $\partial V(t)$.
+Therefore
+\begin{equation}
+\begin{aligned}
+   \lim_{\eps\to0}\frac1\eps
+   \int_{V(t+\eps)\setminus V(t)}\tilde\varphi(\bx,t+\eps)\,\dl v
+   &=\lim_{\eps\to0}\int_{\partial V(t)}
+     \tilde\varphi(\bx,t+\eps)\,u\,\dl a+\frac{o(\eps)}{\eps}
+   \\
+   &=\int_{\partial V(t)}\tilde\varphi(\bx,t)\,u\,\dl a ,
+\end{aligned}
+   \tag{5.26}\label{eq:5.26}
+\end{equation}
+which with \eqr{5.25} gives \eqr{5.23}.
+
+It is convenient to carry a vector field $\bu(\bx,t)$ on $\partial V(t)$
+with $\ip\bu\bn=u$. Only the normal component has any meaning: the
+tangential part $(\I-\bn\otimes\bn)\bu$ slides the boundary along itself
+and sweeps no volume, so it cannot appear in \eqr{5.23}. Then
+\begin{equation}
+   \frac{\dl}{\dl t}\int_{V}\varphi\,\dl v
+   =\int_{V}\varphi'\,\dl v+\int_{\partial V}\varphi\,\ip\bu\bn\,\dl a ,
+   \tag{5.27}\label{eq:5.27}
+\end{equation}
+in exact analogy with \eqr{5.15}. The analogy is only formal, however:
+$\bv$ is defined throughout the body, $\bu$ only on $\partial V$.
+
+%=======================================================================
+\section{Discontinuous fields}\label{sec:ch5disc}
+%=======================================================================
+
+%-----------------------------------------------------------------------
+\subsection{Reynolds' formula for fields that suffer a discontinuity
+across a surface}\label{sec:reydisc}
+%-----------------------------------------------------------------------
+
+Shock waves, phase boundaries and propagating cracks all present the same
+picture: a surface $s(t)$ sweeping through a material volume
+$P_{t}\subset\kappa_{t}$ at speed $u$ along its unit normal $\bn$, cutting
+$P_{t}$ into two parts $V^{\pm}$ across which the fields jump. The two
+parts are \emph{not} material regions, and $s$ is not a material surface,
+whenever $u\neq\ip\bv\bn$ (Figure~\ref{fig:ch5shock}).
+
+Let $\varphi$ be discontinuous across $s$, which we then call a
+\emph{singular surface}. Its jump at $\bx\in s$ is
+\begin{equation}
+   \jump{\varphi}=\varphi^{+}-\varphi^{-},
+   \tag{5.28}\label{eq:5.28}
+\end{equation}
+where $\varphi^{\pm}$ are the limits of $\varphi$ as $\bx$ is approached
+from the interiors of $V^{\pm}$. Throughout, $\bn$ points from $V^{-}$
+into $V^{+}$; the sign of every jump depends on that convention and on
+nothing else. From the figure,
+\begin{equation}
+   P_{t}=V^{+}\cup V^{-},\qquad
+   \partial P_{t}^{\pm}=\partial V^{\pm}\cap\partial P_{t},\qquad
+   \partial P_{t}=\partial P_{t}^{+}\cup\partial P_{t}^{-}.
+   \tag{5.29}\label{eq:5.29}
+\end{equation}
+
+\bookfig{2}\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.05,
+   ar/.style={-{Stealth[length=2.2mm]},thick}]
+% material region
+\draw[thick] plot[smooth cycle,tension=0.82] coordinates
+  {(0,1.55) (1.75,1.05) (2.05,-0.55) (0.70,-1.70) (-1.15,-1.35) (-1.80,0.15)};
+% the propagating surface s : a curve cutting it
+\draw[very thick,red!65!black] (-1.62,-0.72) .. controls (-0.25,-0.30) and (0.55,0.30) .. (1.92,0.28);
+\node[font=\small,text=red!65!black] at (2.28,0.52) {$s(t)$};
+% shading labels
+\node[font=\small] at (-0.35,0.95) {$V^{+}$};
+\node[font=\small] at (0.15,-1.05) {$V^{-}$};
+\node[font=\footnotesize,text=gray!80,anchor=west] at (2.20,1.30)
+  {$\partial P^{+}_{t}$};
+\draw[gray!70,-{Stealth[length=1.6mm]}] (2.18,1.24) -- (1.35,1.16);
+\node[font=\footnotesize,text=gray!80,anchor=west] at (2.20,-1.35)
+  {$\partial P^{-}_{t}$};
+\draw[gray!70,-{Stealth[length=1.6mm]}] (2.18,-1.29) -- (1.25,-1.05);
+% normal on s, pointing from V- into V+
+\coordinate (Q) at (0.20,0.06);
+\draw[ar] (Q) -- ++(-0.16,0.72) node[above,font=\small] {$\bn$};
+\draw[ar,red!65!black] (Q) -- ++(-0.10,0.44)
+   node[right=1pt,font=\small,text=red!65!black] {$u$};
+\fill (Q) circle (1.2pt);
+% material velocity, deliberately not aligned with u n
+\draw[ar,blue!55!black] (Q) -- ++(0.62,0.30)
+   node[right,font=\small,text=blue!55!black] {$\bv$};
+\end{tikzpicture}
+\caption{A material region $P_{t}\subset\kappa_{t}$ traversed by a
+propagating surface $s$. The normal $\bn$ on $s$ points from $V^{-}$ into
+$V^{+}$ and $s$ advances at speed $u$ along it. Material crosses $s$
+whenever $u\neq\ip\bv\bn$: the surface is then not made of the same
+particles from one instant to the next, and $V^{\pm}$ are non-material
+regions even though their union $P_{t}$ is material. This is why
+\eqr{5.27}, and not \eqr{5.15}, is the formula to apply to each half.}
+\label{fig:ch5shock}
+\end{figure}
+
+Let $\varphi$ be smooth in $V^{+}$ and in $V^{-}$ separately. Each half is
+a non-material region, so \eqr{5.27} applies to each. The boundary of
+$V^{+}$ consists of $\partial P_{t}^{+}$, which is material and therefore
+moves with normal speed $\ip\bv\bn$, and of $s$, whose exterior normal
+\emph{as seen from $V^{+}$} is $-\bn$, so that its normal speed in that
+direction is $-u$. For $V^{-}$ the exterior normal on $s$ is $+\bn$ and
+the speed is $+u$. Hence
+\begin{equation}
+\begin{aligned}
+   \frac{\dl}{\dl t}\int_{V^{+}}\varphi\,\dl v
+   &=\int_{V^{+}}\varphi'\,\dl v
+    +\int_{\partial P^{+}_{t}}\varphi\,\ip\bv\bn\,\dl a
+    +\int_{s}\varphi^{+}(-u)\,\dl a
+   \qquad\text{and}\\[1mm]
+   \frac{\dl}{\dl t}\int_{V^{-}}\varphi\,\dl v
+   &=\int_{V^{-}}\varphi'\,\dl v
+    +\int_{\partial P^{-}_{t}}\varphi\,\ip\bv\bn\,\dl a
+    +\int_{s}\varphi^{-}u\,\dl a .
+\end{aligned}
+   \tag{5.30}\label{eq:5.30}
+\end{equation}
+Before adding them, notice why the signs came out as they did, since this
+is the only delicate point in the section. Equation \eqr{5.27} was derived
+for a region whose boundary advances at speed $u$ \emph{along its own
+exterior normal}. The surface $s$ is part of the boundary of both halves,
+but the two halves look at it from opposite sides. Seen from $V^{-}$, the
+outward direction is $+\bn$ and the surface advances into $V^{+}$, which
+is away from $V^{-}$: the region $V^{-}$ is gaining, and the speed to use
+is $+u$. Seen from $V^{+}$, the outward direction is $-\bn$ and the
+surface is advancing into $V^{+}$ itself: the region is losing, and the
+speed to use is $-u$. One surface, one physical motion, two opposite
+bookkeeping signs, because the two regions are on opposite sides of it.
+The limiting value of $\varphi$ likewise differs, being $\varphi^{+}$ from
+one side and $\varphi^{-}$ from the other, which is exactly what makes the
+sum fail to cancel.
+
+Now add the two lines of \eqr{5.30}, one piece at a time. The volume
+integrals combine, because $V^{+}\cup V^{-}=P_{t}$ by \eqr{5.29}$_{1}$ and
+the two parts overlap only on $s$, a surface of zero volume:
+\[
+   \int_{V^{+}}\varphi'\,\dl v+\int_{V^{-}}\varphi'\,\dl v
+   =\int_{P_{t}}\varphi'\,\dl v .
+\]
+The material surface integrals combine for the same reason, using
+$\partial P_{t}=\partial P^{+}_{t}\cup\partial P^{-}_{t}$ from
+\eqr{5.29}$_{3}$:
+\[
+   \int_{\partial P^{+}_{t}}\varphi\,\ip\bv\bn\,\dl a
+   +\int_{\partial P^{-}_{t}}\varphi\,\ip\bv\bn\,\dl a
+   =\int_{\partial P_{t}}\varphi\,\ip\bv\bn\,\dl a .
+\]
+The two integrals over $s$ are both over the same surface, so they combine
+into one integrand:
+\[
+   \int_{s}\varphi^{+}(-u)\,\dl a+\int_{s}\varphi^{-}u\,\dl a
+   =-\int_{s}\big(\varphi^{+}-\varphi^{-}\big)u\,\dl a
+   =-\int_{s}\jump{\varphi}\,u\,\dl a ,
+\]
+the last step being the definition \eqr{5.28} of the jump. Collecting the
+three results,
+\begin{equation}
+   \boxed{\ \frac{\dl}{\dl t}\int_{P_{t}}\varphi\,\dl v
+   =\int_{P_{t}}\varphi'\,\dl v
+   +\int_{\partial P_{t}}\varphi\,\ip\bv\bn\,\dl a
+   -\int_{s}\jump{\varphi}u\,\dl a .\ }
+   \tag{5.31}\label{eq:5.31}
+\end{equation}
+
+\begin{remark}[the sign, and what the extra term is]\label{rem:jumpsign}
+The minus sign is not a convention one may take or leave: it follows from
+$\bn$ pointing into $V^{+}$, which is also the convention that defines
+$\jump\varphi$ in \eqr{5.28}. Reverse $\bn$ and both $\jump\varphi$ and
+$u$ change sign, so the product, and the formula, are unchanged, as they must be, since the left-hand side knows nothing
+about our choice. As for the
+meaning: if $\varphi$ is smooth then $\jump\varphi=0$ and \eqr{5.31} is
+\eqr{5.15}. When it is not, the surface acts as a source. It is this term
+that will produce the Rankine--Hugoniot jump conditions in Chapter 6, in
+exactly the way \eqr{5.15} produces the smooth balance laws.
+\end{remark}
+
+The passage to vector fields is the one already made from \eqr{5.15} to
+\eqr{5.18}: apply \eqr{5.31} to each Cartesian component and reassemble.
+
+%-----------------------------------------------------------------------
+\subsection{The divergence theorem for discontinuous fields}
+\label{sec:divdisc}
+%-----------------------------------------------------------------------
+
+The divergence theorem \eqr{5.1} needs the same repair. Recall that in
+$\ip\ba\bn$ on its right-hand side, $\ba$ means the limit taken as
+$\partial R$ is approached \emph{from inside} $R$. Let $\ba(\bx,t)$ be
+smooth in $V^{+}$ and $V^{-}$ separately and suffer
+\begin{equation}
+   \jump\ba=\ba^{+}-\ba^{-}\qquad\text{at }\bx\in s .
+   \tag{5.32}\label{eq:5.32}
+\end{equation}
+
+Apply \eqr{5.1} to each half separately. This is legitimate because
+$\ba$ is smooth on each side taken by itself. The boundary of $V^{-}$ is $\partial P^{-}_{t}$ together
+with $s$, on which the exterior normal is $+\bn$ and the relevant limit is
+$\ba^{-}$; the boundary of $V^{+}$ is $\partial P^{+}_{t}$ together with
+$s$, on which the exterior normal is $-\bn$ and the limit is $\ba^{+}$:
+\begin{equation}
+\begin{aligned}
+   \int_{\partial P^{-}_{t}}\ip\ba\bn\,\dl a
+   +\int_{s}\ip{\ba^{-}}\bn\,\dl a
+   &=\int_{V^{-}}\dvg\ba\,\dl v
+   \qquad\text{and}\\[1mm]
+   \int_{\partial P^{+}_{t}}\ip\ba\bn\,\dl a
+   +\int_{s}\ip{\ba^{+}}{(-\bn)}\,\dl a
+   &=\int_{V^{+}}\dvg\ba\,\dl v .
+\end{aligned}
+   \tag{5.33}\label{eq:5.33}
+\end{equation}
+The sign pattern is the same one that appeared in \eqr{5.30} and for the
+same reason: the two halves see the shared surface from opposite sides, so
+one of them reads its exterior normal as $+\bn$ and the other as $-\bn$.
+There is no motion in this argument at all, only geometry, which is why
+$u$ never appears.
+
+Add the two lines. The right sides combine into a single integral over
+$P_{t}$, since $V^{+}\cup V^{-}=P_{t}$:
+\[
+   \int_{V^{-}}\dvg\ba\,\dl v+\int_{V^{+}}\dvg\ba\,\dl v
+   =\int_{P_{t}}\dvg\ba\,\dl v .
+\]
+On the left, the two integrals over the outer boundary combine into one
+over $\partial P_{t}$ by \eqr{5.29}$_{3}$, and the two over $s$ give
+\[
+   \int_{s}\ip{\ba^{-}}\bn\,\dl a+\int_{s}\ip{\ba^{+}}{(-\bn)}\,\dl a
+   =-\int_{s}\ip{\big(\ba^{+}-\ba^{-}\big)}\bn\,\dl a
+   =-\int_{s}\ip{\jump\ba}\bn\,\dl a ,
+\]
+using the linearity of the inner product in its first slot and then the
+definition \eqr{5.32}. So the sum reads
+\[
+   \int_{\partial P_{t}}\ip\ba\bn\,\dl a-\int_{s}\ip{\jump\ba}\bn\,\dl a
+   =\int_{P_{t}}\dvg\ba\,\dl v ,
+\]
+and moving the jump term to the other side,
+\begin{equation}
+   \boxed{\ \int_{\partial P_{t}}\ip\ba\bn\,\dl a
+   =\int_{P_{t}}\dvg\ba\,\dl v
+   +\int_{s}\ip{\jump\ba}\bn\,\dl a .\ }
+   \tag{5.34}\label{eq:5.34}
+\end{equation}
+
+In every formula of this section the jump is taken with respect to a
+normal $\bn$ on $s$ directed from $V^{-}$ to $V^{+}$.
+
+\begin{remark}[a way to remember both]\label{rem:distrib}
+Read \eqr{5.34} backwards: $\int_{P_{t}}\dvg\ba\,\dl v$ \emph{under-counts}
+the boundary flux by exactly the flux the jump carries across $s$.
+Equivalently, the distributional divergence of a piecewise smooth field
+is the classical divergence plus a surface layer of strength
+$\ip{\jump\ba}\bn$ on $s$. The same reading applies to \eqr{5.31}: the
+singular surface carries its own share of the balance, and localizing an
+integral statement over a region cut by $s$ therefore produces two local statements: a field equation away from $s$,
+and a jump condition on $s$ itself.
+\end{remark}
+
+%=======================================================================
+\setcounter{problemenv}{0}
+\section{Problems}\label{sec:problems:c5}
+%=======================================================================
+
+%-----------------------------------------------------------------------
+\begin{problem}[Transport of a line integral]
+Fill in the missing terms in the transport formula
+\[
+   \frac{\dl}{\dl t}\int_{C_{t}}\ip\ba{\dl\bx}
+   =\int_{C_{t}}\ip{\big(\ba'+\dots\big)}{\dl\bx},
+\]
+where $C_{t}$ is a moving material curve and $\ba'$ is the time derivative
+of the smooth spatial field $\ba$ at fixed $\bx$.
+\end{problem}
+
+\begin{solution}
+The pattern of the chapter applies unchanged: convert to a fixed domain,
+differentiate, convert back. The fixed domain here is the material curve
+$C\subset\kappa$ of which $C_{t}=\bchi_{\kappa}(C,t)$ is the image.
+
+A material line element obeys $\dl\bx=\bF\,\dl\bX$ by the definition of
+the deformation gradient, and $\dl\bX$ is fixed in time, so by \eqr{4.3}
+\[
+   \big(\dl\bx\big)^{\textstyle\cdot}=\dot\bF\,\dl\bX=\bL\bF\,\dl\bX
+   =\bL\,\dl\bx .
+\]
+This is the line-element counterpart of $\dot J=J\tr\bL$ for the volume
+element and of Piola--Nanson for the area element; the three together are
+the transport rules for the three measures.
+
+Now differentiate the integral over the fixed $C$ and use the product
+rule:
+\[
+\begin{aligned}
+   \frac{\dl}{\dl t}\int_{C_{t}}\ip\ba{\dl\bx}
+   &=\int_{C}\Big[\ip{\dot\ba}{\dl\bx}
+     +\ip\ba{\big(\dl\bx\big)^{\textstyle\cdot}}\Big]
+    =\int_{C_{t}}\Big[\ip{\dot\ba}{\dl\bx}+\ip\ba{\bL\,\dl\bx}\Big]\\
+   &=\int_{C_{t}}\ip{\big(\dot\ba+\bL^{t}\ba\big)}{\dl\bx},
+\end{aligned}
+\]
+The last step moved $\bL$ from the second slot of the inner product to the
+first. That is the definition of the transpose,
+$\ip\ba{\bL\bs}=\ip{\bL^{t}\ba}\bs$, applied with $\bs=\dl\bx$, and then
+the two terms were collected under one inner product by linearity in the
+first slot.
+
+Now trade the material derivative for the spatial one. By \eqr{2.20},
+$\dot\ba=\ba'+(\grad\ba)\bv$, and $\bL=\grad\bv$ so $\bL^{t}
+=(\grad\bv)^{t}$. Substituting both,
+\[
+   \boxed{\ \frac{\dl}{\dl t}\int_{C_{t}}\ip\ba{\dl\bx}
+   =\int_{C_{t}}\ip{\Big(\ba'+(\grad\ba)\bv+(\grad\bv)^{t}\ba\Big)}{\dl\bx}.\ }
+\]
+So the missing terms are $(\grad\ba)\bv+(\grad\bv)^{t}\ba$. The first is
+the convective change of $\ba$, the change met by being carried to a new
+place. The second has a different origin: it is the change caused by the
+line element itself rotating and stretching, and it would be absent if one
+guessed the answer to be $\int\ip{\dot\ba}{\dl\bx}$. Guessing that is the
+natural mistake, and the reason it fails is that $\dl\bx$ is not a passive
+label but a material object that the motion deforms, exactly as $\dl v$
+and $\dl a$ are.
+
+\emph{A check worth doing.} Take $\ba=\bv$, so that the integral is the
+circulation of the velocity around the curve. The integrand becomes
+\[
+   \ip{\bv'}{\dl\bx}+\ip{(\grad\bv)\bv}{\dl\bx}
+   +\ip{(\grad\bv)^{t}\bv}{\dl\bx}.
+\]
+The third term simplifies. In components,
+$\big[(\grad\bv)^{t}\bv\big]_{i}=v_{j,i}v_{j}
+=\tfrac12\big(v_{j}v_{j}\big)_{,i}=\tfrac12\big(|\bv|^{2}\big)_{,i}$,
+using the product rule backwards, so
+\[
+   (\grad\bv)^{t}\bv=\tfrac12\grad\big(|\bv|^{2}\big),
+\]
+a gradient. The line integral of a gradient around a closed curve is the
+change of the potential around a closed loop, which is zero. So on a
+closed material curve the third term drops out entirely and
+\[
+   \frac{\dl}{\dl t}\oint_{C_{t}}\ip\bv{\dl\bx}
+   =\oint_{C_{t}}\ip{\big(\bv'+(\grad\bv)\bv\big)}{\dl\bx}
+   =\oint_{C_{t}}\ip{\dot\bv}{\dl\bx},
+\]
+the last step recognising \eqr{2.21}. This is Kelvin's circulation theorem
+in its purely kinematical form: the circulation around a closed material
+curve changes only through the acceleration. Once Chapter 6 supplies an
+equation of motion for $\dot\bv$, this becomes the statement that
+circulation is conserved whenever the acceleration is itself a gradient,
+which is the usual form of the theorem in fluid mechanics.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[A second form of the flux derivative]
+Show that the flux derivative of a vector field $\bu$ may be written
+\[
+   \bu^{*}=\bu'+(\dvg\bu)\bv-\crl(\bv\times\bu).
+\]
+\end{problem}
+
+\begin{solution}
+Start from the identity for the curl of a cross product, Problem 24 of
+Chapter 1:
+\[
+   \crl(\ba\times\bb)=(\dvg\bb)\ba-(\dvg\ba)\bb
+   +(\grad\ba)\bb-(\grad\bb)\ba .
+\]
+Put $\ba=\bv$, $\bb=\bu$:
+\[
+   \crl(\bv\times\bu)=(\dvg\bu)\bv-(\dvg\bv)\bu
+   +(\grad\bv)\bu-(\grad\bu)\bv .
+\]
+Therefore
+\[
+\begin{aligned}
+   (\dvg\bu)\bv-\crl(\bv\times\bu)
+   &=(\dvg\bu)\bv-(\dvg\bu)\bv+(\dvg\bv)\bu\\
+   &\qquad-(\grad\bv)\bu+(\grad\bu)\bv\\
+   &=\underbrace{(\grad\bu)\bv+(\dvg\bv)\bu}
+     _{=\ \dvg(\bu\otimes\bv)}-(\grad\bv)\bu ,
+\end{aligned}
+\]
+the brace by Proposition~\ref{prop:divprod}. Adding $\bu'$ to both sides
+and comparing with \eqr{5.22},
+\[
+   \boxed{\ \bu^{*}=\bu'+(\dvg\bu)\bv-\crl(\bv\times\bu).\ }
+\]
+
+The second form is the one that makes Faraday's law transparent. If
+$\dvg\bu=0$, as it is for the magnetic induction, the middle term drops
+and
+\[
+   \frac{\dl}{\dl t}\int_{\partial P_{t}}\ip\bu\bn\,\dl a
+   =\int_{\partial P_{t}}\ip{\big[\bu'-\crl(\bv\times\bu)\big]}\bn\,\dl a :
+\]
+the flux through a material loop changes through the local rate $\bu'$
+and through the motional term $-\crl(\bv\times\bu)$, whose line-integral
+form $\oint\ip{(\bv\times\bu)}{\dl\bx}$ is the motional electromotive
+force. The two forms \eqr{5.22} and the boxed one are of course the same
+field; which is preferable depends on whether $\dvg\bu$ or
+$\dvg(\bu\otimes\bv)$ is the quantity at hand.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[The referential statements]
+Everything in this chapter is written in the spatial description. Derive
+the corresponding referential statements for fields suffering a
+discontinuity across a surface $S$ propagating through a fixed region
+$P\subset\kappa$ at speed $U$ along its unit normal $\bN$. \emph{Hint:}
+use $\dot\bX=\bze$.
+\end{problem}
+
+\begin{solution}
+The hint is the whole solution, once its consequence is seen. In the
+referential description the independent variable is $\bX$, and material
+points do not move in $\kappa$: $\dot\bX=\bze$. So the ``material
+velocity'' of the referential picture vanishes, and every term in the
+spatial formulas built from $\bv$ disappears.
+
+\textbf{Transport.} Let $\hat\Phi(\bX,t)$ be a referential density and let
+$S(t)$ propagate through the \emph{fixed} region $P$ at normal speed $U$
+along $\bN$, cutting $P$ into $P^{\pm}$ with $\bN$ directed from $P^{-}$
+into $P^{+}$. Apply the non-material formula \eqr{5.27} in $\kappa$ to
+each half. Because $\partial P$ is fixed, its normal speed is zero and the
+integral over $\partial P$ that replaced $\int_{\partial P_{t}}\varphi
+\ip\bv\bn\,\dl a$ is absent; only the two integrals over $S$ survive, with
+exterior normal $-\bN$ and speed $-U$ for $P^{+}$ and $+\bN$, $+U$ for
+$P^{-}$. Adding,
+\[
+   \boxed{\ \frac{\dl}{\dl t}\int_{P}\hat\Phi\,\dl V
+   =\int_{P}\frac{\partial\hat\Phi}{\partial t}\,\dl V
+   -\int_{S}\jump{\hat\Phi}\,U\,\dl A .\ }
+\]
+Compare \eqr{5.31}: the boundary flux term is gone and the singular
+surface term is untouched. That is the referential picture in one
+line. Nothing is convected, because nothing moves; all that happens is that the
+discontinuity sweeps across the material.
+
+\textbf{Divergence.} The argument of Section~\ref{sec:divdisc} used only
+the smoothness of the field on each side and the direction of the
+exterior normal, never the motion. It therefore transcribes verbatim, with
+$\Dvg$ for $\dvg$ and $\bN$, $\dl A$, $\dl V$ for $\bn$, $\dl a$, $\dl v$:
+for a referential field $\bA(\bX,t)$ smooth on each side of $S$,
+\[
+   \boxed{\ \int_{\partial P}\ip\bA\bN\,\dl A
+   =\int_{P}\Dvg\bA\,\dl V+\int_{S}\ip{\jump\bA}\bN\,\dl A .\ }
+\]
+
+\textbf{Relation between $U$ and $u$.} The two speeds describe the same
+physical surface seen in two configurations and are not equal. A point of
+$S$ with referential normal speed $U$ maps to a point of $s$; the
+displacement $U\eps\bN$ in $\kappa$ carries over to $\bF(U\eps\bN)$ in
+$\kappa_{t}$, whose component along $\bn$ is the normal advance there.
+Using Piola--Nanson to relate the normals, one finds
+\[
+   u-\ip\bv\bn=\frac{J}{|\bF^{*}\bN|}\,U ,
+\]
+so the two vanish together: $S$ is material in $\kappa$ exactly when $s$
+is material in $\kappa_{t}$, as it must be. The combination
+$u-\ip\bv\bn$, the speed of the surface \emph{relative to the material},
+is the one with physical content, and it is what Chapter 6 will meet in
+the mass jump condition.
+\end{solution}

@@ -1,0 +1,3931 @@
+%=======================================================================
+\chapter{Observers and Frames of Reference}
+%=======================================================================
+
+Every formula written so far belongs to one observer. Chapter 2 gave that
+observer a point space and let him record where each material point is;
+Chapters 3 and 4 let him measure how the body has been distorted and how
+fast; Chapters 5 and 6 let him balance mass, momentum and energy. At no
+stage was it asked whether a second observer, watching the same body from
+a platform of his own, would write the same things down.
+
+He would not. Two observers disagree about the velocity of a particle,
+about its acceleration, about the spin of the material, and about the
+components of every vector and tensor in sight. They nevertheless agree
+about the distance between two material points, about the elapsed time
+between two events, about the density, and about the stress power. The
+business of this chapter is to sort the one list from the other, and to
+do it by calculation rather than by intuition, because intuition gets it
+wrong: the stretching tensor $\bD$ survives a change of observer and the
+spin tensor $\bW$ does not, although the two were built side by side out
+of the same $\bL$ in \eqr{4.7}.
+
+The sorting matters for a reason that will only become visible in
+Chapter 8. A constitutive equation is a claim about a material, and a
+material cannot know who is looking at it. So a constitutive equation may
+be built only out of quantities on which all observers agree, in the
+precise sense set out in Section~\ref{sec:ch7kin} below. Every result of
+this chapter is therefore a licence or a prohibition for the chapters
+that follow: $\bD$ is admissible in a constitutive law and $\bW$ is not,
+$\bC$ is admissible and $\bF$ is not, and the reason in each case is a
+transformation law derived here.
+
+One object generates the entire chapter, the relation
+\[
+   \bx^{+}=\bQ(t)\bx+\bc(t)
+\]
+between the place $\bx$ that one observer assigns to a material point and
+the place $\bx^{+}$ that the other assigns to the same point at the same
+instant. Section~\ref{sec:ch7obs} derives it from two physical
+assumptions. Everything afterwards is obtained by differentiating it,
+with respect to position to get $\bF$, $\bH$ and the polar factors, and
+with respect to time to get $\bv$, $\ba$, $\bL$, $\bD$ and $\bW$. The
+single term $\dot\bQ$, which appears whenever the second differentiation
+is performed, is the whole difficulty and the whole content.
+
+%=======================================================================
+\section{Observers}\label{sec:ch7obs}
+%=======================================================================
+
+An observer $O$, perceiving a configuration $\kappa_{t}$ of a body, is
+equipped for the purpose with a point space $\Et$ and its associated
+translation space, also written $\Et$. These constitute the \emph{frame
+of reference} adopted by $O$. We are concerned with the relationship
+between this observer's perception and that of an alternative observer
+$O^{+}$, who perceives the same configuration as $\kappa^{+}_{t^{+}}$
+relative to a frame of reference consisting of the point space
+$\mathbb{E}^{3+}$ and translation space $\mathbb{E}^{3+}$.
+
+\begin{remark}[a frame of reference is not a coordinate
+system]\label{rem:ch7frame}
+This is the distinction that has to be fixed before anything else, and it
+is the one most often lost.
+
+A \emph{basis} is chosen inside a single frame. Changing it, as in
+Section~\ref{ss:cob}, leaves every geometric object exactly where it is
+and merely re-expresses it: the vector $\bu$ is one vector, and
+$u_{i}=\ip\bu{\be_{i}}$ and $u_{i}'=\ip\bu{\be_{i}'}$ are two lists of
+numbers naming it. The change-of-basis matrix $a_{ij}$ of
+Theorem~\ref{thm:cob} is a fixed array of numbers; nothing in that
+discussion had any time dependence, and nothing could, because the
+question ``which basis?'' is not a question about when.
+
+A \emph{frame} is a whole space, carried by an observer. Changing it
+replaces the point $\bx\in\Et$ by a different point $\bx^{+}$ of a
+different space $\mathbb{E}^{3+}$. The tensor $\bQ(t)$ that relates them
+is a two-point tensor with one foot in each space, in exactly the sense
+of Remark~\ref{rem:hatinch4}, and it depends on $t$ because the two
+observers may be in relative motion.
+
+The practical test: if $\dot\bQ$ can be non-zero, you are changing
+observers; if it cannot, you are changing bases. Every difficulty in this
+chapter, and every term in \eqr{7.9} and \eqr{7.63}, comes from
+$\dot\bQ\neq\Ob$. A change of basis produces no such term and no such
+difficulty, which is why Chapters 1 to 6 could ignore the whole subject.
+\end{remark}
+
+In classical non-relativistic physics, including classical continuum
+mechanics, all observers are presumed to agree on two things: the time
+intervals between successive events, and the distance between arbitrary
+pairs of material points. Thus, if $t$ and $t^{+}$ are the times on the
+watches worn by $O$ and $O^{+}$ respectively, then
+\begin{equation}
+   t^{+}=t+a ,
+   \tag{7.1}\label{eq:7.1}
+\end{equation}
+where $a$ is a constant; and if $\bx,\by\in\Et$ and
+$\bx^{+},\by^{+}\in\mathbb{E}^{3+}$ are the positions of material points
+$p$ and $q$ as perceived by $O$ and $O^{+}$ (Figure~\ref{fig:ch7two}),
+then
+\begin{equation}
+   \big|\bx^{+}-\by^{+}\big|=\big|\bx-\by\big| .
+   \tag{7.2}\label{eq:7.2}
+\end{equation}
+
+\begin{remark}[what the two assumptions cost, and what they
+buy]\label{rem:ch7twoassump}
+Neither statement is a theorem. Both are the classical idealisation, and
+both fail in relativity: \eqr{7.1} fails because simultaneity is not
+absolute, and \eqr{7.2} fails because lengths contract. Writing them down
+is therefore the point at which this book commits to Newtonian physics,
+and it is worth knowing exactly how much is being committed.
+
+Very little, and very much. Very little, because the two statements
+concern only clocks and rulers and say nothing about matter. Very much,
+because \eqr{7.2} alone will be shown to force the form of the change of
+observer completely, leaving only the arbitrary $\bQ(t)$ and $\bc(t)$; and
+the constant $a$ in \eqr{7.1} will be shown to be irrelevant, since only
+$\dl t^{+}/\dl t=1$ is ever used. From two sentences about measurement
+comes the entire kinematics of the chapter.
+\end{remark}
+
+\bookfig{1}\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.3mm]},thick}]
+% ================= as O sees it =================
+\begin{scope}
+  \blob{configline}
+  \coordinate (oo) at (-2.35,-1.75);
+  \coordinate (X) at (-0.40,0.30);
+  \coordinate (Y) at (0.80,-0.42);
+  \draw[thinvec,gray!70] (oo)--(X);
+  \draw[thinvec,gray!70] (oo)--(Y);
+  \draw[very thick,blue!55!black] (X)--(Y);
+  \fill (X) circle (1.3pt); \fill (Y) circle (1.3pt);
+  \fill (oo) circle (1.3pt);
+  \node[lbl,anchor=south east] at (X) {$\bx$};
+  \node[lbl,anchor=west] at (Y) {$\by$};
+  \node[lbl,anchor=north east] at (oo) {$\bo$};
+  \node[lbl,font=\small,text=blue!55!black] at (0.28,0.10) {$\ell$};
+  \node[font=\small,anchor=north] at (0,-1.95) {$\kappa_{t}\subset\Et$};
+  \node[font=\footnotesize,text=gray!85,anchor=north] at (0,-2.38)
+     {observer $O$, clock reads $t$};
+\end{scope}
+% ================= the map =================
+\draw[ar] (2.05,0.35) .. controls (3.05,0.95) and (4.05,0.95) .. (5.05,0.35);
+\node[font=\small,anchor=south] at (3.55,0.92) {$\bQ(t),\ \bc(t)$};
+% ================= as O+ sees it =================
+\begin{scope}[xshift=7.2cm,rotate=-32]
+  \blob{configline}
+  \coordinate (X2) at (-0.40,0.30);
+  \coordinate (Y2) at (0.80,-0.42);
+  \draw[very thick,blue!55!black] (X2)--(Y2);
+  \fill (X2) circle (1.3pt); \fill (Y2) circle (1.3pt);
+  \node[lbl,anchor=south east] at (X2) {$\bx^{+}$};
+  \node[lbl,anchor=west] at (Y2) {$\by^{+}$};
+  \node[lbl,font=\small,text=blue!55!black] at (0.30,0.12) {$\ell$};
+\end{scope}
+\begin{scope}[xshift=7.2cm]
+  \coordinate (oo2) at (-2.05,-1.95);
+  \fill (oo2) circle (1.3pt);
+  \node[lbl,anchor=north east] at (oo2) {$\bo^{+}$};
+  \draw[thinvec,gray!70] (oo2)--(-0.05,0.72);
+  \draw[thinvec,gray!70] (oo2)--(1.12,0.04);
+  \node[font=\small,anchor=north] at (0,-1.95)
+     {$\kappa^{+}_{t^{+}}\subset\mathbb{E}^{3+}$};
+  \node[font=\footnotesize,text=gray!85,anchor=north] at (0,-2.38)
+     {observer $O^{+}$, clock reads $t^{+}=t+a$};
+\end{scope}
+\end{tikzpicture}
+\caption{A body as perceived by two observers. The same two material
+points are seen at $\bx,\by$ by $O$ and at $\bx^{+},\by^{+}$ by $O^{+}$,
+and the segment joining them has the same length $\ell$ in both pictures:
+that is \eqr{7.2}, and it is the only geometric agreement assumed. The
+two observers need not agree about which direction the segment points,
+about where the origin is, or about anything else. Section~\ref{sec:ch7obs}
+shows that this single agreement forces the relation between the pictures
+to be \eqr{7.3}, a uniform orthogonal $\bQ(t)$ followed by a translation
+$\bc(t)$, and that both may depend on time in any way whatever.}
+\label{fig:ch7two}
+\end{figure}
+
+Assume the two point spaces are related by a differentiable mapping. Fix
+$t$, and let $\phi$ denote the map that sends the place $\bx\in\Et$
+assigned by $O$ to a material point to the place
+$\bx^{+}=\phi(\bx)\in\mathbb{E}^{3+}$ assigned by $O^{+}$ to the same
+material point at the same instant. Condition \eqr{7.2} reads
+\[
+   \big|\phi(\by)-\phi(\bx)\big|=\big|\by-\bx\big|
+   \qquad\text{for all }\bx,\by ,
+\]
+which is word for word the hypothesis \eqr{3.113} of the analysis of
+rigid-body motion in Section~\ref{sec:rigid}, with $\phi$ in place of
+$\bchi_{\kappa}(\,\cdot\,,t)$. The argument given there therefore applies
+verbatim. It is short enough to be worth repeating in the present
+notation, because the conclusion is the pivot of the chapter.
+
+Square both sides to remove the square root, so that each side is a
+polynomial and differentiates cleanly:
+\[
+   \ip{\big[\phi(\by)-\phi(\bx)\big]}{\big[\phi(\by)-\phi(\bx)\big]}
+   =\ip{(\by-\bx)}{(\by-\bx)} .
+\]
+Fix $\bx$ and differentiate with respect to $\by$. Both sides have the
+form $\ip\ba\ba$, whose differential is
+$\ip{\dl\ba}\ba+\ip\ba{\dl\ba}=2\ip\ba{\dl\ba}$, the two terms being
+equal by the symmetry of the inner product; the factor $2$ appears on
+both sides and cancels. Writing $\bG(\by)$ for the gradient of $\phi$ at
+$\by$, a two-point tensor $\Et\to\mathbb{E}^{3+}$, so that
+$\dl\phi=\bG\,\dl\by$,
+\[
+   \ip{\big[\phi(\by)-\phi(\bx)\big]}{\bG(\by)\,\dl\by}
+   =\ip{(\by-\bx)}{\dl\by} .
+\]
+Move $\bG(\by)$ to the other slot by the definition of the transpose,
+$\ip\ba{\bG\bb}=\ip{\bG^{t}\ba}\bb$, and collect:
+\[
+   \ip{\Big(\bG^{t}(\by)\big[\phi(\by)-\phi(\bx)\big]-(\by-\bx)\Big)}
+      {\dl\by}=0\qquad\text{for all }\dl\by .
+\]
+A vector orthogonal to every vector is $\bze$ by Lemma~\ref{lem:cvec}, so
+\[
+   \bG^{t}(\by)\big[\phi(\by)-\phi(\bx)\big]=\by-\bx .
+\]
+Now reverse the roles: fix $\by$, so that $\bG^{t}(\by)$ and $\phi(\by)$
+are both constant, and differentiate with respect to $\bx$. The only
+$\bx$-dependent piece on the left is $-\phi(\bx)$, whose differential is
+$-\bG(\bx)\,\dl\bx$; on the right it is $-\bx$. Hence
+\[
+   -\bG^{t}(\by)\bG(\bx)\,\dl\bx=-\dl\bx\qquad\text{for all }\dl\bx ,
+\]
+and since two tensors agreeing on every vector are equal,
+\[
+   \bG^{t}(\by)\bG(\bx)=\I\qquad\text{for all }\bx,\by\in\Et ,
+\]
+$\I$ being the identity of $\Et$. Setting $\by=\bx$ gives
+$\bG^{t}(\bx)\bG(\bx)=\I$, so $\bG(\bx)$ is orthogonal at every $\bx$ and
+$\bG^{t}=\bG^{-1}$ by Proposition~\ref{prop:orth}; substituting that back
+gives $\bG^{-1}(\by)\bG(\bx)=\I$, i.e. $\bG(\by)=\bG(\bx)$ for every pair
+of places. So $\bG$ does not depend on position at all. Call its common
+value $\bQ(t)$, the dependence on $t$ surviving because $t$ was held
+fixed throughout. Finally $\dl\bx^{+}=\bQ(t)\,\dl\bx=\dl(\bQ(t)\bx)$,
+$\bQ$ being uniform, so $\dl(\bx^{+}-\bQ\bx)=\bze$ and the bracket is
+independent of $\bx$; this is the integration step already used at
+\eqr{3.99} and \eqr{4.30}. Therefore
+\begin{equation}
+   \bx^{+}=\bQ(t)\bx+\bc(t),
+   \tag{7.3}\label{eq:7.3}
+\end{equation}
+where $\bc(t)\in\mathbb{E}^{3+}$ is arbitrary and $\bQ(t)$ is an
+arbitrary spatially uniform two-point orthogonal tensor mapping $\Et$ to
+$\mathbb{E}^{3+}$.
+
+The converse is immediate and is what makes the condition sharp: if
+\eqr{7.3} holds then
+\[
+   \big|\bx^{+}-\by^{+}\big|^{2}
+   =\ip{\bQ(\bx-\by)}{\bQ(\bx-\by)}
+   =\ip{(\bx-\by)}{\bQ^{t}\bQ(\bx-\by)}
+   =\big|\bx-\by\big|^{2},
+\]
+so \eqr{7.2} is recovered. Thus \eqr{7.2} holds \emph{if and only if}
+\eqr{7.3} does.
+
+\begin{remark}[the shape of that proof, and what each differentiation
+rules out]\label{rem:ch7isometry}
+The derivation is four lines long but it is not obvious why it should
+work at all, and the reason is worth extracting, because the same three
+moves are used at \eqr{3.113} and in every rigidity argument in the book.
+
+The hypothesis \eqr{7.2} is a statement about \emph{pairs} of points; the
+conclusion \eqr{7.3} is a statement about \emph{one} point at a time. The
+entire difficulty is the passage from the first kind of statement to the
+second, and each step performs one part of it.
+
+\emph{Squaring} is not cosmetic. The function $|\cdot|$ is not
+differentiable where its argument vanishes, and $|\cdot|^{2}$ is a
+polynomial in the components. Both sides being non-negative, nothing is
+lost.
+
+\emph{The first differentiation, in $\by$, makes the statement local.} It
+replaces the map $\phi$ by its gradient and yields
+$\bG^{t}(\by)\big[\phi(\by)-\phi(\bx)\big]=\by-\bx$. This is still a
+statement about a pair of points, but it is now linear in the increment
+at $\by$; and it says nothing yet about whether $\bG$ is the same at
+different places, which is exactly the thing to be proved.
+
+\emph{The second differentiation, in $\bx$, is what makes $\bG$
+uniform.} Both $\phi(\by)$ and $\by$ are constants of that
+differentiation and disappear, leaving $\bG^{t}(\by)\bG(\bx)=\I$ for
+\emph{every pair} of places. That single relation carries two
+conclusions: putting $\by=\bx$ gives orthogonality at each place, and
+feeding that back gives $\bG(\by)=\bG(\bx)$ everywhere. The second is
+the one that matters. A map that preserves all distances cannot bend,
+because bending is precisely a $\bG$ that varies from place to place, and
+two places whose $\bG$ differed would betray themselves in the distance
+between a third pair.
+
+\emph{The integration} turns a uniform gradient into an affine map, as
+after \eqr{3.99} and \eqr{4.30}. It is here, and only here, that the
+arbitrary $\bc(t)$ enters: an affine map is determined by its linear part
+only up to a translation, which is the analytic form of the statement of
+Remark~\ref{rem:ch7pointvec} that $\bc$ is arbitrary because the two
+origins are.
+
+Two footnotes on the hypotheses, since both are easy to overlook.
+Differentiability of $\phi$ was assumed before the argument began; it is
+a real assumption here, though a removable one, because a
+distance-preserving map of one Euclidean space onto another is affine
+with no smoothness assumed at all. Nothing in this book needs the sharper
+statement. And what comes out is orthogonality, not rotation:
+$\bQ^{t}\bQ=\I$ gives $\det\bQ=\pm1$ by
+Proposition~\ref{prop:orth}, and no step of the argument prefers one sign
+to the other. Remark~\ref{rem:ch7mirror} takes up what the other sign
+would mean.
+\end{remark}
+
+Because tensors operate on vectors rather than on positions, \eqr{7.3}
+should be interpreted to mean
+\begin{equation}
+   \bx^{+}-\by^{+}=\bQ(t)(\bx-\by).
+   \tag{7.4}\label{eq:7.4}
+\end{equation}
+In fact, as suggested by Figure~\ref{fig:ch7two}, \eqr{7.3} also holds if
+the positions therein are replaced by position vectors.
+
+\begin{remark}[why \eqr{7.4} is the honest statement and \eqr{7.3} the
+usable one]\label{rem:ch7pointvec}
+A point is not a vector. The difference of two points is a vector, by
+Definition~\ref{def:eps}, and it is on differences that $\bQ$ acts. That
+is all \eqr{7.4} says, and it is the only form of the statement that is
+correct before any origin has been named.
+
+Once each observer names an origin, $\bo\in\Et$ for $O$ and
+$\bo^{+}\in\mathbb{E}^{3+}$ for $O^{+}$, the deliberate abuse of
+Remark~\ref{rem:abuse} lets the same letter denote a point and its
+position vector $\bx-\bo$. Apply \eqr{7.4} to the pair $(\bx,\bo)$, which
+gives $\phi(\bx)-\phi(\bo)=\bQ(t)(\bx-\bo)$, and insert the place
+$\phi(\bo)$ between $\bx^{+}=\phi(\bx)$ and $\bo^{+}$ by Chasles'
+relation, Definition~\ref{def:eps}(P2):
+\[
+\begin{aligned}
+   \bx^{+}-\bo^{+}&=\big(\phi(\bx)-\phi(\bo)\big)
+   +\big(\phi(\bo)-\bo^{+}\big)
+   \\
+   &=\bQ(t)(\bx-\bo)+\bc(t),\qquad
+   \bc(t)=\phi(\bo)-\bo^{+},
+\end{aligned}
+\]
+which is \eqr{7.3} verbatim for position vectors, with $\bc(t)$ now
+identified as the position, in $O^{+}$'s frame, of the place $O^{+}$
+assigns to $O$'s origin. So nothing is lost by reading \eqr{7.3} as an
+equation between position vectors, and that is how it will be read from
+here on. What is lost if the distinction is forgotten altogether is the
+ability to see why $\bc$ is arbitrary: it is arbitrary precisely because
+the choice of the two origins is.
+\end{remark}
+
+\begin{remark}[the two freedoms in \eqr{7.3}, and which one is
+dangerous]\label{rem:ch7twofreedoms}
+The change of observer carries two free functions of time, and they are
+not on the same footing.
+
+$\bc(t)$ is a relative translation. It disappears from every statement
+about \emph{differences} of positions, and \eqr{7.4} is the proof: no
+$\bc$ appears there. Consequently $\bc$ can never affect a deformation
+gradient, a strain, or a stress, all of which are built from differences.
+It survives only in the velocity, through $\dot\bc$, and in the
+acceleration, through $\ddot\bc$.
+
+$\bQ(t)$ is a relative rotation, and it does not disappear from
+differences. It is the source of every non-trivial transformation law in
+this chapter. The truly dangerous part of it is $\dot\bQ$: if $\bQ$ were
+constant the whole chapter would collapse into the change-of-basis
+formulas of Chapter 1, because a constant $\bQ$ commutes with $\dl/\dl t$
+and every rate would transform exactly as the quantity itself does. It is
+because $\bQ$ turns as time passes, and hence fails to commute with
+differentiation, that $\bD$ and $\bW$ part company at \eqr{7.34}, that
+$\ba$ acquires the extra terms of \eqr{7.9}, and that the equation of
+motion acquires the inertial force of \eqr{7.63}.
+\end{remark}
+
+\begin{remark}[may one observer be the mirror image of
+another?]\label{rem:ch7mirror}
+Nothing said so far forbids it, and it is worth seeing that this is not
+an oversight.
+
+\emph{He is a legitimate observer.} A reflection preserves every
+distance, so it satisfies \eqr{7.2} exactly, and the derivation of
+\eqr{7.3} returned only $\bQ^{t}\bQ=\I$, hence $\det\bQ=\pm1$ by
+Proposition~\ref{prop:orth}. Had the book wanted to exclude mirror
+observers it would have had to say so, and it would have had to justify
+saying so by something other than clocks and rulers, because clocks and
+rulers cannot tell left from right.
+
+\emph{What is unaffected.} Every transformation law derived in this
+chapter. Each was obtained from $\bQ^{t}\bQ=\I$ alone, and none of them
+used $\det\bQ=1$: $\bU^{+}=\bK\bU\bK^{t}$, $\bT^{+}=\bQ\bT\bQ^{t}$ and
+the rest hold verbatim for a mirror observer. So does everything metric,
+lengths and angles being exactly what \eqr{7.2} protects.
+
+\emph{What he does not agree about.} Handedness. A right-handed helix is
+left-handed in his picture (Figure~\ref{fig:ch7mirror}); a right-handed
+basis of $\Et$ has a left-handed image in $\mathbb{E}^{3+}$; and every
+cross product changes sign relative to what a rotation would have given,
+because the box product carries the factor $\det\bQ$ by
+Theorem~\ref{thm:det}. The consequence worth recording is that an axial
+vector is not a spatial vector in the sense of
+Definition~\ref{def:ch7obj}. If $\bA$ is skew with axial vector $\ba$ in
+the sense of Proposition~\ref{prop:axial}, and if $\bA$ is objective,
+$\bA^{+}=\bQ\bA\bQ^{t}$, then for every $\bs\in\mathbb{E}^{3+}$
+\[
+\begin{aligned}
+   \bA^{+}\bs&=\bQ\bA\bQ^{t}\bs=\bQ\big(\ba\times\bQ^{t}\bs\big)\\
+   &=(\det\bQ)\,(\bQ\ba)\times\big(\bQ\bQ^{t}\bs\big)
+   =(\det\bQ)(\bQ\ba)\times\bs ,
+\end{aligned}
+\]
+using $\bQ(\bu\times\bw)=(\det\bQ)(\bQ\bu)\times(\bQ\bw)$, which is
+Theorem~\ref{thm:det} written for an orthogonal $\bQ$. Hence
+\begin{equation*}
+   \ba^{+}=(\det\bQ)\,\bQ\ba ,
+\end{equation*}
+which is $\bQ\ba$ for a rotation and $-\bQ\ba$ for a reflection. This is
+why the whole of this chapter is written in the skew tensor $\bOm$ and
+never in its axial vector $\bom$: the tensor transforms by one rule for
+both signs and the vector does not. The same caution applies to $\bW$,
+and it is the reason \eqr{7.34}$_{2}$ is stated as a tensor equation.
+
+\emph{What \eqr{7.19} costs him.} Having chosen a mirrored frame,
+$O^{+}$ is no longer free in his choice of reference configuration. The
+requirement that his reference configuration be occupiable is $J^{+}>0$,
+and that forced $\det\bQ\det\bK=1$; so $\det\bQ=-1$ obliges
+$\det\bK=-1$ as well. A mirror observer must mirror his reference copy of
+the body too. This is not a restriction on physics but a consistency
+condition on bookkeeping, and it is the only place in the chapter where
+the sign of a determinant does any work.
+
+\emph{Why the question is not idle.} Whether a material can tell itself
+from its mirror image is a genuine physical question, and for some
+materials the answer is yes: a quartz crystal, a cholesteric liquid
+crystal, a composite whose fibres wind one way. Chapter 8 will require
+constitutive equations to be indifferent to a change of observer, and by
+this remark that requirement may be posed over the full orthogonal group
+$\Orth$ or over the proper orthogonal group alone. The two demands are
+different, and the difference is exactly whether the material is
+permitted to be chiral. Nothing in the present chapter decides between
+them, because \eqr{7.2} does not.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{A}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.3mm]},thick},
+   sm/.style={-{Stealth[length=1.9mm]},semithick}]
+% ---- the helix, drawn as front (solid) and back (pale) strands -------
+% r(phi) = (a phi, r cos phi, r sin phi); depth = r sin phi
+\def\coil{%
+  \draw[guide] (-0.25,0)--(3.85,0);
+  \draw[ar,gray!70] (3.85,0)--(4.30,0);
+  \draw[thick,gray!45]
+     plot[domain=180:360,samples=28,smooth]
+     ({0.0042*\x},{0.42*cos(\x)});
+  \draw[thick,gray!45]
+     plot[domain=540:720,samples=28,smooth]
+     ({0.0042*\x},{0.42*cos(\x)});
+  \draw[thick,blue!55!black]
+     plot[domain=0:180,samples=28,smooth]
+     ({0.0042*\x},{0.42*cos(\x)});
+  \draw[thick,blue!55!black]
+     plot[domain=360:540,samples=28,smooth]
+     ({0.0042*\x},{0.42*cos(\x)});
+  \draw[thick,blue!55!black]
+     plot[domain=720:900,samples=28,smooth]
+     ({0.0042*\x},{0.42*cos(\x)});
+  \draw[sm,blue!55!black] (0.30,0.29)--(0.44,-0.26);}
+% ================= (a) as O sees it =================
+\begin{scope}
+  \coil
+\end{scope}
+\node[font=\small,align=center,anchor=north] at (2.00,-0.95)
+   {(a) observer $O$\\[0.5mm] a right-handed helix};
+% ================= the mirror =================
+\draw[thick,gray!45,densely dashed] (5.15,-0.80)--(5.15,0.88);
+\node[font=\footnotesize,text=gray!85,anchor=south] at (5.15,0.90)
+   {mirror};
+% ================= (b) as the mirror observer sees it =================
+\begin{scope}[xshift=10.30cm,xscale=-1]
+  \coil
+\end{scope}
+\node[font=\small,align=center,anchor=north] at (8.30,-0.95)
+   {(b) observer $O^{+}$, $\det\bQ=-1$\\[0.5mm]
+    the same helix, left-handed};
+\end{tikzpicture}
+\caption{A mirror observer. The solid strands are in front and the pale
+ones behind, and the grey arrow is the direction of advance along the
+axis, so the two panels are genuinely different curves in space and not
+the same curve redrawn: no rotation carries one onto the other.
+Yet every distance between two points of the coil is the same in both,
+which is all \eqr{7.2} demands, so $\bQ$ with $\det\bQ=-1$ is an
+admissible change of observer. What the two observers disagree about is
+handedness, and with it the sign of every cross product and of every
+axial vector, by the rule $\ba^{+}=(\det\bQ)\bQ\ba$ established in
+Remark~\ref{rem:ch7mirror}. The disagreement is invisible in $\bU$, $\bC$
+and $\bD$, which are built from lengths and angles alone; it becomes
+visible the moment a formula contains $\bom$ rather than $\bOm$, or asks
+whether a material is chiral.}
+\label{fig:ch7mirror}
+\end{figure}
+
+We can now name the two properties that the rest of the chapter is
+occupied with sorting.
+
+\begin{definition}[objective and invariant]\label{def:ch7obj}
+A field carried by the body is \emph{objective}, or \emph{frame
+indifferent}, if the values recorded by the two observers are related as
+the type of the field demands, that is, if
+\[
+\begin{aligned}
+   \text{a scalar }\varphi:&\qquad \varphi^{+}=\varphi ,\\
+   \text{a spatial vector }\bu:&\qquad \bu^{+}=\bQ\bu ,\\
+   \text{a spatial tensor }\bA:&\qquad \bA^{+}=\bQ\bA\bQ^{t} .
+\end{aligned}
+\]
+A quantity is \emph{invariant} under the change of observer if both
+observers assign it the same value, $(\,\cdot\,)^{+}=(\,\cdot\,)$. An
+\emph{equation} is invariant, or form invariant, if it has the same form
+in the two frames, that is, if starring every symbol in it produces a
+true statement.
+\end{definition}
+
+\begin{remark}[the distinction, and a counterexample on each
+side]\label{rem:ch7objinv}
+Objectivity is a property of a \emph{quantity}; invariance is a property
+of a \emph{quantity's value} or of an \emph{equation}. Confusing the two
+is the standard error in this subject, so it is worth having a
+counterexample in each direction ready before the calculations start. All
+four are proved in the sections that follow; they are collected here as
+signposts.
+
+\emph{Objective but not invariant.} The Cauchy stress. By \eqr{7.40},
+$\bT^{+}=\bQ\bT\bQ^{t}$, which is exactly what
+Definition~\ref{def:ch7obj} requires of a spatial tensor, so $\bT$ is
+objective. But $\bQ\bT\bQ^{t}\neq\bT$ in general: the two observers write
+down different tensors, with different components. Objectivity is not
+sameness; it is agreement about \emph{how} to differ.
+
+\emph{Invariant but not objective, in the sense that the test does not
+apply.} The right Cauchy--Green tensor. By \eqr{7.30}$_{1}$,
+$\bC^{+}=\bK\bC\bK^{t}$ with $\bK$ a \emph{fixed} tensor that has nothing
+to do with the relative motion of the observers; if the two observers
+happen to use a common reference configuration, $\bK=\hI$ and
+$\bC^{+}=\bC$ literally. So $\bC$ carries no trace of $\bQ$ at all. It is
+not objective in the sense of Definition~\ref{def:ch7obj} because it is
+not a spatial tensor and the third line of that definition is not the
+right test for it. Set beside $\bB^{+}=\bQ\bB\bQ^{t}$ of
+\eqr{7.30}$_{2}$, this is instructive: $\bC$ and $\bB$ encode the same
+deformation and are as close to being the same tensor as two tensors can
+be, and yet one of them ignores the observer completely while the other
+turns with him. The difference is only which space they live in.
+
+\emph{An invariant scalar built from non-objective ingredients.} The
+velocity is not objective, by \eqr{7.8}: $\bv^{+}\neq\bQ\bv$. Yet
+$\dvg^{+}\bv^{+}=\dvg\bv$ by \eqr{7.56}. A non-objective field can have
+an invariant scalar hidden inside it, and the extra terms can cancel.
+
+\emph{An invariant scalar built from one objective and one
+non-objective ingredient.} $\bT$ is objective and $\bL$ is not, by
+\eqr{7.33}; nevertheless the stress power density is invariant,
+$\bT^{+}\cdot\bL^{+}=\bT\cdot\bL$, by \eqr{7.58}. The offending part of
+$\bL$ is annihilated by the symmetry of $\bT$.
+
+The moral is that invariance must be checked, never assumed from the
+ingredients, and that is what Section~\ref{sec:ch7balance} does law by
+law. The one law that fails the check, linear momentum, fails it in a way
+that is itself instructive.
+\end{remark}
+
+%=======================================================================
+\section{Transformation of the motion}\label{sec:ch7motion}
+%=======================================================================
+
+Following the development of Section~\ref{sec:pva}, the motions of
+$p\in B$, as perceived by $O$ and $O^{+}$, are expressible as
+\begin{equation}
+   \bx=\bchi(p,t)
+   \qquad\text{and}\qquad
+   \bx^{+}=\bchi^{+}(p,t^{+}),
+   \tag{7.5}\label{eq:7.5}
+\end{equation}
+respectively. Accordingly, substituting both into \eqr{7.3},
+\begin{equation}
+   \bchi^{+}(p,t^{+})=\bQ(t)\bchi(p,t)+\bc(t).
+   \tag{7.6}\label{eq:7.6}
+\end{equation}
+
+\begin{remark}[why the argument is $p$ and not $\bX$]\label{rem:ch7whyp}
+Equations \eqr{7.5} take the material point itself as the independent
+variable, which is the material description of
+Definition~\ref{def:motion} and Remark~\ref{rem:decorations}, and they
+have to. The body $B$ is the one thing the two observers share. It is not
+a subset of $\Et$, nor of $\mathbb{E}^{3+}$; it is a set of material
+points, and each observer supplies his own map of it, as
+Remark~\ref{rem:fig123} insisted. Had we written $\bchi_{\kappa}(\bX,t)$
+here, we would have had to say which observer chose $\kappa$, and the
+statement \eqr{7.6} would have been circular. Section~\ref{sec:ch7kin}
+introduces reference configurations only after \eqr{7.6} has been secured
+without them, and pays for the convenience with the extra tensor $\bK$.
+\end{remark}
+
+The velocity of $p$ in the frame $\mathbb{E}^{3+}$ is
+$\bv^{+}=\partial\bchi^{+}/\partial t^{+}$, by
+Definition~\ref{def:va} written in that frame. The two time derivatives
+are the same operation: $t^{+}=t+a$ with $a$ constant by \eqr{7.1}, so
+$\dl t^{+}/\dl t=1$ and the chain rule gives
+$\partial/\partial t^{+}=(\dl t/\dl t^{+})\,\partial/\partial t
+=\partial/\partial t$, both taken at fixed $p$. Differentiating
+\eqr{7.6} at fixed $p$, with the product rule applied to $\bQ(t)\bchi$
+and remembering that $\bQ$ and $\bc$ depend on $t$ alone while $\bchi$
+depends on $p$ and $t$,
+\begin{equation}
+   \bv^{+}=\frac{\partial}{\partial t^{+}}\bchi^{+}
+   =\frac{\partial}{\partial t}\bchi^{+}
+   =\dot\bQ\bx+\bQ\bv+\dot\bc ,
+   \tag{7.7}\label{eq:7.7}
+\end{equation}
+where $\bv=\partial\bchi/\partial t$ is the velocity of $p$ in the frame
+$\Et$ and $\bx=\bchi(p,t)$.
+
+This is the first transformation law of the chapter that is not simply a
+conjugation, and the reason is visible in the algebra: of the three terms
+on the right, only the middle one came from differentiating the motion.
+The other two came from differentiating the relation between the
+observers. If the body stands still for $O$, so that $\bv=\bze$, then
+$\bv^{+}=\dot\bQ\bx+\dot\bc$, which vanishes only if the observers are at
+relative rest. \emph{The velocity is not objective.}
+
+It is convenient to eliminate $\bx$, which belongs to $O$'s frame, in
+favour of $\bx^{+}$. From \eqr{7.3}, $\bQ\bx=\bx^{+}-\bc$, so
+\[
+   \dot\bQ\bx=\dot\bQ\big(\bQ^{t}\bQ\big)\bx
+   =\big(\dot\bQ\bQ^{t}\big)\big(\bQ\bx\big)
+   =\bOm\,(\bx^{+}-\bc),
+\]
+where the identity $\bQ^{t}\bQ=\I$ of Proposition~\ref{prop:orth} was
+inserted and the factors regrouped. Thus the velocities in the two frames
+are related by
+\begin{equation}
+   \bv^{+}-\bQ\bv=\bOm(\bx^{+}-\bc)+\dot\bc ,
+   \qquad\text{where}\qquad
+   \bOm(t)=\dot\bQ\bQ^{t}
+   \tag{7.8}\label{eq:7.8}
+\end{equation}
+is the spin of $\mathbb{E}^{3+}$.
+
+Two properties of $\bOm$ are needed constantly and are established once
+here.
+
+\emph{$\bOm$ is skew.} Differentiate the orthogonality relation
+$\bQ\bQ^{t}=\I^{+}$, in which $\I^{+}$ is the identity of
+$\mathbb{E}^{3+}$ and is therefore constant. By the product rule and the
+commutation of differentiation with transposition, Problem 1(a) and
+Problem 1(b) of Chapter 4,
+\[
+   \dot\bQ\bQ^{t}+\bQ\dot{\bQ^{t}}
+   =\dot\bQ\bQ^{t}+\big(\dot\bQ\bQ^{t}\big)^{t}
+   =\Ob^{+},
+\]
+the middle step because $\bQ\dot{\bQ^{t}}=\bQ(\dot\bQ)^{t}
+=(\dot\bQ\bQ^{t})^{t}$ by the rule $(\bA\bB)^{t}=\bB^{t}\bA^{t}$. Hence
+$\bOm+\bOm^{t}=\Ob^{+}$, i.e. $\bOm^{t}=-\bOm$.
+
+\emph{$\bOm$ is a spatial tensor of the frame of $O^{+}$.} The derivative
+of a two-point tensor is a two-point tensor of the same type, so
+$\dot\bQ\colon\Et\to\mathbb{E}^{3+}$, while
+$\bQ^{t}\colon\mathbb{E}^{3+}\to\Et$. The composition
+$\bOm=\dot\bQ\bQ^{t}$ therefore maps $\mathbb{E}^{3+}$ into itself. This
+is why $\bOm$ may be added to $\bQ\bL\bQ^{t}$ in \eqr{7.33} without an
+index mismatch, and it is worth checking by the alphabet test of
+Remark~\ref{rem:hatinch4}: $\dot\bQ$ carries
+$\be^{+}_{i}\otimes\be_{j}$, $\bQ^{t}$ carries
+$\be_{j}\otimes\be^{+}_{k}$, the unstarred indices contract in pairs and
+what is left is $\be^{+}_{i}\otimes\be^{+}_{k}$.
+
+\begin{remark}[what $\dot\bQ\bQ^{t}$ \emph{is}]\label{rem:ch7omega}
+The combination has been met before. Equation \eqr{4.29} says that in a
+rigid motion $\bx=\bQ(t)\bX+\bc(t)$ the spatial velocity gradient is
+$\bL=\dot\bQ\bQ^{t}$, that the stretching vanishes, $\bD=\Ob$, and that
+the whole of $\bL$ is spin, $\bW=\dot\bQ\bQ^{t}$. Compare that motion
+with \eqr{7.3} and they are the same formula. A change of observer is,
+formally, a rigid motion: not a motion of the body, but of one frame
+relative to the other.
+
+So $\bOm$ is the velocity gradient of the rigid displacement that carries
+$O$'s frame onto $O^{+}$'s, and it is a \emph{pure spin} for exactly the
+reason \eqr{4.29} gives, namely that a rigid displacement stretches
+nothing. By Proposition~\ref{prop:axial} the skew tensor $\bOm$ has a
+unique axial vector $\bom$ with $\bOm\bs=\bom\times\bs$, and $\bom$ is
+the angular velocity of $O$'s frame as recorded by $O^{+}$. If the
+platform of $O^{+}$ turns with angular velocity $\bom_{p}$ relative to
+$O$, then $\bom=-\bom_{p}$: what $O^{+}$ sees is the rest of the world
+going round the other way. Problem 3 computes both for an observer
+standing on a spinning planet.
+
+Everything else in this chapter follows from this one identification. The
+extra term in \eqr{7.33} is a pure spin, so it lands entirely in the skew
+part of $\bL^{+}$ and leaves the symmetric part untouched: that is
+\eqr{7.34}, and it is the whole reason $\bD$ is objective and $\bW$ is
+not. The extra terms in \eqr{7.9} are what a pure spin does to an
+acceleration, and they are the Coriolis and centrifugal terms.
+\end{remark}
+
+\begin{remark}[\eqr{7.8} read as a decomposition, and a one-line route to
+\eqr{7.33}]\label{rem:ch7transport}
+Equation \eqr{7.8} is usually met in elementary mechanics in words, and
+the words are worth attaching to the symbols, because they make the rest
+of Section~\ref{sec:ch7kin} predictable.
+
+\emph{What the second and third terms are.} Put $\bv=\bze$ in \eqr{7.8}.
+A particle at rest in the frame of $O$, sitting at the place $O^{+}$
+calls $\bx^{+}$, is recorded by $O^{+}$ as having the velocity
+\begin{equation*}
+   \bv^{+}_{\text{tr}}(\bx^{+},t)=\bOm\big(\bx^{+}-\bc\big)+\dot\bc .
+\end{equation*}
+This is the \emph{transport} velocity: the velocity $O^{+}$ attributes to
+the point of $O$'s frame that the particle happens to occupy. So
+\eqr{7.8} says
+\[
+   \bv^{+}=\underbrace{\bQ\bv}_{\text{what }O\text{ records, rotated}}
+   +\underbrace{\bv^{+}_{\text{tr}}}_{\text{what the frame contributes}},
+\]
+which is the familiar statement that a velocity relative to a moving
+frame differs from a velocity relative to a fixed one by the velocity of
+the frame at that place. Figure~\ref{fig:ch7transport}(a) is the
+triangle.
+
+\emph{The transport field is rigid.} As a field of $\bx^{+}$ it is a
+constant $\dot\bc-\bOm\bc$ plus a skew tensor applied to $\bx^{+}$, which
+is exactly the form \eqr{4.29} of a rigid velocity field, and
+Remark~\ref{rem:ch7omega} said as much. Its gradient is
+$\grad^{+}\bv^{+}_{\text{tr}}=\bOm$, a constant tensor and a pure spin;
+it stretches nothing, anywhere.
+
+\emph{Hence \eqr{7.33} in one line.} Take $\grad^{+}$ of \eqr{7.8}. The
+first term gives $\bQ(\grad\bv)\bQ^{t}=\bQ\bL\bQ^{t}$, by the chain rule
+with $\partial\bx/\partial\bx^{+}=\bQ^{t}$ from \eqr{7.3}, which is the
+computation performed in general at \eqr{7.48}; the second gives $\bOm$;
+and the left-hand side is $\bL^{+}$. So
+\[
+   \bL^{+}=\bQ\bL\bQ^{t}+\bOm ,
+\]
+which is \eqr{7.33} without passing through $\dot\bF$ at all. The route
+through \eqr{7.31} is the book's and is worth having, because it exhibits
+$\bOm$ as arising from $\dot\bQ$; but this route exhibits it as the
+gradient of a rigid field, and that is the fact \eqr{7.34} needs. The
+splitting into $\bD$ and $\bW$ can now be predicted before it is done:
+the observer adds the gradient of a rigid field, a rigid field has no
+stretching, so the observer cannot touch $\bD$.
+
+\emph{Why the velocity itself is beyond repair.} Notice what the
+decomposition does \emph{not} say. There is no way to subtract
+$\bv^{+}_{\text{tr}}$ and be left with something both observers can
+compute, because $\bv^{+}_{\text{tr}}$ is not a property of the body: it
+depends on $\bOm$, $\bc$ and $\bx^{+}$, and $O$ has no access to any of
+them. This is the difference between the velocity, which is irreparably
+non-objective, and the velocity \emph{gradient}, whose offending part is
+a single constant skew tensor that the splitting \eqr{4.7} isolates and
+discards.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{B}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.3mm]},thick},
+   sm/.style={-{Stealth[length=1.8mm]},semithick},
+   tn/.style={-{Stealth[length=1.5mm]},thin}]
+% ================= (a) the triangle at one point =================
+\begin{scope}
+  \draw[thick,gray!55,fill=blue!4] (0,0) circle (2.15);
+  \fill (0,0) circle (1.3pt);
+  \coordinate (P) at (40:0.75);
+  \draw[guide] (0,0)--(P);
+  \node[font=\small,text=gray!85,anchor=south east] at (48:0.40)
+     {$\bx^{+}$};
+  \fill (P) circle (1.6pt);
+  % Q v  and  the transport velocity  and their sum
+  \draw[guide] ($(P)+(15:1.05)$)--($(P)+(-13.6:1.61)$);
+  \draw[guide] ($(P)+(-50:0.85)$)--($(P)+(-13.6:1.61)$);
+  \draw[ar,blue!55!black] (P)--++(15:1.05);
+  \draw[ar,gray!70] (P)--++(-50:0.85);
+  \draw[ar,red!65!black] (P)--++(-13.6:1.61);
+  \node[font=\small,text=blue!55!black,anchor=south] at ($(P)+(17:1.02)$)
+     {$\bQ\bv$};
+  \node[font=\small,text=gray!85,anchor=north] at ($(P)+(-50:0.98)$)
+     {$\bv^{+}_{\text{tr}}$};
+  \node[font=\small,text=red!65!black,anchor=west] at ($(P)+(-12:1.66)$)
+     {$\bv^{+}$};
+  \draw[sm,gray!70] (128:2.32) arc (128:88:2.32);
+  \node[font=\small,text=gray!85,anchor=south east] at (120:2.38)
+     {$\bom_{p}$};
+  \node[font=\small,align=center,anchor=north] at (0,-2.40)
+     {(a) one particle:\\[0.5mm] $\bv^{+}=\bQ\bv+\bv^{+}_{\text{tr}}$};
+\end{scope}
+% ================= (b) the transport field =================
+\begin{scope}[xshift=7.60cm]
+  \draw[thick,gray!55,fill=blue!4] (0,0) circle (2.15);
+  \fill (0,0) circle (1.3pt);
+  \foreach \a in {0,60,...,300}{
+     \fill[gray!60] (\a:0.80) circle (1.3pt);
+     \draw[sm,gray!70] (\a:0.80)--++({\a-90}:0.48);
+     \fill[gray!60] (\a:1.60) circle (1.3pt);
+     \draw[ar,gray!70] (\a:1.60)--++({\a-90}:0.96);}
+  \draw[sm,gray!70] (128:2.32) arc (128:88:2.32);
+  \node[font=\small,text=gray!85,anchor=south east] at (120:2.38)
+     {$\bom_{p}$};
+  \node[font=\small,align=center,anchor=north] at (0,-2.40)
+     {(b) the transport field:\\[0.5mm]
+      rigid, so $\grad^{+}\bv^{+}_{\text{tr}}=\bOm$};
+\end{scope}
+\end{tikzpicture}
+\caption{Equation \eqr{7.8} as a decomposition, drawn in the frame of
+$O^{+}$ with $\bc=\bze$ for clarity. In (a) the velocity $O^{+}$ records
+for one particle is the sum of the velocity $O$ records, carried over by
+$\bQ$, and the transport velocity $\bv^{+}_{\text{tr}}$, which is what
+$O^{+}$ would record if the particle were nailed to $O$'s frame. Since
+the platform of $O^{+}$ turns at $\bom_{p}$, the transport velocity runs
+backwards, $\bOm\bs=-\bom_{p}\times\bs$, as
+Remark~\ref{rem:ch7omega} requires. In (b) the same field is drawn at
+twelve places: its arrows grow linearly with the distance from the axis
+and are everywhere tangential, which is to say that it is the velocity
+field of a rigid rotation, \eqr{4.29}. That is the whole reason $\bD$
+survives a change of observer and $\bW$ does not: the observer adds the
+gradient of the field in (b), and the field in (b) stretches nothing.}
+\label{fig:ch7transport}
+\end{figure}
+
+Using this result it is straightforward, though not short, to show that
+the accelerations $\ba^{+}\in\mathbb{E}^{3+}$ and $\ba\in\Et$ of $p$ are
+related by
+\begin{equation}
+   \ba^{+}-\bQ\ba=\ddot\bc+2\bOm\big(\bv^{+}-\dot\bc\big)
+   +\big(\dot\bOm-\bOm^{2}\big)\big(\bx^{+}-\bc\big).
+   \tag{7.9}\label{eq:7.9}
+\end{equation}
+This is Problem 1, where it is derived in full from \eqr{7.7} and
+\eqr{7.8} with no step omitted. The reader who wants the algebra now
+should turn to it; what is needed here is only the reading of the four
+terms, and the fact that the left-hand side is not zero.
+
+\begin{remark}[the four terms of \eqr{7.9}]\label{rem:ch7fourterms}
+Each term answers to one way in which the frame of $O^{+}$ can fail to be
+at rest relative to that of $O$, and each is familiar from elementary
+mechanics under a different name.
+
+$\ddot\bc$ is the acceleration of the origin of $O^{+}$'s frame. It is
+the only term that survives when the frames do not rotate, and it is what
+throws a passenger forward when a bus brakes.
+
+$2\bOm(\bv^{+}-\dot\bc)$ is the \emph{Coriolis} term. It is proportional
+to the velocity of the particle relative to the moving frame, and it
+vanishes for a particle at rest in that frame; the factor $2$ is not a
+convention but comes out of the calculation, as Problem 1 shows, because
+$\dot\bQ$ is differentiated once in $\ba^{+}$ and once again through
+$\bv$.
+
+$-\bOm^{2}(\bx^{+}-\bc)$ is the \emph{centrifugal} term. With
+$\bOm\bs=\bom\times\bs$, it is $-\bom\times(\bom\times\bs)$, which points
+away from the axis of $\bom$ with magnitude $|\bom|^{2}$ times the
+distance from that axis.
+
+$\dot\bOm(\bx^{+}-\bc)$ is the \emph{Euler} or azimuthal term, present
+only when the relative rotation is speeding up or slowing down.
+
+Note that all four are proportional to nothing that the body is doing.
+They depend on the relative motion of the observers and on the particle's
+position and velocity, and on nothing else. That is exactly the property
+that will let them be moved to the other side of the equation of motion
+in \eqr{7.62} and called forces.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{C}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.1mm]},thick},
+   sm/.style={-{Stealth[length=1.7mm]},semithick}]
+% ================= (a) the translational term =================
+\begin{scope}
+  \draw[thick,gray!55,fill=blue!4] (0,0) circle (1.15);
+  \foreach \p in {(-0.55,0.45),(0.50,0.30),(-0.05,-0.60)}{
+     \fill[gray!65] \p circle (1.3pt);
+     \draw[sm,red!65!black] \p --++(25:0.62);}
+  \node[font=\small,align=center,anchor=north] at (0,-1.35)
+     {(a) translational\\[0.4mm] $\ddot\bc$\\[0.4mm]
+      uniform};
+\end{scope}
+% ================= (b) the Coriolis term =================
+\begin{scope}[xshift=4.05cm]
+  \draw[thick,gray!55,fill=blue!4] (0,0) circle (1.15);
+  \fill (0,0) circle (1.2pt);
+  \coordinate (P) at (-0.20,0.15);
+  \fill[gray!65] (P) circle (1.4pt);
+  \draw[ar,blue!55!black] (P)--++(55:0.85);
+  \node[font=\footnotesize,text=blue!55!black,anchor=south east]
+     at ($(P)+(58:0.88)$) {$\bv^{+}$};
+  \draw[ar,red!65!black] (P)--++(-35:0.70);
+  \draw[sm,gray!70] (128:1.32) arc (128:92:1.32);
+  \node[font=\footnotesize,text=gray!85,anchor=south east] at (124:1.38)
+     {$\bom_{p}$};
+  \node[font=\small,align=center,anchor=north] at (0,-1.35)
+     {(b) Coriolis\\[0.4mm] $2\bOm(\bv^{+}-\dot\bc)$\\[0.4mm]
+      $\perp\bv^{+}$, no work};
+\end{scope}
+% ================= (c) the centrifugal term =================
+\begin{scope}[xshift=8.10cm]
+  \draw[thick,gray!55,fill=blue!4] (0,0) circle (1.15);
+  \fill (0,0) circle (1.2pt);
+  \fill[gray!65] (152:0.40) circle (1.3pt);
+  \draw[sm,red!65!black] (152:0.40)--(152:0.72);
+  \fill[gray!65] (-28:0.80) circle (1.3pt);
+  \draw[ar,red!65!black] (-28:0.80)--(-28:1.44);
+  \draw[sm,gray!70] (128:1.32) arc (128:92:1.32);
+  \node[font=\footnotesize,text=gray!85,anchor=south east] at (124:1.38)
+     {$\bom_{p}$};
+  \node[font=\small,align=center,anchor=north] at (0,-1.35)
+     {(c) centrifugal\\[0.4mm] $-\bOm^{2}(\bx^{+}-\bc)$\\[0.4mm]
+      outward, $\propto r$};
+\end{scope}
+% ================= (d) the Euler term =================
+\begin{scope}[xshift=12.15cm]
+  \draw[thick,gray!55,fill=blue!4] (0,0) circle (1.15);
+  \fill (0,0) circle (1.2pt);
+  \fill[gray!65] (152:0.40) circle (1.3pt);
+  \draw[sm,red!65!black] (152:0.40)--++(62:0.32);
+  \fill[gray!65] (-28:0.80) circle (1.3pt);
+  \draw[ar,red!65!black] (-28:0.80)--++(-118:0.62);
+  \draw[sm,gray!70] (128:1.32) arc (128:92:1.32);
+  \node[font=\footnotesize,text=gray!85,anchor=south east] at (124:1.38)
+     {$\dot\bom_{p}$};
+  \node[font=\small,align=center,anchor=north] at (0,-1.35)
+     {(d) Euler\\[0.4mm] $\dot\bOm(\bx^{+}-\bc)$\\[0.4mm]
+      azimuthal, spin-up};
+\end{scope}
+\end{tikzpicture}
+\caption{The four terms of \eqr{7.9}, drawn in the frame of $O^{+}$ as
+the four contributions they make to the inertial force \eqr{7.63}. Each
+answers to one way in which the frame can move, and each has a signature
+that identifies it. (a) depends on neither the place nor the velocity of
+the particle, so it is indistinguishable from a uniform gravitational
+field, which is the content of Remark~\ref{rem:ch7inertial}. (b) is
+perpendicular to $\bv^{+}$, because $\bOm$ is skew, and therefore does no
+work: $\ip{\bOm\bv^{+}}{\bv^{+}}=0$ by Lemma~\ref{lem:symskw}. It
+vanishes for a particle at rest in the frame. (c) points away from the
+axis with magnitude proportional to the distance from it, and is the only
+one of the four that a particle at rest in a steadily spinning frame
+feels. (d) appears only while the spin rate is changing and is
+azimuthal, in the sense opposite to the change. A frame may exhibit any
+combination of the four; the spinning planet of Problem 3 has (b) and (c)
+and nothing else.}
+\label{fig:ch7fourterms}
+\end{figure}
+
+We observe that if $\ddot\bc=\bze$, i.e. if $\bc=\bV t+\bc_{0}$ for
+constant $\bV$ and $\bc_{0}$, and if $\bQ$ is independent of $t$, then
+$\dot\bQ=\Ob$, so $\bOm=\Ob$ and $\dot\bOm=\Ob$, and \eqr{7.9} reduces
+term by term to $\ba^{+}-\bQ\ba=\bze$. Thus
+\begin{equation}
+   \bx^{+}=\bQ\bx+\bV t+\bc_{0}
+   \qquad\text{and}\qquad
+   \ba^{+}=\bQ\ba .
+   \tag{7.10}\label{eq:7.10}
+\end{equation}
+This is called a \emph{Galilean transformation}. Its significance will be
+discussed later, in connection with the equations of motion. Note that
+$\bV$ here is a constant velocity and has nothing to do with the left
+stretch tensor $\bV$ of \eqr{7.27}; the book uses the same letter for
+both and no formula contains the two together.
+
+\begin{remark}[what a Galilean transformation does and does not
+change]\label{rem:ch7galilean}
+Under \eqr{7.10} the acceleration is objective while the velocity is
+still not: \eqr{7.8} with $\bOm=\Ob$ and $\dot\bc=\bV$ gives
+$\bv^{+}=\bQ\bv+\bV$, so the two observers disagree about velocity by a
+constant vector no matter what the body does. This is the familiar
+statement that velocity is relative and acceleration is not, and
+\eqr{7.9} shows precisely how much of it survives when the rotation is
+allowed to depend on time: none of it.
+
+The class of Galilean transformations is exactly the class that preserves
+the form of the equation of motion, which is proved at \eqr{7.64}. It is
+worth noticing already that the class is large: $\bQ$ is any fixed
+orthogonal tensor, $\bV$ any constant vector, $\bc_{0}$ any fixed vector,
+and $a$ in \eqr{7.1} any constant. That is the reason for the remark
+after \eqr{7.64} that if one inertial frame exists then infinitely many
+do.
+\end{remark}
+
+
+\begin{remark}[where the name comes from, and what the transformation is
+for]\label{rem:ch7galileo}
+Equation \eqr{7.10} takes three lines to write and is named after a man
+who never wrote it. Both facts repay a paragraph, because the
+transformation carries more of this book than its brevity suggests.
+
+\emph{What it is, counted.} A Galilean transformation is the change of
+observer \eqr{7.3} restricted by $\dot\bQ=\Ob$ and $\ddot\bc=\bze$,
+together with the clock shift \eqr{7.1}:
+\[
+   \bx^{+}=\bQ\bx+\bV t+\bc_{0},
+   \qquad
+   t^{+}=t+a .
+\]
+It carries ten free constants: three in the fixed rotation $\bQ$, three
+in the boost $\bV$, three in the translation $\bc_{0}$, and one in $a$.
+These are the ten ways in which two observers may be set up differently
+without either being able to find it out: pointing their axes
+differently, drifting apart at constant speed, placing their origins
+differently, and starting their clocks at different moments. (Strictly
+$\bQ$ is orthogonal rather than a rotation, so the family has a second
+piece consisting of the mirrored observers of
+Remark~\ref{rem:ch7mirror}; the ten constants count the piece containing
+the identity.)
+
+\emph{Why they form a group, and why that matters.} Compose two of them.
+By the calculation before \eqr{7.65}, $\bQ^{++}=\bQ^{+}\bQ$ and
+$\bc^{++}=\bQ^{+}\bc+\bc^{+}$; a product of constant tensors is constant,
+and $\bQ^{+}(\bV t+\bc_{0})+\bV^{+}t+\bc^{+}_{0}$ is again linear in $t$.
+The identity and the inverses are immediate. So the Galilean
+transformations form a group, and that is precisely what licenses the
+sentence after \eqr{7.64}. Being inertial is not a property a frame has
+by itself but a relation between two frames, and such a relation is
+usable only if it is transitive. Were the composition of two Galilean
+transformations not Galilean, a frame inertial relative to an inertial
+frame need not have been inertial, and the whole notion would have
+dissolved. Remark~\ref{rem:ch7addspin} is the same closure property
+stated for the spins.
+
+\emph{What it is for.} One thing, and \eqr{7.64} is it. The Galilean
+transformations are exactly the changes of observer under which
+\eqr{7.53}$_{3}$ keeps its bare form with no inertial force; by
+Remark~\ref{rem:ch7whatinertial} the condition $\vek{i}^{+}=\bze$,
+imposed as an identity in $\bx^{+}$ and $\bv^{+}$, is equivalent to
+\eqr{7.10} and to nothing weaker. So \eqr{7.10} is not a computational
+convenience but a definition in disguise: it names the class of frames in
+which the balance laws of Chapters 5 and 6 may be read exactly as they
+were written.
+
+\emph{How Galileo came to it.} Not as a formula. The \emph{Dialogo} of
+1632 is a defence of the claim that the Earth moves, and the standing
+objection to that claim was mechanical rather than astronomical: if the
+Earth turned, a stone dropped from a tower would be left behind by the
+tower, and a cannon fired westward would outrange one fired eastward.
+Galileo's answer, put into the mouth of Salviati, is the ship. Shut
+yourself below decks with some flies, a bowl of water holding a fish, a
+bottle dripping into a basin, and a friend to throw things to; watch
+everything carefully while the ship stands still; then have the ship move
+as fast as you please, provided only that the motion is uniform and does
+not fluctuate this way and that. You will not find the least change in
+any of those effects, nor will any of them tell you whether the ship is
+moving or standing still. That is Figure~\ref{fig:ch7ship}, and it is
+\eqr{7.10}$_{2}$ stated two centuries before anyone wrote
+$\ba^{+}=\bQ\ba$.
+
+Two qualifications keep the history honest. Galileo argued the
+\emph{principle}, that a uniform motion shared by everything in a closed
+room is undetectable inside it; the \emph{transformation}, and with it
+the group, is a much later codification, and the name was attached to it
+only when there was a Lorentz transformation to set beside it. And
+Galileo's own notion of uniform motion still admitted uniform motion in a
+circle, since what he needed was for a stone dropped from a mast to keep
+pace with a turning Earth. The sharpening to uniform motion in a straight
+line is Descartes' and Newton's, and \eqr{7.10}, with its \emph{constant}
+$\bV$ and \emph{constant} $\bQ$, is the sharpened version. Newton states
+the conclusion as Corollary V to the laws of motion in the
+\emph{Principia} of 1687: the motions of bodies among themselves are the
+same whether the space that contains them is at rest or moves uniformly
+forwards in a straight line without circular motion. That last clause is
+the requirement in \eqr{7.10} that $\bQ$ be constant, and Problem 3 is
+what happens when it is dropped.
+
+\emph{Where it stops.} The Galilean group is the symmetry of \eqr{7.1}
+and \eqr{7.2} and of nothing else. Maxwell's equations do not share it,
+and the attempt to make them share it is where the two assumptions of
+Remark~\ref{rem:ch7twoassump} were given up in favour of the Lorentz
+transformation. The relation between the two groups is not rivalry but
+limit: the Galilean group is what the Poincar\'e group becomes as
+$c\to\infty$. Inside a theory that has already committed itself to
+\eqr{7.1} and \eqr{7.2}, as this one has, \eqr{7.10} is the last word.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{D}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.3mm]},thick},
+   sm/.style={-{Stealth[length=1.8mm]},semithick}]
+% a cabin: \cab{x}{y}{halfwidth}{halfheight}{style}
+\def\cab#1#2#3#4#5{\draw[#5] (#1-#3,#2-#4) rectangle (#1+#3,#2+#4);}
+% ================= (a) below decks =================
+\begin{scope}
+  \cab{0}{0}{1.55}{1.10}{thick,gray!55,fill=blue!4}
+  % the dripping bottle and its basin
+  \fill[gray!60] (-0.68,0.72) rectangle (-0.44,0.98);
+  \draw[guide] (-0.56,0.68)--(-0.56,-0.68);
+  \foreach \y in {0.38,0.02,-0.36}
+     {\fill[blue!55!black] (-0.56,\y) circle (1.6pt);}
+  \draw[thick,gray!70] (-0.86,-0.70) arc (180:360:0.30 and 0.18);
+  % a second object, simply let fall
+  \draw[guide] (0.72,0.86)--(0.72,-0.62);
+  \foreach \y in {0.56,0.20,-0.24}
+     {\fill[red!65!black] (0.72,\y) circle (1.6pt);}
+  \draw[thick,gray!70] (0.50,-0.64)--(0.94,-0.64);
+  % water
+  \draw[gray!55] plot[domain=0:720,samples=60]
+     ({-1.90+\x/720*3.80},{-1.36+0.06*sin(\x)});
+  \node[font=\small,align=center,anchor=north] at (0,-1.62)
+     {(a) below decks, for $O^{+}$:\\[0.5mm]
+      the fall is vertical};
+\end{scope}
+% ================= (b) from the shore =================
+\begin{scope}[xshift=7.10cm]
+  \cab{-1.85}{0}{0.95}{0.85}{thick,gray!45,densely dashed}
+  \cab{1.05}{0}{0.95}{0.85}{thick,gray!55,fill=blue!4}
+  % the bottle at t_0 and the basin at t
+  \fill[gray!50] (-2.24,0.50) rectangle (-2.04,0.70);
+  \draw[thick,gray!70] (0.48,-0.50) arc (180:360:0.24 and 0.15);
+  % the track of one drop, as O records it
+  \draw[guide] plot[smooth,tension=0.9] coordinates
+     {(-2.14,0.46) (-0.90,0.22) (0.10,-0.16) (0.72,-0.52)};
+  \foreach \p in {(-2.14,0.46),(-0.90,0.22),(0.10,-0.16),(0.72,-0.52)}
+     {\fill[blue!55!black] \p circle (1.6pt);}
+  % the ship's own displacement
+  \draw[sm,gray!75] (-1.85,1.12)--(1.05,1.12);
+  \node[font=\small,text=gray!85,anchor=south] at (-0.40,1.14)
+     {$\bV(t-t_{0})$};
+  \draw[gray!55] plot[domain=0:1080,samples=80]
+     ({-3.00+\x/1080*5.90},{-1.36+0.06*sin(\x)});
+  \node[font=\small,align=center,anchor=north] at (-0.40,-1.62)
+     {(b) from the shore, for $O$:\\[0.5mm]
+      the same fall, leaning forward};
+\end{scope}
+\end{tikzpicture}
+\caption{Salviati's ship, the argument of the \emph{Dialogo} of 1632 and
+the physical content of \eqr{7.10}. The cabin sails at the constant
+velocity $\bV$. In (a) the observer $O^{+}$ shut inside it sees the drops
+leave the bottle and fall vertically into the basin, and so does
+everything else he tries; nothing he can do below decks tells him whether
+the ship is moving. In (b) the observer $O$ on the shore sees the same
+drop follow a track that leans forward, because to its fall he must add
+the ship's displacement $\bV(t-t_{0})$. The two records differ, and by
+exactly the amount \eqr{7.10}$_{1}$ predicts; but they differ by a term
+linear in $t$, whose second derivative vanishes, so the two observers
+agree about every acceleration, which is \eqr{7.10}$_{2}$. That agreement
+is what lets $O^{+}$ use the equations of Chapter 6 unaltered, and it is
+what fails, and is repaired by \eqr{7.62}, the moment the ship begins to
+turn or to change speed.}
+\label{fig:ch7ship}
+\end{figure}
+%=======================================================================
+\section{Transformation of kinematic variables}\label{sec:ch7kin}
+%=======================================================================
+
+To analyze the motion, observers $O$ and $O^{+}$ select reference
+configurations $\kappa$ and $\kappa^{+}$ respectively, in which the
+positions of $p$ are $\bX=\kappa(p)$ and $\bX^{+}=\kappa^{+}(p)$. The
+motions of $p$ in the two frames are then given by
+\begin{equation}
+   \bx=\bchi_{\kappa}(\bX,t)
+   \qquad\text{and}\qquad
+   \bx^{+}=\bchi^{+}_{\kappa^{+}}(\bX^{+},t^{+}),
+   \tag{7.11}\label{eq:7.11}
+\end{equation}
+where $\bchi_{\kappa}(\bX,t)=\bchi(\kappa^{-1}(\bX),t)$ and
+$\bchi^{+}_{\kappa^{+}}(\bX^{+},t^{+})
+=\bchi^{+}((\kappa^{+})^{-1}(\bX^{+}),t^{+})$, exactly as in
+Definition~\ref{def:ref}. Thus \eqr{7.6} becomes
+\begin{equation}
+   \bchi^{+}_{\kappa^{+}}(\bX^{+},t^{+})=\bQ(t)\bchi_{\kappa}(\bX,t)
+   +\bc(t).
+   \tag{7.12}\label{eq:7.12}
+\end{equation}
+The two sides are functions of different arguments, $\bX^{+}$ on the left
+and $\bX$ on the right, and the equation is to be read as holding when
+both label the same material point $p$. Finding the relation between
+$\bX$ and $\bX^{+}$ is therefore the first order of business.
+
+Suppose the observers adopt $\kappa_{t_{0}}$ and $\kappa^{+}_{t^{+}_{0}}$
+as their respective reference configurations, the two being the placement
+of the body at one and the same instant, since $t^{+}_{0}=t_{0}+a$ by
+\eqr{7.1}. Following the development of Section~\ref{sec:shifter}, we
+interpret this to mean
+\begin{equation}
+   \bchi_{\kappa}(\bX,t_{0})=\shift\bX
+   \qquad\text{and}\qquad
+   \bchi^{+}_{\kappa^{+}}(\bX^{+},t^{+}_{0})=\shift^{+}\bX^{+},
+   \tag{7.13}\label{eq:7.13}
+\end{equation}
+with $\bX$ and $\bX^{+}$ regarded as position vectors in $\hEt$ and
+$\hat{\mathbb{E}}^{3+}$ respectively, and where
+$\shift\colon\hEt\to\Et$ and
+$\shift^{+}\colon\hat{\mathbb{E}}^{3+}\to\mathbb{E}^{3+}$ are the
+uniform, orthogonal shifters of Definition~\ref{def:shifter} in the two
+frames. Equation \eqr{7.13} is \eqr{2.76} written twice, once for each
+observer.
+
+Now set $t=t_{0}$ in \eqr{7.12} and use \eqr{7.13} on both sides:
+\[
+   \shift^{+}\bX^{+}=\bQ(t_{0})\shift\bX+\bc(t_{0}).
+\]
+Multiply on the left by $(\shift^{+})^{t}$ and use
+$(\shift^{+})^{t}\shift^{+}=\hI^{+}$, which is \eqr{2.72} read in the
+frame of $O^{+}$, $\hI^{+}$ being the identity of
+$\hat{\mathbb{E}}^{3+}$:
+\begin{equation}
+   \bX^{+}=\bK\bX+\bc^{+},
+   \tag{7.14}\label{eq:7.14}
+\end{equation}
+where
+\begin{equation}
+   \bK=(\shift^{+})^{t}\bQ(t_{0})\shift
+   \qquad\text{and}\qquad
+   \bc^{+}=(\shift^{+})^{t}\bc(t_{0}),
+   \tag{7.15}\label{eq:7.15}
+\end{equation}
+with the shifters evaluated at the times $t_{0}$ and $t^{+}_{0}$. Here
+$\bK\colon\hEt\to\hat{\mathbb{E}}^{3+}$ is a fixed orthogonal tensor and
+$\bc^{+}\in\hat{\mathbb{E}}^{3+}$ is a fixed vector.
+
+Both claims about $\bK$ need checking, and one of them is the most
+important single fact in the chapter.
+
+\emph{$\bK$ is orthogonal.} It is a product of three orthogonal maps,
+$\shift\colon\hEt\to\Et$, then $\bQ(t_{0})\colon\Et\to\mathbb{E}^{3+}$,
+then $(\shift^{+})^{t}\colon\mathbb{E}^{3+}\to\hat{\mathbb{E}}^{3+}$, so
+the composition maps $\hEt$ to $\hat{\mathbb{E}}^{3+}$ as claimed, and
+\[
+   \bK^{t}\bK=\shift^{t}\bQ^{t}(t_{0})\shift^{+}(\shift^{+})^{t}
+   \bQ(t_{0})\shift
+   =\shift^{t}\bQ^{t}(t_{0})\I^{+}\bQ(t_{0})\shift
+   =\shift^{t}\I\shift=\shift^{t}\shift=\hI ,
+\]
+using $\shift^{+}(\shift^{+})^{t}=\I^{+}$ from \eqr{2.73},
+$\bQ^{t}\bQ=\I$ from Proposition~\ref{prop:orth}, and
+$\shift^{t}\shift=\hI$ from \eqr{2.72}.
+
+\emph{$\bK$ is fixed.} Every one of the three factors in \eqr{7.15}$_{1}$
+is evaluated at the single instant $t_{0}$. The tensor $\bQ(t)$ moves;
+the tensor $\bQ(t_{0})$ is one particular tensor, chosen once, and does
+not.
+
+\begin{remark}[why the whole chapter splits in two at
+\eqr{7.15}]\label{rem:ch7Kfixed}
+The fixity of $\bK$ is the reason the transformation laws that follow
+come in exactly two families, and it is worth stating before any of them
+is derived, because it makes all of them predictable.
+
+Referential objects, those living on $\hEt$, are related to their
+counterparts on $\hat{\mathbb{E}}^{3+}$ by $\bK$ alone: $\bU$, $\bC$,
+$\bE$, $\bS$, $\bq_{\kappa}$, $\bN$. Spatial objects, those living on
+$\Et$, are related by $\bQ(t)$ alone: $\bB$, $\bV$, $\bT$, $\bq$, $\bn$,
+$\bD$. Two-point objects get one of each: $\bF$, $\bR$, $\bP$, $\bH$,
+$\shift$. The rule is not a coincidence but the alphabet test of
+Remark~\ref{rem:hatinch4} applied to the transformation law itself, and
+Remark~\ref{rem:2ptlaw} of Chapter 2 already made the general point that
+the transformation law identifies the tensor's type.
+
+The consequence is decisive. Since $\bK$ does not depend on time,
+$\dot\bK=\hOb$, and differentiating a referential quantity produces no
+extra term at all: whatever survives a change of observer before
+differentiation survives it afterwards. Since $\bQ$ does depend on time,
+differentiating a spatial quantity produces $\dot\bQ$, and that is where
+every anomaly of this chapter comes from. Compare \eqr{7.30}$_{1}$, in
+which $\bC^{+}=\bK\bC\bK^{t}$ is as clean after differentiation as
+before, with \eqr{7.33}, in which $\bL$ picks up $\bOm$. Nothing else has
+changed between the two; only which tensor does the conjugating.
+
+This is also why constitutive theory is written in terms of referential
+strain measures whenever possible. A referential measure cannot be
+polluted by the observer's motion, because the observer's motion has been
+evaluated at $t_{0}$ and frozen.
+\end{remark}
+
+Fixing $t$, and hence $t^{+}$, and combining \eqr{2.34} with \eqr{7.3}
+and $\dl\bX^{+}=\bK\,\dl\bX$, which follows from \eqr{7.14} because
+$\bc^{+}$ is constant, we find that the deformation gradients in the two
+frames are related by
+\begin{equation}
+   \bF^{+}\dl\bX^{+}=\dl\bx^{+}=\bQ(t)\,\dl\bx=\bQ(t)\bF\,\dl\bX
+   =\bQ(t)\bF\bK^{t}\,\dl\bX^{+},
+   \tag{7.16}\label{eq:7.16}
+\end{equation}
+i.e., since $\dl\bX^{+}$ is arbitrary, that
+\begin{equation}
+   \bF^{+}=\bQ(t)\bF\bK^{t}.
+   \tag{7.17}\label{eq:7.17}
+\end{equation}
+Every step of \eqr{7.16} deserves its justification. The first equality
+is the definition \eqr{2.34} of the deformation gradient in the frame of
+$O^{+}$. The second is \eqr{7.4} applied to a pair of neighbouring
+places, which is legitimate at fixed $t$ because $\bQ$ is then a
+constant tensor and a differential is taken at fixed $t$. The third is
+\eqr{2.34} in the frame of $O$. The fourth substitutes
+$\dl\bX=\bK^{t}\,\dl\bX^{+}$, obtained from $\dl\bX^{+}=\bK\,\dl\bX$ by
+multiplying on the left by $\bK^{t}$ and using $\bK^{t}\bK=\hI$.
+
+This is a linear map from $\hat{\mathbb{E}}^{3+}$ to $\mathbb{E}^{3+}$,
+as the alphabet test confirms: $\bK^{t}$ carries
+$\hbE_{A}\otimes\hbE^{+}_{B}$, $\bF$ carries $\be_{i}\otimes\hbE_{A}$,
+$\bQ$ carries $\be^{+}_{j}\otimes\be_{i}$, and the contractions leave
+$\be^{+}_{j}\otimes\hbE^{+}_{B}$. Because the shifter $\shift^{+}$ is
+also such a map, it is natural to assume that
+\begin{equation}
+   \shift^{+}=\bQ(t)\shift\bK^{t}.
+   \tag{7.18}\label{eq:7.18}
+\end{equation}
+
+This recovers \eqr{7.15}$_{1}$ at time $t_{0}$: substituting \eqr{7.18}
+into $(\shift^{+})^{t}\bQ(t_{0})\shift$ and using
+$\bQ^{t}(t_{0})\bQ(t_{0})=\I$ and $\shift^{t}\shift=\hI$,
+\[
+   (\shift^{+})^{t}\bQ(t_{0})\shift
+   =\big(\bQ(t_{0})\shift\bK^{t}\big)^{t}\bQ(t_{0})\shift
+   =\bK\shift^{t}\bQ^{t}(t_{0})\bQ(t_{0})\shift
+   =\bK\shift^{t}\shift=\bK\hI=\bK .
+\]
+It also ensures that $\mathbb{E}^{3+}$ and $O^{+}$ evolve together as
+time passes, and it yields $\bF^{+}(\bX^{+},t^{+}_{0})=\shift^{+}$ in
+accordance with \eqr{2.79} and the chosen reference configurations:
+by \eqr{7.17} and \eqr{2.79},
+$\bF^{+}(\bX^{+},t^{+}_{0})=\bQ(t_{0})\bF(\bX,t_{0})\bK^{t}
+=\bQ(t_{0})\shift\bK^{t}=\shift^{+}$.
+
+\begin{remark}[why \eqr{7.18} is assumed rather than
+derived]\label{rem:ch7whyshiftass}
+The shifter is not determined by anything said so far. Its construction
+in Definition~\ref{def:shifter} required a choice of fixed orthonormal
+vectors $\bE_{A}$ in the current translation space, and $O^{+}$ must
+likewise choose fixed orthonormal $\bE^{+}_{A}\in\mathbb{E}^{3+}$.
+Nothing in \eqr{7.1} to \eqr{7.17} says which. Equation \eqr{7.18} is
+that choice, and the two properties just verified are exactly the reasons
+for making it: it agrees with \eqr{7.15} at the instant the reference
+configurations were fixed, and it keeps $\shift^{+}$ playing for $O^{+}$
+the role $\shift$ plays for $O$ at every later instant as well.
+
+The alternative would be to let $O^{+}$ pick his $\bE^{+}_{A}$ once and
+leave them alone in his own frame. That is a legitimate choice too, but
+then $\shift^{+}$ would not satisfy \eqr{7.18}, the relation
+$\bH=\bF-\shift$ would fail to transform correctly, and the two observers
+would disagree about the displacement gradient. The discussion after
+\eqr{7.26} is that failure worked out in detail for the sharper case in
+which the shifter is dropped altogether.
+
+An \emph{inertial frame} is a frame that neither accelerates nor spins.
+In this book we always regard the frame $\Et$ of $O$ as being inertial.
+Accordingly the shifter $\shift$ is fixed, independent of time. It then
+follows from \eqr{7.18}, with $\dot\bQ=\Ob$ under a Galilean
+transformation, that $(\shift^{+})^{\textstyle\cdot}
+=\dot\bQ\shift\bK^{t}=\Ob$: the shifter is fixed in any frame related to
+$O$ by a Galilean transformation, i.e. in all inertial frames. In a
+frame that does spin, $\shift^{+}$ is not fixed, and Problem 2 computes
+exactly how fast it turns. What an inertial frame is, what the two ways
+of failing to be one are, and what it means for a shifter not to be
+fixed, are taken apart in the remark that follows.
+\end{remark}
+
+\begin{remark}[what \emph{inertial} means, and which half of it the
+shifter feels]\label{rem:ch7whatinertial}
+The paragraph just ended packs a definition, a standing assumption and a
+computation into four sentences. Each repays unpacking, the more so
+because the standing assumption is what allowed Chapter 6 to be written
+without mentioning observers at all, and because the last sentence is the
+only place in the chapter where an object is allowed to depend on time
+for a reason having nothing to do with the body.
+
+\emph{Exactly two things can move.} A change of observer is \eqr{7.3},
+$\bx^{+}=\bQ(t)\bx+\bc(t)$, and it has exactly two ingredients. Each may
+depend on $t$, and each carries one of the two words in the definition.
+
+The translation $\bc$ is not an abstract offset. Setting $\bx=\bze$ in
+\eqr{7.3} gives $\bx^{+}=\bc(t)$: the vector $\bc(t)$ is the place at
+which $O^{+}$ sees the origin of $O$'s frame. So $\dot\bc$ is the
+velocity of that origin and $\ddot\bc$ its acceleration, both as recorded
+by $O^{+}$, and $\ddot\bc\neq\bze$ is what \emph{accelerates} means. The
+reading is worth keeping in mind at \eqr{7.63}, where it explains a fact
+that surprises everyone who meets it: in Problem 3 the observer stands on
+a spinning planet, his station is certainly being accelerated, and yet
+$\ddot\bc=\bze$ there. It is $O$'s origin, the centre of the planet, that
+$\bc$ tracks, and the observer sees it sitting still a distance $R$
+straight down. The acceleration of his own station is not lost; it
+reappears in the centrifugal term.
+
+The rotation $\bQ(t)$ is the identification of directions. By \eqr{7.4} a
+vector $\bu$ of $\Et$ is seen by $O^{+}$ as $\bQ(t)\bu$, so
+$\bQ(t_{2})\bQ^{t}(t_{1})$ is the rotation carrying the direction $O^{+}$
+assigned to $\bu$ at $t_{1}$ onto the one he assigns at $t_{2}$. If $\bQ$
+is constant, that rotation is the identity for every pair of instants and
+the two observers agree permanently about which way is which. If it is
+not, the instantaneous rate is $\bOm=\dot\bQ\bQ^{t}$, with axial vector
+$\bom$ by Proposition~\ref{prop:axial}, and Remark~\ref{rem:ch7omega} has
+already identified it: $\bom$ is the angular velocity of $O$'s frame as
+recorded by $O^{+}$, the negative of the rate $\bom_{p}$ at which
+$O^{+}$'s own platform turns. That is what \emph{spins} means.
+
+There is no third possibility. A frame is a Euclidean space and has no
+shape to distort; \eqr{7.2} forbids it a change of scale; and \eqr{7.3},
+which was derived and not assumed, exhausts what is left. Position and
+orientation, two ingredients, two defects.
+Figure~\ref{fig:ch7framekinds} is the whole of the classification.
+
+\emph{Why acceleration and not motion.} The definition says
+\emph{accelerates}, not \emph{moves}, and the asymmetry is not a
+convenience. A frame drifting at constant velocity is inertial, because
+by Remark~\ref{rem:ch7galilean} the two observers then disagree about
+velocity by the fixed vector $\bV$ and about nothing else, and no
+measurement returns $\bV$ without first nominating a frame in which to
+make it. A frame whose drift is speeding up is a different matter, and
+the passenger thrown forward when the bus brakes is the measurement.
+
+\emph{The definition is the vanishing of the inertial force.} The two
+conditions are not an extra postulate laid on top of the chapter. They
+are \eqr{7.63} read as an identity. Suppose $\vek{i}^{+}=\bze$ for every
+particle, that is, for every $\bx^{+}$ and every $\bv^{+}$. The only term
+of \eqr{7.63} containing $\bv^{+}$ is $2\bOm\bv^{+}$, so subtracting the
+statement for two particles at the same place with different velocities
+leaves $\bOm(\bv^{+}_{1}-\bv^{+}_{2})=\bze$ for arbitrary velocities,
+whence $\bOm=\Ob$. If that holds at every instant then $\dot\bOm=\Ob$ and
+$\bOm^{2}=\Ob$ as well, and what remains of \eqr{7.63} is
+$\ddot\bc=\bze$. Conversely all four terms vanish when $\bOm=\Ob$ and
+$\ddot\bc=\bze$; and $\bOm=\Ob$ returns $\dot\bQ=\bOm\bQ=\Ob$. Hence
+\[
+\begin{aligned}
+   \vek{i}^{+}=\bze\ \text{for every particle}
+   &\iff \dot\bQ=\Ob\ \ \text{and}\ \ \ddot\bc=\bze\\[0.6mm]
+   &\iff \bx^{+}=\bQ\bx+\bV t+\bc_{0},\ \text{which is \eqr{7.10}} .
+\end{aligned}
+\]
+The first line says that a body free of tractions and of body force
+satisfies $\ba^{+}=\bze$, i.e. that free particles move uniformly; the
+second is the definition of an inertial frame; the third is a Galilean
+transformation. The three are one statement wearing three costumes, and
+\eqr{7.64} is the fourth.
+
+\emph{Inertial relative to what.} Neither $\bQ$ nor $\bc$ exists until
+two observers have been named, so ``neither accelerates nor spins'' is,
+as it stands, a statement about a \emph{pair} of frames. The theory does
+not pretend otherwise. What is postulated is that one inertial frame
+exists, which is the content of Euler's postulates \eqr{6.34} and
+\eqr{6.35}; the sentence after \eqr{7.64} then manufactures infinitely
+many others, one for each Galilean transformation; and the standing
+assumption that $\Et$ is inertial merely names one member of that class.
+Every statement made afterwards is a statement about the class, not about
+the member.
+
+The postulate is nevertheless more than a definition, because a single
+frame can be tested from inside it. Isolate a particle from all contact
+and all body force and watch it: by \eqr{7.62} it moves uniformly if and
+only if $\vek{i}^{+}=\bze$. Two instruments split the test in two. An
+accelerometer reports $\ddot\bc$, subject to the caveat of
+Remark~\ref{rem:ch7inertial} that no local measurement separates a
+uniform $\ddot\bc$ from a uniform $\bb^{+}$. A gyroscope, or a Foucault
+pendulum, reports $\bOm$, and that measurement carries no such caveat,
+because the caveat rests on both quantities being uniform and the two
+terms $\bOm$ contributes to \eqr{7.63} are not: one grows with the
+particle's distance from the axis and the other with its velocity. No
+body force does that. Uniform motion is undetectable from inside a closed
+room; rotation is not.
+
+\emph{Which half of it the shifter feels.} Return now to
+$\shift^{+}=\bQ(t)\shift\bK^{t}$. Of the three factors $\shift$ is fixed,
+being built in Definition~\ref{def:shifter} from vectors chosen once, and
+$\bK$ is fixed by \eqr{7.15}, every factor in it having been evaluated at
+the single instant $t_{0}$. Only $\bQ$ can move, so
+\[
+   \big(\shift^{+}\big)^{\textstyle\cdot}
+   =\dot\bQ\shift\bK^{t}
+   =\big(\dot\bQ\bQ^{t}\big)\big(\bQ\shift\bK^{t}\big)
+   =\bOm\shift^{+},
+\]
+which is Problem 2. The formula deserves reading twice, once for what is
+in it and once for what is not.
+
+What is not in it is $\ddot\bc$. A frame that accelerates in a straight
+line, however violently, has a fixed shifter. The reason is that the
+shifter is a tensor, tensors act on vectors, and vectors are differences
+of positions in which the translation cancels exactly as it does in
+\eqr{7.4}. The whole translational half of non-inertiality is invisible
+to it.
+
+What is in it is $\bOm$, alone and undiluted. The shifter turns if and
+only if the frame spins, and then at precisely the frame's own rate. So
+of the two ways a frame can fail to be inertial the shifter feels one and
+ignores the other, and knowing which is which saves a good deal of
+worrying: whatever else an observer who merely accelerates disturbs, it
+is not the shifter.
+
+\emph{What a moving shifter actually looks like.} The statement can be
+made completely concrete. Let $O^{+}$ label his reference space by
+$\hbE^{+}_{A}=\bK\hbE_{A}$, which is legitimate because $\bK$ is
+orthogonal and therefore carries an orthonormal basis of $\hEt$ onto one
+of $\hat{\mathbb{E}}^{3+}$, and which is the choice that gives $\bX$ and
+$\bX^{+}$ the same components in \eqr{7.14}. Then
+$\bK=\bK\hI=(\bK\hbE_{A})\otimes\hbE_{A}=\hbE^{+}_{A}\otimes\hbE_{A}$, so
+$\bK^{t}=\hbE_{A}\otimes\hbE^{+}_{A}$, and \eqr{7.18} with
+$\shift=\bE_{B}\otimes\hbE_{B}$ and Lemma~\ref{lem:dyadprod} gives
+\[
+\begin{aligned}
+   \shift^{+}
+   &=\bQ\big(\bE_{B}\otimes\hbE_{B}\big)
+    \big(\hbE_{A}\otimes\hbE^{+}_{A}\big)
+   =\bQ\big(\bE_{A}\otimes\hbE^{+}_{A}\big)
+   =\bE^{+}_{A}\otimes\hbE^{+}_{A},\\[0.6mm]
+   \bE^{+}_{A}(t)&=\bQ(t)\bE_{A},
+\end{aligned}
+\]
+and therefore $\dot\bE^{+}_{A}=\dot\bQ\bE_{A}=\bOm\bE^{+}_{A}$.
+
+Read as an instruction this says something quite definite. The three
+directions $O^{+}$ must use to build his shifter are the images of
+$O$'s. They are \emph{not} the directions he calls north, east and up,
+which are fixed in his own frame and which he has every reason to regard
+as fixed; they are a triad that keeps pointing where $O$'s triad points.
+For an observer on a turntable those are the directions of the fixed
+stars, and his shifter triad is a gyroscope. He is quite entitled to say
+that it turns, because in his frame it does, backwards at the rate of his
+own platform. For an observer standing on the Earth it comes round once
+per sidereal day, at $\omega\simeq7.29\times10^{-5}\,\mathrm{s}^{-1}$:
+slow, but not zero. Figure~\ref{fig:ch7gyro} is this paragraph in two
+pictures, and Problem 3 is this observer.
+
+\emph{What is given up, and what is not.} Definition~\ref{def:shifter}
+asked for \emph{fixed} orthonormal $\bE_{A}$, and
+$\bE^{+}_{A}(t)=\bQ(t)\bE_{A}$ is not fixed, so \eqr{7.18} does relax
+that definition for every observer but the inertial one. It is worth
+being precise about how much is relaxed, because the answer is: the word
+\emph{fixed}, and nothing else. At each instant $\{\bE^{+}_{A}(t)\}$ is
+still orthonormal, $\bQ$ being orthogonal, so $\shift^{+}$ is still a
+uniform orthogonal two-point tensor and every identity of
+Proposition~\ref{prop:shifter} holds of it at every instant; in
+particular $(\shift^{+})^{t}\shift^{+}=\hI^{+}$ and
+$\shift^{+}(\shift^{+})^{t}=\I^{+}$, which were used at \eqr{7.14} and
+again at \eqr{7.21}, remain available. Uniformity in $\bX$, which is what
+makes $\shift^{+}\bX^{+}$ differentiate to $\shift^{+}$ and hence makes
+\eqr{7.25} work, is untouched. Constancy in $t$ is the single property
+surrendered, and it is surrendered only where the frame spins.
+
+\emph{Why the surrender is the right way round.} The alternative offered
+in the second paragraph of Remark~\ref{rem:ch7whyshiftass} can now be
+priced. Suppose $O^{+}$ nails his $\bE^{+}_{A}$ to the walls of his
+laboratory. His shifter is then constant,
+$(\shift^{+})^{\textstyle\cdot}=\Ob$, but $\bF^{+}$ is not: for a body
+sitting motionless in $O$'s frame, $\dot\bF^{+}=\dot\bQ\bF\bK^{t}
+=\bOm\bF^{+}$. The difference $\bH^{+}=\bF^{+}-\shift^{+}$ would then
+change in time while absolutely nothing happened to the body, and
+$O^{+}$ would read his own rotation as a growing displacement gradient.
+With \eqr{7.18} instead, both terms obey the same evolution law and
+$\dot\bH^{+}=\bOm\bH^{+}$: the displacement gradient rides round with the
+observer and reports the body alone. Problem 2 works this out; it is the
+dynamic form of the objection raised after \eqr{7.26}. The shifter of a
+spinning observer must be gyroscopic, and if it is not, his displacement
+gradient measures him.
+
+\emph{Nothing physical is being smuggled in.} It is worth closing on why
+none of this should be troubling. The shifter is not a field on the body
+and carries no mechanical information whatever; by
+Remark~\ref{rem:shifteruse} it exists only so that
+$\bchi_{\kappa}(\bX,t)-\shift\bX$ has both of its terms in the same
+space. Requiring it to turn therefore costs nothing, because there was
+nothing in it to conserve. What the requirement buys is that $\bH$ means
+the same thing to every observer, which is precisely the property
+Remark~\ref{rem:ch7shiftertrap} shows cannot be arranged by any choice of
+bases.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{E}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.2mm]},thick},
+   sm/.style={-{Stealth[length=1.9mm]},semithick}]
+% a small pair of axes standing for the frame of O+ at one instant:
+%   \frm{x}{y}{angle}{colour}{line width}
+\def\frm#1#2#3#4#5{%
+  \begin{scope}[shift={(#1,#2)},rotate=#3]
+    \draw[-{Stealth[length=1.9mm]},#4,#5] (0,0)--(0.80,0);
+    \draw[-{Stealth[length=1.9mm]},#4,#5] (0,0)--(0,0.80);
+    \fill[#4] (0,0) circle (1.2pt);
+  \end{scope}}
+% ================= (a) inertial =================
+\begin{scope}
+  \draw[ar] (-2.15,1.80)--(-1.45,1.80);
+  \node[font=\small,anchor=west] at (-1.38,1.80) {$\bE_{1}$};
+  \draw[guide] (-2.25,0)--(2.25,0);
+  \frm{-1.85}{0}{0}{gray!55}{thin}
+  \frm{-0.35}{0}{0}{gray!55}{thin}
+  \frm{1.15}{0}{0}{blue!55!black}{semithick}
+  \node[font=\small,text=gray!85,anchor=north] at (-1.85,-0.12) {$t_{0}$};
+  \node[font=\small,text=gray!85,anchor=north] at (-0.35,-0.12) {$t_{1}$};
+  \node[font=\small,text=blue!55!black,anchor=north] at (1.15,-0.12)
+     {$t_{2}$};
+  \draw[sm,gray!75] (-1.85,-0.92)--(-0.35,-0.92);
+  \draw[sm,gray!75] (-0.35,-0.92)--(1.15,-0.92);
+  \node[font=\small,align=center,anchor=north] at (-0.35,-1.30)
+     {(a) inertial\\[0.4mm]
+      $\dot\bQ=\Ob$, $\ddot\bc=\bze$\\[0.4mm]
+      $\vek{i}^{+}=\bze$\\[0.4mm]
+      $\shift^{+}$ fixed};
+\end{scope}
+% ================= (b) accelerating =================
+\begin{scope}[xshift=5.80cm]
+  \draw[ar] (-2.15,1.80)--(-1.45,1.80);
+  \node[font=\small,anchor=west] at (-1.38,1.80) {$\bE_{1}$};
+  \draw[guide] (-2.25,0)--(2.25,0);
+  \frm{-1.95}{0}{0}{gray!55}{thin}
+  \frm{-1.25}{0}{0}{gray!55}{thin}
+  \frm{0.85}{0}{0}{red!65!black}{semithick}
+  \node[font=\small,text=gray!85,anchor=north east] at (-1.90,-0.12)
+     {$t_{0}$};
+  \node[font=\small,text=gray!85,anchor=north west] at (-1.20,-0.12)
+     {$t_{1}$};
+  \node[font=\small,text=red!65!black,anchor=north] at (0.85,-0.12)
+     {$t_{2}$};
+  \draw[sm,gray!75] (-1.95,-0.92)--(-1.25,-0.92);
+  \draw[sm,red!65!black] (-1.25,-0.92)--(0.85,-0.92);
+  \node[font=\small,align=center,anchor=north] at (-0.35,-1.30)
+     {(b) accelerating\\[0.4mm]
+      $\dot\bQ=\Ob$, $\ddot\bc\neq\bze$\\[0.4mm]
+      $\vek{i}^{+}=\ddot\bc$\\[0.4mm]
+      $\shift^{+}$ still fixed};
+\end{scope}
+% ================= (c) spinning =================
+\begin{scope}[xshift=11.60cm]
+  \draw[ar] (-2.15,1.80)--(-1.45,1.80);
+  \node[font=\small,anchor=west] at (-1.38,1.80) {$\bE_{1}$};
+  \begin{scope}[shift={(-0.35,0)}]
+    \draw[guide] (0,0) circle (0.80);
+    \frm{0}{0}{0}{gray!55}{thin}
+    \frm{0}{0}{40}{gray!55}{thin}
+    \frm{0}{0}{80}{red!65!black}{semithick}
+    \node[font=\small,text=gray!85,anchor=north west] at (-10:0.90)
+       {$t_{0}$};
+    \node[font=\small,text=red!65!black,anchor=south east] at (94:0.90)
+       {$t_{2}$};
+    \draw[sm,red!65!black] (10:1.25) arc (10:70:1.25);
+    \node[font=\small,text=red!65!black,anchor=south west] at (40:1.38)
+       {$\bom_{p}$};
+  \end{scope}
+  \node[font=\small,align=center,anchor=north] at (-0.35,-1.30)
+     {(c) spinning\\[0.4mm]
+      $\dot\bQ\neq\Ob$\\[0.4mm]
+      Coriolis, centrifugal\\[0.4mm]
+      $(\shift^{+})^{\textstyle\cdot}=\bOm\shift^{+}$};
+\end{scope}
+\end{tikzpicture}
+\caption{The two ways a frame can fail to be inertial, and which of them
+the shifter feels. Each panel is drawn in the frame of $O$ and shows the
+frame of $O^{+}$ --- a pair of axes, that is, the directions $O^{+}$
+calls fixed --- at three successive instants, beside one direction
+$\bE_{1}$ that really is fixed in $\Et$. In (a) the frame drifts at
+constant velocity, so that the steps taken in equal times are equal:
+$\bQ$ is constant, $\bc$ is linear in $t$, the transformation is the
+Galilean one \eqr{7.10}, and $O^{+}$ is inertial. In (b) the steps grow,
+so $\ddot\bc\neq\bze$, while the axes nevertheless stay parallel to
+$\bE_{1}$ for ever. In (c) the origin does not move at all and the axes
+turn, $\dot\bQ\neq\Ob$, and the velocity- and position-dependent terms
+of \eqr{7.63} appear. The last line of each panel is the point of the
+figure: by \eqr{7.18} the shifter is carried by $\bQ$ alone, so it is
+blind to (b) and sensitive only to (c). The shifter records the
+orientation of the frame and nothing else.}
+\label{fig:ch7framekinds}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{F}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.4mm]},thick},
+   sm/.style={-{Stealth[length=2.0mm]},semithick}]
+% ================= (a) as O records it =================
+\begin{scope}
+  \draw[thick,gray!55,fill=blue!4] (0,0) circle (1.90);
+  \fill (0,0) circle (1.4pt);
+  % the mark painted on the rim, at t_0 and at t
+  \draw[line width=1.5pt,gray!70] (0:1.70)--(0:2.12);
+  \node[font=\small,text=gray!85,anchor=west] at (0:2.20) {$t_{0}$};
+  \draw[line width=1.5pt,red!65!black] (55:1.70)--(55:2.12);
+  \node[font=\small,text=red!65!black,anchor=south west] at (55:2.20)
+     {$t$};
+  \draw[sm,red!65!black] (12:2.58) arc (12:46:2.58);
+  \node[font=\small,text=red!65!black,anchor=south west] at (50:2.60)
+     {$\vartheta$};
+  % the shifter triad: it does not move
+  \draw[ar,blue!55!black] (0,0)--(20:1.55);
+  \draw[ar,blue!55!black] (0,0)--(110:1.55);
+  \node[font=\small,text=blue!55!black,anchor=north] at (9:1.28)
+     {$\bE_{1}$};
+  \node[font=\small,text=blue!55!black,anchor=east] at (126:1.24)
+     {$\bE_{2}$};
+  \node[font=\small,align=center,anchor=north] at (0,-2.35)
+     {(a) as $O$ records it:\\[0.5mm]
+      the platform turns, $\bE_{A}$ does not};
+\end{scope}
+% ================= (b) as O+ records it =================
+\begin{scope}[xshift=8.60cm]
+  \draw[thick,gray!55,fill=blue!4] (0,0) circle (1.90);
+  \fill (0,0) circle (1.4pt);
+  % his platform: at rest, by definition
+  \draw[line width=1.5pt,gray!70] (0:1.70)--(0:2.12);
+  \node[font=\small,text=gray!85,anchor=south west] at (0:2.20)
+     {$t_{0}$ and $t$};
+  % the shifter triad, turning backwards
+  \draw[ar,blue!55!black,densely dashed] (0,0)--(20:1.55);
+  \draw[ar,blue!55!black,densely dashed] (0,0)--(110:1.55);
+  \node[font=\small,text=blue!55!black,anchor=south east] at (118:1.62)
+     {$\bE^{+}_{A}(t_{0})$};
+  \draw[ar,blue!55!black] (0,0)--(-35:1.55);
+  \draw[ar,blue!55!black] (0,0)--(55:1.55);
+  \node[font=\small,text=blue!55!black,anchor=south west] at (57:1.62)
+     {$\bE^{+}_{A}(t)$};
+  \draw[sm,blue!55!black] (-8:2.45) arc (-8:-40:2.45);
+  \node[font=\small,text=blue!55!black,anchor=west] at (-38:2.62)
+     {$\bom=-\bom_{p}$};
+  \node[font=\small,align=center,anchor=north] at (0,-2.35)
+     {(b) as $O^{+}$ records it:\\[0.5mm]
+      the platform is at rest, $\bE^{+}_{A}(t)$ turns};
+\end{scope}
+\end{tikzpicture}
+\caption{What it means for the shifter not to be fixed. An observer
+$O^{+}$ stands on a turntable spinning at $\bom_{p}$, and the mark on the
+rim records how far it has gone round, through the angle
+$\vartheta=|\bom_{p}|(t-t_{0})$. The two panels are the same physical
+situation, and the blue triad, dashed at $t_{0}$ and solid at $t$, is the
+same pair of directions in both. In (a) the vectors $\bE_{A}$ of
+Definition~\ref{def:shifter} do not move; the platform does. In (b) the
+platform is at rest, by definition, and it
+is the triad $\bE^{+}_{A}(t)=\bQ(t)\bE_{A}$ carrying the shifter
+$\shift^{+}=\bE^{+}_{A}\otimes\hbE^{+}_{A}$ that turns, backwards at the
+observer's own rate: $\dot\bE^{+}_{A}=\bOm\bE^{+}_{A}$, which is
+$(\shift^{+})^{\textstyle\cdot}=\bOm\shift^{+}$ of Problem 2. The
+practical content is in panel (b). Observer $O^{+}$ cannot build his
+shifter out of the walls of his own laboratory; he must sight three fixed
+stars, or mount a gyroscope. Had he used the walls, his shifter would be
+constant, \eqr{7.18} would fail, and $\bH^{+}=\bF^{+}-\shift^{+}$ would
+change in time for a body on which nothing whatever was happening.}
+\label{fig:ch7gyro}
+\end{figure}
+
+Because both observers have selected occupiable reference
+configurations, we have that
+$0<J^{+}=\det\bF^{+}=J\det\bQ\det\bK$, in which $J=\det\bF>0$ by
+\eqr{2.50}. The determinant of a two-point tensor is computed from its
+component matrix relative to a right-handed orthonormal basis in each of
+the two spaces, and $\det(\bA\bB)=\det\bA\det\bB$ holds for the
+corresponding matrices by Theorem~\ref{thm:det}; that is all that is
+being used, together with $\det\bK^{t}=\det\bK$. Then, because $\bQ$ and
+$\bK$ are orthogonal, each of $\det\bQ$ and $\det\bK$ is $\pm1$ by
+Proposition~\ref{prop:orth}, so their product is $\pm1$; and since
+$J>0$ and $J^{+}>0$, that product cannot be $-1$. Hence
+$\det\bQ\det\bK=1$, and
+\begin{equation}
+   J^{+}=J.
+   \tag{7.19}\label{eq:7.19}
+\end{equation}
+It is then a simple matter to show that the cofactor of $\bF$ transforms
+to
+\begin{equation}
+   (\bF^{+})^{*}=\bQ\bF^{*}\bK^{t}.
+   \tag{7.20}\label{eq:7.20}
+\end{equation}
+Here is the computation. By Proposition~\ref{prop:I2cof},
+$\bA^{*}=(\det\bA)\bA^{-t}$, so $(\bF^{+})^{*}=J^{+}(\bF^{+})^{-t}
+=J(\bF^{+})^{-t}$ by \eqr{7.19}. Invert \eqr{7.17}, reversing the order
+of the factors as in Proposition~\ref{prop:prodinv} and using
+$\bQ^{-1}=\bQ^{t}$, $(\bK^{t})^{-1}=\bK$:
+\[
+   (\bF^{+})^{-1}=\big(\bQ\bF\bK^{t}\big)^{-1}
+   =(\bK^{t})^{-1}\bF^{-1}\bQ^{-1}=\bK\bF^{-1}\bQ^{t},
+\]
+and transposing,
+$(\bF^{+})^{-t}=\big(\bK\bF^{-1}\bQ^{t}\big)^{t}
+=\bQ\bF^{-t}\bK^{t}$. Therefore
+\[
+   (\bF^{+})^{*}=J\bQ\bF^{-t}\bK^{t}=\bQ\big(J\bF^{-t}\big)\bK^{t}
+   =\bQ\bF^{*}\bK^{t},
+\]
+the scalar $J$ passing through $\bQ$ because scalars commute with
+everything. So the cofactor transforms exactly as $\bF$ does, which had
+to be the case: by Remark~\ref{rem:cofgeom} the cofactor carries area
+elements, and an area element is built from a pair of line elements, each
+of which transforms with $\bQ$ and $\bK$.
+
+With reference to \eqr{2.77}, the displacement of $p$ in the frame of
+$O^{+}$ is
+\begin{equation}
+\begin{aligned}
+   \bu^{+}(\bX^{+},t^{+})
+   &=\bchi^{+}_{\kappa^{+}}(\bX^{+},t^{+})-\shift^{+}\bX^{+}\\
+   &=\bQ(t)\big[\bchi_{\kappa}(\bX,t)
+     -\shift\bK^{t}\big(\bK\bX+\bc^{+}\big)\big]+\bc(t)\\
+   &=\bQ(t)\big[\bchi_{\kappa}(\bX,t)-\shift\bX\big]+\bc(t)
+     -\bQ(t)\shift\bK^{t}\bc^{+}\\
+   &=\bQ(t)\bu(\bX,t)+\bd(t),
+\end{aligned}
+   \tag{7.21}\label{eq:7.21}
+\end{equation}
+where $\bu$ is the displacement in the frame of $O$ and
+$\bd(t)=\bc(t)-\bQ(t)\shift\bK^{t}\bc^{+}$ vanishes at time $t_{0}$.
+Here we have used the fact that $\bK^{t}\bK=\hI$, the identity for
+$\hEt$: it is what turns $\shift\bK^{t}\bK\bX$ into $\shift\bX$ between
+the second and third lines. The second line substituted \eqr{7.12} for
+the first term and \eqr{7.18} together with \eqr{7.14} for the second.
+
+That $\bd(t_{0})=\bze$ is worth verifying, since it is the statement that
+the two displacements are both zero at the instant from which they are
+measured. At $t=t_{0}$, \eqr{7.18} gives
+$\bQ(t_{0})\shift\bK^{t}=\shift^{+}\bK\bK^{t}=\shift^{+}\hI^{+}
+=\shift^{+}$, so
+\[
+   \bd(t_{0})=\bc(t_{0})-\shift^{+}\bc^{+}
+   =\bc(t_{0})-\shift^{+}(\shift^{+})^{t}\bc(t_{0})
+   =\bc(t_{0})-\I^{+}\bc(t_{0})=\bze ,
+\]
+using \eqr{7.15}$_{2}$ and then $\shift^{+}(\shift^{+})^{t}=\I^{+}$.
+
+\begin{remark}[the displacement is not objective, but its gradient
+is]\label{rem:ch7disp}
+Equation \eqr{7.21} is $\bu^{+}=\bQ\bu+\bd$, not $\bu^{+}=\bQ\bu$, so
+the displacement fails the test of Definition~\ref{def:ch7obj}. It could
+not pass it. A displacement is the difference between a position now and
+a position at $t_{0}$, and the two observers were in different relative
+positions at those two instants; the mismatch is exactly $\bd(t)$.
+
+The gradient does pass, because $\bd$ is uniform in $\bX$ and a uniform
+field has zero gradient. This is the same phenomenon as in
+Remark~\ref{rem:ch7twofreedoms}: translations disappear on taking
+differences. It is also the reason strain measures may be built from
+$\bH$ but not from $\bu$.
+\end{remark}
+
+Let $\bH$ be the gradient of $\bu$ with respect to $\bX$, i.e.
+$\bH\,\dl\bX=\dl\bu$ at fixed $t$. It follows from \eqr{2.77} by taking
+the referential gradient of $\bu=\bchi_{\kappa}-\shift\bX$, the shifter
+being uniform so that its gradient is itself, that
+\begin{equation}
+   \bH=\bF-\shift .
+   \tag{7.22}\label{eq:7.22}
+\end{equation}
+In terms of Cartesian components, cf. \eqr{2.78} and \eqr{2.70},
+\begin{equation}
+   \bH=H_{iA}\,\be_{i}\otimes\hbE_{A},\qquad\text{where}\qquad
+   H_{iA}=\hat u_{i,A}=F_{iA}-\dd_{iA}.
+   \tag{7.23}\label{eq:7.23}
+\end{equation}
+This is a two-point tensor, mapping $\hEt$ to $\Et$.
+
+Let $\bH^{+}$ be the gradient of $\bu^{+}$ with respect to $\bX^{+}$.
+Then, from \eqr{7.21}, differentiating at fixed $t$ so that $\bd(t)$
+contributes nothing,
+\begin{equation}
+   \bH^{+}\dl\bX^{+}=\dl\bu^{+}=\bQ(t)\,\dl\bu=\bQ(t)\bH\,\dl\bX
+   =\bQ(t)\bH\bK^{t}\,\dl\bX^{+},
+   \tag{7.24}\label{eq:7.24}
+\end{equation}
+yielding, since $\dl\bX^{+}$ is arbitrary,
+\begin{equation}
+   \bH^{+}=\bQ(t)\bH\bK^{t}=\bF^{+}-\shift^{+}.
+   \tag{7.25}\label{eq:7.25}
+\end{equation}
+The second equality is \eqr{7.22} transformed: subtracting \eqr{7.18}
+from \eqr{7.17},
+$\bF^{+}-\shift^{+}=\bQ\bF\bK^{t}-\bQ\shift\bK^{t}
+=\bQ(\bF-\shift)\bK^{t}=\bQ\bH\bK^{t}$, the middle step by the
+distributivity of tensor multiplication. This, of course, is also a
+two-point tensor, mapping $\hat{\mathbb{E}}^{3+}$ to $\mathbb{E}^{3+}$.
+
+It is at this stage that the significance of the shifter becomes
+apparent. In particular, it ensures that every tensor in \eqr{7.22} is of
+the same type, and hence that the relation remains invariant under basis
+transformations in a given frame. It also ensures that the relationship
+between the deformation and displacement gradients is the same in all
+frames: \eqr{7.22} holds for $O$ and \eqr{7.25}$_{2}$, which is the same
+sentence with every symbol starred, holds for $O^{+}$.
+
+In contrast, in the extant literature the shifter in \eqr{7.22} is
+typically replaced by the referential identity $\hI$. That tensor
+transforms differently. From \eqr{7.14},
+\[
+   \hI^{+}\dl\bX^{+}=\dl\bX^{+}=\bK\,\dl\bX=\bK\hI\,\dl\bX
+   =\bK\hI\bK^{t}\,\dl\bX^{+},
+\]
+whence, $\dl\bX^{+}$ being arbitrary,
+\begin{equation}
+   \hI^{+}=\bK\hI\bK^{t}.
+   \tag{7.26}\label{eq:7.26}
+\end{equation}
+
+Now, if \eqr{7.22} is replaced by $\bH=\bF-\hI$, then
+\eqr{7.25}$_{1}$ yields
+\[
+\begin{aligned}
+   \bH^{+}&=\bQ(t)\bH\bK^{t}=\bQ(t)\big(\bF-\hI\big)\bK^{t}
+   \\
+   &=\bQ(t)\bF\bK^{t}-\bQ(t)\hI\bK^{t}
+   =\bF^{+}-\bQ(t)\hI\bK^{t}\neq\bF^{+}-\hI^{+},
+\end{aligned}
+\]
+since $\bQ(t)\hI\bK^{t}$ and $\bK\hI\bK^{t}$ differ whenever
+$\bQ(t)$ differs from $\bK$, which it does at every instant other than
+$t_{0}$ and, in general, even there. So the proposed relationship, if
+deemed valid by $O$, must be regarded by $O^{+}$ as being invalid. This
+would imply that $O$ enjoys a privileged status, not shared by other
+observers. Such a state of affairs runs counter to the philosophy
+underlying modern physics. We will consider the displacement gradient
+again later, in the context of linear elasticity theory.
+
+\begin{remark}[the same objection, stated so that it cannot be
+evaded]\label{rem:ch7shiftertrap}
+The temptation is to answer that $\hI$ and $\shift$ are the same thing
+when the two reference bases are aligned with the spatial one, so that
+$\dd_{iA}$ really are Kronecker deltas, and that the distinction is
+therefore pedantry. Remark~\ref{rem:shifteruse} already answered that for
+one observer: $\bF-\hI$ subtracts a map $\hEt\to\hEt$ from a map
+$\hEt\to\Et$ and is meaningless whatever the numerical values of the
+components. The present objection is stronger and does not depend on
+type checking at all.
+
+Grant, for the sake of argument, that $O$ has aligned his bases so that
+the components of $\shift$ and of $\hI$ agree, and that he therefore sees
+no difference between the two formulas. The tensor $\bQ(t)$ still turns.
+At any instant $t\neq t_{0}$ the observer $O^{+}$, aligning \emph{his}
+bases in the same way, computes $\hI^{+}$ by \eqr{7.26} and
+$\shift^{+}$ by \eqr{7.18}, and these are not the same tensor, because
+one is built from the frozen $\bK$ and the other from the moving
+$\bQ(t)$. So a convention that costs $O$ nothing costs $O^{+}$ the
+correctness of his formula. There is no way to align bases once and for
+all that repairs this, because $\bQ(t)$ is a function of time and a
+choice of bases is not.
+
+The general lesson is worth extracting, because it recurs in Chapter 8.
+An identity that holds in one frame and is written with objects that
+transform by different rules is not an identity at all; it is a statement
+about that frame. Testing a formula against a change of observer is the
+cheapest available check on whether it is a law or a convention.
+\end{remark}
+
+Continuing, we have the polar decompositions \eqr{3.32} of $\bF$ and the
+polar decompositions
+\begin{equation}
+   \bF^{+}=\bR^{+}\bU^{+}=\bV^{+}\bR^{+}
+   \tag{7.27}\label{eq:7.27}
+\end{equation}
+of $\bF^{+}$ in terms of the symmetric, positive-definite stretch tensors
+$\bU^{+}$ and $\bV^{+}$ and the two-point rotation $\bR^{+}$, all
+guaranteed to exist and to be unique by Theorem~\ref{thm:polar} applied
+in the frame of $O^{+}$. Then, substituting \eqr{7.17} and inserting an
+identity in the one place where it does the required work,
+\begin{equation}
+\begin{aligned}
+   \bR^{+}\bU^{+}&=\bQ\bR\bU\bK^{t}=\bQ\bR\,\hI\,\bU\bK^{t}
+     =\big(\bQ\bR\bK^{t}\big)\big(\bK\bU\bK^{t}\big)
+   \qquad\text{and}\\[1mm]
+   \bV^{+}\bR^{+}&=\bQ\bV\bR\bK^{t}=\bQ\bV\,\I\,\bR\bK^{t}
+     =\big(\bQ\bV\bQ^{t}\big)\big(\bQ\bR\bK^{t}\big),
+\end{aligned}
+   \tag{7.28}\label{eq:7.28}
+\end{equation}
+the inserted identities being $\hI=\bK^{t}\bK$ in the first line and
+$\I=\bQ^{t}\bQ$ in the second. The device is the one used throughout
+Chapter 3: to convert a product into a product of factors of prescribed
+type, insert an identity written as a product of the tensor that has the
+right domain and its transpose.
+
+The uniqueness of the polar decompositions then furnishes
+\begin{equation}
+   \bU^{+}=\bK\bU\bK^{t},\qquad
+   \bV^{+}=\bQ\bV\bQ^{t}
+   \qquad\text{and}\qquad
+   \bR^{+}=\bQ\bR\bK^{t},
+   \tag{7.29}\label{eq:7.29}
+\end{equation}
+but only once it has been checked that the two brackets in each line of
+\eqr{7.28} really are of the kind that Theorem~\ref{thm:polar} declares
+unique. Three checks are needed.
+
+\emph{$\bQ\bR\bK^{t}$ is a two-point rotation
+$\hat{\mathbb{E}}^{3+}\to\mathbb{E}^{3+}$.} It is a product of orthogonal
+maps, hence orthogonal, by the computation already performed for $\bK$
+after \eqr{7.15}; and its determinant is
+$(\det\bQ)(\det\bR)(\det\bK)=(\det\bQ)(\det\bK)=1$ by \eqr{7.19} and
+$\det\bR=1$.
+
+\emph{$\bK\bU\bK^{t}$ is symmetric and positive definite on
+$\hat{\mathbb{E}}^{3+}$.} Symmetry:
+$(\bK\bU\bK^{t})^{t}=\bK\bU^{t}\bK^{t}=\bK\bU\bK^{t}$, using
+$(\bA\bB\bC)^{t}=\bC^{t}\bB^{t}\bA^{t}$ and the symmetry of $\bU$.
+Positive definiteness: for $\ba\neq\bze$ in $\hat{\mathbb{E}}^{3+}$,
+\[
+   \ip\ba{\bK\bU\bK^{t}\ba}=\ip{\bK^{t}\ba}{\bU\bK^{t}\ba}>0 ,
+\]
+by Definition~\ref{def:pd} applied to $\bU$, since $\bK^{t}\ba\neq\bze$:
+$\bK^{t}$ is invertible.
+
+\emph{$\bQ\bV\bQ^{t}$ is symmetric and positive definite on
+$\mathbb{E}^{3+}$.} The same two computations with $\bQ$ for $\bK$ and
+$\bV$ for $\bU$.
+
+So each line of \eqr{7.28} exhibits $\bF^{+}$ as a rotation times a
+symmetric positive definite tensor, in the two possible orders, and
+uniqueness identifies the factors term by term, giving \eqr{7.29}.
+
+The right- and left-Cauchy--Green tensors in the frame of $O^{+}$ are
+thus given by
+\begin{equation}
+\begin{aligned}
+   \bC^{+}&=(\bU^{+})^{2}=\bK\bU\bK^{t}\bK\bU\bK^{t}
+    =\bK\bU\,\hI\,\bU\bK^{t}=\bK\bU^{2}\bK^{t}=\bK\bC\bK^{t}
+   \qquad\text{and}\\[1mm]
+   \bB^{+}&=(\bV^{+})^{2}=\bQ\bV\bQ^{t}\bQ\bV\bQ^{t}
+    =\bQ\bV\,\I\,\bV\bQ^{t}=\bQ\bV^{2}\bQ^{t}=\bQ\bB\bQ^{t},
+\end{aligned}
+   \tag{7.30}\label{eq:7.30}
+\end{equation}
+respectively. These also follow directly from \eqr{7.17} with
+$\bC^{+}=(\bF^{+})^{t}\bF^{+}$ and $\bB^{+}=\bF^{+}(\bF^{+})^{t}$:
+\[
+\begin{aligned}
+   \bC^{+}&=\big(\bQ\bF\bK^{t}\big)^{t}\bQ\bF\bK^{t}
+    =\bK\bF^{t}\bQ^{t}\bQ\bF\bK^{t}=\bK\bF^{t}\,\I\,\bF\bK^{t}
+    =\bK\bC\bK^{t},\\
+   \bB^{+}&=\bQ\bF\bK^{t}\big(\bQ\bF\bK^{t}\big)^{t}
+    =\bQ\bF\bK^{t}\bK\bF^{t}\bQ^{t}=\bQ\bF\,\hI\,\bF^{t}\bQ^{t}
+    =\bQ\bB\bQ^{t}.
+\end{aligned}
+\]
+
+\begin{remark}[which measures of deformation see the observer, and
+why]\label{rem:ch7whosees}
+Equations \eqr{7.29} and \eqr{7.30} are the complete answer to the
+question the chapter was written for, at least as far as deformation is
+concerned, and it is worth reading them as a list.
+
+$\bU$ and $\bC$ do not see $\bQ$ at all. They are referential, and by
+Remark~\ref{rem:ch7Kfixed} they can only be touched by the fixed $\bK$.
+If both observers use the same reference configuration, so that
+$\bK=\hI$, they write down literally the same tensors. This is the
+algebraic form of the statement, made intuitively in
+Remark~\ref{rem:CBintuition}, that $\bC$ measures lengths and angles of
+material fibres: lengths and angles are what \eqr{7.2} guarantees the two
+observers agree about.
+
+$\bV$ and $\bB$ see only $\bQ$, and see it in the objective way of
+Definition~\ref{def:ch7obj}. They measure the same lengths and angles,
+but record them in the current space, which the two observers hold
+differently.
+
+$\bR$ and $\bF$ see both, one on each side. They are two-point tensors
+and cannot be otherwise.
+
+The practical consequence, which Chapter 8 will use and Chapter 10 will
+use again, is that a scalar function of $\bC$ is automatically agreed on
+by all observers, whereas a scalar function of $\bF$ is not. That is why
+constitutive equations reduce to functions of $\bC$, and why
+Chapter 10 will be able to say that a kinematic constraint may not see
+$\bR$: by \eqr{7.29}$_{3}$ the rotation is exactly the part of $\bF$
+that a change of observer alters. The reduction is not a modelling
+preference; it is forced by \eqr{7.29}$_{3}$.
+\end{remark}
+
+Equation \eqr{7.17} also furnishes, on differentiating with respect to
+$t$ and remembering that $\bK$ is fixed so that $\dot\bK=\hOb$,
+\begin{equation}
+   \dot\bF^{+}=\bQ\dot\bF\bK^{t}+\dot\bQ\bF\bK^{t}.
+   \tag{7.31}\label{eq:7.31}
+\end{equation}
+Using $\dot\bF^{+}=\bL^{+}\bF^{+}$ and $\dot\bF=\bL\bF$, both instances
+of \eqr{4.3}, where $\bL^{+}$ and $\bL$ respectively are the spatial
+velocity gradients as perceived by $O^{+}$ and $O$, the left side of
+\eqr{7.31} becomes $\bL^{+}\bF^{+}$ and the first term on the right
+becomes $\bQ\bL\bF\bK^{t}$. Both terms on the right now contain the
+factor $\bF\bK^{t}$, and \eqr{7.17} identifies it:
+$\bF\bK^{t}=\bQ^{t}\bQ\bF\bK^{t}=\bQ^{t}\bF^{+}$. Substituting,
+\[
+   \bQ\bL\bF\bK^{t}=\bQ\bL\bQ^{t}\bF^{+},
+   \qquad
+   \dot\bQ\bF\bK^{t}=\dot\bQ\bQ^{t}\bF^{+}=\bOm\bF^{+},
+\]
+the second using the definition \eqr{7.8}$_{2}$ of $\bOm$. We conclude
+that
+\begin{equation}
+   \bL^{+}\bF^{+}=\bQ\bL\bQ^{t}\bF^{+}+\dot\bQ\bQ^{t}\bF^{+},
+   \tag{7.32}\label{eq:7.32}
+\end{equation}
+and right-multiplication by $(\bF^{+})^{-1}$, which exists because
+$\det\bF^{+}=J>0$ by \eqr{7.19}, gives
+\begin{equation}
+   \bL^{+}=\bQ\bL\bQ^{t}+\bOm ,
+   \tag{7.33}\label{eq:7.33}
+\end{equation}
+where $\bOm$ is the skew tensor defined in \eqr{7.8}$_{2}$.
+
+The stretching and spin tensors thus transform as
+\begin{equation}
+   \bD^{+}=\bQ\bD\bQ^{t}
+   \qquad\text{and}\qquad
+   \bW^{+}=\bQ\bW\bQ^{t}+\bOm .
+   \tag{7.34}\label{eq:7.34}
+\end{equation}
+The passage from \eqr{7.33} to \eqr{7.34} is the splitting \eqr{4.7}
+applied in the frame of $O^{+}$, and it goes through in three steps.
+First, conjugation by $\bQ$ commutes with transposition:
+\[
+   \big(\bQ\bL\bQ^{t}\big)^{t}=\bQ\bL^{t}\bQ^{t},
+\]
+so that
+\[
+   \Sym\big(\bQ\bL\bQ^{t}\big)
+   =\tfrac12\bQ\big(\bL+\bL^{t}\big)\bQ^{t}=\bQ\bD\bQ^{t},
+   \qquad
+   \Skw\big(\bQ\bL\bQ^{t}\big)=\bQ\bW\bQ^{t},
+\]
+using the linearity of $\bA\mapsto\bQ\bA\bQ^{t}$ to take the factor
+$\tfrac12$ and the sum through. Second, $\bOm$ is skew, so
+$\Sym\bOm=\Ob^{+}$ and $\Skw\bOm=\bOm$: the extra term contributes
+nothing at all to the symmetric part and all of itself to the skew part.
+Third, the splitting of a tensor into symmetric and skew parts is unique,
+Problem 14 of Chapter 1 and Definition~\ref{def:splits}, so the
+symmetric parts of the two sides of \eqr{7.33} may be equated and
+likewise the skew parts. That is \eqr{7.34}.
+
+\begin{remark}[why $\bD$ survives and $\bW$ does not]\label{rem:ch7DW}
+This is the central result of the chapter and it should not be left as
+two lines of algebra.
+
+\emph{The mechanism.} By Remark~\ref{rem:ch7omega} the contamination
+$\bOm$ is the velocity gradient of a rigid displacement, and \eqr{4.29}
+established that a rigid displacement has zero stretching and pure spin.
+So the pollution introduced by the observer is, by its very nature, spin
+and nothing but spin. The splitting \eqr{4.7} sorts $\bL$ into a
+stretching part and a spinning part; the observer can only add to the
+second bin. That is the whole reason, and it explains why the result
+could have been predicted without any calculation.
+
+\emph{Why it is not an accident of the algebra.} $\bD$ measures rates of
+change of lengths and angles. Equation \eqr{4.15} makes this exact:
+$\ip\bm{\bD\bm}=(\ln\mu)^{\textstyle\cdot}$, the rate of logarithmic
+stretch of the material fibre in the direction $\bm$. Both observers
+agree about $\mu$, because \eqr{7.2} says they agree about lengths, so
+they must agree about $\dot\mu/\mu$, and hence about $\bD$ up to the
+rotation that relates their pictures. $\bW$ measures no length and no
+angle; by Remark~\ref{rem:Wtrap} it is not even the spin of a material
+fibre. There is therefore nothing in \eqr{7.2} to protect it, and nothing
+does.
+
+\emph{The counterexample, which is the point.} Let the body be at rest
+for $O$: $\bv=\bze$, hence $\bL=\Ob$, $\bD=\Ob$, $\bW=\Ob$. Let $O^{+}$
+spin steadily. Then \eqr{7.33} gives $\bL^{+}=\bOm$ and \eqr{7.34} gives
+\[
+   \bD^{+}=\Ob^{+},\qquad \bW^{+}=\bOm\neq\Ob^{+} .
+\]
+The two observers agree that nothing is being deformed, and they disagree
+completely about the spin. $O^{+}$ records a non-zero $\bW^{+}$ although
+no material fibre changes its length or its angle to any other. The spin
+was manufactured by the act of looking. Figure~\ref{fig:ch7DW} is that
+example drawn.
+
+\emph{What it forbids.} Suppose someone proposed the constitutive
+equation $\bT=2\mu\bW$ for some material. In the example above $O$ would
+compute $\bT=\Ob$ and $O^{+}$ would compute
+$\bT^{+}=2\mu\bOm\neq\Ob^{+}$. But by \eqr{7.40} the two are obliged to
+satisfy $\bT^{+}=\bQ\bT\bQ^{t}=\Ob^{+}$. The proposed law is therefore
+not merely inaccurate but self-contradictory: it asserts that a body
+sitting still on a table develops stress if the person looking at it
+starts to turn round. The same argument disqualifies $\bT=f(\bL)$ for any
+$f$ that actually depends on the skew part of $\bL$, and it is why the
+viscous fluid of Chapter 9 is written with $\bD$ and never with $\bL$.
+That prohibition is worth the whole chapter.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{G}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.2mm]},thick},
+   sm/.style={-{Stealth[length=1.7mm]},semithick}]
+% ================= what O records =================
+\begin{scope}
+  \draw[thick,fill=blue!6] (0,0) circle (1.15);
+  \foreach \a in {0,45,...,315}
+     {\fill (\a:1.15) circle (1.1pt);}
+  \fill (0,0) circle (1.2pt);
+  % "no motion" marks
+  \foreach \a in {20,110,200,290}
+     {\node[font=\footnotesize,text=gray!80] at (\a:0.62) {$\cdot$};}
+  \node[font=\small,anchor=north] at (0,-1.45) {observer $O$};
+  \node[font=\small,align=center,anchor=north] at (0,-1.90)
+     {$\bv=\bze$\\[0.6mm] $\bD=\Ob,\quad \bW=\Ob$};
+  \node[font=\footnotesize,text=gray!85,anchor=south] at (0,1.32)
+     {the body sits still};
+\end{scope}
+% ================= the change of observer =================
+\draw[ar] (2.10,0.25) .. controls (3.10,0.80) and (4.10,0.80) .. (5.10,0.25);
+\node[font=\small,anchor=south] at (3.60,0.78)
+   {$\bQ(t)$,\ \ $\bOm=\dot\bQ\bQ^{t}\neq\Ob$};
+% ================= what O+ records =================
+\begin{scope}[xshift=7.2cm]
+  \draw[thick,fill=blue!6] (0,0) circle (1.15);
+  \foreach \a in {0,45,...,315}
+     {\fill (\a:1.15) circle (1.1pt);}
+  \fill (0,0) circle (1.2pt);
+  % tangential velocity arrows: the body appears to turn
+  \foreach \a in {0,45,...,315}
+     {\draw[sm,red!65!black] (\a:1.15) -- ++(\a+90:0.55);}
+  \draw[ar,red!65!black] (1.55,-1.05) arc (-34:34:1.9);
+  \node[font=\small,anchor=north] at (0,-1.45) {observer $O^{+}$};
+  \node[font=\small,align=center,anchor=north] at (0,-1.90)
+     {$\bv^{+}=\bOm\bx^{+}+\dot\bc\neq\bze$\\[0.6mm]
+      $\bD^{+}=\Ob^{+},\quad \bW^{+}=\bOm$};
+  \node[font=\footnotesize,text=gray!85,anchor=south] at (0,1.32)
+     {the body appears to turn};
+\end{scope}
+\end{tikzpicture}
+\caption{One motion, two records: the counterexample of
+Remark~\ref{rem:ch7DW}. The body is at rest for $O$ and the observer
+$O^{+}$ spins, so $O^{+}$ sees every material point moving on a circle.
+The circle of material drawn in each panel is a circle in both, and every
+marked fibre keeps its length and its angle to every other; that is what
+\eqr{7.2} guarantees, and it is why both observers record
+$\bD=\Ob$. The velocity fields differ, and so do the spins: $O$ records
+$\bW=\Ob$ and $O^{+}$ records $\bW^{+}=\bOm$, the entire spin having been
+manufactured by the observer's own rotation. A constitutive law written
+in $\bW$ would give these two panels different stresses, which is
+impossible by \eqr{7.40}.}
+\label{fig:ch7DW}
+\end{figure}
+
+To any unit vector $\bn\in\Et$ we can associate two positions
+$\bx,\by\in\Et$ by $\bn=(\by-\bx)/|\by-\bx|$
+(Figure~\ref{fig:ch7unit}). Its counterpart in $\mathbb{E}^{3+}$ is
+\begin{equation}
+   \bn^{+}=\frac{\by^{+}-\bx^{+}}{\big|\by^{+}-\bx^{+}\big|}
+   =\frac{\by^{+}-\bx^{+}}{|\by-\bx|}
+   =\frac{\bQ(\by-\bx)}{|\by-\bx|}
+   =\bQ\bn ,
+   \tag{7.35}\label{eq:7.35}
+\end{equation}
+the second equality by \eqr{7.2} and the third by \eqr{7.4}; the last
+step takes the scalar $|\by-\bx|^{-1}$ inside the linear map $\bQ$.
+Similarly, for a unit vector $\bN\in\hEt$ we have its counterpart in
+$\hat{\mathbb{E}}^{3+}$:
+\begin{equation}
+   \bN^{+}=\frac{\bY^{+}-\bX^{+}}{\big|\bY^{+}-\bX^{+}\big|}
+   =\frac{\bY^{+}-\bX^{+}}{|\bY-\bX|}
+   =\frac{\bK(\bY-\bX)}{|\bY-\bX|}
+   =\bK\bN ,
+   \tag{7.36}\label{eq:7.36}
+\end{equation}
+now using \eqr{7.14}, from which $\bY^{+}-\bX^{+}=\bK(\bY-\bX)$ because
+the constant $\bc^{+}$ cancels in the difference, and
+$|\bK(\bY-\bX)|=|\bY-\bX|$ because $\bK$ is orthogonal.
+
+\begin{remark}[why \eqr{7.35} is a theorem and \eqr{7.38} will be an
+assumption]\label{rem:ch7unitwhy}
+It would have been possible to declare that unit vectors transform by
+$\bn^{+}=\bQ\bn$ and be done with it. The book does not, and the reason
+is instructive.
+
+A unit vector attached to a configuration is not a primitive object. It
+is built from two positions, and positions are the primitives about which
+\eqr{7.2} and \eqr{7.3} already say everything. So its transformation law
+is a consequence, and \eqr{7.35} derives it in three lines with nothing
+assumed that was not assumed in Section~\ref{sec:ch7obs}.
+
+Contrast \eqr{7.38} below. A traction is not built out of positions; it
+is a primitive of the mechanical theory, introduced in Chapter 6 by a
+postulate of its own. Nothing in the geometry of Section~\ref{sec:ch7obs}
+can determine how it transforms, and the statement $\bt^{+}=\bQ\bt$ has
+to be adopted as a further physical hypothesis. Keeping the two kinds of
+statement apart is what makes it possible to say later exactly which
+physical assumptions the theory rests on.
+\end{remark}
+
+\bookfig{2}\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.3mm]},thick}]
+% ================= as O sees it =================
+\begin{scope}
+  \blob{configline}
+  \coordinate (X) at (-0.55,-0.15);
+  \coordinate (Y) at (0.72,0.42);
+  \draw[guide] (X)--(Y);
+  \fill (X) circle (1.3pt); \fill (Y) circle (1.3pt);
+  \node[lbl,anchor=north east] at (X) {$\bx$};
+  \node[lbl,anchor=south west] at (Y) {$\by$};
+  \draw[ar,red!65!black] (X) -- ($(X)!0.72cm!(Y)$);
+  \node[lbl,font=\small,text=red!65!black,anchor=north west]
+     at (-0.30,-0.10) {$\bn$};
+  \node[font=\small,anchor=north] at (0,-1.55) {$\Et$};
+\end{scope}
+% ================= the map =================
+\draw[ar] (2.05,0.20) .. controls (2.95,0.72) and (3.85,0.72) .. (4.75,0.20);
+\node[font=\small,anchor=south] at (3.40,0.70) {$\bQ(t)$};
+% ================= as O+ sees it =================
+\begin{scope}[xshift=6.9cm,rotate=-38]
+  \blob{configline}
+  \coordinate (X2) at (-0.55,-0.15);
+  \coordinate (Y2) at (0.72,0.42);
+  \draw[guide] (X2)--(Y2);
+  \fill (X2) circle (1.3pt); \fill (Y2) circle (1.3pt);
+  \node[lbl,anchor=north east] at (X2) {$\bx^{+}$};
+  \node[lbl,anchor=south west] at (Y2) {$\by^{+}$};
+  \draw[ar,red!65!black] (X2) -- ($(X2)!0.72cm!(Y2)$);
+  \node[lbl,font=\small,text=red!65!black,anchor=north west]
+     at (-0.32,-0.12) {$\bn^{+}$};
+\end{scope}
+\node[font=\small,anchor=north] at (6.9,-1.75) {$\mathbb{E}^{3+}$};
+\end{tikzpicture}
+\caption{A unit vector as perceived by two observers. The vector is not
+posited but built: $\bn$ is the direction from $\bx$ to $\by$, normalised
+by the distance between them. Both the numerator and the denominator are
+already governed by Section~\ref{sec:ch7obs}, the first by \eqr{7.4} and
+the second by \eqr{7.2}, so the transformation law $\bn^{+}=\bQ\bn$ of
+\eqr{7.35} is derived rather than assumed. The same construction in the
+reference configuration, with \eqr{7.14} in place of \eqr{7.4}, gives
+$\bN^{+}=\bK\bN$, and the change from $\bQ$ to $\bK$ is the whole
+difference between a spatial and a referential vector.}
+\label{fig:ch7unit}
+\end{figure}
+
+%=======================================================================
+\section{Further transformations}\label{sec:ch7further}
+%=======================================================================
+
+We assume the density, energy, heating supply, temperature and entropy to
+be absolute scalars, and hence the same for all observers. Thus
+\begin{equation}
+   \rho^{+}=\rho,\quad \eps^{+}=\eps,\quad r^{+}=r,\quad
+   h^{+}=h,\quad \theta^{+}=\theta
+   \quad\text{and}\quad \eta^{+}=\eta .
+   \tag{7.37}\label{eq:7.37}
+\end{equation}
+The first of these is a natural consequence of the fact that neither the
+mass of a body, nor its volume, are affected by a change from one
+observer to another. Mass is assigned to the body itself in
+Section~\ref{sec:mass}, before any observer appears; and volume is
+unaffected because, by \eqr{7.4},
+\[
+\begin{aligned}
+   \dl v^{+}&=\big|\tbox{\dl\bx^{+}}{\dl\by^{+}}{\dl\bz^{+}}\big|
+   \\
+   &=\big|\tbox{\bQ\dl\bx}{\bQ\dl\by}{\bQ\dl\bz}\big|
+   =|\det\bQ|\,\big|\tbox{\dl\bx}{\dl\by}{\dl\bz}\big|=\dl v ,
+\end{aligned}
+\]
+by Theorem~\ref{thm:det} and $|\det\bQ|=1$. Equation \eqr{7.37}$_{1}$
+combines with \eqr{7.19} to yield the equality of the referential mass
+densities: since $\rho_{\kappa}=\rho J$ by the mass conservation of
+Section~\ref{sec:mass}, and both factors are unchanged,
+$\rho^{+}_{\kappa^{+}}=\rho^{+}J^{+}=\rho J=\rho_{\kappa}$.
+
+\begin{remark}[why \eqr{7.37} is an assumption, and how one would notice
+if it were wrong]\label{rem:ch7absolute}
+Nothing derived so far bears on any of the six quantities in \eqr{7.37}.
+Sections~\ref{sec:ch7obs} to \ref{sec:ch7kin} concerned only clocks,
+rulers and the geometry that follows from them; mass, energy and
+temperature were never mentioned. So \eqr{7.37} is new physical input,
+and it is worth being explicit about that rather than letting it pass as
+obvious.
+
+It is also worth seeing that it has content. Suppose temperature were not
+absolute, and that a moving observer read a different value. Then the
+Clausius--Duhem inequality \eqr{7.53}$_{5}$, which carries $\theta$ in
+two places, would hold for one observer and could fail for another, and
+the second law of thermodynamics would become a statement about who is
+looking. The assumption \eqr{7.37} is precisely what forbids that, and
+\eqr{7.59}$_{3}$ is the pay-off.
+
+The one entry that is not simply a postulate is $\rho^{+}=\rho$, since it
+follows from mass and volume separately, and the volume computation above
+is the proof.
+\end{remark}
+
+Further, we assume that the Cauchy and Piola tractions $\bt,\bp\in\Et$
+and the body force density $\bb\in\Et$ transform as spatial vectors, i.e.
+\begin{equation}
+   \bt^{+}=\bQ\bt,\qquad \bp^{+}=\bQ\bp
+   \qquad\text{and}\qquad \bb^{+}=\bQ\bb .
+   \tag{7.38}\label{eq:7.38}
+\end{equation}
+The Cauchy stress $\bT^{+}$ in the frame of $O^{+}$ is then such that
+\begin{equation}
+   \bT^{+}\bn^{+}=\bt^{+}=\bQ\bt=\bQ\bT\bn=\bQ\bT\bQ^{t}\bn^{+}
+   \tag{7.39}\label{eq:7.39}
+\end{equation}
+for all unit vectors $\bn^{+}$; thus
+\begin{equation}
+   \bT^{+}=\bQ\bT\bQ^{t}.
+   \tag{7.40}\label{eq:7.40}
+\end{equation}
+The chain \eqr{7.39} uses Cauchy's relation $\bt=\bT\bn$ of Chapter 6 in
+each frame, \eqr{7.38}$_{1}$ in the middle, and finally
+$\bn=\bQ^{t}\bn^{+}$, which is \eqr{7.35} solved for $\bn$ by
+multiplying on the left by $\bQ^{t}$ and using $\bQ^{t}\bQ=\I$.
+
+Two small points make the passage from \eqr{7.39} to \eqr{7.40} legal.
+First, every unit vector $\bn^{+}\in\mathbb{E}^{3+}$ arises as $\bQ\bn$
+for a unit $\bn\in\Et$, namely $\bn=\bQ^{t}\bn^{+}$, which is a unit
+vector because $\bQ^{t}$ is orthogonal; so \eqr{7.39} really does hold
+for every unit vector of the starred frame and not merely for those that
+happen to be images. Second, two tensors that agree on every \emph{unit}
+vector agree on every vector: given $\bs\neq\bze$, write
+$\bs=|\bs|\,\bn$ with $\bn=\bs/|\bs|$ a unit vector, and linearity gives
+$\bA\bs=|\bs|\bA\bn=|\bs|\bB\bn=\bB\bs$, while $\bA\bze=\bze=\bB\bze$.
+Hence $\bT^{+}$ and $\bQ\bT\bQ^{t}$ are the same tensor.
+
+\begin{remark}[what kind of statement \eqr{7.38} is, and how much of it
+is independent]\label{rem:ch7tractionass}
+Three statements were written down in \eqr{7.38}, and it matters that
+they are not three.
+
+\emph{Two are assumptions and the third is a theorem.} Equation
+\eqr{7.42} will derive $\bp^{+}=\bQ\bp$ from \eqr{7.38}$_{1}$ and the
+kinematics of Section~\ref{sec:ch7kin} alone, so \eqr{7.38}$_{2}$ adds
+nothing. What is genuinely assumed is that the Cauchy traction and the
+body force density are objective spatial vectors. Nothing proves either,
+and Remark~\ref{rem:ch7unitwhy} said why: a traction is a primitive of
+Chapter 6 rather than a construction out of positions, and the geometry
+of Section~\ref{sec:ch7obs} has no hold on it. This is the point at which
+the mechanics of the chapter, as opposed to its geometry, enters.
+
+\emph{What the assumption says physically.} That the force transmitted
+across a surface is a property of the two pieces of material on either
+side of it, and not of the person watching. Cut the body and put a spring
+balance in the cut: both observers read the same needle, and they
+disagree only about which direction in their own space the reading points
+along, by exactly the $\bQ$ that relates their spaces. Stated that way it
+is nearly a tautology about what the word \emph{force} means, and that is
+why it usually passes without comment. It is nevertheless an assumption,
+and it is a strong one: it is what forbids a force whose magnitude
+depends on the observer's motion.
+
+\emph{Where it fails, and why the failure is the whole story of
+Section~\ref{sec:ch7balance}.} The one force in this chapter that is
+\emph{not} objective is the inertial force $\vek{i}^{+}$ of \eqr{7.63},
+and it could not be, since by construction it is built out of $\bQ$ and
+$\bc$ themselves. That is the precise content of the word
+\emph{fictitious}. A centrifugal force has the units of a body force
+density, enters the equations of motion exactly like one, and is
+distinguished from a real one by a single property: it fails the test of
+Definition~\ref{def:ch7obj}. Chapter 6's postulates concerned real body
+forces, \eqr{7.38}$_{3}$ is the statement that they are objective, and
+\eqr{7.62} is what happens when the two kinds are added together.
+
+\emph{What rests on it.} Because \eqr{7.38}$_{1}$ is an assumption, so is
+\eqr{7.40}, and with it the whole of Chapter 8. Had the traction carried
+an extra term, in the manner of \eqr{7.8}, Cauchy's relation
+$\bt=\bT\bn$ would have produced a $\bT^{+}$ that is not a conjugate of
+$\bT$; the stress would not have been objective; the stress power would
+not have been invariant, so \eqr{7.59}$_{2}$ and \eqr{7.59}$_{3}$ would
+have failed as well; and there would have been nothing left on the stress
+side of a constitutive equation for both observers to agree about. One
+assumed line, \eqr{7.38}$_{1}$, carries all of that.
+\end{remark}
+
+The Piola stress $\bP^{+}$ follows from $\bP=\bT\bF^{*}$, the definition
+of Chapter 6, written in each frame and combined with \eqr{7.40} and
+\eqr{7.20}:
+\begin{equation}
+   \bP^{+}=\bT^{+}(\bF^{+})^{*}=\bQ\bT\bQ^{t}\bQ\bF^{*}\bK^{t}
+   =\bQ\bT\,\I\,\bF^{*}\bK^{t}=\bQ\bP\bK^{t}.
+   \tag{7.41}\label{eq:7.41}
+\end{equation}
+This furnishes
+\begin{equation}
+   \bp^{+}=\bP^{+}\bN^{+}=\bQ\bP\bK^{t}\bK\bN=\bQ\bP\,\hI\,\bN
+   =\bQ\bP\bN=\bQ\bp ,
+   \tag{7.42}\label{eq:7.42}
+\end{equation}
+in accordance with \eqr{7.38}$_{2}$, using \eqr{7.36} for $\bN^{+}$ and
+$\bK^{t}\bK=\hI$. So \eqr{7.38}$_{2}$ was not an independent assumption:
+it is forced by \eqr{7.38}$_{1}$ together with the kinematics of
+Section~\ref{sec:ch7kin}. Lastly, the Piola--Kirchhoff stress $\bS^{+}$
+follows from $\bP^{+}=\bF^{+}\bS^{+}$. Solving,
+\[
+   \bS^{+}=(\bF^{+})^{-1}\bP^{+}
+   =\big(\bK\bF^{-1}\bQ^{t}\big)\big(\bQ\bP\bK^{t}\big)
+   =\bK\bF^{-1}\,\I\,\bP\bK^{t}=\bK\big(\bF^{-1}\bP\big)\bK^{t},
+\]
+using the inverse of \eqr{7.17} computed after \eqr{7.20}; and
+$\bF^{-1}\bP=\bS$ by the same relation $\bP=\bF\bS$ in the frame of $O$.
+We obtain
+\begin{equation}
+   \bS^{+}=\bK\bS\bK^{t}.
+   \tag{7.43}\label{eq:7.43}
+\end{equation}
+
+\begin{remark}[three stresses, three transformation
+laws]\label{rem:ch7threestress}
+Put \eqr{7.40}, \eqr{7.41} and \eqr{7.43} side by side and they say what
+Remark~\ref{rem:2ptlaw} of Chapter 2 promised: the transformation law
+announces the type.
+\[
+\begin{aligned}
+   \bT^{+}&=\bQ\bT\bQ^{t}
+     &&\text{spatial: }\Et\to\Et ,\\
+   \bP^{+}&=\bQ\bP\bK^{t}
+     &&\text{two-point: }\hEt\to\Et ,\\
+   \bS^{+}&=\bK\bS\bK^{t}
+     &&\text{referential: }\hEt\to\hEt .
+\end{aligned}
+\]
+The pattern is exactly that of $\bB$, $\bF$, $\bC$ in \eqr{7.30} and
+\eqr{7.17}, and for the same reason: each stress measures force per unit
+area, and the three differ only in which configuration supplies the
+force and which supplies the area. $\bT$ takes both from the current
+configuration, $\bS$ takes both from the reference one, and $\bP$ takes
+one from each.
+
+The practically important entry is the last. Because $\bK$ is fixed, a
+constitutive equation written for $\bS$ in terms of $\bC$ relates two
+objects neither of which sees $\bQ$, and observer agreement is then
+automatic. Written for $\bT$ in terms of $\bB$ it is equally automatic,
+since both sides carry one $\bQ$ on each side. Written for $\bT$ in terms
+of $\bC$ it is not, and that mismatch is what Chapter 8 has to repair.
+\end{remark}
+
+The relationship between the heat flux $h$ through a surface with unit
+normal $\bn$ and the heat flux vector $\bq$ is $h=-\ip\bq\bn$, cf.
+\eqr{6.166}. The corresponding relationship in the frame of $O^{+}$ is
+$h^{+}=-\ip{\bq^{+}}{\bn^{+}}$. We thus have, from \eqr{7.35} and
+\eqr{7.37}$_{4}$, that
+\[
+   \ip{\bq^{+}}{\bn^{+}}=\ip\bq\bn=\ip\bq{\bQ^{t}\bn^{+}}
+   =\ip{\bQ\bq}{\bn^{+}}
+\]
+for all unit vectors $\bn^{+}$, the last step being the definition of the
+transpose. Hence $\ip{(\bq^{+}-\bQ\bq)}{\bn^{+}}=0$ for every unit
+$\bn^{+}$, and therefore for every vector of $\mathbb{E}^{3+}$ by the
+scaling argument used after \eqr{7.39}; Lemma~\ref{lem:cvec} then gives
+\begin{equation}
+   \bq^{+}=\bQ\bq ,
+   \tag{7.44}\label{eq:7.44}
+\end{equation}
+and the referential heat flux vectors in the two frames, defined by
+$\bq_{\kappa}=(\bF^{*})^{t}\bq$ in Chapter 6, are related by
+\begin{equation}
+\begin{aligned}
+   \bq^{+}_{\kappa^{+}}&=\big[(\bF^{+})^{*}\big]^{t}\bq^{+}
+    =\big(\bQ\bF^{*}\bK^{t}\big)^{t}\bQ\bq\\
+   &=\bK(\bF^{*})^{t}\bQ^{t}\bQ\bq=\bK(\bF^{*})^{t}\,\I\,\bq
+    =\bK\bq_{\kappa}.
+\end{aligned}
+   \tag{7.45}\label{eq:7.45}
+\end{equation}
+
+
+\begin{remark}[the whole of it is one commutative square]%
+\label{rem:ch7square}
+Everything derived in Sections~\ref{sec:ch7kin} and
+\ref{sec:ch7further} is a statement about the diagram of
+Figure~\ref{fig:ch7square}, and once that diagram is in front of one, the
+dictionary below can be read off instead of memorised.
+
+\emph{Four spaces, two vertical maps.} There are four spaces in play: the
+reference spaces $\hEt$ and $\hat{\mathbb{E}}^{3+}$ and the current
+spaces $\Et$ and $\mathbb{E}^{3+}$. Changing observer means going down,
+by $\bK$ on the reference side and by $\bQ(t)$ on the current side, and
+the whole content of Remark~\ref{rem:ch7Kfixed} is the difference between
+those two verticals: the left one was frozen at $t_{0}$ by \eqr{7.15} and
+the right one moves.
+
+\emph{Every two-point law says that the square commutes.} Equation
+\eqr{7.17} is $\bF^{+}=\bQ\bF\bK^{t}$, and multiplying on the right by
+$\bK$ and using $\bK^{t}\bK=\hI$ turns it into
+\[
+   \bF^{+}\bK=\bQ\bF ,
+\]
+that is, into the statement that the two routes from $\hEt$ to
+$\mathbb{E}^{3+}$ agree: deform and then change observer, or change
+observer and then deform. Read that way, \eqr{7.20}, \eqr{7.25},
+\eqr{7.29}$_{3}$ and \eqr{7.41} are the same sentence for $\bF^{*}$,
+$\bH$, $\bR$ and $\bP$. And \eqr{7.18} is the demand that the shifter be
+a horizontal arrow of the same square. Seen from here it stops looking
+like a convention: it is what puts $\shift$ into the diagram at all, and
+Remark~\ref{rem:ch7whyshiftass} is the observation that nothing else
+would.
+
+\emph{Every one-space law is a conjugation.} A tensor mapping a space to
+itself is a loop at one corner, and carrying it down the diagram means
+going down, round the loop, and back up: $\bA^{+}=\bQ\bA\bQ^{t}$ on the
+right, $\bA^{+}=\bK\bA\bK^{t}$ on the left. That is the entire difference
+between the second and third groups of the dictionary, and the polar
+decomposition displays it: by \eqr{7.29} and
+Figure~\ref{fig:ch7square}(b), $\bU$ is a loop on the reference side,
+$\bV$ a loop on the current side, and $\bR$ the horizontal arrow they
+share. The pairs $(\bC,\bB)$ and $(\bS,\bT)$ are loops in the same two
+places. A vector is a third case: it lives \emph{at} a corner rather than
+on an arrow, and it is carried down by a single application of the
+vertical, which is $\bN^{+}=\bK\bN$ and $\bq^{+}_{\kappa^{+}}
+=\bK\bq_{\kappa}$ on the left and $\bn^{+}=\bQ\bn$, $\bt^{+}=\bQ\bt$,
+$\bq^{+}=\bQ\bq$ on the right.
+
+\emph{What the diagram cannot show.} One thing only, and it is the
+subject of the rest of the chapter: the right-hand vertical depends on
+$t$. Every law free of time derivatives is a statement about the square
+as drawn. Every law containing one must differentiate that vertical too,
+and $\dot\bQ$ is what comes out. That is why $\bv$, $\ba$, $\bL$ and
+$\bW$ are absent from the figure and present in the last group of the
+dictionary: they are statements about how the square changes, not about
+the square.
+
+\emph{Using it as a check.} The alphabet test of
+Remark~\ref{rem:hatinch4} is precisely the instruction to read a
+formula's corners off this square, and it catches nearly every error
+available in this chapter. A term $\bK\bT\bK^{t}$ is wrong because $\bT$
+is a loop on the right while $\bK$ runs down the left; $\bQ\bC\bQ^{t}$ is
+wrong for the mirror-image reason; the sum $\bF-\shift$ is legitimate and
+$\bF-\hI$ is not, because the first subtracts one horizontal arrow from
+another and the second subtracts a loop from a horizontal arrow. That
+last is the objection of Remark~\ref{rem:ch7shiftertrap}, drawn.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{H}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.4mm]},thick},
+   sm/.style={-{Stealth[length=2.0mm]},semithick},
+   sp/.style={inner sep=2.5pt}]
+% ================= (a) the square =================
+\begin{scope}
+  \node[sp] (TL) at (0,2.45)   {$\hEt$};
+  \node[sp] (TR) at (4.10,2.45) {$\Et$};
+  \node[sp] (BL) at (0,0)      {$\hat{\mathbb{E}}^{3+}$};
+  \node[sp] (BR) at (4.10,0)    {$\mathbb{E}^{3+}$};
+  \draw[ar] (TL)--(TR) node[midway,above,font=\small] {$\bF$};
+  \draw[ar] (BL)--(BR) node[midway,below,font=\small] {$\bF^{+}$};
+  \draw[ar] (TL)--(BL) node[midway,left,font=\small] {$\bK$};
+  \draw[ar] (TR)--(BR) node[midway,right,font=\small] {$\bQ(t)$};
+  \node[font=\small,anchor=north] at (2.05,1.62) {$\bF^{+}\bK=\bQ\bF$};
+  \node[font=\small,align=center,anchor=north] at (2.05,-1.66)
+     {(a) the square of \eqr{7.17}:\\[0.5mm]
+      $\bK$ fixed, $\bQ(t)$ moving};
+\end{scope}
+% ================= (b) the polar factors on it =================
+\begin{scope}[xshift=8.20cm]
+  \node[sp] (tl) at (0,2.45)   {$\hEt$};
+  \node[sp] (tr) at (4.10,2.45) {$\Et$};
+  \node[sp] (bl) at (0,0)      {$\hat{\mathbb{E}}^{3+}$};
+  \node[sp] (br) at (4.10,0)    {$\mathbb{E}^{3+}$};
+  \draw[ar] (tl)--(tr) node[midway,above,font=\small] {$\bR$};
+  \draw[ar] (bl)--(br) node[midway,below,font=\small] {$\bR^{+}$};
+  \draw[ar] (tl)--(bl) node[midway,left,font=\small] {$\bK$};
+  \draw[ar] (tr)--(br) node[midway,right,font=\small] {$\bQ(t)$};
+  \draw[sm] (tl) to[out=115,in=65,looseness=9] (tl);
+  \node[font=\small,anchor=south] at (0,3.30) {$\bU$};
+  \draw[sm] (tr) to[out=115,in=65,looseness=9] (tr);
+  \node[font=\small,anchor=south] at (4.10,3.30) {$\bV$};
+  \draw[sm] (bl) to[out=245,in=295,looseness=9] (bl);
+  \node[font=\small,anchor=north] at (0,-0.92) {$\bU^{+}$};
+  \draw[sm] (br) to[out=245,in=295,looseness=9] (br);
+  \node[font=\small,anchor=north] at (4.10,-0.92) {$\bV^{+}$};
+  \node[font=\small,align=center,anchor=north] at (2.05,-1.66)
+     {(b) the polar factors of \eqr{7.29}:\\[0.5mm]
+      $\bU$, $\bV$ are loops, $\bR$ the arrow};
+\end{scope}
+\end{tikzpicture}
+\caption{The diagram the chapter is about. Going right is deforming;
+going down is changing observer. (a) Equation \eqr{7.17} says that the
+square commutes, and the same statement with $\bF$ replaced by
+$\bF^{*}$, $\bR$, $\bH$, $\bP$ or $\shift$ is \eqr{7.20}, \eqr{7.29}$_{3}$,
+\eqr{7.25}, \eqr{7.41} and \eqr{7.18} respectively. The two verticals are
+not alike: $\bK$ is one fixed tensor, every factor of it evaluated at
+$t_{0}$ by \eqr{7.15}, while $\bQ(t)$ turns, and every anomaly of this
+chapter is $\dot\bQ$. (b) A tensor that maps a space to itself is a loop
+at a corner, and a loop is carried down the diagram by conjugation:
+$\bU^{+}=\bK\bU\bK^{t}$ on the left and $\bV^{+}=\bQ\bV\bQ^{t}$ on the
+right, which is \eqr{7.29}. The pairs $(\bC,\bB)$ and $(\bS,\bT)$ are
+loops in the same two places, and $\bD$ is a loop on the right that
+happens also to be objective; a vector such as $\bN$ or $\bn$ sits at a
+corner instead and is carried down by one application of the vertical.
+The dictionary below is this figure sorted into a list.}
+\label{fig:ch7square}
+\end{figure}
+\subsection*{The dictionary}
+
+It is convenient to have the results of Sections~\ref{sec:ch7kin} and
+\ref{sec:ch7further} in one place, since the remaining sections and the
+whole of Chapters 8 to 10 consult them constantly. Sorted by what each
+quantity sees:
+\[
+\begin{aligned}
+   \text{nothing:}&\quad
+     \rho,\ \eps,\ r,\ h,\ \theta,\ \eta,\ J,\ \rho_{\kappa}
+     &&\eqr{7.19},\ \eqr{7.37}\\[0.7mm]
+   \bK\text{ only:}&\quad
+     \bN^{+}=\bK\bN,\quad \bU^{+}=\bK\bU\bK^{t},
+     &&\eqr{7.29}\\
+   &\quad \bC^{+}=\bK\bC\bK^{t},
+     &&\eqr{7.30}\\
+   &\quad \bS^{+}=\bK\bS\bK^{t},\quad
+     \bq^{+}_{\kappa^{+}}=\bK\bq_{\kappa},
+     &&\eqr{7.43},\ \eqr{7.45}\\
+   &\quad \hI^{+}=\bK\hI\bK^{t}
+     &&\eqr{7.26}\\[0.7mm]
+   \bQ\text{ only:}&\quad
+     \bn^{+}=\bQ\bn,\quad \bt^{+}=\bQ\bt,
+     &&\eqr{7.35},\ \eqr{7.38}\\
+   &\quad \bb^{+}=\bQ\bb,\quad \bq^{+}=\bQ\bq,
+     &&\eqr{7.38},\ \eqr{7.44}\\
+   &\quad \bV^{+}=\bQ\bV\bQ^{t},\quad \bB^{+}=\bQ\bB\bQ^{t},
+     &&\eqr{7.29},\ \eqr{7.30}\\
+   &\quad \bT^{+}=\bQ\bT\bQ^{t},
+     &&\eqr{7.40}\\
+   &\quad \bD^{+}=\bQ\bD\bQ^{t}
+     &&\eqr{7.34}\\[0.7mm]
+   \text{both:}&\quad
+     \bF^{+}=\bQ\bF\bK^{t},\quad \bR^{+}=\bQ\bR\bK^{t},
+     &&\eqr{7.17},\ \eqr{7.29}\\
+   &\quad \bH^{+}=\bQ\bH\bK^{t},
+     &&\eqr{7.25}\\
+   &\quad \bP^{+}=\bQ\bP\bK^{t},\quad
+     (\bF^{+})^{*}=\bQ\bF^{*}\bK^{t},
+     &&\eqr{7.41},\ \eqr{7.20}\\
+   &\quad \shift^{+}=\bQ\shift\bK^{t}
+     &&\eqr{7.18}\\[0.7mm]
+   \dot\bQ\text{ as well:}&&&\\[-1mm]
+   &\quad \bv^{+}=\bQ\bv+\bOm(\bx^{+}-\bc)+\dot\bc ,
+     &&\eqr{7.8}\\
+   &\quad \bL^{+}=\bQ\bL\bQ^{t}+\bOm,
+     &&\eqr{7.33}\\
+   &\quad \bW^{+}=\bQ\bW\bQ^{t}+\bOm,
+     &&\eqr{7.34}\\
+   &\quad \ba^{+}=\bQ\ba+\vek{i}^{+}
+     &&\eqr{7.9}
+\end{aligned}
+\]
+The first four groups are the objective and the observer-blind
+quantities, in the sense of Definition~\ref{def:ch7obj}; they are the raw
+material of constitutive theory. The last group is the list of everything
+that goes wrong, and every entry in it contains $\dot\bQ$, whether
+written as $\dot\bQ$, as $\bOm$, or as $\vek{i}^{+}$.
+
+%=======================================================================
+\section{Transformation of the balance laws}\label{sec:ch7balance}
+%=======================================================================
+
+Let $\bw(\bx,t)$ be an arbitrary spatial vector in the frame of $O$, and
+suppose $\bw^{+}(\bx^{+},t^{+})$ is its counterpart in the frame of
+$O^{+}$, i.e. that $\bw$ is objective in the sense of
+Definition~\ref{def:ch7obj}:
+\begin{equation}
+   \bw^{+}(\bx^{+},t^{+})=\bQ(t)\bw(\bx,t).
+   \tag{7.46}\label{eq:7.46}
+\end{equation}
+Then, differentiating at fixed $t$, so that $\bQ$ is a constant tensor
+throughout and passes through the differential,
+\begin{equation}
+   \bQ(\grad\bw)\dl\bx=\bQ\,\dl\bw=\dl\bw^{+}
+   =(\grad^{+}\bw^{+})\dl\bx^{+}=(\grad^{+}\bw^{+})\bQ\,\dl\bx ,
+   \tag{7.47}\label{eq:7.47}
+\end{equation}
+using the definition of the gradient of a vector field in each frame,
+Definition~\ref{def:diffv}, and $\dl\bx^{+}=\bQ\,\dl\bx$ from \eqr{7.4}.
+As $\dl\bx$ is arbitrary the two ends are equal as tensors,
+$\bQ(\grad\bw)=(\grad^{+}\bw^{+})\bQ$, and multiplying on the right by
+$\bQ^{t}$ therefore gives
+\begin{equation}
+   \grad^{+}\bw^{+}=\bQ(\grad\bw)\bQ^{t}.
+   \tag{7.48}\label{eq:7.48}
+\end{equation}
+The gradient of an objective vector field is an objective tensor field.
+
+This implies that the divergence is the same in both frames:
+\begin{equation}
+\begin{aligned}
+   \dvg^{+}\bw^{+}&=\tr(\grad^{+}\bw^{+})=\tr\big[\bQ(\grad\bw)\bQ^{t}\big]
+   \\
+   &=\tr\big[\bQ^{t}\bQ(\grad\bw)\big]=\tr(\grad\bw)=\dvg\bw ,
+\end{aligned}
+   \tag{7.49}\label{eq:7.49}
+\end{equation}
+by Proposition~\ref{prop:divv} at the two ends and the cyclic property
+$\tr(\bA\bB)=\tr(\bB\bA)$ in the middle.
+
+\begin{remark}[two traces, on two different spaces]\label{rem:ch7twotraces}
+The middle step of \eqr{7.49} needs the care that
+Remark~\ref{rem:twopointlegal} taught. The first trace is taken on
+$\mathbb{E}^{3+}$, since $\bQ(\grad\bw)\bQ^{t}$ maps that space to
+itself; the second is taken on $\Et$, since $\bQ^{t}\bQ(\grad\bw)$ maps
+$\Et$ to itself. They are different operations on different spaces, and
+the assertion is that they produce the same number.
+
+They do, and the reason is the component identity behind
+Remark~\ref{rem:twopointlegal}: with
+$\bQ=Q_{\alpha i}\be^{+}_{\alpha}\otimes\be_{i}$ and
+$\grad\bw=w_{i,j}\be_{i}\otimes\be_{j}$,
+\[
+   \tr\big[\bQ(\grad\bw)\bQ^{t}\big]=Q_{\alpha i}w_{i,j}Q_{\alpha j},
+   \qquad
+   \tr\big[\bQ^{t}\bQ(\grad\bw)\big]=Q_{\alpha j}Q_{\alpha i}w_{i,j},
+\]
+the same sum of products of the same numbers, written in a different
+order. Both traces are legitimate, each on its own space, and they are
+equal. Every use of the cyclic property in this chapter is of that kind
+and none of them is an abuse.
+\end{remark}
+
+From \eqr{7.40},
+\begin{equation}
+   \bT^{+}\bw^{+}=\bQ\bT\bQ^{t}\bQ\bw=\bQ\bT\,\I\,\bw=\bQ(\bT\bw).
+   \tag{7.50}\label{eq:7.50}
+\end{equation}
+If $\bw$ is independent of $\bx$, i.e. $\grad\bw=\Ob$, then $\bw^{+}$ is
+independent of $\bx^{+}$, since $\bQ$ is spatially uniform and
+\eqr{7.48} gives $\grad^{+}\bw^{+}=\Ob^{+}$; and the definition
+\eqr{1.148} of the divergence of a tensor, Definition~\ref{def:divA},
+yields
+\begin{equation}
+\begin{aligned}
+   \bQ^{t}(\dvg^{+}\bT^{+})\cdot\bw
+   &=\dvg^{+}\bT^{+}\cdot\bw^{+}
+    =\dvg^{+}\big[(\bT^{+})^{t}\bw^{+}\big]\\
+   &=\dvg(\bT^{t}\bw)
+    =\dvg\bT\cdot\bw ,
+\end{aligned}
+   \tag{7.51}\label{eq:7.51}
+\end{equation}
+leading, as $\bw$ is arbitrary, to the conclusion that
+\begin{equation}
+   \dvg^{+}\bT^{+}=\bQ(\dvg\bT).
+   \tag{7.52}\label{eq:7.52}
+\end{equation}
+Each equality of \eqr{7.51} carries its own justification. The first
+moves $\bQ^{t}$ across the inner product by the definition of the
+transpose and then uses \eqr{7.46}. The second is
+Definition~\ref{def:divA} in the frame of $O^{+}$, applicable because
+$\bw^{+}$ is uniform there. The third is \eqr{7.49} applied to the
+vector field $\bs=\bT^{t}\bw$, which is objective:
+\[
+   (\bT^{+})^{t}\bw^{+}=\big(\bQ\bT\bQ^{t}\big)^{t}\bQ\bw
+   =\bQ\bT^{t}\bQ^{t}\bQ\bw=\bQ\bT^{t}\bw=\bQ\bs=\bs^{+} .
+\]
+The fourth is Definition~\ref{def:divA} in the frame of $O$. The passage
+from \eqr{7.51} to \eqr{7.52} is Lemma~\ref{lem:cvec}: the vector
+$\bQ^{t}\dvg^{+}\bT^{+}-\dvg\bT$ has zero inner product with every
+uniform $\bw$, hence vanishes, and multiplying by $\bQ$ gives \eqr{7.52}.
+
+Suppose now that $O$ is an inertial observer. The laws holding in the
+frame of this observer are the conservation of mass, the balance of
+energy, the balances of linear and rotational momenta, and the
+Clausius--Duhem inequality:
+\begin{equation}
+\begin{aligned}
+   &\dot\rho+\rho\,\dvg\bv=0,\\
+   &\rho\dot\eps+\dvg\bq-\bT\cdot\bL=\rho r,\\
+   &\rho\ba-\dvg\bT=\rho\bb,\qquad \bT^{t}=\bT,\\
+   &\quad\text{and}\quad
+   -\rho\big(\dot\psi+\eta\dot\theta\big)+\bT\cdot\bL
+   -\theta^{-1}\ip\bq{\grad\theta}\geq0 ,
+\end{aligned}
+   \tag{7.53}\label{eq:7.53}
+\end{equation}
+where $\ba$ is the material acceleration. We seek the corresponding laws
+pertaining to an arbitrary observer $O^{+}$. To this end we use
+\eqr{7.44}, \eqr{7.46} and \eqr{7.49} to infer that
+\begin{equation}
+   \dvg^{+}\bq^{+}=\dvg\bq ,
+   \tag{7.54}\label{eq:7.54}
+\end{equation}
+the heat flux vector being objective by \eqr{7.44} and hence an
+admissible $\bw$ in \eqr{7.49}.
+
+Also, from $\ip{\grad^{+}\theta^{+}}{\dl\bx^{+}}=\dl\theta^{+}
+=\dl\theta=\ip{\grad\theta}{\dl\bx}=\ip{\grad\theta}{\bQ^{t}\dl\bx^{+}}
+=\ip{\bQ\grad\theta}{\dl\bx^{+}}$, valid for every $\dl\bx^{+}$ because
+$\theta$ is an absolute scalar by \eqr{7.37}$_{5}$ and hence has the same
+increment for both observers, Lemma~\ref{lem:cvec} gives
+$\grad^{+}\theta^{+}=\bQ(\grad\theta)$, and therefore
+\begin{equation}
+\begin{aligned}
+   \grad^{+}\theta^{+}&=\bQ(\grad\theta),
+   \qquad
+   \ip{\bq^{+}}{\grad^{+}\theta^{+}}\\
+   &=\ip{\bQ\bq}{\bQ\grad\theta}
+   =\ip\bq{\bQ^{t}\bQ\grad\theta}=\ip\bq{\grad\theta}.
+\end{aligned}
+   \tag{7.55}\label{eq:7.55}
+\end{equation}
+
+The transformation formula \eqr{7.8} for the material velocity is not of
+the form \eqr{7.46}. Nevertheless
+\begin{equation}
+   \dvg^{+}\bv^{+}=\dvg\bv .
+   \tag{7.56}\label{eq:7.56}
+\end{equation}
+This follows from \eqr{7.33}, i.e.
+\begin{equation}
+   \dvg^{+}\bv^{+}=\tr\bL^{+}=\tr\big(\bQ\bL\bQ^{t}+\bOm\big)
+   =\tr\big(\bQ\bL\bQ^{t}\big)=\tr\big(\bQ^{t}\bQ\bL\big)
+   =\tr\bL=\dvg\bv ,
+   \tag{7.57}\label{eq:7.57}
+\end{equation}
+the third equality because $\tr\bOm=0$: a skew tensor has
+$\Omega_{\alpha\alpha}=-\Omega_{\alpha\alpha}$ for each $\alpha$, with no
+sum, so every diagonal component vanishes.
+
+Further, the symmetry of $\bT$, and hence that of $\bQ\bT\bQ^{t}$, yields
+\begin{equation}
+\begin{aligned}
+   \bT^{+}\cdot\bL^{+}
+   &=\bQ\bT\bQ^{t}\cdot\big(\bQ\bL\bQ^{t}+\bOm\big)
+    =\bQ\bT\bQ^{t}\cdot\bQ\bL\bQ^{t}\\
+   &=\tr\big[\bQ\bT\bQ^{t}\big(\bQ\bL^{t}\bQ^{t}\big)\big]
+    =\tr\big(\bQ\bT\bL^{t}\bQ^{t}\big)\\
+   &=\tr\big(\bQ^{t}\bQ\bT\bL^{t}\big)=\tr\big(\bT\bL^{t}\big)
+    =\bT\cdot\bL .
+\end{aligned}
+   \tag{7.58}\label{eq:7.58}
+\end{equation}
+The second equality dropped $\bQ\bT\bQ^{t}\cdot\bOm$, which vanishes by
+Lemma~\ref{lem:symskw} because $\bQ\bT\bQ^{t}$ is symmetric,
+$(\bQ\bT\bQ^{t})^{t}=\bQ\bT^{t}\bQ^{t}=\bQ\bT\bQ^{t}$, and $\bOm$ is
+skew. The third used Definition~\ref{def:tip},
+$\bA\cdot\bB=\tr(\bA\bB^{t})$, with
+$(\bQ\bL\bQ^{t})^{t}=\bQ\bL^{t}\bQ^{t}$; the fourth cancelled
+$\bQ^{t}\bQ=\I$ in the middle; the fifth is the cyclic property once
+more.
+
+\begin{remark}[the two invariant scalars, and what they teach about
+Definition~\ref{def:ch7obj}]\label{rem:ch7twoscalars}
+Equations \eqr{7.56} and \eqr{7.58} are the counterexamples promised in
+Remark~\ref{rem:ch7objinv}, and they are worth pausing over because they
+are the sharpest available warning against reasoning from ingredients.
+
+In \eqr{7.56} both sides are built from a field, $\bv$, that is not
+objective: \eqr{7.8} carries two extra terms. The extra terms survive
+differentiation, since $\bL^{+}$ carries $\bOm$; they are annihilated
+only at the very last step, by the trace. So a non-objective field can
+have a perfectly invariant scalar buried inside it, and no inspection of
+the field alone would reveal it.
+
+In \eqr{7.58} the ingredients are mixed: $\bT$ is objective, $\bL$ is
+not. What kills the extra term is not a property of $\bL$ at all but the
+symmetry of $\bT$, which is itself a balance law, \eqr{7.53}$_{4}$. Had
+the material admitted couple stresses, so that $\bT$ were not symmetric,
+the stress power would not have been invariant and the energy balance
+\eqr{7.59}$_{2}$ would have failed to have the same form for both
+observers. The invariance of the stress power is therefore not a
+kinematic fact but a consequence of the balance of rotational momentum.
+That is worth remembering, because Chapters 8 and 9 use
+$\bT\cdot\bL=\bT\cdot\bD$ constantly, and the deletion of $\bW$ there is
+the same deletion as here.
+\end{remark}
+
+With these results and \eqr{7.37}, together with the invariance of the
+Helmholtz free energy, cf. \eqr{6.186}, and of the material derivative,
+we conclude that the balances of mass and energy, and the
+Clausius--Duhem inequality, are the same in all frames:
+\begin{equation}
+\begin{aligned}
+   &\dot\rho^{+}+\rho^{+}\dvg^{+}\bv^{+}=0,\\
+   &\rho^{+}\dot\eps^{+}+\dvg^{+}\bq^{+}-\bT^{+}\cdot\bL^{+}
+     =\rho^{+}r^{+},\\
+   &\quad\text{and}\quad
+   -\rho^{+}\big(\dot\psi^{+}+\eta^{+}\dot\theta^{+}\big)
+   +\bT^{+}\cdot\bL^{+}
+   -(\theta^{+})^{-1}\ip{\bq^{+}}{\grad^{+}\theta^{+}}\geq0 ,
+\end{aligned}
+   \tag{7.59}\label{eq:7.59}
+\end{equation}
+and, of course, \eqr{7.40} and \eqr{7.53}$_{4}$ ensure that
+\begin{equation}
+   (\bT^{+})^{t}=\bT^{+}.
+   \tag{7.60}\label{eq:7.60}
+\end{equation}
+The verification is term by term, and it is entirely a matter of
+substituting the results already obtained. In \eqr{7.59}$_{1}$,
+$\rho^{+}=\rho$ by \eqr{7.37}$_{1}$ and $\dvg^{+}\bv^{+}=\dvg\bv$ by
+\eqr{7.56}; the material derivative is unchanged because it follows the
+material point $p$ and, by \eqr{7.1}, $\partial/\partial t^{+}
+=\partial/\partial t$, so $\dot\rho^{+}=\dot\rho$. Every term of
+\eqr{7.59}$_{1}$ therefore equals the corresponding term of
+\eqr{7.53}$_{1}$, and the equation holds because that one does. In
+\eqr{7.59}$_{2}$, use \eqr{7.37}$_{1,2,3}$, \eqr{7.54} and \eqr{7.58}. In
+\eqr{7.59}$_{3}$, use \eqr{7.37} again, \eqr{7.58} and \eqr{7.55}$_{2}$.
+And \eqr{7.60} is $(\bQ\bT\bQ^{t})^{t}=\bQ\bT^{t}\bQ^{t}
+=\bQ\bT\bQ^{t}$.
+
+\begin{remark}[why the symmetry of $\bT$ survives a rotating
+observer]\label{rem:ch7symT}
+Equation \eqr{7.60} was obtained by conjugation in one line, and the ease
+of it hides a question worth asking. The symmetry of $\bT$ is not an
+algebraic identity. It is the local form of the balance of moment of
+momentum, derived in Chapter 6 for an inertial observer. In the frame of
+$O^{+}$ that balance picks up the moment of the inertial force, which
+does not vanish and which varies from place to place. Why is the
+conclusion unchanged?
+
+\emph{Because a body force never enters the symmetry argument.} Taking
+moments about a point of $\mathbb{E}^{3+}$ adds the term
+$\int\rho^{+}\,\bs^{+}\times\vek{i}^{+}\,\dl v$, a volume integral of
+exactly the same form as the moment
+$\int\rho^{+}\,\bs^{+}\times\bb^{+}\,\dl v$ of the true body force. In
+the localisation of Chapter 6 the volume terms are one order higher in
+the diameter of the shrinking region than the surface terms, and it is
+the surface terms alone that survive to give $\eps_{ijk}T_{jk}=0$. Adding
+$\vek{i}^{+}$ to $\bb^{+}$ therefore changes the balance of moment of
+momentum in precisely the way that changes nothing in its local
+consequence.
+
+\emph{The observation generalises, and explains why \eqr{7.62} is the
+only casualty.} By \eqr{7.63} a change of observer contributes to the
+mechanics through a term of body-force type and through nothing else. Any
+law whose local content is insensitive to the body force is therefore
+untouched: the balance of moment of momentum for the reason just given,
+and the mass balance and the Clausius--Duhem inequality because no force
+appears in them at all. Only the balance of linear momentum reads the
+body force pointwise, and only it changes.
+
+\emph{The energy balance is the interesting case.} No body force appears
+in \eqr{7.53}$_{2}$, but one does appear in the statement of Chapter 6
+from which it came, through the working $\int\rho\ip\bb\bv\,\dl v$; it
+cancels against the same term in the kinetic energy theorem, and
+\eqr{7.59}$_{2}$ is what is left after that cancellation. Adding
+$\vek{i}^{+}$ to $\bb^{+}$ adds
+$\int\rho^{+}\ip{\vek{i}^{+}}{\bv^{+}}\,\dl v$ to both sides of the
+cancellation, so it survives in neither. An inertial force does work on a
+body in a rotating frame, and none of that work reaches the internal
+energy.
+
+Exactly one of the four terms of \eqr{7.63} does no work at all, and it
+is worth saying which. The Coriolis term is orthogonal to $\bv^{+}$
+whenever $\dot\bc=\bze$, since $\ip{\bOm\bv^{+}}{\bv^{+}}=0$ for a skew
+$\bOm$ by Lemma~\ref{lem:symskw}: a Coriolis force deflects a particle
+and never speeds it up or slows it down. The Euler term is orthogonal to
+$\bs^{+}$, by the same lemma applied to the skew $\dot\bOm$, which is
+what makes it azimuthal; but it is not orthogonal to $\bv^{+}$, and it
+does work. The other two do work as well, and they are the two that
+possess potentials:
+\[
+   -\bOm^{2}\bs^{+}=\grad^{+}\psi ,\quad
+   \psi=\tfrac12\big|\bOm\bs^{+}\big|^{2},
+   \qquad
+   \ddot\bc=\grad^{+}\ip{\ddot\bc}{\bx^{+}},
+\]
+the first because $\ip{\bOm^{2}\bs}{\bs}=-|\bOm\bs|^{2}$ and $\bOm^{2}$
+is symmetric. With $\bOm\bs=\bom\times\bs$ the potential $\psi$ is the
+familiar $\tfrac12|\bom|^{2}r^{2}$, $r$ being the distance from the axis.
+That is why a steadily rotating frame admits an effective potential
+energy, and why the Coriolis force cannot be absorbed into one.
+\end{remark}
+
+The situation for the linear momentum balance is different. To
+investigate this we combine \eqr{7.38}$_{3}$ and \eqr{7.53}$_{3}$,
+obtaining
+\begin{equation}
+\begin{aligned}
+   \rho^{+}\bb^{+}&=\rho^{+}\bQ\bb=\rho\bQ\bb
+    =\bQ\big(\rho\ba-\dvg\bT\big)\\
+   &=\rho\bQ\ba-\bQ(\dvg\bT)=\rho^{+}\bQ\ba-\dvg^{+}\bT^{+},
+\end{aligned}
+   \tag{7.61}\label{eq:7.61}
+\end{equation}
+the last step by \eqr{7.52} and \eqr{7.37}$_{1}$ read backwards.
+
+Every term of \eqr{7.53}$_{3}$ has now been carried into the frame of
+$O^{+}$ intact except one. The divergence of the stress went over by
+\eqr{7.52}, the body force by \eqr{7.38}$_{3}$, and the density is
+invariant by \eqr{7.37}$_{1}$; each of the three appears in the starred
+frame as the image under $\bQ$ of what $O$ wrote, which is what
+objectivity means. The acceleration is the single exception, and
+\eqr{7.9} says by exactly how much it fails. Give that failure a name:
+\begin{equation*}
+   \vek{i}^{+}:=\ba^{+}-\bQ\ba ,
+   \qquad\text{equivalently}\qquad
+   \bQ\ba=\ba^{+}-\vek{i}^{+}.
+\end{equation*}
+This introduces nothing. The quantity $\vek{i}^{+}$ is the right-hand
+side of \eqr{7.9}, already computed in Problem 1 out of $\bQ(t)$ and
+$\bc(t)$ alone; the definition merely gives it a symbol so that it can be
+moved about. Substituting it into \eqr{7.61} we arrive at
+\[
+   \rho^{+}\bb^{+}=\rho^{+}\big(\ba^{+}-\vek{i}^{+}\big)
+   -\dvg^{+}\bT^{+},
+\]
+i.e., moving $\dvg^{+}\bT^{+}$ and $\rho^{+}\vek{i}^{+}$ to the left, the
+linear momentum balance
+\begin{equation}
+   \dvg^{+}\bT^{+}+\rho^{+}\big(\bb^{+}+\vek{i}^{+}\big)=\rho^{+}\ba^{+},
+   \tag{7.62}\label{eq:7.62}
+\end{equation}
+where
+\begin{equation}
+   \vek{i}^{+}=\ddot\bc+2\bOm\big(\bv^{+}-\dot\bc\big)
+   +\big(\dot\bOm-\bOm^{2}\big)\big(\bx^{+}-\bc\big)
+   \tag{7.63}\label{eq:7.63}
+\end{equation}
+is the contribution to the net body force arising from the spin and
+translation of the frame of $O^{+}$. This is typically referred to as the
+\emph{inertial force}.
+
+Three features of the symbol are worth fixing before it is used. It is an
+\emph{acceleration}, of the same dimensions as $\ba^{+}$, which is why it
+may stand beside $\bb^{+}$ inside the bracket of \eqr{7.62} and why that
+bracket must be multiplied by $\rho^{+}$ before it becomes a force per
+unit volume. Its sign is not a convention but is forced by the
+substitution: $\bQ\ba$ was replaced by $\ba^{+}-\vek{i}^{+}$, and
+carrying the resulting $-\rho^{+}\vek{i}^{+}$ from the right-hand side to
+the left turned it into $+\rho^{+}\vek{i}^{+}$. And it has no star-free
+counterpart. For $O$ himself the change of observer is the identity,
+$\bQ=\I$ and $\bc=\bze$, so that $\bOm=\Ob$ and \eqr{7.63} returns
+$\vek{i}=\bze$; \eqr{7.62} then collapses to \eqr{7.53}$_{3}$. The symbol
+exists only because a second observer was introduced, and it measures
+that observer and nothing else.
+
+Notice, finally, what \eqr{7.63} does \emph{not} contain. There is no
+$\bT$, no $\bb$, no material constant, nothing about what is being done
+to the body: only $\bc$ and $\bOm$, which describe the relation between
+the two frames, and $\bx^{+}$ and $\bv^{+}$, which say where the particle
+is and how fast it is moving as $O^{+}$ records it. That is precisely the
+property that licenses moving $\vek{i}^{+}$ to the force side of the
+equation and treating it as though it were a body force, in the manner of
+Remark~\ref{rem:ch7inertial}: $O^{+}$ can evaluate it once, as a field
+over his whole frame, before he knows anything whatever about the body
+that is going to occupy it. Figure~\ref{fig:ch7fourterms} is that field,
+term by term.
+
+However, if the frame of $O^{+}$ is related to
+that of $O$ by a Galilean transformation, then $\bOm=\Ob$, $\dot\bOm=\Ob$
+and $\ddot\bc=\bze$, so every term of \eqr{7.63} vanishes,
+$\vek{i}^{+}=\bze$, and the balance of linear momentum is identical in
+both frames, i.e.
+\begin{equation}
+   \dvg^{+}\bT^{+}+\rho^{+}\bb^{+}=\rho^{+}\ba^{+}.
+   \tag{7.64}\label{eq:7.64}
+\end{equation}
+Thus, if an inertial frame exists, cf. Euler's postulates \eqr{6.34} and
+\eqr{6.35}, then there are infinitely many, simply because there are
+infinitely many Galilean transformations.
+
+\begin{remark}[what an inertial force is, and what it is
+not]\label{rem:ch7inertial}
+Three things about \eqr{7.62} repay attention.
+
+\emph{It is not a repair.} Nothing was added to the physics. Equation
+\eqr{7.62} is \eqr{7.53}$_{3}$ rewritten, and every symbol in
+$\vek{i}^{+}$ was computed in Section~\ref{sec:ch7motion} from the
+relative motion of the two observers. The non-inertial observer is not
+doing worse mechanics; he is doing the same mechanics with a longer
+right-hand side, and he can compute the extra term himself once he knows
+$\bQ(t)$ and $\bc(t)$.
+
+\emph{Why it looks like a body force.} In \eqr{7.62} the inertial force
+enters multiplied by $\rho^{+}$, exactly as $\bb^{+}$ does, and that is
+not a notational accident: $\vek{i}^{+}$ is an acceleration, and
+multiplying an acceleration by a density produces a force per unit
+volume. The consequence is that no measurement made inside a small region
+can distinguish a uniform $\ddot\bc$ from a uniform gravitational field,
+since both act on every particle in proportion to its mass. That is the
+observation from which general relativity starts. Within the present
+theory it means only that the split of the right-hand side of \eqr{7.62}
+into $\bb^{+}$ and $\vek{i}^{+}$ is a matter of bookkeeping unless the
+frames are specified.
+
+\emph{Why only this law fails.} Look back at \eqr{7.59}. The mass
+balance contains no acceleration; the energy balance contains $\ba$
+nowhere, only $\dot\eps$ and the stress power; the Clausius--Duhem
+inequality likewise. Linear momentum is the only one of the five in which
+the material acceleration appears, and $\ba$ is the only quantity in the
+whole dictionary of Section~\ref{sec:ch7further} whose transformation law
+carries $\ddot\bc$ and $\dot\bOm$. One non-objective ingredient, one
+non-invariant law. The correspondence is exact, and it is the clearest
+illustration in the book of Remark~\ref{rem:ch7objinv}.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{I}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.2mm]},thick},
+   sm/.style={-{Stealth[length=1.8mm]},semithick}]
+% ================= panel (a): the inertial observer =================
+\begin{scope}
+  \draw[thick,gray!55] (0,0) circle (1.55);
+  \fill (0,0) circle (1.3pt);
+  \node[font=\footnotesize,text=gray!85,anchor=north east] at (-0.05,-0.06)
+     {axis};
+  % straight, uniform path of a free particle
+  \draw[ar,blue!55!black] (-1.85,-0.95) -- (1.95,0.72);
+  \foreach \s in {0,0.25,0.5,0.75,1}
+     {\fill[blue!55!black]
+        ($(-1.85,-0.95)!\s!(1.95,0.72)$) circle (1.4pt);}
+  \node[font=\small,text=blue!55!black,anchor=south east] at (1.95,0.72)
+     {$\bv$ constant};
+  % the turntable's own rotation
+  \draw[sm,gray!70] (1.10,-1.30) arc (-50:-14:1.70);
+  \node[font=\footnotesize,text=gray!85,anchor=north west] at (1.12,-1.32)
+     {$\bom_{p}$};
+  \node[font=\small,anchor=north,align=center] at (0,-2.15)
+     {(a) observer $O$, inertial\\[0.6mm]
+      $\bb=\bze$ and $\ba=\bze$: no force, no bending};
+\end{scope}
+% ================= panel (b): the rotating observer =================
+\begin{scope}[xshift=7.0cm]
+  \draw[thick,gray!55] (0,0) circle (1.55);
+  \fill (0,0) circle (1.3pt);
+  % the same journey, recorded in the rotating frame: a curved track
+  \draw[ar,red!65!black] plot[smooth,tension=0.85] coordinates
+     {(-1.85,-0.95) (-0.95,-0.30) (-0.10,0.10) (0.80,0.10) (1.60,-0.35)};
+  \foreach \p in {(-1.85,-0.95),(-0.95,-0.30),(-0.10,0.10),(0.80,0.10),
+                  (1.60,-0.35)}
+     {\fill[red!65!black] \p circle (1.4pt);}
+  % Coriolis and centrifugal at one instant
+  \coordinate (P) at (-0.10,0.10);
+  \draw[sm,blue!55!black] (P) -- ++(0.86,0.10)
+     node[right=0pt,font=\small,text=blue!55!black] {$\bv^{+}$};
+  \draw[sm,red!65!black] (P) -- ++(-0.10,-0.80)
+     node[below=0pt,font=\small,text=red!65!black]
+     {$2\bOm\bv^{+}$};
+  \draw[sm,gray!75] (P) -- ++(-0.62,0.34)
+     node[above left=-3pt,font=\small,text=gray!85]
+     {$-\bOm^{2}\bx^{+}$};
+  \node[font=\small,anchor=north,align=center] at (0,-2.15)
+     {(b) observer $O^{+}$, spinning with the disc\\[0.6mm]
+      $\bb^{+}=\bze$ but $\ba^{+}\neq\bze$: the deficit is
+      $\vek{i}^{+}$};
+\end{scope}
+\end{tikzpicture}
+\caption{Why a rotating observer manufactures forces. A free particle
+crosses a spinning disc. In (a) the inertial observer records a straight
+path at constant speed, consistent with \eqr{7.64} and no force at all.
+In (b) the observer turning with the disc records the same journey as a
+curved track, so $\ba^{+}\neq\bze$; since the tractions and the true body
+force are unchanged, \eqr{7.64} cannot hold in his frame. Equation
+\eqr{7.62} restores the balance by crediting him with the inertial force
+$\vek{i}^{+}$ of \eqr{7.63}, whose Coriolis part $2\bOm\bv^{+}$ bends the
+track and whose centrifugal part $-\bOm^{2}\bx^{+}$ pushes outward.
+Nothing touches the particle in either panel; the difference is entirely
+in $\dot\bQ$.}
+\label{fig:ch7apparent}
+\end{figure}
+
+It is possible to show that
+\begin{equation}
+   \ba^{++}-\vek{i}^{++}=\bQ^{+}(t^{+})\big(\ba^{+}-\vek{i}^{+}\big)
+   \tag{7.65}\label{eq:7.65}
+\end{equation}
+under a further transformation
+\begin{equation}
+   \bx^{++}=\bQ^{+}(t^{+})\bx^{+}+\bc^{+}(t^{+}),
+   \qquad
+   t^{++}=t^{+}+a^{+}
+   \tag{7.66}\label{eq:7.66}
+\end{equation}
+from the frame of $O^{+}$ to that of another observer $O^{++}$, where
+$\vek{i}^{++}$ is the inertial force in the latter frame, and hence that
+\begin{equation}
+   \dvg^{++}\bT^{++}+\rho^{++}\big(\bb^{++}+\vek{i}^{++}\big)
+   =\rho^{++}\ba^{++}.
+   \tag{7.67}\label{eq:7.67}
+\end{equation}
+Thus the linear momentum balance, with the inertial forces included, is
+valid in all frames. Moreover, the jump conditions derived in Chapter 6
+are identical in all frames.
+
+The proof of \eqr{7.65} is two observations and one line, and it is worth
+giving, because it is what makes the theory consistent rather than merely
+serviceable.
+
+\emph{First, changes of observer compose.} Substituting \eqr{7.3} into
+\eqr{7.66},
+\[
+   \bx^{++}=\bQ^{+}\big(\bQ\bx+\bc\big)+\bc^{+}
+   =\big(\bQ^{+}\bQ\big)\bx+\big(\bQ^{+}\bc+\bc^{+}\big)
+   =:\bQ^{++}\bx+\bc^{++},
+\]
+and $\bQ^{++}=\bQ^{+}\bQ$ is orthogonal as a product of orthogonal
+tensors, mapping $\Et$ to $\mathbb{E}^{3++}$. Likewise
+$t^{++}=t+(a+a^{+})$, again of the form \eqr{7.1}. So the passage from
+$O$ directly to $O^{++}$ is itself a change of observer of exactly the
+kind studied in Section~\ref{sec:ch7obs}, and everything proved for a
+single change applies to it.
+
+\emph{Second, \eqr{7.9} is the definition of the inertial force.}
+Comparing \eqr{7.9} with \eqr{7.63}, the content of the two together is
+\[
+   \vek{i}^{+}=\ba^{+}-\bQ\ba ,
+\]
+the acceleration deficit of the frame of $O^{+}$ measured against the
+inertial frame of $O$. Applying the same statement to the composite
+change, with $\bQ^{++}$ in place of $\bQ$,
+$\vek{i}^{++}=\ba^{++}-\bQ^{++}\ba$. Therefore
+\[
+   \ba^{++}-\vek{i}^{++}=\bQ^{++}\ba=\bQ^{+}\bQ\ba
+   =\bQ^{+}\big(\ba^{+}-\vek{i}^{+}\big),
+\]
+which is \eqr{7.65}. And \eqr{7.67} is \eqr{7.62} written for the
+composite change of observer, which is legitimate precisely because the
+first observation showed the composite to be a change of observer.
+
+\begin{remark}[spins add]\label{rem:ch7addspin}
+The composition rule has a corollary worth recording, since it is the
+statement that the $\bOm$ of \eqr{7.8} behaves like an angular velocity.
+Differentiating $\bQ^{++}=\bQ^{+}\bQ$, all time derivatives being with
+respect to the common time by \eqr{7.1} and \eqr{7.66}$_{2}$,
+\[
+   \bOm^{++}=\dot{\bQ^{++}}\big(\bQ^{++}\big)^{t}
+   =\big(\dot\bQ^{+}\bQ+\bQ^{+}\dot\bQ\big)\bQ^{t}(\bQ^{+})^{t}
+   =\dot\bQ^{+}(\bQ^{+})^{t}
+     +\bQ^{+}\big(\dot\bQ\bQ^{t}\big)(\bQ^{+})^{t},
+\]
+that is, $\bOm^{++}=\bOm^{+}_{\text{rel}}+\bQ^{+}\bOm(\bQ^{+})^{t}$,
+where $\bOm^{+}_{\text{rel}}=\dot\bQ^{+}(\bQ^{+})^{t}$ is the spin of the
+second change taken by itself. The spin of the composite is the spin of
+the second plus the spin of the first, the latter carried over by
+$\bQ^{+}$ into the final frame. Written with axial vectors, by
+Proposition~\ref{prop:axial}, this reads
+$\bom^{++}=\bom^{+}_{\text{rel}}+\bQ^{+}\bom$: angular velocities add.
+Nothing in this chapter would work if they did not, since \eqr{7.65}
+would then depend on the route taken from $O$ to $O^{++}$.
+\end{remark}
+
+\begin{remark}[what the chapter licenses, and what it
+forbids]\label{rem:ch7mfi}
+It is worth setting down in one place the principle that the whole
+chapter exists to make precise, because Chapter 8 will invoke it on every
+page and will not repeat the derivation.
+
+\emph{The principle.} A constitutive equation is a claim about a
+material, and a material has no access to the identity of the observer
+looking at it. A constitutive equation must therefore survive the
+substitution of \eqr{7.3} for arbitrary $\bQ(t)$ and $\bc(t)$: if it
+holds between the quantities recorded by $O$, then the same equation with
+every symbol starred must hold between the quantities recorded by
+$O^{+}$. This is the \emph{principle of material frame indifference}. It
+is a restriction on the constitutive equation and never on the motion:
+the motion is whatever it is, and it is the form of the law that is being
+constrained.
+
+\emph{Why it is not vacuous.} The dictionary of
+Section~\ref{sec:ch7further} is the list of what each variable does under
+that substitution, and its entries are not alike. A law written in
+variables drawn from the first four groups satisfies the principle
+automatically, because the $\bQ$'s cancel in pairs or never appear at
+all. A law containing any entry from the last group does not, because
+$\dot\bQ$ enters with nothing to cancel against and $\dot\bQ$ is
+arbitrary. The principle is therefore a genuine sieve, and the dictionary
+is that sieve written out.
+
+\emph{The three prohibitions established here.} Each is a mistake that
+has been made.
+\begin{itemize}\itemsep2pt
+\item No constitutive law may contain $\bW$, nor $\bL$ otherwise than
+      through $\bD$. Remark~\ref{rem:ch7DW}: the observer manufactures
+      spin out of nothing, so such a law would predict stress in a body
+      lying still on a table.
+\item No constitutive law may contain $\bv$ or $\ba$. By \eqr{7.8} and
+      \eqr{7.9} the two observers disagree about both even when the body
+      is doing nothing whatever.
+\item No constitutive law may contain $\bF$ except through $\bC$, or
+      equivalently none may see $\bR$. By \eqr{7.29}$_{3}$ the rotation
+      is exactly the part of $\bF$ that a change of observer alters.
+\end{itemize}
+The corresponding licences are the first four groups of the dictionary,
+and the safest of them is the second: a law relating $\bS$ to $\bC$
+involves nothing that sees $\bQ$ at all, which is why constitutive theory
+is written there.
+
+\emph{One thing the principle does not govern.} It says nothing about
+the balance laws, which are not constitutive statements.
+Section~\ref{sec:ch7balance} showed that four of the five are form
+invariant on their own and that the fifth is repaired by \eqr{7.62}. A
+frequent confusion is to read the failure of \eqr{7.64} in a rotating
+frame as a failure of frame indifference. It is not. Frame indifference
+is a demand made on constitutive equations; \eqr{7.62} is a theorem about
+a balance law; and the theorem tells the engineer in the rotating frame
+which extra terms to add, not that he must stop.
+
+\emph{How strong the principle is.} What has been established in this
+chapter is that the theory is consistent with the principle and what the
+principle sieves out. Whether the principle is exactly true is a separate
+question, and it has been argued over since M\"uller and Truesdell: for a
+gas whose molecular mean free path is not negligible against the scale of
+the flow, kinetic theory does predict a weak dependence of the
+constitutive response on $\bOm$, and the principle is then an excellent
+approximation rather than an axiom. Nothing in this book is at that
+scale, and the principle is used at full strength throughout; but it is
+an assumption about materials, not a theorem about geometry, and it is
+worth knowing which of the two one is holding. Compare
+Remark~\ref{rem:ch7tractionass}, where the same point was made about
+\eqr{7.38}$_{1}$: the geometry of Section~\ref{sec:ch7obs} is proved, and
+everything in this chapter that concerns matter rather than space is
+assumed.
+\end{remark}
+
+%=======================================================================
+\setcounter{problemenv}{0}
+\section{Problems}\label{sec:problems:c7}
+%=======================================================================
+
+%-----------------------------------------------------------------------
+\begin{problem}[The transformation of the acceleration]
+Derive \eqr{7.9}.
+\end{problem}
+
+\begin{solution}
+The acceleration in the frame of $O^{+}$ is
+$\ba^{+}=\partial\bv^{+}/\partial t^{+}$ at fixed $p$, by
+Definition~\ref{def:va}, and $\partial/\partial t^{+}=\partial/\partial
+t$ by the argument given before \eqr{7.7}. So the whole problem is to
+differentiate \eqr{7.7} once more and then to eliminate the unstarred
+quantities $\bx$ and $\bv$ in favour of the starred ones. Neither
+operation is difficult; what makes the result look complicated is that
+both $\bx$ and $\bv$ have to be eliminated, and the second elimination
+feeds on the first. The elimination is therefore split into two steps
+below, giving four in all.
+
+\textbf{Step 1: differentiate.} From \eqr{7.7},
+$\bv^{+}=\dot\bQ\bx+\bQ\bv+\dot\bc$. Differentiate at fixed $p$, using
+the product rule of Problem 1(a) of Chapter 4 on the first two terms and
+remembering that $\dot\bx=\bv$ and $\dot\bv=\ba$ because $\bx$ and $\bv$
+are being followed along the motion of the material point:
+\[
+   \ba^{+}=\ddot\bQ\bx+\dot\bQ\bv+\dot\bQ\bv+\bQ\ba+\ddot\bc
+   =\ddot\bQ\bx+2\dot\bQ\bv+\bQ\ba+\ddot\bc .
+\]
+The two middle terms are equal and are the origin of the factor $2$ in
+the Coriolis term: one copy comes from differentiating $\dot\bQ\bx$ and
+the other from differentiating $\bQ\bv$. Rearranged,
+\begin{equation*}
+   \ba^{+}-\bQ\ba=\ddot\bc+2\dot\bQ\bv+\ddot\bQ\bx .
+\end{equation*}
+Everything now depends on rewriting the last two terms.
+
+\textbf{Step 2: eliminate $\bx$.} From \eqr{7.3},
+$\bQ\bx=\bx^{+}-\bc$. Also, from $\bOm=\dot\bQ\bQ^{t}$ and
+$\bQ^{t}\bQ=\I$,
+\[
+   \dot\bQ=\dot\bQ\,\I=\dot\bQ\bQ^{t}\bQ=\bOm\bQ ,
+\]
+which is the identity that will be used three times. Differentiating it,
+\[
+   \ddot\bQ=\big(\bOm\bQ\big)^{\textstyle\cdot}
+   =\dot\bOm\bQ+\bOm\dot\bQ=\dot\bOm\bQ+\bOm\big(\bOm\bQ\big)
+   =\big(\dot\bOm+\bOm^{2}\big)\bQ .
+\]
+Hence
+\[
+   \ddot\bQ\bx=\big(\dot\bOm+\bOm^{2}\big)\bQ\bx
+   =\big(\dot\bOm+\bOm^{2}\big)\big(\bx^{+}-\bc\big).
+\]
+
+\textbf{Step 3: eliminate $\bv$.} Solve \eqr{7.7} for $\bQ\bv$:
+\[
+   \bQ\bv=\bv^{+}-\dot\bQ\bx-\dot\bc
+   =\bv^{+}-\dot\bc-\bOm\big(\bx^{+}-\bc\big),
+\]
+using the result of Step 2 for $\dot\bQ\bx=\bOm\bQ\bx
+=\bOm(\bx^{+}-\bc)$. This is \eqr{7.8} rearranged, as it must be.
+Therefore
+\[
+\begin{aligned}
+   2\dot\bQ\bv&=2\bOm\bQ\bv
+    =2\bOm\Big[\bv^{+}-\dot\bc-\bOm\big(\bx^{+}-\bc\big)\Big]\\
+   &=2\bOm\big(\bv^{+}-\dot\bc\big)-2\bOm^{2}\big(\bx^{+}-\bc\big).
+\end{aligned}
+\]
+
+\textbf{Step 4: collect.} Substituting the results of Steps 2 and 3 into
+the display at the end of Step 1,
+\[
+\begin{aligned}
+   \ba^{+}-\bQ\ba&=\ddot\bc
+     +2\bOm\big(\bv^{+}-\dot\bc\big)-2\bOm^{2}\big(\bx^{+}-\bc\big)
+     +\big(\dot\bOm+\bOm^{2}\big)\big(\bx^{+}-\bc\big)\\
+   &=\ddot\bc+2\bOm\big(\bv^{+}-\dot\bc\big)
+     +\big(-2\bOm^{2}+\dot\bOm+\bOm^{2}\big)\big(\bx^{+}-\bc\big),
+\end{aligned}
+\]
+the two brackets in $\bx^{+}-\bc$ having been collected by linearity.
+Since $-2\bOm^{2}+\bOm^{2}=-\bOm^{2}$,
+\[
+   \boxed{\ \ba^{+}-\bQ\ba=\ddot\bc+2\bOm\big(\bv^{+}-\dot\bc\big)
+   +\big(\dot\bOm-\bOm^{2}\big)\big(\bx^{+}-\bc\big),\ }
+\]
+which is \eqr{7.9}.
+
+\emph{Two checks.} First, put $\dot\bQ=\Ob$ and $\ddot\bc=\bze$. Then
+$\bOm=\Ob$, $\dot\bOm=\Ob$, and every term on the right vanishes, leaving
+$\ba^{+}=\bQ\ba$: this is \eqr{7.10}$_{2}$, so the Galilean case is
+recovered. Second, put $\bv^{+}=\dot\bc$ and $\bx^{+}=\bc$, meaning a
+particle sitting at the origin of $O^{+}$'s frame and moving with it.
+Then only $\ddot\bc$ survives, which is right: such a particle has, for
+$O^{+}$, no acceleration at all, and the whole discrepancy is the
+acceleration of the frame itself.
+
+\emph{Where the minus sign comes from.} The centrifugal term appears as
+$-\bOm^{2}$ and not $+\bOm^{2}$ because the two contributions to
+$\bOm^{2}$ have opposite signs and different origins: $+\bOm^{2}$ comes
+from $\ddot\bQ$, the turning of the frame's turning, while $-2\bOm^{2}$
+comes from the Coriolis term acting on the part of $\bv$ that is itself
+due to the frame's rotation. Their sum is $-\bOm^{2}$. With
+$\bOm\bs=\bom\times\bs$ this is $-\bom\times(\bom\times\bs)$, which by
+the expansion of the triple cross product is
+$|\bom|^{2}\bs-\ip\bom\bs\,\bom$, the component of $|\bom|^{2}\bs$
+perpendicular to the axis. It points away from the axis, as centrifugal
+effects do.
+
+The result is what \eqr{7.62} and \eqr{7.63} are built on: the entire
+difference between the two observers' equations of motion is the boxed
+expression multiplied by $\rho$.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[The rate of the shifter in a spinning frame]
+Show that $(\shift^{+})^{\textstyle\cdot}=\bOm\shift^{+}$, where
+$\bOm=\dot\bQ\bQ^{t}$.
+\end{problem}
+
+\begin{solution}
+Everything is in \eqr{7.18}, $\shift^{+}=\bQ(t)\shift\bK^{t}$, once it is
+noticed which of the three factors can move.
+
+The shifter $\shift$ of the observer $O$ is fixed, because the frame of
+$O$ is taken to be inertial, as stated after \eqr{7.18}; so
+$\dot\shift=\Ob$ in the sense that $\shift$ is a constant two-point
+tensor. The tensor $\bK$ is fixed by \eqr{7.15}, every factor in it
+having been evaluated at the single instant $t_{0}$; so $\dot\bK=\hOb$
+and hence $\dot{\bK^{t}}=(\dot\bK)^{t}=\hOb$ by Problem 1(b) of
+Chapter 4. Only $\bQ(t)$ moves. Differentiating \eqr{7.18} with the
+product rule, two of the three terms therefore vanish:
+\[
+   \big(\shift^{+}\big)^{\textstyle\cdot}
+   =\dot\bQ\shift\bK^{t}+\bQ\dot\shift\bK^{t}
+     +\bQ\shift\dot{\bK^{t}}
+   =\dot\bQ\shift\bK^{t}.
+\]
+Now insert $\I=\bQ^{t}\bQ$, which is legitimate by
+Proposition~\ref{prop:orth}, and regroup so that \eqr{7.18} reappears on
+the right:
+\[
+   \dot\bQ\shift\bK^{t}=\dot\bQ\,\I\,\shift\bK^{t}
+   =\big(\dot\bQ\bQ^{t}\big)\big(\bQ\shift\bK^{t}\big)
+   =\bOm\shift^{+},
+\]
+using \eqr{7.8}$_{2}$ for the first bracket and \eqr{7.18} for the
+second. Hence
+\[
+   \boxed{\ \big(\shift^{+}\big)^{\textstyle\cdot}=\bOm\shift^{+},
+   \qquad \bOm=\dot\bQ\bQ^{t}.\ }
+\]
+
+\emph{What the formula says.} Compare it with \eqr{4.3},
+$\dot\bF=\bL\bF$. The two are the same statement with $\shift^{+}$ in
+place of $\bF$ and $\bOm$ in place of $\bL$. That is exactly right, and
+it is Remark~\ref{rem:ch7omega} in another guise: the frame of $O^{+}$
+undergoes a rigid displacement relative to that of $O$, whose velocity
+gradient is $\bOm$ by \eqr{4.29}, and $\shift^{+}$ is the two-point
+tensor that gets carried along by it. The shifter of a spinning observer
+turns with him, at the rate $\bOm$.
+
+\emph{The consistency check that matters.} The relation
+$\bH^{+}=\bF^{+}-\shift^{+}$ of \eqr{7.25}$_{2}$ would be worthless if
+its two terms evolved by different rules. They do not:
+$\dot\bF^{+}=\bL^{+}\bF^{+}$ by \eqr{4.3}, and for a frame at rest
+relative to the material, so that $\bL^{+}$ reduces to the frame's own
+contribution $\bOm$ by \eqr{7.33}, the two rates coincide. In particular,
+if the body is at rest for $O$ then $\bF$ is constant, and
+\[
+   \dot\bF^{+}=\big(\bQ\bF\bK^{t}\big)^{\textstyle\cdot}
+   =\dot\bQ\bF\bK^{t}=\bOm\bF^{+},
+\]
+by the same insertion of $\I=\bQ^{t}\bQ$, so
+$\dot\bH^{+}=\bOm(\bF^{+}-\shift^{+})=\bOm\bH^{+}$ and the displacement
+gradient simply rides round with the observer. Had the shifter been
+replaced by $\hI$, its counterpart $\hI^{+}=\bK\hI\bK^{t}$ of \eqr{7.26}
+would have satisfied $(\hI^{+})^{\textstyle\cdot}=\hOb^{+}$ instead: it
+would have stood still while $\bF^{+}$ turned, and the difference
+$\bF^{+}-\hI^{+}$ would have changed in time even though nothing whatever
+was happening to the body. That is the dynamic version of the objection
+raised after \eqr{7.26}, and it is the sharper of the two.
+
+\emph{When it vanishes.} If $O^{+}$ is related to $O$ by a Galilean
+transformation then $\dot\bQ=\Ob$, so $\bOm=\Ob$ and
+$(\shift^{+})^{\textstyle\cdot}=\Ob$: the shifter is fixed in every
+inertial frame, which is the claim made in
+Remark~\ref{rem:ch7whyshiftass}.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[An observer standing on a spinning planet]
+Observer $O^{+}$ adopts a frame of reference attached to the surface of a
+planet of radius $R$, with origin located at azimuth $\theta$ (degrees
+longitude) and elevation $\varphi$ (degrees latitude). The planet spins
+about its axis, the unit vector $\be_{3}$, at the constant rate $\omega$,
+i.e. $\theta=\omega t+\theta_{0}$ with $\theta_{0}=\theta(0)$. What are
+the equations of motion for this observer?
+\end{problem}
+
+\begin{solution}
+Required: \eqr{7.62} with \eqr{7.63}, i.e. $\bc,\bOm,\dot\bOm$ from
+$\bQ(t),\bc(t)$ of \eqr{7.3}. Geometry: Figures~\ref{fig:ch7planet}
+and~\ref{fig:ch7planet3d}. Data:
+\begin{gather*}
+   \ip{\be_{i}}{\be_{j}}=\dd_{ij},\qquad
+   \be_{1}\times\be_{2}=\be_{3},\qquad \be_{2}\times\be_{3}=\be_{1},\qquad
+   \be_{3}\times\be_{1}=\be_{2},\\
+   \theta=\omega t+\theta_{0},\qquad \dot\theta=\omega,\qquad
+   \dot\varphi=0,\qquad \dot\be_{i}=\bze .
+\end{gather*}
+Equatorial plane (Figure~\ref{fig:ch7planet3d}): unit vector at angle
+$\theta$ from $\be_{1}$, and the same at $\theta+\pi/2$:
+\begin{align*}
+   \bff_{\rho}&=\cos\theta\,\be_{1}+\sin\theta\,\be_{2},\\
+   \bff_{E}&=\cos(\theta+\tfrac{\pi}{2})\,\be_{1}
+            +\sin(\theta+\tfrac{\pi}{2})\,\be_{2}
+           =-\sin\theta\,\be_{1}+\cos\theta\,\be_{2},\\
+   \be_{3}\times\bff_{\rho}
+     &=\cos\theta\,\be_{3}\times\be_{1}+\sin\theta\,\be_{3}\times\be_{2}
+      =\cos\theta\,\be_{2}-\sin\theta\,\be_{1}=\bff_{E},\\
+   |\bff_{\rho}|^{2}&=\cos^{2}\theta+\sin^{2}\theta=1,\qquad
+   |\bff_{E}|^{2}=\sin^{2}\theta+\cos^{2}\theta=1,\\
+   \ip{\bff_{\rho}}{\bff_{E}}
+     &=-\cos\theta\sin\theta+\sin\theta\cos\theta=0,\qquad
+   \ip{\bff_{\rho}}{\be_{3}}=\ip{\bff_{E}}{\be_{3}}=0,\\
+   \bff_{\rho}\times\bff_{E}
+     &=\cos^{2}\theta\,\be_{1}\times\be_{2}
+       -\sin^{2}\theta\,\be_{2}\times\be_{1}
+      =(\cos^{2}\theta+\sin^{2}\theta)\,\be_{3}=\be_{3},\\
+   \bff_{E}\times\be_{3}
+     &=-\sin\theta\,\be_{1}\times\be_{3}+\cos\theta\,\be_{2}\times\be_{3}
+      =\sin\theta\,\be_{2}+\cos\theta\,\be_{1}=\bff_{\rho}.
+\end{align*}
+Meridian plane (Figure~\ref{fig:ch7planet}(a)), spanned by
+$\bff_{\rho},\be_{3}$: unit vector at angle $\varphi$ from
+$\bff_{\rho}$, and the same at $\varphi+\pi/2$:
+\begin{align*}
+   \bff_{U}&=\cos\varphi\,\bff_{\rho}+\sin\varphi\,\be_{3},
+   \qquad \bo^{+}=R\,\bff_{U},\\
+   \bff_{N}&=\cos(\varphi+\tfrac{\pi}{2})\,\bff_{\rho}
+            +\sin(\varphi+\tfrac{\pi}{2})\,\be_{3}
+           =-\sin\varphi\,\bff_{\rho}+\cos\varphi\,\be_{3},\\
+   |\bff_{U}|^{2}&=\cos^{2}\varphi\,|\bff_{\rho}|^{2}
+      +2\cos\varphi\sin\varphi\,\ip{\bff_{\rho}}{\be_{3}}
+      +\sin^{2}\varphi\,|\be_{3}|^{2}\\
+      &=\cos^{2}\varphi+0+\sin^{2}\varphi=1,\\
+   |\bff_{N}|^{2}&=\sin^{2}\varphi\,|\bff_{\rho}|^{2}
+      -2\sin\varphi\cos\varphi\,\ip{\bff_{\rho}}{\be_{3}}
+      +\cos^{2}\varphi\,|\be_{3}|^{2}\\
+      &=\sin^{2}\varphi+0+\cos^{2}\varphi=1,\\
+   \ip{\bff_{N}}{\bff_{U}}
+     &=-\sin\varphi\cos\varphi\,|\bff_{\rho}|^{2}
+       +(\cos^{2}\varphi-\sin^{2}\varphi)\ip{\bff_{\rho}}{\be_{3}}
+       +\cos\varphi\sin\varphi\,|\be_{3}|^{2}\\
+     &=-\sin\varphi\cos\varphi+0+\cos\varphi\sin\varphi=0,\\
+   \ip{\bff_{E}}{\bff_{U}}
+     &=\cos\varphi\ip{\bff_{E}}{\bff_{\rho}}
+       +\sin\varphi\ip{\bff_{E}}{\be_{3}}=0,\\
+   \ip{\bff_{E}}{\bff_{N}}
+     &=-\sin\varphi\ip{\bff_{E}}{\bff_{\rho}}
+       +\cos\varphi\ip{\bff_{E}}{\be_{3}}=0,\\
+   \bff_{E}\times\bff_{N}
+     &=-\sin\varphi\,\bff_{E}\times\bff_{\rho}
+       +\cos\varphi\,\bff_{E}\times\be_{3}
+      =\sin\varphi\,\be_{3}+\cos\varphi\,\bff_{\rho}=\bff_{U},\\
+   \tbox{\bff_{E}}{\bff_{N}}{\bff_{U}}
+     &=\ip{\bff_{E}\times\bff_{N}}{\bff_{U}}
+      =\ip{\bff_{U}}{\bff_{U}}=1 .
+\end{align*}
+Hence, for $\alpha,\beta\in\{E,N,U\}$,
+$\ip{\bff_{\alpha}}{\bff_{\beta}}=\dd_{\alpha\beta}$ and
+$\bff_{E}\times\bff_{N}=\bff_{U}$,
+$\bff_{N}\times\bff_{U}=\bff_{E}$,
+$\bff_{U}\times\bff_{E}=\bff_{N}$. Inverse of the last two
+definitions: $\cos\varphi\times$first $-\sin\varphi\times$second, and
+$\sin\varphi\times$first $+\cos\varphi\times$second,
+\begin{align*}
+   \cos\varphi\,\bff_{U}-\sin\varphi\,\bff_{N}
+     &=(\cos^{2}\varphi+\sin^{2}\varphi)\,\bff_{\rho}
+       +(\cos\varphi\sin\varphi-\sin\varphi\cos\varphi)\,\be_{3}
+      =\bff_{\rho},\\
+   \sin\varphi\,\bff_{U}+\cos\varphi\,\bff_{N}
+     &=(\sin\varphi\cos\varphi-\cos\varphi\sin\varphi)\,\bff_{\rho}
+       +(\sin^{2}\varphi+\cos^{2}\varphi)\,\be_{3}
+      =\be_{3},
+\end{align*}
+and in the equatorial plane in the same way
+\begin{align*}
+   \cos\theta\,\bff_{\rho}-\sin\theta\,\bff_{E}
+     &=(\cos^{2}\theta+\sin^{2}\theta)\,\be_{1}
+       +(\cos\theta\sin\theta-\sin\theta\cos\theta)\,\be_{2}=\be_{1},\\
+   \sin\theta\,\bff_{\rho}+\cos\theta\,\bff_{E}
+     &=(\sin\theta\cos\theta-\cos\theta\sin\theta)\,\be_{1}
+       +(\sin^{2}\theta+\cos^{2}\theta)\,\be_{2}=\be_{2}.
+\end{align*}
+
+$O^{+}$: fixed basis $\{\be^{+}_{E},\be^{+}_{N},\be^{+}_{U}\}$ of
+$\mathbb{E}^{3+}$, $\ip{\be^{+}_{\alpha}}{\be^{+}_{\beta}}
+=\dd_{\alpha\beta}$, $\be^{+}_{E}\times\be^{+}_{N}=\be^{+}_{U}$
+cyclically. $\bQ$ of \eqr{7.3} with $\bQ\bff_{\alpha}=\be^{+}_{\alpha}$,
+by Lemma~\ref{lem:dyadprod}:
+\begin{align*}
+   \bQ&=\be^{+}_{\alpha}\otimes\bff_{\alpha},\qquad
+   \bQ^{t}=\bff_{\alpha}\otimes\be^{+}_{\alpha},\qquad
+   \bQ\bff_{\beta}=\be^{+}_{\alpha}\ip{\bff_{\alpha}}{\bff_{\beta}}
+     =\be^{+}_{\alpha}\dd_{\alpha\beta}=\be^{+}_{\beta},\\
+   \bQ\bQ^{t}&=\big(\be^{+}_{\alpha}\otimes\bff_{\alpha}\big)
+     \big(\bff_{\beta}\otimes\be^{+}_{\beta}\big)
+   =\ip{\bff_{\alpha}}{\bff_{\beta}}\,
+     \be^{+}_{\alpha}\otimes\be^{+}_{\beta}\\
+   &=\dd_{\alpha\beta}\,\be^{+}_{\alpha}\otimes\be^{+}_{\beta}
+   =\be^{+}_{\alpha}\otimes\be^{+}_{\alpha}=\I^{+},\\
+   \bQ^{t}\bQ&=\big(\bff_{\alpha}\otimes\be^{+}_{\alpha}\big)
+     \big(\be^{+}_{\beta}\otimes\bff_{\beta}\big)
+   =\ip{\be^{+}_{\alpha}}{\be^{+}_{\beta}}\,
+     \bff_{\alpha}\otimes\bff_{\beta}\\
+   &=\dd_{\alpha\beta}\,\bff_{\alpha}\otimes\bff_{\beta}
+   =\bff_{\alpha}\otimes\bff_{\alpha}=\I .
+\end{align*}
+Station at the origin of $\mathbb{E}^{3+}$:
+\begin{equation*}
+   \bze=\bQ\bo^{+}+\bc=R\,\bQ\bff_{U}+\bc=R\,\be^{+}_{U}+\bc
+   \ \Longrightarrow\
+   \bc=-R\,\be^{+}_{U},\qquad
+   \dot\bc=\ddot\bc=\bze .
+\end{equation*}
+Rates, with $\dot\theta=\omega$, $\dot\varphi=0$, $\dot\be_{i}=\bze$,
+and the inverse relation for $\bff_{\rho}$:
+\begin{align*}
+   \dot\bff_{\rho}&=\dot\theta\big(-\sin\theta\,\be_{1}
+      +\cos\theta\,\be_{2}\big)=\omega\,\bff_{E},\\
+   \dot\bff_{E}&=\dot\theta\big(-\cos\theta\,\be_{1}
+      -\sin\theta\,\be_{2}\big)=-\omega\,\bff_{\rho}
+      =-\omega\cos\varphi\,\bff_{U}+\omega\sin\varphi\,\bff_{N},\\
+   \dot\bff_{N}&=-\sin\varphi\,\dot\bff_{\rho}+\cos\varphi\,\dot\be_{3}
+      =-\omega\sin\varphi\,\bff_{E},\\
+   \dot\bff_{U}&=\cos\varphi\,\dot\bff_{\rho}+\sin\varphi\,\dot\be_{3}
+      =\omega\cos\varphi\,\bff_{E}.
+\end{align*}
+Spin, \eqr{7.8}$_{2}$ and Lemma~\ref{lem:dyadprod}:
+\begin{align*}
+   \dot\bQ&=\be^{+}_{\alpha}\otimes\dot\bff_{\alpha},\qquad
+   \bOm=\dot\bQ\bQ^{t}
+   =\big(\be^{+}_{\alpha}\otimes\dot\bff_{\alpha}\big)
+    \big(\bff_{\beta}\otimes\be^{+}_{\beta}\big)\\
+   &=\ip{\dot\bff_{\alpha}}{\bff_{\beta}}\,
+     \be^{+}_{\alpha}\otimes\be^{+}_{\beta}
+   =\Omega_{\alpha\beta}\,\be^{+}_{\alpha}\otimes\be^{+}_{\beta},\\
+   \Omega_{\alpha\beta}&=\ip{\dot\bff_{\alpha}}{\bff_{\beta}}:
+   \qquad
+   \Omega_{EE}=\ip{\dot\bff_{E}}{\bff_{E}}=0,\qquad
+   \Omega_{EN}=\ip{\dot\bff_{E}}{\bff_{N}}=\omega\sin\varphi,\\
+   \Omega_{EU}&=\ip{\dot\bff_{E}}{\bff_{U}}=-\omega\cos\varphi,\qquad
+   \Omega_{NE}=\ip{\dot\bff_{N}}{\bff_{E}}=-\omega\sin\varphi,\\
+   \Omega_{UE}&=\ip{\dot\bff_{U}}{\bff_{E}}=\omega\cos\varphi,\qquad
+   \Omega_{NN}=\Omega_{NU}=\Omega_{UN}=\Omega_{UU}=0,\\
+   [\Omega_{\alpha\beta}]&=\omega
+   \begin{pmatrix}
+      0 & \sin\varphi & -\cos\varphi\\
+      -\sin\varphi & 0 & 0\\
+      \cos\varphi & 0 & 0
+   \end{pmatrix}
+   =-[\Omega_{\alpha\beta}]^{t},\\
+   \Omega_{\alpha\beta}+\Omega_{\beta\alpha}
+   &=\ip{\dot\bff_{\alpha}}{\bff_{\beta}}
+    +\ip{\bff_{\alpha}}{\dot\bff_{\beta}}
+   =\tfrac{\dl}{\dl t}\ip{\bff_{\alpha}}{\bff_{\beta}}
+   =\tfrac{\dl}{\dl t}\dd_{\alpha\beta}=0 .
+\end{align*}
+Axial vector, Proposition~\ref{prop:axial} with $(E,N,U)$ as $(1,2,3)$:
+\begin{align*}
+   w_{\gamma}&=-\tfrac12\eps_{\gamma\alpha\beta}\Omega_{\alpha\beta},\qquad
+   w_{E}=-\tfrac12(\Omega_{NU}-\Omega_{UN})=0,\\
+   w_{N}&=-\tfrac12(\Omega_{UE}-\Omega_{EU})
+        =-\tfrac12(\omega\cos\varphi+\omega\cos\varphi)=-\omega\cos\varphi,\\
+   w_{U}&=-\tfrac12(\Omega_{EN}-\Omega_{NE})
+        =-\tfrac12(\omega\sin\varphi+\omega\sin\varphi)=-\omega\sin\varphi,\\
+   \bw&=-\omega\big(\cos\varphi\,\be^{+}_{N}+\sin\varphi\,\be^{+}_{U}\big)
+      =:-\bom,\\
+   \bOm\bs&=\bw\times\bs=-\bom\times\bs
+      \qquad\forall\,\bs\in\mathbb{E}^{3+},\\
+   \bQ\be_{3}&=\bQ\big(\sin\varphi\,\bff_{U}+\cos\varphi\,\bff_{N}\big)
+      =\sin\varphi\,\be^{+}_{U}+\cos\varphi\,\be^{+}_{N}
+      =\bom/\omega,\\
+   \dot\bom&=\bze\ \Longrightarrow\ \dot\bOm=\Ob^{+}.
+\end{align*}
+Sign: \eqr{7.8} with $\bv=\bze$, $\dot\bc=\bze$ gives
+$\bv^{+}=\bOm(\bx^{+}-\bc)=-\bom\times(\bx^{+}-\bc)$, a point at rest for
+$O$ circles the axis backwards for $O^{+}$. $\theta_{0}$ enters $\bQ$
+only, not $\bOm$.
+
+\eqr{7.63} with $\ddot\bc=\dot\bc=\bze$, $\dot\bOm=\Ob^{+}$,
+$\bs^{+}:=\bx^{+}-\bc=\bx^{+}+R\,\be^{+}_{U}$:
+\begin{align*}
+   \vek{i}^{+}&=2\bOm\bv^{+}-\bOm^{2}\bs^{+},\qquad
+   \bOm\bv^{+}=-\bom\times\bv^{+},\\
+   \bOm^{2}\bs^{+}&=\bOm(\bOm\bs^{+})=\bOm(-\bom\times\bs^{+})
+   =-\bom\times(-\bom\times\bs^{+})=\bom\times(\bom\times\bs^{+}),
+\end{align*}
+\begin{equation*}
+   \boxed{\
+   \begin{aligned}
+      &\dvg^{+}\bT^{+}+\rho^{+}\big(\bb^{+}+\vek{i}^{+}\big)
+        =\rho^{+}\ba^{+},\\[0.6mm]
+      &\vek{i}^{+}=-2\,\bom\times\bv^{+}
+        -\bom\times\big(\bom\times\bs^{+}\big),
+      \qquad
+      \bom=\omega\big(\cos\varphi\,\be^{+}_{N}+\sin\varphi\,\be^{+}_{U}\big).
+   \end{aligned}
+   \ }
+\end{equation*}
+\eqr{7.59}, \eqr{7.60} and the jump conditions are unchanged.
+
+Centrifugal term, by $\ba\times(\bb\times\bc)=\ip{\ba}{\bc}\bb
+-\ip{\ba}{\bb}\bc$ and
+$|\bom|^{2}=\omega^{2}(\cos^{2}\varphi+\sin^{2}\varphi)=\omega^{2}$:
+\begin{equation*}
+   -\bom\times(\bom\times\bs^{+})
+   =-\ip{\bom}{\bs^{+}}\,\bom+\ip{\bom}{\bom}\,\bs^{+}
+   =\omega^{2}\bs^{+}-\ip{\bom}{\bs^{+}}\,\bom ,
+\end{equation*}
+$\omega^{2}$ times the part of $\bs^{+}$ perpendicular to $\bom$. At the
+station $\bx^{+}=\bze$, $\bs^{+}=R\,\be^{+}_{U}$,
+$\ip{\bom}{\be^{+}_{U}}=\omega\sin\varphi$:
+\begin{align*}
+   -\bom\times(\bom\times R\,\be^{+}_{U})
+   &=\omega^{2}R\,\be^{+}_{U}
+     -R\,\omega\sin\varphi\cdot\omega\big(\cos\varphi\,\be^{+}_{N}
+     +\sin\varphi\,\be^{+}_{U}\big)\\
+   &=\omega^{2}R\,(1-\sin^{2}\varphi)\,\be^{+}_{U}
+     -\omega^{2}R\sin\varphi\cos\varphi\,\be^{+}_{N}\\
+   &=\omega^{2}R\cos\varphi
+     \big(\cos\varphi\,\be^{+}_{U}-\sin\varphi\,\be^{+}_{N}\big),\\
+   \big|\cdots\big|&=\omega^{2}R\cos\varphi
+     \sqrt{\cos^{2}\varphi+\sin^{2}\varphi}=\omega^{2}R\cos\varphi,\\
+   \cos\varphi\,\be^{+}_{U}-\sin\varphi\,\be^{+}_{N}
+   &=\bQ\big(\cos\varphi\,\bff_{U}-\sin\varphi\,\bff_{N}\big)
+    =\bQ\bff_{\rho},
+\end{align*}
+$\omega^{2}\times$ the distance $R\cos\varphi$ from the axis, along the
+outward horizontal of the equatorial plane
+(Figure~\ref{fig:ch7planet}(a)). With gravity $-g\,\be^{+}_{U}$,
+\begin{align*}
+   \bg_{\mathrm{eff}}
+   &=-g\,\be^{+}_{U}+\omega^{2}R\cos\varphi
+     \big(\cos\varphi\,\be^{+}_{U}-\sin\varphi\,\be^{+}_{N}\big)\\
+   &=-\big(g-\omega^{2}R\cos^{2}\varphi\big)\be^{+}_{U}
+     -\omega^{2}R\sin\varphi\cos\varphi\,\be^{+}_{N},\\
+   \tan\delta&=\frac{|\text{horizontal part}|}{|\text{vertical part}|}
+   =\frac{\omega^{2}R\sin\varphi\cos\varphi}
+         {g-\omega^{2}R\cos^{2}\varphi},
+\end{align*}
+Figure~\ref{fig:ch7planet}(b),(c), Remark~\ref{rem:ch7inertial}: the
+term is uniform and $\propto\rho^{+}$ like gravity, hence
+indistinguishable from it locally.
+
+Coriolis term, $\bv^{+}=v_{E}\be^{+}_{E}+v_{N}\be^{+}_{N}+v_{U}\be^{+}_{U}$:
+\begin{align*}
+   \be^{+}_{N}\times\bv^{+}
+   &=v_{E}\,\be^{+}_{N}\times\be^{+}_{E}+v_{U}\,\be^{+}_{N}\times\be^{+}_{U}
+    =-v_{E}\,\be^{+}_{U}+v_{U}\,\be^{+}_{E},\\
+   \be^{+}_{U}\times\bv^{+}
+   &=v_{E}\,\be^{+}_{U}\times\be^{+}_{E}+v_{N}\,\be^{+}_{U}\times\be^{+}_{N}
+    =v_{E}\,\be^{+}_{N}-v_{N}\,\be^{+}_{E},\\
+   -2\,\bom\times\bv^{+}
+   &=-2\omega\cos\varphi\,\be^{+}_{N}\times\bv^{+}
+     -2\omega\sin\varphi\,\be^{+}_{U}\times\bv^{+}\\
+   &=-2\omega\cos\varphi\big(v_{U}\,\be^{+}_{E}-v_{E}\,\be^{+}_{U}\big)
+     -2\omega\sin\varphi\big(-v_{N}\,\be^{+}_{E}+v_{E}\,\be^{+}_{N}\big)\\
+   &=2\omega\Big[\big(v_{N}\sin\varphi-v_{U}\cos\varphi\big)\be^{+}_{E}
+     -v_{E}\sin\varphi\,\be^{+}_{N}
+     +v_{E}\cos\varphi\,\be^{+}_{U}\Big].
+\end{align*}
+$\sin\varphi>0$: $v_{N}>0\Rightarrow$ push along $+\be^{+}_{E}$,
+$v_{E}>0\Rightarrow$ push along $-\be^{+}_{N}$; both to the right of the
+motion, reversed for $\sin\varphi<0$.
+
+Earth: $\omega=2\pi/86164\,\mathrm{s}=7.29\times10^{-5}\,\mathrm{s}^{-1}$,
+$R=6.37\times10^{6}\,\mathrm{m}$, $g=9.81\,\mathrm{m\,s^{-2}}$:
+\begin{align*}
+   \omega^{2}R&=(7.29\times10^{-5})^{2}\times6.37\times10^{6}
+     =5.32\times10^{-9}\times6.37\times10^{6}\\
+     &=3.39\times10^{-2}\ \mathrm{m\,s^{-2}}=0.0035\,g,\\
+   2\omega|\bv^{+}|&=1.46\times10^{-4}\ \mathrm{m\,s^{-2}}
+     \quad\text{at }|\bv^{+}|=1\ \mathrm{m\,s^{-1}},\\
+   \tan\delta&=\frac{\eps\sin\varphi\cos\varphi}{1-\eps\cos^{2}\varphi}
+   =\frac{\tfrac12\eps\sin2\varphi}{1-\eps\cos^{2}\varphi},
+   \qquad \eps=\frac{\omega^{2}R}{g}=0.00345,\\
+   \frac{\dl}{\dl\varphi}\tan\delta&=0
+   \ \Leftrightarrow\ \eps\cos2\varphi+O(\eps^{2})=0
+   \ \Leftrightarrow\ \varphi=45^{\circ}+O(\eps),\\
+   \tan\delta_{\max}&=\frac{\eps/2}{1-\eps/2}=1.73\times10^{-3},
+   \qquad \delta_{\max}=0.099^{\circ}=5.9' .
+\end{align*}
+Negligible against $g$ in a laboratory; decisive in the ocean and the
+atmosphere, where the comparison is with the residual accelerations
+left after gravity is balanced by pressure.
+\end{solution}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{J}
+\input{fig_ch7_planet}
+\caption{The geometry of Problem 3 at latitude $\varphi=35^{\circ}$.
+(a) The meridional section through the station: the planet turns at
+$\omega$ about $\be_{3}$, $\bff_{\rho}$ is the equatorial radial
+direction at the station's longitude, and
+$\bff_{U}=\cos\varphi\,\bff_{\rho}+\sin\varphi\,\be_{3}$,
+$\bff_{N}=-\sin\varphi\,\bff_{\rho}+\cos\varphi\,\be_{3}$, with
+$\bff_{E}$ into the page, is the local triad; the station is $R$
+from the centre and $R\cos\varphi$ from the axis, and that second
+distance is the whole of the centrifugal term. (b) The same picture as
+$O^{+}$ draws it, $\be^{+}_{U}$ vertical, north to the left, east into
+the page: the angular velocity $\bom$ points at the celestial pole, at elevation
+$\varphi$ above the northern horizon, and the shifter triad of
+Remark~\ref{rem:ch7whatinertial} turns backwards about it once a
+sidereal day; the centrifugal term, perpendicular to the axis,
+tilts the effective gravity $\bg_{\mathrm{eff}}$ from $-g\be^{+}_{U}$
+towards the equator by $\delta$, so a plumb line does not point at the
+centre of the planet ($\omega^{2}R/g$ is drawn as $0.55$; for the Earth
+it is $0.0035$). (c) Magnitude and components of the centrifugal term
+against latitude.}
+\label{fig:ch7planet}
+\end{figure}
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{K}
+\input{fig_ch7_planet3d}
+\caption{Figure~\ref{fig:ch7planet}(a) in three dimensions: what is
+where, for a station at longitude $\theta=40^{\circ}$ and latitude
+$\varphi=35^{\circ}$. $O$ is the inertial observer at the centre with
+the fixed triad $\{\be_{i}\}$, $\be_{3}$ the axis of the spin $\omega$.
+The station lies on the meridian of longitude $\theta=\omega t+\theta_{0}$,
+measured in the equatorial plane from $\be_{1}$, and on the parallel of
+latitude $\varphi$, measured from the equator along that meridian;
+$\bff_{\rho}$ is the radial direction in the equatorial plane at that
+longitude. The station is $R$ from $O$ and $R\cos\varphi$ from the axis.
+At the station, $\bff_{U}$ points straight up along $O$--station,
+$\bff_{N}$ points north along the meridian and $\bff_{E}$ points east
+along the parallel; only the near side of the three circles is drawn.}
+\label{fig:ch7planet3d}
+\end{figure}

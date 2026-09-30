@@ -1,0 +1,1959 @@
+%=======================================================================
+\chapter{Rate of Deformation}
+%=======================================================================
+
+Chapter 3 answered ``how much has the material been deformed''. This one
+answers ``how fast is it being deformed now''. The two questions are not
+the same, and the difference is the whole content of the chapter: $\bF$,
+$\bC$, $\bU$ compare the present with a reference chosen once and for all,
+whereas $\bD$ and $\bW$ below compare the present with the present, and
+need no reference configuration at all. That is why the rate quantities
+are \emph{spatial} tensors while the strain quantities were referential.
+
+%=======================================================================
+\section{Velocity gradient, stretching and spin}\label{sec:Lstretch}
+%=======================================================================
+
+Let $\bv$ be the material velocity field. By \eqr{2.19}--\eqr{2.21} and
+\eqr{2.37} its referential gradient is
+\begin{equation}
+   \Grad\bv=\bL\bF,\qquad \bL=\grad\bv ,
+   \tag{4.1}\label{eq:4.1}
+\end{equation}
+$\bL$ being the \emph{spatial} velocity gradient. In components, using
+$\hat v_{i}=\partial\chi_{i}/\partial t$ and $F_{iA}=\chi_{i,A}$,
+\begin{equation}
+\begin{aligned}
+   \Grad\bv&=\hat v_{i,A}\,\be_{i}\otimes\hbE_{A}
+   =\frac{\partial}{\partial X_{A}}
+     \Big(\frac{\partial\chi_{i}}{\partial t}\Big)\be_{i}\otimes\hbE_{A}\\
+   &=\frac{\partial}{\partial t}
+     \Big(\frac{\partial\chi_{i}}{\partial X_{A}}\Big)\be_{i}\otimes\hbE_{A}
+   =\dot F_{iA}\,\be_{i}\otimes\hbE_{A},
+\end{aligned}
+   \tag{4.2}\label{eq:4.2}
+\end{equation}
+the interchange being permissible when $\chi_{i}(X_{B},t)$ is twice
+continuously differentiable in $X_{B}$ and $t$ jointly. So
+$\Grad\bv=\dot\bF$, and \eqr{4.1} gives
+\begin{equation}
+   \dot\bF=\bL\bF,\qquad\text{equivalently}\qquad \bL=\dot\bF\bF^{-1}.
+   \tag{4.3}\label{eq:4.3}
+\end{equation}
+
+\begin{remark}[reading \eqr{4.2}: what every mark in it
+means]\label{rem:hatinch4}
+Four different marks appear in these three lines. Each one is there for a
+reason, and the derivation stops making sense if any of them is misread.
+
+\textbf{The caret on $\hat v_{i}$.} Remark~\ref{rem:decorations} explained
+that the same velocity is three different functions, distinguished by what
+they take as input. The caret selects the one that takes a reference
+place, so $\hat v_{i}=\hat v_{i}(\bX,t)$. It must be that one. The
+definition $\hat v_{i}=\partial\chi_{i}/\partial t$ is a partial
+derivative at fixed $\bX$, and holding $\bX$ fixed is an instruction that
+only makes sense in the referential description, where $\bX$ is an
+independent variable. Written $\tilde v_{i}$ the same formula would say
+nothing: in the spatial description the independent variable is $\bx$,
+holding it fixed follows no particle at all, and $\chi_{i}$ is not a
+function of $\bx$ to begin with. The caret is therefore not an ornament.
+It records which of the three functions is meant, and only one of the
+three makes the formula meaningful.
+
+\textbf{The two bases.} The vectors $\be_{i}$ span the current translation
+space $\Vt$, and $\hbE_{A}$ spans the referential one $\hVt$. These are
+different spaces, and $\bF$ has one index in each:
+$\bF=F_{iA}\,\be_{i}\otimes\hbE_{A}$. A tensor of this kind is called
+two-point, because it has one foot in the reference configuration and one
+in the current one. This is why the index alphabet changes, with Latin
+$i,j,k$ for the present and capital $A,B,C$ for the reference. The
+convention earns its place the first time a formula has to be checked. In
+$\bL=\dot\bF\bF^{-1}$, for instance, $\dot\bF$ carries $\be_{i}\otimes
+\hbE_{A}$ and $\bF^{-1}$ carries $\hbE_{A}\otimes\be_{j}$. The two capital
+indices meet and are summed away, leaving $\be_{i}\otimes\be_{j}$. So $\bL$
+has both feet in the current configuration, which is exactly the claim
+\eqr{4.1} made when it called $\bL$ spatial. Had the answer come out with
+a capital index left over, the formula would have been wrong, and the
+alphabet is what makes that visible at a glance.
+
+\textbf{The overdot.} $\dot F_{iA}$ is the material derivative of
+Theorem~\ref{thm:matder}, meaning the derivative taken while holding the
+material point fixed. When a quantity is already written as a function of
+$(\bX,t)$, holding the material point fixed is the same as holding $\bX$
+fixed, so the material derivative is just $\partial/\partial t$. That is
+why \eqr{4.2} produces $\dot F_{iA}$ directly, with no extra term. The
+convective term $(\grad\,\cdot\,)\bv$ that appears in \eqr{2.20} is the
+cost of asking the same question in the spatial description, and here the
+question was never asked in that description.
+
+\textbf{The interchange of derivatives.} Swapping $\partial/\partial
+X_{A}$ with $\partial/\partial t$ is the only analytic step in the
+derivation. It is Clairaut's theorem: mixed partial derivatives are equal
+where they are continuous. That is the entire content of the phrase
+``twice continuously differentiable in $X_{B}$ and $t$ jointly''. The
+hypothesis is not recited for form. Without it the two orders of
+differentiation can genuinely differ, and then $\Grad\bv$ and $\dot\bF$
+would be different tensors and \eqr{4.3} would fail.
+\end{remark}
+
+\begin{remark}[why $\bL$ and not $\dot\bF$]\label{rem:whyL}
+$\dot\bF$ is a two-point tensor and inherits the reference configuration:
+change $\kappa$ and $\dot\bF$ changes. $\bL=\dot\bF\bF^{-1}$ maps $\Vt$ to
+$\Vt$ and does not: replacing $\kappa$ by another reference replaces $\bF$
+by $\bF\bK$ with $\bK$ fixed in time, so
+$\dot{(\bF\bK)}(\bF\bK)^{-1}=\dot\bF\bK\bK^{-1}\bF^{-1}=\bL$. The rate of
+deformation is a property of the motion at the present instant alone, and
+$\bL$ is the object that says so. Figure~\ref{fig:ch4comm} puts both
+statements as commuting diagrams.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{A}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.4mm]},thick},
+   nd/.style={inner sep=2pt}]
+% ---------- left square: Fdot = L F ----------
+\node[nd] (a1) at (0,1.75)   {$\hVt$};
+\node[nd] (b1) at (3.30,1.75) {$\Vt$};
+\node[nd] (a2) at (0,0)      {$\hVt$};
+\node[nd] (b2) at (3.30,0)   {$\Vt$};
+\draw[ar] (a1)--(b1) node[midway,above,font=\small] {$\bF(t)$};
+\draw[ar] (a2)--(b2) node[midway,below,font=\small] {$\bF(t+\dl t)$};
+\draw[ar] (a1)--(a2) node[midway,left,font=\small]  {$\hI$};
+\draw[ar] (b1)--(b2) node[midway,right,font=\small] {$\I+\dl t\,\bL$};
+\node[font=\small,text=gray!75] at (1.65,0.88) {commutes};
+\node[font=\small] at (1.65,-1.25) {$\Rightarrow\ \dot\bF=\bL\bF$};
+% ---------- divider ----------
+\draw[gray!40] (5.85,-1.70)--(5.85,2.20);
+% ---------- right triangle: change of reference ----------
+\node[nd] (c) at (7.05,1.75) {$\hVt_{\kappa'}$};
+\node[nd] (d) at (7.05,0)    {$\hVt_{\kappa}$};
+\node[nd] (e) at (10.35,0.88) {$\Vt$};
+\draw[ar] (c)--(d) node[midway,left,font=\small] {$\bK$};
+\draw[ar] (c)--(e) node[midway,above right=-2pt,font=\small] {$\bF\bK$};
+\draw[ar] (d)--(e) node[midway,below right=-2pt,font=\small] {$\bF$};
+\node[font=\footnotesize,text=gray!75] at (8.70,-0.68) {$\dot\bK=\hOb$};
+\node[font=\small] at (8.70,-1.30) {$\Rightarrow\ $same $\bL$};
+\end{tikzpicture}
+\caption{Left: the reference space does not move, so the vertical arrow on
+that side is the identity, while the configuration at $t$ is carried to the
+one at $t+\dl t$ by $\bx\mapsto\bx+\dl t\,\bv$, whose gradient is
+$\I+\dl t\,\bL$. Commutativity of the square is
+$\bF(t+\dl t)=(\I+\dl t\,\bL)\bF(t)$, which is \eqr{4.3}. Right: changing
+the reference from $\kappa$ to $\kappa'$ replaces $\bF$ by $\bF\bK$ with
+$\bK$ fixed in time. The triangle commutes, and since $\dot\bK=\hOb$ the
+factor cancels in $\dot\bF\bF^{-1}$: the two references disagree about
+$\bF$ and about $\dot\bF$, but not about $\bL$.}
+\label{fig:ch4comm}
+\end{figure}
+
+\subsection*{The polar factors and their rates}
+
+Differentiate \eqr{3.32}, $\bF=\bR\bU=\bV\bR$, with the product rule for
+tensors (Problem 1(a)):
+\begin{equation}
+   \dot\bF=\dot\bR\bU+\bR\dot\bU=\dot\bV\bR+\bV\dot\bR .
+   \tag{4.4}\label{eq:4.4}
+\end{equation}
+We want $\bL$, and by \eqr{4.3} that means post-multiplying by
+$\bF^{-1}$. The two forms of $\bF$ give two forms of the inverse. From
+$\bF=\bR\bU$, reversing the order and inverting each factor,
+$\bF^{-1}=\bU^{-1}\bR^{-1}=\bU^{-1}\bR^{t}$, the last step because $\bR$
+is orthogonal so $\bR^{-1}=\bR^{t}$. From $\bF=\bV\bR$ in the same way,
+$\bF^{-1}=\bR^{-1}\bV^{-1}=\bR^{t}\bV^{-1}$.
+
+Take the first form and multiply \eqr{4.4} on the right by
+$\bU^{-1}\bR^{t}$, term by term:
+\[
+\begin{aligned}
+   \dot\bR\bU\cdot\bU^{-1}\bR^{t}
+     &=\dot\bR\big(\bU\bU^{-1}\big)\bR^{t}=\dot\bR\bR^{t},\\
+   \bR\dot\bU\cdot\bU^{-1}\bR^{t}
+     &=\bR\dot\bU\bU^{-1}\bR^{t},
+\end{aligned}
+\]
+where the first line used $\bU\bU^{-1}=\hI$ and the second had nothing to
+cancel, since $\dot\bU$ sits between $\bR$ and $\bU^{-1}$ and tensors do
+not commute. Adding the two gives the first expression below. The second
+form goes the same way with $\bR^{t}\bV^{-1}$ on the right:
+$\dot\bV\bR\cdot\bR^{t}\bV^{-1}=\dot\bV\bV^{-1}$ using
+$\bR\bR^{t}=\I$, and $\bV\dot\bR\cdot\bR^{t}\bV^{-1}$ left as it stands.
+So
+\begin{equation}
+   \bL=\dot\bR\bR^{t}+\bR\dot\bU\bU^{-1}\bR^{t}
+      =\dot\bV\bV^{-1}+\bV\dot\bR\bR^{t}\bV^{-1}.
+   \tag{4.5}\label{eq:4.5}
+\end{equation}
+The two expressions are equal because both are $\dot\bF\bF^{-1}$, computed
+by grouping the same product in two different ways.
+
+\begin{remark}[why we may choose the reference, and why we choose this
+one]\label{rem:whykt0}
+Equation \eqr{4.5} is correct but not yet usable. It expresses $\bL$
+through $\bR$, $\bU$, $\bV$ together with their rates, which is six
+objects where we wanted a statement about rates alone. Getting rid of the
+first three is done by a manoeuvre that recurs all through the subject, so
+it is worth setting out in three parts.
+
+\emph{First, why we are free to choose at all.} Remark~\ref{rem:whyL}
+established that $\bL$ does not depend on which reference configuration
+was used to define $\bF$. That fact is what licenses everything that
+follows. $\bL$ is a fixed object, determined by the motion at the present
+instant, while $\kappa$ is a bookkeeping device we introduced ourselves.
+So we may pick whichever $\kappa$ is convenient, prove a formula for
+$\bL$ with it, and the formula holds for every other choice as well,
+because $\bL$ was the same object all along. No generality is lost.
+
+\emph{Second, which one to pick.} We want the terms containing $\bR$,
+$\bU$, $\bV$ themselves to disappear, leaving only $\dot\bR$, $\dot\bU$,
+$\dot\bV$. The deformation of a configuration relative to itself is the
+identity, so the way to make $\bF$ trivial at one instant is to use the
+configuration the body occupies at that very instant as the reference.
+Setting $\kappa=\kappa_{t_{0}}$ gives $\bF=\shift$ at $t=t_{0}$ by
+\eqr{2.79}. Uniqueness of the polar decomposition then forces
+$\bR=\shift$, $\bU=\hI$ and $\bV=\I$, since those values reproduce
+$\bF=\shift$ and no other values can. Every factor and every inverse in
+\eqr{4.5} becomes an identity, and the expression collapses to \eqr{4.6}.
+
+\emph{Third, the point that is easy to get wrong.} The equalities
+$\bR=\shift$, $\bU=\hI$, $\bV=\I$ hold at $t_{0}$ and at no other time.
+An instant later the body has moved away from $\kappa_{t_{0}}$ and the
+polar factors are no longer trivial. Their derivatives are therefore not
+required to vanish, and in general they do not. This is the asymmetry the
+argument runs on: the values are trivial, the rates are free. It is what
+allows \eqr{4.6} to isolate $\dot\bU$ and $\dot\bR$ while all the
+non-differentiated factors drop out.
+
+To see how much damage the wrong reading does, suppose one took $\bU=\hI$
+to hold for all $t$. Then $\dot\bU=\hOb$, and \eqr{4.6} would give
+$\bL=\dot\bR\shift^{t}$, which is skew, so $\bD=\Ob$ and every motion
+would be rigid. The conclusion is absurd, and the error was a single
+confusion between a value at one instant and a value on an interval.
+Because the reference is chosen to sit at the present placement, this
+$\kappa$ is often called the instantaneous reference, and $\bD$ and $\bW$
+are said to be measured relative to the present configuration.
+\end{remark}
+
+Now choose $\kappa=\kappa_{t_{0}}$. By \eqr{2.79} and the uniqueness of the
+polar factors, at $t=t_{0}$
+\[
+   \bR=\shift,\qquad \bU=\hI,\qquad \bV=\I ,
+\]
+so $\bU^{-1}=\hI$ and $\bV^{-1}=\I$, and \eqr{4.5} collapses to
+\begin{equation}
+   \bL=\dot\bR\shift^{t}+\shift\dot\bU\shift^{t}=\dot\bV+\dot\bR\shift^{t},
+   \tag{4.6}\label{eq:4.6}
+\end{equation}
+all derivatives evaluated at $t_{0}$. By Problem 1(c), $\dot\bR\bR^{t}$ is
+skew whenever $\bR$ is orthogonal, so $\dot\bR\shift^{t}$ is skew at
+$t_{0}$; and $\shift\dot\bU\shift^{t}$ is symmetric because $\dot\bU$ is,
+$\bU$ being symmetric at every instant. Splitting
+\begin{equation}
+   \bL=\bD+\bW;\qquad
+   \bD=\Sym\bL=\tfrac12(\bL+\bL^{t}),\quad
+   \bW=\Skw\bL=\tfrac12(\bL-\bL^{t}),
+   \tag{4.7}\label{eq:4.7}
+\end{equation}
+and invoking the uniqueness of that splitting, Problem 14 of Chapter 1,
+\begin{equation}
+   \bD=\shift\dot\bU\shift^{t}=\dot\bV,
+   \qquad
+   \bW=\dot\bR\shift^{t}
+   \qquad\text{at }t_{0}.
+   \tag{4.8}\label{eq:4.8}
+\end{equation}
+So $\bD$ is the rate of stretch and $\bW$ the rate of rotation, both
+measured against the configuration occupied at that instant. $\bD$ is the
+\emph{stretching} tensor, $\bW$ the \emph{spin} tensor;
+Figure~\ref{fig:DWsplit} shows what each half does. In components,
+\begin{equation}
+\begin{aligned}
+   \bD&=D_{ij}\be_{i}\otimes\be_{j},\qquad
+   D_{ij}=\tfrac12\big(v_{i,j}+v_{j,i}\big),\\
+   \bW&=W_{ij}\be_{i}\otimes\be_{j},\qquad
+   W_{ij}=\tfrac12\big(v_{i,j}-v_{j,i}\big).
+\end{aligned}
+   \tag{4.9}\label{eq:4.9}
+\end{equation}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{B}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.0mm]},semithick},
+   mk/.style={fill=black}]
+% ============ panel 1 : D alone ============
+\begin{scope}[xshift=0cm]
+  \draw[guide] (0,0) circle (1.05);
+  \draw[thick] (0,0) ellipse (1.42 and 0.78);
+  % material marker at 45 deg on the circle -> same parameter on ellipse
+  \draw[guide] (0,0)--(0.742,0.742);
+  \fill (0.742,0.742) circle (1.3pt);
+  \draw[thick] (0,0)--(1.004,0.552);
+  \fill (1.004,0.552) circle (1.3pt);
+  \draw[ar,gray!75] (0.742,0.742) to[bend right=22] (1.004,0.552);
+  \node[font=\small] at (0,-1.40) {$\I+\dl t\,\bD$};
+  \node[font=\footnotesize,text=gray!75,align=center,anchor=north] at (0,-1.72)
+     {shape changes,\\ axes fixed};
+\end{scope}
+% ============ panel 2 : W alone ============
+\begin{scope}[xshift=4.2cm]
+  \draw[guide] (0,0) circle (1.05);
+  \draw[thick] (0,0) circle (1.05);
+  \draw[guide] (0,0)--(0.742,0.742);
+  \fill (0.742,0.742) circle (1.3pt);
+  \draw[thick] (0,0)--(0.271,1.014);
+  \fill (0.271,1.014) circle (1.3pt);
+  \draw[ar,gray!75] (0.742,0.742) to[bend right=22] (0.271,1.014);
+  \node[font=\small] at (0,-1.40) {$\I+\dl t\,\bW$};
+  \node[font=\footnotesize,text=gray!75,align=center,anchor=north] at (0,-1.72)
+     {rigid turn,\\ shape untouched};
+\end{scope}
+% ============ panel 3 : L = D + W ============
+\begin{scope}[xshift=8.4cm]
+  \draw[guide] (0,0) circle (1.05);
+  \draw[thick,rotate=30] (0,0) ellipse (1.42 and 0.78);
+  \draw[guide] (0,0)--(0.742,0.742);
+  \fill (0.742,0.742) circle (1.3pt);
+  \draw[thick] (0,0)--(0.594,0.980);
+  \fill (0.594,0.980) circle (1.3pt);
+  \draw[ar,gray!75] (0.742,0.742) to[bend right=22] (0.594,0.980);
+  \node[font=\small] at (0,-1.40) {$\I+\dl t\,\bL$};
+  \node[font=\footnotesize,text=gray!75,align=center,anchor=north] at (0,-1.72)
+     {both at once};
+\end{scope}
+\end{tikzpicture}
+\caption{What the two halves of \eqr{4.7} do to a disc of material
+directions at $\bx$, over a time $\dl t$, the dashed circle being the
+disc as it stands now. The symmetric part $\bD$ changes its shape without
+turning its axes; the skew part $\bW$ turns it without changing its shape;
+and $\bL$ does both, since to first order in $\dl t$,
+$\I+\dl t\,\bL=(\I+\dl t\,\bW)(\I+\dl t\,\bD)+O(\dl t^{2})$. The marked
+material direction moves in all three panels, which is
+Remark~\ref{rem:Wtrap}: even the shape-only panel reorients it.}
+\label{fig:DWsplit}
+\end{figure}
+
+\begin{remark}[the two ``rates of stretch'' are not the same tensor]
+\label{rem:trapdot}
+\eqr{4.8} holds \emph{only} at the instant $t_{0}$ at which
+$\kappa=\kappa_{t}$. At any other instant $\bD\neq\dot\bV$ and
+$\bD\neq\shift\dot\bU\shift^{t}$; the general statements are \eqr{4.5}
+together with \eqr{4.7}, and they contain $\bR$ and $\bV$ explicitly. This
+is the commonest trap in the chapter: $\bD$ is \emph{not} the material
+derivative of any strain measure, and in particular
+$\bD\neq\dot\bE$. What is true at all times is \eqr{4.11} below, which
+carries $\bF$ on both sides.
+\end{remark}
+
+\subsection*{Rates of the Cauchy--Green tensors}
+
+Differentiate $\bC=\bF^{t}\bF$, using the product rule and Problem 1(b),
+$(\bF^{t})^{\textstyle\cdot}=\dot\bF^{t}$, then \eqr{4.3}:
+\begin{equation}
+\begin{aligned}
+   \dot\bC&=(\bF^{t}\bF)^{\textstyle\cdot}
+   =\dot\bF^{t}\bF+\bF^{t}\dot\bF
+   =(\bL\bF)^{t}\bF+\bF^{t}\bL\bF\\
+   &=\bF^{t}\bL^{t}\bF+\bF^{t}\bL\bF
+   =\bF^{t}\big(\bL+\bL^{t}\big)\bF=2\,\bF^{t}\bD\bF .
+\end{aligned}
+   \tag{4.10}\label{eq:4.10}
+\end{equation}
+The Green strain of \eqr{2.97} is $\bE=\tfrac12(\bC-\hI)$. Differentiating
+it costs nothing extra, because $\hI$ is a fixed tensor and $\tfrac12$ a
+fixed number, so $\dot\bE=\tfrac12\dot\bC$. Therefore
+\begin{equation}
+   \bF^{t}\bD\bF=\tfrac12\dot\bC=\dot\bE .
+   \tag{4.11}\label{eq:4.11}
+\end{equation}
+
+\begin{remark}[why $\bC$ is the right thing to differentiate, and what
+\eqr{4.11} is saying]\label{rem:whyC}
+Two questions are worth asking here. Why differentiate $\bC$ rather than
+$\bF$ or $\bU$, and what kind of statement is \eqr{4.11}?
+
+\emph{Why $\bC$.} Differentiating $\bF$ gives $\dot\bF=\bL\bF$, which is
+\eqr{4.3} and tells us nothing new. Differentiating $\bU$ is what one
+would like, since $\bU$ is the pure stretch, but $\bU$ is defined through
+a square root, $\bU=\sqrt{\bC}$, and the derivative of a tensor square
+root has no simple closed form. $\bC=\bF^{t}\bF$ has neither problem. It
+is a polynomial in $\bF$, so the product rule applies directly, and it is
+already free of the rotation: substituting $\bF=\bR\bU$ gives
+$\bC=\bU\bR^{t}\bR\bU=\bU^{2}$, with $\bR$ cancelling. So $\bC$ carries
+exactly the stretch information, in a form that can be differentiated in
+one line. That combination is why every rate calculation in finite
+elasticity goes through $\bC$ rather than $\bU$.
+
+\emph{What \eqr{4.11} says.} On the right sits $\dot\bE$, a referential
+tensor: it lives on $\hVt$ and is what an observer using the reference
+configuration would call the strain rate. On the left sits $\bD$,
+a spatial tensor, sandwiched between $\bF^{t}$ and $\bF$. That sandwich is
+the standard operation for moving a spatial tensor back to the reference
+configuration, and it is forced by index bookkeeping alone:
+$\bF^{t}$ carries $\hbE_{A}\otimes\be_{i}$, $\bD$ carries
+$\be_{i}\otimes\be_{j}$, $\bF$ carries $\be_{j}\otimes\hbE_{B}$, and the
+Latin indices contract in pairs to leave $\hbE_{A}\otimes\hbE_{B}$, which
+is what a referential tensor must carry.
+
+So \eqr{4.11} is not a formula relating two different physical quantities.
+It says that $\bD$ and $\dot\bE$ are the same measurement expressed in two
+configurations, with $\bF$ doing the translating. This also settles the
+warning of Remark~\ref{rem:trapdot} in a sharper form. It is tempting to
+read \eqr{4.11} as $\bD=\dot\bE$ with the $\bF$'s ignored, but the $\bF$'s
+cannot be ignored: they are the only reason the two sides live in the same
+space. At the one instant when $\kappa=\kappa_{t_{0}}$ we have
+$\bF=\shift$, the sandwich disappears, and $\bD=\dot\bE$ holds. At every
+other instant it does not.
+\end{remark}
+The same computation on $\bB=\bF\bF^{t}$ gives
+\begin{equation}
+   \dot\bB=\dot\bF\bF^{t}+\bF\dot\bF^{t}
+   =\bL\bF\bF^{t}+\bF\bF^{t}\bL^{t}=\bL\bB+\bB\bL^{t}.
+   \tag{4.12}\label{eq:4.12}
+\end{equation}
+Evaluating \eqr{4.11} at $t_{0}$, where $\bF=\shift$,
+\begin{equation}
+   \bD=\shift\dot\bE\shift^{t},
+   \tag{4.13}\label{eq:4.13}
+\end{equation}
+so $\bD$ might equally be called the \emph{straining} tensor.
+
+\begin{remark}[$\bD=\Ob$ characterises rigidity]\label{rem:Drigid}
+In a rigid motion $\bF=\bQ(t)$, so $\bC=\hI$ and $\bB=\I$, both constant;
+then $\dot\bC=\hOb$ and \eqr{4.11} gives $\bF^{t}\bD\bF=\hOb$, whence
+$\bD=\Ob$ since $\bF$ is invertible. The converse is also true but is not
+a one-line matter: $\bD=\Ob$ says only that $\bL$ is skew at each point,
+and one must use that $\bL$ is a \emph{gradient} to conclude that it is
+also spatially uniform. Granting that, $\bD=\Ob$ is necessary and
+sufficient for rigidity, the rate analogue of \eqr{3.122}.
+\end{remark}
+
+%=======================================================================
+\section{Material curves}\label{sec:matcurves}
+%=======================================================================
+
+The object to differentiate is \eqr{2.67}, $\mu\bm=\bF\bM$. It is worth
+being clear about what each symbol in it is before touching it, because
+the whole derivation turns on which of them depend on time.
+
+$\bM$ is a unit vector in the reference configuration, pointing along a
+chosen material fibre as that fibre was laid out in $\kappa$. It is a
+label for the fibre, in the way $\bX$ is a label for a particle, and
+labels do not change: $\dot\bM=\bze$ by Remark~\ref{rem:matvec}. The pair
+$(\mu,\bm)$ on the left is what that fibre has become. $\bm$ is a unit
+vector in the current configuration giving the fibre's present direction,
+and $\mu>0$ is its present stretch, the factor by which its length has
+grown. Splitting $\bF\bM$ into a length and a direction this way is a
+deliberate choice, and it is the choice that makes the section work: it
+separates the question ``how much longer is the fibre'' from the question
+``which way is it now pointing'', and the two answers turn out to be
+carried by $\bD$ and by the whole of $\bL$ respectively.
+
+Differentiate, using the product rule on the left and
+$\dot\bM=\bze$ with $\dot\bF=\bL\bF$ from \eqr{4.3} on the right:
+\begin{equation}
+   \dot\mu\,\bm+\mu\dot\bm=\dot\bF\bM=\bL\bF\bM=\mu\bL\bm ,
+   \tag{4.14}\label{eq:4.14}
+\end{equation}
+the last step replacing $\bF\bM$ by $\mu\bm$, which is the equation we
+started from.
+
+Equation \eqr{4.14} contains both unknowns, $\dot\mu$ and $\dot\bm$, and
+one equation cannot give both. The way to separate them is to project.
+Take the inner product of \eqr{4.14} with $\bm$:
+\[
+   \dot\mu\,\ip\bm\bm+\mu\,\ip\bm{\dot\bm}=\mu\,\ip\bm{\bL\bm}.
+\]
+Two of these pieces vanish, each for its own reason.
+
+\emph{First}, $\ip\bm\bm=1$ because $\bm$ is a unit vector, so the
+coefficient of $\dot\mu$ is simply $1$.
+
+\emph{Second}, $\ip\bm{\dot\bm}=0$. To see it, differentiate the identity
+$\ip\bm\bm=1$ with respect to time. The inner product is bilinear, so it
+obeys a product rule,
+\[
+   \frac{\dl}{\dl t}\ip\bm\bm
+   =\ip{\dot\bm}\bm+\ip\bm{\dot\bm}
+   =2\,\ip\bm{\dot\bm},
+\]
+the two terms being equal by symmetry of the inner product. The left side
+is the derivative of the constant $1$, hence zero, so
+$2\ip\bm{\dot\bm}=0$ and therefore $\ip\bm{\dot\bm}=0$. Nothing about the
+motion was used; any unit vector, however it moves, has its derivative
+perpendicular to itself.
+
+What survives is
+\[
+   \dot\mu=\mu\,\ip\bm{\bL\bm}.
+\]
+The right side can be simplified once more. Split $\bL=\bD+\bW$ by
+\eqr{4.7}. Then $\ip\bm{\bL\bm}=\ip\bm{\bD\bm}+\ip\bm{\bW\bm}$, and the
+second term is zero because $\bW$ is skew: by Problem 6(a) of Chapter 1,
+$\ip\bu{\bW\bu}=\ip{\bW^{t}\bu}\bu=-\ip{\bW\bu}\bu=-\ip\bu{\bW\bu}$ for
+every $\bu$, and a number equal to its own negative is zero. So
+\[
+   \dot\mu=\mu\,\ip\bm{\bD\bm}.
+\]
+
+This already says everything, but it is customarily written in a tidier
+form. Divide by $\mu$, which is legitimate because a stretch is strictly
+positive, $\mu>0$, so we are never dividing by zero:
+\[
+   \frac{\dot\mu}{\mu}=\ip\bm{\bD\bm}.
+\]
+Now recognise the left side. By the chain rule, for any positive
+differentiable $\mu(t)$,
+\[
+   \frac{\dl}{\dl t}\ln\mu
+   =\frac{1}{\mu}\,\frac{\dl\mu}{\dl t}
+   =\frac{\dot\mu}{\mu},
+\]
+so the left side is the material derivative of $\ln\mu$ and
+\begin{equation}
+   (\ln\mu)^{\textstyle\cdot}=\ip{\bm}{\bD\bm}.
+   \tag{4.15}\label{eq:4.15}
+\end{equation}
+
+\begin{remark}[why the logarithm is the natural variable
+here]\label{rem:whylog}
+The step from $\dot\mu/\mu$ to $(\ln\mu)^{\textstyle\cdot}$ is only a
+rewriting, and one may ask why anyone bothers. Three reasons, and they are
+the same reasons the logarithmic strain is used throughout finite
+elasticity.
+
+The first is that $\dot\mu/\mu$ is the quantity with physical meaning. A
+fibre growing from $1$ to $1.01$ and a fibre growing from $100$ to $101$
+have the same $\dot\mu$ and are not stretching at the same rate; the
+second is barely changing. Rates of growth are relative, which is why
+interest, inflation and population growth are all quoted as fractions of
+the current amount, and $\dot\mu/\mu$ is exactly that fraction per unit
+time.
+
+The second is that logarithms turn the composition of stretches into
+addition. Stretch a fibre by $\mu_{1}$ and then by $\mu_{2}$ and the total
+stretch is the product $\mu_{1}\mu_{2}$, not the sum. Taking logarithms
+makes the total $\ln\mu_{1}+\ln\mu_{2}$, so $\ln\mu$ accumulates the way
+one expects a strain to accumulate, and its rate is what \eqr{4.15}
+delivers.
+
+The third is that it makes the statement integrable. Reading \eqr{4.15}
+backwards,
+\[
+   \ln\frac{\mu(t)}{\mu(t_{0})}
+   =\int_{t_{0}}^{t}\ip\bm{\bD\bm}\,\dl\tau ,
+\]
+so the total stretch of a fibre is recovered from the history of one
+diagonal component of $\bD$ along it. Had we stopped at $\dot\mu=\mu\,
+\ip\bm{\bD\bm}$ we would have had a differential equation to solve rather
+than an integral to evaluate.
+\end{remark}
+
+Now return to \eqr{4.14} for the other half of the answer. Solve it for
+$\dot\bm$ by isolating that term,
+\[
+   \mu\dot\bm=\mu\bL\bm-\dot\mu\,\bm ,
+\]
+divide through by $\mu>0$,
+\[
+   \dot\bm=\bL\bm-\frac{\dot\mu}{\mu}\,\bm ,
+\]
+and substitute $\dot\mu/\mu=\ip\bm{\bD\bm}$ from \eqr{4.15} together with
+$\bL=\bD+\bW$:
+\begin{equation}
+   \dot\bm=\bD\bm-(\ip\bm{\bD\bm})\bm+\bW\bm .
+   \tag{4.16}\label{eq:4.16}
+\end{equation}
+So one equation, \eqr{4.14}, has been made to yield two, by taking its
+component along $\bm$ and what is left over. That is the standard way to
+get two statements out of one vector equation, and it works here because
+$\bm$ is the natural direction to resolve along.
+
+\begin{remark}[what $\dot\bm$ is: the overdot as a direction of
+change]\label{rem:mdot}
+The object $\dot\bm$ deserves a closer look, because the overdot is saying
+something more specific here than a general rate of change.
+
+Recall what $\bm$ is. It is the unit vector along a material fibre as that
+fibre stands at the present instant. Since $\bm$ always has length one,
+following it in time traces a curve on the unit sphere, and $\dot\bm$ is
+the velocity along that curve. Two consequences follow at once.
+
+\emph{It is perpendicular to $\bm$.} This was proved above in the course
+of deriving \eqr{4.15}: differentiating $\ip\bm\bm=1$ gives
+$\ip\bm{\dot\bm}=0$. So $\dot\bm$ carries no information about length. It
+cannot, since the length is pinned at one. What it points along is the
+direction in which the fibre is swinging, and its magnitude is the angular
+speed of that swing, measured in radians per unit time. The information
+about length was separated off into \eqr{4.15}, which is why \eqr{4.15}
+and \eqr{4.16} together contain everything \eqr{4.14} contained, no more
+and no less.
+
+\emph{The middle term is what enforces the perpendicularity.} Look at the
+three terms of \eqr{4.16} in turn. The term $\bW\bm$ is perpendicular to
+$\bm$ automatically, since $\ip\bm{\bW\bm}=0$ for skew $\bW$. The term
+$\bD\bm$ is not, in general; its component along $\bm$ is exactly
+$\ip\bm{\bD\bm}$. The remaining term, $-(\ip\bm{\bD\bm})\bm$, subtracts
+precisely that component and nothing else. So the formula says: apply
+$\bL$ to the fibre, then remove the part that would change its length. In
+compact form,
+\[
+   \dot\bm=(\I-\bm\otimes\bm)\bL\bm ,
+\]
+where $\I-\bm\otimes\bm$ is the projection onto the plane perpendicular to
+$\bm$, the complement of the projection $\Proj\bn$ of Chapter 1. To check
+that the compact form agrees with \eqr{4.16}, expand it:
+$(\I-\bm\otimes\bm)\bL\bm=\bL\bm-\bm(\ip\bm{\bL\bm})
+=\bD\bm+\bW\bm-(\ip\bm{\bD\bm})\bm$, using $\ip\bm{\bL\bm}=\ip\bm{\bD\bm}$
+once more.
+
+\emph{Which clock the dot keeps.} As everywhere in this chapter, the
+overdot follows the material. So $\dot\bm$ is the turning rate an observer
+riding the particle would measure, not the rate at which the direction
+field $\bm(\bx,t)$ changes at a fixed place in space. The two differ by
+the convective term of \eqr{2.20}, and mistaking one for the other is the
+usual way to get a wrong sign in a rotating flow. Problem 10 is built on
+exactly this distinction. In the potential vortex the direction field at
+any fixed place is steady in time, while every material fibre passing
+through that place is turning.
+\end{remark}
+
+\begin{remark}[the trap: $\bW$ is not the spin of material fibres]
+\label{rem:Wtrap}
+$\bm$ is a unit vector, so $\dot\bm$ is pure reorientation. One is
+tempted to read \eqr{4.16} as saying that the reorientation is $\bW\bm$.
+It is not: the first two terms are generally non-zero, and they are what
+makes Problem 6(d) come out with $\dot\bm\neq\bze$ even though
+$\bW=\Ob$. The stretching tensor turns material fibres as well, and it
+turns different fibres by different amounts. Only in the special case of
+\eqr{4.18} does $\bW$ tell the whole story. Figure~\ref{fig:Wtrapfig}
+shows the failure concretely, in the setting of Problem 6.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{D}
+\begin{tikzpicture}[scale=1.45,
+   ar/.style={-{Stealth[length=2.3mm]},thick},
+   sw/.style={-{Stealth[length=2.0mm]},semithick,gray!80}]
+% only the upper half is drawn; the lower half is its mirror image
+\draw[guide] (1.32,0) arc (0:180:1.32);
+% principal axes
+\draw[ar] (0,0)--(1.32,0);   \node[font=\small,right] at (1.36,0) {$\be_{1}$};
+\draw[ar] (0,0)--(0,1.32);   \node[font=\small,above] at (0,1.36) {$\be_{2}$};
+\draw[ar] (0,0)--(-1.32,0);  \node[font=\small,left] at (-1.36,0) {$-\be_{1}$};
+% fixed directions
+\fill (1.32,0) circle (1.6pt); \fill (0,1.32) circle (1.6pt);
+\fill (-1.32,0) circle (1.6pt);
+% three sample fibres in the first quadrant, drifting clockwise toward e1
+\foreach \a in {28,52,76}{\draw[thin,gray!55] (0,0)--(\a:1.32);}
+\draw[sw] (78:1.46) arc (78:58:1.46);
+\draw[sw] (50:1.46) arc (50:30:1.46);
+\draw[sw] (26:1.46) arc (26:8:1.46);
+% second quadrant, drifting counter-clockwise toward -e1
+\foreach \a in {104,128,152}{\draw[thin,gray!55] (0,0)--(\a:1.32);}
+\draw[sw] (102:1.46) arc (102:122:1.46);
+\draw[sw] (130:1.46) arc (130:150:1.46);
+\draw[sw] (154:1.46) arc (154:172:1.46);
+% labels
+\node[font=\small,align=center] at (0,-0.42)
+   {$\bW=\Ob$, yet $\dot\bm\neq\bze$};
+\node[font=\small] at (0,-0.94)
+   {$\dot\theta=-\tfrac{3}{4}\tfrac{\dot\lambda}{\lambda}\sin2\theta$};
+\node[font=\footnotesize,text=gray!80,align=center] at (0,-1.44)
+   {$\bullet$ = the only directions that hold still};
+\end{tikzpicture}
+\caption{The trap of Remark~\ref{rem:Wtrap}, in the $(\be_{1},\be_{2})$
+section of Problem 6. The spin tensor vanishes identically, so nothing is
+rotating in the sense of $\bW$; nevertheless every material fibre except
+four drifts, and it drifts towards $\pm\be_{1}$, the direction that is
+stretching fastest. The reason is \eqr{4.16}: with $\bW=\Ob$ it reads
+$\dot\bm=\bD\bm-(\bm\cdot\bD\bm)\bm$, the component of $\bD\bm$
+perpendicular to $\bm$, which vanishes exactly when $\bm$ is a principal
+direction of $\bD$. Stretching alone reorients material, and that is why
+$\bW$ cannot be called ``the spin of the material''. Only directions in
+the upper half plane are drawn; the fourth fixed direction, $-\be_{2}$,
+is the mirror image of the one at the top.}
+\label{fig:Wtrapfig}
+\end{figure}
+
+Now specialise. Suppose that at some instant $t_{*}$ the fibre direction
+$\bm$ happens to coincide with a principal vector $\bnu$ of $\bD$, so that
+\[
+   \bD\bnu=\eta\bnu ,\qquad \bm\big|_{t_{*}}=\bnu ,
+\]
+with $\eta$ the corresponding principal value. Feed this into \eqr{4.15}.
+The right side becomes
+\[
+   \ip\bm{\bD\bm}=\ip\bnu{\bD\bnu}=\ip\bnu{\eta\bnu}
+   =\eta\,\ip\bnu\bnu=\eta ,
+\]
+since $\bnu$ is a unit vector. So
+\begin{equation}
+   \eta=(\ln\mu)^{\textstyle\cdot}\big|_{t_{*}} ,
+   \tag{4.17}\label{eq:4.17}
+\end{equation}
+which is the promised interpretation of the principal values: they are the
+logarithmic stretch rates of material curves momentarily lying along the
+principal directions of $\bD$. The eigenvalues of $\bD$ are not abstract
+numbers; each is a rate of stretching that could be measured by marking a
+fibre and timing its growth.
+
+The same substitution does something to \eqr{4.16} as well. At $t_{*}$,
+\[
+   \bD\bm=\eta\bnu
+   \qquad\text{and}\qquad
+   (\ip\bm{\bD\bm})\bm=\eta\,\bnu ,
+\]
+the second because the scalar $\ip\bm{\bD\bm}$ was just computed to be
+$\eta$ and $\bm=\bnu$. The two are equal, so the first two terms of
+\eqr{4.16} cancel exactly and only the spin survives:
+\begin{equation}
+   \dot\bm\big|_{t_{*}}=\bW\bm\big|_{t_{*}} .
+   \tag{4.18}\label{eq:4.18}
+\end{equation}
+
+\begin{remark}[why \eqr{4.18} is a statement about one instant
+only]\label{rem:instantonly}
+It is tempting to read \eqr{4.18} as saying that principal directions turn
+with the spin, full stop. It does not, and the reason is worth being
+careful about.
+
+The cancellation used $\bm=\bnu$, which holds at $t_{*}$ by assumption.
+But the two sides of that assumption evolve for different reasons and at
+different rates. The fibre direction $\bm$ is convected by the motion,
+obeying \eqr{4.16}. The principal direction $\bnu$ is whatever direction
+happens to diagonalise $\bD$ at each instant, and $\bD$ is itself changing
+in time, so $\bnu$ moves for reasons that have nothing to do with any
+particular fibre. There is no reason for the two to stay together, and in
+general they separate immediately after $t_{*}$. Once they have,
+$\bD\bm$ is no longer parallel to $\bm$, the first two terms of \eqr{4.16}
+no longer cancel, and \eqr{4.18} fails.
+
+The special motions in which a fibre stays principal for an interval
+rather than an instant are exactly those in which the principal axes are
+frozen in the material, and Problem 8 works out what that costs.
+Figure~\ref{fig:Wtrapfig} shows the generic situation, in which
+$\bW=\Ob$ yet fibres still drift, precisely because they are not principal
+directions and \eqr{4.18} does not apply to them.
+\end{remark}
+
+\subsection*{Rate of change of the angle between two fibres}
+
+Let $\bM_{1},\bM_{2}$ be two material directions. By \eqr{4.16} with
+$\bD+\bW=\bL$,
+\begin{equation}
+   \dot\bm_{1}=\bL\bm_{1}-(\ip{\bm_{1}}{\bD\bm_{1}})\bm_{1},
+   \qquad
+   \dot\bm_{2}=\bL\bm_{2}-(\ip{\bm_{2}}{\bD\bm_{2}})\bm_{2}.
+   \tag{4.19}\label{eq:4.19}
+\end{equation}
+Both fibres are unit vectors, so the angle $\theta$ between them satisfies
+$\cos\theta=\ip{\bm_{1}}{\bm_{2}}$. This is the equation to differentiate,
+and it is worth noticing why we differentiate the cosine rather than
+$\theta$ itself: $\theta$ is not directly expressible in the fibres,
+whereas its cosine is a plain inner product, and inner products obey a
+product rule.
+
+Differentiate the left side by the chain rule,
+$\frac{\dl}{\dl t}\cos\theta=-(\sin\theta)\dot\theta$, and the right side
+by the product rule for the inner product:
+\begin{equation}
+\begin{aligned}
+   -(\sin\theta)\dot\theta
+   &=\ip{\dot\bm_{1}}{\bm_{2}}+\ip{\bm_{1}}{\dot\bm_{2}}\\
+   &=\ip{\bm_{2}}{\bL\bm_{1}}
+     -(\ip{\bm_{1}}{\bD\bm_{1}})(\ip{\bm_{1}}{\bm_{2}})\\
+   &\qquad+\ip{\bm_{1}}{\bL\bm_{2}}
+     -(\ip{\bm_{2}}{\bD\bm_{2}})(\ip{\bm_{1}}{\bm_{2}}).
+\end{aligned}
+   \tag{4.20}\label{eq:4.20}
+\end{equation}
+The second equality substituted \eqr{4.19} for each dotted fibre and then
+expanded. In the first substitution, $\ip{\dot\bm_{1}}{\bm_{2}}
+=\ip{\bL\bm_{1}}{\bm_{2}}-(\ip{\bm_{1}}{\bD\bm_{1}})\ip{\bm_{1}}{\bm_{2}}$,
+and the first term was rewritten as $\ip{\bm_{2}}{\bL\bm_{1}}$ by symmetry
+of the inner product. The second substitution is the same with the labels
+exchanged.
+
+Now specialise to the case of interest. Suppose the two fibres are
+momentarily perpendicular at an instant $t_{*}$, so that
+$\ip{\bm_{1}}{\bm_{2}}=0$ and $\theta=\pi/2$. Two simplifications follow
+at once. The factor $\ip{\bm_{1}}{\bm_{2}}$ multiplies both of the
+subtracted terms, so both vanish. And $\sin\theta=\sin(\pi/2)=1$, so the
+left side is just $-\dot\theta$. What remains is
+\[
+   -\dot\theta\big|_{t_{*}}
+   =\ip{\bm_{2}}{\bL\bm_{1}}+\ip{\bm_{1}}{\bL\bm_{2}} .
+\]
+Move $\bL$ off the first fibre in the first term using the definition of
+the transpose, $\ip{\bm_{2}}{\bL\bm_{1}}=\ip{\bL^{t}\bm_{2}}{\bm_{1}}
+=\ip{\bm_{1}}{\bL^{t}\bm_{2}}$, so that both terms act on $\bm_{2}$:
+\[
+   -\dot\theta\big|_{t_{*}}
+   =\ip{\bm_{1}}{\bL^{t}\bm_{2}}+\ip{\bm_{1}}{\bL\bm_{2}}
+   =\ip{\bm_{1}}{\big(\bL+\bL^{t}\big)\bm_{2}}
+   =2\,\ip{\bm_{1}}{\bD\bm_{2}},
+\]
+using linearity to combine the two and then $\bL+\bL^{t}=2\bD$ from
+\eqr{4.7}. Therefore
+\begin{equation}
+   \dot\theta\big|_{t_{*}}
+   =-2\,\ip{\bm_{1}}{\bD\bm_{2}} .
+   \tag{4.21}\label{eq:4.21}
+\end{equation}
+The sign says that a positive off-diagonal component of $\bD$ makes the
+angle decrease, which is why one speaks of the fibres closing on one
+another. So the
+\emph{off-diagonal} components of $\bD$ are half the rates at which
+initially perpendicular fibres close on one another, while by \eqr{4.17} the
+\emph{diagonal} components are logarithmic stretch rates. That is the
+complete interpretation of $\bD$, and Figure~\ref{fig:Dmeaning} is the
+whole of it in one picture.
+
+\begin{remark}[why $\bW$ vanished from \eqr{4.21}, and what it would have
+done]\label{rem:Wdrops}
+Something happened between \eqr{4.20} and \eqr{4.21} that is easy to pass
+over: the spin tensor went into the calculation and did not come out. The
+algebra that removed it was the combination $\bL+\bL^{t}=2\bD$, in which
+the skew parts cancel. But the cancellation is not a lucky accident of the
+manipulation, and seeing why shows the difference between the two halves
+of $\bL$ more clearly than anything else in the chapter.
+
+Write out the two places $\bW$ enters. Splitting $\bL=\bD+\bW$ in
+\eqr{4.20}, its contribution to $-(\sin\theta)\dot\theta$ is
+\[
+   \ip{\bm_{2}}{\bW\bm_{1}}+\ip{\bm_{1}}{\bW\bm_{2}} .
+\]
+By skewness the first equals $-\ip{\bW\bm_{2}}{\bm_{1}}
+=-\ip{\bm_{1}}{\bW\bm_{2}}$, so the two are negatives of one another and
+their sum is zero. That is the algebra.
+
+The reason behind the algebra is this. The angle $\theta$ is a relative
+quantity. It depends on the two fibres only through how they are placed
+with respect to each other, not on where either one sits in space. The
+spin tensor turns the pair bodily, moving both fibres at the same angular
+rate about the same axis, so it changes where each of $\bm_{1}$ and
+$\bm_{2}$ points while leaving the relation between them untouched. Any
+quantity built out of the pair alone must therefore be unable to detect
+$\bW$, and $\dot\theta$ is such a quantity. The skewness of $\bW$ is the
+algebraic form of the sentence: a rigid turn does not deform anything.
+
+This also explains the caption of Figure~\ref{fig:Dmeaning}, which says
+the picture is drawn with $\bW=\Ob$. If spin were present, the figure
+would show both arms swinging round together in addition to closing on one
+another, and $\dot\theta$ would come out the same. Setting $\bW=\Ob$ puts
+the pair in the frame that makes the closing look symmetric, so that each
+arm appears to contribute half of it. Equation \eqr{4.21} fixes only the
+sum $\dot\theta$ and says nothing about how that sum is divided between
+the two fibres, because the division depends on the frame in exactly the
+way $\bW$ does. Remark~\ref{rem:Wtrap} is the same warning stated for one
+fibre instead of two.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{C}
+\begin{tikzpicture}[scale=1.28,
+   ar/.style={-{Stealth[length=2.4mm]},thick}]
+% ---- the two fibres as they stand now (dashed) ----
+\draw[guide] (0,0)--(1.70,0);
+\draw[guide] (0,0)--(0,1.70);
+\node[font=\small,text=gray!70,below] at (1.62,-0.04) {$\bm_{1}$};
+\node[font=\small,text=gray!70,left]  at (-0.05,1.58) {$\bm_{2}$};
+% right angle marker on the current pair
+\draw[gray!65,thin] (0.19,0)--(0.19,0.19)--(0,0.19);
+\fill (0,0) circle (1.1pt);
+\node[font=\small,below left=-3pt] at (0,0) {$\bx$};
+% ---- the same two fibres a time dt later ----
+\draw[ar] (0,0)--(1.980,0.278);   % grown and tilted up by 8 deg
+\draw[ar] (0,0)--(0.212,1.505);   % shrunk and tilted right by 8 deg
+% angle between them
+\draw[gray!75,thin] (0.901,0.127) arc (8:82:0.91);
+\node[font=\small] at (0.66,0.58) {$\theta$};
+% annotations
+\node[font=\small,anchor=west] at (2.03,0.30) {$\mu_{1}$ grows};
+\node[font=\small,anchor=west] at (0.30,1.47) {$\mu_{2}$ shrinks};
+\node[font=\small,anchor=north] at (1.05,-0.34)
+  {$(\ln\mu_{i})^{\textstyle\cdot}=\bm_{i}\cdot\bD\bm_{i}$
+   \quad\textit{(diagonal)}};
+\node[font=\small,anchor=north] at (1.05,-0.90)
+  {$\dot\theta=-2\,\bm_{1}\cdot\bD\bm_{2}$
+   \quad\textit{(off-diagonal)}};
+\end{tikzpicture}
+\caption{The entire meaning of $\bD$, read off two material fibres that
+are momentarily perpendicular at $\bx$. Their lengths change at the
+logarithmic rates $\bm_{i}\cdot\bD\bm_{i}$, which are the diagonal
+components of $\bD$ in the basis $\{\bm_{1},\bm_{2}\}$, by \eqr{4.15}.
+The right angle between them closes at the rate $2\,\bm_{1}\cdot\bD\bm_{2}$,
+twice the off-diagonal component, by \eqr{4.21}. Drawn with $\bW=\Ob$, so
+that the closing is shared equally; in general $\bW$ turns the pair
+bodily as well, and \eqr{4.21} fixes only the sum.}
+\label{fig:Dmeaning}
+\end{figure}
+
+\subsection*{Vorticity}
+
+By Problem 16 of Chapter 1 every skew $\bW$ has an axial vector $\bw$ with
+$\bW\bu=\bw\times\bu$. For the spin tensor $\bw$ is the \emph{vorticity}.
+
+\begin{remark}[where $w_{i}=\tfrac12\eps_{ijk}W_{kj}$ comes
+from]\label{rem:axialformula}
+This formula is not a fresh definition. It is
+Proposition~\ref{prop:axial} solved for $\bw$, and both the factor
+$\tfrac12$ and the reversed index pair are forced rather than chosen. Here
+is the whole derivation.
+
+Start with why an axial vector exists at all. A skew tensor satisfies
+$W_{ij}=-W_{ji}$, so its diagonal entries vanish and the entries below the
+diagonal are determined by those above it. In three dimensions that leaves
+three independent numbers, namely $W_{12}$, $W_{13}$, $W_{23}$. A vector
+in three dimensions also has three components. The correspondence between
+skew tensors and vectors rests on this coincidence and exists in no other
+dimension: in four dimensions a skew tensor has six independent entries
+and no vector to match them.
+
+The correspondence is pinned down by requiring $\bW\bu=\bw\times\bu$ for
+every $\bu$. Write both sides in components. The left side is $W_{ij}
+u_{j}$. For the right side, the cross product in components is
+$(\bw\times\bu)_{i}=\eps_{ijk}w_{j}u_{k}$, so
+\[
+   W_{ij}u_{j}=\eps_{ijk}w_{j}u_{k}.
+\]
+The free index is $i$ and $\bu$ is arbitrary, so the coefficients of
+$u_{j}$ must agree on both sides. On the right, rename the summed index
+$k$ to $j$ and the summed index $j$ to $k$, which is allowed because both
+are dummies:
+\[
+   \eps_{ijk}w_{j}u_{k}=\eps_{ikj}w_{k}u_{j}.
+\]
+Matching coefficients of $u_{j}$ now gives
+\[
+   W_{ij}=\eps_{ikj}w_{k}=-\eps_{ijk}w_{k},
+\]
+the last step using the antisymmetry $\eps_{ikj}=-\eps_{ijk}$. This is the
+statement recorded in Proposition~\ref{prop:axial}, and it expresses $\bW$
+in terms of $\bw$.
+
+To go the other way, contract both sides with $\eps_{ijl}$ and sum over
+$i$ and $j$:
+\[
+   \eps_{ijl}W_{ij}=-\eps_{ijl}\eps_{ijk}w_{k}.
+\]
+The double contraction is handled by Theorem~\ref{thm:epsdelta}, which is
+stated with the repeated pair in the last two slots. A cyclic shift puts
+each factor into that form, $\eps_{ijl}=\eps_{lij}$ and
+$\eps_{ijk}=\eps_{kij}$, so
+\[
+   \eps_{ijl}\eps_{ijk}=\eps_{lij}\eps_{kij}=2\dd_{lk},
+\]
+and therefore
+\[
+   \eps_{ijl}W_{ij}=-2\dd_{lk}w_{k}=-2w_{l}
+   \qquad\Longrightarrow\qquad
+   w_{l}=-\tfrac12\eps_{ijl}W_{ij}=-\tfrac12\eps_{lij}W_{ij}.
+\]
+
+Now the factor $\tfrac12$ has an explanation. It is the $2$ in
+$\eps_{lij}\eps_{kij}=2\dd_{lk}$, and that $2$ counts the two orderings of
+the summed pair of indices. Each independent entry of $\bW$ is reached
+twice by the contraction, once as $W_{ij}$ and once as $W_{ji}$, and since
+the two are negatives of one another and $\eps$ also changes sign, the two
+contributions add rather than cancel. Dividing by $2$ undoes the double
+count. Nobody chose the factor for tidiness.
+
+Finally, the form used below is $w_{i}=\tfrac12\eps_{ijk}W_{kj}$, with the
+indices of $W$ in the order $kj$ rather than $jk$. This is the same
+statement written differently. Relabel the dummies $j\leftrightarrow k$ in
+$\eps_{ijk}W_{kj}$ to get $\eps_{ikj}W_{jk}$, then use
+$\eps_{ikj}=-\eps_{ijk}$:
+\[
+   \tfrac12\eps_{ijk}W_{kj}=\tfrac12\eps_{ikj}W_{jk}
+   =-\tfrac12\eps_{ijk}W_{jk},
+\]
+which is what the boxed result above gives with $l$ renamed to $i$.
+Writing $W_{kj}$ instead of $W_{jk}$ is a way of carrying the minus sign in
+the index order rather than in front of the expression, and it is why
+\eqr{4.22} runs through with no stray signs to keep track of.
+\end{remark}
+
+In components, with $w_{i}=\tfrac12\eps_{ijk}W_{kj}$ and \eqr{4.9},
+\begin{equation}
+\begin{aligned}
+   w_{i}&=\tfrac12\eps_{ijk}W_{kj}
+   =\tfrac14\eps_{ijk}\big(v_{k,j}-v_{j,k}\big)\\
+   &=\tfrac14\big(\eps_{ijk}v_{k,j}+\eps_{ikj}v_{j,k}\big)\\
+   &=\tfrac14\big(\eps_{ijk}v_{k,j}+\eps_{ijk}v_{k,j}\big)
+    =\tfrac12\eps_{jki}v_{k,j},
+\end{aligned}
+   \tag{4.22}\label{eq:4.22}
+\end{equation}
+Each line deserves a word, since three different index manipulations are
+used in quick succession.
+
+The first line substituted $W_{kj}=\tfrac12(v_{k,j}-v_{j,k})$ from
+\eqr{4.9}, which contributed the extra $\tfrac12$ and made the total
+$\tfrac14$.
+
+The second line rewrote the subtraction as an addition. Look at the second
+piece, $-\tfrac14\eps_{ijk}v_{j,k}$. Using antisymmetry in the last two
+slots, $-\eps_{ijk}=\eps_{ikj}$, so the piece equals
+$+\tfrac14\eps_{ikj}v_{j,k}$. The minus sign has been absorbed into the
+order of the indices on $\eps$, which is the same trick
+Remark~\ref{rem:axialformula} described.
+
+The third line renamed the dummy indices in that second piece,
+$j\leftrightarrow k$, which is always permitted for summed indices and
+changes nothing. It turns $\eps_{ikj}v_{j,k}$ into $\eps_{ijk}v_{k,j}$,
+which is exactly the first piece. So the two pieces are identical, they
+add, and $\tfrac14+\tfrac14=\tfrac12$.
+
+The fourth line applied the cyclic symmetry $\eps_{ijk}=\eps_{jki}$ to put
+the free index $i$ last, which is the form in which the curl was written
+in Chapter 1. Comparing with $(1.165)$ there,
+\begin{equation}
+   \bw=\tfrac12\crl\bv ,
+   \tag{4.23}\label{eq:4.23}
+\end{equation}
+$\crl$ being the spatial curl.
+
+\begin{remark}[the factor $\tfrac12$, and what vorticity
+measures]\label{rem:halfcurl}
+The factor of $\tfrac12$ in \eqr{4.23} is a standing source of confusion,
+because different books define vorticity as $\bw$ and as $\crl\bv$ without
+always saying which. The way to keep it straight is to remember what each
+one counts, and the cleanest test is rigid rotation.
+
+Let the body rotate rigidly at angular velocity $\bOm$, so that
+$\bv=\bOm\times\br$ with $\br$ measured from a point on the axis. Then
+$\bL=\grad\bv$ is the skew tensor whose axial vector is $\bOm$, so
+$\bD=\Ob$, $\bW=\bL$, and by definition $\bw=\bOm$. The vorticity is the
+angular velocity itself, with no factor.
+
+Now compute the curl of the same field. Since $\bw=\tfrac12\crl\bv$ and
+$\bw=\bOm$, we get $\crl\bv=2\bOm$: the curl is \emph{twice} the angular
+velocity. The factor is real and it is in the curl, not in the vorticity.
+
+The reason is that $\crl\bv$ measures the circulation per unit area around
+a small loop, and a rigidly rotating disc of radius $a$ has circulation
+$\oint\ip\bv{\dl\bx}=(\Omega a)(2\pi a)=2\pi\Omega a^{2}$ around its rim,
+while its area is $\pi a^{2}$. The ratio is $2\Omega$, not $\Omega$.
+Circulation counts the whole way round; angular velocity counts the
+turning rate. Defining $\bw$ with the $\tfrac12$ is what makes the
+vorticity equal to the angular velocity of the local rigid rotation, which
+is the physically useful normalisation and the one this book uses.
+
+The disc of the next section is the concrete version of this argument, and
+Problem 10 shows how badly intuition fails when the flow is not rigid: a
+potential vortex has curved streamlines and zero vorticity everywhere off
+the axis.
+\end{remark}
+
+%=======================================================================
+\section{Example: a spinning disc}\label{sec:disc}
+%=======================================================================
+
+A disc spins about a fixed centre $\bx\in\kappa_{t}$. With $\by$ a point
+of the rim and $\br=\by-\bx$,
+\begin{equation}
+   \dot\br=\omega\,\bn\times\br ,
+   \tag{4.24}\label{eq:4.24}
+\end{equation}
+$\omega$ the constant rotation rate and $\bn$ a fixed unit normal to the
+disc (Figure~\ref{fig:disc}). Taking $\bv(\bx,t)=\bze$,
+\begin{equation}
+   \bv(\by,t)-\bv(\bx,t)=\omega\,\bn\times(\by-\bx).
+   \tag{4.25}\label{eq:4.25}
+\end{equation}
+The right side is linear in $\by-\bx$, so there is a spatially uniform
+$\bL(t)$ with $\bv(\by,t)-\bv(\bx,t)=\bL(t)(\by-\bx)$. It is skew, so
+$\bL=\bW$, $\bD=\Ob$, and the axial vector is
+\begin{equation}
+   \bw(t)=\omega\,\bn .
+   \tag{4.26}\label{eq:4.26}
+\end{equation}
+
+\begin{figure}[htbp]\centering
+\bookfig{1}
+\begin{tikzpicture}[scale=1.15,
+  vec/.style={-{Stealth[length=2.4mm]},thick},
+  lbl/.style={fill=white,inner sep=1.2pt,font=\small}]
+\draw[thick] (0,0) ellipse (2.05 and 0.72);
+\fill[gray!10] (0,0) ellipse (2.05 and 0.72);
+\draw[thick] (0,0) ellipse (2.05 and 0.72);
+\fill (0,0) circle (1.0pt);
+\node[lbl,below left=0pt] at (0,0) {$\bx$};
+\coordinate (Y) at (1.62,0.44);
+\fill (Y) circle (1.0pt);
+\node[lbl,below right=-1pt and 0pt] at (Y) {$\by$};
+\draw[vec] (0,0)--(Y);
+\node[lbl] at (0.84,0.36) {$\br$};
+% the normal
+\draw[vec] (0,0)--(0,1.75);
+\node[lbl,above] at (0,1.78) {$\bn$};
+% the velocity at y: omega n x r, tangent to the rim
+\draw[vec] (Y)--++(-0.30,0.86);
+\node[lbl] at (1.30,1.42) {$\omega\,\bn\times\br$};
+% sense of rotation
+\draw[-{Stealth[length=2.2mm]},gray!70,thick]
+   (-1.35,0.62) arc (150:105:2.0 and 0.95);
+\node[lbl,text=gray!85] at (-1.05,1.02) {$\omega$};
+\end{tikzpicture}
+\caption{The spinning disc. Every point of the body moves with
+$\bv(\by)-\bv(\bx)=\omega\bn\times(\by-\bx)$, which is linear in
+$\by-\bx$ with a skew coefficient. Hence $\bD=\Ob$: the motion is rigid.
+The vorticity is $\bw=\omega\bn$, the angular velocity itself, because
+$\crl\bv$ of a rigid field is twice the angular velocity and \eqr{4.23}
+halves it.}
+\label{fig:disc}
+\end{figure}
+
+In components \eqr{4.25} reads
+\begin{equation}
+   v_{i}(\by,t)-v_{i}(\bx,t)=\omega\,\eps_{ijk}n_{j}(y_{k}-x_{k}),
+   \tag{4.27}\label{eq:4.27}
+\end{equation}
+so, matching against $L_{ik}(y_{k}-x_{k})$,
+\[
+   L_{ik}=\omega\,\eps_{ijk}n_{j}.
+\]
+Then $L_{ki}=\omega\eps_{kji}n_{j}=-\omega\eps_{ijk}n_{j}=-L_{ik}$, so
+$D_{ik}=0$ and $W_{ik}=\omega\eps_{ijk}n_{j}$: the motion is rigid. The
+vorticity follows from \eqr{4.22},
+\begin{equation}
+\begin{aligned}
+   \bw&=w_{j}\be_{j}=\tfrac12\eps_{jki}v_{i,k}\,\be_{j}
+   =\tfrac12\eps_{jki}L_{ik}\,\be_{j}\\
+   &=\tfrac12\,\omega\,\eps_{jki}\eps_{ilk}n_{l}\,\be_{j}
+   =\tfrac12\,\omega\,(2\dd_{jl})\,n_{l}\,\be_{j}
+   =\omega\,n_{j}\be_{j}=\omega\bn ,
+\end{aligned}
+   \tag{4.28}\label{eq:4.28}
+\end{equation}
+the contraction being $\eps_{jki}\eps_{ilk}=\eps_{ijk}\eps_{ilk}
+=2\dd_{jl}$ after cyclic shifts. This confirms \eqr{4.26}.
+
+\begin{remark}[two misprints in the printed \eqr{4.27}--\eqr{4.28}]
+\label{rem:ch4misprint}
+The text writes ``\,$L_{ij}=\omega e_{ijk}n_{j}$\,'' and, two lines later,
+``\,$W_{ij}=\omega e_{ijk}n_{j}$\,''. Neither can be right as printed:
+the index $j$ occurs three times, once free on the left and twice on the
+right, so the equation is not index balanced. Matching \eqr{4.27} against
+$v_{i}-v_{i}=L_{ik}(y_{k}-x_{k})$ shows that the free indices are $i$ and
+$k$ and that $j$ is the summed one, giving
+$L_{ik}=\omega\eps_{ijk}n_{j}$ and $W_{ik}=\omega\eps_{ijk}n_{j}$, as
+used above. Nothing downstream changes.
+
+Second, the printed chain for \eqr{4.28} carries $\omega$ in the line
+$\tfrac12\omega\eps_{jki}L_{ik}\be_{j}$ and again in the following line.
+Since $L$ already contains $\omega$, the factor enters exactly once, at
+the substitution of $L$, as written above. Again the final answer
+$\bw=\omega\bn$ is unaffected.
+\end{remark}
+
+%=======================================================================
+\section{Rigid-body motions}\label{sec:rigidrate}
+%=======================================================================
+
+A rigid motion is \eqr{3.121}, $\bx=\bQ(t)\bX+\bc(t)$, with $\bQ$
+orthogonal. Then $\bF=\bQ$ and, by \eqr{4.3} with $\bQ^{-1}=\bQ^{t}$,
+\begin{equation}
+   \bL=\dot\bQ\bQ^{t}.
+   \tag{4.29}\label{eq:4.29}
+\end{equation}
+By Problem 1(c) this is skew, so
+\[
+   \bD=\Ob,\qquad \bW=\dot\bQ\bQ^{t},
+\]
+and $\bW$ is spatially uniform, depending on $t$ alone. To recover the
+velocity field, integrate at fixed $t$; uniformity of $\bW$ is what lets
+it pass inside the differential, exactly as at \eqr{3.99}:
+\begin{equation}
+   \dl\bv=\bL\,\dl\bx=\bW(t)\,\dl\bx=\dl\big(\bW\bx\big),
+   \tag{4.30}\label{eq:4.30}
+\end{equation}
+so $\dl(\bv-\bW\bx)=\bze$ and the bracket is independent of $\bx$:
+\begin{equation}
+   \bv(\bx,t)=\bW(t)\bx+\bd(t)=\bw(t)\times\bx+\bd(t),
+   \tag{4.31}\label{eq:4.31}
+\end{equation}
+with $\bd(t)\in\Vt$ spatially uniform. Subtracting the same relation at
+two points,
+\begin{equation}
+   \bv(\by,t)-\bv(\bx,t)=\bw(t)\times(\by-\bx),
+   \tag{4.32}\label{eq:4.32}
+\end{equation}
+of which the spinning disc is the special case $\bw=\omega\bn$.
+
+Alternatively differentiate \eqr{3.121} directly and eliminate $\bX$ by
+$\bX=\bQ^{t}(\bx-\bc)$:
+\begin{equation}
+   \bv=\dot\bQ\bX+\dot\bc=\dot\bQ\bQ^{t}(\bx-\bc)+\dot\bc
+     =\bW\bx+\big(\dot\bc-\bW\bc\big),
+   \tag{4.33}\label{eq:4.33}
+\end{equation}
+which is \eqr{4.31} with $\bd=\dot\bc-\bW\bc$.
+
+\begin{remark}[what survives from Chapter 3]\label{rem:ch4summary}
+Three statements now say the same thing about rigidity, at three levels:
+\[
+\begin{aligned}
+   \text{geometry:}&\quad |\bchi(\bY,t)-\bchi(\bX,t)|=|\bY-\bX|,
+     &&\eqr{3.113}\\
+   \text{deformation:}&\quad \bU=\hI,\ \ \bC=\hI,\ \ \bE=\hOb,
+     &&\eqr{3.122}\\
+   \text{rate:}&\quad \bD=\Ob .&&
+\end{aligned}
+\]
+The third is the useful one in practice, because it is a condition on the
+present velocity field alone and needs no reference configuration. It is
+also the reason constitutive laws for fluids are written in $\bD$: a fluid
+cannot feel how far it has come from a reference state, only how fast it
+is being distorted now.
+\end{remark}
+
+%=======================================================================
+\setcounter{problemenv}{0}
+\section{Problems}\label{sec:problems:c4}
+%=======================================================================
+
+%-----------------------------------------------------------------------
+\begin{problem}[Rules for time derivatives of tensors]
+(a) Product rule. (b) Differentiation commutes with transposition.
+(c) If $\bR$ is orthogonal, $\dot\bR\bR^{t}$ is skew. (d) Differentiation
+does \emph{not} commute with inversion; find
+$(\bA^{-1})^{\textstyle\cdot}$.
+\end{problem}
+
+\begin{solution}
+Every part of this problem is settled the same way. A tensor equation is
+nine scalar equations in components, the components are ordinary functions
+of $t$, and the ordinary rules of calculus apply to them. The only care
+needed is that tensors do not commute, so the \emph{order} of factors must
+be preserved when the component statement is read back as a tensor
+statement. All four parts are used repeatedly in this chapter and the
+next, and (a) and (c) in particular are what \eqr{4.4} and \eqr{4.6} rest
+on.
+
+\textbf{(a)} In components $(\bA\bB)_{ij}=A_{ik}B_{kj}$, a sum of products
+of scalar functions of $t$, so the scalar product rule applies to each
+term of the sum:
+\[
+   \big[(\bA\bB)^{\textstyle\cdot}\big]_{ij}
+   =\big(A_{ik}B_{kj}\big)^{\textstyle\cdot}
+   =\dot A_{ik}B_{kj}+A_{ik}\dot B_{kj}.
+\]
+Read the two terms back as tensors. In the first, the free indices $i$ and
+$j$ sit on $\dot A$ and $B$ in that order with $k$ summed between them, so
+it is $\dot\bA\bB$; the second is $\bA\dot\bB$ by the same reading. Hence
+\[
+   (\bA\bB)^{\textstyle\cdot}=\dot\bA\bB+\bA\dot\bB .
+\]
+The order matters: $\bB\dot\bA$ would be a different tensor, and writing
+the rule with the factors commuted is the commonest slip in the subject.
+
+\textbf{(b)} $(\bA^{t})_{ij}=A_{ji}$, so
+$\big[(\bA^{t})^{\textstyle\cdot}\big]_{ij}=\dot A_{ji}
+=(\dot\bA^{t})_{ij}$.
+
+\textbf{(c)} Differentiate $\bR\bR^{t}=\I$ by (a) and (b):
+\[
+   \dot\bR\bR^{t}+\bR\dot\bR^{t}=\Ob
+   \ \Longrightarrow\
+   \dot\bR\bR^{t}=-\bR\dot\bR^{t}=-\big(\dot\bR\bR^{t}\big)^{t},
+\]
+which is skewness.
+
+\textbf{(d)} Differentiate $\bA\bA^{-1}=\I$:
+\[
+   \dot\bA\bA^{-1}+\bA\big(\bA^{-1}\big)^{\textstyle\cdot}=\Ob
+   \ \Longrightarrow\
+   \boxed{\ \big(\bA^{-1}\big)^{\textstyle\cdot}
+   =-\bA^{-1}\dot\bA\bA^{-1}.\ }
+\]
+This is not $(\dot\bA)^{-1}$: the two differ already for
+$\bA=t\I$, where $(\bA^{-1})^{\textstyle\cdot}=-t^{-2}\I$ while
+$(\dot\bA)^{-1}=\I$. The scalar case $\dl(1/a)/\dl t=-\dot a/a^{2}$ is the
+same statement, with the two copies of $\bA^{-1}$ collapsing to $a^{-2}$
+only because scalars commute.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[$\dot J=J\tr\bL$, and $\partial J/\partial F_{iA}=F^{*}_{iA}$]
+(a) Differentiate $J\tbox\bu\bv\bw=\tbox{\bF\bu}{\bF\bv}{\bF\bw}$ at fixed
+$\bu,\bv,\bw$ and use the box-product definition of the trace to get
+$\dot J/J=\tr\bL$.
+(b) Compare with $\dot J=(\partial J/\partial F_{iA})\dot F_{iA}$ to
+conclude $\partial J/\partial F_{iA}=F^{*}_{iA}$.
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} The box product is trilinear, so its derivative obeys a
+three-term product rule. With $\bu,\bv,\bw$ fixed and $\dot\bF=\bL\bF$,
+\[
+\begin{aligned}
+   \dot J\,\tbox\bu\bv\bw
+   &=\tbox{\dot\bF\bu}{\bF\bv}{\bF\bw}
+    +\tbox{\bF\bu}{\dot\bF\bv}{\bF\bw}
+    +\tbox{\bF\bu}{\bF\bv}{\dot\bF\bw}\\
+   &=\tbox{\bL\ba}{\bb}{\bc}+\tbox{\ba}{\bL\bb}{\bc}
+    +\tbox{\ba}{\bb}{\bL\bc},
+\end{aligned}
+\]
+where $\ba=\bF\bu$, $\bb=\bF\bv$, $\bc=\bF\bw$. The last line is exactly
+Definition~\ref{def:inv3}$_{1}$ of the trace, so it equals
+$(\tr\bL)\tbox\ba\bb\bc=(\tr\bL)J\tbox\bu\bv\bw$. Cancelling the non-zero
+box product,
+\[
+   \boxed{\ \dot J=J\,\tr\bL=J\,\tr\bD\ }
+\]
+the second form because $\tr\bW=0$ for skew $\bW$. So $J$ is constant in
+time exactly when $\dvg\bv=\tr\bL=0$: that is what \emph{isochoric} means
+for a motion.
+
+\textbf{(b)} By the chain rule, $J$ being a function of the nine $F_{iA}$,
+\[
+   \dot J=\frac{\partial J}{\partial F_{iA}}\,\dot F_{iA}.
+\]
+On the other hand, by (a) and $L_{ii}=\dot F_{iA}F^{-1}_{Ai}$ from
+\eqr{4.3},
+\[
+   \dot J=J\,L_{ii}=J\,F^{-1}_{Ai}\,\dot F_{iA}
+   =\big(J\,F^{-t}_{iA}\big)\dot F_{iA}.
+\]
+The two hold for every $\dot F_{iA}$, which are arbitrary, so the
+coefficients agree:
+\[
+   \frac{\partial J}{\partial F_{iA}}=J\,F^{-t}_{iA}=F^{*}_{iA},
+\]
+the last step by \eqr{2.55}. So the cofactor is the derivative of the
+determinant, which is the identity that produces the Piola stress in
+Chapter 6.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[A material derivative from a spatial field]
+With $\theta(\bx,t)=(A\cos t)/r$, $r^{2}=x_{1}^{2}+x_{2}^{2}$, and
+$v_{1}=x_{1}^{2}x_{2}+x_{3}^{2}$, $v_{2}=-x_{1}^{3}-x_{1}x_{2}^{2}$,
+$v_{3}=0$, find $\dot\theta$.
+\end{problem}
+
+\begin{solution}
+Use \eqr{2.17}, $\dot\theta=\theta'+\ip{\grad\theta}{\bv}$.
+
+\emph{Spatial time derivative}, at fixed $\bx$:
+\[
+   \theta'=\frac{\partial}{\partial t}\Big(\frac{A\cos t}{r}\Big)
+   =-\frac{A\sin t}{r}.
+\]
+
+\emph{Spatial gradient.} From $r^{2}=x_{1}^{2}+x_{2}^{2}$,
+$r_{,1}=x_{1}/r$, $r_{,2}=x_{2}/r$, $r_{,3}=0$. Then
+$\theta=A\cos t\,r^{-1}$ gives
+\[
+   \theta_{,i}=-A\cos t\,r^{-2}r_{,i}
+   \ \Longrightarrow\
+   \grad\theta=-\frac{A\cos t}{r^{3}}\big(x_{1}\be_{1}+x_{2}\be_{2}\big).
+\]
+
+\emph{Convective term.} Only $v_{1},v_{2}$ contribute:
+\[
+\begin{aligned}
+   x_{1}v_{1}+x_{2}v_{2}
+   &=x_{1}\big(x_{1}^{2}x_{2}+x_{3}^{2}\big)
+     +x_{2}\big(-x_{1}^{3}-x_{1}x_{2}^{2}\big)\\
+   &=x_{1}^{3}x_{2}+x_{1}x_{3}^{2}-x_{1}^{3}x_{2}-x_{1}x_{2}^{3}
+    =x_{1}\big(x_{3}^{2}-x_{2}^{3}\big),
+\end{aligned}
+\]
+the $x_{1}^{3}x_{2}$ terms cancelling. Hence
+\[
+   \boxed{\ \dot\theta=-\frac{A\sin t}{r}
+   -\frac{A\cos t}{r^{3}}\,x_{1}\big(x_{3}^{2}-x_{2}^{3}\big),
+   \qquad r=\sqrt{x_{1}^{2}+x_{2}^{2}}.\ }
+\]
+On the axis $x_{1}=x_{2}=0$ both terms are singular, as $\theta$ itself
+is; off the axis the first term is the cooling seen by a fixed
+thermometer and the second is what the moving material point picks up by
+travelling through the spatial gradient.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[The convective acceleration in Lamb form]
+Show $\dot\bv=\bv'+\tfrac12\grad\big(|\bv|^{2}\big)+2\,\bw\times\bv$.
+\end{problem}
+
+\begin{solution}
+The strategy is to compute both sides in terms of $\bD$ and $\bW$ and see
+that they agree. The left side comes straight from Chapter 2.
+
+\emph{The left side.} Apply \eqr{2.20} to the vector field $\bv$ itself,
+which is \eqr{2.21}, and then split $\bL$ into its symmetric and skew
+parts by \eqr{4.7}:
+\[
+   \dot\bv=\bv'+(\grad\bv)\bv=\bv'+\bL\bv=\bv'+\bD\bv+\bW\bv .
+\]
+
+\emph{The gradient term.} Compute $\tfrac12\grad|\bv|^{2}$ in components.
+Write $|\bv|^{2}=v_{k}v_{k}$ and differentiate with the product rule,
+noting that the two terms produced are equal because $k$ is summed:
+\[
+   \Big[\tfrac12\grad|\bv|^{2}\Big]_{i}
+   =\tfrac12\big(v_{k}v_{k}\big)_{,i}
+   =\tfrac12\big(v_{k,i}v_{k}+v_{k}v_{k,i}\big)
+   =v_{k}v_{k,i}.
+\]
+Now recognise what $v_{k}v_{k,i}$ is. Since $L_{ki}=v_{k,i}$, the
+expression is $L_{ki}v_{k}=(\bL^{t})_{ik}v_{k}=(\bL^{t}\bv)_{i}$, the
+transpose appearing because the summed index sits in the \emph{first} slot
+of $\bL$. So
+\[
+   \tfrac12\grad|\bv|^{2}=\bL^{t}\bv=(\bD+\bW)^{t}\bv=(\bD-\bW)\bv ,
+\]
+using $\bD^{t}=\bD$ and $\bW^{t}=-\bW$.
+
+\emph{The cross-product term.} By the definition of the axial vector,
+Proposition~\ref{prop:axial} with $\bW$ in place of $\bA$, we have
+$\bW\bv=\bw\times\bv$ for every $\bv$.
+
+\emph{Putting them together.} Substitute both into the claimed right side:
+\[
+   \bv'+\tfrac12\grad|\bv|^{2}+2\,\bw\times\bv
+   =\bv'+(\bD-\bW)\bv+2\bW\bv
+   =\bv'+\bD\bv+\bW\bv ,
+\]
+since $-\bW\bv+2\bW\bv=\bW\bv$. This is exactly the expression computed
+for $\dot\bv$ above, so the two sides agree and the identity is proved.
+
+\emph{Why anyone bothers.} The convective term $(\grad\bv)\bv$ is
+quadratic in the velocity and is the source of every difficulty in fluid
+mechanics. The Lamb form splits it into two pieces of quite different
+character. The first, $\tfrac12\grad|\bv|^{2}$, is a gradient, so it
+integrates to a potential and contributes nothing to the circulation
+around a closed material curve, exactly as was seen in Problem 1 of
+Chapter 5. The second, $2\bw\times\bv$, is perpendicular to $\bv$ and
+therefore does no work on the flow; it is the term that vanishes when the
+motion is irrotational. In a steady irrotational flow both simplifications
+apply at once, $\bv'=\bze$ and $\bw=\bze$, so $\dot\bv$ is a pure gradient
+and the equation of motion of Chapter 6 integrates immediately. That
+integral is Bernoulli's theorem, and this rearrangement is where it comes
+from.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[A given velocity field]
+For $v_{1}=ax_{2}x_{3}$, $v_{2}=-ax_{1}x_{3}$, $v_{3}=bx_{3}$ find
+(a) $\bL$, (b) $\bD,\bW$, (c) $\bw$, (d) the conditions on $a,b$ for the
+motion to be (i) isochoric and (ii) irrotational.
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} $L_{ij}=v_{i,j}$, differentiating each component with respect
+to each coordinate:
+\[
+   (L_{ij})=\begin{pmatrix}
+      0&ax_{3}&ax_{2}\\
+     -ax_{3}&0&-ax_{1}\\
+      0&0&b\end{pmatrix}.
+\]
+
+\textbf{(b)} $\bD=\tfrac12(\bL+\bL^{t})$ and $\bW=\tfrac12(\bL-\bL^{t})$,
+entry by entry. The $(1,2)$ entries cancel in $\bD$ and double in $\bW$:
+\[
+   (D_{ij})=\begin{pmatrix}
+      0&0&\tfrac12 ax_{2}\\
+      0&0&-\tfrac12 ax_{1}\\
+      \tfrac12 ax_{2}&-\tfrac12 ax_{1}&b\end{pmatrix},
+   \qquad
+   (W_{ij})=\begin{pmatrix}
+      0&ax_{3}&\tfrac12 ax_{2}\\
+     -ax_{3}&0&-\tfrac12 ax_{1}\\
+     -\tfrac12 ax_{2}&\tfrac12 ax_{1}&0\end{pmatrix}.
+\]
+
+\textbf{(c)} From $\bW\bu=\bw\times\bu$ one has $W_{ij}=-\eps_{ijk}w_{k}$,
+so $w_{1}=-W_{23}$, $w_{2}=W_{13}$, $w_{3}=-W_{12}$:
+\[
+   \bw=\tfrac{a}{2}\big(x_{1}\be_{1}+x_{2}\be_{2}\big)-a x_{3}\be_{3}.
+\]
+Check against \eqr{4.23}, $\bw=\tfrac12\crl\bv$:
+\[
+\begin{aligned}
+   (\crl\bv)_{1}&=v_{3,2}-v_{2,3}=0+ax_{1}=ax_{1},\\
+   (\crl\bv)_{2}&=v_{1,3}-v_{3,1}=ax_{2}-0=ax_{2},\\
+   (\crl\bv)_{3}&=v_{2,1}-v_{1,2}=-ax_{3}-ax_{3}=-2ax_{3},
+\end{aligned}
+\]
+whose half is the $\bw$ just found.
+
+\textbf{(d)} (i) Isochoric means $\dot J=0$, i.e.\ $\tr\bL=0$ by
+Problem 2. Here $\tr\bL=0+0+b=b$, so the condition is
+\[
+   b=0 .
+\]
+(ii) Irrotational means $\bw=\bze$ at every point; the component
+$w_{1}=\tfrac12 ax_{1}$ must vanish for all $x_{1}$, so
+\[
+   a=0 ,
+\]
+and then $\bw=\bze$ whatever $b$ is. Note the two conditions are
+independent: $b$ controls the volume change, $a$ the rotation.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[Spin of a fibre when $\bW=\Ob$]
+Let $\bF=\lambda\,\be_{1}\otimes\hbE_{1}
++\lambda^{-1/2}\big(\be_{2}\otimes\hbE_{2}+\be_{3}\otimes\hbE_{3}\big)$
+with $\lambda=\lambda(t)$.
+(a) Show the motion is isochoric. (b) Verify the stated $\bF^{-1}$.
+(c) Find $\bL$ and show $\bW=\Ob$. (d) With
+$\bm=\cos\phi\,\ber(\theta)+\sin\phi\,\be_{3}$, find $\dot\theta$ and
+$\dot\phi$, and identify the directions with $\dot\bm=\bze$.
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} $\bF$ is already in the form \eqr{3.43} with orthonormal frames
+on both sides, so its principal stretches are the coefficients and
+\[
+   J=\lambda\cdot\lambda^{-1/2}\cdot\lambda^{-1/2}
+   =\lambda^{1-\frac12-\frac12}=1 .
+\]
+
+\textbf{(b)} Multiply, using $(\ba\otimes\bb)(\bc\otimes\bd)
+=(\ip\bb\bc)\ba\otimes\bd$; only the three diagonal products survive:
+\[
+   \bF\bF^{-1}=\lambda\lambda^{-1}\be_{1}\otimes\be_{1}
+   +\lambda^{-1/2}\lambda^{1/2}\big(\be_{2}\otimes\be_{2}
+   +\be_{3}\otimes\be_{3}\big)=\I .
+\]
+
+\textbf{(c)} Differentiate $\bF$ at fixed $\bX$, the bases being constant:
+\[
+   \dot\bF=\dot\lambda\,\be_{1}\otimes\hbE_{1}
+   -\tfrac12\lambda^{-3/2}\dot\lambda
+   \big(\be_{2}\otimes\hbE_{2}+\be_{3}\otimes\hbE_{3}\big),
+\]
+and multiply by $\bF^{-1}$ of part (b):
+\[
+   \boxed{\ \bL=\dot\bF\bF^{-1}
+   =\frac{\dot\lambda}{\lambda}\,\be_{1}\otimes\be_{1}
+   -\frac{\dot\lambda}{2\lambda}
+   \big(\be_{2}\otimes\be_{2}+\be_{3}\otimes\be_{3}\big).\ }
+\]
+This is symmetric, so $\bW=\Skw\bL=\Ob$ and $\bD=\bL$. Its trace is
+$\dot\lambda/\lambda-\dot\lambda/\lambda=0$, consistent with (a) and
+Problem 2.
+
+\textbf{(d)} Write $\alpha=\dot\lambda/\lambda$, so
+$\bD=\alpha\be_{1}\otimes\be_{1}
+-\tfrac\alpha2(\be_{2}\otimes\be_{2}+\be_{3}\otimes\be_{3})$, and
+\[
+\begin{aligned}
+   \bm&=\big(\cos\phi\cos\theta,\ \cos\phi\sin\theta,\ \sin\phi\big),\\
+   \bD\bm&=\big(\alpha\cos\phi\cos\theta,\
+   -\tfrac\alpha2\cos\phi\sin\theta,\ -\tfrac\alpha2\sin\phi\big).
+\end{aligned}
+\]
+Differentiating the parametrisation, with $\beth=\ber'(\theta)$ and
+$\beph=-\sin\phi\,\ber+\cos\phi\,\be_{3}$,
+\[
+   \dot\bm=\cos\phi\,\dot\theta\,\beth+\dot\phi\,\beph
+   \ \Longrightarrow\
+   \dot\theta=\frac{\ip{\beth}{\dot\bm}}{\cos\phi},
+   \qquad
+   \dot\phi=\ip{\beph}{\dot\bm},
+\]
+since $\{\bm,\beth,\beph\}$ is orthonormal. By \eqr{4.16} with $\bW=\Ob$,
+$\dot\bm=\bD\bm-(\ip\bm{\bD\bm})\bm$, and both $\beth$ and $\beph$ are
+perpendicular to $\bm$, so the second term drops out of both projections:
+$\ip{\beth}{\dot\bm}=\ip{\beth}{\bD\bm}$ and
+$\ip{\beph}{\dot\bm}=\ip{\beph}{\bD\bm}$. Now
+\[
+\begin{aligned}
+   \ip{\beth}{\bD\bm}
+   &=-\sin\theta\,\alpha\cos\phi\cos\theta
+     +\cos\theta\big(-\tfrac\alpha2\cos\phi\sin\theta\big)\\
+   &=-\tfrac{3\alpha}{2}\cos\phi\sin\theta\cos\theta
+    =-\tfrac{3\alpha}{4}\cos\phi\,\sin2\theta,
+\end{aligned}
+\]
+\[
+\begin{aligned}
+   \ip{\beph}{\bD\bm}
+   &=-\alpha\sin\phi\cos\phi\cos^{2}\theta
+     +\tfrac\alpha2\sin\phi\cos\phi\sin^{2}\theta
+     -\tfrac\alpha2\sin\phi\cos\phi\\
+   &=\alpha\sin\phi\cos\phi
+     \Big[-\cos^{2}\theta+\tfrac12\sin^{2}\theta-\tfrac12\Big]
+    =-\tfrac{3\alpha}{2}\sin\phi\cos\phi\,\cos^{2}\theta,
+\end{aligned}
+\]
+using $\tfrac12\sin^{2}\theta-\tfrac12=-\tfrac12\cos^{2}\theta$. Hence
+\[
+   \boxed{\ \dot\theta=-\frac{3\dot\lambda}{4\lambda}\,\sin2\theta,
+   \qquad
+   \dot\phi=-\frac{3\dot\lambda}{4\lambda}\,\sin2\phi\,\cos^{2}\theta .\ }
+\]
+Both are generally non-zero although $\bW=\Ob$: this is
+Remark~\ref{rem:Wtrap} made quantitative, and it is the point of the
+problem.
+
+\emph{When is $\dot\bm=\bze$?} Since $\bW=\Ob$, \eqr{4.16} gives
+$\dot\bm=\bD\bm-(\ip\bm{\bD\bm})\bm$, which vanishes exactly when
+$\bD\bm$ is parallel to $\bm$, i.e.\ when $\bm$ is a principal direction
+of $\bD$. Reading the boxed formulas, $\dot\theta=0$ needs
+$\sin2\theta=0$ and $\dot\phi=0$ needs $\sin2\phi\cos^{2}\theta=0$, so
+\[
+\begin{aligned}
+   \theta&=\tfrac\pi2\ \text{or}\ \tfrac{3\pi}{2}:
+     &&\cos\theta=0,\ \text{so any }\phi\ \text{works},\\
+   \theta&=0\ \text{or}\ \pi: &&\phi=0\ \text{or}\ \tfrac\pi2 .
+\end{aligned}
+\]
+The first family is every direction in the $(\be_{2},\be_{3})$ plane, the
+second gives $\bm=\pm\be_{1}$ and $\bm=\pm\be_{3}$. That is exactly the
+principal set of $\bD$: the value $-\alpha/2$ is repeated, so the whole
+$(\be_{2},\be_{3})$ plane is principal, and $\be_{1}$ carries the isolated
+value $\alpha$.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[Rate of area change and rotation of the normal]
+With $\alpha=\dl a/\dl A$ the local area ratio of a material surface,
+(a) show $\alpha>0$; (b) establish
+$\dot\alpha/\alpha=\tr\bD-\ip\bn{\bD\bn}$ and
+$\dot\bn=(\ip\bn{\bD\bn})\bn-\bL^{t}\bn$.
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} By Piola--Nanson \eqr{2.54}, $\alpha\bn=\bF^{*}\bN$ with
+$|\bn|=1$, so $\alpha=|\bF^{*}\bN|$. Now $\bF^{*}=J\bF^{-t}$ is
+invertible, since $\det\bF^{*}=J^{2}\neq0$, and $\bN\neq\bze$; hence
+$\bF^{*}\bN\neq\bze$ and $\alpha>0$.
+
+\textbf{(b)} Differentiate $\alpha\bn=J\bF^{-t}\bN$ at fixed $\bN$, which
+is legitimate because $\bN$ is a material vector. Two ingredients are
+needed. First $\dot J=J\tr\bD$ from Problem 2. Second, by Problem 1(b),(d)
+and $\dot\bF=\bL\bF$,
+\[
+   \big(\bF^{-t}\big)^{\textstyle\cdot}
+   =\Big(\big(\bF^{-1}\big)^{\textstyle\cdot}\Big)^{t}
+   =\big(-\bF^{-1}\bL\bF\bF^{-1}\big)^{t}
+   =-\big(\bF^{-1}\bL\big)^{t}
+   =-\bL^{t}\bF^{-t}.
+\]
+Therefore
+\[
+   \dot\alpha\,\bn+\alpha\dot\bn
+   =\dot J\bF^{-t}\bN+J\big(\bF^{-t}\big)^{\textstyle\cdot}\bN
+   =(\tr\bD)\,\alpha\bn-\bL^{t}\alpha\bn ,
+\]
+having recognised $J\bF^{-t}\bN=\alpha\bn$ twice. Dot with $\bn$, using
+$\ip{\bn}{\dot\bn}=0$ and
+$\ip{\bn}{\bL^{t}\bn}=\ip{\bn}{\bL\bn}=\ip\bn{\bD\bn}$:
+\[
+   \boxed{\ \frac{\dot\alpha}{\alpha}=\tr\bD-\ip\bn{\bD\bn}\ }
+\]
+Substituting this back and dividing by $\alpha$,
+\[
+   \dot\bn=(\tr\bD)\bn-\bL^{t}\bn-\big(\tr\bD-\ip\bn{\bD\bn}\big)\bn
+   =\boxed{\ (\ip\bn{\bD\bn})\bn-\bL^{t}\bn .\ }
+\]
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{E}
+\begin{tikzpicture}[scale=1.5,
+   ar/.style={-{Stealth[length=2.4mm]},thick}]
+% the material square now, and a moment later under simple shear
+\draw[guide] (0,0) rectangle (1.5,1.5);
+\draw[thick] (0,0)--(1.5,0)--(2.05,1.5)--(0.55,1.5)--cycle;
+% the left edge as a material fibre
+\draw[ar] (0,0)--(0.55,1.5);
+\node[font=\small,anchor=south east] at (0.56,1.42) {$\bm$};
+\draw[guide] (0,0)--(0,1.5);
+% its normal, before and after
+\draw[ar] (0.275,0.75)--(1.20,0.411);
+\node[font=\small,anchor=north west=-1pt] at (1.17,0.40) {$\bn$};
+\draw[guide] (0.275,0.75)--(1.20,0.75);
+% right angle between m and n
+\draw[gray!65,thin] (0.363,0.99)--(0.487,1.048)--(0.545,0.924);
+\node[font=\footnotesize,text=gray!80,anchor=north] at (1.0,-0.22)
+   {dashed horizontal: where convecting $\bn$ with $\bL$ would leave it};
+\node[font=\small,anchor=north] at (1.0,-0.68)
+   {$\dot\bm=\bL\bm-(\bm\cdot\bD\bm)\bm$
+    \qquad
+    $\dot\bn=(\bn\cdot\bD\bn)\bn-\bL^{t}\bn$};
+\end{tikzpicture}
+\caption{Simple shear, with the square as it stands now dashed. The left
+edge is a material fibre and also a material surface; its unit tangent
+$\bm$ and unit normal $\bn$ must stay perpendicular, and they do. That is
+what the transpose in $-\bL^{t}\bn$ buys: here
+$\bL=\kappa\,\be_{1}\otimes\be_{2}$, so $\bL\bm$ tips the fibre to the
+right while $-\bL^{t}\bn=-\kappa\be_{2}$ tips the normal down by the same
+angle. Convecting the normal with $\bL$ instead, the common slip, gives
+$\bL\be_{1}=\bze$: the normal would not move at all, and would stop being
+normal.}
+\label{fig:linevsnormal}
+\end{figure}
+
+Compare with \eqr{4.16}: a material \emph{line} element is convected by
+$\bL$, a material \emph{normal} by $-\bL^{t}$. That sign and transpose
+are the rate form of the difference between $\bF$ and $\bF^{-t}$ in
+Piola--Nanson, and forgetting them is the standard error.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[Stretching when the principal axes are frozen in the body]
+If $\dot\bu_{i}=\bze$, show
+$\bD=\sum_{i}(\ln\lambda_{i})^{\textstyle\cdot}\,\bv_{i}\otimes\bv_{i}$.
+\end{problem}
+
+\begin{solution}
+With $\bU=\sum_{i}\lambda_{i}\bu_{i}\otimes\bu_{i}$ and
+$\dot\bu_{i}=\bze$, only the coefficients move:
+\[
+   \dot\bU=\sum_{i}\dot\lambda_{i}\,\bu_{i}\otimes\bu_{i},
+   \qquad
+   \bU^{-1}=\sum_{i}\lambda_{i}^{-1}\,\bu_{i}\otimes\bu_{i},
+\]
+the inverse by Remark~\ref{rem:powers}. Now multiply them. The product of
+the two sums has nine terms, one for each pair $(i,j)$:
+\[
+   \dot\bU\bU^{-1}
+   =\sum_{i}\sum_{j}\frac{\dot\lambda_{i}}{\lambda_{j}}
+     \big(\bu_{i}\otimes\bu_{i}\big)\big(\bu_{j}\otimes\bu_{j}\big).
+\]
+Each product of dyads collapses by the rule
+$(\ba\otimes\bb)(\bc\otimes\bd)=(\ip\bb\bc)\,\ba\otimes\bd$, which is the
+definition of the tensor product applied twice. Here $\bb=\bu_{i}$ and
+$\bc=\bu_{j}$, so the scalar produced is $\ip{\bu_{i}}{\bu_{j}}=\dd_{ij}$
+by orthonormality of the principal basis. That kills every term with
+$i\neq j$, six of the nine, and leaves the three diagonal ones with
+$\lambda_{j}$ replaced by $\lambda_{i}$:
+\[
+   \dot\bU\bU^{-1}
+   =\sum_{i}\frac{\dot\lambda_{i}}{\lambda_{i}}\,
+     \bu_{i}\otimes\bu_{i}
+   =\sum_{i}(\ln\lambda_{i})^{\textstyle\cdot}\,\bu_{i}\otimes\bu_{i},
+\]
+the last step being the same chain rule that produced \eqr{4.15},
+$\dot\lambda/\lambda=(\ln\lambda)^{\textstyle\cdot}$. The result is
+\emph{symmetric}, being a sum of terms $\bu\otimes\bu$ with real
+coefficients, and that observation is what the rest of the solution turns
+on. Now look at \eqr{4.5}:
+\[
+   \bL=\underbrace{\dot\bR\bR^{t}}_{\text{skew, Problem 1(c)}}
+      +\underbrace{\bR\big(\dot\bU\bU^{-1}\big)\bR^{t}}_{\text{symmetric}},
+\]
+the second being symmetric because $\bR\bS\bR^{t}$ is symmetric whenever
+$\bS$ is. By the uniqueness of the symmetric--skew splitting, Problem 14
+of Chapter 1, these two \emph{are} $\bD$ and $\bW$. Hence, using
+$(\bR\ba)\otimes(\bR\bb)=\bR(\ba\otimes\bb)\bR^{t}$ from \eqr{3.41} and
+$\bv_{i}=\bR\bu_{i}$,
+\[
+   \bD=\bR\Big(\sum_{i}(\ln\lambda_{i})^{\textstyle\cdot}
+       \bu_{i}\otimes\bu_{i}\Big)\bR^{t}
+   =\boxed{\ \sum_{i}(\ln\lambda_{i})^{\textstyle\cdot}\,
+     \bv_{i}\otimes\bv_{i}\ }
+\]
+and $\bW=\dot\bR\bR^{t}$.
+
+Two readings. The principal values of $\bD$ are the logarithmic stretch
+rates, in agreement with \eqr{4.17}; and $\bD$ is here coaxial with $\bV$,
+which is exactly the case in which the Hencky strain of
+Remark~\ref{rem:sethhill} satisfies $\bD=(\ln\bV)^{\textstyle\cdot}$. In
+general, when $\dot\bu_{i}\neq\bze$, that last identity is false.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[An azimuthally graded axial flow]
+For $\bv=(\theta/\theta_{0})W\be_{3}$ with $W,\theta_{0}$ constant, find
+(a) $\bL,\bD,\bW$; (b) the principal values and vectors of $\bD$, and
+$\bw$.
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} $\bv=f\be_{3}$ with $f=W\theta/\theta_{0}$ a scalar field and
+$\be_{3}$ constant, so by Problem 24(f) of Chapter 1,
+$\grad(f\be_{3})=\be_{3}\otimes\grad f$. By Problem 25 of Chapter 1 in
+cylindrical form, $\grad\theta=\bet/r$, whence
+\[
+   \boxed{\ \bL=\frac{W}{\theta_{0}r}\,\be_{3}\otimes\bet\ }
+\]
+and, splitting by \eqr{4.7} with $c:=W/(2\theta_{0}r)$,
+\[
+   \bD=c\big(\be_{3}\otimes\bet+\bet\otimes\be_{3}\big),
+   \qquad
+   \bW=c\big(\be_{3}\otimes\bet-\bet\otimes\be_{3}\big).
+\]
+Note $\tr\bD=2c\,\ip{\be_{3}}{\bet}=0$: the flow is isochoric.
+
+\textbf{(b)} In the ordered orthonormal frame $(\ber,\bet,\be_{3})$,
+\[
+   (D)=\begin{pmatrix}0&0&0\\ 0&0&c\\ 0&c&0\end{pmatrix},
+\]
+a pure shear on the $(\bet,\be_{3})$ pair with $\ber$ inert. Its
+characteristic equation is $-\eta(\eta^{2}-c^{2})=0$, so
+\[
+   \eta=0,\ +c,\ -c;
+   \qquad
+   \bnu_{0}=\ber,\quad
+   \bnu_{\pm}=\tfrac{\sqrt2}{2}\big(\bet\pm\be_{3}\big).
+\]
+For the vorticity, $\bW=\ba\otimes\bb-\bb\otimes\ba$ has axial vector
+$\bb\times\ba$, since
+\[
+   (\ba\otimes\bb-\bb\otimes\ba)\bu=(\ip\bb\bu)\ba-(\ip\ba\bu)\bb
+   =(\bb\times\ba)\times\bu
+\]
+by Problem 11(a). With $\ba=c\,\be_{3}$, $\bb=\bet$ and
+$\bet\times\be_{3}=\ber$,
+\[
+   \boxed{\ \bw=\frac{W}{2\theta_{0}r}\,\ber\ }
+\]
+which checks against \eqr{4.23}: $\crl(f\be_{3})=\grad f\times\be_{3}
+=\tfrac{W}{\theta_{0}r}\bet\times\be_{3}=\tfrac{W}{\theta_{0}r}\ber$, half
+of which is $\bw$.
+\end{solution}
+
+\begin{remark}[the field of Problem 9 is not single valued]
+\label{rem:P9multi}
+$\theta$ jumps by $2\pi$ on crossing the half plane $\theta=0$, so
+$\bv=(W\theta/\theta_{0})\be_{3}$ jumps by $2\pi W/\theta_{0}$ there: the
+velocity field is discontinuous across that surface, and the motion it
+describes tears the material. The \emph{gradient} $\bL$ is nevertheless
+perfectly single valued, because $\grad\theta=\bet/r$ is, which is why the
+computation above goes through without complaint. This is a useful warning:
+$\bL$, $\bD$, $\bW$ can be smooth where $\bv$ is not, and a velocity field
+must be checked for single-valuedness separately.
+\end{remark}
+
+%-----------------------------------------------------------------------
+\begin{problem}[Circular flow]
+For $\bv=rf(r)\bet$ in cylindrical coordinates, show
+$\bL=\big[\partial_{r}(rf)\big]\bet\otimes\ber-f\,\ber\otimes\bet$ and
+find $\bD$ and $\bW$.
+\end{problem}
+
+\begin{solution}
+Apply \eqr{1.145}, the polar form of $\grad\bu$, to
+$u_{r}=0$, $u_{\theta}=rf(r)$, $u_{z}=0$, all independent of $\theta$ and
+$z$. The six coefficients are
+\[
+\begin{aligned}
+   u_{r,r}&=0, &\tfrac1r\big(u_{r,\theta}-u_{\theta}\big)&=-f,
+   &u_{\theta,r}&=(rf)',\\
+   \tfrac1r\big(u_{\theta,\theta}+u_{r}\big)&=0,
+   &u_{z,r}&=0, &\tfrac1r u_{z,\theta}&=0,
+\end{aligned}
+\]
+so
+\[
+   \boxed{\ \bL=(rf)'\,\bet\otimes\ber-f\,\ber\otimes\bet\ }
+\]
+as stated. Splitting by \eqr{4.7}, and using $(rf)'=f+rf'$ so that
+$(rf)'-f=rf'$ and $(rf)'+f=2f+rf'$,
+\[
+   \bD=\frac{rf'}{2}\big(\ber\otimes\bet+\bet\otimes\ber\big),
+   \qquad
+   \bW=\frac{2f+rf'}{2}\big(\bet\otimes\ber-\ber\otimes\bet\big).
+\]
+By the axial-vector rule of Problem 9, with $\ba=\bet$, $\bb=\ber$ and
+$\ber\times\bet=\be_{3}$,
+\[
+   \bw=\frac{2f+rf'}{2}\,\be_{3}=\frac{1}{2r}\big(r^{2}f\big)'\,\be_{3}.
+\]
+
+Two special cases show what the two tensors separate. If $f$ is constant
+the flow is a rigid rotation: then $f'=0$, so $\bD=\Ob$, as
+Remark~\ref{rem:Drigid} requires, and $\bw=f\be_{3}$, the angular
+velocity. If instead $f=k/r^{2}$, then $r^{2}f=k$ is constant and
+$\bw=\bze$: the flow is irrotational although every particle travels in a
+circle. This is the potential vortex, and it is the standard
+counterexample to the belief that curved streamlines imply vorticity.
+Its stretching is $\bD=-\tfrac{k}{r^{2}}(\ber\otimes\bet
++\bet\otimes\ber)$, which is not zero: the material is being sheared even
+though it is not spinning.
+
+The two cases are worth seeing side by side, because they separate the two
+things $\bL$ measures. Put a radial and an azimuthal material fibre at the
+same point and let $\Omega$ denote the rate at which each turns about
+$\be_{3}$. From $\dot\bm=\bL\bm-(\bm\cdot\bD\bm)\bm$ with
+$\ber\cdot\bD\ber=\bet\cdot\bD\bet=0$,
+\[
+   \dot\ber=(rf)'\,\bet,\qquad \dot\bet=-f\,\ber,
+   \qquad\text{so}\qquad
+   \Omega_{r}=(rf)'=f+rf',\quad \Omega_{\theta}=f .
+\]
+Their mean is the vorticity and their difference is the shear:
+\[
+   \tfrac12\big(\Omega_{r}+\Omega_{\theta}\big)=\frac{2f+rf'}{2},
+   \qquad
+   \Omega_{\theta}-\Omega_{r}=-rf'=-2\,\ber\cdot\bD\bet ,
+\]
+in agreement with $\bw$ above and with \eqr{4.21}. Rigid rotation is
+$\Omega_{r}=\Omega_{\theta}=f$; the potential vortex $f=k/r^{2}$ has
+$rf'=-2f$, hence $\Omega_{r}=-f$ and $\Omega_{\theta}=+f$, equal and
+opposite.
+\end{solution}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{F}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.3mm]},thick},
+   old/.style={-{Stealth[length=2.0mm]},semithick,gray!55,densely dashed},
+   sw/.style={-{Stealth[length=1.9mm]},thin,gray!80}]
+% ================= panel 1 : rigid rotation =================
+\begin{scope}[xshift=0cm]
+  % a short arc of the streamline through P; its centre lies 2.2 to the
+  % left, so at P the outward radial direction is +x and the azimuthal +y
+  \draw[guide,-{Stealth[length=2.0mm]}] (-0.295,-1.10) arc (-30:30:2.2);
+  \fill (0,0) circle (1.3pt);
+  \node[font=\small,anchor=north east] at (-0.05,-0.07) {$P$};
+  % the two fibres as they stand now
+  \draw[old] (0,0)--(1.25,0);  \draw[old] (0,0)--(0,1.25);
+  \node[font=\small,text=gray!65,below] at (1.16,-0.07) {$\ber$};
+  \node[font=\small,text=gray!65,right] at (0.07,1.14) {$\bet$};
+  % both turn by the same +25 deg
+  \draw[ar] (0,0)--(25:1.25);
+  \draw[ar] (0,0)--(115:1.25);
+  \draw[sw] (1.44,0) arc (0:25:1.44);
+  \draw[sw] (0,1.44) arc (90:115:1.44);
+  \draw[gray!65,thin] (25:0.34) arc (25:115:0.34);
+  \node[font=\small,anchor=north] at (0.45,-1.42)
+     {$\Omega_{r}=\Omega_{\theta}=f$};
+  \node[font=\small,anchor=north] at (0.45,-1.95)
+     {$\bD=\Ob$,\quad $\bw=f\be_{3}$};
+  \node[font=\footnotesize,text=gray!80,align=center,anchor=north]
+     at (0.45,-2.48) {rigid rotation:\\ it spins, it does not shear};
+\end{scope}
+% ================= panel 2 : potential vortex =================
+\begin{scope}[xshift=5.9cm]
+  \draw[guide,-{Stealth[length=2.0mm]}] (-0.295,-1.10) arc (-30:30:2.2);
+  \fill (0,0) circle (1.3pt);
+  \node[font=\small,anchor=north east] at (-0.05,-0.07) {$P$};
+  \draw[old] (0,0)--(1.25,0);  \draw[old] (0,0)--(0,1.25);
+  \node[font=\small,text=gray!65,above=-1pt] at (1.16,0.04) {$\ber$};
+  \node[font=\small,text=gray!65,right] at (0.07,1.14) {$\bet$};
+  % er turns BACK by 25, et turns FORWARD by 25: the pair opens
+  \draw[ar] (0,0)--(-25:1.25);
+  \draw[ar] (0,0)--(115:1.25);
+  \draw[sw] (1.44,0) arc (0:-25:1.44);
+  \draw[sw] (0,1.44) arc (90:115:1.44);
+  \draw[gray!65,thin] (-25:0.34) arc (-25:115:0.34);
+  \node[font=\small,anchor=north] at (0.45,-1.42)
+     {$\Omega_{r}=-f$,\quad $\Omega_{\theta}=+f$};
+  \node[font=\small,anchor=north] at (0.45,-1.95)
+     {$\bw=\bze$,\quad $\bD\neq\Ob$};
+  \node[font=\footnotesize,text=gray!80,align=center,anchor=north]
+     at (0.45,-2.48) {potential vortex:\\ it shears, it does not spin};
+\end{scope}
+\end{tikzpicture}
+\caption{Problem 10, at one point $P$ of a circular streamline, with the
+two material fibres as they stand now shown dashed. In rigid rotation both
+turn at the same rate, so their mean rate, the vorticity, is $f$ and their
+relative rate, the shearing, is zero. In the potential vortex $f=k/r^{2}$
+the two rates are equal and opposite: the mean vanishes, so a paddle wheel
+placed at $P$ would circle the origin without ever turning, yet the right
+angle between the fibres opens at rate $2f$, so the material is being
+sheared throughout. Curved streamlines therefore say nothing about
+vorticity.}
+\label{fig:vortex}
+\end{figure}

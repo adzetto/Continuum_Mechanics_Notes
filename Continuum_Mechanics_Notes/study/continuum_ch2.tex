@@ -1,0 +1,2106 @@
+%=======================================================================
+%  Chapter 2.  BODIES, CONFIGURATIONS, AND MOTIONS  (sections 2.1-2.5)
+%  A from-scratch, motivated account of Steigmann & Shirani,
+%  "Principles of Continuum Mechanics", Chapter 2, matching the book's
+%  section and equation numbering.  Every step is shown, using only the
+%  algebra of Chapter 1.  Examples are solved in place.
+%
+%  Compile:  pdflatex continuum_ch2.tex   (run twice, for references)
+%=======================================================================
+\documentclass[17pt,a4paper]{extreport}
+
+\usepackage[margin=1.8cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{bm}
+\usepackage{accents}
+% book style: boldface is rendered by an under-tilde
+\DeclareRobustCommand{\vek}[1]{\underaccent{\tilde}{#1}}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+
+% reusable blob outline for bodies and configurations
+\newcommand{\blob}[1]{\draw[#1] plot[smooth cycle,tension=0.85] coordinates
+  {(0,1.05) (1.15,0.72) (1.5,-0.35) (0.6,-1.15) (-0.75,-0.95) (-1.3,0.05)};}
+\tikzset{bodyline/.style={thick,dashed}, configline/.style={thick},
+         vec/.style={-{Stealth[length=2.2mm]},thick},
+         mapar/.style={-{Stealth[length=2.4mm]},thick}}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,
+            hypertexnames=false,pdfencoding=unicode]{hyperref}
+
+%=============================== notation ==============================
+\newcommand{\Rn}{\mathbb{R}}
+\newcommand{\Et}{\mathcal{E}^{3}}          % spatial point space
+\newcommand{\hEt}{\hat{\mathcal{E}}^{3}}    % referential point space
+\newcommand{\Vt}{\mathbb{E}^{3}}            % spatial translation space
+\newcommand{\hVt}{\hat{\mathbb{E}}^{3}}     % referential translation space
+\newcommand{\Lin}{\operatorname{Lin}}
+\newcommand{\Proj}[1]{\mathbb{P}_{(#1)}}
+\newcommand{\Refl}[1]{\mathbb{R}_{(#1)}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\grad}{\operatorname{grad}}
+\newcommand{\Grad}{\operatorname{Grad}}
+\newcommand{\dvg}{\operatorname{div}}
+\newcommand{\Dvg}{\operatorname{Div}}
+\newcommand{\I}{\vek{I}}
+\newcommand{\Ob}{\vek{O}}
+\newcommand{\bE}{\vek{E}}
+\newcommand{\ba}{\vek{a}}
+\newcommand{\bb}{\vek{b}}
+\newcommand{\bc}{\vek{c}}
+\newcommand{\bd}{\vek{d}}
+\newcommand{\bu}{\vek{u}}
+\newcommand{\bv}{\vek{v}}
+\newcommand{\bw}{\vek{w}}
+\newcommand{\bx}{\vek{x}}
+\newcommand{\by}{\vek{y}}
+\newcommand{\bz}{\vek{z}}
+\newcommand{\bX}{\vek{X}}
+\newcommand{\bY}{\vek{Y}}
+\newcommand{\bZ}{\vek{Z}}
+\newcommand{\bo}{\vek{o}}
+\newcommand{\be}{\vek{e}}
+\newcommand{\bn}{\vek{n}}
+\newcommand{\bN}{\vek{N}}
+\newcommand{\bM}{\vek{M}}
+\newcommand{\bmm}{\vek{m}}
+\newcommand{\bze}{\vek{0}}
+\newcommand{\bA}{\vek{A}}
+\newcommand{\bB}{\vek{B}}
+\newcommand{\bC}{\vek{C}}
+\newcommand{\bF}{\vek{F}}
+\newcommand{\bH}{\vek{H}}
+\newcommand{\bL}{\vek{L}}
+\newcommand{\bQ}{\vek{Q}}
+\newcommand{\bR}{\vek{R}}
+\newcommand{\bU}{\vek{U}}
+\newcommand{\bV}{\vek{V}}
+\newcommand{\hbE}{\hat{\vek{E}}}
+\newcommand{\bchi}{\vek{\chi}}
+\newcommand{\bkappa}{\vek{\kappa}}
+\newcommand{\dd}{\delta}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dl}{\mathrm{d}}
+\newcommand{\tbox}[3]{[\,#1,#2,#3\,]}
+\newcommand{\ip}[2]{#1\cdot#2}
+\newcommand{\rest}[1]{\big|_{#1}}
+
+\newtheoremstyle{scplain}{\topsep}{\topsep}{\itshape}{0pt}
+  {\scshape}{.}{5pt plus 1pt minus 1pt}{}
+\newtheoremstyle{scdefn}{\topsep}{\topsep}{\normalfont}{0pt}
+  {\scshape}{.}{5pt plus 1pt minus 1pt}{}
+
+\theoremstyle{scplain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{scdefn}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\allowdisplaybreaks
+\setcounter{chapter}{1}   % so \chapter becomes Chapter 2
+
+%=======================================================================
+
+%------------------- clickable equation references ---------------------
+% \eqr{4.11} prints "(4.11)" exactly as before and turns it into a link
+% when equation (4.11) is present in this document.  When it is not -- a
+% standalone chapter referring to an equation of another chapter -- it
+% degrades silently to plain text instead of raising an undefined
+% reference.  Must sit after hyperref.
+\makeatletter
+% a display carrying \tag{2.48--2.50} can hold only one \label, so the
+% remaining members of the range are routed to it by this alias table
+\newcommand{\eqalias}[2]{\expandafter\gdef\csname eqal@#1\endcsname{#2}}
+\newcommand{\eqr@do}[1]{%
+  \begingroup
+    \@ifundefined{eqal@#1}{\def\eqr@t{#1}}%
+                          {\edef\eqr@t{\csname eqal@#1\endcsname}}%
+    \@ifundefined{r@eq:\eqr@t}%
+      {\textup{(#1)}}%
+      {\hyperref[eq:\eqr@t]{\textup{(#1)}}}%
+  \endgroup}
+\DeclareRobustCommand{\eqr}[1]{%
+  \ifmmode\text{\eqr@do{#1}}\else\eqr@do{#1}\fi}
+\makeatother
+\input{eq_aliases}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+{\Large\bfseries Bodies, Configurations, and Motions\par}
+\vspace{4mm}
+{\large Kinematics of a deforming body: motion, the material derivative,\\
+the deformation gradient, and mass\par}
+\vspace{8mm}
+{\itshape A from-scratch, definition--theorem--proof companion to}\\[2mm]
+{Steigmann and Shirani, \emph{Principles of Continuum Mechanics},
+Chapter~2}\\[1mm]
+{(\S\,2.1 through \S\,2.5, in the book's order and numbering)}
+\vfill
+{\small Every figure of the text is described in an intuitive remark, every
+equation is derived using only the algebra of Chapter~1, and the worked
+example is solved in full. Section and equation numbers match the book.\par}
+\vspace{1cm}
+\end{titlepage}
+
+\tableofcontents
+
+\chapter{Bodies, Configurations, and Motions}
+
+This chapter builds the \emph{kinematics} of continuum mechanics: the
+language for describing where the material of a body is, how fast it moves,
+and how it deforms, all before any mention of force. The single new idea is
+that we carry \emph{two} pictures of the body at once, a fixed reference
+copy and the moving current one, and translate between them. Everything
+computational rests on the vector and tensor algebra of Chapter~1; we cite
+it freely and prove each new relation from it.
+
+%=======================================================================
+\section{Position, velocity and acceleration}\label{sec:pva}
+%=======================================================================
+
+A \emph{body} $B$ is a collection of \emph{material points}, labelled $p$.
+In the older literature these are sometimes called \emph{particles}, to
+convey the notion of a small indivisible object; that name has some
+heuristic value but is not really what is intended. A material point is
+better regarded as a \emph{primitive} notion: not a tiny lump of matter, but
+an abstract label for ``a bit of the material''. The body $B$ itself is not a
+region of space; we never see $B$ directly, only the region of space it
+fills at a given instant. In the book's figures $B$ is drawn with a
+\emph{dashed} outline for exactly this reason (Figure~2.1): it is a set of
+labels, not a place.
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=0.85]
+  \blob{bodyline}
+  \fill (0.05,-0.05) circle (1.7pt) node[left=2pt] {$p$};
+  \node at (1.45,0.95) {$B$};
+\end{tikzpicture}
+\caption{A material body.}\label{fig:2.1}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=0.8]
+  \begin{scope}\blob{bodyline}
+    \fill (0,0) circle (1.7pt) node[left=2pt] {$p$};
+    \node at (-1.15,1.0) {$B$};\end{scope}
+  \begin{scope}[shift={(6,0)}]\blob{configline}
+    \fill (0.1,0.1) circle (1.7pt) node[right=2pt] {$p$};
+    \node at (1.3,1.0) {$\kappa_t$};\end{scope}
+  \draw[mapar] (0.15,0.2) to[bend left=22] (5.9,0.35);
+  \node at (3.1,1.5) {$\bx=\bchi(p,t)$};
+\end{tikzpicture}
+\caption{Configuration of the body at time $t$.}\label{fig:2.2}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=0.8]
+  \begin{scope}\blob{bodyline}
+    \fill (0,0) circle (1.7pt) node[left=2pt] {$p$};
+    \node at (-1.15,1.0) {$B$};\end{scope}
+  \begin{scope}[shift={(6,0)}]\blob{configline}
+    \fill (0.1,0.1) circle (1.7pt) node[right=2pt] {$p$};
+    \node at (1.3,1.0) {$\kappa$};\end{scope}
+  \draw[mapar] (0.15,0.2) to[bend left=22] (5.9,0.35);
+  \node at (3.1,1.5) {$\bX=\bkappa(p)$};
+\end{tikzpicture}
+\caption{A reference configuration for the body.}\label{fig:2.3}
+\end{figure}
+
+\begin{remark}[Figures 2.1--2.3: body versus configuration]\label{rem:fig123}
+Figure~2.1 shows the abstract body $B$ (a dashed blob with a marked point
+$p$): the reservoir of material points. Figures~2.2 and~2.3 each show $B$ on
+the left mapped by an arrow to a \emph{solid} blob on the right, the
+difference being only which placement of the body the arrow produces: the
+\emph{current} configuration $\kappa_t$ at time $t$ in Figure~2.2, and a
+fixed \emph{reference} configuration $\kappa$ in Figure~2.3. Solid outlines
+mark genuine regions of Euclidean space; the dashed $B$ is not one. The
+whole chapter is the art of never confusing the label $p$ with either of
+its placements $\bx$ or $\bX$.
+\end{remark}
+
+\begin{definition}[Configuration and motion]\label{def:motion}
+At time $t$ the body occupies a \emph{configuration} $\kappa_t$, a region of
+the Euclidean point space $\Et$, and $p\in B$ sits at the position
+$\bx\in\kappa_t$. Distinct material points occupy distinct positions at a
+fixed time, so there is an invertible \emph{motion} $\bchi(p,t)$ with
+\begin{equation}
+   \bx=\bchi(p,t),\qquad p=\bchi^{-1}(\bx,t). \tag{2.1}\label{eq:2.1}
+\end{equation}
+\end{definition}
+
+At fixed $t$, $\bchi$ tells us where each material point is, and
+$\bchi^{-1}$ tells us which material point sits at a given place. Freezing
+$p$ and letting $t$ run traces the path of one material point through
+space; its time derivatives are its velocity and acceleration.
+
+\begin{definition}[Velocity, acceleration]\label{def:va}
+\begin{equation}
+   \bv(p,t)=\frac{\partial}{\partial t}\bchi(p,t),\qquad
+   \ba(p,t)=\frac{\partial^{2}}{\partial t^{2}}\bchi(p,t). \tag{2.2}\label{eq:2.2}
+\end{equation}
+The derivatives are taken at fixed $p$: they follow the \emph{same} material
+point.
+\end{definition}
+
+Working with the ethereal $B$ is awkward, because a ``label'' has no
+coordinates. The remedy is to name each material point by the fixed place
+it occupies in one chosen, frozen configuration, the \emph{reference}
+configuration $\kappa$.
+
+\begin{definition}[Reference configuration]\label{def:ref}
+Fix a configuration $\kappa$ and let $\bX\in\kappa$ be positions in one-to-one
+correspondence with material points through an invertible placement map
+$\bkappa$,
+\begin{equation}
+   \bX=\bkappa(p),\qquad p=\bkappa^{-1}(\bX). \tag{2.3}\label{eq:2.3}
+\end{equation}
+A common, though not obligatory, choice is the configuration actually
+occupied at some instant $t_0$, $\kappa=\kappa_{t_0}$, for which
+\begin{equation}
+   \bkappa(p)=\bchi(p,t_0). \tag{2.4}\label{eq:2.4}
+\end{equation}
+\end{definition}
+
+Composing the placement's inverse with the motion expresses the current
+position directly in terms of the reference position (Figure~2.4):
+\begin{equation}
+   \bx=\bchi_\kappa(\bX,t),\qquad
+   \bchi_\kappa(\bX,t)=\bchi\!\big(\bkappa^{-1}(\bX),t\big). \tag{2.5--2.6}\label{eq:2.5}
+\end{equation}
+The subscript records the dependence on the chosen $\kappa$. Since each
+$p$ corresponds to exactly one $\bx\in\kappa_t$ and one $\bX\in\kappa$, the
+map $\bchi_\kappa(\cdot,t)$ is invertible at each $t$,
+\begin{equation}
+   \bX=\bchi_\kappa^{-1}(\bx,t). \tag{2.7}\label{eq:2.7}
+\end{equation}
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=0.82]
+  \begin{scope}\blob{configline}
+    \fill (0,0) circle (1.7pt) node[above right=0pt and 2pt] {$p$};
+    \node at (-1.25,1.25) {$\kappa$};\end{scope}
+  \fill (-2.1,-2.5) circle (1.4pt) node[below=2pt] {$O$};
+  \draw[vec] (-2.1,-2.5) -- (-0.05,-0.06);
+  \node at (-1.75,-1.2) {$\bX$};
+  \begin{scope}[shift={(6.6,0)}]\blob{configline}
+    \fill (0.15,0.1) circle (1.7pt) node[above right=0pt and 2pt] {$p$};
+    \node at (1.45,1.25) {$\kappa_t$};\end{scope}
+  \fill (4.5,-2.5) circle (1.4pt) node[below=2pt] {$O$};
+  \draw[vec] (4.5,-2.5) -- (6.72,0.04);
+  \node at (4.85,-1.2) {$\bx$};
+  \draw[mapar] (0.75,0.95) to[bend left=20] (5.75,1.05);
+  \node at (3.3,2.15) {$\bx=\bchi_\kappa(\bX,t)$};
+\end{tikzpicture}
+\caption{Mapping of reference configuration to current configuration.}\label{fig:2.4}
+\end{figure}
+
+\begin{remark}[Figure 2.4: the deformation map]\label{rem:fig4}
+Figure~2.4 draws two \emph{solid} blobs, $\kappa$ (reference, left) and
+$\kappa_t$ (current, right), with the same material point $p$ appearing in
+each, at $\bX$ and at $\bx$. The connecting arrow is $\bchi_\kappa$: it is
+the object a deformation actually is, a rule sending each reference place to
+its current place. Because both blobs are real regions of space, this map is
+the one we can differentiate, and its gradient will be the deformation
+gradient of \S\ref{sec:defgrad}.
+\end{remark}
+
+Because $B$ and $\kappa$ are in fixed one-to-one correspondence, using
+$(p,t)$ as independent variables is the same as using $(\bX,t)$. The
+velocity therefore has a \emph{referential} form (a function of $\bX,t$) and
+a \emph{spatial} form (a function of $\bx,t$),
+\begin{equation}
+   \hat\bv(\bX,t)=\bv\big(\bkappa^{-1}(\bX),t\big)
+   =\frac{\partial}{\partial t}\bchi_\kappa(\bX,t),\qquad
+   \tilde\bv(\bx,t)=\bv\big(\bchi^{-1}(\bx,t),t\big), \tag{2.8--2.9}\label{eq:2.8}
+\end{equation}
+the partial in \eqr{2.8} being taken at fixed $\bX$, i.e.\ at fixed $p$. The
+two forms are related through \eqr{2.5} and \eqr{2.7},
+\begin{equation}
+   \hat\bv(\bX,t)=\tilde\bv(\bchi_\kappa(\bX,t),t),\qquad
+   \tilde\bv(\bx,t)=\hat\bv(\bchi_\kappa^{-1}(\bx,t),t). \tag{2.10}\label{eq:2.10}
+\end{equation}
+
+%=======================================================================
+\section{Material, referential and spatial descriptions}\label{sec:desc}
+%=======================================================================
+
+Any field $f$ carried by the material, temperature, density, velocity, may
+be written as a function of the material point, of the current position, or
+of the reference position:
+\begin{equation}
+   f=\bar f(p,t)=\tilde f(\bx,t)=\hat f(\bX,t), \tag{2.11}\label{eq:2.11}
+\end{equation}
+where
+\begin{equation}
+   \tilde f(\bx,t)=\bar f\big(\bchi^{-1}(\bx,t),t\big),\qquad
+   \hat f(\bX,t)=\bar f\big(\bkappa^{-1}(\bX),t\big), \tag{2.12}\label{eq:2.12}
+\end{equation}
+and, relating the last two directly,
+\begin{equation}
+   \hat f(\bX,t)=\tilde f(\bchi_\kappa(\bX,t),t),\qquad
+   \tilde f(\bx,t)=\hat f(\bchi_\kappa^{-1}(\bx,t),t). \tag{2.13}\label{eq:2.13}
+\end{equation}
+These are the \emph{material}, \emph{spatial}, and \emph{referential}
+descriptions of $f$.
+
+\begin{remark}[same value, three different functions: why the decorations
+matter]\label{rem:decorations}
+This is the single most important notational point of the chapter, and it is
+the exact analogue of the caret in Chapter~1, where $\hat\varphi(x_1,x_2,x_3)$
+and $\varphi(\bx)$ shared their values but had different domains
+($\Rn^3$ versus a point space) and so were different functions. Here the
+\emph{same number} $f$, the temperature of a given bit of matter at a given
+instant, is produced by \emph{three different machines}:
+\[
+\begin{aligned}
+&\bar f\ \text{eats a material label }p,\\
+&\tilde f\ \text{eats a current place }\bx,\\
+&\hat f\ \text{eats a reference place }\bX .
+\end{aligned}
+\]
+They agree in value only when $p$, $\bx$, $\bX$ describe the same material
+point at the same time, i.e.\ when $\bx=\bchi_\kappa(\bX,t)$. Their
+\emph{derivatives} are genuinely different, because ``hold the variable
+fixed'' means hold $p$, hold $\bx$, or hold $\bX$, and these are three
+different physical instructions. The bar, tilde and caret are the honest
+bookkeeping of which machine is meant; the book (and we) will soon drop the
+decorations ``to minimize visual distraction'', exactly as the caret was
+dropped in Chapter~1, on the understanding that the reader remembers which
+function a symbol denotes.
+\end{remark}
+
+In the \emph{spatial} description $\bx$ and $t$ are the independent
+variables. Fixing $\bx$ fixes a \emph{place}, not a material point, so as
+time passes different material points stream through that fixed $\bx$
+(Figure~2.5). The set of fixed positions $\bx$ is a \emph{control volume},
+a window in space through which material flows.
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=0.95]
+  % same body drawn at two instants; it translates past a fixed place
+  \begin{scope}\blob{configline}\end{scope}
+  \node at (-1.5,1.35) {$\kappa_{t_1}$};
+  \begin{scope}[shift={(1.65,0)}]\blob{thick,gray,dash pattern=on 3pt off 2pt}\end{scope}
+  \node[gray] at (3.35,1.3) {$\kappa_{t_2}$};
+  % the fixed place in space, marked by a cross
+  \coordinate (X) at (0.55,-0.15);
+  \draw[thin] ($(X)+(-0.32,0)$)--($(X)+(0.32,0)$);
+  \draw[thin] ($(X)+(0,-0.32)$)--($(X)+(0,0.32)$);
+  \fill (X) circle (2pt);
+  \node[above left=2pt and 1pt] at (X) {$p_1$};
+  % p1 is convected away while x stays put
+  \draw[-{Stealth[length=2mm]},gray,densely dashed] ($(X)+(0.18,0)$) -- ++(1.3,0);
+  \fill[gray] ($(X)+(1.65,0)$) circle (1.8pt);
+  \node[gray,above=3pt] at ($(X)+(1.65,0)$) {$p_1$ at $t_2$};
+  \node at (0.9,-1.95) {$\bx$ stays put; at $t_2$ a \emph{different} point $p_2$ sits there};
+\end{tikzpicture}
+\caption{Different material points occupy position $\bx$ at different times.}\label{fig:2.5}
+\end{figure}
+
+\begin{remark}[Figure 2.5: the control-volume viewpoint]\label{rem:fig5}
+Figure~2.5 shows one fixed position $\bx$ occupied by different material
+points at different times: the Eulerian, or spatial, standpoint of an
+observer nailed to space (a thermometer on a wall) rather than riding with
+the matter (a thermometer floating down a river). The distinction between
+``rate of change at a fixed place'' and ``rate of change following the
+matter'' is precisely what the material derivative below measures.
+\end{remark}
+
+Take the differential of $f$ in each description. Using the coordinate free
+chain rule of Chapter~1, $\dl f=\ip{\grad f}{\dl\bx}$ (there written
+$\dl\varphi=\ip{\grad\varphi}{\dl\bx}$), and allowing time to vary,
+\begin{align}
+   \dl f&=\tilde f'\,\dl t+\ip{\grad\tilde f}{\dl\bx}, \tag{2.14}\label{eq:2.14}\\
+   \dl f&=(\hat f)^{\hbox{\tiny\textbullet}}\,\dl t+\ip{\Grad\hat f}{\dl\bX}. \tag{2.15}\label{eq:2.15}
+\end{align}
+Here $\tilde f'=\partial\tilde f/\partial t$ is the \emph{spatial time
+derivative} (at fixed $\bx$) and $\grad$ is the gradient in $\bx$; while
+$(\hat f)^{\hbox{\tiny\textbullet}}=\partial\hat f/\partial t$ is the
+\emph{referential} (equivalently \emph{material}) time derivative (at fixed
+$\bX$, i.e.\ fixed $p$) and $\Grad$ is the gradient in $\bX$. Since \eqr{2.14}
+and \eqr{2.15} are two expressions for the \emph{same} increment $\dl f$,
+dropping decorations,
+\begin{equation}
+   \dot f\,\dl t+\ip{\Grad f}{\dl\bX}=f'\,\dl t+\ip{\grad f}{\dl\bx}. \tag{2.16}\label{eq:2.16}
+\end{equation}
+We call $\dot f$ the \emph{material derivative}: the rate of change of $f$
+following a fixed material point.
+
+\begin{theorem}[Material derivative in the spatial description]\label{thm:matder}
+For a scalar field, with $\bv$ the (spatial) material velocity,
+\begin{equation}
+   \dot f=f'+\ip{\grad f}{\bv}. \tag{2.17}\label{eq:2.17}
+\end{equation}
+For a vector field $\bu$,
+\begin{equation}
+   \dot\bu=\bu'+(\grad\bu)\bv, \tag{2.20}\label{eq:2.20}
+\end{equation}
+and in particular the material acceleration is
+\begin{equation}
+   \ba=\dot\bv=\bv'+\bL\bv,\qquad \bL=\grad\bv. \tag{2.21}\label{eq:2.21}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Follow one material point: hold $p$, hence $\bX$, fixed, so $\dl\bX=\bze$ in
+\eqr{2.16}. Moving with the point, $\dl\bx=\dl\bchi_\kappa(\bX,t)=\bv\,\dl t$
+(the position changes at the velocity). Substituting into \eqr{2.16},
+\[
+   \dot f\,\dl t=f'\,\dl t+\ip{\grad f}{\bv\,\dl t}
+   =\big(f'+\ip{\grad f}{\bv}\big)\dl t,
+\]
+and cancelling $\dl t$ gives \eqr{2.17}. For a vector field the identical
+argument applied componentwise, or directly from the vector chain rule
+$\dl\bu=\bu'\,\dl t+(\grad\bu)\dl\bx$ of Chapter~1, gives
+\begin{equation}
+   \dot\bu\,\dl t+(\Grad\bu)\dl\bX=\dl\bu=\bu'\,\dl t+(\grad\bu)\dl\bx,
+   \tag{2.18--2.19}\label{eq:2.18}
+\end{equation}
+and setting $\dl\bX=\bze$, $\dl\bx=\bv\,\dl t$ yields \eqr{2.20}. Taking
+$\bu=\bv$ gives the acceleration \eqr{2.21}, with $\bL=\grad\bv$ the spatial
+velocity gradient.
+\end{proof}
+
+\begin{remark}[the convective term, intuitively]\label{rem:convective}
+The material derivative splits into two clearly physical pieces:
+\[
+   \dot f=\underbrace{f'}_{\substack{\text{local: change at}\\ \text{a fixed place}}}
+   +\underbrace{\ip{\grad f}{\bv}}_{\substack{\text{convective: change from}\\
+   \text{being carried to new places}}}.
+\]
+Float down a river whose temperature is steady in time ($f'=0$) but rises
+downstream ($\grad f\neq\bze$): you still warm up, at the rate
+$\ip{\grad f}{\bv}$, purely because the current carries you into warmer
+water. The acceleration \eqr{2.21} shows the same effect is why steady flows
+($\bv'=\bze$) can still accelerate fluid particles, through the nonlinear
+term $\bL\bv=(\grad\bv)\bv$; this convective nonlinearity is the source of
+most of the difficulty in fluid and solid dynamics.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.0]
+  % channel
+  \fill[gray!8] (0,0) rectangle (8.2,1.7);
+  \draw[gray!60] (0,0)--(8.2,0); \draw[gray!60] (0,1.7)--(8.2,1.7);
+  % isotherms: field increasing to the right
+  \foreach \x/\lab in {1.0/{}, 2.6/{}, 4.2/{}, 5.8/{}, 7.4/{}}
+     {\draw[gray!55,densely dashed] (\x,0)--(\x,1.7);}
+  \node[gray!70] at (1.0,-0.3) {\scriptsize$f$ small};
+  \node[gray!70] at (7.4,-0.3) {\scriptsize$f$ large};
+  \draw[-{Stealth[length=2mm]},gray!70] (0.9,-0.62)--(7.5,-0.62);
+  \node[gray!70] at (4.2,-0.95) {\scriptsize$\grad f$ points downstream};
+  % flow velocity
+  \draw[vec] (1.2,1.25)--(2.5,1.25) node[above=0pt,midway] {\small$\bv$};
+  % fixed probe
+  \draw[thick] (2.6,1.7)--(2.6,0.95); \fill (2.6,0.95) circle (2.2pt);
+  \node[align=center,font=\scriptsize] at (1.75,2.35)
+     {probe bolted to the bank:\\ reads $f'$ only};
+  % floating probe, two instants
+  \fill (4.6,0.62) circle (2.2pt); \node[font=\scriptsize,below=2pt] at (4.6,0.62) {$t$};
+  \draw[-{Stealth[length=2mm]},densely dashed] (4.75,0.62)--(6.35,0.62);
+  \fill (6.5,0.62) circle (2.2pt); \node[font=\scriptsize,below=2pt] at (6.5,0.62) {$t+\dl t$};
+  \node[align=center,font=\scriptsize] at (6.2,2.35)
+     {probe drifting with the water:\\ reads $\dot f=f'+\ip{\grad f}{\bv}$};
+\end{tikzpicture}
+\\[1.8ex]
+{\footnotesize\textsc{Supplementary Figure A.} The two time derivatives of a
+field. A probe bolted to the bank samples one \emph{place} and records only
+the explicit time change $f'$. A probe drifting with the water samples one
+\emph{material point}; even in a perfectly steady field ($f'=0$) it registers
+a change, because the current carries it into regions of different $f$. That
+extra reading is the convective term $\ip{\grad f}{\bv}$, and the sum is the
+material derivative $\dot f$ of \eqr{2.17}.}
+\end{figure}
+
+%=======================================================================
+\section{Cartesian coordinates}\label{sec:cart}
+%=======================================================================
+
+To compute, we resolve everything on orthonormal bases. The current
+position uses a fixed basis $\{\be_i\}$ of the spatial translation space
+$\Vt$, the reference position a second fixed basis $\{\hbE_A\}$ of the
+referential translation space $\hVt$ (Figure~2.6):
+\begin{equation}
+   \bx=x_i\be_i\ (i\in\{1,2,3\}),\qquad
+   \bX=X_A\hbE_A\ (A\in\{1,2,3\}). \tag{2.22--2.23}\label{eq:2.22}
+\end{equation}
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=0.82]
+  % reference
+  \begin{scope}[shift={(0.35,1.7)}]\blob{configline}
+    \fill (0.2,0.05) circle (1.7pt) node[above right=0pt and 2pt] {$p$};\end{scope}
+  \node at (0.35,3.35) {$\kappa\subset\hEt$};
+  \coordinate (O1) at (-1.9,-1.4);
+  \draw[vec] (O1) -- ++(1.25,0) node[right=1pt] {$\hbE_1$};
+  \draw[vec] (O1) -- ++(0,1.15) node[above=1pt] {$\hbE_2$};
+  \draw[vec] (O1) -- ++(-0.62,-0.58) node[below=0pt] {$\hbE_3$};
+  \draw[vec] (O1) -- (0.5,1.7);
+  \node at (-1.25,0.5) {$\bX$};
+  % current
+  \begin{scope}[shift={(7.0,1.7)}]\blob{configline}
+    \fill (0.2,0.05) circle (1.7pt) node[above right=0pt and 2pt] {$p$};\end{scope}
+  \node at (7.0,3.35) {$\kappa_t\subset\Et$};
+  \coordinate (O2) at (4.75,-1.4);
+  \draw[vec] (O2) -- ++(1.25,0) node[right=1pt] {$\be_1$};
+  \draw[vec] (O2) -- ++(0,1.15) node[above=1pt] {$\be_2$};
+  \draw[vec] (O2) -- ++(-0.62,-0.58) node[below=0pt] {$\be_3$};
+  \draw[vec] (O2) -- (7.15,1.7);
+  \node at (5.4,0.5) {$\bx$};
+\end{tikzpicture}
+\caption{Position vectors in $\kappa$ and $\kappa_t$.}\label{fig:2.6}
+\end{figure}
+
+\begin{remark}[Figure 2.6, and why two bases]\label{rem:fig6}
+Figure~2.6 draws the reference blob $\kappa\subset\hEt$ with its own frame
+$\{\hbE_A\}$ and the current blob $\kappa_t\subset\Et$ with a separate frame
+$\{\be_i\}$. Keeping the two frames \emph{conceptually distinct}, even
+though both are copies of ordinary three-space, is the whole trick of the
+chapter: a quantity carrying one index of each kind (a lower-case $i$ from
+$\{\be_i\}$ and an upper-case $A$ from $\{\hbE_A\}$) is a \emph{two-point
+tensor}, an object living with one foot in each configuration. The
+deformation gradient is the first and most important example. This is why
+the book uses capital letters $X_A$, $\hbE_A$ for reference quantities and
+lower-case $x_i$, $\be_i$ for current ones: the alphabet itself tracks which
+space you are in.
+\end{remark}
+
+Regarding $\bchi_\kappa$ as a vector in $\Vt$ and using that the $\hbE_A$ are
+fixed,
+\begin{equation}
+   x_i\be_i=\bchi_\kappa(X_A\hbE_A,t)=\chi_i(X_A,t)\,\be_i,\qquad
+   x_i=\chi_i(X_A,t), \tag{2.24}\label{eq:2.24}
+\end{equation}
+shorthand for $x_i=\chi_i(X_1,X_2,X_3,t)$. The velocity, in the referential
+description, is obtained by differencing at fixed $\bX$ and passing to the
+limit:
+\begin{equation}
+\begin{aligned}
+   \bv&=\lim_{\alpha\to0}\tfrac1\alpha\big[\bchi_\kappa(\bX,t+\alpha)
+      -\bchi_\kappa(\bX,t)\big]\\
+   &=\be_i\lim_{\alpha\to0}\tfrac1\alpha\big[\chi_i(X_A,t+\alpha)
+      -\chi_i(X_A,t)\big]=\dot\chi_i\,\be_i,
+\end{aligned}\tag{2.25--2.26}\label{eq:2.25}
+\end{equation}
+so $\hat v_i=\dot\chi_i=\partial\chi_i/\partial t$; likewise
+$\hat a_i=\ddot\chi_i=\partial^2\chi_i/\partial t^2$ $(2.27)$. In the spatial
+description $\bv=\tilde v_i(x_k,t)\be_i$, $\ba=\tilde a_i(x_k,t)\be_i$
+$(2.28)$. Resolving the material derivative \eqr{2.21}, $\ba=\bv'+(\grad\bv)\bv$,
+on $\{\be_i\}$ gives the component identity
+\begin{equation}
+   \tilde a_i=\tilde v_i'+\tilde v_{i,j}\tilde v_j, \tag{2.29}\label{eq:2.29}
+\end{equation}
+and applying \eqr{2.20} to the position field $\bx$ itself, with $\bx'=\bze$
+and $x_{i,j}=\dd_{ij}$, recovers the sanity check $\dot x_i=x_{i,j}\tilde v_j
+=\dd_{ij}\tilde v_j=\tilde v_i$: the material derivative of position is
+velocity, as it must be.
+
+\begin{remark}[why $\bx'=\bze$, and why this is not circular]\label{rem:xprime}
+This step confuses almost everyone on first reading, because $\bx$ is
+manifestly moving: the material point does change its position with time.
+The resolution is that the prime is \emph{not} a material derivative.
+
+Take the field $\bu$ in \eqr{2.18} to be \emph{position itself}. Its three
+descriptions are
+\[
+   \bar\bu(p,t)=\bchi(p,t),\qquad
+   \hat\bu(\bX,t)=\bchi_\kappa(\bX,t),\qquad
+   \tilde\bu(\bx,t)=\bx .
+\]
+The first two genuinely depend on $t$: hold the material point fixed and its
+location changes. The third does not, and the reason is purely definitional.
+In the spatial description the independent variable \emph{is} $\bx$. Asking
+for the value of the position field at the place $\bx$ is asking ``what
+position is the position $\bx$?'', and the answer is $\bx$, at every instant.
+The function $\tilde\bu$ is the identity map of $\Et$, and the identity map
+carries no $t$ in it at all. Hence
+\[
+   \bu'=\frac{\partial}{\partial t}\Big|_{\bx\ \mathrm{fixed}}\tilde\bu(\bx,t)
+       =\frac{\partial\bx}{\partial t}\Big|_{\bx\ \mathrm{fixed}}=\bze,
+   \qquad\text{componentwise } \tilde u_i'=\frac{\partial x_i}{\partial t}=0 .
+\]
+Nothing is being asserted about the motion here. What is being asserted is
+that a photograph of space, labelled by its own coordinates, does not change
+when the clock advances. The matter flowing through the point changes; the
+point does not.
+
+The second ingredient is $\grad\bu=\I$, for the same reason: from
+$\tilde u_i=x_i$ we get $u_{i,j}=\partial x_i/\partial x_j=\dd_{ij}$, so
+$\grad\bu=\dd_{ij}\be_i\otimes\be_j=\I$. Substituting both into \eqr{2.20},
+\[
+   \dot\bu=\bu'+(\grad\bu)\bv=\bze+\I\bv=\bv,
+\]
+that is $\dot x_i=\tilde v_i$. Read backwards this is a consistency check on
+the whole apparatus rather than a new result: \eqr{2.17} and \eqr{2.20} were
+constructed precisely so that $\dot f=f'+\grad f\cdot\bv$ would reproduce the
+rate seen by a material point, and the material point's rate of change of
+position is, by \eqr{2.2}$_1$, its velocity. Had the formula returned anything
+other than $\bv$, the definition of the material derivative would have been
+wrong.
+
+The whole content of the identity is therefore the split
+\[
+   \underbrace{\dot x_i}_{\text{the point moves}}
+   =\underbrace{x_i'}_{=\,0:\ \text{the \emph{place} does not move}}
+   +\underbrace{x_{i,j}\tilde v_j}_{=\,\tilde v_i:\ \text{convection}}.
+\]
+All of the motion sits in the convective term, none of it in the spatial
+time derivative. This is the cleanest possible illustration of the difference
+between $'$ and $\dot{\phantom{f}}$: for the position field the two are as
+far apart as they can be, $\bze$ against $\bv$.
+\end{remark}
+
+\begin{example}[converting a motion between descriptions]\label{ex:motion}
+Consider the motion (linear in $\bX$, hence atypical, but transparent)
+\begin{equation}
+   \begin{pmatrix}x_1\\x_2\\x_3\end{pmatrix}
+   =\begin{pmatrix}e^{t}&0&0\\0&1&t\\0&-t&1\end{pmatrix}
+   \begin{pmatrix}X_1\\X_2\\X_3\end{pmatrix},\quad\text{i.e.}\quad
+   \begin{aligned}x_1&=e^{t}X_1,\\ x_2&=X_2+tX_3,\\ x_3&=-tX_2+X_3.\end{aligned}
+   \tag{2.30}\label{eq:2.30}
+\end{equation}
+
+\emph{Referential velocity and acceleration.} Differentiate at fixed $\bX$:
+\[
+\begin{aligned}
+   &\hat v_1=\dot\chi_1=e^{t}X_1,\quad \hat v_2=X_3,\quad \hat v_3=-X_2;\\
+   &\hat a_1=e^{t}X_1,\quad \hat a_2=0,\quad \hat a_3=0 .
+\end{aligned}
+\]
+
+\emph{Inversion.} To get the spatial forms we invert \eqr{2.30}. Immediately
+$X_1=e^{-t}x_1$. The lower $2\times2$ block $\left(\begin{smallmatrix}1&t\\
+-t&1\end{smallmatrix}\right)$ has determinant $1+t^2$ and inverse
+$\tfrac{1}{1+t^2}\left(\begin{smallmatrix}1&-t\\t&1\end{smallmatrix}\right)$,
+so
+\begin{equation}
+   X_1=e^{-t}x_1,\qquad
+   X_2=\frac{x_2-t x_3}{1+t^2},\qquad
+   X_3=\frac{t x_2+x_3}{1+t^2}. \tag{2.31}\label{eq:2.31}
+\end{equation}
+
+\emph{Spatial velocity.} Substitute \eqr{2.31} into $\hat v_i$:
+\[
+\begin{aligned}
+   &\tilde v_1=e^{t}X_1=e^{t}e^{-t}x_1=x_1,\\
+   &\tilde v_2=X_3=\frac{t x_2+x_3}{1+t^2},\quad
+    \tilde v_3=-X_2=\frac{t x_3-x_2}{1+t^2}.
+\end{aligned}
+\]
+
+\emph{Spatial acceleration, directly.} Substitute \eqr{2.31} into $\hat a_i$:
+$\tilde a_1=e^{t}X_1=x_1$, $\tilde a_2=0$, $\tilde a_3=0$, i.e.\
+$\ba=x_1\be_1$.
+
+\emph{Spatial acceleration, via \eqr{2.29} (a check on the material
+derivative).} The spatial velocity gradient is
+\begin{equation}
+   (\tilde v_{i,j})=\begin{pmatrix}
+   1&0&0\\[1mm]
+   0&\dfrac{t}{1+t^2}&\dfrac{1}{1+t^2}\\[2mm]
+   0&-\dfrac{1}{1+t^2}&\dfrac{t}{1+t^2}\end{pmatrix}, \tag{2.33}\label{eq:2.33}
+\end{equation}
+and the spatial time derivatives $\tilde v_i'=\partial\tilde v_i/\partial t$
+(at fixed $\bx$) are $\tilde v_1'=0$ and, by the quotient rule,
+\begin{equation}
+   \tilde v_2'=\frac{(1-t^2)x_2-2t x_3}{(1+t^2)^2},\qquad
+   \tilde v_3'=\frac{(1-t^2)x_3+2t x_2}{(1+t^2)^2}. \tag{2.32}\label{eq:2.32}
+\end{equation}
+Then $\tilde a_2=\tilde v_2'+\tilde v_{2,j}\tilde v_j
+=\tilde v_2'+\tilde v_{2,2}\tilde v_2+\tilde v_{2,3}\tilde v_3$; with
+$\tilde v_{2,2}=t/(1+t^2)$, $\tilde v_{2,3}=1/(1+t^2)$,
+\[
+   \tilde v_{2,2}\tilde v_2+\tilde v_{2,3}\tilde v_3
+   =\frac{t(tx_2+x_3)+(tx_3-x_2)}{(1+t^2)^2}
+   =\frac{(t^2-1)x_2+2t x_3}{(1+t^2)^2}
+   =-\tilde v_2' ,
+\]
+so $\tilde a_2=0$, matching the direct computation; likewise $\tilde a_1=x_1$,
+$\tilde a_3=0$. The two routes agree, which is the point of the example.
+\end{example}
+
+\begin{remark}[a correction to the printed $\tilde v_2'$]\label{rem:v2prime}
+The material derivative check forces
+$\tilde v_2'=[(1-t^2)x_2-2t x_3]/(1+t^2)^2$: only this value makes
+$\tilde a_2=\tilde v_2'+\tilde v_{2,j}\tilde v_j$ vanish, as it must since
+$\hat a_2=0$. (The text's printed coefficient of $x_2$ in $\tilde v_2'$ is a
+misprint; the denominator is squared and the numerator is $1-t^2$, not
+$1-2t^2$.)
+\end{remark}
+
+%=======================================================================
+\section{The deformation gradient}\label{sec:defgrad}
+%=======================================================================
+
+Assume the motion $\bchi_\kappa(\bX,t)$ is differentiable in $\bX$. Holding
+$t$ fixed, its linear part is a tensor, the \emph{deformation gradient}:
+\begin{equation}
+   \dl\bx=\bF\,\dl\bX,\qquad \bF=\Grad\bchi_\kappa. \tag{2.34}\label{eq:2.34}
+\end{equation}
+Allowing $t$ to vary as well,
+\begin{equation}
+   \dl\bx=\bF\,\dl\bX+\bv\,\dl t. \tag{2.35}\label{eq:2.35}
+\end{equation}
+
+\begin{theorem}[The two gradients of a field are related by $\bF$]\label{thm:GradgradF}
+For any field $\bu$,
+\begin{equation}
+   \Grad\bu=(\grad\bu)\bF. \tag{2.37}\label{eq:2.37}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Write the increment $\dl\bu$ referentially and spatially, as in \eqr{2.19},
+and substitute \eqr{2.35} and the material derivative $\dot\bu=\bu'+(\grad\bu)\bv$:
+\begin{equation}
+   \dot\bu\,\dl t+(\Grad\bu)\dl\bX
+   =[\bu'+(\grad\bu)\bv]\,\dl t+(\grad\bu)\bF\,\dl\bX. \tag{2.36}\label{eq:2.36}
+\end{equation}
+The $\dl t$ terms cancel by \eqr{2.20}, leaving
+$(\Grad\bu)\dl\bX=(\grad\bu)\bF\,\dl\bX$ for every $\dl\bX$; hence
+$\Grad\bu=(\grad\bu)\bF$.
+\end{proof}
+
+To read off components, differentiate $\bx=\chi_i\be_i$ at fixed $t$ using
+$\dl\chi_i=\chi_{i,A}\,\dl X_A=\chi_{i,A}\,\ip{\hbE_A}{\dl\bX}$:
+\begin{equation}
+   \dl\bx=\chi_{i,A}\be_i\,\ip{\hbE_A}{\dl\bX}
+   =(\chi_{i,A}\,\be_i\otimes\hbE_A)\dl\bX, \tag{2.38}\label{eq:2.38}
+\end{equation}
+so comparison with \eqr{2.34} gives
+\begin{equation}
+   \bF=F_{iA}\,\be_i\otimes\hbE_A,\qquad F_{iA}=\chi_{i,A}. \tag{2.39}\label{eq:2.39}
+\end{equation}
+The mixed basis $\{\be_i\otimes\hbE_A\}$ shows $\bF$ is a \emph{two-point
+tensor}, a linear map $\hVt\to\Vt$ (exactly the object of Problem~12 of
+Chapter~1). Its action on a reference basis vector,
+\begin{equation}
+   \bF\hbE_B=(F_{iA}\be_i\otimes\hbE_A)\hbE_B
+   =F_{iA}(\ip{\hbE_A}{\hbE_B})\be_i=F_{iA}\dd_{AB}\be_i=F_{iB}\be_i, \tag{2.40}\label{eq:2.40}
+\end{equation}
+gives the component extraction $F_{iA}=\ip{\be_i}{\bF\hbE_A}$ $(2.41)$.
+
+\begin{lemma}[product of two dyads]\label{lem:dyadprod}
+For all vectors, $(\ba\otimes\bb)(\bc\otimes\bd)=(\ip\bb\bc)\,\ba\otimes\bd$.
+\end{lemma}
+
+\begin{proof}
+Act on an arbitrary $\bv$ and unfold using $(\bc\otimes\bd)\bv=(\ip\bd\bv)\bc$
+and $(\ba\otimes\bb)\bc=(\ip\bb\bc)\ba$:
+\begin{equation}
+\begin{aligned}
+   [(\ba\otimes\bb)(\bc\otimes\bd)]\bv&=(\ba\otimes\bb)\big[(\ip\bd\bv)\bc\big]
+   =(\ip\bd\bv)(\ip\bb\bc)\ba\\
+   &=(\ip\bb\bc)(\ip\bd\bv)\ba=(\ip\bb\bc)(\ba\otimes\bd)\bv,
+\end{aligned}\tag{2.43--2.44}\label{eq:2.43}
+\end{equation}
+true for all $\bv$, so the tensors are equal.
+\end{proof}
+
+Applying Lemma~\ref{lem:dyadprod} to \eqr{2.37} with $\grad\bu=\tilde u_{i,k}
+\be_i\otimes\be_k$ and $\bF=F_{jA}\be_j\otimes\hbE_A$,
+\begin{equation}
+\begin{aligned}
+   \Grad\bu&=(\tilde u_{i,k}\be_i\otimes\be_k)(F_{jA}\be_j\otimes\hbE_A)
+   =\tilde u_{i,k}F_{jA}(\ip{\be_k}{\be_j})\be_i\otimes\hbE_A\\
+   &=\tilde u_{i,k}\,x_{j,A}\,\dd_{kj}\,\be_i\otimes\hbE_A
+   =\tilde u_{i,j}\,x_{j,A}\,\be_i\otimes\hbE_A
+   =\hat u_{i,A}\,\be_i\otimes\hbE_A,
+\end{aligned}
+\tag{2.42}\label{eq:2.42}
+\end{equation}
+the last step being the ordinary chain rule
+$\hat u_{i,A}=\tilde u_{i,j}\,x_{j,A}$. So $\Grad\bu$ is a two-point tensor
+too.
+
+\paragraph*{Material curves.}
+Let $\bX(S)$, $S$ arclength, parametrise a curve $C\subset\kappa$ of fixed
+material points; at time $t^*$ it is convected to
+$\bx_*(S)=\bchi_\kappa(\bX(S),t^*)$ (Figure~2.7). The relative position of
+two of its points is obtained by integrating the tangent,
+\begin{equation}
+\begin{aligned}
+   \bx_*(S_1)-\bx_*(S_0)&=\be_i\!\int_{S_0}^{S_1}\!x_{*i}'(S)\,\dl S\\
+   &=\be_i\!\int_{S_0}^{S_1}\!F_{iA}(X_B(S),t^*)\,X_A'(S)\,\dl S,
+\end{aligned}
+\tag{2.45--2.46}\label{eq:2.45}
+\end{equation}
+using $x_{*i}'=\chi_{i,A}X_A'=F_{iA}X_A'$: knowing $\bF$ lets us reconstruct
+relative positions of connected material points.
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=0.88]
+  % curve laid out mostly horizontally; position vector rises steeply: clear angle
+  \draw[thick] plot[smooth,tension=0.85] coordinates
+    {(-1.5,0.45) (-0.75,1.05) (0.1,0.95) (0.95,1.45) (1.7,1.25)};
+  \fill (-1.5,0.45) circle (1.6pt) node[left=2pt] {$S_0$};
+  \fill (1.7,1.25) circle (1.6pt) node[right=2pt] {$S_1$};
+  \fill (0.1,0.95) circle (1.7pt); \node at (0.12,1.42) {$S$};
+  \fill (-0.35,-1.85) circle (1.4pt) node[below=2pt] {$O$};
+  \draw[vec] (-0.35,-1.85) -- (0.08,0.86);
+  \node at (-0.95,-0.5) {$\bX(S)$};
+  \node at (-1.35,1.85) {$C\subset\kappa$};
+  \begin{scope}[shift={(6.2,0)}]
+  \draw[thick] plot[smooth,tension=0.85] coordinates
+    {(-1.5,0.45) (-0.6,0.8) (0.15,1.25) (0.95,1.0) (1.7,1.55)};
+  \fill (-1.5,0.45) circle (1.6pt) node[left=2pt] {$S_0$};
+  \fill (1.7,1.55) circle (1.6pt) node[right=2pt] {$S_1$};
+  \fill (0.15,1.25) circle (1.7pt);
+  \fill (-0.35,-1.85) circle (1.4pt) node[below=2pt] {$O$};
+  \draw[vec] (-0.35,-1.85) -- (0.12,1.16);
+  \node at (-1.05,-0.5) {$\bx_*(S)$};
+  \node at (-1.15,1.95) {$C_{t_*}\subset\kappa_{t_*}$};
+  \end{scope}
+  \draw[mapar] (2.5,1.0) to[bend left=16] (4.05,1.0);
+  \node at (3.3,1.65) {$\bchi_\kappa(\cdot,t_*)$};
+\end{tikzpicture}
+\caption{A material curve and its image in $\kappa_{t_*}$.}\label{fig:2.7}
+\end{figure}
+
+\begin{remark}[Figure 2.7]\label{rem:fig7}
+Figure~2.7 shows a curve $C$ of fixed material points in $\kappa$ and its
+deformed image $C_{t^*}$ in $\kappa_{t^*}$; the arclength $S$ labels the
+material points and rides along with them. The tangent transforms by $\bF$,
+$\bx_*'=\bF\,\bX'$, the seed of the stretch formula $\mu\bmm=\bF\bM$ of
+\S2.6.
+\end{remark}
+
+\paragraph*{Volume.}
+Invertibility of $\bchi_\kappa$ at each $t$ makes $\bF$ invertible
+(inverse function theorem), and invertibility of a tensor is $\det\bF\neq0$,
+where, from Chapter~1,
+\begin{equation}
+   \det\bF=\frac{\tbox{\bF\ba}{\bF\bb}{\bF\bc}}{\tbox\ba\bb\bc} \tag{2.47}\label{eq:2.47}
+\end{equation}
+for any independent $\{\ba,\bb,\bc\}$ (well defined for the two-point $\bF$
+because numerator and denominator each use vectors of a single space).
+
+\begin{remark}[invertibility of $\bF$ is only \emph{local} information]
+\label{rem:localinv}
+The implication runs one way only. Global invertibility of the motion
+$\bchi_\kappa(\cdot,t)$ gives, by the inverse function theorem, an inverse
+$\bF^{-1}$ at each $\bX$. But the existence of $\bF^{-1}$ at a
+\emph{particular} $\bX$ does \emph{not} imply that $\bchi_\kappa$ is
+invertible at all $\bX$: it implies only that $\bchi_\kappa$ is invertible in
+some \emph{neighbourhood} of the point considered. Nothing local can prevent
+a motion from folding a distant part of the body onto the piece near $\bX$;
+$\det\bF\neq0$ everywhere forbids local self-penetration, not global. This is
+the same phenomenon as $x\mapsto e^{\mathrm{i}x}$ having nonzero derivative
+everywhere while being far from injective, and it is why global
+injectivity of the motion is imposed as a separate physical assumption in
+Definition~\ref{def:motion} rather than deduced from $\det\bF>0$.
+\end{remark}
+
+\noindent Three
+material curves through $\bX$ carry tangents $\dl\bX,\dl\bY,\dl\bZ$ spanning
+a reference parallelepiped of volume $\dl V=\tbox{\dl\bX}{\dl\bY}{\dl\bZ}$
+(Figure~2.8); their images $\dl\bx=\bF\dl\bX$ etc.\ span
+$\dl v=\tbox{\dl\bx}{\dl\by}{\dl\bz}$. Taking $\{\ba,\bb,\bc\}=\{\dl\bX,\dl\bY,\dl\bZ\}$
+in \eqr{2.47},
+\begin{equation}
+\begin{aligned}
+   \dl v&=\tbox{\bF\dl\bX}{\bF\dl\bY}{\bF\dl\bZ}
+        =\det\bF\;\tbox{\dl\bX}{\dl\bY}{\dl\bZ}\\
+   &=J\,\dl V,\qquad J=\det\bF>0.
+\end{aligned}
+\tag{2.48--2.50}\label{eq:2.48}
+\end{equation}
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=0.92]
+% draw a full parallelepiped from an origin and three edge vectors
+\newcommand{\ppiped}[6]{% #1 origin  #2,#3,#4 edges (u,v,w)  #5 edge style #6 arrow style
+  \begin{scope}[shift={#1}]
+    \coordinate (o) at (0,0); \coordinate (U) at #2;
+    \coordinate (V) at #3;    \coordinate (W) at #4;
+    \draw[#5] (o)--(U) (o)--(V) (o)--(W);
+    \draw[#5] (U)--($(U)+(V)$) (U)--($(U)+(W)$);
+    \draw[#5] (V)--($(U)+(V)$) (V)--($(V)+(W)$);
+    \draw[#5] (W)--($(U)+(W)$) (W)--($(V)+(W)$);
+    \draw[#5] ($(U)+(V)$)--($(U)+(V)+(W)$)
+              ($(U)+(W)$)--($(U)+(V)+(W)$)
+              ($(V)+(W)$)--($(U)+(V)+(W)$);
+  \end{scope}}
+  % reference
+  \ppiped{(0,0)}{(1.45,-0.3)}{(0.35,1.25)}{(0.95,0.42)}{gray!65,thin}{}
+  \draw[vec] (0,0) -- (1.45,-0.3) node[below=1pt] {$\dl\bX$};
+  \draw[vec] (0,0) -- (0.35,1.25) node[above left=-1pt] {$\dl\bY$};
+  \draw[vec] (0,0) -- (0.95,0.42) node[right=1pt] {$\dl\bZ$};
+  \node at (1.9,1.75) {$\dl V$};  \node at (-1.15,1.35) {$\kappa$};
+  % current (sheared and stretched)
+  \begin{scope}[shift={(5.5,-0.1)}]
+  \ppiped{(0,0)}{(1.75,0.15)}{(0.05,1.35)}{(1.05,0.65)}{gray!65,thin}{}
+  \draw[vec] (0,0) -- (1.75,0.15) node[below=1pt] {$\dl\bx$};
+  \draw[vec] (0,0) -- (0.05,1.35) node[above left=-1pt] {$\dl\by$};
+  \draw[vec] (0,0) -- (1.05,0.65) node[right=1pt] {$\dl\bz$};
+  \node at (2.35,1.95) {$\dl v$};  \node at (3.35,1.35) {$\kappa_t$};
+  \end{scope}
+  \draw[mapar] (2.9,1.95) to[bend left=16] (4.85,1.95);
+  \node at (3.9,2.55) {$\bF$};
+  \node at (3.9,-1.05) {$\dl v=J\,\dl V,\qquad J=\det\bF$};
+\end{tikzpicture}
+\caption{Three material curves intersecting at a material point.}\label{fig:2.8}
+\end{figure}
+
+\begin{remark}[Figure 2.8, and $J$ as a volume ratio]\label{rem:fig8}
+Figure~2.8 shows the reference parallelepiped (left, $\kappa$) and its image
+(right, $\kappa_t$): $J=\det\bF$ is the factor by which local volume is
+scaled, exactly the ``oriented volume ratio'' reading of the determinant
+from Chapter~1. If the reference configuration is \emph{occupiable} (could
+be physically occupied), then $J>0$; if not, one only knows $J=|\det\bF|$.
+Incompressibility is the constraint $J\equiv1$.
+\end{remark}
+
+\paragraph*{Area (the Piola--Nanson formula).}
+Let $\dl\bX,\dl\bY$ span the tangent plane of a material surface at $\bX$,
+of area $\dl A=|\dl\bX\times\dl\bY|$, with unit normal $\bN$ defined by
+\begin{equation}
+   \bN\,\dl A=\dl\bX\times\dl\bY \tag{2.51}\label{eq:2.51}
+\end{equation}
+(Figure~2.9). The deformed edges $\dl\bx=\bF\dl\bX$, $\dl\by=\bF\dl\bY$ span
+a parallelogram of area $\dl a$ with unit normal $\bn$, $\bn\,\dl a=\dl\bx
+\times\dl\by$. Using the cofactor $\bF^{*}$, defined (as in Chapter~1) by
+$\bF^{*}(\ba\times\bb)=\bF\ba\times\bF\bb$,
+\begin{equation}
+   \bn\,\dl a=\bF\dl\bX\times\bF\dl\bY=\bF^{*}(\dl\bX\times\dl\bY)
+   =\bF^{*}\bN\,\dl A, \tag{2.52--2.54}\label{eq:2.52}
+\end{equation}
+the \emph{Piola--Nanson formula}, in components $n_i\,\dl a=F^{*}_{iB}N_B\,\dl A$.
+By Problem~22(c) of Chapter~1, $\bA^{t}\bA^{*}=(\det\bA)\I$, valid also for
+the two-point $\bF$, so
+\begin{equation}
+   \bF^{*}=J\bF^{-t}. \tag{2.55}\label{eq:2.55}
+\end{equation}
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=0.92]
+  % reference patch drawn in perspective: edges nearly horizontal, normal straight up
+  \fill[gray!12] (0,0)--++(1.55,-0.12)--++(0.62,0.55)--++(-1.55,0.12)--cycle;
+  \draw[gray!70,thin] (0,0)--++(1.55,-0.12)--++(0.62,0.55)--++(-1.55,0.12)--cycle;
+  \draw[vec] (0,0) -- ++(1.55,-0.12) node[below right=-1pt and -2pt] {$\dl\bX$};
+  \draw[vec] (0,0) -- ++(0.62,0.55) node[left=1pt] {$\dl\bY$};
+  \draw[vec] (1.09,0.22) -- ++(0,1.25) node[above=1pt] {$\bN$};
+  \draw[gray!70,thin] (1.09,0.22) ++(-0.16,0) -- ++(0.16,0.16) -- ++(0.16,-0.16);
+  \node at (1.62,0.34) {$\dl A$};  \node at (-0.85,1.15) {$\kappa$};
+  % current patch
+  \begin{scope}[shift={(5.4,0)}]
+  \fill[gray!12] (0,0)--++(1.9,0.22)--++(0.35,0.72)--++(-1.9,-0.22)--cycle;
+  \draw[gray!70,thin] (0,0)--++(1.9,0.22)--++(0.35,0.72)--++(-1.9,-0.22)--cycle;
+  \draw[vec] (0,0) -- ++(1.9,0.22) node[below right=-1pt and -2pt] {$\dl\bx$};
+  \draw[vec] (0,0) -- ++(0.35,0.72) node[left=1pt] {$\dl\by$};
+  \draw[vec] (1.12,0.47) -- ++(0.28,1.25) node[above=1pt] {$\bn$};
+  \node at (1.95,0.62) {$\dl a$};  \node at (2.9,1.15) {$\kappa_t$};
+  \end{scope}
+  \draw[mapar] (2.85,1.55) to[bend left=15] (4.9,1.6);
+  \node at (3.85,2.2) {$\bF$};
+  \node at (3.9,-1.15) {$\bn\,\dl a=\bF^{*}\bN\,\dl A=J\bF^{-t}\bN\,\dl A$};
+  % inset: area of a parallelogram
+  \begin{scope}[shift={(2.15,-3.35)},scale=0.95]
+  \fill[gray!12] (0,0)--++(1.5,0)--++(0.65,0.85)--++(-1.5,0)--cycle;
+  \draw[gray!70,thin] (0,0)--++(1.5,0)--++(0.65,0.85)--++(-1.5,0)--cycle;
+  \draw[vec] (0,0) -- (1.5,0) node[below=1pt] {$\ba$};
+  \draw[vec] (0,0) -- (0.65,0.85) node[above left=-2pt] {$\bb$};
+  \draw (0.45,0) arc (0:52.6:0.45); \node at (0.72,0.22) {\small$\alpha$};
+  \node at (1.05,-0.62) {\small area $=|\ba||\bb|\sin\alpha=|\ba\times\bb|$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Deformation of oriented surface measure.}\label{fig:2.9}
+\end{figure}
+
+\begin{remark}[Figure 2.9: area is not a passive rider]\label{rem:fig9}
+Figure~2.9 shows the reference patch with edges $\dl\bX,\dl\bY$, area $\dl A$,
+normal $\bN$, and its deformed image with $\dl\bx,\dl\by$, area $\dl a$,
+normal $\bn$; the small inset recalls $\text{area}=|\ba||\bb|\sin\alpha
+=|\ba\times\bb|$ from Chapter~1. The point of $\bn\,\dl a=J\bF^{-t}\bN\,\dl A$
+is that the normal does \emph{not} transform by $\bF$ (that would be the
+tangent's rule): it transforms by the cofactor $\bF^{*}=J\bF^{-t}$, because a
+normal is defined by a cross product, and cross products go with cofactors.
+This single formula converts every surface traction and flux between
+reference and current descriptions in the balance laws.
+\end{remark}
+
+%=======================================================================
+\section{Mass and density}\label{sec:mass}
+%=======================================================================
+
+Consider a sub-body $S\subset B$, occupying a part $P=\bkappa(S)\subset\kappa$
+of the reference configuration and a part $P_t=\bchi_\kappa(P,t)\subset\kappa_t$
+of the current one. Mass is assumed absolutely continuous in volume (more
+volume, more mass) and strictly positive on regions of positive volume, so
+there are positive \emph{density} fields $\rho(\bx,t)$ and $\rho_\kappa(\bX,t)$
+with
+\begin{equation}
+   m(S,t)=\int_{P_t}\rho(\bx,t)\,\dl v=\int_{P}\rho_\kappa(\bX,t)\,\dl V. \tag{2.56}\label{eq:2.56}
+\end{equation}
+(Conservation of mass, treated later, will make $m$ independent of $t$.)
+
+Change variables in the first integral by $\bx=\bchi_\kappa(\bX,t)$,
+$\dl v=J\,\dl V$ from \eqr{2.50}:
+\begin{equation}
+   \int_{P_t}\rho(\bx,t)\,\dl v=\int_{P}\rho(\bchi_\kappa(\bX,t),t)\,J(\bX,t)\,\dl V,
+   \tag{2.57}\label{eq:2.57}
+\end{equation}
+so equality of the two forms in \eqr{2.56} becomes
+\begin{equation}
+   \int_{P}\big[\rho_\kappa(\bX,t)-\rho(\bchi_\kappa(\bX,t),t)\,J(\bX,t)\big]\,\dl V=0
+   \qquad\text{for all }P\subset\kappa. \tag{2.58}\label{eq:2.58}
+\end{equation}
+It is \emph{sufficient} for this that the bracket vanish pointwise,
+\begin{equation}
+   \rho_\kappa=\rho J\quad\text{at every }\bX\in\kappa. \tag{2.59}\label{eq:2.59}
+\end{equation}
+That it is also \emph{necessary}, when the integrand is continuous, is the
+content of the localization theorem.
+
+\begin{theorem}[Localization]\label{thm:localization}
+Let $\varphi(\bX)$ be continuous and suppose
+\begin{equation}
+   \int_{P}\varphi(\bX)\,\dl V=0\qquad\text{for all }P\subset\kappa. \tag{2.60}\label{eq:2.60}
+\end{equation}
+Then
+\begin{equation}
+   \varphi(\bX)=0\quad\text{at every }\bX\in\kappa. \tag{2.61}\label{eq:2.61}
+\end{equation}
+\textup{(The converse statement is obvious: if $\varphi$ vanishes
+identically its integral over every $P$ is zero.)}
+\end{theorem}
+
+\begin{proof}
+Fix $\bX_0\in\kappa$ and take $P=R_\eps$, the ball of radius $\eps$ and
+volume $V_\eps$ centred at $\bX_0$ and contained in $\kappa$. Consider the
+average discrepancy
+\begin{equation}
+   I_\eps=\bigg|\frac{1}{V_\eps}\int_{R_\eps}[\varphi(\bX_0)-\varphi(\bX)]\,\dl V\bigg|.
+   \tag{2.62}\label{eq:2.62}
+\end{equation}
+By the triangle inequality for integrals, then bounding the integrand by its
+maximum over the (compact) ball,
+\begin{equation}
+\begin{aligned}
+   I_\eps&\le\frac{1}{V_\eps}\int_{R_\eps}|\varphi(\bX_0)-\varphi(\bX)|\,\dl V\\
+   &\le\frac{1}{V_\eps}\int_{R_\eps}\max_{\bX\in R_\eps}
+       |\varphi(\bX_0)-\varphi(\bX)|\,\dl V\\
+   &=\max_{\bX\in R_\eps}|\varphi(\bX_0)-\varphi(\bX)|,
+\end{aligned}
+\tag{2.63}\label{eq:2.63}
+\end{equation}
+the last step because the maximum is a constant and $\int_{R_\eps}\dl V=V_\eps$.
+A continuous function on a compact set attains its maximum, and by continuity
+of $\varphi$ that maximum tends to $0$ as the ball shrinks:
+\begin{equation}
+   0\le I_\eps\le\max_{\bX\in R_\eps}|\varphi(\bX_0)-\varphi(\bX)|\ \longrightarrow\ 0
+   \quad(\eps\to0). \tag{2.64}\label{eq:2.64}
+\end{equation}
+But the hypothesis \eqr{2.60} makes $\int_{R_\eps}\varphi(\bX)\,\dl V=0$, so
+\begin{equation}
+   \varphi(\bX_0)=\frac{1}{V_\eps}\int_{R_\eps}\varphi(\bX_0)\,\dl V
+   =\frac{1}{V_\eps}\int_{R_\eps}[\varphi(\bX_0)-\varphi(\bX)]\,\dl V
+   \xrightarrow{\ \eps\to0\ }0, \tag{2.65}\label{eq:2.65}
+\end{equation}
+i.e.\ $|\varphi(\bX_0)|=\lim_{\eps\to0}I_\eps=0$. Since $\bX_0$ was
+arbitrary, $\varphi\equiv0$.
+\end{proof}
+
+Applying the theorem to the continuous bracket in \eqr{2.58} yields the
+pointwise mass relation \eqr{2.59}, $\rho_\kappa=\rho J$. Continuity of that
+bracket is guaranteed by the assumed differentiability of $\bchi_\kappa$
+(which makes $\bF$, and hence $J=\det\bF$, continuous) together with
+continuity of $\rho$.
+
+\begin{remark}[what localization really says]\label{rem:localuse}
+The theorem is the bridge from \emph{integral} (global) balance laws to
+\emph{pointwise} (local) field equations, and it is used again and again:
+conservation of mass, momentum, and energy are all first stated as ``the
+integral over every sub-body vanishes'', and localization converts each into
+a differential equation holding at every point. Intuitively, if an average
+over \emph{every} shrinking ball around $\bX_0$ is forced to be zero, the
+value at $\bX_0$ cannot be anything but zero, since a continuous function is
+nearly constant on a small enough ball and its average there nearly equals
+its central value. The relation $\rho_\kappa=\rho J$ itself is just
+conservation of mass in disguise: the same matter in a smaller current
+volume ($J<1$) must be denser, $\rho=\rho_\kappa/J$.
+\end{remark}
+
+%=======================================================================
+\section{Material curves and the shifter}\label{sec:shifter}
+%=======================================================================
+
+Return to the material curve $C\subset\kappa$ and its convected image
+$C_{t_*}=\bchi_\kappa(C,t_*)\subset\kappa_{t_*}$ (Figure~2.10). The material
+point at arclength station $S$ on $C$ occupies $\bx_*(S)=\bchi_\kappa(\bX(S),t_*)$.
+Differentiating in $S$ at fixed $t_*$, by the chain rule and \eqr{2.34},
+\begin{equation}
+   \bx_*'(S)=\bF(\bX(S),t_*)\,\bM(S),\qquad \bM(S)=\bX'(S), \tag{2.66}\label{eq:2.66}
+\end{equation}
+$\bM$ being a \emph{unit} tangent to $C$ (because $S$ is arclength,
+$|\bX'|=1$). The image $\bx_*'$ is tangent to $C_{t_*}$ but need not be a
+unit vector; writing $\bx_*'=\mu\bmm$ with $|\bmm|=1$ and $\mu=|\bx_*'|$ the
+local \emph{stretch},
+\begin{equation}
+   \mu\bmm=\bF\bM. \tag{2.67}\label{eq:2.67}
+\end{equation}
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=0.9]
+  % curve thin+gray so the tangent stands out
+  \draw[gray!75,thick] plot[smooth,tension=0.9] coordinates
+    {(-1.3,-1.35) (-0.75,-0.35) (-0.05,0.25) (0.5,1.15) (1.05,1.95)};
+  \fill (-0.05,0.25) circle (1.9pt); \node at (-0.5,0.42) {$S$};
+  \draw[vec,black] (-0.05,0.25) -- ++(0.55,0.9);
+  \node at (0.88,0.82) {$\bM$};
+  \node[gray!75] at (-1.35,1.3) {$C\subset\kappa$};
+  \node at (0.35,-0.55) {\small$|\bM|=1$};
+  \begin{scope}[shift={(5.6,0)}]
+  \draw[gray!75,thick] plot[smooth,tension=0.9] coordinates
+    {(-1.3,-1.35) (-0.4,-0.9) (0.05,0.1) (0.3,1.05) (1.0,1.95)};
+  \fill (0.05,0.1) circle (1.9pt);
+  \draw[vec,black] (0.05,0.1) -- ++(0.28,1.3);
+  \node at (0.95,1.42) {$\mu\bmm$};
+  \node[gray!75] at (-1.15,-1.35) {$C_{t_*}\subset\kappa_{t_*}$};
+  \node at (0.35,-0.65) {\small$|\bmm|=1,\ \mu=|\bF\bM|$};
+  \end{scope}
+  \draw[mapar] (1.9,1.5) to[bend left=16] (3.6,1.5);
+  \node at (2.75,2.1) {$\mu\bmm=\bF\bM$};
+\end{tikzpicture}
+\caption{Orientation of material curves at point $p$ with arclength $S$ in $\kappa$.}
+\label{fig:2.10}
+\end{figure}
+
+\begin{remark}[Figure 2.10: what $\bF$ does to a fibre]\label{rem:fig10}
+Figure~2.10 shows the curve $C\subset\kappa$ with station $S$, position
+$\bX(S)$ and unit tangent $\bM$, beside its image $C_{t_*}\subset\kappa_{t_*}$
+with $\bx_*(S)=\bchi_\kappa(\bX(S),t_*)$. Equation \eqr{2.67} is the sentence
+``$\bF$ takes the unit material fibre $\bM$ and returns the deformed fibre,
+whose length $\mu$ is the stretch and whose direction $\bmm$ is the new
+orientation''. Every deformation measure in \S\ref{sec:cauchygreen} is
+extracted from this one statement by taking lengths and angles of $\bF\bM$.
+\end{remark}
+
+\medskip
+Interpreting \eqr{2.67} for an \emph{undeformed} body raises a genuine
+conceptual difficulty. We stipulated $\bX\in\hVt$ but $\kappa_t\subset\Et$
+for every $t$, including $t_0$; so if we want to say ``at $t_0$ the body is
+where its reference copy is'', we are comparing vectors from two different
+spaces, which is meaningless. The repair is a fixed two-point tensor that
+carries one space onto the other.
+
+\begin{definition}[The shifter]\label{def:shifter}
+Introduce fixed orthonormal vectors $\bE_A\in\Vt$ and the uniform two-point
+tensor
+\begin{equation}
+   \vek{1}=\bE_A\otimes\hbE_A . \tag{2.68}\label{eq:2.68}
+\end{equation}
+If $\{\hbE_A\}$ and $\{\bE_A\}$ have the same handedness, $\vek{1}$
+rotates the former onto the latter and is a two-point rotation; otherwise it
+is merely orthogonal. Resolving $\bE_A\in\Vt$ on $\{\be_i\}$ by the
+orthonormal expansion of Chapter~1,
+\begin{equation}
+   \bE_A=\dd_{iA}\be_i,\qquad \dd_{iA}=\ip{\be_i}{\bE_A}, \tag{2.69}\label{eq:2.69}
+\end{equation}
+(the dot product is legitimate: both factors lie in $\Vt$), giving the
+standard two-point decomposition
+\begin{equation}
+   \vek{1}=\dd_{iA}\,\be_i\otimes\hbE_A . \tag{2.70}\label{eq:2.70}
+\end{equation}
+The $\dd_{iA}$ are Kronecker deltas if and only if $\{\bE_A\}=\{\be_i\}$;
+otherwise they are the cosines of the fixed angles between the two sets.
+\end{definition}
+
+\begin{proposition}[Algebra of the shifter]\label{prop:shifter}
+With $\I$ and $\hat\I$ the identities of $\Vt$ and $\hVt$,
+\begin{equation}
+   \vek{1}=\vek{1}\hat\I=\I\vek{1},\qquad
+   \vek{1}^{t}\vek{1}=\hat\I,\qquad
+   \vek{1}\vek{1}^{t}=\I, \tag{2.71--2.73}\label{eq:2.71}
+\end{equation}
+equivalently, in components,
+\begin{equation}
+   \dd_{iA}\dd_{iB}=\dd_{AB},\qquad \dd_{iA}\dd_{jA}=\dd_{ij}. \tag{2.74}\label{eq:2.74}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+For \eqr{2.71}: $\bE_A=\I\bE_A$ and $\hbE_A=\hat\I\hbE_A$, so by the rules
+$\bA(\ba\otimes\bb)=(\bA\ba)\otimes\bb$ and
+$(\ba\otimes\bb)\bA=\ba\otimes(\bA^{t}\bb)$ (Problems 17(b),(c) of
+Chapter~1),
+\[
+\begin{aligned}
+   \I\vek{1}&=\I(\bE_A\otimes\hbE_A)=(\I\bE_A)\otimes\hbE_A=\vek{1},\\
+   \vek{1}\hat\I&=\bE_A\otimes(\hat\I^{t}\hbE_A)=\bE_A\otimes\hbE_A=\vek{1}.
+\end{aligned}
+\]
+For \eqr{2.72}, transpose \eqr{2.68} by Problem 17(a) of Chapter~1, which gives
+$(\ba\otimes\bb)^{t}=\bb\otimes\ba$, and then multiply using
+Lemma~\ref{lem:dyadprod}:
+\begin{equation}
+\begin{aligned}
+   \vek{1}^{t}\vek{1}&=(\hbE_A\otimes\bE_A)(\bE_B\otimes\hbE_B)
+   =(\ip{\bE_A}{\bE_B})\,\hbE_A\otimes\hbE_B\\
+   &=\dd_{AB}\,\hbE_A\otimes\hbE_B=\hbE_A\otimes\hbE_A=\hat\I .
+\end{aligned}\tag{2.72}
+\end{equation}
+Identically, $\vek{1}\vek{1}^{t}=(\ip{\hbE_A}{\hbE_B})\bE_A\otimes\bE_B
+=\bE_A\otimes\bE_A=\I$. In components, \eqr{2.72} reads
+$\dd_{iA}\dd_{iB}=\dd_{AB}$ and \eqr{2.73} reads $\dd_{iA}\dd_{jA}=\dd_{ij}$,
+which is \eqr{2.74}.
+\end{proof}
+
+Acting with the shifter on \eqr{2.23} produces a \emph{spatial} copy of the
+reference position,
+\begin{equation}
+   \vek{1}\bX=X_A\,\vek{1}\hbE_A=X_A\bE_A\in\Vt, \tag{2.75}\label{eq:2.75}
+\end{equation}
+and the statement $\kappa=\kappa_{t_0}$ is then properly written
+\begin{equation}
+   \bchi_\kappa(\bX,t_0)=\vek{1}\bX \tag{2.76}\label{eq:2.76}
+\end{equation}
+(taking the origins of Figure~2.6 to coincide, without loss of generality).
+This makes the \emph{displacement} well defined:
+\begin{equation}
+   \bu(\bX,t)=\bchi_\kappa(\bX,t)-\vek{1}\bX\ \in\Vt,\qquad
+   \hat u_i(X_B,t)=\chi_i(X_B,t)-\dd_{iA}X_A. \tag{2.77--2.78}\label{eq:2.77}
+\end{equation}
+
+\begin{remark}[why the shifter is not pedantry]\label{rem:shifteruse}
+The definition of displacement found in most of the literature omits
+$\vek{1}$ and writes $\bu=\bchi_\kappa-\bX$. That expression subtracts a
+vector of $\Vt$ from a vector of $\hVt$: an impermissible operation between
+different vector spaces, and a documented source of confusion in using
+displacement to characterise deformation. The shifter is the ``two-point
+identity tensor'': when $\bE_A$ and $\hbE_A$ are aligned it simply
+\emph{parallel transports} a vector from one copy of space to the other and
+changes nothing else, so its components $\dd_{iA}$ then really are Kronecker
+deltas and every classical formula is recovered. Its only job is to make the
+bookkeeping honest, exactly as the caret did for functions
+(Remark~\ref{rem:decorations}). The shifter and the displacement are put to
+substantive use later, in the book's Chapters~7 and~12.
+\end{remark}
+
+\begin{proposition}[Undeformed state]\label{prop:undeformed}
+If \eqr{2.76} holds then
+\begin{equation}
+   \bF(\bX,t_0)=\vek{1}, \qquad F_{iA}=\dd_{iA}, \tag{2.79}\label{eq:2.79}
+\end{equation}
+and consequently $\mu=1$ for every material curve:
+\begin{equation}
+   \mu\bmm=\vek{1}\bM,\qquad
+   \mu=\sqrt{\ip{\vek{1}\bM}{\vek{1}\bM}}=\sqrt{\ip\bM\bM}=1. \tag{2.80--2.81}\label{eq:2.80}
+\end{equation}
+Moreover, in the general case \eqr{2.67} forces $\mu>0$.
+\end{proposition}
+
+\begin{proof}
+\eqr{2.79}: $\bF=\Grad\bchi_\kappa$ and $\bchi_\kappa(\bX,t_0)=\vek{1}\bX$ is
+\emph{linear} in $\bX$ with the uniform (position independent) coefficient
+$\vek{1}$, so its gradient is $\vek{1}$ itself; in components
+$F_{iA}=\partial(\dd_{jB}X_B)/\partial X_A\,\big|_{i=j}=\dd_{iA}$.
+Substituting into \eqr{2.67} gives \eqr{2.80}, and since the shifter is
+orthogonal, $\ip{\vek{1}\bM}{\vek{1}\bM}
+=\ip{\bM}{\vek{1}^{t}\vek{1}\bM}=\ip\bM{\hat\I\bM}=\ip\bM\bM=1$ by
+\eqr{2.72}, so $\mu=1$: an undeformed body stretches no fibre.
+Finally $\mu>0$ always, for $\mu=0$ would give $\bF\bM=\bze$ with
+$\bM\neq\bze$ (as $|\bM|=1$), contradicting invertibility of $\bF$.
+\end{proof}
+
+%=======================================================================
+\section{The Cauchy--Green deformation tensors and the Lagrange--Euler
+strain tensors}\label{sec:cauchygreen}
+%=======================================================================
+
+The stretch is the positive square root of $\mu^2$, and \eqr{2.67} turns that
+into a quadratic form in $\bM$. Using only the definitions of the transpose
+and of the product of two tensors (Chapter~1),
+\begin{equation}
+   \mu^{2}=|\mu\bmm|^{2}=\ip{\bF\bM}{\bF\bM}
+   =\ip\bM{\bF^{t}(\bF\bM)}=\ip\bM{(\bF^{t}\bF)\bM}, \tag{2.82}\label{eq:2.82}
+\end{equation}
+so that
+\begin{equation}
+   0<\mu^{2}=\ip\bM{\bC\bM},\qquad \bC=\bF^{t}\bF \tag{2.83}\label{eq:2.83}
+\end{equation}
+defines the \emph{right Cauchy--Green deformation tensor}.
+
+\begin{proposition}[Properties of $\bC$]\label{prop:C}
+$\bC$ is a \emph{referential} tensor ($\hVt\to\hVt$), symmetric, and
+positive definite; its components are
+\begin{equation}
+\begin{aligned}
+   &\bC=C_{AB}\,\hbE_A\otimes\hbE_B,\qquad
+   C_{AB}=F_{iA}F_{iB}=C_{BA},\\
+   &\mu^{2}=C_{AB}M_AM_B.
+\end{aligned}
+\tag{2.86--2.88}\label{eq:2.86}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+\emph{Domain.} $\bF:\hVt\to\Vt$, hence $\bF^{t}:\Vt\to\hVt$, hence
+$\bC=\bF^{t}\bF$ maps $\hVt$ into itself.
+\emph{Positive definiteness.} For any $\ba\neq\bze$ in $\hVt$, moving $\bF^t$
+across the dot product by the definition of the transpose,
+\begin{equation}
+   \ip\ba{\bC\ba}=\ip\ba{\bF^{t}\bF\ba}=\ip{\bF\ba}{\bF\ba}=|\bF\ba|^{2}>0,
+   \tag{2.84}\label{eq:2.84}
+\end{equation}
+strictly, because $\bF$ is invertible ($\det\bF\neq0$) so $\bF\ba\neq\bze$.
+\emph{Symmetry,} using $(\bB\bA)^{t}=\bA^{t}\bB^{t}$ (Problem 20 of
+Chapter~1) and $(\bF^{t})^{t}=\bF$:
+\begin{equation}
+   \bC^{t}=(\bF^{t}\bF)^{t}=\bF^{t}(\bF^{t})^{t}=\bF^{t}\bF=\bC. \tag{2.85}\label{eq:2.85}
+\end{equation}
+\emph{Components.} With $\bF=F_{iA}\be_i\otimes\hbE_A$ and
+$\bF^{t}=F_{iA}\hbE_A\otimes\be_i$ (Problem 17(a) of Chapter~1), multiply by
+Lemma~\ref{lem:dyadprod}:
+\begin{equation}
+\begin{aligned}
+   \bC&=(F_{iA}\hbE_A\otimes\be_i)(F_{jB}\be_j\otimes\hbE_B)
+   =F_{iA}F_{jB}(\ip{\be_i}{\be_j})\,\hbE_A\otimes\hbE_B\\
+   &=F_{iA}F_{jB}\dd_{ij}\,\hbE_A\otimes\hbE_B
+   =C_{AB}\,\hbE_A\otimes\hbE_B,\qquad C_{AB}=F_{iA}F_{iB},
+\end{aligned}\tag{2.86--2.87}
+\end{equation}
+manifestly symmetric since $F_{iA}F_{iB}=F_{iB}F_{iA}$. Finally
+\begin{equation}
+   \mu^{2}=\ip\bM{(C_{AB}\hbE_A\otimes\hbE_B)\bM}
+   =\ip\bM{C_{AB}M_B\hbE_A}=C_{AB}M_AM_B, \tag{2.88}
+\end{equation}
+so $(C_{AB})$ is a positive definite matrix.
+\end{proof}
+
+Inverting \eqr{2.67} gives the companion, spatial, measure. Applying $\bF^{-1}$
+to $\mu\bmm=\bF\bM$,
+\begin{equation}
+\begin{aligned}
+   \mu\bF^{-1}\bmm&=\bF^{-1}(\bF\bM)=(\bF^{-1}\bF)\bM=\hat\I\bM=\bM,\\
+   \text{i.e.}\quad \mu^{-1}\bM&=\bF^{-1}\bmm,
+\end{aligned}
+\tag{2.89--2.90}\label{eq:2.89}
+\end{equation}
+and taking the squared length of the left side (recall $|\bM|=1$),
+\begin{equation}
+\begin{aligned}
+   \mu^{-2}&=\big|\mu^{-1}\bM\big|^{2}=\ip{\bF^{-1}\bmm}{\bF^{-1}\bmm}\\
+   &=\ip\bmm{(\bF^{-1})^{t}\bF^{-1}\bmm}
+   =\ip\bmm{\bF^{-t}\bF^{-1}\bmm}=\ip\bmm{\bB^{-1}\bmm},
+\end{aligned}
+\tag{2.91}\label{eq:2.91}
+\end{equation}
+where
+\begin{equation}
+   \bB=\bF\bF^{t} \tag{2.92}\label{eq:2.92}
+\end{equation}
+is the \emph{left Cauchy--Green deformation tensor}; indeed
+$\bB^{-1}=(\bF\bF^{t})^{-1}=\bF^{-t}\bF^{-1}$ by Problems 18--19 of
+Chapter~1.
+
+\begin{proposition}[Properties of $\bB$]\label{prop:B}
+$\bB$ is a \emph{spatial} tensor ($\Vt\to\Vt$), symmetric, with
+\begin{equation}
+   \bB=B_{ij}\,\be_i\otimes\be_j,\qquad B_{ij}=F_{iA}F_{jA}=B_{ji}, \tag{2.93--2.94}\label{eq:2.93}
+\end{equation}
+and $\bB^{-1}$ is positive definite.
+\end{proposition}
+
+\begin{proof}
+$\bF^{t}:\Vt\to\hVt$ then $\bF:\hVt\to\Vt$, so $\bB$ maps $\Vt$ to itself;
+symmetry is $\bB^{t}=(\bF\bF^{t})^{t}=\bF\bF^{t}=\bB$. Components, again by
+Lemma~\ref{lem:dyadprod}:
+\begin{equation}
+\begin{aligned}
+   \bB&=(F_{iA}\be_i\otimes\hbE_A)(F_{jB}\hbE_B\otimes\be_j)
+   =F_{iA}F_{jB}(\ip{\hbE_A}{\hbE_B})\,\be_i\otimes\be_j\\
+   &=F_{iA}F_{jB}\dd_{AB}\,\be_i\otimes\be_j=B_{ij}\be_i\otimes\be_j,
+   \qquad B_{ij}=F_{iA}F_{jA}.
+\end{aligned}\tag{2.93--2.94}
+\end{equation}
+Positive definiteness of $\bB^{-1}$: for $\ba\neq\bze$ in $\Vt$,
+\begin{equation}
+   \ip\ba{\bB^{-1}\ba}=\ip\ba{\bF^{-t}\bF^{-1}\ba}
+   =\ip{\bF^{-1}\ba}{\bF^{-1}\ba}=\big|\bF^{-1}\ba\big|^{2}>0, \tag{2.95}\label{eq:2.95}
+\end{equation}
+since $\bF^{-1}$ is invertible (with inverse $\bF$). In Chapter~3 this is
+shown equivalent to positive definiteness of $\bB$ itself.
+\end{proof}
+
+\begin{remark}[$\bC$ and $\bB$: which space you measure in]\label{rem:CBintuition}
+$\bF$ has one foot in each configuration, so it cannot be symmetric and
+carries rotation as well as stretch. Pairing $\bF$ with its transpose
+cancels the rotation and lands the result wholly in one space:
+$\bC=\bF^{t}\bF$ lives in the \emph{reference} space and is fed reference
+fibres $\bM$, while $\bB=\bF\bF^{t}$ lives in the \emph{current} space and
+is fed current fibres $\bmm$. Concretely, \eqr{2.83} says ``give me the
+undeformed direction and I return the square of the stretch'', whereas
+\eqr{2.91} says ``give me the deformed direction and I return the inverse
+square of the stretch''. If $\bF$ is a pure rotation, $\bF^{t}\bF=\hat\I$
+and no fibre stretches, which is exactly why these products, and not $\bF$,
+are the measures of \emph{distortion}.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.05]
+  % ---- reference: unit circle of directions M
+  \draw[gray!55,thin] (-1.35,0)--(1.35,0); \draw[gray!55,thin] (0,-1.35)--(0,1.35);
+  \draw[thick] (0,0) circle (1);
+  \foreach \a in {15,45,...,345}
+     {\draw[gray!55,-{Stealth[length=1.4mm]}] (0,0)--(\a:1);}
+  \draw[vec,black] (0,0)--(0:1);  \node at (1.32,0.28) {$\bM_{\!1}$};
+  \draw[vec,black] (0,0)--(90:1); \node at (0.36,1.24) {$\bM_{\!2}$};
+  \node at (0,-1.85) {\small unit directions $|\bM|=1$ in $\kappa$};
+  % ---- map arrow
+  \draw[mapar] (1.9,0.4) to[bend left=14] (3.3,0.4);
+  \node at (2.6,1.0) {$\bF$};
+  % ---- current: ellipse of images FM
+  \begin{scope}[shift={(5.6,0)},rotate=22]
+  \draw[gray!55,thin] (-1.85,0)--(1.85,0); \draw[gray!55,thin] (0,-0.95)--(0,0.95);
+  \draw[thick] (0,0) ellipse (1.62 and 0.7);
+  \foreach \a in {15,45,...,345}
+     {\draw[gray!55,-{Stealth[length=1.4mm]}] (0,0)--({1.62*cos(\a)},{0.7*sin(\a)});}
+  \draw[vec,black] (0,0)--(1.62,0);  \node at (1.5,-0.42) {$\mu_1\bmm_1$};
+  \draw[vec,black] (0,0)--(0,0.7);   \node at (-0.78,0.95) {$\mu_2\bmm_2$};
+  \end{scope}
+  \node at (5.6,-1.85) {\small images $\bF\bM$: an ellipse};
+\end{tikzpicture}
+\\[1.8ex]
+\parbox{0.93\textwidth}{\footnotesize\textsc{Supplementary Figure B.} What
+$\bC=\bF^{t}\bF$ measures. Feed $\bF$ every unit direction $\bM$ at a
+material point: the images $\bF\bM$ sweep out an \emph{ellipse} (an
+ellipsoid in three dimensions), because $\mu^{2}=\ip\bM{\bC\bM}$ is a
+quadratic form in $\bM$. The stretch $\mu$ is the length of the image, so it
+depends on direction; its largest and smallest values occur along the
+principal axes of the ellipse, which are the eigenvectors of $\bC$, the
+corresponding $\mu^{2}$ being its eigenvalues. A general fibre is both
+stretched \emph{and} rotated, and the change in angle between two fibres is
+the shear recorded by the off-diagonal $C_{AB}$. A rigid motion sends the
+circle to a circle of equal radius, i.e.\ $\bC=\hat\I$.}
+\end{figure}
+
+\begin{remark}[reading Supplementary Figure B: why $\bF$ splits]
+\label{rem:polarpreview}
+The picture already contains the polar decomposition theorem of Chapter~3.
+Turning the circle into the ellipse can be done in two stages: first stretch
+along a fixed pair of orthogonal directions of $\kappa$, then rotate the
+stretched figure into place. Symbolically $\bF=\bR\bU$ with $\bU$ symmetric
+positive definite (the stretch) and $\bR$ orthogonal (the rotation).
+Squaring kills the rotation, exactly as the picture suggests:
+\[
+   \bC=\bF^{t}\bF=(\bR\bU)^{t}(\bR\bU)=\bU^{t}\bR^{t}\bR\bU=\bU\hat\I\bU=\bU^{2},
+\]
+using $(\bB\bA)^{t}=\bA^{t}\bB^{t}$, $\bR^{t}\bR=\hat\I$ and
+$\bU^{t}=\bU$. So $\bC$ records the ellipse's shape and size but nothing
+about its final orientation, which is the precise sense in which it measures
+distortion alone; $\mu^2=\ip\bM{\bC\bM}=\ip\bM{\bU^2\bM}=|\bU\bM|^2$ says the
+stretch is done entirely by $\bU$. Symmetrically
+$\bB=\bF\bF^{t}=\bR\bU^{2}\bR^{t}=\bV^{2}$ with $\bV=\bR\bU\bR^{t}$, the same
+stretch seen from the current configuration.
+\end{remark}
+
+\begin{definition}[Lagrange and Euler strains]\label{def:strains}
+The deviation of the stretch from its undeformed value $1$ is measured by
+\begin{equation}
+   \tfrac12(\mu^{2}-1)=\tfrac12\big(\ip\bM{\bC\bM}-1\big)=\ip\bM{\bE\bM},
+   \qquad \bE=\tfrac12(\bC-\hat\I), \tag{2.96--2.97}\label{eq:2.96}
+\end{equation}
+the \emph{Lagrange strain tensor}, and by
+\begin{equation}
+   \tfrac12(1-\mu^{-2})=\ip\bmm{\vek{e}\bmm},
+   \qquad \vek{e}=\tfrac12(\I-\bB^{-1}), \tag{2.98--2.99}\label{eq:2.98}
+\end{equation}
+the \emph{Euler strain tensor}. Both are symmetric.
+\end{definition}
+
+\begin{proof}[Verification]
+Since $|\bM|=1$, $\ip\bM{\hat\I\bM}=\ip\bM\bM=1$, so
+$\ip\bM{\bE\bM}=\tfrac12(\ip\bM{\bC\bM}-\ip\bM\bM)=\tfrac12(\mu^{2}-1)$,
+which is \eqr{2.96}; the Euler case is identical using \eqr{2.91} and
+$|\bmm|=1$.
+\end{proof}
+
+\begin{remark}[why the factor $\tfrac12$, and why strain at all]\label{rem:half}
+For $\mu\simeq1$ write $\mu=1+\eps$ with $\eps$ small; then
+$\mu^{2}-1=(1+\eps)^{2}-1=2\eps+\eps^{2}\simeq2(\mu-1)$. The factor $\tfrac12$
+is chosen precisely so that $\ip\bM{\bE\bM}\simeq\mu-1$, the
+\emph{extension} (change in length per unit original length), recovering the
+engineer's strain in the small-deformation limit; likewise
+$\ip\bmm{\vek{e}\bmm}\simeq\mu-1$. The reason for introducing strains at
+all, rather than working with $\bC$ and $\bB$, is that they \emph{vanish} in
+the undeformed state: by \eqr{2.79}, $\bF=\vek{1}$ gives
+$\bC=\vek{1}^{t}\vek{1}=\hat\I$ and $\bB=\vek{1}\vek{1}^{t}=\I$
+by \eqr{2.72}--\eqr{2.73}, hence $\bE=\hat\Ob$ and $\vek{e}=\Ob$. (Henceforth
+we drop the caret on the referential zero tensor and let context decide.)
+The names used here are not universal, and there are infinitely many
+equivalent strain measures; see Ogden's book for a survey.
+\end{remark}
+
+\begin{remark}[symmetry is meaningless for two-point tensors]\label{rem:nosym}
+$\bE$ and $\vek{e}$ are symmetric, but note carefully that symmetry and
+skewness are defined only for tensors mapping a vector space \emph{to
+itself}: $\bA^{t}=\pm\bA$ compares $\bA$ with an object of the same type.
+For a two-point tensor such as $\bF$, the transpose $\bF^{t}$ maps $\Vt\to\hVt$
+while $\bF$ maps $\hVt\to\Vt$, so the equation $\bF^{t}=\pm\bF$ cannot even be
+written. Two-point tensors are therefore \emph{neither} symmetric nor skew,
+which is another reason the deformation measures are built as $\bF^{t}\bF$
+and $\bF\bF^{t}$.
+\end{remark}
+
+\paragraph*{Arclength of a deformed curve.}
+On $C$, $\dl\bX(S)=\bM\,\dl S$ with $\dl S=|\dl\bX|$ (arclength
+parametrisation), so the deformed arclength measure is
+\begin{equation}
+   \dl s=|\dl\bx|=\sqrt{\ip{\bF\dl\bX}{\bF\dl\bX}}
+   =\sqrt{\ip\bM{\bC\bM}}\;\dl S=\mu(S,t_*)\,\dl S, \tag{2.100}\label{eq:2.100}
+\end{equation}
+that is $\dl s/\dl S=\mu(S,t_*)$ $(2.101)$, and the total length of the
+deformed curve, and its change, are
+\begin{equation}
+   l(C_{t_*})=\int_{S_0}^{S_1}\!\mu(S,t_*)\,\dl S,\qquad
+   l(C_{t_*})-l(C)=\int_{S_0}^{S_1}\!\big[\mu(S,t_*)-1\big]\,\dl S. \tag{2.102--2.103}\label{eq:2.102}
+\end{equation}
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=0.9]
+  \draw[gray!75,thick] plot[smooth,tension=0.9] coordinates
+    {(-1.35,-1.2) (-0.85,-0.25) (-0.15,0.4) (0.45,1.3) (1.1,2.05)};
+  \fill (-1.35,-1.2) circle (1.7pt) node[left=2pt] {$S_0$};
+  \fill (1.1,2.05) circle (1.7pt) node[right=2pt] {$S_1$};
+  \fill (-0.15,0.4) circle (1.9pt); \node at (-0.6,0.55) {$S$};
+  \draw[vec,black] (-0.15,0.4) -- ++(0.5,0.82);
+  \node at (0.78,0.92) {$\bM$};
+  \node at (0.35,-0.62) {\small$\dl\bX=\bM\,\dl S$};
+  \node[gray!75] at (-1.55,1.45) {$C\subset\kappa$};
+  \begin{scope}[shift={(5.9,0)}]
+  \draw[gray!75,thick] plot[smooth,tension=0.9] coordinates
+    {(-1.35,-1.2) (-0.55,-0.7) (-0.05,0.25) (0.35,1.25) (1.05,2.05)};
+  \fill (-1.35,-1.2) circle (1.7pt) node[left=2pt] {$s=0$};
+  \fill (1.05,2.05) circle (1.7pt) node[right=2pt] {$s=l(C_{t_*})$};
+  \fill (-0.05,0.25) circle (1.9pt); \node at (-0.75,0.4) {$s(S,t_*)$};
+  \node at (0.5,-0.62) {\small$\dl s=\mu\,\dl S$};
+  \node[gray!75] at (-1.35,-1.75) {$C_{t_*}\subset\kappa_{t_*}$};
+  \end{scope}
+  \draw[mapar] (2.0,1.6) to[bend left=16] (3.75,1.6);
+  \node at (2.9,2.2) {$\dfrac{\dl s}{\dl S}=\mu$};
+\end{tikzpicture}
+\caption{Arclength of a material point on material curves in $\kappa$ and $\kappa_{t_*}$.}
+\label{fig:2.11}
+\end{figure}
+
+\begin{remark}[Figure 2.11]\label{rem:fig11}
+Figure~2.11 shows $C\subset\kappa$ carrying the stations $S_0,S,S_1$, the
+unit tangent $\bM$ and the element $\dl\bX=\bM\,\dl S$, beside its image
+$C_{t_*}$ carrying the deformed arclength $s(S,t_*)$. The content of
+$(2.101)$ is that the stretch $\mu$ is literally the local ratio of deformed
+to undeformed arclength, so integrating it along the fibre gives the new
+length: a one-dimensional version of $\dl v=J\,\dl V$.
+\end{remark}
+
+\paragraph*{Angles between material curves.}
+Let two material curves cross at $\bX$ with unit tangents $\bM_1,\bM_2$ and
+angle $\Theta$ ($\cos\Theta=\ip{\bM_1}{\bM_2}$); after deformation they cross
+at $\bx$ with unit tangents $\bmm_1,\bmm_2$ and angle $\theta$
+($\cos\theta=\ip{\bmm_1}{\bmm_2}$), where
+\begin{equation}
+   \mu_1\bmm_1=\bF\bM_1,\qquad \mu_2\bmm_2=\bF\bM_2 \tag{2.104}\label{eq:2.104}
+\end{equation}
+(Figure~2.12). Dotting the two and moving $\bF^{t}$ across,
+\begin{equation}
+   \mu_1\mu_2\cos\theta=\ip{\bF\bM_1}{\bF\bM_2}=\ip{\bM_1}{\bC\bM_2}, \tag{2.105}\label{eq:2.105}
+\end{equation}
+and dividing by $\mu_1\mu_2=\sqrt{\ip{\bM_1}{\bC\bM_1}}\sqrt{\ip{\bM_2}{\bC\bM_2}}$
+from \eqr{2.83},
+\begin{equation}
+   \cos\theta=\frac{\ip{\bM_1}{\bC\bM_2}}
+   {\sqrt{(\ip{\bM_1}{\bC\bM_1})(\ip{\bM_2}{\bC\bM_2})}} , \tag{2.106}\label{eq:2.106}
+\end{equation}
+in which $\ip{\bM_1}{\bC\bM_2}=\ip{\bM_2}{\bC\bM_1}$ because
+$\ip{\bM_1}{\bC\bM_2}=\ip{\bC^{t}\bM_1}{\bM_2}=\ip{\bM_2}{\bC\bM_1}$ by the
+symmetry of $\bC$. Running the same argument backwards with
+$\mu_1^{-1}\bM_1=\bF^{-1}\bmm_1$, $\mu_2^{-1}\bM_2=\bF^{-1}\bmm_2$ from
+\eqr{2.90} gives the undeformed angle in terms of current data,
+\begin{equation}
+   \cos\Theta=\frac{\ip{\bmm_1}{\bB^{-1}\bmm_2}}
+   {\sqrt{(\ip{\bmm_1}{\bB^{-1}\bmm_1})(\ip{\bmm_2}{\bB^{-1}\bmm_2})}} . \tag{2.107--2.108}\label{eq:2.107}
+\end{equation}
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=0.85]
+  % reference: two curves crossing at X
+  \draw[thick] plot[smooth,tension=0.9] coordinates {(-1.7,-1.0) (-0.6,-0.35) (0,0) (0.9,0.9) (1.5,1.9)};
+  \draw[thick] plot[smooth,tension=0.9] coordinates {(1.6,-0.9) (0.7,-0.5) (0,0) (-0.75,0.95) (-1.2,1.9)};
+  \fill (0,0) circle (1.7pt) node[below=2pt] {$\bX$};
+  \draw[vec] (0,0) -- (0.78,0.78); \node at (1.12,0.92) {$\bM_1$};
+  \draw[vec] (0,0) -- (-0.62,0.85); \node at (-0.95,1.08) {$\bM_2$};
+  \draw (0.42,0.42) arc (45:126:0.6); \node at (0.02,0.78) {$\Theta$};
+  \node at (-1.55,1.55) {$\kappa$};
+  % current
+  \begin{scope}[shift={(6.0,0)}]
+  \draw[thick] plot[smooth,tension=0.9] coordinates {(-1.5,-1.1) (-0.5,-0.45) (0,0) (0.75,1.05) (1.1,1.95)};
+  \draw[thick] plot[smooth,tension=0.9] coordinates {(1.7,-0.7) (0.75,-0.4) (0,0) (-0.95,0.7) (-1.6,1.5)};
+  \fill (0,0) circle (1.7pt) node[below=2pt] {$\bx$};
+  \draw[vec] (0,0) -- (0.55,0.9); \node at (0.88,1.05) {$\bmm_1$};
+  \draw[vec] (0,0) -- (-0.85,0.6); \node at (-1.22,0.75) {$\bmm_2$};
+  \draw (0.3,0.49) arc (58:145:0.58); \node at (-0.12,0.82) {$\theta$};
+  \node at (1.6,1.55) {$\kappa_t$};
+  \end{scope}
+  \draw[mapar] (2.15,1.35) to[bend left=16] (3.85,1.35);
+  \node at (3.0,1.95) {$\bF$};
+\end{tikzpicture}
+\caption{Intersecting material curves in $\kappa$ and $\kappa_{t_*}$.}\label{fig:2.12}
+\end{figure}
+
+\begin{remark}[Figure 2.12, and why $\bC$ deserves the name ``distortion'']
+\label{rem:fig12}
+Figure~2.12 shows two material curves meeting at $\bX$ at angle $\Theta$ in
+$\kappa$, and their images meeting at $\bx$ at angle $\theta$ in $\kappa_t$.
+Formulas \eqr{2.106} and \eqr{2.108} say that $\bC$ (or $\bB$) determines
+\emph{every} stretch and \emph{every} angle change at the point, and these
+are the entire local geometric content of a deformation: hence the
+Cauchy--Green tensors are said to characterise the \emph{state of distortion}
+at $p$. Note the shear reading of the off-diagonal entries: taking
+$\bM_1=\hbE_1$, $\bM_2=\hbE_2$ (initially orthogonal, $\Theta=\pi/2$),
+\eqr{2.106} collapses to $\cos\theta=C_{12}/\sqrt{C_{11}C_{22}}$, so a nonzero
+$C_{12}$ \emph{is} the loss of perpendicularity, while the diagonal entries
+$C_{AA}=\mu^2$ (no sum) are squared stretches along the axes.
+\end{remark}
+
+%=======================================================================
+\section{Problems}\label{sec:problems}
+%=======================================================================
+
+The three problems of \S2.8 are solved below in full index notation, using
+only Chapter~1 algebra together with \eqr{2.39}, $F_{iA}=\chi_{i,A}$. Recall
+the referential and spatial permutation symbols
+$\eps_{ABC}=\tbox{\hbE_A}{\hbE_B}{\hbE_C}$ and
+$\eps_{ijk}=\tbox{\be_i}{\be_j}{\be_k}$, and the contracted identities
+$\eps_{ABC}\eps_{DBC}=2\dd_{AD}$, $\eps_{ijk}\eps_{ijk}=6$.
+
+\begin{lemma}[symmetric contracted with antisymmetric vanishes]
+\label{lem:symskw}
+If $S_{BC}=S_{CB}$ and $A_{BC}=-A_{CB}$, then $A_{BC}S_{BC}=0$, the sum
+running over both indices.
+\end{lemma}
+
+\begin{proof}
+Use the antisymmetry of $A$, then relabel the two dummy indices, then use
+the symmetry of $S$:
+\[
+   A_{BC}S_{BC}\ \overset{(1)}{=}\ -A_{CB}S_{BC}
+   \ \overset{(2)}{=}\ -A_{BC}S_{CB}
+   \ \overset{(3)}{=}\ -A_{BC}S_{BC}.
+\]
+Step (1) is $A_{BC}=-A_{CB}$; step (2) renames the summation indices; step
+(3) is $S_{CB}=S_{BC}$. Hence $2A_{BC}S_{BC}=0$.
+\end{proof}
+
+The lemma is used twice below, at 2(a) and at 2(b).
+
+\paragraph*{Problem 1: components of the cofactor of $\bF$.}
+\emph{Show that} $F^{*}_{iA}=\tfrac12\eps_{ijk}\eps_{ABC}F_{jB}F_{kC}$.
+
+\emph{Solution.} The cofactor is defined by $\bF^{*}(\ba\times\bb)
+=\bF\ba\times\bF\bb$ for all $\ba,\bb\in\hVt$. Take $\ba=\hbE_B$,
+$\bb=\hbE_C$, with
+\[
+   \hbE_B\times\hbE_C=\eps_{BCA}\hbE_A
+\]
+by Proposition~1.24. The left side becomes
+\[
+   \bF^{*}(\eps_{BCA}\hbE_A)=\eps_{BCA}\,\bF^{*}\hbE_A
+   =\eps_{BCA}F^{*}_{iA}\,\be_i ,
+\]
+using $\bF^{*}\hbE_A=F^{*}_{iA}\be_i$ (the analogue of \eqr{2.40}). The right
+side, expanding each image on $\{\be_i\}$ and using
+$\be_j\times\be_k=\eps_{jki}\be_i$, is
+\[
+   \bF\hbE_B\times\bF\hbE_C=(F_{jB}\be_j)\times(F_{kC}\be_k)
+   =F_{jB}F_{kC}\,\eps_{jki}\,\be_i .
+\]
+Equating components on $\be_i$ and writing $\eps_{jki}=\eps_{ijk}$ (cyclic),
+\[
+   \eps_{BCA}F^{*}_{iA}=\eps_{ijk}F_{jB}F_{kC}.
+\]
+Contract both sides with $\eps_{BCD}$ (sum over $B,C$). On the left,
+$\eps_{BCA}\eps_{BCD}=2\dd_{AD}$, giving $2\dd_{AD}F^{*}_{iA}=2F^{*}_{iD}$;
+on the right, $\eps_{BCD}=\eps_{DBC}$ (cyclic). Hence
+\[
+   F^{*}_{iD}=\tfrac12\,\eps_{ijk}\,\eps_{DBC}\,F_{jB}F_{kC},
+\]
+which upon renaming $D\to A$ is the required
+$F^{*}_{iA}=\tfrac12\eps_{ijk}\eps_{ABC}F_{jB}F_{kC}$. \hfill$\square$
+
+The identity $\eps_{BCA}\eps_{BCD}=2\dd_{AD}$ is Theorem~1.29. Directly:
+for $A\neq D$ every term repeats an index and dies; for $A=D=3$ the
+survivors are $\eps_{123}^{2}+\eps_{213}^{2}=2$. The factor $2$ is why
+$\tfrac12$ appears, each unordered pair $\{B,C\}$ being counted twice.
+
+\emph{Check.} For the simple shear of Chapter 3,
+$F_{iA}=\dd_{iA}+\gamma\,\dd_{i1}\dd_{A2}$, whose matrix is
+$\left(\begin{smallmatrix}1&\gamma&0\\0&1&0\\0&0&1\end{smallmatrix}\right)$.
+Since $\det\bF=1$ and $\bF^{*}=J\bF^{-t}=\bF^{-t}$ by \eqr{2.55}, the answer
+must be
+$\left(\begin{smallmatrix}1&0&0\\-\gamma&1&0\\0&0&1\end{smallmatrix}\right)$.
+Test the formula on the entry $A=1$, $i=2$:
+\[
+   F^{*}_{21}=\tfrac12\eps_{2jk}\eps_{1BC}F_{jB}F_{kC}.
+\]
+The only non-zero $\eps_{2jk}$ are $\eps_{231}=1$ and $\eps_{213}=-1$; the
+only non-zero $\eps_{1BC}$ are $\eps_{123}=1$ and $\eps_{132}=-1$. So four
+terms survive:
+\[
+\begin{aligned}
+   2F^{*}_{21}&=\eps_{231}\eps_{123}F_{32}F_{13}
+     +\eps_{231}\eps_{132}F_{33}F_{12}\\
+   &\qquad+\eps_{213}\eps_{123}F_{12}F_{33}
+     +\eps_{213}\eps_{132}F_{13}F_{32}\\
+   &=(+1)(+1)(0)(0)+(+1)(-1)(1)(\gamma)\\
+   &\qquad+(-1)(+1)(\gamma)(1)+(-1)(-1)(0)(0)\\
+   &=-\gamma-\gamma=-2\gamma ,
+\end{aligned}
+\]
+so $F^{*}_{21}=-\gamma$, as required.
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.0,
+  vec/.style={-{Stealth[length=2.2mm]},thick},
+  lbl/.style={fill=white,inner sep=1pt,font=\small}]
+% ---- reference parallelogram and its area vector ----
+\begin{scope}
+\fill[gray!14] (0,0)--(1.5,-0.35)--(2.1,0.95)--(0.6,1.30)--cycle;
+\draw[thick] (0,0)--(1.5,-0.35)--(2.1,0.95)--(0.6,1.30)--cycle;
+\draw[vec] (0,0)--(1.5,-0.35); \node[lbl,below] at (0.85,-0.30) {$\hbE_B$};
+\draw[vec] (0,0)--(0.6,1.30);  \node[lbl,left]  at (0.52,1.05) {$\hbE_C$};
+\draw[vec,gray!60] (1.05,0.475)--++(0.30,1.15);
+\node[lbl] at (1.55,1.72) {$\hbE_B\times\hbE_C$};
+\node[lbl] at (1.05,-1.50) {$\kappa$};
+\end{scope}
+% ---- arrow ----
+\draw[-{Stealth[length=2.6mm]},thick,gray!70] (2.9,0.5)--(4.0,0.5);
+\node[lbl,above,text=gray!85] at (3.45,0.56) {$\bF$};
+% ---- image parallelogram ----
+\begin{scope}[xshift=5.0cm]
+\fill[gray!14] (0,0)--(2.1,0.15)--(2.5,1.15)--(0.4,1.0)--cycle;
+\draw[thick] (0,0)--(2.1,0.15)--(2.5,1.15)--(0.4,1.0)--cycle;
+\draw[vec] (0,0)--(2.1,0.15); \node[lbl,below] at (1.1,0.12) {$\bF\hbE_B$};
+\draw[vec] (0,0)--(0.4,1.0);  \node[lbl,left]  at (0.34,0.82) {$\bF\hbE_C$};
+\draw[vec,gray!60] (1.25,0.575)--++(0.18,1.25);
+\node[lbl] at (1.75,1.92) {$\bF\hbE_B\times\bF\hbE_C$};
+\node[lbl] at (1.25,-1.50) {$\kappa_{t}$};
+\end{scope}
+\draw[-{Stealth[length=2.6mm]},thick,gray!70,densely dashed]
+   (1.35,1.72) .. controls (3.4,2.55) .. (5.9,1.95);
+\node[lbl,font=\small] at (3.6,2.62) {$\bF^{*}$};
+\end{tikzpicture}
+\caption{Problem 1. $\bF$ carries the edge vectors of a material
+parallelogram, $\bF^{*}$ carries its area vector. The problem converts the
+implicit definition into components,
+$F^{*}_{iA}=\tfrac12\eps_{ijk}\eps_{ABC}F_{jB}F_{kC}$; \eqr{2.55} then
+converts those into $J\bF^{-t}$.}
+\label{fig:cofactor}
+\end{figure}
+
+\paragraph*{Problem 2(a): $F^{*}_{iA}$ as a referential divergence.}
+\emph{Show} $F^{*}_{iA}=G_{iAB,B}$, \emph{where}
+$G_{iAB}=\tfrac12\eps_{ijk}\eps_{ABC}\chi_j\chi_{k,C}$.
+
+\emph{Solution.} Differentiate $G_{iAB}$ with respect to $X_B$ and sum,
+using the product rule (the $\eps$'s are constants):
+\[
+   G_{iAB,B}=\tfrac12\eps_{ijk}\eps_{ABC}
+   \big(\chi_{j,B}\,\chi_{k,C}+\chi_j\,\chi_{k,CB}\big).
+\]
+Second term: for fixed $A,k$ put $S_{BC}=\chi_{k,CB}$ and
+$A_{BC}=\eps_{ABC}$. Mixed partials commute, so $S_{BC}=S_{CB}$; $\eps$
+changes sign under a swap, so $A_{BC}=-A_{CB}$. By
+Lemma~\ref{lem:symskw},
+\[
+   \eps_{ABC}\,\chi_{k,CB}=0 .
+\]
+First term, by $F_{jB}=\chi_{j,B}$ and Problem~1,
+\[
+   \tfrac12\eps_{ijk}\eps_{ABC}F_{jB}F_{kC}=F^{*}_{iA}.
+\]
+Hence $G_{iAB,B}=F^{*}_{iA}$. \hfill$\square$
+
+\paragraph*{Problem 2(b): the Piola identity.}
+\emph{Show} $G_{iAB}=-G_{iBA}$ \emph{and deduce} $F^{*}_{iA,A}=0$.
+
+\emph{Solution.} Swapping the free indices $A,B$ in the definition and using
+only the antisymmetry $\eps_{BAC}=-\eps_{ABC}$,
+\[
+   G_{iBA}=\tfrac12\eps_{ijk}\eps_{BAC}\chi_j\chi_{k,C}
+   =-\tfrac12\eps_{ijk}\eps_{ABC}\chi_j\chi_{k,C}=-G_{iAB}.
+\]
+Now take the referential divergence of Problem 2(a):
+\[
+   F^{*}_{iA,A}=(G_{iAB,B})_{,A}=G_{iAB,BA}.
+\]
+Apply Lemma~\ref{lem:symskw} again on the pair $(A,B)$: $(\cdot)_{,BA}$ is
+symmetric, $G_{iAB}$ antisymmetric. Hence
+\[
+   F^{*}_{iA,A}=0,\qquad\text{i.e.}\qquad \Dvg\bF^{*}=\bze,
+\]
+the \emph{Piola identity}. \hfill$\square$
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.0,
+  vec/.style={-{Stealth[length=2.1mm]},semithick},
+  lbl/.style={fill=white,inner sep=1pt,font=\small}]
+% ---- closed material surface in kappa ----
+\begin{scope}
+\draw[thick] plot[smooth cycle,tension=0.85] coordinates
+  {(0,1.05) (1.05,0.66) (1.35,-0.32) (0.55,-1.05) (-0.68,-0.86) (-1.18,0.05)};
+\foreach \a/\b/\c/\d in {0/1.05/0.10/0.55, 1.05/0.66/0.60/0.28,
+  1.35/-0.32/0.62/-0.18, 0.55/-1.05/0.18/-0.56, -0.68/-0.86/-0.42/-0.48,
+  -1.18/0.05/-0.60/0.06}
+  \draw[vec,gray!75] (\a,\b)--++(\c,\d);
+\node[lbl] at (0,-1.60) {$\partial P\subset\kappa$};
+\node[lbl,font=\small] at (1.45,0.95) {$\bN$};
+\end{scope}
+% ---- arrow ----
+\draw[-{Stealth[length=2.6mm]},thick,gray!70] (2.0,0)--(3.1,0);
+\node[lbl,above,text=gray!85] at (2.55,0.06) {$\bchi_{\kappa}$};
+% ---- image in kappa_t ----
+\begin{scope}[xshift=4.9cm,rotate=-18,xscale=1.25,yscale=0.85]
+\draw[thick] plot[smooth cycle,tension=0.85] coordinates
+  {(0,1.05) (1.05,0.66) (1.35,-0.32) (0.55,-1.05) (-0.68,-0.86) (-1.18,0.05)};
+\foreach \a/\b/\c/\d in {0/1.05/0.10/0.55, 1.05/0.66/0.60/0.28,
+  1.35/-0.32/0.62/-0.18, 0.55/-1.05/0.18/-0.56, -0.68/-0.86/-0.42/-0.48,
+  -1.18/0.05/-0.60/0.06}
+  \draw[vec,gray!75] (\a,\b)--++(\c,\d);
+\end{scope}
+\node[lbl] at (4.9,-1.60) {$\partial P_{t}\subset\kappa_{t}$};
+\node[lbl,font=\small] at (6.5,1.05) {$\bn$};
+% ---- the statement ----
+\node[align=center,font=\small] at (2.9,-2.55)
+  {$\displaystyle\int_{\partial P}\bF^{*}\bN\,\dl A
+    =\int_{P}\Dvg\bF^{*}\,\dl V=\bze
+    \qquad\Longleftrightarrow\qquad
+    \int_{\partial P_{t}}\bn\,\dl a=\bze$};
+\end{tikzpicture}
+\caption{The Piola identity. A closed material surface stays closed, so its
+normals integrate to zero in $\kappa_{t}$ as they do in $\kappa$. By
+Piola--Nanson \eqr{2.54} that is the divergence theorem applied to
+$\bF^{*}$, and it holds for every $P$ and every motion only if
+$\Dvg\bF^{*}=\bze$.}
+\label{fig:piola}
+\end{figure}
+
+\begin{remark}[what the Piola identity buys]\label{rem:piolauses}
+$\Dvg\bF^{*}=\bze$ says the cofactor field is automatically divergence free,
+no matter what motion is prescribed. Combined with Piola--Nanson
+\eqr{2.54}, it is exactly the statement that the deformed images of closed
+material surfaces stay closed: applying the divergence theorem,
+$\int_{\partial P}\bF^{*}\bN\,\dl A=\int_P\Dvg\bF^{*}\,\dl V=\bze$, i.e.\
+$\int_{\partial P_t}\bn\,\dl a=\bze$, the elementary fact that the outward
+normals of any closed surface integrate to zero. It is the kinematic
+identity that later converts the Cauchy stress balance into its Piola form.
+\end{remark}
+
+\paragraph*{Problem 2(c): $\det\bF$ as a divergence.}
+\emph{Show} $\det\bF=\tfrac13F_{iA}F^{*}_{iA}$, \emph{and hence that there is
+a field $\vek{H}(\bX,t)=H_A\hbE_A$ with} $\det\bF=H_{A,A}$.
+
+\emph{Solution.} The cofactor identity $\bA^{t}\bA^{*}=(\det\bA)\I$ of
+Problem 22(c) of Chapter~1 holds verbatim for the two-point $\bF$, where it
+reads, in components,
+\[
+   F_{iA}F^{*}_{iB}=(\det\bF)\,\dd_{AB}.
+\]
+Setting $B=A$ and summing, with $\dd_{AA}=3$,
+\[
+   F_{iA}F^{*}_{iA}=3\det\bF
+   \qquad\Longrightarrow\qquad \det\bF=\tfrac13F_{iA}F^{*}_{iA}.
+\]
+Now substitute $F_{iA}=\chi_{i,A}$ and use the Piola identity of part (b) to
+move the derivative outside:
+\[
+   \det\bF=\tfrac13\chi_{i,A}F^{*}_{iA}
+   =\tfrac13\Big[(\chi_iF^{*}_{iA})_{,A}-\chi_i\underbrace{F^{*}_{iA,A}}_{=0}\Big]
+   =\Big(\tfrac13\chi_iF^{*}_{iA}\Big)_{,A}.
+\]
+Hence $\det\bF=H_{A,A}$ with
+\[
+   H_A=\tfrac13\,\chi_i\,F^{*}_{iA},
+\]
+i.e.\ $\vek{H}=\tfrac13\bF^{*t}\bchi_\kappa$. \hfill$\square$
+
+\begin{remark}[why one wants $J$ as a divergence]\label{rem:Hdiv}
+Writing $J=\det\bF=\Dvg\vek{H}$ turns the volume integral of $J$ into a
+surface integral by the divergence theorem,
+$\int_P J\,\dl V=\int_{\partial P}\ip{\vek{H}}{\bN}\,\dl A$. Since
+$\int_PJ\,\dl V=\int_{P_t}\dl v$ is the deformed volume, this expresses the
+volume enclosed by a deformed surface purely in terms of data \emph{on} that
+surface, the familiar ``volume from a surface integral'' trick, and it is the
+kinematic origin of several variational identities in nonlinear elasticity.
+\end{remark}
+
+\paragraph*{Problem 2(d): $\det\bF^{t}=\det\bF$.}
+
+\emph{Solution.} Substituting Problem 1 into the result of 2(c),
+\begin{equation}
+   \det\bF=\tfrac13F_{iA}\cdot\tfrac12\eps_{ijk}\eps_{ABC}F_{jB}F_{kC}
+   =\tfrac16\,\eps_{ijk}\,\eps_{ABC}\,F_{iA}F_{jB}F_{kC},
+   \tag{$\ast$}
+\end{equation}
+the two-point version of the contracted determinant formula of Chapter~1.
+The transpose has components $(\bF^{t})_{Ai}=F_{iA}$, and $\bF^{t}$ maps
+$\Vt\to\hVt$, so the same formula with the roles of the two index families
+exchanged gives
+\[
+\begin{aligned}
+   \det\bF^{t}&=\tfrac16\,\eps_{ABC}\,\eps_{ijk}\,
+      (\bF^{t})_{Ai}(\bF^{t})_{Bj}(\bF^{t})_{Ck}\\
+   &=\tfrac16\,\eps_{ABC}\,\eps_{ijk}\,F_{iA}F_{jB}F_{kC}=\det\bF,
+\end{aligned}
+\]
+since the two scalar expressions differ only in the order in which the same
+factors are written. \hfill$\square$
+
+\paragraph*{Problem 3: change of basis for a two-point tensor.}
+\emph{With $\{\hbE_A\},\{\hbE'_A\}$ orthonormal in $\hVt$ and
+$\{\be_i\},\{\be'_i\}$ orthonormal in $\Vt$, and
+$\bF=F_{iA}\be_i\otimes\hbE_A=F'_{iA}\be'_i\otimes\hbE'_A$, find $F'_{iA}$.}
+
+\emph{Solution.} Introduce the two independent sets of direction cosines,
+one for each space,
+\[
+   a_{ij}=\ip{\be_i}{\be'_j}\ \ (\text{spatial}),\qquad
+   \hat a_{AB}=\ip{\hbE_A}{\hbE'_B}\ \ (\text{referential}),
+\]
+so that, by the orthonormal expansion of Chapter~1,
+\[
+   \be'_i=(\ip{\be_j}{\be'_i})\be_j=a_{ji}\be_j,\qquad
+   \hbE'_A=(\ip{\hbE_B}{\hbE'_A})\hbE_B=\hat a_{BA}\hbE_B .
+\]
+Extract the primed components with $(2.41)$, $F'_{iA}=\ip{\be'_i}{\bF\hbE'_A}$.
+First act with $\bF$ on the primed referential basis vector, using linearity
+and $\bF\hbE_B=F_{jB}\be_j$ from \eqr{2.40}:
+\[
+   \bF\hbE'_A=\hat a_{BA}\,\bF\hbE_B=\hat a_{BA}F_{jB}\,\be_j .
+\]
+Then dot with $\be'_i=a_{ki}\be_k$ and use $\ip{\be_k}{\be_j}=\dd_{kj}$:
+\[
+   F'_{iA}=\ip{a_{ki}\be_k}{\hat a_{BA}F_{jB}\be_j}
+   =a_{ki}\hat a_{BA}F_{jB}\,\dd_{kj}
+   =a_{ji}\,\hat a_{BA}\,F_{jB}.
+\]
+Hence
+\[
+   \boxed{\;F'_{iA}=a_{ji}\,\hat a_{BA}\,F_{jB}\;}
+\]
+\hfill$\square$
+
+\emph{In matrix form.} With $(a)_{ij}=a_{ij}$ and
+$(\hat a)_{AB}=\hat a_{AB}$, the index pattern $a_{ji}(\cdot)_{jB}
+\hat a_{BA}$ is
+\[
+   (F')=(a)^{t}\,(F)\,(\hat a).
+\]
+Both $(a)$ and $(\hat a)$ are orthogonal, by the computation of Problem
+9(a) of Chapter 1 applied in each space separately:
+\[
+   a_{ki}a_{kj}=\dd_{ij},\qquad \hat a_{CA}\hat a_{CB}=\dd_{AB}.
+\]
+
+\emph{Check 1: $J$ is unchanged.} Taking determinants,
+\[
+   \det(F')=\det(a)^{t}\det(F)\det(\hat a)=(\pm1)\det(F)(\pm1),
+\]
+and both signs are $+1$ when the two changes of basis preserve
+handedness. So $J$ is basis independent, as \eqr{2.50} requires.
+
+\emph{Check 2: $\bC$ transforms with one matrix only.} From
+$C_{AB}=F_{iA}F_{iB}$,
+\[
+\begin{aligned}
+   C'_{AB}&=F'_{iA}F'_{iB}
+   =\big(a_{ji}\hat a_{CA}F_{jC}\big)\big(a_{ki}\hat a_{DB}F_{kD}\big)\\
+   &=\hat a_{CA}\hat a_{DB}\,\dd_{jk}F_{jC}F_{kD}
+   =\hat a_{CA}\hat a_{DB}\,C_{CD},
+\end{aligned}
+\]
+using $a_{ji}a_{ki}=\dd_{jk}$. The spatial cosines have cancelled: $\bC$
+is a referential tensor and cannot feel a change of spatial basis. The
+same computation on $B_{ij}=F_{iA}F_{jA}$ cancels the referential cosines
+instead.
+
+\begin{remark}[the transformation law identifies the tensor's type]
+\label{rem:2ptlaw}
+Compare with Chapter~1: a vector picks up one factor of the cosine matrix,
+$v'_i=a_{ki}v_k$; an ordinary (one-point) tensor picks up two factors of the
+\emph{same} matrix, $A'_{ij}=a_{ki}a_{lj}A_{kl}$. A two-point tensor also
+picks up two factors, but one from \emph{each} space, $a_{ji}$ for the
+lower-case index and $\hat a_{BA}$ for the upper-case one. The two rotations
+are independent: one may re-label the reference frame without touching the
+current frame, and $\bF$ responds only in its capital index. This is the
+precise sense in which $\bF$ ``has one foot in each configuration'', and it
+is why the alphabet convention of Remark~\ref{rem:fig6} is more than
+cosmetic.
+\end{remark}
+
+%=======================================================================
+\appendix
+\chapter{Dictionary to the book}\label{app:dict}
+%=======================================================================
+
+\renewcommand{\arraystretch}{1.2}
+\begin{center}\scriptsize
+\begin{tabular}{@{}ll@{\hspace{1.6em}}ll@{}}
+\hline
+Book & Here & Book & Here\\
+\hline
+\eqr{2.1} motion & Def.~\ref{def:motion}
+ & \eqr{2.34}--\eqr{2.37} & \S\ref{sec:defgrad}, Thm.~\ref{thm:GradgradF}\\
+\eqr{2.2} velocity, accel. & Def.~\ref{def:va}
+ & \eqr{2.38}--(2.41) & eqs.\ here in \S\ref{sec:defgrad}\\
+\eqr{2.3}, \eqr{2.4} reference & Def.~\ref{def:ref}
+ & \eqr{2.42}--\eqr{2.44} & Lem.~\ref{lem:dyadprod}\\
+\eqr{2.5}--\eqr{2.7} $\bchi_\kappa$ & eqs.\ in \S\ref{sec:pva}
+ & \eqr{2.45}, \eqr{2.46} & material curves, \S\ref{sec:defgrad}\\
+\eqr{2.8}--\eqr{2.10} velocity forms & \S\ref{sec:pva}
+ & \eqr{2.47}--\eqr{2.50} volume & eqs.\ here, Rem.~\ref{rem:fig8}\\
+\eqr{2.11}--\eqr{2.13} descriptions & \S\ref{sec:desc}, Rem.~\ref{rem:decorations}
+ & \eqr{2.51}--\eqr{2.54} Piola--Nanson & \S\ref{sec:defgrad}\\
+\eqr{2.14}--\eqr{2.16} differentials & \S\ref{sec:desc}
+ & \eqr{2.55} $\bF^{*}=J\bF^{-t}$ & \S\ref{sec:defgrad}\\
+\eqr{2.17}--\eqr{2.21} material deriv. & Thm.~\ref{thm:matder}
+ & \eqr{2.56}--\eqr{2.59} mass & \S\ref{sec:mass}\\
+\eqr{2.22}--\eqr{2.24} coordinates & \S\ref{sec:cart}, Rem.~\ref{rem:fig6}
+ & \eqr{2.60}--\eqr{2.65} localization & Thm.~\ref{thm:localization}\\
+\eqr{2.25}--\eqr{2.29} components & \S\ref{sec:cart}
+ & Example \eqr{2.30}--\eqr{2.33} & Example~\ref{ex:motion}\\
+\eqr{2.66}, \eqr{2.67} stretch & \S\ref{sec:shifter}, Rem.~\ref{rem:fig10}
+ & \eqr{2.89}--\eqr{2.95} $\bB$ & Prop.~\ref{prop:B}\\
+\eqr{2.68}--\eqr{2.74} shifter & Def.~\ref{def:shifter}, Prop.~\ref{prop:shifter}
+ & \eqr{2.96}--\eqr{2.99} strains & Def.~\ref{def:strains}, Rem.~\ref{rem:half}\\
+\eqr{2.75}--\eqr{2.78} displacement & \S\ref{sec:shifter}, Rem.~\ref{rem:shifteruse}
+ & \eqr{2.100}--\eqr{2.103} arclength & \S\ref{sec:cauchygreen}, Rem.~\ref{rem:fig11}\\
+\eqr{2.79}--\eqr{2.81} undeformed & Prop.~\ref{prop:undeformed}
+ & \eqr{2.104}--\eqr{2.108} angles & \S\ref{sec:cauchygreen}, Rem.~\ref{rem:fig12}\\
+\eqr{2.82}--\eqr{2.88} $\bC$ & Prop.~\ref{prop:C}
+ & \S2.8 Problems 1--3 & \S\ref{sec:problems}\\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip\noindent
+Figures 2.1--2.12 are described in Remarks~\ref{rem:fig123}, \ref{rem:fig4},
+\ref{rem:fig5}, \ref{rem:fig6}, \ref{rem:fig7}, \ref{rem:fig8},
+\ref{rem:fig9}, \ref{rem:fig10}, \ref{rem:fig11} and \ref{rem:fig12}. All
+algebra uses only Chapter~1: the tensor product and its component rule, the
+dyad product $(\ba\otimes\bb)(\bc\otimes\bd)=(\ip\bb\bc)\ba\otimes\bd$, the
+transpose rules of Problems 17--20, the box product and determinant
+$\tbox{\bF\ba}{\bF\bb}{\bF\bc}=\det\bF\,\tbox\ba\bb\bc$, the cofactor
+identity $\bA^{t}\bA^{*}=(\det\bA)\I$ of Problem 22(c), the contracted
+$\eps$--$\dd$ identities, and the coordinate free chain rule
+$\dl f=\ip{\grad f}{\dl\bx}$.
+
+\end{document}

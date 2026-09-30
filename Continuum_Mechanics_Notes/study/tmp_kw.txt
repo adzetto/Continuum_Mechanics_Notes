@@ -1,0 +1,46 @@
+--- straightforward ---
+ used by O, where Q = Qt 2Q1: E3 →E3 (9.11) is an arbitrary orthogonal tensor mapping E3 to itself. Straightforward manipulations making use of (9.6)–(9.8) yield x2 = Qx1 +d(t), where d(t) = Qt 2(c1 −c2), and v2 = Q
+s in which the stretching tensor has only one or two distinct principal values. Conversely, it is a straightforward matter to show that (9.41) and (9.42) yield (9.40) for all orthogonal Q: E3 →E3, and hence that the
+--- simple matter ---
+de that ψi(D) = ¯ψi(I1, I2, I3) and substitute into (9.33) to arrive at (9.24). Conversely, it is a simple matter to conﬁrm that (9.24) ensures the isotropy of G(D). This result subsumes the case in which D has on
+--- it follows ---
+he subscript 1, to G(x + d, v + e, θ, ρ, L; p) = G(x, v, θ, ρ, L; p), (9.15) for arbitrary d and e. It follows that the constitutive function is insensitive to variations of its ﬁrst two arguments, and hence th
+mensional vector space constitute a basis for that space, we have S = Span{I, D, D2}. (9.32) Part 4 It follows from (9.29) that G(D) ∈S. Thus, (9.32) implies that there are unique scalars ψ0(D), ψ1(D) and ψ2(D)
+ This is non-zero for the family of D′s considered. Then, since the ηi are determined by the Ik(D), it follows that the ψ′s are determined by D. Now, from (9.33) we have G(QDQt) −QG(D)Qt = Q{[ψ0(QDQt) −ψ0(D)]I 
+fa 202 ----- 188 Principles of Continuum Mechanics as claimed. Conversely, if ψ(d) = ¯ψ(d ⊗d), then it follows immedi- ately that ψ(d) = ψ(−d). Part 2 We show that if d is arbitrary and D is an arbitrary symmet
+s requires that a + bηi + cη2 i = 0; i = 1, 2, 3. This is the contradiction encountered previously. It follows that a, b, c all vanish and hence that the set {d, Dd, D2d} is linearly independent. Thus, g(D, d) 
+here- fore all the ci vanish, i.e., ˜ Qta · vi = ±b · vi; i = 1, 2, 3. Since {vi} is a basis for E3 it follows that a = ± ˜Qb. Thus, the equality of the two sets of scalars I1 −I6 implies that a ⊗a = ˜Qb ⊗˜Qb. 
+lent. Fur- ther, assuming the φ′s in (9.42) to be continuous functions of the Ik; k = 1, . . . , 6, it follows from the continuity of this representation with respect to gradθ that g(θ, ρ, D, 0; p) = 0, (9.58) 
+--- easy to see ---
+--- obviously ---
+or all δ. Hence, the necessary conditions a(z) = (0, O, 0) and b(z) ≥0 (9.68) for (9.64), which are obviously also suﬃcient. We conclude that ψD = O and ψgradθ = 0, and hence that that the free energy is a fun
+--- Hence ---
+ Q1G(x1, v1, θ, ρ, L1; p)Qt 1 = G+(x+, v+, θ+, ρ+, L+; p) = Q2G(x2, v2, θ, ρ, L2; p)Qt 2, (9.9) and hence the restriction G(x2, v2, θ, ρ, L2; p) = QG(x1, v1, θ, ρ, L1; p)Qt (9.10)  ----- PDF sayfa 195 ----
+) = Qt 2(c1 −c2), and v2 = Qv1 +e, (9.12) where e is a function of x+ and t, and L2 = QL1Qt + ˙QQt; hence D2 = QD1Qt and W2 = QW 1Qt + ˙QQt, (9.13) in which Q is given by (9.11). To derive a necessary cond
+ follows that the constitutive function is insensitive to variations of its ﬁrst two arguments, and hence that it is independent of those arguments. We thus arrive at the major simpliﬁcation G(x, v, θ, ρ, 
+that, for (9.17) to hold, it is neces- sary that G(θ, ρ, L; p) = G(θ, ρ, D; p) (9.21) at all t, and hence that the stress can depend on the velocity gradient only through the stretching tensor. On substitu
+ with ν1 replaced by ν2 or ν3, we conclude that {νi} is a principal basis for G(D), as claimed, and hence that G(D) =  βi(D)νi ⊗νi, (9.29) for some scalar-valued functions βi. Part 3 We show that the set 
+ne element of {a, b, c} unequal to zero. This implies that a + bηi + cη2 i = 0 for i = 1, 2, 3, and hence that the ηi are all the roots of the same quadratic equation. But such equations have at most two d
+tinct roots, contrary to our choice of D. This contradiction implies that the premise is false, and hence that the set {I, D, D2} is linearly independent, as claimed.  ----- PDF sayfa 199 ----- Viscous Flu
+= 1, 2, 3. This is the contradiction encountered previously. It follows that a, b, c all vanish and hence that the set {d, Dd, D2d} is linearly independent. Thus, g(D, d) = ψ0(D, d)d + ψ1(D, d)Dd + ψ2(D, d
+traightforward matter to show that (9.41) and (9.42) yield (9.40) for all orthogonal Q: E3 →E3, and hence that the two statements are equivalent. Fur- ther, assuming the φ′s in (9.42) to be continuous func
+then this is violated for δ < −b/ |a|2 , contrary to the requirement that it be satisﬁed for all δ. Hence, the necessary conditions a(z) = (0, O, 0) and b(z) ≥0 (9.68) for (9.64), which are obviously also 
+0 (9.68) for (9.64), which are obviously also suﬃcient. We conclude that ψD = O and ψgradθ = 0, and hence that that the free energy is a function ψ(θ, ρ; p) of θ and ρ, and that η = −ψθ, (9.69) so that the
+hich θ and ρ are ﬁxed. Then, f(O) = 0 and f(D) ≥0 for all symmetric D, so that f is minimized — and hence stationary — at D = O, i.e., (T|D=O + ρ2ψρI) · dD = 0 for all symmetric dD. (9.72) This implies tha
+, (T|D=O + ρ2ψρI) · dD = 0 for all symmetric dD. (9.72) This implies that T|D=O = −ρ2ψρI (9.73) and hence, from (9.38), that ˜p(θ, ρ; p) = ρ2ψρ. (9.74) This is called the thermodynamic pressure.  ----- PDF
+evD = O) and the second with D = 1 2(a ⊗b + b ⊗a), where a · b = 0, the latter yielding trD = 0 and hence D = devD. These yield the necessary and suﬃcient conditions κ ≥0 and μ ≥0. (9.79) Because the secon
+nvoking (9.70) for the classical Fourier law (9.61), with D = O, we conclude that K |gradθ|2 ≤0 and hence that the thermal con- ductivity is non-positive: K ≤0. (9.80) In turn, these inequalities ensure th
+yields only (9.79)2. Moreover, conservation of mass, i.e., (ρJ)· = 0, then implies that ˙ρ = 0, and hence that ρ is ﬁxed at a material point. It therefore enters the functions ψ, η and μ as a ﬁxed paramete
+ns do not restrict the spherical part of the stress, which is thus constitutively indeterminate and hence outside the purview of our earlier discussion about observer consen- sus concerning material respon
+les consisting of ρ, p and the components of v. Clearly, this system would be overdeter- mined, and hence generally insoluble, if not for the presence of the additional unknown function p. Accordingly the 
+--- yield ---
+ary orthogonal tensor mapping E3 to itself. Straightforward manipulations making use of (9.6)–(9.8) yield x2 = Qx1 +d(t), where d(t) = Qt 2(c1 −c2), and v2 = Qv1 +e, (9.12) where e is a function of x+ and 
+E3+. The left- and right-hand sides of this are simply Q2 and Q1, respectively, and our choice thus yields Q2 = Q1. We ﬁnd that e then reduces to a function of t alone, given by e(t) = Qt 1( ˙c1 −˙c2) + ˙Q
+D: E3 →E3 and all d = gradθ ∈E3, where Q: E3 →E3 is an arbitrary orthogonal tensor. For Q = −I this yields g(D, −d) = −g(D, d). (9.45) Our proof is again in four parts. Part 1 Suppose ϕ(D, d) = ϕ(D, −d). W
+b = |a| |b| cos α. Then, cos α = ±1 and either of (9.46) gives b = ±a. The solution b = a trivially yields ψ(b) = ψ(a), and the solution b = −a gives ψ(b) = ψ(−a). But ψ(a) = ψ(−a) by hypothesis, and there
+result of Part 2, we have g(D, −d) = −ψ0(D, −d)d −ψ1(D, −d)Dd −ψ2(D, −d)D2d. (9.50) Imposing (9.45) yields [ψ0(D, d) −ψ0(D, −d)]d + [ψ1(D, d) −ψ1(D, −d)]Dd + [ψ2(D, d) −ψ2(D, −d)]D2d = 0, (9.51) and theref
+istinct principal values. Conversely, it is a straightforward matter to show that (9.41) and (9.42) yield (9.40) for all orthogonal Q: E3 →E3, and hence that the two statements are equivalent. Fur- ther, a
+----- Viscous Fluids 193 Invoking (9.70) for the Newtonian ﬂuid model (9.60), again with gradθ = 0, yields λ(trD)2 + 2μD · D ≥0, (9.75) for all symmetric D. To derive necessary conditions for this we invok
+he ﬁrst with D = I (devD = O) and the second with D = 1 2(a ⊗b + b ⊗a), where a · b = 0, the latter yielding trD = 0 and hence D = devD. These yield the necessary and suﬃcient conditions κ ≥0 and μ ≥0. (9.
+d with D = 1 2(a ⊗b + b ⊗a), where a · b = 0, the latter yielding trD = 0 and hence D = devD. These yield the necessary and suﬃcient conditions κ ≥0 and μ ≥0. (9.79) Because the second form of D represents
+1) where, for the incompressible Newtonian ﬂuid, devT = 2μdevD = 2μD. (9.82) The foregoing argument yields only (9.79)2. Moreover, conservation of mass, i.e., (ρJ)· = 0, then implies that ˙ρ = 0, and hence

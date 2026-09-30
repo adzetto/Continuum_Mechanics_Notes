@@ -1,0 +1,1613 @@
+%=======================================================================
+\chapter{Kinematic Constraints}
+%=======================================================================
+
+Not every motion is available to every material. Water resists a change
+of volume so much more stiffly than it resists a change of shape that,
+over the range of pressures met in ordinary problems, it is both more
+accurate and far more convenient to forbid the volume change outright
+than to model it. A stiff fibre embedded in a soft matrix tells the same
+story along a line rather than in bulk: the fibre will stretch, but by so
+little that setting its stretch to one costs less error than any elastic
+law for it would. Idealising a very stiff response as \emph{no} response
+is what this chapter is about.
+
+The idealisation is not free, and the price is the whole content of the
+chapter. If the material cannot perform a certain motion, then something
+must stop it, and that something is a stress. It is a stress of a new
+kind: no constitutive equation produces it, because a constitutive
+equation answers ``what stress does this deformation cause'', and here
+the deformation in question never happens. What determines it instead is
+the equations of motion together with the boundary and initial data. The
+pressure in an incompressible fluid is the case everyone meets first, and
+it is worth saying at the outset what will be proved: that pressure is
+not a material property at all.
+
+Guided by the incompressible fluid, we consider \emph{local} constraints
+of the form
+\begin{equation}
+   g_{\kappa}(\bF)=0 ,
+   \tag{10.1}\label{eq:10.1}
+\end{equation}
+from the perspective of an observer $O$, where $g_{\kappa}$ is a
+scalar-valued function, $\bF$ is the deformation gradient of
+Section~\ref{sec:defgrad}, and the subscript $\kappa$ records the
+reference configuration relative to which $\bF$, and hence $g_{\kappa}$,
+is defined. For incompressibility, $g_{\kappa}(\bF)=\det\bF-1$.
+
+\begin{remark}[what a constraint is, and what it is not]\label{rem:ch10what}
+Three distinctions are worth fixing before anything is computed, because
+each of them is a way of misreading \eqr{10.1}.
+
+\emph{A constraint is not a boundary condition.} A boundary condition
+restricts the motion of particular material points, those on
+$\partial\kappa$, and it is data supplied with the problem. Equation
+\eqr{10.1} is imposed at \emph{every} $\bX\in\kappa$ and at every $t$,
+and it is part of the description of the material, not of the problem.
+Two different problems for the same incompressible fluid have different
+boundary conditions and the same constraint.
+
+\emph{A constraint is not a constitutive equation.} A constitutive
+equation such as \eqr{8.33} is a map from the deformation to the stress;
+it answers a question. A constraint answers nothing; it deletes part of
+the domain on which the question may be asked. This is why the two must
+be stated separately, and why \eqr{10.14} below will split the stress in
+two rather than modifying $\hat\bT_{\kappa}$.
+
+\emph{The constraint is on $\bF$, not on $\bchi_{\kappa}$.} The
+deformation gradient is the local, first-order content of the motion at
+a point, so \eqr{10.1} restricts what the material may do in an
+arbitrarily small neighbourhood of $\bX$, which is what a statement about
+material response has to do. A restriction on $\bchi_{\kappa}$ itself
+would say where the particle is allowed to be, which is a statement about
+the problem and not about the material. The same locality argument opened
+Chapter 8.
+\end{remark}
+
+%=======================================================================
+\section{Observer consensus}\label{sec:ch10obs}
+%=======================================================================
+
+Chapter 7 required all observers to agree on material response. Because a
+constraint characterises the nature of that response, we require that all
+observers agree that a constraint of the form \eqr{10.1} is in force.
+Thus the constraint, as perceived by an observer $O^{+}$, is
+\begin{equation}
+   g^{+}_{\kappa^{+}}(\bF^{+})=0 ,
+   \tag{10.2}\label{eq:10.2}
+\end{equation}
+where
+\begin{equation}
+   g^{+}_{\kappa^{+}}(\bF^{+})=g_{\kappa}(\bF).
+   \tag{10.3}\label{eq:10.3}
+\end{equation}
+Equation \eqr{10.3} is the substantive assumption and \eqr{10.2} is its
+consequence. The two observers are not merely required to reach the same
+verdict, zero or non-zero; they are required to compute the same
+\emph{number}. That is what ``agreeing on material response'' means when
+the response is described by a scalar function.
+
+From \eqr{7.17} the two deformation gradients are related by
+$\bF^{+}=\bQ(t)\bF\bK^{t}$, in which
+$\bQ(t)\colon\Vt\to\mathbb{E}^{3+}$ is the orthogonal tensor of the
+change of observer and $\bK\colon\hVt\to\hat{\mathbb{E}}^{3+}$ is the
+fixed orthogonal tensor of \eqr{7.15} relating the two reference
+configurations. Solving for $\bF$,
+\[
+   \bQ^{t}\bF^{+}\bK=\bQ^{t}\bQ\bF\bK^{t}\bK=\I\bF\hI=\bF ,
+\]
+where $\bQ^{t}\bQ=\I$ is the identity on $\Vt$ and $\bK^{t}\bK=\hI$ the
+identity on $\hVt$, both by orthogonality (Proposition~\ref{prop:orth}).
+Substituting into \eqr{10.3},
+\begin{equation}
+   g^{+}_{\kappa^{+}}(\bF^{+})=g_{\kappa}(\bQ^{t}\bF^{+}\bK).
+   \tag{10.4}\label{eq:10.4}
+\end{equation}
+
+As in Chapter 9, we now impose this requirement for \emph{two} relative
+motions of the observers, both viewed from $O^{+}$. This is the device
+that converts a statement relating two observers into a restriction on
+the single function $g_{\kappa}$ used by one of them. Let the two
+relative motions be characterised by orthogonal tensors $\bQ_{1}(t)$ and
+$\bQ_{2}(t)$ in the sense of \eqr{9.6}. Observer $O^{+}$ perceives one
+and the same $\bF^{+}$, so \eqr{10.4} applies twice with the same left
+side and gives
+\begin{equation}
+   g_{\kappa}(\bQ_{2}^{t}\bF^{+}\bK)=g^{+}_{\kappa^{+}}(\bF^{+})
+   =g_{\kappa}(\bQ_{1}^{t}\bF^{+}\bK).
+   \tag{10.5}\label{eq:10.5}
+\end{equation}
+Here we assume $\bQ_{2}(t_{0})=\bQ_{1}(t_{0})$, so that $\bK$ is the same
+for both relative motions; by \eqr{7.15}$_{1}$, $\bK$ is built from
+$\bQ$ at the single instant $t_{0}$ and from the two shifters, so it is
+this equality at $t_{0}$, and nothing else, that is needed. Let
+$\bQ=\bQ_{2}^{t}\bQ_{1}\colon\Vt\to\Vt$, exactly as in \eqr{9.11}, and
+let
+\begin{equation}
+   \bF=\bQ_{1}^{t}\bF^{+}\bK .
+   \tag{10.6}\label{eq:10.6}
+\end{equation}
+Then, using $\bQ_{1}\bQ_{1}^{t}=\I^{+}$,
+\[
+   \bQ\bF=\bQ_{2}^{t}\bQ_{1}\bQ_{1}^{t}\bF^{+}\bK
+        =\bQ_{2}^{t}\I^{+}\bF^{+}\bK=\bQ_{2}^{t}\bF^{+}\bK ,
+\]
+and taking determinants of the two ends, with
+$\det(\bA\bB)=\det\bA\det\bB$ and $\det\bQ_{2}^{t}=\det\bQ_{2}$,
+\begin{equation}
+   \bQ_{2}^{t}\bF^{+}\bK=\bQ\bF;\qquad\text{hence}\qquad
+   (\det\bQ)J=(\det\bQ_{2})(\det\bK)J^{+} ,
+   \tag{10.7}\label{eq:10.7}
+\end{equation}
+in which $J=\det\bF$ and $J^{+}=\det\bF^{+}$.
+
+Recall the discussion leading to \eqr{7.19}, on the choice of occupiable
+reference configurations. Both $\bQ_{2}$ and $\bK$ are orthogonal, so
+each determinant is $\pm1$ and their product is $\pm1$; occupiability
+forces $J>0$ and $J^{+}>0$, and $J^{+}=J(\det\bQ_{2})(\det\bK)$ then
+leaves only the choice $(\det\bQ_{2})(\det\bK)=1$, whence $J^{+}=J$.
+Putting both into \eqr{10.7}$_{2}$ gives $(\det\bQ)J=J$, and since $J>0$
+we may divide by it:
+\[
+   \det\bQ=1 .
+\]
+So $\bQ$ is a rotation. With \eqr{10.6} and \eqr{10.7}$_{1}$, equation
+\eqr{10.5} now reads
+\begin{equation}
+   g_{\kappa}(\bQ\bF)=g_{\kappa}(\bF)
+   \tag{10.8}\label{eq:10.8}
+\end{equation}
+for arbitrary rotations $\bQ$. The two observers have been eliminated
+entirely: \eqr{10.8} is a statement about the one function $g_{\kappa}$
+that $O$ uses.
+
+\subsection*{Reduction of \eqr{10.8}}
+
+To obtain a \emph{necessary} condition we exploit the arbitrariness of
+$\bQ$ by choosing it as awkwardly as possible for the left side of
+\eqr{10.8}. Take
+\[
+   \bQ=\shift\bR^{t},
+\]
+where $\shift$ is the shifter of Definition~\ref{def:shifter} and $\bR$
+is the two-point rotation in the polar factorisation \eqr{3.32},
+$\bF=\bR\bU$, of Theorem~\ref{thm:polar}. This is a legitimate choice.
+Since $\bR\colon\hVt\to\Vt$ we have $\bR^{t}\colon\Vt\to\hVt$, and
+$\shift\colon\hVt\to\Vt$, so the product maps $\Vt$ to $\Vt$ as $\bQ$
+must; it is orthogonal as a product of orthogonal tensors, and its
+determinant is $(\det\shift)(\det\bR)=1$ because both factors are proper.
+With it,
+\[
+   \bQ\bF=\shift\bR^{t}\bR\bU=\shift\hI\bU=\shift\bU ,
+\]
+the middle step by $\bR^{t}\bR=\hI$. So \eqr{10.8} furnishes
+\[
+   g_{\kappa}(\bF)=g_{\kappa}(\shift\hI\bU)=g_{\kappa}(\shift\bU).
+\]
+Because $\shift$ is fixed in the frame of $O$, the right side is a
+function of $\bU$ alone. The right stretch tensor is in turn uniquely
+determined by the right Cauchy--Green tensor $\bC=\bF^{t}\bF$ through
+\eqr{3.38}, $\bU=\sqrt{\bC}$, the square root being unique by
+Theorem~\ref{thm:sqrt}. We therefore conclude that
+\begin{equation}
+   g_{\kappa}(\bF)=\bar g_{\kappa}(\bC)
+   \tag{10.9}\label{eq:10.9}
+\end{equation}
+for some function $\bar g_{\kappa}$.
+
+Conversely, suppose \eqr{10.9} holds. Then for every rotation $\bQ$,
+\[
+   g_{\kappa}(\bQ\bF)=\bar g_{\kappa}\big((\bQ\bF)^{t}\bQ\bF\big)
+   =\bar g_{\kappa}(\bF^{t}\bQ^{t}\bQ\bF)
+   =\bar g_{\kappa}(\bF^{t}\I\bF)=\bar g_{\kappa}(\bF^{t}\bF)
+   =g_{\kappa}(\bF),
+\]
+so \eqr{10.9} is both necessary and sufficient for \eqr{10.8}.
+
+\begin{remark}[what \eqr{10.9} forbids]\label{rem:ch10rotblind}
+The content of \eqr{10.9} is negative and it is worth stating that way: a
+kinematic constraint may not see the rotation $\bR$. Suppose someone
+proposed the constraint $R_{11}=1$, that a certain material line never
+turn out of a certain plane. Chapter 3 showed that $\bR$ is the part of
+$\bF$ that carries no stretch at all, and Chapter 7 showed, in
+\eqr{7.29}$_{3}$, that $\bR^{+}=\bQ\bR\bK^{t}$: the rotation is precisely
+the part of $\bF$ that a change of observer alters. So the proposed
+constraint would be satisfied for one observer and violated for another,
+watching the same body. It would make ``this material is inextensible''
+a statement about who is looking. Equation \eqr{10.9} is the exact
+statement of what survives that objection: only $\bC$, and by
+Proposition~\ref{prop:C} and Remark~\ref{rem:CBintuition} $\bC$ is the
+part of the deformation that measures lengths and angles of material
+fibres, which is what two observers can compare.
+\end{remark}
+
+The constraint from the perspective of $O^{+}$ now follows from
+\eqr{10.4}. Here $\bQ\colon\Vt\to\mathbb{E}^{3+}$ is once more the
+orthogonal tensor of the change of observer, and $\bK$ is a fixed
+parameter:
+\begin{equation}
+\begin{aligned}
+   g^{+}_{\kappa^{+}}(\bF^{+})
+   &=g_{\kappa}(\bQ^{t}\bF^{+}\bK)
+    =\bar g_{\kappa}\big((\bQ^{t}\bF^{+}\bK)^{t}\bQ^{t}\bF^{+}\bK\big)\\
+   &=\bar g_{\kappa}\big(\bK^{t}(\bF^{+})^{t}\bQ\bQ^{t}\bF^{+}\bK\big)
+    =\bar g_{\kappa}\big(\bK^{t}(\bF^{+})^{t}\I^{+}\bF^{+}\bK\big)\\
+   &=\bar g_{\kappa}\big(\bK^{t}(\bF^{+})^{t}\bF^{+}\bK\big)
+    =\bar g_{\kappa}(\bK^{t}\bC^{+}\bK)
+    =\bar g^{+}_{\kappa^{+}}(\bC^{+}) .
+\end{aligned}
+   \tag{10.10}\label{eq:10.10}
+\end{equation}
+The transpose of a product reverses the order, which produced the second
+line; $\bQ\bQ^{t}=\I^{+}$ is orthogonality read in the other direction
+from the one used above, and it is the step at which the observer
+disappears. What remains, $\bK^{t}\bC^{+}\bK$, involves only the two
+reference configurations, and $\bK$ does not depend on time. Comparing
+with \eqr{7.30}$_{1}$, $\bC^{+}=\bK\bC\bK^{t}$, the last line simply says
+$\bar g^{+}_{\kappa^{+}}(\bC^{+})=\bar g_{\kappa}(\bC)$, which is
+\eqr{10.3} again with $\bC$ in place of $\bF$.
+
+\subsection*{Examples}
+
+\subsubsection*{1. Incompressibility}
+
+Because $J>0$, the constraint $J=1$ associated with incompressibility is
+equivalent to $1=J^{2}$, and
+\[
+   J^{2}=(\det\bF)^{2}=(\det\bF^{t})(\det\bF)=\det(\bF^{t}\bF)=\det\bC ,
+\]
+using $\det\bA^{t}=\det\bA$ and the product rule for determinants.
+Hence
+\begin{equation}
+   \bar g_{\kappa}(\bC)=\det\bC-1 .
+   \tag{10.11}\label{eq:10.11}
+\end{equation}
+The step $J=1\iff J^{2}=1$ needs $J>0$ and would be false without it;
+$J>0$ is guaranteed for a motion by Remark~\ref{rem:vol} and the
+requirement that material not turn itself inside out. Note also that
+\eqr{10.11} is manifestly of the form \eqr{10.9}, as it had to be:
+$\det\bF$ by itself is \emph{not} an admissible constraint function in
+the sense of \eqr{10.9}, but on rotations $\det\bQ=1$ so
+$\det(\bQ\bF)=\det\bF$ and \eqr{10.8} holds anyway. The two statements
+agree, as the equivalence just proved says they must.
+
+\subsubsection*{2. Inextensibility}
+
+In the engineering theory of fibre-reinforced composites the fibres are
+idealised as continuously distributed material curves in $\kappa$ with a
+unit tangent field $\bM(\bX)$. If the fibres are very stiff compared with
+the matrix in which they are embedded, their stretches $\mu$ stay close
+to unity in any deformation the composite can survive, and it is then
+appropriate to impose $\mu=1$ exactly. By \eqr{2.83}, $\mu^{2}
+=\ip\bM{\bC\bM}$, so with $\mu>0$ the constraint $\mu=1$ is
+$\ip\bM{\bC\bM}=1$ and
+\begin{equation}
+   \bar g_{\kappa}(\bC)=\ip\bM{\bC\bM}-1 .
+   \tag{10.12}\label{eq:10.12}
+\end{equation}
+Here $\bM$ is a material vector in the sense of
+Definition~\ref{def:matvec}: it labels a fibre, and by
+Remark~\ref{rem:matvec} it satisfies $\dot\bM=\bze$. That fact will be
+used when \eqr{10.12} is differentiated.
+
+\subsubsection*{3. Rigidity}
+
+If the body is rigid then $\bF$ is a spatially uniform rotation
+(Section~\ref{sec:rigid}), so $\bC=\bF^{t}\bF=\hI$. Because $\bC$ is
+symmetric, this single tensor equation is equivalent to six scalar
+constraints,
+\begin{equation}
+   \bar g_{(\kappa)AB}=C_{AB}-\dd_{AB},
+   \tag{10.13}\label{eq:10.13}
+\end{equation}
+one for each of the six independent entries of the symmetric matrix
+$(C_{AB})$.
+
+\begin{remark}[six is the maximum]\label{rem:ch10sixmax}
+There can be no more than six independent constraints, because there are
+at most six independent entries in $(C_{AB})$. Rigidity is therefore the
+\emph{maximal} constraint: it fixes every component of that matrix and
+leaves the material no freedom whatever beyond a rigid motion. The number
+six is the dimension of $\Sym$, computed in Chapter 1 by counting
+$C_{11},C_{22},C_{33},C_{12},C_{13},C_{23}$, and the same six will
+reappear in \eqr{10.19} as the maximum number of multipliers. That is not
+a coincidence and Section~\ref{sec:ch10stress} explains why: each
+independent constraint deletes one dimension from the space of admissible
+stretchings and pays for it with one dimension of reactive stress, and
+both spaces sit inside the same six-dimensional $\Sym$.
+\end{remark}
+
+%=======================================================================
+\section{Modification of the stress to accommodate
+constraints}\label{sec:ch10stress}
+%=======================================================================
+
+We have seen, in connection with the incompressible Newtonian fluid of
+Chapter 9, that the stress decomposes into the sum of a reactive part
+$-p\I$ and a constitutive part determined by the material. The salient
+feature of the reactive part is that it makes no contribution to the
+stress power density whenever the constraint is operative: by
+Definition~\ref{def:tip}, $-p\I\cdot\bD=-p\tr\bD$, which vanishes
+whenever $\tr\bD=0$. We extend this idea to general constraints by
+assuming that the net Cauchy stress is
+\begin{equation}
+   \bT=\bN+\bG ,
+   \tag{10.14}\label{eq:10.14}
+\end{equation}
+where $\bG$ is a symmetric-tensor-valued constitutive function
+appropriate to the material and the conditions at hand, and $\bN$ is a
+symmetric tensor such that $\bN\cdot\bD$ vanishes in any motion
+compatible with the constraint. Once the structure of $\bN$ has been
+determined, any indeterminacy remaining in it must be such as to secure a
+solution, if one exists, to the equations of motion together with the
+boundary and initial conditions.
+
+\begin{remark}[why worklessness, and why it is an assumption]
+\label{rem:ch10workless}
+Two questions press here. Why should the reaction do no work, and is that
+a theorem or a hypothesis?
+
+\emph{Why worklessness is the right requirement.} The stress power of a
+part $S$ is $\mathcal{S}(S,t)=\int_{P_{t}}\bT\cdot\bL\,\dl v$ by
+\eqr{6.153}. Since $\bT$ is symmetric and $\bW$ is skew,
+$\bT\cdot\bW=0$ by Lemma~\ref{lem:symskw}, so with $\bL=\bD+\bW$ from
+\eqr{4.7} the stress power density is $\bT\cdot\bL=\bT\cdot\bD$. Under
+\eqr{10.14} this is $\bN\cdot\bD+\bG\cdot\bD$. If $\bN\cdot\bD$ vanished
+only sometimes, the reaction would be feeding energy into or draining it
+from the body, and by the energy balance \eqr{6.168} that energy would
+have to show up as heat or internal energy. A constraint is an
+idealisation of a very stiff \emph{elastic} response, which stores energy
+and gives it back and dissipates none; in the limit the stored energy
+goes to zero along with the deformation that stores it. Requiring
+$\bN\cdot\bD=0$ is the exact expression of that limit.
+
+The same conclusion arrives from the thermodynamic side. The
+Clausius--Duhem inequality carries the stress only through $\bT\cdot\bL$,
+so $\bN$ drops out of it identically. Thermodynamics therefore places no
+restriction whatever on $\bN$, which is precisely the sentence in Chapter
+9 that the spherical part of the stress in an incompressible fluid ``is
+constitutively indeterminate and hence outside the purview of our earlier
+discussion about observer consensus concerning material response''.
+Worklessness and constitutive indeterminacy are two readings of one fact.
+
+\emph{It is an assumption.} Nothing proved so far forces \eqr{10.14} on
+us; a theory in which the constraint reaction did work could be written
+down and would not be self-contradictory. It would, however, require
+extra constitutive information to say how much work, and the whole
+economy of the constraint idea is that it requires none. This is the
+continuum version of the principle of d'Alembert, that the forces of
+constraint in a mechanical system do no virtual work, and it is adopted
+for the same reason: it is the assumption that makes constraints cost
+nothing to describe.
+\end{remark}
+
+Suppose, then, that the constraint is operative at a particular material
+point throughout an interval $I$ of time. We require that
+\begin{equation}
+   \bN\cdot\bD=0\quad\text{for all }\bD\text{ such that }
+   \bar g_{\kappa}(\bC(t))=0;\qquad t\in I .
+   \tag{10.15}\label{eq:10.15}
+\end{equation}
+
+Because $\bar g_{\kappa}$ vanishes identically on $I$, the function
+$t\mapsto\bar g_{\kappa}(\bC(t))$ is the zero function there, and the
+derivative of the zero function is zero. Writing $g$ in place of
+$\bar g_{\kappa}$ to keep the notation tractable, and using the chain
+rule for a scalar-valued function of a tensor,
+\begin{equation}
+   0=\dot g=g_{\bC}\cdot\dot\bC=\tr\big((g_{\bC})\dot\bC\big),
+   \tag{10.16}\label{eq:10.16}
+\end{equation}
+where $g_{\bC}=(g_{\bC})^{t}$ is the symmetric referential tensor-valued
+gradient of $g$ (Sections B.2 and B.3 of Appendix B), defined by
+$\dl g=g_{\bC}\cdot\dl\bC$ and existing uniquely by the Riesz argument of
+Theorem~\ref{thm:riesz} applied on the inner-product space $\Lin$.
+
+Three points in \eqr{10.16} need spelling out.
+
+\emph{Why the interval, and not the instant.} The constraint must hold
+throughout $I$ for the differentiation to be legal. Had \eqr{10.15}
+required only $\bar g_{\kappa}(\bC(t_{0}))=0$ at one instant, the
+function $t\mapsto\bar g_{\kappa}(\bC(t))$ would be zero at a single
+point and its derivative there would be unrestricted. A constraint is by
+its nature a standing condition, so this costs nothing, but it is the
+hypothesis the argument actually uses.
+
+\emph{Why $g_{\bC}$ may be taken symmetric.} By
+Proposition~\ref{prop:C}, $\bC(t)$ is symmetric at every $t$, so each
+difference quotient $\big(\bC(t+h)-\bC(t)\big)/h$ is symmetric, and
+$\Sym$ is a subspace and therefore closed: the limit $\dot\bC$ is
+symmetric. By the orthogonality of the splitting
+$\Lin=\Sym\oplus\Skw$ of Definition~\ref{def:splits} and
+Lemma~\ref{lem:symskw}, $\Skw(g_{\bC})\cdot\dot\bC=0$, so the inner
+product in \eqr{10.16} picks out only $\Sym(g_{\bC})$. The skew part of
+$g_{\bC}$ is invisible to \eqr{10.16}, which is what effectively defines
+$g_{\bC}$; no generality is lost by taking it symmetric, and doing so
+makes it unique.
+
+\emph{The order of operations.} The function $g(\bC)$ is well defined for
+\emph{all} symmetric positive definite $\bC$, not only for those that
+satisfy the constraint, and $g_{\bC}$ is therefore likewise well defined
+for all such $\bC$. The derivative appearing in \eqr{10.16} is obtained
+by differentiating first and imposing the constraint afterwards.
+
+\begin{remark}[what breaks if the constraint is imposed too
+early]\label{rem:ch10apost}
+Reverse the order and the entire theory collapses in one line. Impose the
+constraint first: then $g$ is the zero function on the set where it is
+defined, its gradient is $\hOb$, and \eqr{10.18} below gives $\bN=\Ob$.
+There would be no reaction, the incompressible fluid would carry no
+pressure, and a rigid body would be free of stress.
+
+The error is the same one that Remark~\ref{rem:whykt0} of Chapter 4
+warned against in another guise: confusing the value of a function on a
+set with the function itself. What the constraint says is that the motion
+never leaves the surface $g=0$ in the space of symmetric positive
+definite tensors. The gradient $g_{\bC}$ is the \emph{normal} to that
+surface, and a normal is computed from how $g$ behaves as one steps
+\emph{off} the surface, which is exactly the information deleted by
+imposing the constraint first. That is why \eqr{10.21} is computed for
+all $\bC$ and only then evaluated, in \eqr{10.22}, on the constraint set.
+\end{remark}
+
+Now bring in Chapter 4. Recalling \eqr{4.11}, $\bF^{t}\bD\bF=\tfrac12
+\dot\bC$, that is $\dot\bC=2\bF^{t}\bD\bF$, equation \eqr{10.16} becomes
+$0=2\tr\big(g_{\bC}(\bF^{t}\bD\bF)\big)$, and dividing by the constant
+$2$,
+\begin{equation}
+   0=\tr\big(g_{\bC}(\bF^{t}\bD\bF)\big)
+    =\tr\big((\bF(g_{\bC})\bF^{t})\bD\big)
+    =\bF(g_{\bC})\bF^{t}\cdot\bD ,
+   \tag{10.17}\label{eq:10.17}
+\end{equation}
+in which the first factor on the right-hand side of the third equality is
+a symmetric \emph{spatial} tensor.
+
+The middle equality of \eqr{10.17} is the one step here that is not
+purely formal, since the two products live on different spaces and the
+trace of a two-point tensor is not defined. In components, with
+$g_{\bC}=G_{AB}\hbE_{A}\otimes\hbE_{B}$, $\bF=F_{iA}\be_{i}
+\otimes\hbE_{A}$ and $\bD=D_{ij}\be_{i}\otimes\be_{j}$, the tensor
+$g_{\bC}\bF^{t}\bD\bF$ is referential with components
+$G_{AB}F_{iB}D_{ij}F_{jE}$, so its trace is
+\[
+   \tr\big(g_{\bC}\bF^{t}\bD\bF\big)=G_{AB}F_{iB}D_{ij}F_{jA},
+\]
+whereas $\bF(g_{\bC})\bF^{t}$ is spatial with components
+$F_{iA}G_{AB}F_{jB}$, so
+\[
+   \bF(g_{\bC})\bF^{t}\cdot\bD=F_{iA}G_{AB}F_{jB}D_{ij}.
+\]
+The two are the same sum of products of the same numbers, written in a
+different order. Both traces are legitimate, each on its own space, and
+they are equal. Note also that
+$\big(\bF(g_{\bC})\bF^{t}\big)^{t}=\bF(g_{\bC})^{t}\bF^{t}
+=\bF(g_{\bC})\bF^{t}$, so the tensor is symmetric, and that the index
+bookkeeping of Remark~\ref{rem:hatinch4} confirms it is spatial: $\bF$
+carries $\be_{i}\otimes\hbE_{A}$, $g_{\bC}$ carries
+$\hbE_{A}\otimes\hbE_{B}$, $\bF^{t}$ carries $\hbE_{B}\otimes\be_{j}$,
+and the capital indices contract in pairs leaving
+$\be_{i}\otimes\be_{j}$.
+
+Equation \eqr{10.17} says exactly this: the stretchings $\bD$ that the
+constraint permits are those, and only those, perpendicular in $\Sym$ to
+the fixed symmetric spatial tensor $\bF(g_{\bC})\bF^{t}$. A constraint on
+$\bC$, which is a statement about the deformation as a whole, has become
+a single linear equation for $\bD$, which is a statement about the
+present rate. The bridge is \eqr{4.11}, and this is the sense in which
+the constraint restricts the stretching tensor of Chapter 4.
+
+\begin{remark}[from a surface to a plane]\label{rem:ch10lin}
+The set of $\bC$ satisfying $g(\bC)=0$ is a curved five-dimensional
+surface in the six-dimensional $\Sym$; the set of $\bD$ satisfying
+\eqr{10.17} is a flat five-dimensional subspace. Nothing was lost in
+passing from one to the other, because a velocity is by definition
+tangent to the surface it moves on, and the tangent space to a level
+surface at a point is a subspace. Linearity is what makes the next step
+possible at all: one may speak of the orthogonal complement of a
+subspace, but not of the orthogonal complement of a curved surface.
+\end{remark}
+
+\subsection*{The reaction is pinned down to one multiplier}
+
+By \eqr{10.15} we require $\bN$ to be perpendicular, in $\Sym$, to every
+$\bD$ that is perpendicular to $\bF(g_{\bC})\bF^{t}$
+(Figure~\ref{fig:ch10ortho}). Accordingly $\bN$ must be parallel to
+$\bF(g_{\bC})\bF^{t}$. The following lemma is that inference, made
+precise; it is the same manoeuvre as Lemma~\ref{lem:cvec} of Chapter 5,
+namely, feed the hypothesis the one special element that turns it into a
+statement about a norm.
+
+\begin{lemma}[the double orthogonal complement of a line]
+\label{lem:ch10ortho}
+Let $\bA\in\Sym$ with $\bA\neq\Ob$, and let $\bN\in\Sym$ satisfy
+$\bN\cdot\bD=0$ for every $\bD\in\Sym$ with $\bA\cdot\bD=0$. Then
+$\bN=\lambda\bA$ for exactly one scalar $\lambda$.
+\end{lemma}
+
+\begin{proof}
+By Theorem~\ref{thm:tip} the tensor inner product is positive definite,
+so $\bA\cdot\bA=|\bA|^{2}>0$ and we may set
+\[
+   \lambda=\frac{\bN\cdot\bA}{\bA\cdot\bA},\qquad
+   \bN'=\bN-\lambda\bA .
+\]
+Then $\bN'\in\Sym$, being a difference of symmetric tensors, and
+\[
+   \bA\cdot\bN'=\bA\cdot\bN-\lambda\,\bA\cdot\bA
+   =\bA\cdot\bN-\frac{\bN\cdot\bA}{\bA\cdot\bA}\,\bA\cdot\bA=0 .
+\]
+So $\bN'$ is one of the $\bD$'s covered by the hypothesis, and taking
+$\bD=\bN'$ gives $\bN\cdot\bN'=0$. On the other hand
+$\bN=\bN'+\lambda\bA$, so
+\[
+   0=\bN\cdot\bN'=(\bN'+\lambda\bA)\cdot\bN'
+   =|\bN'|^{2}+\lambda\,(\bA\cdot\bN')=|\bN'|^{2},
+\]
+whence $\bN'=\Ob$ by positive definiteness again, and $\bN=\lambda\bA$.
+Uniqueness: if $\lambda_{1}\bA=\lambda_{2}\bA$ then
+$(\lambda_{1}-\lambda_{2})\bA=\Ob$, and $\bA\neq\Ob$ forces
+$\lambda_{1}=\lambda_{2}$.
+\end{proof}
+
+Applying the lemma with $\bA=\bF(g_{\bC})\bF^{t}$,
+\begin{equation}
+   \bN=\lambda(\bx,t)\,\bF(g_{\bC})\bF^{t},
+   \tag{10.18}\label{eq:10.18}
+\end{equation}
+in which the multiplier $\lambda(\bx,t)$ is determined solely by the
+equations of motion, with the stress given by \eqr{10.14}, together with
+the constraint equation and the initial and boundary conditions.
+
+\begin{remark}[the multiplier is a field, and it is a Lagrange
+multiplier]\label{rem:ch10lagrange}
+Read \eqr{10.18} beside the elementary rule for constrained
+stationarity and it is the same statement. To make $f$ stationary on the
+surface $g=0$ one sets $\nabla f=\lambda\nabla g$: the reaction is
+directed along the normal to the constraint surface, and $\lambda$ is
+whatever number the constraint then requires. Here $g_{\bC}$ is the
+normal to the constraint surface in the referential space of symmetric
+tensors, the sandwich $\bF(\,\cdot\,)\bF^{t}$ carries it to the spatial
+one, and \eqr{10.18} says the reaction stress lies along it.
+
+Two features of $\lambda$ are easy to misread. It is a \emph{field},
+$\lambda(\bx,t)$, not a constant and not a material parameter: it is
+allowed to vary from point to point and instant to instant, and it must,
+since it is doing the work of enforcing the constraint everywhere at
+once. And it is \emph{not} a function of $\bC$, $\bF$ or $\bD$. Writing
+$\lambda=\hat\lambda(\bC)$ would smuggle a constitutive equation back in
+and would generally make the resulting system unsolvable, for the reason
+Chapter 9 gives after \eqr{9.85}: without a free field the equations for
+an incompressible fluid outnumber the unknowns.
+\end{remark}
+
+If $n$ constraints $g^{(i)}(\bC)=0$, $i=1,\dots,n$, are in force during
+an interval of time, then $\bN\cdot\bD$ must vanish for all $\bD$ such
+that $\bF(g^{(i)}_{\bC})\bF^{t}\cdot\bD$ vanishes for each $i$. The $n$
+constraints are said to be independent provided that the elements of
+$\{\bF(g^{(i)}_{\bC})\bF^{t}\}$ are linearly independent, the
+$g^{(i)}_{\bC}$ being computed for all positive definite symmetric $\bC$.
+In this case $n\leq6$, because $\Sym$ is six-dimensional and
+$\mathrm{Span}\{\bF(g^{(i)}_{\bC})\bF^{t}\}$ is then a subspace of
+$\Sym$. Thus
+\begin{equation}
+   \bN=\sum_{i=1}^{n\leq6}\lambda_{i}(\bx,t)\,\bF(g^{(i)}_{\bC})\bF^{t}
+   =\bF\Big(\sum_{i=1}^{n}\lambda_{i}g^{(i)}_{\bC}\Big)\bF^{t},
+   \tag{10.19}\label{eq:10.19}
+\end{equation}
+where the multipliers $\lambda_{i}(\bx,t)$ are again such as to secure a
+solution to the equations of motion together with the $n$ constraint
+equations and the initial and boundary conditions, and the derivatives
+$g^{(i)}_{\bC}$ are evaluated, after the fact, at those $\bC$'s that
+satisfy all $n$ constraints simultaneously. The second form of
+\eqr{10.19} follows from the first because $\bF(\,\cdot\,)\bF^{t}$ is
+linear in its argument.
+
+The proof of \eqr{10.19} is Lemma~\ref{lem:ch10ortho} with a line
+replaced by a subspace. Let $\mathcal{W}=\mathrm{Span}
+\{\bF(g^{(i)}_{\bC})\bF^{t}\}\subset\Sym$. The admissible $\bD$ are those
+in $\mathcal{W}^{\perp}$, and the hypothesis is
+$\bN\in(\mathcal{W}^{\perp})^{\perp}$. Decompose
+$\bN=\bN_{\mathcal{W}}+\bN'$ with $\bN_{\mathcal{W}}\in\mathcal{W}$ and
+$\bN'\in\mathcal{W}^{\perp}$, which is possible because $\mathcal{W}$ is
+a finite-dimensional subspace of an inner-product space. Then $\bN'$ is
+an admissible $\bD$, so $0=\bN\cdot\bN'=|\bN'|^{2}$ and $\bN'=\Ob$;
+therefore $\bN\in\mathcal{W}$, which is \eqr{10.19}.
+
+\bookfig{1}\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.4mm]},thick}]
+% the five-dimensional plane of admissible D, drawn as a parallelogram
+\draw[thick,fill=blue!6]
+   (-3.1,-0.95) -- (2.1,-0.95) -- (3.1,0.95) -- (-2.1,0.95) -- cycle;
+\coordinate (O) at (0,0);
+\fill (O) circle (1.3pt);
+% normal direction, with its dashed continuation: the line of reactions
+\draw[guide] (0,-1.75) -- (0,0);
+\draw[ar] (O) -- (0,2.45)
+   node[right,font=\small] {$\bF(g_{\bC})\bF^{t}$};
+\draw[ar,red!65!black] (O) -- (0,1.35)
+   node[left,font=\small,text=red!65!black]
+   {$\bN=\lambda\bF(g_{\bC})\bF^{t}$};
+% two admissible stretchings inside the plane
+\draw[ar,blue!55!black] (O) -- (2.05,0)
+   node[right=1pt,font=\small,text=blue!55!black] {$\bD$};
+\draw[ar,blue!55!black] (O) -- (0.85,0.72)
+   node[above right=-2pt,font=\small,text=blue!55!black] {$\bD'$};
+% right angle mark between the vertical normal and the horizontal D
+\draw[semithick] (0.26,0) -- (0.26,0.26) -- (0,0.26);
+% labels
+\node[font=\footnotesize,text=gray!85,align=left,anchor=west]
+   at (-3.05,-1.45) {admissible stretchings:
+   $\bF(g_{\bC})\bF^{t}\cdot\bD=0$};
+\node[font=\footnotesize,text=gray!85,anchor=west] at (0.28,2.05)
+   {reactions};
+\node[font=\small] at (2.55,1.35) {$\Sym$};
+\end{tikzpicture}
+\caption{Orthogonality of $\bF(g_{\bC})\bF^{t}$ and $\bD$ in the space of
+symmetric tensors. One constraint deletes one dimension from $\Sym$: the
+admissible stretchings fill the five-dimensional plane through the origin
+perpendicular to $\bF(g_{\bC})\bF^{t}$, drawn here as a parallelogram.
+Requiring $\bN$ to be perpendicular to all of them leaves exactly the
+one-dimensional line along $\bF(g_{\bC})\bF^{t}$, which is \eqr{10.18}.
+The picture also shows why the count in Remark~\ref{rem:ch10sixmax} comes
+out as it does: dimensions lost by $\bD$ are dimensions gained by $\bN$,
+and $5+1=6=\dim\Sym$.}
+\label{fig:ch10ortho}
+\end{figure}
+
+\subsection*{Examples}
+
+We determine the forms of the reactive stresses for the constraints of
+incompressibility, inextensibility and rigidity.
+
+\subsubsection*{(1) Incompressibility}
+
+In the case of incompressibility we use \eqr{10.11}, with \eqr{B.26} and
+\eqr{B.27} of Appendix B, to obtain
+\begin{equation}
+   g_{\bC}\cdot\dot\bC=(\det\bC)^{\textstyle\cdot}
+   =\bC^{*}\cdot\dot\bC=(\det\bC)\bC^{-1}\cdot\dot\bC ,
+   \tag{10.20}\label{eq:10.20}
+\end{equation}
+for arbitrary symmetric $\dot\bC$.
+
+Both of the equalities after the first deserve a derivation, since they
+are the whole computation. Start from the box-product characterisation of
+the determinant, Theorem~\ref{thm:det}: for any invertible $\bA(t)$ and
+fixed $\bu,\bv,\bw$,
+\[
+   (\det\bA)\tbox\bu\bv\bw=\tbox{\bA\bu}{\bA\bv}{\bA\bw}.
+\]
+Differentiating, the box product being trilinear so that its derivative
+obeys a three-term product rule, and writing $\ba=\bA\bu$, $\bb=\bA\bv$,
+$\bc=\bA\bw$ together with $\dot\bA\bu=\dot\bA\bA^{-1}\ba$ and likewise
+for the others,
+\[
+\begin{aligned}
+   (\det\bA)^{\textstyle\cdot}\tbox\bu\bv\bw
+   &=\tbox{\dot\bA\bu}{\bA\bv}{\bA\bw}+\tbox{\bA\bu}{\dot\bA\bv}{\bA\bw}
+     +\tbox{\bA\bu}{\bA\bv}{\dot\bA\bw}\\
+   &=\tbox{\dot\bA\bA^{-1}\ba}\bb\bc+\tbox\ba{\dot\bA\bA^{-1}\bb}\bc
+     +\tbox\ba\bb{\dot\bA\bA^{-1}\bc}\\
+   &=\tr\big(\dot\bA\bA^{-1}\big)\tbox\ba\bb\bc
+    =\tr\big(\dot\bA\bA^{-1}\big)(\det\bA)\tbox\bu\bv\bw ,
+\end{aligned}
+\]
+the third line by Definition~\ref{def:inv3}$_{1}$, which is precisely
+that sum of three box products. Cancelling the non-zero
+$\tbox\bu\bv\bw$,
+\[
+   (\det\bA)^{\textstyle\cdot}=(\det\bA)\tr\big(\dot\bA\bA^{-1}\big).
+\]
+This is Problem 2(a) of Chapter 4 with $\bA=\bF$; here we want it with
+$\bA=\bC$. Using $\tr(\bA\bB)=\tr(\bB\bA)$ and then the symmetry of
+$\bC^{-1}$ and $\dot\bC$,
+\[
+   (\det\bC)^{\textstyle\cdot}=(\det\bC)\tr\big(\dot\bC\bC^{-1}\big)
+   =(\det\bC)\tr\big(\bC^{-1}\dot\bC\big)
+   =(\det\bC)\,\bC^{-1}\cdot\dot\bC ,
+\]
+which is the last equality of \eqr{10.20}. The middle one is then
+Proposition~\ref{prop:I2cof}, $\bA^{*}=(\det\bA)\bA^{-t}$, read for the
+symmetric $\bC$: $\bC^{*}=(\det\bC)\bC^{-1}$. So the cofactor of
+Definition~\ref{def:cof} is the derivative of the determinant, which is
+the same fact that produced $\partial J/\partial F_{iA}=F^{*}_{iA}$ in
+Chapter 4.
+
+Since \eqr{10.20} holds for arbitrary symmetric $\dot\bC$ and both
+$g_{\bC}$ and $(\det\bC)\bC^{-1}$ are symmetric, their difference is a
+symmetric tensor orthogonal to every symmetric tensor, hence orthogonal
+to itself, hence zero. Thus
+\begin{equation}
+   g_{\bC}=(\det\bC)\bC^{-1},
+   \tag{10.21}\label{eq:10.21}
+\end{equation}
+which reduces to
+\begin{equation}
+   g_{\bC}=\bC^{-1}
+   \tag{10.22}\label{eq:10.22}
+\end{equation}
+on the set of $\bC$'s that satisfy the constraint, where $\det\bC=1$.
+Equations \eqr{10.21} and \eqr{10.22} are Remark~\ref{rem:ch10apost} in
+action: the first is computed off the constraint set, the second is the
+first evaluated on it, and doing those two steps in the other order would
+have produced $g_{\bC}=\hOb$.
+
+Writing $\lambda=-\bar p$, the associated reactive stress follows from
+\eqr{10.18}:
+\begin{equation}
+   \bN=-\bar p\,\bF\bC^{-1}\bF^{t}=-\bar p\,\bF(\bF^{t}\bF)^{-1}\bF^{t}
+   =-\bar p\,\I ,
+   \tag{10.23}\label{eq:10.23}
+\end{equation}
+and is therefore mechanically equivalent to a pressure. The middle step
+substituted $\bC=\bF^{t}\bF$; the last used
+$(\bF^{t}\bF)^{-1}=\bF^{-1}\bF^{-t}$, from
+Proposition~\ref{prop:prodinv}, so that
+\[
+   \bF(\bF^{t}\bF)^{-1}\bF^{t}=\bF\bF^{-1}\bF^{-t}\bF^{t}
+   =\I\,\I=\I .
+\]
+
+The worklessness may now be verified directly rather than assumed. By
+Definition~\ref{def:tip} and Problem 2(a) of Chapter 4,
+\[
+   \bN\cdot\bD=-\bar p\,\I\cdot\bD=-\bar p\tr\bD=-\bar p\dvg\bv
+   =-\bar p\,\frac{\dot J}{J},
+\]
+which vanishes because the constraint $J\equiv1$ gives $\dot J=0$. The
+reaction does no work for the plainest of reasons: a pressure works only
+through a change of volume, and the constraint is that there is none.
+
+For example, in the case of the Newtonian viscous fluid model \eqr{9.60},
+whose stress is the sum of $-\tilde p\I$, a term proportional to
+$(\tr\bD)\I$, and $2\mu\bD$, the constraint annihilates the middle term
+and leaves the constitutive part $\bG=-\tilde p\I+2\mu\bD$. Adding the
+reaction \eqr{10.23} and writing $p=\tilde p+\bar p$,
+\begin{equation}
+   \bT=-p\,\I+2\mu\bD
+   \tag{10.24}\label{eq:10.24}
+\end{equation}
+if the constraint is operative. The constitutive indeterminacy of
+$\bar p$ implies that $p$ is likewise indeterminate, and we arrive at
+\eqr{9.83}. Note what has become of the thermodynamic pressure
+$\tilde p=\rho^{2}\psi_{\rho}$ of \eqr{9.74}: it has not been
+contradicted, it has been absorbed. Since $\bar p$ is arbitrary so is the
+sum, and there is no way to recover $\tilde p$ from a measurement of
+$\bT$.
+
+\begin{example}[the pressure in a fluid at rest, and why it is not a
+material property]\label{ex:ch10hydro}
+This is the example that makes the whole chapter concrete, so it is
+worked out completely.
+
+\emph{The problem.} Let the fluid occupy $0\leq x_{3}\leq h$, be at rest,
+and be acted on by gravity $\bb=-g\be_{3}$. At rest $\bv=\bze$, so
+$\bL=\Ob$ and $\bD=\Ob$; the constraint $\tr\bD=0$ holds, and
+\eqr{10.24} gives $\bT=-p\I$.
+
+\emph{The equation of motion.} Substituting into
+$\dvg\bT+\rho\bb=\rho\dot\bv$, with $\dot\bv=\bze$ because the fluid is
+at rest. In components,
+\[
+   (\dvg\bT)_{i}=T_{ij,j}=(-p\dd_{ij})_{,j}=-p_{,i},
+   \qquad\text{that is}\qquad \dvg(-p\I)=-\grad p ,
+\]
+so
+\[
+   \grad p=\rho\bb=-\rho g\be_{3},
+   \qquad\text{i.e.}\qquad
+   p_{,1}=0,\quad p_{,2}=0,\quad p_{,3}=-\rho g .
+\]
+The first two say $p$ depends on $x_{3}$ alone; integrating the third,
+$p=c-\rho gx_{3}$ with $c$ a constant of integration.
+
+\emph{The boundary condition.} On the free surface $x_{3}=h$ the exterior
+unit normal is $\be_{3}$ and the air exerts the traction $-p_{a}\be_{3}$.
+Cauchy's relation gives $\bt=\bT\be_{3}=-p\be_{3}$, so $p(h)=p_{a}$ and
+$c=p_{a}+\rho gh$. Therefore
+\[
+   \boxed{\ p=p_{a}+\rho g(h-x_{3}).\ }
+\]
+
+\emph{The point.} Not one step of that calculation consulted the
+material. The viscosity $\mu$ never appeared, because $\bD=\Ob$; the
+density entered only through the body force, and $\tilde p$ was absorbed
+into $p$ at the start. What fixed $p$ was the equation of motion, which
+is a balance law of Chapter 6 and holds for every material, together with
+one boundary condition.
+
+To see that this is not an accident of the example, seal the container
+with a piston and press on it, so that the boundary condition at
+$x_{3}=h$ becomes $p=p_{a}+\Delta$ (Figure~\ref{fig:ch10press}). The
+material is the same, the motion is the same, $\bD$ is still $\Ob$, and
+$\bG$ is unchanged; yet now
+\[
+   p=p_{a}+\Delta+\rho g(h-x_{3}).
+\]
+Two different stress fields in the same material undergoing the same
+motion. No constitutive equation can be responsible for the difference,
+because a constitutive equation is a function of the motion and the
+motion did not change. The pressure in an incompressible fluid is a
+reaction, and $\Delta$ is the price of the constraint.
+
+\emph{A dynamic case, so that the split is visible.} Take instead the
+shear flow $\bv=\gamma x_{2}\be_{1}$ with $\gamma$ constant. Then
+$\bL=\gamma\be_{1}\otimes\be_{2}$, so $\tr\bL=0$ and the flow is
+isochoric as the constraint demands, and by \eqr{4.7}
+$\bD=\tfrac12\gamma(\be_{1}\otimes\be_{2}+\be_{2}\otimes\be_{1})$, which
+is trace free. Equation \eqr{10.24} gives
+\[
+\begin{aligned}
+   \bT&=-p\I+\mu\gamma(\be_{1}\otimes\be_{2}+\be_{2}\otimes\be_{1}),
+   \qquad\text{so}\qquad
+   T_{12}\\
+   &=\mu\gamma,\quad T_{11}=T_{22}=T_{33}=-p .
+\end{aligned}
+\]
+The shear component is constitutive: measure it and you have measured
+$\mu$. The three normal components are the reaction: measure them and you
+have measured the boundary conditions.
+
+\emph{Counting.} With $\bD=\Sym(\grad\bv)$, the linear momentum balance
+is three equations, conservation of mass \eqr{9.84} is a fourth, and the
+constraint $\dvg\bv=0$ of \eqr{9.85} is a fifth, for the five unknowns
+$\rho$, $p$ and the three components of $\bv$. Remove $p$ and there are
+five equations for four unknowns: an overdetermined, and generally
+insoluble, system. The constraint added an equation, and the multiplier
+it brought with it added exactly one unknown to pay for it. That balance
+is not a coincidence of this example; it is what Lemma~\ref{lem:ch10ortho}
+guarantees in general, one multiplier per independent constraint.
+\end{example}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{A}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.0mm]},semithick}]
+% ============ panel (a): open to the atmosphere ============
+\begin{scope}
+  \fill[blue!8] (0,0) rectangle (2.7,2.3);
+  \draw[very thick] (0,2.7)--(0,0)--(2.7,0)--(2.7,2.7);
+  \draw[thick,blue!55!black] (0,2.3)--(2.7,2.3);
+  \node[font=\small,anchor=south] at (1.35,2.42) {$p=p_{a}$};
+  \foreach \y/\L in {2.0/0.30, 1.55/0.52, 1.10/0.74, 0.65/0.96, 0.20/1.18}
+     {\draw[ar,red!65!black] (\L,\y)--(0,\y);}
+  \draw[ar] (3.05,0)--(3.05,2.3) node[right,font=\small] {$x_{3}$};
+  \node[font=\small,anchor=north] at (1.35,-0.25) {(a)  $p(h)=p_{a}$};
+\end{scope}
+% ============ panel (b): sealed and pressed ============
+\begin{scope}[xshift=6.0cm]
+  \fill[blue!8] (0,0) rectangle (2.7,2.3);
+  \draw[very thick] (0,2.7)--(0,0)--(2.7,0)--(2.7,2.7);
+  \fill[gray!35] (0,2.3) rectangle (2.7,2.62);
+  \draw[thick] (0,2.3) rectangle (2.7,2.62);
+  \draw[ar,thick] (1.35,3.30)--(1.35,2.72);
+  \node[font=\small,anchor=west] at (1.48,3.05) {$\Delta$};
+  \foreach \y/\L in {2.0/0.72, 1.55/0.94, 1.10/1.16, 0.65/1.38, 0.20/1.60}
+     {\draw[ar,red!65!black] (\L,\y)--(0,\y);}
+  \node[font=\small,anchor=north] at (1.35,-0.25)
+     {(b)  $p(h)=p_{a}+\Delta$};
+\end{scope}
+\end{tikzpicture}
+\caption{The reaction pressure of Example~\ref{ex:ch10hydro}. In both
+panels the fluid is the same, the motion is the same, namely rest, and
+the constitutive part $\bG$ of the stress is the same, since $\bD=\Ob$.
+The arrows show the pressure the fluid exerts on the left wall, growing
+linearly with depth in both cases. Only the boundary condition at the top
+differs, and the whole pressure field shifts by the constant $\Delta$
+throughout the body. A constitutive equation is a function of the motion
+and could not tell the two panels apart; the pressure is therefore not
+constitutive, but a reaction fixed by the equations of motion and the
+data.}
+\label{fig:ch10press}
+\end{figure}
+
+\subsubsection*{(2) Inextensibility}
+
+For inextensibility of embedded fibres with unit tangent $\bM$ in
+$\kappa$ we use \eqr{10.12}. Since $\bM$ is a material vector,
+$\dot\bM=\bze$ by Remark~\ref{rem:matvec}, so differentiating
+$\ip\bM{\bC\bM}-1$ leaves only the term in which $\bC$ is
+differentiated, and
+\begin{equation}
+   g_{\bC}\cdot\dot\bC=\ip\bM{\dot\bC\bM}=\bM\otimes\bM\cdot\dot\bC
+   \tag{10.25}\label{eq:10.25}
+\end{equation}
+for all symmetric $\dot\bC$. The second equality is the component
+identity
+\[
+   (\bM\otimes\bM)\cdot\bA=M_{A}M_{B}A_{AB}=M_{A}(\bA\bM)_{A}
+   =\ip\bM{\bA\bM},
+\]
+using the component rule for the tensor product, Definition~\ref{def:tp},
+and the component form of the tensor inner product. Thus, by the same
+arbitrariness argument used for \eqr{10.21}, and noting that
+$\bM\otimes\bM$ is symmetric,
+\begin{equation}
+   g_{\bC}=\bM\otimes\bM .
+   \tag{10.26}\label{eq:10.26}
+\end{equation}
+Writing $\lambda=\sigma$, we use \eqr{10.18} to obtain
+\begin{equation}
+   \bN=\sigma\bF(\bM\otimes\bM)\bF^{t}=\sigma\,\bF\bM\otimes\bF\bM ,
+   \tag{10.27}\label{eq:10.27}
+\end{equation}
+the second equality being the dyad rule $\bA(\ba\otimes\bb)\bB^{t}
+=\bA\ba\otimes\bB\bb$, which follows from Lemma~\ref{lem:dyadprod}, or
+directly in components:
+$A_{iC}(M_{C}M_{D})B_{jD}=(A_{iC}M_{C})(B_{jD}M_{D})$. This reduces to
+\begin{equation}
+   \bN=\sigma\,\bm\otimes\bm
+   \tag{10.28}\label{eq:10.28}
+\end{equation}
+when the constraint is in effect, where $\bm$ is the unit tangent to a
+fibre in $\kappa_{t}$. The step is \eqr{2.67}, $\bF\bM=\mu\bm$, together
+with the constraint $\mu=1$: with $\mu\neq1$ one would have
+$\bF\bM\otimes\bF\bM=\mu^{2}\bm\otimes\bm$, and the factor $\mu^{2}$ is
+absorbable into $\sigma$ in any case, which is why the constraint may be
+imposed here without loss. Thus the reactive stress is mechanically
+equivalent to a uniaxial stress along the fibres, exactly the state of
+stress of \eqr{6.130}, with $\sigma$ the fibre tension.
+
+Worklessness is again immediate, and this time it is Chapter 4 that
+supplies it. From \eqr{10.28} and the identity used in \eqr{10.25},
+\[
+   \bN\cdot\bD=\sigma\,(\bm\otimes\bm)\cdot\bD=\sigma\,\ip\bm{\bD\bm}
+   =\sigma\,(\ln\mu)^{\textstyle\cdot}=0 ,
+\]
+the third equality being \eqr{4.15} and the last the constraint
+$\mu\equiv1$, whose logarithm is constant. A tension works only through
+a stretching of the line it acts along, and the constraint is that there
+is none. Compare the incompressible case: there the pair was pressure
+against rate of volume change, here it is tension against rate of fibre
+stretch, and in both the constraint annihilates the second member of the
+pair.
+
+\begin{example}[what an inextensible fibre still permits]
+\label{ex:ch10fibre}
+It is worth seeing that the constraint is far from paralysing. Take the
+fibres along $\bM=\hbE_{1}$ and let the body undergo the simple shear of
+Section~\ref{sec:shear} \emph{parallel} to them,
+\[
+   x_{1}=X_{1}+\gamma X_{2},\qquad x_{2}=X_{2},\qquad x_{3}=X_{3},
+   \qquad\text{so}\qquad
+   \bF=\shift+\gamma\,\be_{1}\otimes\hbE_{2}.
+\]
+Then $\bF\hbE_{1}=\shift\hbE_{1}+\gamma\be_{1}(\ip{\hbE_{2}}{\hbE_{1}})
+=\be_{1}$, since $\ip{\hbE_{2}}{\hbE_{1}}=0$ and $\shift\hbE_{1}
+=\be_{1}$ by \eqr{2.68}. Comparing with $\bF\bM=\mu\bm$ gives $\mu=1$ and
+$\bm=\be_{1}$: the constraint holds for \emph{every} $\gamma$, however
+large. Equivalently $C_{11}=\ip{\bF\hbE_{1}}{\bF\hbE_{1}}=1$.
+
+Shear the same body across the fibres instead, $x_{2}=X_{2}+\gamma
+X_{1}$, and $\bF\hbE_{1}=\be_{1}+\gamma\be_{2}$, so
+$\mu=\sqrt{1+\gamma^{2}}\neq1$ for $\gamma\neq0$: forbidden. One
+constraint, one direction lost; five of the six dimensions of $\Sym$
+remain, which is Figure~\ref{fig:ch10ortho} in a concrete case.
+
+The reaction in the permitted motion is $\bN=\sigma\be_{1}\otimes
+\be_{1}$, with $\sigma(\bx,t)$ a free field. Its worklessness can be
+checked without any general theory. Let the shear proceed in time,
+$\gamma=\gamma(t)$. Then $\bv=\dot\gamma X_{2}\be_{1}
+=\dot\gamma x_{2}\be_{1}$, since $x_{2}=X_{2}$, so
+$\bL=\grad\bv=\dot\gamma\,\be_{1}\otimes\be_{2}$ and by \eqr{4.7}
+\[
+   \bD=\tfrac12\dot\gamma\big(\be_{1}\otimes\be_{2}
+       +\be_{2}\otimes\be_{1}\big),
+   \qquad\text{so}\qquad
+   D_{11}=\ip{\be_{1}}{\bD\be_{1}}=0 ,
+\]
+and $\bN\cdot\bD=\sigma D_{11}=0$. What $\sigma$ actually is at each
+point is settled, as always, by $\dvg\bT+\rho\bb=\rho\dot\bv$ and the
+tractions applied to the ends of the fibres, not by any property of the
+fibre.
+\end{example}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{B}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.2mm]},thick}]
+% ============ reference configuration ============
+\begin{scope}
+  \draw[thick] (0,0) rectangle (3,2);
+  \foreach \y in {0.4,0.8,1.2,1.6}
+     {\draw[gray!65] (0,\y)--(3,\y);}
+  \draw[very thick,red!65!black] (0.9,1.2)--(1.9,1.2);
+  \fill (0.9,1.2) circle (1.4pt);  \fill (1.9,1.2) circle (1.4pt);
+  \node[font=\footnotesize,anchor=south,text=red!65!black]
+     at (1.4,1.26) {length $1$};
+  \draw[ar] (1.9,0.55)--(2.6,0.55) node[right=1pt,font=\small] {$\bM$};
+  \node[font=\small,anchor=north] at (1.5,-0.2) {$\kappa$};
+\end{scope}
+% ============ current configuration: shear along the fibres ============
+\begin{scope}[xshift=5.4cm]
+  \draw[thick] (0,0)--(3,0)--(4,2)--(1,2)--cycle;
+  \foreach \y/\a/\b in {0.4/0.2/3.2, 0.8/0.4/3.4, 1.2/0.6/3.6, 1.6/0.8/3.8}
+     {\draw[gray!65] (\a,\y)--(\b,\y);}
+  \draw[very thick,red!65!black] (1.5,1.2)--(2.5,1.2);
+  \fill (1.5,1.2) circle (1.4pt);  \fill (2.5,1.2) circle (1.4pt);
+  \node[font=\footnotesize,anchor=south,text=red!65!black]
+     at (2.0,1.26) {length $1$};
+  \draw[ar] (2.0,0.55)--(2.7,0.55) node[right=1pt,font=\small] {$\bm$};
+  % the fibre tension: a cut normal to m, with opposed tractions
+  \draw[guide] (2.90,0.02)--(2.90,1.98);
+  \draw[ar,blue!55!black] (2.96,1.78)--(3.56,1.78);
+  \draw[ar,blue!55!black] (2.84,1.78)--(2.24,1.78);
+  \node[font=\small,text=blue!55!black,anchor=south] at (3.26,1.84)
+     {$\sigma\bm$};
+  \node[font=\small,anchor=north] at (2.0,-0.2) {$\kappa_{t}$};
+\end{scope}
+\end{tikzpicture}
+\caption{An inextensible fibre family, $\bM$ in $\kappa$ and $\bm$ in
+$\kappa_{t}$, under a shear parallel to the fibres. Every fibre keeps its
+length, so the constraint $\mu=1$ holds for every amount of shear, while
+the matrix between the fibres shears freely: the constraint removes one
+dimension from $\Sym$ and leaves five. The reaction \eqr{10.28} is the
+uniaxial stress $\sigma\bm\otimes\bm$, drawn as the pair of opposed
+tractions on a cut normal to $\bm$. It does no work because
+$\ip\bm{\bD\bm}=(\ln\mu)^{\textstyle\cdot}=0$, and its magnitude
+$\sigma$ is not a property of the fibre but whatever the equations of
+motion and the applied end tractions require.}
+\label{fig:ch10fibre}
+\end{figure}
+
+\subsubsection*{(3) Rigidity}
+
+In the case of rigidity it follows from \eqr{10.13} that, for each
+ordered pair $(A,B)$,
+\begin{equation}
+\begin{aligned}
+   (g_{AB})_{\bC}\cdot\dot\bC
+   &=\dot C_{AB}=\big(\ip{\hbE_{A}}{\bC\hbE_{B}}\big)^{\textstyle\cdot}
+    =\ip{\hbE_{A}}{\dot\bC\hbE_{B}}\\
+   &=(\hbE_{A}\otimes\hbE_{B})\cdot\dot\bC
+    =\Sym(\hbE_{A}\otimes\hbE_{B})\cdot\dot\bC ,
+\end{aligned}
+   \tag{10.29}\label{eq:10.29}
+\end{equation}
+on account of the symmetry of $\dot\bC$, where
+\begin{equation}
+   \Sym(\hbE_{A}\otimes\hbE_{B})
+   =\tfrac12\big(\hbE_{A}\otimes\hbE_{B}+\hbE_{B}\otimes\hbE_{A}\big).
+   \tag{10.30}\label{eq:10.30}
+\end{equation}
+The first line of \eqr{10.29} used $\dot{\dd}_{AB}=0$ and the fixity of
+the referential basis, $\dot{\hbE}_{A}=\bze$; the second used the
+identity established after \eqr{10.25}; the third dropped
+$\Skw(\hbE_{A}\otimes\hbE_{B})$ by Lemma~\ref{lem:symskw}, since
+$\dot\bC$ is symmetric. Thus
+\begin{equation}
+   (g_{AB})_{\bC}=\Sym(\hbE_{A}\otimes\hbE_{B})
+   \tag{10.31}\label{eq:10.31}
+\end{equation}
+and it follows from \eqr{10.19} that
+\begin{equation}
+\begin{aligned}
+   \bN&=\lambda_{AB}\bQ\big[\Sym(\hbE_{A}\otimes\hbE_{B})\big]\bQ^{t}
+   =\bQ\big[\lambda_{(AB)}\hbE_{A}\otimes\hbE_{B}\big]\bQ^{t},\\
+   &\text{with}\quad
+   \lambda_{(AB)}=\tfrac12(\lambda_{AB}+\lambda_{BA}),
+\end{aligned}
+   \tag{10.32}\label{eq:10.32}
+\end{equation}
+where the usual summation convention is in effect, the constraint has
+been imposed in the form $\bF=\bQ$, a rotation, and the $\lambda_{AB}$
+are arbitrary scalars.
+
+The passage from the first form of \eqr{10.32} to the second is a
+relabelling worth doing once. Using \eqr{10.30},
+\[
+   \lambda_{AB}\Sym(\hbE_{A}\otimes\hbE_{B})
+   =\tfrac12\lambda_{AB}\,\hbE_{A}\otimes\hbE_{B}
+    +\tfrac12\lambda_{AB}\,\hbE_{B}\otimes\hbE_{A}.
+\]
+In the second sum both $A$ and $B$ are summed over, so they may be
+interchanged as names, turning it into
+$\tfrac12\lambda_{BA}\,\hbE_{A}\otimes\hbE_{B}$. Adding,
+\[
+   \lambda_{AB}\Sym(\hbE_{A}\otimes\hbE_{B})
+   =\tfrac12(\lambda_{AB}+\lambda_{BA})\,\hbE_{A}\otimes\hbE_{B}
+   =\lambda_{(AB)}\,\hbE_{A}\otimes\hbE_{B}.
+\]
+Only the symmetric part of the array $(\lambda_{AB})$ survives, which is
+the same phenomenon as the symmetry of $g_{\bC}$: the skew part is
+invisible because it is contracted against symmetric objects.
+
+The term in square brackets to the right of the second equality in
+\eqr{10.32} is an arbitrary symmetric referential tensor: it has six free
+entries $\lambda_{(AB)}$, and every symmetric referential tensor is of
+that form. Conjugation $\bS\mapsto\bQ\bS\bQ^{t}$ is linear, carries
+symmetric tensors to symmetric tensors, since
+$(\bQ\bS\bQ^{t})^{t}=\bQ\bS^{t}\bQ^{t}$, and is invertible with inverse
+$\bT\mapsto\bQ^{t}\bT\bQ$. It therefore maps the symmetric referential
+tensors \emph{onto} the symmetric spatial tensors. Thus $\bN$ is an
+arbitrary symmetric spatial tensor. It follows that the net stress $\bT$
+of \eqr{10.14} is constitutively indeterminate: the stress in a rigid
+body is indeterminate. Nevertheless, the equations of rigid-body dynamics
+of Section 6.4.2 suffice to determine the motion in terms of the applied
+forces and torques, and vice versa.
+
+\begin{remark}[why rigidity determines nothing, in one
+line]\label{rem:ch10rigid}
+The orthogonality condition \eqr{10.15} is the only thing that ever
+restricted $\bN$, and in a rigid motion it says nothing at all. By
+Remark~\ref{rem:Drigid}, $\bD=\Ob$ in a rigid motion, so
+$\bN\cdot\bD=0$ holds for \emph{every} symmetric $\bN$ and the
+requirement is vacuous. Equation \eqr{10.32} is that observation written
+out. This also settles the count: six independent constraints remove all
+six dimensions of admissible stretching and return all six dimensions of
+$\Sym$ as reaction, which is the extreme case of the arithmetic in
+Figure~\ref{fig:ch10ortho}.
+
+The same fact appears in the energy balance. Chapter 6 observes that for
+a rigid body the stress power is $\bT\cdot\bL=\bT\cdot\bW$, which
+vanishes by the symmetry of $\bT$ and Lemma~\ref{lem:symskw}, so the
+thermal and mechanical problems decouple. A material that can store no
+strain energy can also tell you nothing about its stress.
+\end{remark}
+
+%=======================================================================
+\setcounter{problemenv}{0}
+\section{Problems}\label{sec:problems:c10}
+%=======================================================================
+
+%-----------------------------------------------------------------------
+\begin{problem}[The three constraints as $O^{+}$ writes them]
+Write the constraints of incompressibility, inextensibility and rigidity
+in the frame of observer $O^{+}$.
+\end{problem}
+
+\begin{solution}
+The general rule is \eqr{10.10}: whatever $\bar g_{\kappa}$ is, the
+function used by $O^{+}$ is
+\[
+   \bar g^{+}_{\kappa^{+}}(\bC^{+})=\bar g_{\kappa}(\bK^{t}\bC^{+}\bK),
+\]
+and $\bC^{+}=\bK\bC\bK^{t}$ by \eqr{7.30}$_{1}$, with $\bK$ the fixed
+orthogonal tensor of \eqr{7.15}. So each case is a substitution followed
+by a cancellation of $\bK$'s.
+
+\textbf{Incompressibility.} From \eqr{10.11},
+\[
+\begin{aligned}
+   \bar g^{+}_{\kappa^{+}}(\bC^{+})&=\det(\bK^{t}\bC^{+}\bK)-1
+   \\
+   &=(\det\bK^{t})(\det\bC^{+})(\det\bK)-1
+   =(\det\bK)^{2}\det\bC^{+}-1 ,
+\end{aligned}
+\]
+and $(\det\bK)^{2}=1$ because $\bK$ is orthogonal, so
+\[
+   \boxed{\ \bar g^{+}_{\kappa^{+}}(\bC^{+})=\det\bC^{+}-1 .\ }
+\]
+The function has exactly the same form. Its value is also the same
+number, since $\det\bC^{+}=(\det\bK)^{2}\det\bC=\det\bC$. Equivalently,
+$J^{+}=1$, which is \eqr{7.19} with $J=1$.
+
+\textbf{Inextensibility.} From \eqr{10.12}, moving $\bK$ across the inner
+product by the definition of the transpose,
+\[
+   \bar g^{+}_{\kappa^{+}}(\bC^{+})
+   =\ip\bM{(\bK^{t}\bC^{+}\bK)\bM}-1
+   =\ip{\bK\bM}{\bC^{+}\bK\bM}-1 .
+\]
+By \eqr{7.36} the counterpart in $\hat{\mathbb{E}}^{3+}$ of the
+referential unit vector $\bM$ is $\bM^{+}=\bK\bM$, so
+\[
+   \boxed{\ \bar g^{+}_{\kappa^{+}}(\bC^{+})
+   =\ip{\bM^{+}}{\bC^{+}\bM^{+}}-1,\qquad \bM^{+}=\bK\bM .\ }
+\]
+Again the same form, with the fibre direction carried to the new
+reference configuration by $\bK$. That $\bM^{+}$ is still a unit vector
+is orthogonality of $\bK$: $|\bK\bM|^{2}=\ip{\bK\bM}{\bK\bM}
+=\ip\bM{\bK^{t}\bK\bM}=\ip\bM{\hI\bM}=1$.
+
+\textbf{Rigidity.} From \eqr{10.13} the constraint is $\bC=\hI$, so
+\[
+   \bC^{+}=\bK\hI\bK^{t}=\bK\bK^{t}=\hI^{+},
+\]
+which is \eqr{7.26}, the transformation law for the referential identity.
+Componentwise, resolve on the basis $\hbE^{+}_{A}=\bK\hbE_{A}$, which is
+orthonormal for the same reason $\bM^{+}$ was a unit vector. Then
+\[
+\begin{aligned}
+   C^{+}_{AB}&=\ip{\hbE^{+}_{A}}{\bC^{+}\hbE^{+}_{B}}
+   =\ip{\bK\hbE_{A}}{\bK\bC\bK^{t}\bK\hbE_{B}}
+   \\
+   &=\ip{\hbE_{A}}{\bK^{t}\bK\bC\hbE_{B}}
+   =\ip{\hbE_{A}}{\bC\hbE_{B}}=C_{AB},
+\end{aligned}
+\]
+so the components are literally the same numbers and
+\[
+   \boxed{\ \bar g^{+}_{(\kappa^{+})AB}=C^{+}_{AB}-\dd_{AB}.\ }
+\]
+
+\emph{What the three answers say together.} In each case the constraint
+keeps its form and its numerical value; only the referential objects it
+is written with, $\bM$ and $\hbE_{A}$, are carried over by $\bK$. That is
+precisely the requirement \eqr{10.3} from which the whole of
+Section~\ref{sec:ch10obs} was deduced, now verified in the three cases
+that matter. Had any of the three come out differently, that constraint
+would have failed the test of \eqr{10.9} and would have had to be
+discarded, in the manner of Remark~\ref{rem:ch10rotblind}.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[The reactive stress seen by another observer]
+Find an expression for the reactive stress $\bN^{+}$ as perceived by
+$O^{+}$, associated with a generic constraint. Show that all observers
+agree on the values of the various constitutively indeterminate
+multipliers.
+\end{problem}
+
+\begin{solution}
+Everything follows from \eqr{10.18} once the three ingredients
+$g^{+}_{\bC^{+}}$, $\bF^{+}$ and the transformation of $\bN$ itself are
+in hand.
+
+\textbf{Step 1: the gradient transforms by $\bK$.} We claim
+\[
+   g^{+}_{\bC^{+}}=\bK\,g_{\bC}\,\bK^{t}.
+\]
+By definition, $g^{+}_{\bC^{+}}$ is the tensor for which
+$\dl g^{+}=g^{+}_{\bC^{+}}\cdot\dl\bC^{+}$ for every symmetric increment
+$\dl\bC^{+}$. From \eqr{10.10}, $g^{+}(\bC^{+})=g(\bK^{t}\bC^{+}\bK)$, so
+the increments are related by $\dl\bC=\bK^{t}\,\dl\bC^{+}\bK$, $\bK$
+being fixed. Hence, for any symmetric $\bA$,
+\[
+\begin{aligned}
+   \dl g^{+}&=g_{\bC}\cdot(\bK^{t}\bA\bK)
+   =\tr\big(g_{\bC}(\bK^{t}\bA\bK)^{t}\big)
+   \\
+   &=\tr\big(g_{\bC}\bK^{t}\bA^{t}\bK\big)
+   =\tr\big(\bK g_{\bC}\bK^{t}\bA^{t}\big)
+   =(\bK g_{\bC}\bK^{t})\cdot\bA ,
+\end{aligned}
+\]
+where the fourth equality moved the trailing $\bK$ to the front. Both
+traces are defined, the first on $\hVt$ and the second on
+$\hat{\mathbb{E}}^{3+}$, and they are equal for the same component
+reason checked after \eqr{10.17}:
+the two products are the same sum of products of the same numbers.
+Comparing the two expressions for $\dl g^{+}$ and using the uniqueness of
+the gradient gives the claim. Note that $\bK g_{\bC}\bK^{t}$ is symmetric
+whenever $g_{\bC}$ is, as it must be.
+
+\textbf{Step 2: the sandwich is unchanged up to $\bQ$.} With
+$\bF^{+}=\bQ\bF\bK^{t}$ from \eqr{7.17},
+\[
+\begin{aligned}
+   \bF^{+}g^{+}_{\bC^{+}}(\bF^{+})^{t}
+   &=(\bQ\bF\bK^{t})(\bK g_{\bC}\bK^{t})(\bQ\bF\bK^{t})^{t}
+   =\bQ\bF\bK^{t}\bK\,g_{\bC}\,\bK^{t}\bK\bF^{t}\bQ^{t}\\
+   &=\bQ\bF\hI\,g_{\bC}\,\hI\bF^{t}\bQ^{t}
+   =\bQ\big(\bF g_{\bC}\bF^{t}\big)\bQ^{t}.
+\end{aligned}
+\]
+Every $\bK$ has cancelled, which had to happen: the choice of reference
+configuration is bookkeeping and cannot survive in a spatial tensor. So
+by \eqr{10.18} as written by $O^{+}$,
+\[
+   \boxed{\ \bN^{+}=\lambda^{+}\bF^{+}g^{+}_{\bC^{+}}(\bF^{+})^{t}
+   =\lambda^{+}\,\bQ\big(\bF g_{\bC}\bF^{t}\big)\bQ^{t}.\ }
+\]
+
+\textbf{Step 3: $\bN$ transforms as a spatial tensor.} By \eqr{7.40} the
+net stress obeys $\bT^{+}=\bQ\bT\bQ^{t}$, and by \eqr{8.35} the
+constitutive part obeys $\bG^{+}=\bQ\bG\bQ^{t}$, which is exactly the
+statement that the two observers agree about material response. Since
+$\bN=\bT-\bG$ and $\bN^{+}=\bT^{+}-\bG^{+}$,
+\[
+   \bN^{+}=\bQ\bT\bQ^{t}-\bQ\bG\bQ^{t}=\bQ(\bT-\bG)\bQ^{t}
+   =\bQ\bN\bQ^{t}
+   =\lambda\,\bQ\big(\bF g_{\bC}\bF^{t}\big)\bQ^{t}.
+\]
+
+\textbf{Step 4: the multipliers agree.} Subtracting the two expressions
+for $\bN^{+}$,
+\[
+   (\lambda^{+}-\lambda)\,\bQ\big(\bF g_{\bC}\bF^{t}\big)\bQ^{t}=\Ob .
+\]
+Now $\bF g_{\bC}\bF^{t}\neq\Ob$, since $\bF$ is invertible and
+$g_{\bC}\neq\hOb$ for a non-degenerate constraint, and $\bQ$ is
+invertible, so the conjugated tensor is non-zero. A scalar multiple of a
+non-zero tensor vanishes only if the scalar does. Therefore
+\[
+   \boxed{\ \lambda^{+}=\lambda .\ }
+\]
+
+\textbf{Several constraints.} With $n$ constraints, Steps 1 and 2 apply
+to each $g^{(i)}$ separately, so \eqr{10.19} as written by $O^{+}$ reads
+$\bN^{+}=\sum_{i}\lambda^{+}_{i}\bQ(\bF g^{(i)}_{\bC}\bF^{t})\bQ^{t}$,
+while Step 3 gives $\bN^{+}=\sum_{i}\lambda_{i}\bQ(\bF
+g^{(i)}_{\bC}\bF^{t})\bQ^{t}$. Subtracting,
+\[
+   \sum_{i=1}^{n}(\lambda^{+}_{i}-\lambda_{i})\,
+   \bQ\big(\bF g^{(i)}_{\bC}\bF^{t}\big)\bQ^{t}=\Ob ,
+\]
+and since conjugation by $\bQ$ is an invertible linear map it preserves
+linear independence, so the tensors
+$\bQ(\bF g^{(i)}_{\bC}\bF^{t})\bQ^{t}$ are linearly independent whenever
+the constraints are independent. Every coefficient must therefore vanish:
+$\lambda^{+}_{i}=\lambda_{i}$ for each $i$.
+
+\emph{The three cases.} For incompressibility $\lambda=-\bar p$, so
+$\bar p^{+}=\bar p$. The thermodynamic pressure is also observer
+independent, since $\tilde p=\rho^{2}\psi_{\rho}$ by \eqr{9.74} and both
+$\rho$ and $\psi$ are absolute scalars by \eqr{7.37}; hence
+$p^{+}=\tilde p^{+}+\bar p^{+}=p$, which is Problem 4 of Chapter 9. For
+inextensibility $\sigma^{+}=\sigma$: the fibre tension is a number both
+observers read off the same. For rigidity $\lambda^{+}_{AB}
+=\lambda_{AB}$, although in that case the statement is empty of content,
+since by Remark~\ref{rem:ch10rigid} the multipliers are arbitrary to
+begin with.
+
+\emph{Why this had to come out this way.} A multiplier is a scalar, and
+Chapter 7 assumed absolute scalars to be the same for all observers. The
+calculation above is not an independent discovery of that principle but a
+consistency check on \eqr{10.18}: had $\lambda^{+}$ differed from
+$\lambda$, the constraint reaction would have been observer dependent
+while the constraint itself was not, and \eqr{10.14} would have split the
+stress differently for different observers.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[A laminate of inextensible sheets]
+Consider a laminated material formed from thin sheets of stiff paper
+interspersed in a soft matrix. Take the sheets to be continuously
+distributed parallel planes spanned by $\hbE_{1}$ and $\hbE_{2}$ in the
+reference configuration, so that the constraints are
+$\ip{\hbE_{1}}{\bC\hbE_{2}}=0$ and
+$\ip{\hbE_{1}}{\bC\hbE_{1}}=\ip{\hbE_{2}}{\bC\hbE_{2}}=1$. Show that
+there can be no extensional or shear strain in the plane of the sheets,
+but that transverse normal and shear strains are permitted. What is the
+form of the reactive stress?
+\end{problem}
+
+\begin{solution}
+The three constraints are statements about the upper left two by two
+block of the matrix $(C_{AB})$:
+\[
+   C_{11}=C_{22}=1,\qquad C_{12}=C_{21}=0 ,
+\]
+where $C_{AB}=\ip{\hbE_{A}}{\bC\hbE_{B}}$ as in Chapter 2. Nothing is
+said about $C_{13}$, $C_{23}$ or $C_{33}$.
+
+\textbf{No in-plane strain, in any direction.} Take any material fibre
+lying in a sheet, $\bM=M_{1}\hbE_{1}+M_{2}\hbE_{2}$ with
+$M_{1}^{2}+M_{2}^{2}=1$. Its stretch follows from \eqr{2.83},
+\[
+\begin{aligned}
+   \mu^{2}&=\ip\bM{\bC\bM}=M_{A}M_{B}C_{AB}
+   \\
+   &=M_{1}^{2}C_{11}+2M_{1}M_{2}C_{12}+M_{2}^{2}C_{22}
+   =M_{1}^{2}+M_{2}^{2}=1 ,
+\end{aligned}
+\]
+so $\mu=1$ for every in-plane direction: not just the two coordinate
+directions but every fibre in the sheet is inextensible. For the angles,
+\eqr{2.105} gives the cosine of the angle between the images of two
+reference fibres $\bM$, $\bM'$ as
+$\ip\bM{\bC\bM'}/(\mu\mu')$. With $\bM=\hbE_{1}$ and $\bM'=\hbE_{2}$ this
+is $C_{12}/(1\cdot1)=0$: the right angle between the two coordinate
+fibres is preserved, so there is no in-plane shear either. In terms of
+the Lagrange strain $\bE=\tfrac12(\bC-\hI)$ of \eqr{2.97} the three
+statements are simply
+\[
+   E_{11}=E_{22}=E_{12}=0 .
+\]
+Since $\bE$ restricted to the sheet plane vanishes identically, the sheet
+deforms rigidly in its own plane. Its local area is preserved as well:
+with $\ba_{\alpha}=\bF\hbE_{\alpha}$ for $\alpha=1,2$ we have
+$\ip{\ba_{1}}{\ba_{1}}=C_{11}=1$, $\ip{\ba_{2}}{\ba_{2}}=C_{22}=1$ and
+$\ip{\ba_{1}}{\ba_{2}}=C_{12}=0$, so $\{\ba_{1},\ba_{2}\}$ is an
+orthonormal pair and $|\ba_{1}\times\ba_{2}|=1$.
+
+\textbf{What is still permitted.} The entries $C_{13}$, $C_{23}$,
+$C_{33}$ are unconstrained, so $E_{13}$, $E_{23}$, $E_{33}$ are free:
+the sheets may slide over one another, tilt relative to their common
+normal, and move apart or together. Three of the six components of $\bE$
+are frozen and three are free, which is the count of
+Remark~\ref{rem:ch10sixmax} with $n=3$.
+
+\textbf{The reactive stress.} Write the three constraint functions as
+\[
+   g^{(1)}=\ip{\hbE_{1}}{\bC\hbE_{1}}-1,\quad
+   g^{(2)}=\ip{\hbE_{2}}{\bC\hbE_{2}}-1,\quad
+   g^{(3)}=\ip{\hbE_{1}}{\bC\hbE_{2}} .
+\]
+Their gradients follow from the computation that produced \eqr{10.26}
+and \eqr{10.31}, since $g^{(1)}$ and $g^{(2)}$ are instances of
+\eqr{10.12} and $g^{(3)}$ is an instance of \eqr{10.13} with $A\neq B$:
+\[
+   g^{(1)}_{\bC}=\hbE_{1}\otimes\hbE_{1},\qquad
+   g^{(2)}_{\bC}=\hbE_{2}\otimes\hbE_{2},\qquad
+   g^{(3)}_{\bC}=\Sym(\hbE_{1}\otimes\hbE_{2}) .
+\]
+Substituting in \eqr{10.19} and using the dyad rule
+$\bF(\ba\otimes\bb)\bF^{t}=\bF\ba\otimes\bF\bb$ from \eqr{10.27},
+\[
+   \bN=\lambda_{1}\ba_{1}\otimes\ba_{1}+\lambda_{2}\ba_{2}\otimes\ba_{2}
+      +\tfrac12\lambda_{3}\big(\ba_{1}\otimes\ba_{2}
+      +\ba_{2}\otimes\ba_{1}\big).
+\]
+Because $\{\ba_{1},\ba_{2}\}$ was shown above to be orthonormal, write
+$\bm_{1}=\ba_{1}$, $\bm_{2}=\ba_{2}$ and let $\bm_{3}=\bm_{1}\times
+\bm_{2}$ be the unit normal to the deformed sheet, so that
+$\{\bm_{1},\bm_{2},\bm_{3}\}$ is an orthonormal basis of $\Vt$. Then
+\[
+   \boxed{\ \bN=\lambda_{1}\bm_{1}\otimes\bm_{1}
+   +\lambda_{2}\bm_{2}\otimes\bm_{2}
+   +\tfrac12\lambda_{3}\big(\bm_{1}\otimes\bm_{2}
+   +\bm_{2}\otimes\bm_{1}\big).\ }
+\]
+Equivalently: $\bN$ is an arbitrary symmetric tensor with
+$\bN\bm_{3}=\bze$, that is, an arbitrary state of \emph{plane stress in
+the plane of the deformed sheets}. It has three free components, one per
+constraint.
+
+\emph{Check that it does no work.} By \eqr{10.17} the admissible
+stretchings are those with $\ip{\bm_{1}}{\bD\bm_{1}}
+=\ip{\bm_{2}}{\bD\bm_{2}}=\ip{\bm_{1}}{\bD\bm_{2}}=0$, that is, those
+whose in-plane block vanishes. The reaction has only an in-plane block.
+Resolving both on $\{\bm_{i}\}$, $\bN\cdot\bD=N_{ij}D_{ij}$ and every
+term has at least one factor from a vanishing block, so $\bN\cdot\bD=0$.
+The reaction lives exactly where the stretching is forbidden, and the
+stretching survives exactly where the reaction is absent. That
+complementarity is Figure~\ref{fig:ch10ortho} again, now with a
+three-dimensional space of reactions and a three-dimensional space of
+admissible stretchings inside the six-dimensional $\Sym$.
+
+\emph{Reading the answer.} The reaction is the membrane stress carried by
+the stiff paper: two normal components in the sheet and one in-plane
+shear. The matrix is free to shear transversely and to change thickness,
+and the reaction supplies no stress for those modes, so the transverse
+response of the laminate is entirely constitutive, which is why a stack
+of paper is stiff in its plane and floppy across it.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[A laminate whose sheets preserve area]
+The body is laminated as in the previous problem, but now constrained in
+such a way that the planes experience no change in local surface area as
+they deform. Find the form of the reactive stress.
+\end{problem}
+
+\begin{solution}
+The single constraint has to be expressed through $\bC$ before anything
+else can be done, and Chapter 2 has the tool.
+
+\textbf{Step 1: the constraint.} A material surface element of the sheet
+has reference unit normal $\hbE_{3}$, since the sheets are spanned by
+$\hbE_{1}$ and $\hbE_{2}$. By the Piola--Nanson formula \eqr{2.54},
+$\bn\,\dl a=\bF^{*}\hbE_{3}\,\dl A$, so taking magnitudes of both sides
+and using $|\bn|=1$,
+\[
+   \frac{\dl a}{\dl A}=\big|\bF^{*}\hbE_{3}\big|
+   =\sqrt{\ip{\hbE_{3}}{(\bF^{*})^{t}\bF^{*}\hbE_{3}}} .
+\]
+The tensor in the middle is the cofactor of $\bC$. Indeed, by
+Proposition~\ref{prop:I2cof}, $\bF^{*}=J\bF^{-t}$, so
+\[
+   (\bF^{*})^{t}\bF^{*}=\big(J\bF^{-t}\big)^{t}\big(J\bF^{-t}\big)
+   =J^{2}\bF^{-1}\bF^{-t}=J^{2}(\bF^{t}\bF)^{-1}
+   =(\det\bC)\bC^{-1}=\bC^{*},
+\]
+using $\bF^{-1}\bF^{-t}=(\bF^{t}\bF)^{-1}$ from
+Proposition~\ref{prop:prodinv}, $J^{2}=\det\bC$ from \eqr{10.11}, and
+$\bC^{*}=(\det\bC)\bC^{-1}$ from the derivation of \eqr{10.21}. This is
+Remark~\ref{rem:cofgeom} in tensor form: the cofactor is the tensor that
+carries area elements. Hence $\dl a=\dl A$ is $\ip{\hbE_{3}}{\bC^{*}
+\hbE_{3}}=1$, and
+\[
+   g(\bC)=\ip{\hbE_{3}}{\bC^{*}\hbE_{3}}-1=C^{*}_{33}-1
+   =C_{11}C_{22}-C_{12}^{2}-1 ,
+\]
+the last step because the $(3,3)$ entry of the cofactor matrix is the
+determinant of the complementary two by two block, and $C_{21}=C_{12}$.
+So the constraint is $\det\bC_{\parallel}=1$, where $\bC_{\parallel}$
+denotes the in-plane block. Note in passing that the three constraints of
+Problem 3 imply this one, since they give $\det\bC_{\parallel}
+=1\cdot1-0=1$; the present constraint is the weaker requirement that the
+in-plane block have unit determinant rather than be the identity.
+
+\textbf{Step 2: the gradient.} Let $g_{\bC}=G_{AB}\hbE_{A}\otimes
+\hbE_{B}$ with $G$ symmetric. For a symmetric increment $\dl\bC$,
+\[
+   g_{\bC}\cdot\dl\bC=G_{11}\dl C_{11}+G_{22}\dl C_{22}+G_{33}\dl C_{33}
+   +2G_{12}\dl C_{12}+2G_{13}\dl C_{13}+2G_{23}\dl C_{23},
+\]
+the factors of two arising because each off-diagonal pair contributes
+twice to the sum $G_{AB}\dl C_{AB}$. Differentiating
+$g=C_{11}C_{22}-C_{12}^{2}-1$ directly,
+\[
+   \dl g=C_{22}\,\dl C_{11}+C_{11}\,\dl C_{22}-2C_{12}\,\dl C_{12}.
+\]
+Matching the coefficient of each independent increment,
+\[
+   G_{11}=C_{22},\quad G_{22}=C_{11},\quad G_{12}=-C_{12},\quad
+   G_{33}=G_{13}=G_{23}=0 ,
+\]
+that is,
+\[
+   g_{\bC}=C_{22}\,\hbE_{1}\otimes\hbE_{1}+C_{11}\,\hbE_{2}\otimes\hbE_{2}
+   -C_{12}\big(\hbE_{1}\otimes\hbE_{2}+\hbE_{2}\otimes\hbE_{1}\big).
+\]
+The array $(G_{AB})$ is the adjugate of the in-plane block, extended by
+zeros, so
+\[
+   g_{\bC}=\big(\det\bC_{\parallel}\big)\bC_{\parallel}^{-1}
+   \quad\text{extended by zero},
+\]
+which is \eqr{10.21} one dimension down, as one would expect from a
+constraint that is a determinant in two dimensions rather than three. On
+the constraint set $\det\bC_{\parallel}=1$ this reduces to
+$\bC_{\parallel}^{-1}$, the analogue of \eqr{10.22}. As always the
+reduction is performed only after the differentiation, per
+Remark~\ref{rem:ch10apost}.
+
+\textbf{Step 3: the reaction.} With $\ba_{\alpha}=\bF\hbE_{\alpha}$,
+$\alpha=1,2$, and the dyad rule of \eqr{10.27},
+\[
+   \bF g_{\bC}\bF^{t}
+   =\big(\bC_{\parallel}^{-1}\big)_{\alpha\beta}\,
+     \ba_{\alpha}\otimes\ba_{\beta},
+\]
+the Greek indices running over $1,2$ only. Now observe that
+$\bC_{\parallel}$ is precisely the Gram matrix of the pair
+$\{\ba_{1},\ba_{2}\}$, since
+$\ip{\ba_{\alpha}}{\ba_{\beta}}=\ip{\bF\hbE_{\alpha}}{\bF\hbE_{\beta}}
+=\ip{\hbE_{\alpha}}{\bC\hbE_{\beta}}=C_{\alpha\beta}$. The tensor
+$\bP=(\bC_{\parallel}^{-1})_{\alpha\beta}\ba_{\alpha}\otimes\ba_{\beta}$
+is then the orthogonal projection onto the plane they span. To verify
+this, apply it to $\ba_{\gamma}$:
+\[
+   \bP\ba_{\gamma}
+   =\big(\bC_{\parallel}^{-1}\big)_{\alpha\beta}
+     \ba_{\alpha}\,\ip{\ba_{\beta}}{\ba_{\gamma}}
+   =\big(\bC_{\parallel}^{-1}\big)_{\alpha\beta}
+     C_{\beta\gamma}\,\ba_{\alpha}
+   =\dd_{\alpha\gamma}\ba_{\alpha}=\ba_{\gamma},
+\]
+and to any $\bw$ perpendicular to both:
+$\bP\bw=(\bC_{\parallel}^{-1})_{\alpha\beta}\ba_{\alpha}
+\ip{\ba_{\beta}}\bw=\bze$. A symmetric tensor that fixes a plane and
+annihilates its orthogonal complement is the orthogonal projection onto
+that plane, by Definition~\ref{def:splits} and the uniqueness of the
+splitting. Writing $\bm_{3}$ for the unit normal to the deformed sheet,
+$\bP=\I-\bm_{3}\otimes\bm_{3}$, and \eqr{10.18} gives
+\[
+   \boxed{\ \bN=\lambda\big(\I-\bm_{3}\otimes\bm_{3}\big).\ }
+\]
+
+\emph{Reading the answer.} Compare \eqr{10.23}. Incompressibility is the
+statement that a volume element does not change, and its reaction is an
+isotropic pressure in three dimensions, $-\bar p\I$. The present
+constraint is the statement that an area element does not change, and its
+reaction is an isotropic pressure in the two dimensions of the sheet,
+$\lambda(\I-\bm_{3}\otimes\bm_{3})$. One constraint, one multiplier, and
+the reaction is the identity of the space in which the measure is
+frozen.
+
+\emph{Consistency with Problem 3.} The reaction found there had three
+free components in the sheet plane; the reaction found here has one, and
+it is the isotropic member of that three-parameter family, obtained by
+setting $\lambda_{1}=\lambda_{2}=\lambda$ and $\lambda_{3}=0$. That is
+the right relationship: Problem 3 imposes three constraints and Problem 4
+imposes one of the consequences of those three, so it must buy a
+one-dimensional subspace of the earlier three-dimensional space of
+reactions. Weaker constraint, smaller reaction, and the arithmetic of
+Remark~\ref{rem:ch10sixmax} is respected in both.
+
+\emph{Worklessness, checked.} Admissible stretchings satisfy
+$\bP\cdot\bD=0$ by \eqr{10.17}, and $\bP\cdot\bD
+=\tr(\bP\bD)=D_{11}+D_{22}$ resolved on $\{\bm_{i}\}$. So the constraint
+permits any $\bD$ whose in-plane trace vanishes, which is the statement
+that the sheet may stretch in one in-plane direction provided it
+contracts in the other, keeping the area fixed. And
+$\bN\cdot\bD=\lambda\bP\cdot\bD=0$ for exactly those $\bD$. A
+two-dimensional pressure works only through a change of area, and the
+constraint is that there is none.
+\end{solution}

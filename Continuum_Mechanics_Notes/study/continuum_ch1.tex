@@ -1,0 +1,3941 @@
+%=======================================================================
+%  Chapter 1.  MATHEMATICAL PRELIMINARIES  (complete, with solved problems)
+%  A from-scratch, motivated account of Steigmann & Shirani,
+%  "Principles of Continuum Mechanics", Chapter 1 (1.1.1-1.3), matching
+%  the book's section numbering and order.  Every step is shown.
+%
+%  Compile:  pdflatex continuum_ch1.tex   (run twice, for references)
+%=======================================================================
+\documentclass[17pt,a4paper]{extreport}
+
+\usepackage[margin=1.8cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{bm}
+\usepackage{accents}
+% book style: boldface is rendered by an under-tilde
+\DeclareRobustCommand{\vek}[1]{\underaccent{\tilde}{#1}}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,angles,quotes,patterns}
+\tikzset{vec/.style={-{Stealth[length=2.3mm]},thick},
+         thinvec/.style={-{Stealth[length=1.8mm]},semithick},
+         guide/.style={gray!65,densely dashed,thin}}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,
+            hypertexnames=false,pdfencoding=unicode]{hyperref}
+
+%=============================== notation ==============================
+\newcommand{\Rn}{\mathbb{R}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\Vn}{\mathcal{V}_{n}}
+\newcommand{\En}{\mathbb{E}^{n}}
+\newcommand{\Et}{\mathbb{E}^{3}}
+\newcommand{\hEt}{\hat{\mathbb{E}}^{3}}
+\newcommand{\Lin}{\operatorname{Lin}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Skw}{\operatorname{Skw}}
+\newcommand{\Sph}{\operatorname{Sph}}
+\newcommand{\Dev}{\operatorname{Dev}}
+\newcommand{\Proj}[1]{\mathbb{P}_{(#1)}}
+\newcommand{\Refl}[1]{\mathbb{R}_{(#1)}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\grad}{\nabla}
+\newcommand{\dvg}{\operatorname{div}}
+\newcommand{\crl}{\operatorname{curl}}
+\newcommand{\I}{\vek{I}}
+\newcommand{\Ob}{\vek{O}}
+\newcommand{\ba}{\vek{a}}
+\newcommand{\bb}{\vek{b}}
+\newcommand{\bc}{\vek{c}}
+\newcommand{\bd}{\vek{d}}
+\newcommand{\bh}{\vek{h}}
+\newcommand{\bp}{\vek{p}}
+\newcommand{\bq}{\vek{q}}
+\newcommand{\bu}{\vek{u}}
+\newcommand{\bv}{\vek{v}}
+\newcommand{\bw}{\vek{w}}
+\newcommand{\bx}{\vek{x}}
+\newcommand{\by}{\vek{y}}
+\newcommand{\bz}{\vek{z}}
+\newcommand{\bo}{\vek{o}}
+\newcommand{\be}{\vek{e}}
+\newcommand{\bmv}{\vek{m}}
+\newcommand{\bn}{\vek{n}}
+\newcommand{\btt}{\vek{t}}
+\newcommand{\bk}{\vek{k}}
+\newcommand{\bze}{\vek{0}}
+\newcommand{\bA}{\vek{A}}
+\newcommand{\bB}{\vek{B}}
+\newcommand{\bC}{\vek{C}}
+\newcommand{\bD}{\vek{D}}
+\newcommand{\bE}{\vek{E}}
+\newcommand{\bL}{\vek{L}}
+\newcommand{\bP}{\vek{P}}
+\newcommand{\bQ}{\vek{Q}}
+\newcommand{\bR}{\vek{R}}
+\newcommand{\bS}{\vek{S}}
+\newcommand{\bT}{\vek{T}}
+\newcommand{\bV}{\vek{V}}
+\newcommand{\bW}{\vek{W}}
+\newcommand{\hbE}{\hat{\vek{E}}}
+\newcommand{\bOm}{\vek{\Omega}}
+\newcommand{\bom}{\vek{\omega}}
+\newcommand{\bF}{\vek{F}}
+\newcommand{\bN}{\vek{N}}
+\newcommand{\bff}{\vek{f}}
+\newcommand{\Vt}{\mathbb{E}^{3}}
+\newcommand{\ber}{\vek{e}_{r}}
+\renewcommand{\beth}{\vek{e}_{\theta}}
+\newcommand{\beph}{\vek{e}_{\varphi}}
+\newcommand{\berho}{\vek{e}_{\rho}}
+\newcommand{\dd}{\delta}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dl}{\mathrm{d}}
+\newcommand{\tbox}[3]{[\,#1,#2,#3\,]}
+\newcommand{\ip}[2]{#1\cdot#2}
+\newcommand{\rest}[1]{\big|_{#1}}
+
+% theorem headers in small capitals rather than bold
+\newtheoremstyle{scplain}{\topsep}{\topsep}{\itshape}{0pt}
+  {\scshape}{.}{5pt plus 1pt minus 1pt}{}
+\newtheoremstyle{scdefn}{\topsep}{\topsep}{\normalfont}{0pt}
+  {\scshape}{.}{5pt plus 1pt minus 1pt}{}
+
+\theoremstyle{scplain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{scdefn}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{scplain}
+\newtheorem{problem}{Problem}
+\newenvironment{solution}
+ {\par\smallskip\noindent\textit{Solution.}\ }
+ {\hfill$\square$\par\medskip}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\allowdisplaybreaks
+
+%=======================================================================
+
+%------------------- clickable equation references ---------------------
+% \eqr{4.11} prints "(4.11)" exactly as before and turns it into a link
+% when equation (4.11) is present in this document.  When it is not -- a
+% standalone chapter referring to an equation of another chapter -- it
+% degrades silently to plain text instead of raising an undefined
+% reference.  Must sit after hyperref.
+\makeatletter
+% a display carrying \tag{2.48--2.50} can hold only one \label, so the
+% remaining members of the range are routed to it by this alias table
+\newcommand{\eqalias}[2]{\expandafter\gdef\csname eqal@#1\endcsname{#2}}
+\newcommand{\eqr@do}[1]{%
+  \begingroup
+    \@ifundefined{eqal@#1}{\def\eqr@t{#1}}%
+                          {\edef\eqr@t{\csname eqal@#1\endcsname}}%
+    \@ifundefined{r@eq:\eqr@t}%
+      {\textup{(#1)}}%
+      {\hyperref[eq:\eqr@t]{\textup{(#1)}}}%
+  \endgroup}
+\DeclareRobustCommand{\eqr}[1]{%
+  \ifmmode\text{\eqr@do{#1}}\else\eqr@do{#1}\fi}
+\makeatother
+\input{eq_aliases}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+{\Large\bfseries Mathematical Preliminaries\par}
+\vspace{4mm}
+{\large Vector and tensor algebra, fields, integral theorems,\\
+and full solutions to the chapter problems\par}
+\vspace{8mm}
+{\itshape A from-scratch, definition--theorem--proof companion to}\\[2mm]
+{Steigmann and Shirani, \emph{Principles of Continuum Mechanics},
+Chapter~1}\\[1mm]
+{(\S\,1.1.1 through \S\,1.3, in the book's order and numbering)}
+\vfill
+{\small Each subsection opens with plain expository ground, in the spirit
+of the text, before any formal statement. Nothing in the chapter is
+skipped; every algebraic step, including those the book leaves to the
+reader, is carried out. The chapter problems are all solved in \S1.3.\par}
+\vspace{1cm}
+\end{titlepage}
+
+\tableofcontents
+
+\chapter{Mathematical Preliminaries}
+
+A working knowledge of vector and tensor algebra and analysis is a
+prerequisite for continuum mechanics. This chapter assembles the results
+we will need. The style is deliberately slow: we begin each topic with the
+naive question that forces the next idea, then make it precise and prove
+it. Throughout, $\Vn$ is an $n$ dimensional real vector space, $\En$ the
+same carrying an inner product, and $\Et$ the three dimensional case;
+$\{\be_i\}$ is a fixed orthonormal basis, indices run over $\{1,2,3\}$
+unless stated otherwise, and a repeated index in a term is summed. The
+symbol $\dd_{ij}$ is Kronecker's, $\eps_{ijk}$ the permutation symbol, and
+$\Lin$ the space of second order tensors. Appendix~\ref{app:dict} maps
+every numbered book equation to the place it is produced here.
+
+%=======================================================================
+\section{Vector and tensor theory}\label{sec:vtt}
+%=======================================================================
+
+\subsection{Vector spaces}\label{ss:vs}
+
+Displacements in space, velocities, and forces share exactly two features:
+any two of them may be added tip to tail, and any one may be scaled by a
+real number. Nothing else about ``arrows'' is used in the algebra that
+follows, so instead of drawing pictures we simply write down those two
+operations and the rules they obey. The reward is leverage: a theorem
+proved from the rules holds at once for displacements, forces, and later
+for tensors and fields. The list of rules is the definition of a vector
+space.
+
+\begin{definition}[Vector space]\label{def:vs}
+A real vector space is a set $\V$ with maps $+:\V\times\V\to\V$ and
+$\cdot:\Rn\times\V\to\V$ such that, for all $\ba,\bb,\bc\in\V$ and
+$\alpha,\beta\in\Rn$,
+\[
+\begin{array}{ll}
+\text{(a)}\ \alpha\ba+\beta\bb\in\V, &
+\text{(b)}\ (\ba+\bb)+\bc=\ba+(\bb+\bc), \\[1mm]
+\text{(c)}\ \ba+\bb=\bb+\ba, &
+\text{(d)}\ \exists\,\bze:\ \ba+\bze=\ba, \\[1mm]
+\text{(e)}\ \exists\,(-\ba):\ \ba+(-\ba)=\bze, &
+\text{(f)}\ (\alpha\beta)\ba=\alpha(\beta\ba), \\[1mm]
+\text{(g)}\ (\alpha+\beta)\ba=\alpha\ba+\beta\ba, &
+\text{(h)}\ \alpha(\ba+\bb)=\alpha\ba+\alpha\bb, \\[1mm]
+\text{(i)}\ 1\ba=\ba, & \text{(j)}\ 0\ba=\bze.
+\end{array}
+\]
+Vectors are set in bold; real numbers (scalars) in light face.
+\end{definition}
+
+We want to pin any vector down by a finite list of numbers. For that we
+need a set of reference vectors that neither wastes effort duplicating each
+other nor leaves gaps. ``No duplication'' is linear independence; ``no
+gaps'' together with independence is a basis.
+
+\begin{definition}[Linear dependence]\label{def:lindep}
+$\{\bv_{1},\dots,\bv_{p}\}\subset\V$ is linearly independent iff
+$\alpha_{i}\bv_{i}=\bze\Rightarrow\alpha_{1}=\cdots=\alpha_{p}=0$, and
+linearly dependent otherwise.
+\end{definition}
+
+\begin{definition}[Dimension, basis]\label{def:dim}
+$\V$ is finite dimensional of dimension $n$, written $\Vn$, iff every
+linearly independent set has at most $n$ elements and some such set has
+exactly $n$. Any linearly independent set of $n$ elements is a basis.
+\end{definition}
+
+\begin{theorem}[Coordinates exist and are unique]\label{thm:coord}
+Let $\{\bu_{1},\dots,\bu_{n}\}$ be a basis of $\Vn$. Then every
+$\bv\in\Vn$ has a representation $\bv=\alpha_{i}\bu_{i}$ with unique
+coefficients $\alpha_{i}$.
+\end{theorem}
+
+\begin{proof}
+\emph{Existence.} $\{\bu_{1},\dots,\bu_{n},\bv\}$ has $n+1>n$ elements,
+hence is dependent: $\lambda\bv+\lambda_{i}\bu_{i}=\bze$ with the
+coefficients not all zero. If $\lambda=0$ then $\lambda_{i}\bu_{i}=\bze$
+forces every $\lambda_{i}=0$, a contradiction; so $\lambda\neq0$ and
+$\bv=(-\lambda_{i}/\lambda)\bu_{i}$. \emph{Uniqueness.}
+$\alpha_{i}\bu_{i}=\beta_{i}\bu_{i}\Rightarrow(\alpha_{i}-\beta_{i})\bu_{i}
+=\bze\Rightarrow\alpha_{i}=\beta_{i}$ by independence.
+\end{proof}
+
+\medskip
+The axioms can add and scale, but they cannot yet say how \emph{long} a
+vector is or what \emph{angle} two of them make: those words never appear
+in (a)--(j). To measure we add one operation that eats two vectors and
+returns a number, is symmetric, is linear in each slot, and is strictly
+positive on nonzero vectors. From it flow length, angle, orthogonality,
+and all of Euclidean geometry.
+
+\begin{definition}[Inner product, norm]\label{def:ip}
+$\En$ is $\Vn$ with a map $\cdot:\En\times\En\to\Rn$ such that, for all
+$\bu,\bv,\bw$ and $\alpha\in\Rn$,
+\[
+\text{(a)}\ \ip\bu\bv=\ip\bv\bu,\quad
+\text{(b)}\ \ip\bu{(\bv+\bw)}=\ip\bu\bv+\ip\bu\bw,\quad
+\text{(c)}\ \ip{(\alpha\bu)}\bv=\alpha(\ip\bu\bv),
+\]
+\[
+\text{(d)}\ \ip\bu\bu\ge0,\qquad \ip\bu\bu=0\iff\bu=\bze.
+\]
+The norm is $|\bu|=(\ip\bu\bu)^{1/2}$; $\bu$ is a unit vector iff
+$|\bu|=1$; $\bu\perp\bv$ iff $\ip\bu\bv=0$.
+\end{definition}
+
+Before we may define the angle by $\cos\theta=\ip\bu\bv/(|\bu||\bv|)$, the
+right side must lie in $[-1,1]$, or the arccosine is meaningless. That
+bound is not a new assumption: positivity already forces it, because a
+particular squared length can never be negative.
+
+\begin{theorem}[Cauchy--Schwarz]\label{thm:cs}
+$|\ip\bu\bv|\le|\bu|\,|\bv|$ for all $\bu,\bv\in\En$, with equality iff
+$\bu,\bv$ are parallel.
+\end{theorem}
+
+\begin{proof}
+If $\bv=\bze$ both sides vanish. Otherwise positivity (d) applied to
+$\bu-\lambda\bv$ gives, for every $\lambda\in\Rn$,
+\[
+0\le|\bu-\lambda\bv|^{2}=|\bu|^{2}-2\lambda\,\ip\bu\bv+\lambda^{2}|\bv|^{2},
+\]
+using bilinearity and symmetry. The right side is least at
+$\lambda=\ip\bu\bv/|\bv|^{2}$; substituting,
+$0\le|\bu|^{2}-(\ip\bu\bv)^{2}/|\bv|^{2}$, i.e.
+$(\ip\bu\bv)^{2}\le|\bu|^{2}|\bv|^{2}$. Equality forces
+$\bu-\lambda\bv=\bze$ by (d), i.e. $\bu\parallel\bv$.
+\end{proof}
+
+\begin{corollary}[Triangle inequality]\label{cor:tri}
+$|\bu+\bv|\le|\bu|+|\bv|$.
+\end{corollary}
+
+\begin{proof}
+$|\bu+\bv|^{2}=|\bu|^{2}+2\ip\bu\bv+|\bv|^{2}
+\le|\bu|^{2}+2|\bu||\bv|+|\bv|^{2}=(|\bu|+|\bv|)^{2}$ by
+Theorem~\ref{thm:cs}; take square roots.
+\end{proof}
+
+\begin{definition}[Angle]\label{def:angle}
+For $\bu,\bv\neq\bze$, $\theta=\arccos(\ip\bu\bv/(|\bu||\bv|))\in[0,\pi]$,
+well defined by Theorem~\ref{thm:cs}.
+\end{definition}
+
+A general basis reproduces vectors but scrambles the metric: components are
+not projections, and $\ip\bu\bv$ is not $u_iv_i$. A basis of mutually
+orthogonal unit vectors removes every cross term, so a component becomes a
+projection and the inner product becomes the plain sum of products. This is
+why all computation below uses an orthonormal basis.
+
+\begin{definition}[Orthonormal basis]\label{def:onb}
+$\{\be_{1},\dots,\be_{n}\}$ is orthonormal iff
+$\ip{\be_{i}}{\be_{j}}=\dd_{ij}$.
+\end{definition}
+
+\begin{proposition}\label{prop:onlindep}
+Every orthonormal set is linearly independent.
+\end{proposition}
+
+\begin{proof}
+$\alpha_{i}\be_{i}=\bze\Rightarrow
+0=\ip{(\alpha_{i}\be_{i})}{\be_{j}}=\alpha_{i}\dd_{ij}=\alpha_{j}$.
+\end{proof}
+
+\begin{proposition}[Components and the dot product]\label{prop:comp}
+Relative to an orthonormal basis $\{\be_{i}\}$, every $\bv$ satisfies
+$\bv=v_{i}\be_{i}$ with $v_{i}=\ip\bv{\be_{i}}$, and for
+$\bu=u_{i}\be_{i}$, $\bv=v_{i}\be_{i}$, $\ip\bu\bv=u_{i}v_{i}$.
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{thm:coord}, $\bv=v_{i}\be_{i}$ uniquely; then
+$\ip\bv{\be_{j}}=v_{i}\dd_{ij}=v_{j}$, and
+$\ip\bu\bv=u_{i}v_{j}\dd_{ij}=u_{i}v_{i}$.
+\end{proof}
+
+\begin{remark}[the summation convention, stated once]\label{rem:sum}
+In $v_{i}\be_{i}$ the index $i$ occurs twice and is summed; it is a dummy
+and may be relabelled, $v_{i}\be_{i}=v_{j}\be_{j}$. An index occurring once
+per term is free and must match across every term, as $j$ in
+$\ip\bv{\be_{j}}=v_{j}$. A free index must never share a label with a dummy
+in the same term, and a symbol appearing three or more times in a term is
+undefined. Intuition: the dummy index is a hidden $\textstyle\sum$; the
+free index is the ``address'' of the component the equation is really
+about.
+\end{remark}
+
+\begin{remark}[projection, and why $\bze$ is orthogonal to all]\label{rem:proj}
+$\bv=(\ip\bv{\be_{k}})\be_{k}$ exhibits $v_{i}=\ip\bv{\be_{i}}$ as the
+orthogonal projection of $\bv$ on $\be_{i}$: geometrically, drop a
+perpendicular from the tip of $\bv$ onto the $\be_i$ axis. Axiom (d) with
+$\bu=\bze$ gives $\ip\bze\bv=0$ for all $\bv$: the zero vector, having no
+direction, is perpendicular to everything.
+\end{remark}
+
+\begin{proposition}[Gram--Schmidt]\label{prop:gs}
+Every basis $\{\bu_{1},\dots,\bu_{n}\}$ yields an orthonormal basis
+$\{\be_{i}\}$ with
+\[\operatorname{span}\{\be_{1},\dots,\be_{k}\}
+=\operatorname{span}\{\bu_{1},\dots,\bu_{k}\}\]
+for each $k$; hence there are
+infinitely many orthonormal bases when $n\ge1$.
+\end{proposition}
+
+\begin{proof}
+Recursively $\bw_{1}=\bu_{1}$ and
+$\bw_{k}=\bu_{k}-\sum_{i<k}(\ip{\bu_{k}}{\be_{i}})\be_{i}$,
+$\be_{k}=\bw_{k}/|\bw_{k}|$. Independence of the $\bu_i$ gives
+$\bw_{k}\neq\bze$, and for $j<k$,
+$\ip{\bw_{k}}{\be_{j}}=\ip{\bu_{k}}{\be_{j}}-\ip{\bu_{k}}{\be_{j}}=0$.
+Infinitude: for any orthogonal $\bQ$ (Definition~\ref{def:orth}),
+$\{\bQ\be_{i}\}$ is again orthonormal, and such $\bQ$ form a continuum.
+\end{proof}
+
+Many physical quantities are linear scalar functions of a vector: the work
+of a fixed force along a variable displacement, a single component, a
+directional derivative. Any such function is fixed by its values on the
+basis, and reassembling those values yields one vector whose dot product
+reproduces the function. Isolating this fact now pays off later, when the
+increment of a field becomes its gradient.
+
+\begin{theorem}[Riesz representation]\label{thm:riesz}
+$f:\En\to\Rn$ is linear iff there is a unique $\ba\in\En$ with
+$f(\bv)=\ip\ba\bv$ for all $\bv$; explicitly $\ba=f(\be_{i})\be_{i}$.
+\end{theorem}
+
+\begin{proof}
+($\Leftarrow$) $\bv\mapsto\ip\ba\bv$ is linear by (b),(c).
+($\Rightarrow$) By linearity and Proposition~\ref{prop:comp},
+$f(\bv)=f(v_{i}\be_{i})=v_{i}f(\be_{i})=a_{i}v_{i}=\ip\ba\bv$ with
+$a_{i}:=f(\be_{i})$. Uniqueness: $\ip{\ba}{\bv}=\ip{\ba'}{\bv}\,\forall\bv
+\Rightarrow\ip{(\ba-\ba')}{\bv}=0$; take $\bv=\ba-\ba'$ and use (d).
+\end{proof}
+
+\begin{example}[the Riesz construction in action]\label{ex:riesz}
+Suppose $f:\Et\to\Rn$ is linear and we know its values on the standard
+basis: $f(\be_{1})=3$, $f(\be_{2})=-1$, $f(\be_{3})=2$. Set
+$a_{i}:=f(\be_{i})$, so $\ba=3\be_{1}-\be_{2}+2\be_{3}$. Then for any
+$\bv=v_{1}\be_{1}+v_{2}\be_{2}+v_{3}\be_{3}$,
+\[
+f(\bv)=f(v_{i}\be_{i})=v_{i}f(\be_{i})=3v_{1}-v_{2}+2v_{3}=\ip\ba\bv.
+\]
+The abstract function $f$ is now the concrete operation ``dot with
+$(3,-1,2)$''. Every linear scalar function on $\Et$ hides a single vector;
+finding that vector is the entire content of the Riesz theorem.
+\end{example}
+
+\begin{remark}[why Riesz is the engine of continuum calculus]\label{rem:rieszengine}
+The pattern ``linear functional $\Rightarrow$ dot product with a fixed
+vector'' will reappear every time we define a derivative. The gradient of
+a scalar field (\S\ref{ss:grad}) is the Riesz representer of the linear
+part of the increment. For a vector field the increment is linear and
+vector valued, so its representer is a \emph{tensor} (\S\ref{ss:gradv}).
+Recognising this template once makes every later gradient obvious.
+\end{remark}
+
+\subsection{Change-of-basis formulas}\label{ss:cob}
+
+A vector is a geometric object, but its components $v_i=\ip\bv{\be_i}$ are
+read off a chosen basis. Turn the basis and the same $\bv$ shows different
+numbers. Mechanics must track that change exactly, so that physical
+statements can be made basis independent. The bookkeeping is a single
+matrix of dot products between the old and new axes, and it turns out to be
+orthogonal.
+
+\begin{definition}[Direction cosines]\label{def:dircos}
+For two orthonormal bases $\{\be_{i}\}$, $\{\be'_{i}\}$, set
+$a_{ij}=\ip{\be_{i}}{\be'_{j}}$.
+\end{definition}
+
+\begin{theorem}[Transformation law and orthogonality]\label{thm:cob}
+With $v_{i}=\ip\bv{\be_{i}}$, $v'_{i}=\ip\bv{\be'_{i}}$,
+\[
+v'_{j}=a_{ij}v_{i},\qquad v_{i}=a_{ij}v'_{j},\qquad
+a_{ik}a_{jk}=\dd_{ij}=a_{ki}a_{kj}.
+\]
+\end{theorem}
+
+\begin{proof}
+Expanding each old axis in the new basis,
+$\be_{i}=\ip{\be_{i}}{\be'_{j}}\be'_{j}=a_{ij}\be'_{j}$, so
+$v'_{j}\be'_{j}=\bv=v_{i}\be_{i}=v_{i}a_{ij}\be'_{j}$, whence
+$v'_{j}=a_{ij}v_{i}$ by independence of $\{\be'_{j}\}$; swapping the two
+bases gives the inverse. Orthogonality:
+$a_{ik}a_{jk}=\ip{\be_{i}}{\be'_{k}}\ip{\be_{j}}{\be'_{k}}
+=\ip{\be_{i}}{(\ip{\be_{j}}{\be'_{k}}\be'_{k})}=\ip{\be_{i}}{\be_{j}}
+=\dd_{ij}$, and $a_{ki}a_{kj}=\dd_{ij}$ likewise.
+\end{proof}
+
+\begin{remark}[what ``orthogonal matrix'' means here]\label{rem:cobintuition}
+$a_{ik}a_{jk}=\dd_{ij}$ says the rows of $(a_{ij})$ are orthonormal; it is
+the algebraic echo of the geometric fact that both frames are orthonormal.
+Nothing is rotated in space, only the labels; the vector itself is
+untouched. This is the passive view of a change of basis, to be contrasted
+later with the active view, where an orthogonal \emph{tensor} genuinely
+moves vectors (\S\ref{ss:ops}).
+\end{remark}
+
+\subsection{Vector products in $\Et$}\label{ss:cross}
+
+Two vectors span a parallelogram. Its \emph{area}, and the \emph{normal}
+direction to its plane, are geometric data the inner product cannot supply.
+In exactly three dimensions a plane has a unique normal line, so ``area
+times normal'' can be packed into one vector, the cross product; feeding a
+third vector then measures the signed \emph{volume} of the spanned
+parallelepiped, the box product. These are the tools behind area, volume,
+orientation, determinants, and the axial vector of a rotation.
+
+\begin{definition}[Cross and box products]\label{def:cross}
+$\times:\Et\times\Et\to\Et$ satisfies, for all $\bu,\bv,\bw$ and
+$\alpha,\beta$,
+\[
+\text{(a)}\ \bu\times\bv=-\bv\times\bu,\quad
+\text{(b)}\ |\bu\times\bv|=|\bu||\bv|\sin\theta,
+\]
+\[
+\text{(c)}\ (\alpha\bu+\beta\bv)\times\bw
+ =\alpha\,\bu\times\bw+\beta\,\bv\times\bw,
+\]
+\[
+\text{(d)}\ \tbox\bu\bv\bw:=\ip\bu{(\bv\times\bw)}
+=\ip\bv{(\bw\times\bu)}=\ip\bw{(\bu\times\bv)}.
+\]
+\end{definition}
+
+\begin{proposition}\label{prop:boxprops}
+$\bu\times\bu=\bze$; $\bu\times\bv\perp\bu,\bv$; and $\tbox\cdot\cdot\cdot$
+is trilinear and alternating (it changes sign under any transposition of
+its arguments).
+\end{proposition}
+
+\begin{proof}
+(a) gives $\bu\times\bu=-\bu\times\bu=\bze$; then (d) gives
+$\ip\bu{(\bu\times\bv)}=\tbox\bu\bu\bv=0$ and
+$\ip\bv{(\bu\times\bv)}=\tbox\bv\bu\bv=0$. Trilinearity in slot one is (c)
+via (d); the other slots follow from cyclicity in (d). Alternation: (a)
+gives $\tbox\bu\bv\bw=-\ip\bu{\bw\times\bv}=-\tbox\bu\bw\bv$, and cyclicity
+extends this to every transposition.
+\end{proof}
+
+\begin{definition}[Right-handed basis; permutation symbol]\label{def:perm}
+An orthonormal basis of $\Et$ is right handed iff
+$\be_{1}\times\be_{2}=\be_{3}$ and cyclically. Then
+\[
+\eps_{ijk}:=\tbox{\be_{i}}{\be_{j}}{\be_{k}}=
+\begin{cases}+1,&(i,j,k)\ \text{even perm.\ of}\ (1,2,3),\\
+-1,&(i,j,k)\ \text{odd perm.},\\ 0,&\text{repeated index.}\end{cases}
+\]
+\end{definition}
+
+\begin{proposition}[Components of the products]\label{prop:crosscomp}
+In a right-handed orthonormal basis,
+$\be_{i}\times\be_{j}=\eps_{ijk}\be_{k}$,
+$(\ba\times\bb)_{k}=\eps_{ijk}a_{i}b_{j}$, and
+$\tbox\ba\bb\bc=\eps_{ijk}a_{i}b_{j}c_{k}$.
+\end{proposition}
+
+\begin{proof}
+$\be_{i}\times\be_{j}=\ip{(\be_{i}\times\be_{j})}{\be_{k}}\be_{k}
+=\eps_{ijk}\be_{k}$; then
+$\ba\times\bb=a_{i}b_{j}\eps_{ijk}\be_{k}$ and
+$\tbox\ba\bb\bc=\ip{(\ba\times\bb)}\bc=\eps_{ijk}a_{i}b_{j}c_{k}$.
+\end{proof}
+
+\begin{lemma}[Alternating trilinear forms are one dimensional]\label{lem:altform}
+If $\omega:\Et\times\Et\times\Et\to\Rn$ is trilinear and alternating, then
+$\omega(\ba,\bb,\bc)=\omega(\be_{1},\be_{2},\be_{3})\,\tbox\ba\bb\bc$.
+\end{lemma}
+
+\begin{proof}
+\[
+\begin{aligned}
+\omega(\ba,\bb,\bc)&=a_{i}b_{j}c_{k}\,\omega(\be_{i},\be_{j},\be_{k})\\
+&=a_{i}b_{j}c_{k}\,\eps_{ijk}\,\omega(\be_{1},\be_{2},\be_{3})\\
+&=\omega(\be_{1},\be_{2},\be_{3})\,\tbox\ba\bb\bc,
+\end{aligned}
+\]
+using
+$\omega(\be_{i},\be_{j},\be_{k})=\eps_{ijk}\omega(\be_1,\be_2,\be_3)$ from
+alternation.
+\end{proof}
+
+\begin{remark}[the workhorse]\label{rem:workhorse}
+Lemma~\ref{lem:altform} is the one fact that makes determinants and
+invariants painless: \emph{any} quantity linear in three vectors and sign
+reversing under a swap is a fixed multiple of the box product. Each time we
+invoke it, a page of index juggling collapses to a line. Intuitively, in
+three dimensions there is essentially one way to measure oriented volume,
+and everything alternating and trilinear must be proportional to it.
+\end{remark}
+
+\begin{definition}[Determinant]\label{def:det}
+For $B=(b_{ij})\in\Rn^{3\times3}$, $\det B:=\eps_{ijk}b_{i1}b_{j2}b_{k3}$.
+\end{definition}
+
+\begin{proposition}\label{prop:detforms}
+$\eps_{mnp}\det B=\eps_{ijk}b_{im}b_{jn}b_{kp}$, hence
+$\eps_{ijk}\eps_{mnp}=\det(\dd_{\bullet\bullet})$, the $3\times3$
+determinant of the Kronecker array with rows $i,j,k$ and
+columns $m,n,p$.
+\end{proposition}
+
+\begin{proof}
+$(\bx,\by,\bz)\mapsto\eps_{ijk}x_{i}y_{j}z_{k}$ is trilinear and
+alternating in its three columns, so by Lemma~\ref{lem:altform} equals
+$\tbox\bx\by\bz$ times its value $1$ at $(\be_1,\be_2,\be_3)$. Applied to
+columns $(b_{\cdot m},b_{\cdot n},b_{\cdot p})$ this gives
+$\eps_{ijk}b_{im}b_{jn}b_{kp}=\eps_{mnp}\det B$. Putting $b_{ij}=\dd_{ij}$
+(so $\det B=1$) yields the second identity.
+\end{proof}
+
+\begin{theorem}[$\eps$--$\dd$ identity]\label{thm:epsdelta}
+$\eps_{ijk}\eps_{mnk}=\dd_{im}\dd_{jn}-\dd_{in}\dd_{jm}$,
+$\ \eps_{ijk}\eps_{mjk}=2\dd_{im}$, $\ \eps_{ijk}\eps_{ijk}=6$.
+\end{theorem}
+
+\begin{proof}
+Expand the determinant of Proposition~\ref{prop:detforms}, set $p=k$, sum
+($\dd_{kk}=3$):
+$\eps_{ijk}\eps_{mnk}=\dd_{im}(3\dd_{jn}-\dd_{jn})-\dd_{in}(3\dd_{jm}
+-\dd_{jm})+(\dd_{in}\dd_{jm}-\dd_{im}\dd_{jn})
+=\dd_{im}\dd_{jn}-\dd_{in}\dd_{jm}$. Set $n=j$, sum:
+$\eps_{ijk}\eps_{mjk}=3\dd_{im}-\dd_{im}=2\dd_{im}$. Set $m=i$, sum:
+$\eps_{ijk}\eps_{ijk}=2\dd_{ii}=6$.
+\end{proof}
+
+\begin{corollary}[Determinant, contracted]\label{cor:det6}
+\[\det B=\tfrac16\,\eps_{ijk}\eps_{mnp}\,b_{im}b_{jn}b_{kp}.\]
+\end{corollary}
+
+\begin{proof}
+Contract $\eps_{ijk}b_{im}b_{jn}b_{kp}=\eps_{mnp}\det B$ with
+$\eps_{mnp}$ and use $\eps_{mnp}\eps_{mnp}=6$.
+\end{proof}
+
+\subsection{Tensors}\label{ss:tensor}
+
+Riesz handled linear rules returning a \emph{number}. Physics abounds in
+linear rules returning a \emph{vector}: stress sends a surface normal to a
+traction, the inertia tensor sends angular velocity to angular momentum,
+the deformation gradient sends a material fibre to its deformed image. The
+object encoding such a rule is a second order tensor. Its simplest instance,
+$\ba\otimes\bb$, is the rule ``project onto $\bb$, then point along $\ba$''.
+
+\begin{definition}[Tensor]\label{def:tensor}
+A (second order) tensor is a linear map $\bA:\Et\to\Et$. Equality, scalar
+multiple and sum are defined by $\bA=\bB\iff\bA\bv=\bB\bv\,\forall\bv$,
+$(\alpha\bA)\bv=\alpha(\bA\bv)$, $(\bA+\bB)\bv=\bA\bv+\bB\bv$. The set $\Lin$
+is a vector space; $\Ob\bv=\bze$ and $\I\bv=\bv$ for all $\bv$.
+\end{definition}
+
+\begin{definition}[Tensor product]\label{def:tp}
+For $\ba,\bb\in\Et$, $(\ba\otimes\bb)\bv:=(\ip\bb\bv)\,\ba$.
+\end{definition}
+
+\begin{theorem}[Component representation]\label{thm:comprep}
+$\{\be_{i}\otimes\be_{j}\}$ is a basis of $\Lin$, and
+$\bA=A_{ij}\be_{i}\otimes\be_{j}$ with $A_{ij}=\ip{\be_{i}}{\bA\be_{j}}$;
+hence $\dim\Lin=9$.
+\end{theorem}
+
+\begin{proof}
+\emph{Spanning.} For $\bv=v_{i}\be_{i}$,
+$\bA\bv=v_{i}\bA\be_{i}=v_{i}\ip{\be_{j}}{\bA\be_{i}}\be_{j}
+=A_{ji}(\ip{\be_{i}}\bv)\be_{j}=(A_{ji}\be_{j}\otimes\be_{i})\bv$, so
+$\bA=A_{ij}\be_{i}\otimes\be_{j}$ with $A_{ij}=\ip{\be_{i}}{\bA\be_{j}}$.
+\emph{Independence.} $\alpha_{ij}\be_{i}\otimes\be_{j}=\Ob$ applied to
+$\be_{k}$ gives $\alpha_{ik}\be_{i}=\bze$, so $\alpha_{ik}=0$.
+\end{proof}
+
+\begin{example}[reading off components of tensor products]\label{ex:tp}
+\emph{(i) The tensor product $\ba\otimes\bb$.}
+By Definition~\ref{def:tp},
+$(\ba\otimes\bb)\be_{j}=(\ip\bb{\be_{j}})\ba=b_{j}\ba$. Dotting with
+$\be_{i}$,
+\[
+(\ba\otimes\bb)_{ij}=\ip{\be_{i}}{(\ba\otimes\bb)\be_{j}}
+=\ip{\be_{i}}{b_{j}\ba}=b_{j}\ip{\be_{i}}{\ba}=a_{i}b_{j}.
+\]
+Thus the component matrix is the outer product of the column $(a_i)$ with
+the row $(b_j)$:
+\[
+\bigl((\ba\otimes\bb)_{ij}\bigr)=
+\begin{pmatrix}a_{1}b_{1}&a_{1}b_{2}&a_{1}b_{3}\\
+a_{2}b_{1}&a_{2}b_{2}&a_{2}b_{3}\\
+a_{3}b_{1}&a_{3}b_{2}&a_{3}b_{3}\end{pmatrix}.
+\]
+Such a matrix has rank $\le1$: every row is a multiple of $(b_1,b_2,b_3)$.
+Consequently $\det(\ba\otimes\bb)=0$ unless $\ba$ or $\bb$ is $\bze$.
+
+\emph{(ii) The identity tensor.}
+$\I\be_{j}=\be_{j}$, so $I_{ij}=\ip{\be_{i}}{\be_{j}}=\dd_{ij}$. In the
+basis expansion,
+$\I=\dd_{ij}\be_{i}\otimes\be_{j}=\be_{1}\otimes\be_{1}+\be_{2}\otimes\be_{2}
++\be_{3}\otimes\be_{3}=\be_{i}\otimes\be_{i}$,
+with matrix $(I_{ij})=\operatorname{diag}(1,1,1)$.
+
+\emph{(iii) The zero tensor.}
+$\Ob\bv=\bze$ for all $\bv$, so $O_{ij}=\ip{\be_{i}}{\bze}=0$;
+every entry of the matrix is zero.
+\end{example}
+
+\begin{remark}[outer versus inner product]\label{rem:outer}
+Two operations eat a pair of vectors and return very different objects.
+The \emph{inner product} $\ip\ba\bb=a_ib_i$ sums all matching pairs and
+returns one number: it measures overlap and forgets direction. The
+\emph{outer product} (tensor product) stores every pair, returning
+nine numbers arranged in the matrix $(a_ib_j)$: it remembers both
+directions. In $\Et$ one may think of $\ba\otimes\bb$ as the instruction
+``measure how much $\bv$ aligns with $\bb$ (via $\ip\bb\bv$), then lay
+that amount along $\ba$''. The trace connects the two:
+$\tr(\ba\otimes\bb)=a_ib_j\dd_{ij}=a_ib_i=\ip\ba\bb$,
+collapsing the nine entries back to one.
+\end{remark}
+
+\begin{example}[a diagonal tensor: the reflection]\label{ex:diag}
+Suppose a linear map $\bA$ is specified by its action on the basis:
+$\bA\be_{1}=-\be_{1}$, $\bA\be_{2}=\be_{2}$, $\bA\be_{3}=\be_{3}$.
+We compute every component $A_{ij}=\ip{\be_{i}}{\bA\be_{j}}$ in turn.
+
+\emph{Column $j=1$}: $\bA\be_{1}=-\be_{1}$, so
+$A_{11}=\ip{\be_{1}}{-\be_{1}}=-1$,
+$A_{21}=\ip{\be_{2}}{-\be_{1}}=0$,
+$A_{31}=\ip{\be_{3}}{-\be_{1}}=0$.
+
+\emph{Column $j=2$}: $\bA\be_{2}=\be_{2}$, so
+$A_{12}=0$, $A_{22}=1$, $A_{32}=0$.
+
+\emph{Column $j=3$}: $\bA\be_{3}=\be_{3}$, so
+$A_{13}=0$, $A_{23}=0$, $A_{33}=1$.
+
+Hence
+\[
+(A_{ij})=\begin{pmatrix}-1&0&0\\0&1&0\\0&0&1\end{pmatrix}
+=\operatorname{diag}(-1,1,1),
+\]
+and the tensor product form is
+$\bA=-\be_{1}\otimes\be_{1}+\be_{2}\otimes\be_{2}+\be_{3}\otimes\be_{3}$.
+For any $\bv=v_i\be_i$,
+$\bA\bv=-v_1\be_1+v_2\be_2+v_3\be_3$: the component along $\be_1$ is
+negated while those along $\be_2,\be_3$ are unchanged. This is precisely
+the \emph{mirror reflection} in the plane perpendicular to $\be_1$.
+\end{example}
+
+\begin{remark}[why the diagonal form matters]\label{rem:diag}
+A diagonal tensor $\bA=\lambda_i\be_i\otimes\be_i$ (no sum) acts by
+scaling each basis direction independently:
+$\bA\bv=\lambda_1v_1\be_1+\lambda_2v_2\be_2+\lambda_3v_3\be_3$. The
+$\lambda_i$ are the eigenvalues and the $\be_i$ the eigenvectors. In
+continuum mechanics, when $\bA$ is the (symmetric) stretch tensor, the
+eigenvectors are the principal directions and $|\lambda_i|$ the principal
+stretches. The spectral theorem (Chapter~3) guarantees that every
+symmetric tensor can be written in this form for a suitable orthonormal
+basis.
+\end{remark}
+
+\begin{lemma}\label{lem:Aab}
+$\bA(\ba\otimes\bb)=(\bA\ba)\otimes\bb$.
+\end{lemma}
+
+\begin{proof}
+$[\bA(\ba\otimes\bb)]\bv=\bA[(\ip\bb\bv)\ba]=(\ip\bb\bv)\bA\ba
+=[(\bA\ba)\otimes\bb]\bv$.
+\end{proof}
+
+\begin{theorem}[Transformation law for tensor components]\label{thm:tenstrans}
+With $a_{ij}=\ip{\be_{i}}{\be'_{j}}$, $A'_{ij}=a_{ki}a_{lj}A_{kl}$.
+\end{theorem}
+
+\begin{proof}
+$\bA\be'_{n}=(A_{kl}\be_{k}\otimes\be_{l})\be'_{n}=A_{kl}a_{ln}\be_{k}$,
+so $A'_{jn}=\ip{\be'_{j}}{\bA\be'_{n}}=A_{kl}a_{ln}\ip{\be'_{j}}{\be_{k}}
+=A_{kl}a_{kj}a_{ln}$.
+\end{proof}
+
+\begin{remark}[order $=$ number of cosine factors]\label{rem:order}
+Scalars, vectors and tensors transform with the direction cosine matrix
+zero, one and two times: $\varphi'=\varphi$, $v'_{i}=a_{ki}v_{k}$,
+$A'_{ij}=a_{ki}a_{lj}A_{kl}$. The count of $a$'s is the tensor's
+\emph{order}, and is often taken as the definition of a Cartesian tensor.
+To illustrate: the trace $\tr\bA=A_{ii}$ carries zero free indices, hence
+zero cosines and transforms as a scalar ($\tr\bA'=A'_{ii}=a_{ki}a_{li}A_{kl}
+=\dd_{kl}A_{kl}=A_{kk}=\tr\bA$). The traction vector
+$t_i=A_{ij}n_j$ carries one free index, hence one cosine factor ($t'_i
+=a_{ki}t_k$), and transforms as a vector. The tensor itself carries two.
+Invariants (\S\ref{ss:ops}) exist precisely because even combinations of
+cosines can pair up into Kronecker deltas, cancelling all basis dependence.
+\end{remark}
+
+\subsection{Algebraic operations with second-order tensors}\label{ss:ops}
+
+\paragraph*{Transpose and symmetry.}
+In $\ip\bu{\bA\bv}$ one often needs to let $\bA$ act on the other factor.
+The tensor legalising this, $\ip\bu{\bA\bv}=\ip{\bA^{t}\bu}\bv$, is the
+transpose. Whether a tensor equals or negates its transpose splits $\Lin$
+into the two parts that rule mechanics: strain is symmetric, spin is skew.
+
+\begin{definition}[Transpose]\label{def:transpose}
+$\bA^{t}$ is defined by $\ip\bu{\bA\bv}=\ip\bv{\bA^{t}\bu}$ for all
+$\bu,\bv$.
+\end{definition}
+
+\begin{proposition}\label{prop:transpose}
+$(\bA^{t})_{ij}=A_{ji}$, $(\bA^{t})^{t}=\bA$, $(\bA\bB)^{t}=\bB^{t}\bA^{t}$.
+\end{proposition}
+
+\begin{proof}
+$(\bA^{t})_{ij}=\ip{\be_{i}}{\bA^{t}\be_{j}}=\ip{\be_{j}}{\bA\be_{i}}
+=A_{ji}$. The rest follow from Definition~\ref{def:transpose} and
+uniqueness: $\ip\bu{(\bA\bB)\bv}=\ip{\bA^{t}\bu}{\bB\bv}
+=\ip{\bB^{t}\bA^{t}\bu}\bv$.
+\end{proof}
+
+\begin{definition}[Symmetric, skew]\label{def:symskew}
+$\bA$ is symmetric iff $\bA^{t}=\bA$, skew iff $\bA^{t}=-\bA$.
+\end{definition}
+
+\begin{proposition}[Axial vector of a skew tensor]\label{prop:axial}
+For skew $\bA$ there is a unique $\bw$ with $\bA\bv=\bw\times\bv$ for all
+$\bv$; $A_{ij}=-\eps_{ijk}w_{k}$, $w_{k}=-\tfrac12\eps_{kij}A_{ij}$.
+\end{proposition}
+
+\begin{proof}
+Skewness gives $A_{ii}=0$ and three free entries; the general skew array is
+$A_{ij}=-\eps_{ijk}w_{k}$. Then
+$(\bA\bv)_{i}=-\eps_{ijk}w_{k}v_{j}=\eps_{ikj}w_{k}v_{j}
+=(\bw\times\bv)_{i}$. Inversion by Theorem~\ref{thm:epsdelta}:
+$-\eps_{ijm}A_{ij}=\eps_{ijm}\eps_{ijk}w_{k}=2w_{m}$.
+\end{proof}
+
+\paragraph*{Product and inverse.}
+
+\begin{definition}[Product, inverse]\label{def:prodinv}
+$(\bA\bB)\bv:=\bA(\bB\bv)$. $\bA$ is invertible iff $\bA\bu=\bv$ has a
+unique solution $\bu=\bA^{-1}\bv$ for every $\bv$.
+\end{definition}
+
+\begin{proposition}\label{prop:prodinv}
+$(\bA\bB)_{ij}=A_{ik}B_{kj}$; in general $\bA\bB\neq\bB\bA$; and if $\bA$ is
+invertible, $\bA^{-1}\bA=\bA\bA^{-1}=\I$.
+\end{proposition}
+
+\begin{proof}
+$(\bA\bB)\be_{j}=\bA(B_{kj}\be_{k})=B_{kj}A_{ik}\be_{i}$, so
+$(\bA\bB)_{ij}=A_{ik}B_{kj}$; and
+$(\bA^{-1}\bA)\bu=\bA^{-1}\bv=\bu$, $(\bA\bA^{-1})\bv=\bA\bu=\bv$.
+\end{proof}
+
+\paragraph*{Orthogonal tensors.}
+Rigid motions neither stretch nor shear a body: they preserve every length
+and angle, hence every inner product. The tensors doing this are the
+orthogonal ones, and they are exactly those whose transpose is their
+inverse. Those with $\det=+1$ are rotations; $\det=-1$ adds a reflection.
+
+\begin{definition}[Orthogonal]\label{def:orth}
+$\bA$ is orthogonal iff $\ip{\bA\bu}{\bA\bv}=\ip\bu\bv$ for all $\bu,\bv$.
+\end{definition}
+
+\begin{proposition}\label{prop:orth}
+$\bA$ orthogonal $\iff\bA^{t}\bA=\I\iff\bA\bA^{t}=\I$; then
+$\bA^{-1}=\bA^{t}$ and $\det\bA=\pm1$.
+\end{proposition}
+
+\begin{proof}
+$\ip{\bA\bu}{\bA\bv}=\ip\bu{\bA^{t}\bA\bv}$, so orthogonality is
+$\ip\bu{(\bA^{t}\bA-\I)\bv}=0\,\forall\bu,\bv$; take
+$\bu=(\bA^{t}\bA-\I)\bv$ to get $\bA^{t}\bA=\I$, then
+$\bA^{-1}=\bA^{t}$ and $\bA\bA^{t}=\I$. Finally
+$(\det\bA)^{2}=\det\bA^{t}\det\bA=\det\I=1$ (Theorem~\ref{thm:det}).
+\end{proof}
+
+\paragraph*{Principal invariants.}
+The nine components of a tensor change with the basis; its physics does
+not. So we seek scalar combinations surviving every change of basis.
+Building them from the box product, itself geometric, makes invariance
+automatic. Three exist, and they are the coefficients of the characteristic
+polynomial (Problem~23), hence carry the eigenvalue data used throughout
+deformation analysis.
+
+\begin{definition}[Invariants]\label{def:inv3}
+For all $\ba,\bb,\bc$,
+\[
+\begin{aligned}
+I_{1}(\bA)\tbox\ba\bb\bc&=\tbox{\bA\ba}\bb\bc+\tbox\ba{\bA\bb}\bc+\tbox\ba\bb{\bA\bc},\\
+I_{2}(\bA)\tbox\ba\bb\bc&=\tbox{\bA\ba}{\bA\bb}\bc+\tbox{\bA\ba}\bb{\bA\bc}+\tbox\ba{\bA\bb}{\bA\bc},\\
+I_{3}(\bA)\tbox\ba\bb\bc&=\tbox{\bA\ba}{\bA\bb}{\bA\bc}.
+\end{aligned}
+\]
+\end{definition}
+
+\begin{proposition}[Well-posedness]\label{prop:invwd}
+$I_{1},I_{2},I_{3}$ do not depend on $\ba,\bb,\bc$.
+\end{proposition}
+
+\begin{proof}
+Each right side is trilinear and alternating in $(\ba,\bb,\bc)$; by
+Lemma~\ref{lem:altform} it equals a fixed scalar times $\tbox\ba\bb\bc$.
+\end{proof}
+
+\begin{theorem}[Trace]\label{thm:trace}
+$I_{1}$ is linear, $I_{1}(\bA)=\tr\bA:=A_{ii}$,
+$\tr(\be_{i}\otimes\be_{j})=\dd_{ij}$, $\tr(\bu\otimes\bv)=\ip\bu\bv$.
+\end{theorem}
+
+\begin{proof}
+Definition~\ref{def:inv3}$_1$ is linear in $\bA$. With $\tbox{\be_1}{\be_2}{\be_3}=1$,
+\[
+\tr(\be_{i}\otimes\be_{j})
+=\dd_{j1}\eps_{i23}+\dd_{j2}\eps_{1i3}+\dd_{j3}\eps_{12i}=\dd_{ij},
+\]
+so $\tr\bA=A_{ij}\dd_{ij}=A_{ii}$ and $\tr(\bu\otimes\bv)=u_iv_j\dd_{ij}
+=\ip\bu\bv$.
+\end{proof}
+
+\begin{theorem}[Determinant]\label{thm:det}
+$I_{3}(\bA)=\det(A_{ij})$; $\bA$ invertible $\iff\det\bA\neq0$;
+$\det(\bA\bB)=\det\bA\det\bB$; $\det\bA^{t}=\det\bA$.
+\end{theorem}
+
+\begin{proof}
+$I_{3}(\bA)=\tbox{\bA\be_1}{\bA\be_2}{\bA\be_3}=\eps_{ijk}A_{i1}A_{j2}A_{k3}
+=\det(A_{ij})$ by Proposition~\ref{prop:crosscomp} and
+Definition~\ref{def:det}. Multiplicativity and transpose invariance follow
+from Proposition~\ref{prop:detforms} applied to $(A_{ik}B_{kj})$ and to
+$(A_{ji})$. Invertibility: $\det\bA\neq0\iff$ the columns $\bA\be_i$ are
+independent $\iff\bA$ is a bijection.
+\end{proof}
+
+\begin{remark}[determinant $=$ oriented volume ratio]\label{rem:vol}
+When $\tbox\ba\bb\bc>0$ it is the volume of the parallelepiped on
+$\ba,\bb,\bc$, so Definition~\ref{def:inv3}$_3$ reads
+$\det\bA=\tbox{\bA\ba}{\bA\bb}{\bA\bc}/\tbox\ba\bb\bc$: $\det\bA$ is the
+factor by which $\bA$ scales oriented volume. Hence $\det>0$ means
+orientation preserving, and later $\det$ of the deformation gradient is the
+local volume ratio, with $\det=1$ signalling incompressibility.
+\end{remark}
+
+\begin{definition}[Cofactor]\label{def:cof}
+$\bA^{*}$ is defined by $\bA^{*}(\ba\times\bb)=\bA\ba\times\bA\bb$.
+\end{definition}
+
+\begin{proposition}\label{prop:I2cof}
+$I_{2}(\bA)=\tr\bA^{*}$; $I_{2}$ is quadratic and $I_{3}$ cubic in $\bA$.
+\end{proposition}
+
+\begin{proof}
+Applying the trace formula to $\bA^{*}$ and
+$\bA^{*}(\be_2\times\be_3)=\bA\be_2\times\bA\be_3$ etc.\ (see Problem~22a
+for the full computation) gives $\tr\bA^{*}=I_{2}(\bA)$. Degrees are read
+off Definition~\ref{def:inv3}$_{2,3}$.
+\end{proof}
+
+\begin{remark}[the cofactor maps area elements]%
+\label{rem:cofgeom}
+If $\ba\times\bb$ is the area vector of a parallelogram, then
+$\bA^{*}(\ba\times\bb)=\bA\ba\times\bA\bb$ is the area vector of the
+deformed parallelogram. Thus the determinant tells how $\bA$ scales
+\emph{volumes} (Remark~\ref{rem:vol}), while the cofactor tells how
+$\bA$ scales \emph{oriented areas}. In the notation of continuum
+mechanics, the deformation gradient $\vek{F}$ satisfies
+$n\,da=\vek{F}^{*}(N\,dA)$ (Nanson's formula): the cofactor converts
+a reference area element into its current image. Because area is one
+dimension lower than volume, the cofactor is quadratic in $\bA$ while
+the determinant is cubic; this is exactly what the degrees in
+Proposition~\ref{prop:I2cof} express. The identity
+$\bA^{t}\bA^{*}=(\det\bA)\I$ (Problem~22c) ties the two together.
+\end{remark}
+
+\paragraph*{Inner product of tensors.}
+$\Lin$ is nine dimensional; to do analysis on it, e.g.\ to call a stress
+increment small, it needs a length. The natural one pairs components
+entrywise and is generated intrinsically by trace and transpose.
+
+\begin{definition}[Tensor inner product]\label{def:tip}
+$\bA\cdot\bB:=\tr(\bA\bB^{t})$.
+\end{definition}
+
+\begin{theorem}\label{thm:tip}
+$\bA\cdot\bB=A_{ij}B_{ij}=\bB\cdot\bA$; $|\bA|=(A_{ij}A_{ij})^{1/2}$ makes
+$\Lin$ isometric to $\mathbb{E}^{9}$, so
+$|\bA\cdot\bB|\le|\bA||\bB|$ and $|\bA+\bB|\le|\bA|+|\bB|$; and
+$\bA\cdot(\bu\otimes\bv)=\ip\bu{\bA\bv}$.
+\end{theorem}
+
+\begin{proof}
+$(\bA\bB^{t})_{ik}=A_{ij}B_{kj}$, so $\tr(\bA\bB^{t})=A_{ij}B_{ij}$,
+symmetric. This is the Euclidean inner product of nine components, so the
+inequalities transfer from Theorem~\ref{thm:cs} and
+Corollary~\ref{cor:tri}. Finally, by Lemma~\ref{lem:Aab},
+$\bA\cdot(\bu\otimes\bv)=\tr((\bA\bv)\otimes\bu)=\ip{\bA\bv}\bu
+=\ip\bu{\bA\bv}$.
+\end{proof}
+
+\begin{definition}[Two orthogonal splittings]\label{def:splits}
+$\bA=\Sym\bA+\Skw\bA$ with $\Sym\bA=\tfrac12(\bA+\bA^{t})$,
+$\Skw\bA=\tfrac12(\bA-\bA^{t})$; and
+$\bA=\Sph\bA+\Dev\bA$ with $\Sph\bA=\tfrac13(\tr\bA)\I$,
+$\Dev\bA=\bA-\tfrac13(\tr\bA)\I$.
+\end{definition}
+
+\begin{proposition}\label{prop:splits}
+Each summand is of the named type, the splittings are unique,
+$\tr(\Dev\bA)=0$, and $\Sym\bA\cdot\Skw\bB=0$,
+$\Sph\bA\cdot\Dev\bB=0$ for all $\bA,\bB$. (Details in Problems~14--15.)
+\end{proposition}
+
+\begin{proof}
+$\tfrac12(\bA+\bA^t)$ is symmetric, $\tfrac12(\bA-\bA^t)$ skew, and their
+sum is $\bA$; $\tr(\bA-\tfrac13(\tr\bA)\I)=\tr\bA-\tr\bA=0$. For symmetric
+$\bS$ and skew $\bW$, $\bS\cdot\bW=S_{ij}W_{ij}=S_{ji}(-W_{ji})
+=-\bS\cdot\bW=0$; and
+$\Sph\bA\cdot\Dev\bB=\tfrac13(\tr\bA)\tr(\Dev\bB)=0$. Uniqueness is proved
+in Problems~14a,~15a.
+\end{proof}
+
+%=======================================================================
+\section{Scalar, vector and tensor fields; gradient, divergence and curl;
+integral formulae}\label{sec:fields}
+%=======================================================================
+
+\subsection{Euclidean point spaces}\label{ss:pts}
+
+The algebra above treats \emph{arrows}: they add, scale, and share a zero.
+Mechanics needs instead the \emph{places} occupied by particles, and places
+behave differently. Two places cannot be added: ``the doorway plus the
+window'' names nothing. There is no zero place until someone plants a flag
+and calls it the origin. What \emph{is} intrinsic is the displacement from
+one place to another, and a displacement does not move when the flag moves.
+So positions are not vectors, but their differences are. We therefore work
+with a set of points whose subtraction lands in a vector space.
+
+\begin{definition}[Euclidean point space]\label{def:eps}
+A Euclidean point space is a set $\Et$ of points
+$\mathsf{x},\mathsf{y},\dots$ with a subtraction
+$(\mathsf{x},\mathsf{y})\mapsto\mathsf{y}-\mathsf{x}$ into a three
+dimensional inner product space $\Et$, the translation space, such that
+\begin{enumerate}[label=\textup{(P\arabic*)},leftmargin=2.6em]
+\item \textup{(transport)} for every $\mathsf{x}$ and $\bv\in\Et$ there is
+      a unique $\mathsf{y}$ with $\mathsf{y}-\mathsf{x}=\bv$, written
+      $\mathsf{y}=\mathsf{x}+\bv$;
+\item \textup{(Chasles)} $(\mathsf{y}-\mathsf{x})+(\mathsf{z}-\mathsf{y})
+      =\mathsf{z}-\mathsf{x}$.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[what each axiom buys]\label{rem:axioms}
+(P1) says the translation space acts freely and transitively on points:
+every displacement carries each point to a unique new one, and every pair
+of points is joined by a unique displacement. This is precisely what lets
+us later compare a field's value at $\mathsf{x}$ with its values at
+neighbours $\mathsf{x}+s\bu$, the comparison a derivative is built from.
+Setting $\mathsf{z}=\mathsf{x}$ in (P2), with $\mathsf{x}-\mathsf{x}=\bze$
+(the unique solution of $\mathsf{y}-\mathsf{x}=\bze$ being
+$\mathsf{y}=\mathsf{x}$), gives $\mathsf{x}-\mathsf{y}
+=-(\mathsf{y}-\mathsf{x})$: reversing a displacement negates its arrow.
+\end{remark}
+
+The definition is origin free, which is clean but useless for computation.
+Naming a reference place, the origin, is planting the flag; every point
+then acquires one arrow with three components. The cost is dependence on
+the flag, measured precisely below.
+
+\begin{proposition}[Position vector, Cartesian coordinates]\label{prop:posvec}
+Fix an origin $\mathsf{O}$. Then (a) every point $\mathsf{x}$ determines a
+unique position vector $\bx:=\mathsf{x}-\mathsf{O}$, and
+$\mathsf{x}\mapsto\bx$ is a bijection; (b) $\bx=x_i\be_i$ with
+$x_i=\ip\bx{\be_i}$; (c) under $\mathsf{O}\to\mathsf{O}'$,
+$\bx'=\bx-\bc$ with $\bc=\mathsf{O}'-\mathsf{O}$, and $x_i'=x_i-c_i$.
+\end{proposition}
+
+\begin{proof}
+(a) $\bx\in\Et$ is well defined. Injective: $\mathsf{x}_1-\mathsf{O}
+=\mathsf{x}_2-\mathsf{O}$ gives, by (P2),
+$\bze=(\mathsf{x}_1-\mathsf{O})+(\mathsf{O}-\mathsf{x}_2)
+=\mathsf{x}_1-\mathsf{x}_2$. Surjective: $\mathsf{x}=\mathsf{O}+\bv$ has
+$\bx=\bv$. (b) $\ip\bx{\be_i}=x_j\dd_{ji}=x_i$. (c) By (P2),
+$\mathsf{x}-\mathsf{O}'=(\mathsf{x}-\mathsf{O})-\bc$; dot with $\be_i$.
+\end{proof}
+
+\begin{remark}[the deliberate abuse $\bx(=\bx-\bo)$]\label{rem:abuse}
+The book writes the position vector as a bare $\bx$, so the same letter
+$\bx$ names both the point and its position vector. Part (a) makes this
+legitimate \emph{after} an origin is fixed, since the correspondence is
+then a bijection; part (c) is the warning label, that any formula with a
+bare $\bx$ silently carries the chosen origin. Good continuum theory keeps
+its final physical statements independent of that choice.
+\end{remark}
+
+\begin{definition}[Fields]\label{def:field}
+A scalar field is $\varphi:\Et\to\Rn$, a vector field $\bv:\Et\to\Et$, a
+tensor field $\bA:\Et\to\Lin$; their argument is the position $\bx$.
+\end{definition}
+
+\subsection{Gradients}\label{ss:grad}
+
+In one variable a differentiable $f$ satisfies
+$f(x_0+h)=f(x_0)+f'(x_0)h+(\text{small})$: near $x_0$ the graph is a
+straight line, and $f'(x_0)$ its slope. The single idea of differential
+calculus is that a smooth function is, up close, linear. We now transplant
+it to a field, where the increment depends on the \emph{vector}
+$\bh=\bx-\bx_0$, so the linear part is a linear scalar function of $\bh$.
+Two things must be made precise: what ``small'' means for the remainder,
+and how to replace the abstract linear part by one computable vector.
+
+\begin{definition}[Landau symbol]\label{def:landau}
+For $r$ defined near $0$, $r(\eps)=o(\eps)$ iff $r(\eps)/\eps\to0$ as
+$\eps\to0$; equivalently, for every $\eta>0$ there is $\dd>0$ with
+$|r(\eps)|\le\eta\eps$ for $0<\eps<\dd$.
+\end{definition}
+
+\begin{remark}[why ``faster than linear'' removes ambiguity]\label{rem:kills}
+If a field had two linear parts $f_0,g_0$ in \eqr{1.96}, subtracting gives
+$f_0(\bh)-g_0(\bh)=-o(|\bh|)$; putting $\bh=s\bu$ ($|\bu|=1$) and using
+linearity, $s[f_0(\bu)-g_0(\bu)]=-o(s)$, so
+$f_0(\bu)-g_0(\bu)=-o(s)/s\to0$. The left side is independent of $s$, hence
+$0$ for every unit $\bu$, so $f_0=g_0$. Demanding the remainder die
+\emph{faster} than $\bh$ is exactly what pins the linear part down.
+\end{remark}
+
+\begin{definition}[Differentiable scalar field]\label{def:diff}
+$\varphi$ is differentiable at $\bx_0$ iff there is a linear
+$f_0:\Et\to\Rn$ with
+\begin{equation}
+\varphi(\bx)=\varphi(\bx_0)+f_0(\bx-\bx_0)+o(|\bx-\bx_0|)\qquad(\bx\to\bx_0).
+\tag{1.96}\label{eq:1.96}
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Existence, uniqueness, naming of the gradient]\label{thm:grad}
+If $\varphi$ is differentiable at $\bx_0$, there is a unique
+$\grad\varphi\rest{\bx_0}\in\Et$ with
+$f_0(\bh)=\grad\varphi\rest{\bx_0}\cdot\bh$, hence
+\begin{equation}
+\varphi(\bx)=\varphi(\bx_0)+\grad\varphi\rest{\bx_0}\cdot(\bx-\bx_0)
++o(|\bx-\bx_0|). \tag{1.99}\label{eq:1.99}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+$f_0$ is a linear functional on $\Et$; by Riesz (Theorem~\ref{thm:riesz})
+there is a unique $\bc$ with $f_0(\bh)=\ip\bc\bh$. Explicitly, with
+$c_i:=f_0(\be_i)$ and $\bh=h_i\be_i$,
+$f_0(\bh)=h_if_0(\be_i)=h_ic_i=\ip\bc\bh$. Name
+$\bc=:\grad\varphi\rest{\bx_0}$ and substitute into \eqr{1.96}.
+\end{proof}
+
+\begin{remark}[the gradient is a slope, and it points uphill]\label{rem:slope}
+$\grad\varphi\rest{\bx_0}$ is one vector attached to the place $\bx_0$. By
+\eqr{1.99} the first order change under a step $\bh$ is
+$\grad\varphi\cdot\bh$, largest when $\bh\parallel\grad\varphi$
+(Cauchy--Schwarz). So the gradient points in the direction of steepest
+increase and its length is that steepest rate; its level sets are the
+directions of no first order change, orthogonal to $\grad\varphi$.
+\end{remark}
+
+\begin{remark}[the double construction reused throughout]\label{rem:double}
+The argument has a fixed three step shape:
+$\text{increment}\to\text{linear part}\to\text{Riesz representer}$. For a
+scalar field the representer is a vector, $\grad\varphi$. Applied to a
+\emph{vector} field the linear part is a linear map and Riesz upgrades to
+``a linear map is a tensor'', producing $\grad\bv\in\Lin$
+(\S\ref{ss:gradv}); applied to a flux it produces the divergence. Spotting
+this template once explains every later derivative at a glance.
+\end{remark}
+
+\subsection{Directional derivatives}\label{ss:dir}
+
+The differentiability limit \eqr{1.96} lets $\bx\to\bx_0$ from all directions
+at once, a limit in three variables. The cheapest way to probe it is to fix
+a direction and move only along it: set $\bv=\bx-\bx_0$, let $s=|\bv|$ so
+that $\bv=s\bu$ with $|\bu|=1$, and watch
+$f(s)=\varphi(\bx_0+s\bu)$ as an ordinary function of one real variable.
+The coefficient of $s$ in its expansion is the rate of change of $\varphi$
+along $\bu$. Let us compute it and see that the gradient already contains
+the answer for every direction.
+
+\begin{definition}[Directional derivative]\label{def:dir}
+For a unit vector $\bu$ and fixed $\bx_0$, with $f(s)=\varphi(\bx_0+s\bu)$,
+the derivative of $\varphi$ at $\bx_0$ along $\bu$ is $f'(0)$.
+\end{definition}
+
+\begin{theorem}[The gradient gives every directional derivative]\label{thm:dir}
+If $\varphi$ is differentiable at $\bx_0$, then for every unit $\bu$
+\begin{equation}
+\Big(\tfrac{\dl f}{\dl s}\Big)\Big|_{s=0}=\bu\cdot\grad\varphi\rest{\bx_0}.
+\tag{1.102}\label{eq:1.102}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+With $\bh=s\bu$, $|\bh|=s$ (as $|\bu|=1$, $s\ge0$), \eqr{1.99} gives
+\begin{equation}
+f(s)=\varphi(\bx_0)+\grad\varphi\rest{\bx_0}\cdot(s\bu)+o(s)
+=\varphi(\bx_0)+s\,(\bu\cdot\grad\varphi\rest{\bx_0})+o(s). \tag{1.100}\label{eq:1.100}
+\end{equation}
+Subtract $f(0)$, divide by $s\neq0$:
+$[f(s)-f(0)]/s=\bu\cdot\grad\varphi\rest{\bx_0}+o(s)/s$ (1.101); let
+$s\to0$.
+\end{proof}
+
+Choosing the special directions $\be_i$, which change only one coordinate,
+turns directional derivatives into ordinary partial derivatives and hands
+us the components of the gradient.
+
+\begin{corollary}[Partials as gradient components]\label{cor:partial}
+With $\hat\varphi(x_1,x_2,x_3):=\varphi(x_i\be_i)$,
+\begin{equation}
+\be_i\cdot\grad\varphi\rest{\bx_0}
+=\Big(\tfrac{\partial\hat\varphi}{\partial x_i}\Big)
+\Big|_{(x_1^0,x_2^0,x_3^0)}=:\hat\varphi_{,i}\rest{\bx_0}. \tag{1.103--1.106}\label{eq:1.103}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Take $\bu=\be_i$ in Theorem~\ref{thm:dir}; $\bx_0+s\be_i$ increments only
+the $i$th coordinate, so
+$\be_i\cdot\grad\varphi\rest{\bx_0}=\lim_{s\to0}\tfrac1s[
+\hat\varphi(\dots,x_i^0+s,\dots)-\hat\varphi(\dots,x_i^0,\dots)]
+=\partial\hat\varphi/\partial x_i$. As $\bx_0$ is arbitrary,
+$\be_i\cdot\grad\varphi=\hat\varphi_{,i}$.
+\end{proof}
+
+\begin{theorem}[Cartesian gradient]\label{thm:cart}
+$\grad\varphi=\hat\varphi_{,i}\be_i=\varphi_{,i}\be_i$.
+\hfill\textup{(1.107--1.108)}
+\end{theorem}
+
+\begin{proof}
+By orthonormal expansion (Proposition~\ref{prop:comp}),
+$\bw=(\ip\bw{\be_i})\be_i$; take $\bw=\grad\varphi$ and use
+$\ip{\grad\varphi}{\be_i}=\hat\varphi_{,i}$. Dropping the caret gives
+(1.108).
+\end{proof}
+
+\begin{remark}[caret and comma]\label{rem:caret}
+$\varphi(\bx)$ eats a point; $\hat\varphi(x_1,x_2,x_3)$ eats three real
+numbers. Different domains make them different functions, yet they take
+equal values when $\bx=x_i\be_i$. The comma abbreviates a Cartesian
+partial, $\varphi_{,i}=\partial\varphi/\partial x_i$, from here on;
+dropping the caret is the same controlled abuse as writing a bare $\bx$ for
+the position (Remark~\ref{rem:abuse}).
+\end{remark}
+
+\subsection{Parameterized paths and the chain rule}\label{ss:chain}
+
+Directional derivatives run along straight lines of fixed direction. A
+particle's trajectory, or a coordinate line in curvilinear coordinates,
+bends: its direction $\bx'(u)$ varies along the way. To differentiate a
+field along such a curve we compose $\varphi$ with the path and use the one
+variable derivative. The resulting rule, in its coordinate free form
+$\dl\varphi=\grad\varphi\cdot\dl\bx$, is powerful enough to generate
+$\grad\varphi$ in any coordinate system.
+
+\begin{theorem}[Chain rule]\label{thm:chain}
+For a smooth simple curve $\bx(u)$ and $\psi(u)=\varphi(\bx(u))$,
+\begin{equation}
+\psi'(u_0)=\grad\varphi\rest{\bx(u_0)}\cdot\bx'(u_0). \tag{1.112}\label{eq:1.112}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+With $\bx_0=\bx(u_0)$, $\bx_1=\bx(u_1)$, \eqr{1.99} gives
+\begin{equation}
+\psi(u_1)=\psi(u_0)+\grad\varphi\rest{\bx_0}\cdot(\bx_1-\bx_0)
++o(|\bx_1-\bx_0|). \tag{1.109}\label{eq:1.109}
+\end{equation}
+Smoothness of the path gives
+\begin{equation}
+\bx_1-\bx_0=\bx'(u_0)(u_1-u_0)+o(u_1-u_0), \tag{1.110}\label{eq:1.110}
+\end{equation}
+so $|\bx_1-\bx_0|=O(u_1-u_0)$ and $o(|\bx_1-\bx_0|)=o(u_1-u_0)$. Insert
+\eqr{1.110} into \eqr{1.109}, subtract $\psi(u_0)$, divide by $u_1-u_0$:
+\begin{equation}
+\frac{\psi(u_1)-\psi(u_0)}{u_1-u_0}
+=\grad\varphi\rest{\bx_0}\cdot\bx'(u_0)+\frac{o(u_1-u_0)}{u_1-u_0}, \tag{1.111}\label{eq:1.111}
+\end{equation}
+and let $u_1\to u_0$.
+\end{proof}
+
+\begin{corollary}[Coordinate free differential]\label{cor:dphi}
+With $\dl\bx=\bx'(u)\,\dl u$,
+\begin{equation}
+\frac{\dl\varphi}{\dl u}=\grad\varphi\cdot\frac{\dl\bx}{\dl u},
+\qquad \dl\varphi=\grad\varphi\cdot\dl\bx. \tag{1.113--1.114}\label{eq:1.113}
+\end{equation}
+This holds for every $\dl\bx$ and uses no coordinates.
+\end{corollary}
+
+\begin{remark}[the power of \eqr{1.114}]\label{rem:dphi}
+Equation \eqr{1.114}, $\dl\varphi=\grad\varphi\cdot\dl\bx$, is coordinate free:
+it never mentions a basis. Yet it can \emph{generate} the gradient formula
+in \emph{any} coordinate system. The recipe is always the same: write
+$\dl\varphi$ from the conventional chain rule, express the coordinate
+increments as dot products with $\dl\bx$, read off $\grad\varphi$ by
+matching with \eqr{1.114}. The next two examples execute this recipe in
+Cartesian and cylindrical coordinates.
+\end{remark}
+
+\begin{example}[recovering the Cartesian formula]\label{ex:cartrecover}
+\emph{Step 1 (conventional chain rule).} With
+$\hat\varphi(x_1,x_2,x_3)=\varphi(x_i\be_i)$ and $\{\be_i\}$ fixed,
+\[
+\dl\hat\varphi=\frac{\partial\hat\varphi}{\partial x_1}\dl x_1
++\frac{\partial\hat\varphi}{\partial x_2}\dl x_2
++\frac{\partial\hat\varphi}{\partial x_3}\dl x_3
+=\hat\varphi_{,i}\,\dl x_i.
+\]
+\emph{Step 2 (express $\dl x_i$ via $\dl\bx$).} Since the basis is fixed,
+$\bx=x_i\be_i$ gives $\dl\bx=\dl x_i\,\be_i$. Dotting with $\be_i$
+and using orthonormality, $\dl x_i=\be_i\cdot\dl\bx$. Insert:
+\[
+\dl\hat\varphi=\hat\varphi_{,i}(\be_i\cdot\dl\bx)
+=(\hat\varphi_{,i}\be_i)\cdot\dl\bx.
+\]
+\emph{Step 3 (match with \eqr{1.114}).} Setting this equal to
+$\grad\varphi\cdot\dl\bx$ gives
+$(\grad\varphi-\hat\varphi_{,i}\be_i)\cdot\dl\bx=0$ for all $\dl\bx$.
+Choose $\dl\bx=\grad\varphi-\hat\varphi_{,i}\be_i$ itself; then its squared
+norm $|\grad\varphi-\hat\varphi_{,i}\be_i|^2=0$, so
+\[
+\grad\varphi=\hat\varphi_{,i}\be_i. \eqno(1.115)
+\]
+This is identical to (1.108), confirming that both routes give the same
+formula. The Cartesian gradient has no extra factors because $\{\be_i\}$ is
+fixed and orthonormal; when the basis varies with position (as in polar
+coordinates), extra terms appear.
+\end{example}
+
+\begin{example}[cylindrical polar coordinates]\label{ex:polar}
+With $\bk=\be_3$, define the rotating frame
+\begin{equation}
+\ber(\theta)=\cos\theta\,\be_1+\sin\theta\,\be_2,\qquad
+\beth(\theta)=\bk\times\ber=-\sin\theta\,\be_1+\cos\theta\,\be_2, \tag{1.116}\label{eq:1.116}
+\end{equation}
+orthonormal for each $\theta$, with
+\begin{equation}
+\ber'(\theta)=\beth(\theta),\qquad \beth'(\theta)=-\ber(\theta). \tag{$\dagger$}
+\end{equation}
+A point has $\bx=r\,\ber(\theta)+z\,\bk$ (1.117). Then, using
+$\dl\ber=\ber'(\theta)\dl\theta=\beth\,\dl\theta$,
+\begin{equation}
+\dl\bx=\dl r\,\ber+r\,\dl\ber+\dl z\,\bk
+=\dl r\,\ber+r\,\dl\theta\,\beth+\dl z\,\bk, \tag{1.119}\label{eq:1.119}
+\end{equation}
+and dotting with the orthonormal $\{\ber,\beth,\bk\}$,
+\begin{equation}
+\dl r=\ber\cdot\dl\bx,\quad r\,\dl\theta=\beth\cdot\dl\bx,\quad
+\dl z=\bk\cdot\dl\bx. \tag{1.120}\label{eq:1.120}
+\end{equation}
+With $\varphi=\tilde\varphi(r,\theta,z)$,
+$\dl\tilde\varphi=\tilde\varphi_{,r}\dl r+\tilde\varphi_{,\theta}\dl\theta
++\tilde\varphi_{,z}\dl z$; substituting \eqr{1.120},
+\begin{equation}
+\dl\tilde\varphi=\big(\tilde\varphi_{,r}\ber
++\tfrac1r\tilde\varphi_{,\theta}\beth+\tilde\varphi_{,z}\bk\big)\cdot\dl\bx,
+\tag{1.121}\label{eq:1.121}
+\end{equation}
+so by \eqr{1.114}, dropping the tilde,
+\begin{equation}
+\grad\varphi=\varphi_{,r}\,\ber+\tfrac1r\,\varphi_{,\theta}\,\beth
++\varphi_{,z}\,\bk. \tag{1.122}\label{eq:1.122}
+\end{equation}
+The extra $1/r$, absent from the Cartesian (1.108), arises solely because
+$\{\ber,\beth,\bk\}$ varies with position while $\{\be_i\}$ is fixed.
+\end{example}
+
+\begin{example}[gradient of the radius $r=|\bx|$]\label{ex:gradr}
+\emph{Index route.} Start from $r^2=\ip\bx\bx=x_jx_j$. Note that
+$x_{j,i}=\partial x_j/\partial x_i=\dd_{ji}$: the Cartesian coordinate
+$x_j$ depends only on itself, so its derivative with respect to $x_i$ is
+$1$ when $j=i$ and $0$ otherwise. Differentiate $r^2=x_jx_j$ using the
+product rule:
+\begin{equation}
+2r\,r_{,i}=(x_jx_j)_{,i}=x_{j,i}x_j+x_jx_{j,i}
+=\dd_{ji}x_j+x_j\dd_{ji}=x_i+x_i=2x_i, \tag{1.123}\label{eq:1.123}
+\end{equation}
+where the Kronecker delta $\dd_{ji}$ collapsed the sum over $j$ to its
+$j=i$ term: $\dd_{ji}x_j=x_i$. Divide both sides by $2r$:
+$r_{,i}=x_i/r$. Since $\grad r=r_{,i}\be_i$ (by 1.108),
+\begin{equation}
+\grad r=\frac{x_i}{r}\be_i=\frac{1}{r}\bx. \tag{1.124}\label{eq:1.124}
+\end{equation}
+
+\emph{Coordinate free route.} The differential product rule for the
+inner product reads $\dl(\ip\ba\bb)=\ip{\dl\ba}\bb+\ip\ba{\dl\bb}$
+(proved by $\dl(a_ib_i)=\dl a_i\,b_i+a_i\dl b_i$). Apply it to
+$r^2=\ip\bx\bx$:
+\begin{equation}
+2r\,\dl r=\dl(\ip\bx\bx)=\ip{\dl\bx}\bx+\ip\bx{\dl\bx}=2\,\ip\bx{\dl\bx}.
+\tag{1.125}\label{eq:1.125}
+\end{equation}
+Cancel $2$ and divide by $r$: $\dl r=r^{-1}\ip\bx{\dl\bx}$. By \eqr{1.114},
+$\dl r=\grad r\cdot\dl\bx$; matching the two gives $\grad r=r^{-1}\bx$.
+Both routes arrive at the same answer, but the coordinate free route
+never wrote a single index.
+\end{example}
+
+\begin{remark}[$\grad r$ points radially outward]\label{rem:gradr}
+Since $\bx/r=\bx/|\bx|$ is the unit vector in the radial direction,
+$\grad r$ is the unit radial vector: $|\grad r|=1$, pointing from the
+origin toward the point $\bx$. The level sets of $r$ are concentric
+spheres, and $\grad r$ is indeed perpendicular to them, consistent with
+the general fact that the gradient is orthogonal to the level sets of
+the field (Remark~\ref{rem:slope}).
+\end{remark}
+
+\subsection{Gradients of vector fields}\label{ss:gradv}
+
+Repeat the linearisation of \S\ref{ss:grad} on a vector field. Now the
+increment $\bv(\bx)-\bv(\bx_0)$ is a \emph{vector}, so its linear part is a
+linear map $\Et\to\Et$, that is, a tensor. This is the double construction
+one rung up: the fixed object representing the linear part is
+$\grad\bv\in\Lin$.
+
+\begin{definition}[Differentiable vector field]\label{def:diffv}
+$\bv$ is differentiable at $\bx_0$ iff there is a tensor $\bL_0$ with
+\begin{equation}
+\bv(\bx)=\bv(\bx_0)+\bL_0(\bx-\bx_0)+\bo(\bx-\bx_0),\quad
+|\bo(\bx-\bx_0)|=o(|\bx-\bx_0|), \tag{1.126--1.127}\label{eq:1.126}
+\end{equation}
+and one writes $\bL_0=\grad\bv\rest{\bx_0}$.
+\end{definition}
+
+\begin{theorem}[Cartesian representation]\label{thm:gradvcart}
+$\grad\bv=v_{i,j}\,\be_i\otimes\be_j$, i.e. $(\grad\bv)_{ij}=v_{i,j}$.
+\hfill\textup{(1.132)}
+\end{theorem}
+
+\begin{proof}
+With $\bx-\bx_0=s\bu$, $|\bu|=1$,
+$\bL_0\bu=\lim_{s\to0}\tfrac1s[\bv(\bx_0+s\bu)-\bv(\bx_0)]$ (1.129). Take
+$\bu=\be_j$ and $\bv=\hat v_i\be_i$ with fixed $\be_i$:
+$\bL_0\be_j=\be_i\lim_{s\to0}\tfrac1s[\hat v_i(\dots,x_j^0+s,\dots)
+-\hat v_i(\dots)]=\hat v_{i,j}\be_i$ (1.130--1.131). Hence
+$L_{ij}=\ip{\be_i}{\bL_0\be_j}=v_{i,j}$.
+\end{proof}
+
+\begin{corollary}[Chain rule for vector fields]\label{cor:dv}
+$\dl\bv=(\grad\bv)\,\dl\bx$. \hfill\textup{(1.133)}
+\end{corollary}
+
+\begin{proof}
+$\dl\hat v_i=\hat v_{i,j}\,\dl x_j=\hat v_{i,j}\,\be_j\cdot\dl\bx$, so
+$\dl\bv=\dl\hat v_i\,\be_i=\hat v_{i,j}\,\be_i(\be_j\cdot\dl\bx)
+=(\hat v_{i,j}\be_i\otimes\be_j)\dl\bx=(\grad\bv)\dl\bx$ (1.134).
+\end{proof}
+
+\begin{example}[$\bu=\mu\bx+\nu(\bx\otimes\bx)\ba$]\label{ex:gu1}
+The field $\bu(\bx)=\mu\bx+\nu(\bx\otimes\bx)\ba$ arises, for instance,
+in quadratic displacement fields. We compute its gradient by two routes.
+
+\emph{Index route.} Write $u_i=\mu x_i+\nu x_ix_ja_j$ (since
+$(\bx\otimes\bx)\ba=\ip\bx\ba\,\bx$, its $i$th component is
+$x_i(x_ja_j)$). Differentiate with respect to $x_k$:
+\begin{align}
+u_{i,k}&=\mu\frac{\partial x_i}{\partial x_k}
++\nu\Big(\frac{\partial x_i}{\partial x_k}\,x_ja_j
++x_i\frac{\partial x_j}{\partial x_k}\,a_j\Big)\notag\\
+&=\mu\dd_{ik}+\nu(\dd_{ik}\,x_ja_j+x_i\,\dd_{jk}\,a_j)\notag\\
+&=\mu\dd_{ik}+\nu(\ip\bx\ba)\dd_{ik}+\nu x_ia_k\notag\\
+&=[\mu+\nu(\ip\bx\ba)]\dd_{ik}+\nu x_ia_k. \tag{1.136}\label{eq:1.136}
+\end{align}
+Recognise the first term as $[\mu+\nu(\ip\bx\ba)]I_{ik}$ and the second
+as $(\bx\otimes\ba)_{ik}=x_ia_k$, so
+\begin{equation}
+\grad\bu=[\mu+\nu(\ip\bx\ba)]\I+\nu\,\bx\otimes\ba. \tag{1.137}\label{eq:1.137}
+\end{equation}
+
+\emph{Differential route.} The product rule
+$\dl(\bb\otimes\bc)=\dl\bb\otimes\bc+\bb\otimes\dl\bc$ (proved by
+$\dl(b_ic_j)=\dl b_i\,c_j+b_i\,\dl c_j$) gives
+$\dl(\bx\otimes\bx)=\dl\bx\otimes\bx+\bx\otimes\dl\bx$, so
+\begin{align}
+\dl\bu&=\mu\,\dl\bx+\nu(\dl\bx\otimes\bx+\bx\otimes\dl\bx)\ba\notag\\
+&=\mu\,\dl\bx+\nu(\ip\bx\ba)\dl\bx+\nu\,\bx(\ip\ba{\dl\bx})\notag\\
+&=\{[\mu+\nu(\ip\bx\ba)]\I+\nu\,\bx\otimes\ba\}\dl\bx. \tag{1.138}\label{eq:1.138}
+\end{align}
+In line two we used
+$(\dl\bx\otimes\bx)\ba=(\ip\bx\ba)\dl\bx$ and
+$(\bx\otimes\dl\bx)\ba=(\ip{\dl\bx}\ba)\bx=\bx(\ip\ba{\dl\bx})$.
+Comparing with $\dl\bu=(\grad\bu)\dl\bx$ confirms \eqr{1.137}.
+\end{example}
+
+\begin{example}[affine field $\bu=\bx+(\ip\bb\bx)\ba$]\label{ex:gu2}
+Here $\ba,\bb$ are fixed vectors. Write
+$\bu(\bx)=\bx+\ba(\ip\bb\bx)$; its differential is
+\[
+\dl\bu=\dl\bx+\ba(\ip\bb{\dl\bx})=\dl\bx+\ba\otimes\bb\,\dl\bx
+=(\I+\ba\otimes\bb)\dl\bx,
+\]
+where we recognised $\ba(\ip\bb{\dl\bx})=(\ba\otimes\bb)\dl\bx$ by
+Definition~\ref{def:tp}. Thus
+\begin{equation}
+\grad\bu=\I+\ba\otimes\bb. \tag{1.141}\label{eq:1.141}
+\end{equation}
+Notice that $\grad\bu$ is \emph{uniform}: it does not depend on $\bx$.
+This is no accident. Write $\bu(\bx)=(\I+\ba\otimes\bb)\bx=:\bA\bx$;
+then for any $\bx_0$,
+\[
+\bu(\bx)=\bA\bx=\bA\bx_0+\bA(\bx-\bx_0)=\bu(\bx_0)+\bA(\bx-\bx_0),
+\]
+which is already in the form \eqr{1.127} with $\bL_0=\bA$ and \emph{zero
+remainder}. Whenever the field is affine (linear in $\bx$), the gradient
+is constant and the approximation \eqr{1.127} is exact everywhere.
+\end{example}
+
+\begin{example}[polar gradient of a vector field]\label{ex:gupolar}
+For $\bu=u_r\ber+u_\theta\beth+u_z\bk$ with components functions of
+$(r,\theta)$, using $(\dagger)$ and the product rule,
+\[
+\begin{aligned}
+\dl\bu&=[u_{r,r}\dl r+(u_{r,\theta}-u_\theta)\dl\theta]\ber\\
+&\quad+[u_{\theta,r}\dl r+(u_{\theta,\theta}+u_r)\dl\theta]\beth\\
+&\quad+[u_{z,r}\dl r+u_{z,\theta}\dl\theta]\bk,
+\end{aligned}
+\]
+where the $-u_\theta$ and $+u_r$ come from
+$\dl\ber=\beth\dl\theta$, $\dl\beth=-\ber\dl\theta$. Inserting
+$\dl r=\ber\cdot\dl\bx$, $\dl\theta=\tfrac1r\beth\cdot\dl\bx$ and
+$(\be_a\cdot\dl\bx)\be_b=(\be_b\otimes\be_a)\dl\bx$,
+\begin{equation}
+\begin{aligned}
+\grad\bu&=u_{r,r}\,\ber\otimes\ber
++\tfrac1r(u_{r,\theta}-u_\theta)\,\ber\otimes\beth
++u_{\theta,r}\,\beth\otimes\ber\\
+&\quad+\tfrac1r(u_{\theta,\theta}+u_r)\,\beth\otimes\beth
++u_{z,r}\,\bk\otimes\ber+\tfrac1r u_{z,\theta}\,\bk\otimes\beth.
+\end{aligned}\tag{1.145}\label{eq:1.145}
+\end{equation}
+\end{example}
+
+\subsection{Divergence and curl}\label{ss:divcurl}
+
+The tensor $\grad\bv$ carries nine numbers. Two coordinate free
+combinations carry the physics: its trace measures the local rate of volume
+change, the divergence, and its skew part measures local rotation, the
+curl. Defining each through the trace and box product machinery keeps them
+intrinsic, after which the component formulas drop out.
+
+\begin{definition}[Divergence of a vector field]\label{def:divv}
+$\dvg\bv:=\tr(\grad\bv)$.
+\end{definition}
+
+\begin{proposition}\label{prop:divv}
+$\dvg\bv=v_{i,i}$.
+\end{proposition}
+
+\begin{proof}
+$\dvg\bv=\tr(v_{i,j}\be_i\otimes\be_j)=v_{i,j}\dd_{ij}=v_{i,i}$ (1.147), by
+$\tr(\be_i\otimes\be_j)=\dd_{ij}$.
+\end{proof}
+
+\begin{definition}[Divergence of a tensor field]\label{def:divA}
+$\dvg\bA$ is the vector field with $\ip\bc{\dvg\bA}=\dvg(\bA^{t}\bc)$ for
+every fixed $\bc$.
+\end{definition}
+
+\begin{proposition}\label{prop:divA}
+$\dvg\bA=A_{ij,j}\,\be_i$. \hfill\textup{(1.150)}
+\end{proposition}
+
+\begin{proof}
+Take $\bc=\be_i$: $\bA^{t}\be_i=A_{ij}\be_j$, so
+$\ip{\be_i}{\dvg\bA}=\dvg(A_{ij}\be_j)=A_{ij,j}$ ($i$ fixed, $j$ summed).
+\end{proof}
+
+\begin{proposition}[Product rule]\label{prop:divprod}
+$\ip\bu{\dvg\bA}=\dvg(\bA^{t}\bu)-\tr[\bA^{t}(\grad\bu)]$. \hfill\textup{(1.152)}
+\end{proposition}
+
+\begin{proof}
+The scalar product rule $u_iA_{ij,j}=(A_{ij}u_i)_{,j}-A_{ij}u_{i,j}$
+(1.151) reads, term by term, $\ip\bu{\dvg\bA}=\dvg(\bA^{t}\bu)
+-\tr[\bA^{t}(\grad\bu)]$, since $(\bA^{t}\bu)_j=A_{ij}u_i$ and
+$\tr[\bA^{t}\grad\bu]=A_{ij}u_{i,j}$.
+\end{proof}
+
+\begin{definition}[Curl of a vector field]\label{def:curlv}
+$\crl\bv$ is the vector with $\ip\bc{\crl\bv}=\dvg(\bv\times\bc)$ for every
+fixed $\bc$.
+\end{definition}
+
+\begin{proposition}\label{prop:curlv}
+$\crl\bv=\eps_{kij}v_{i,k}\,\be_j$. \hfill\textup{(1.165)}
+\end{proposition}
+
+\begin{proof}
+Take $\bc=\be_j$: $\bv\times\be_j=v_i\eps_{ijk}\be_k$, so
+$\ip{\be_j}{\crl\bv}=\dvg(v_i\eps_{ijk}\be_k)=\eps_{ijk}v_{i,k}
+=\eps_{kij}v_{i,k}$ (1.164), using $\eps_{ijk}=\eps_{kij}$.
+\end{proof}
+
+\begin{remark}[curl of a tensor field]\label{rem:curlA}
+$\crl\bA$ is defined by $(\crl\bA)\bc=\crl(\bA^{t}\bc)$. Taking
+$\bc=\be_m$, $\bA^{t}\be_m=A_{mi}\be_i$ has $i$th component $A_{mi}$, so
+$\crl(\bA^{t}\be_m)=\eps_{kij}A_{mi,k}\be_j$; matching
+$(\crl\bA)\be_m=(\crl\bA)_{jm}\be_j$ gives
+$\crl\bA=\eps_{kij}A_{mi,k}\,\be_j\otimes\be_m$, equivalently
+$\eps_{ilm}A_{jl,i}\,\be_m\otimes\be_j$ (Problem~28).
+\end{remark}
+
+\begin{example}[divergence of a tensor field in polar coordinates]\label{ex:divpolar}
+For $\bA=A_{rr}\ber\otimes\ber+A_{r\theta}\ber\otimes\beth+\cdots$ with
+components functions of $(r,\theta)$, decompose $\dvg\bA$ on
+$\{\ber,\beth,\bk\}$ and use (1.152). From \eqr{1.145} applied to the frame
+fields,
+\begin{equation}
+\grad\ber=\tfrac1r\,\beth\otimes\beth,\qquad
+\grad\beth=-\tfrac1r\,\ber\otimes\beth, \tag{1.156}\label{eq:1.156}
+\end{equation}
+and the scalar divergence of $\bw=w_r\ber+w_\theta\beth+w_z\bk$ is
+$\dvg\bw=w_{r,r}+\tfrac1r(w_{\theta,\theta}+w_r)$ (1.158). Applying (1.152)
+with $\bA^{t}\ber=A_{rr}\ber+A_{r\theta}\beth+A_{rz}\bk$ and the like, and
+$\tr[\bA^{t}\grad\ber]=\tfrac1rA_{\theta\theta}$,
+$\tr[\bA^{t}\grad\beth]=-\tfrac1rA_{r\theta}$,
+\begin{equation}
+\begin{aligned}
+\ber\cdot\dvg\bA&=A_{rr,r}+\tfrac1r(A_{rr}-A_{\theta\theta}+A_{r\theta,\theta}),\\
+\beth\cdot\dvg\bA&=A_{\theta r,r}+\tfrac1r(A_{\theta r}+A_{r\theta}+A_{\theta\theta,\theta}),\\
+\bk\cdot\dvg\bA&=A_{zr,r}+\tfrac1r(A_{zr}+A_{z\theta,\theta}).
+\end{aligned}\tag{1.162}\label{eq:1.162}
+\end{equation}
+\end{example}
+
+\subsection{Integral formulae}\label{ss:int}
+
+Balance laws equate the rate of change of a quantity inside a region to
+fluxes through its boundary. Passing between the two needs a bridge from
+volume integrals of derivatives to surface integrals of values. That bridge
+is the divergence theorem; every conservation law later rests on it.
+
+\begin{theorem}[Divergence theorem]\label{thm:div}
+For a $C^{1}$ vector field $\bv$ on a bounded region $R$ with piecewise
+smooth orientable boundary $\partial R$ and exterior unit normal $\bn$,
+\begin{equation}
+\int_{R}\dvg\bv\,\dl v=\int_{\partial R}\ip\bv\bn\,\dl a. \tag{1.167}\label{eq:1.167}
+\end{equation}
+\end{theorem}
+
+The proof is classical and is taken as given. Three consequences, used
+constantly later, are immediate.
+
+\begin{corollary}[Component, tensor and scalar forms]\label{cor:divforms}
+\[\int_R v_{i,i}\,\dl v=\int_{\partial R}v_in_i\,\dl a;\]
+$\int_R\dvg\bA\,\dl v=\int_{\partial R}\bA\bn\,\dl a$;
+$\int_R\grad\varphi\,\dl v=\int_{\partial R}\varphi\,\bn\,\dl a$.
+\end{corollary}
+
+\begin{proof}
+The first is \eqr{1.167} in components. For the tensor form, fix $\bc$ and
+apply \eqr{1.167} to $\bA^{t}\bc$:
+$\ip\bc{\int_R\dvg\bA\,\dl v}=\int_{\partial R}\ip{\bA^{t}\bc}\bn\,\dl a
+=\ip\bc{\int_{\partial R}\bA\bn\,\dl a}$, true for all $\bc$. The scalar
+form is the tensor form with $\bA=\varphi\I$, since
+$\dvg(\varphi\I)=\grad\varphi$ and $\varphi\I\,\bn=\varphi\bn$.
+\end{proof}
+
+\begin{theorem}[Stokes, for reference]\label{thm:stokes}
+For a differentiable $\bv$ on a piecewise smooth surface $\Omega$ bounded
+by a piecewise smooth closed curve $\partial\Omega$,
+\begin{equation}
+\int_{\Omega}\ip{\crl\bv}\bn\,\dl a=\int_{\partial\Omega}\ip\bv{\dl\bx},
+\tag{1.168}\label{eq:1.168}
+\end{equation}
+with $\bn$ oriented so that $\nu=\btt\times\bn$ is the outward normal to
+$\partial\Omega$ in the tangent plane. \textup{(Stated for completeness;
+not used in the sequel.)}
+\end{theorem}
+
+%=======================================================================
+\section{Problems}\label{sec:problems}
+%=======================================================================
+
+All twenty eight problems of the chapter are solved below, in the book's
+order, with every algebraic step shown. Two identities recur:
+\begin{equation}
+\ba\times(\bb\times\bc)=(\ip\ba\bc)\bb-(\ip\ba\bb)\bc,\qquad
+\eps_{ijk}\eps_{imn}=\dd_{jm}\dd_{kn}-\dd_{jn}\dd_{km}. \tag{$\star$}
+\end{equation}
+Problems~1--23 use only the algebra of \S\ref{sec:vtt}; Problems~24--28 use
+the field calculus of \S\ref{sec:fields}.
+
+\begin{problem}[Cauchy--Schwarz, triangle, Pythagoras]
+Prove $|\ip\ba\bb|\le|\ba||\bb|$, the triangle inequality, and the
+Pythagorean theorem for orthogonal $\ba,\bb$.
+\end{problem}
+\begin{solution}
+\emph{Cauchy--Schwarz.} If $\ba=\bze$ then $\ip\ba\bb=0$ and the inequality
+reads $0\le0$; assume $\ba\neq\bze$. Following the hint, form the vector
+\[
+\bw=(\ip\ba\ba)\bb-(\ip\ba\bb)\ba .
+\]
+Positivity of the norm gives $0\le|\bw|^2=\ip\bw\bw$. Expand the dot product
+by bilinearity, keeping every one of the four cross terms (write
+$\alpha=\ip\ba\ba$, $\beta=\ip\ba\bb$ for brevity):
+\[
+\begin{aligned}
+|\bw|^2&=\ip{(\alpha\bb-\beta\ba)}{(\alpha\bb-\beta\ba)}\\
+&=\alpha^2\,\ip\bb\bb-\alpha\beta\,\ip\bb\ba-\beta\alpha\,\ip\ba\bb
+ +\beta^2\,\ip\ba\ba\\
+&=\alpha^2\,\ip\bb\bb-2\alpha\beta^2+\beta^2\alpha
+ \qquad(\text{using }\ip\bb\ba=\ip\ba\bb=\beta,\ \ip\ba\ba=\alpha)\\
+&=\alpha\big[\alpha\,\ip\bb\bb-\beta^2\big]
+ =(\ip\ba\ba)\big[(\ip\ba\ba)(\ip\bb\bb)-(\ip\ba\bb)^2\big].
+\end{aligned}
+\]
+Since $\ip\ba\ba=|\ba|^2>0$, dividing the inequality $|\bw|^2\ge0$ by it
+leaves the bracket nonnegative:
+\[
+(\ip\ba\ba)(\ip\bb\bb)-(\ip\ba\bb)^2\ge0
+\ \Longrightarrow\ (\ip\ba\bb)^2\le|\ba|^2|\bb|^2 .
+\]
+Taking the (nonnegative) square root, $|\ip\ba\bb|\le|\ba|\,|\bb|$. Equality
+requires $\bw=\bze$, i.e.\ $\ba,\bb$ parallel.
+
+\emph{Triangle inequality.} Expand the squared norm and insert
+Cauchy--Schwarz at the marked step, $\ip\ba\bb\le|\ip\ba\bb|\le|\ba||\bb|$:
+\[
+\begin{aligned}
+|\ba+\bb|^2&=\ip{(\ba+\bb)}{(\ba+\bb)}=|\ba|^2+2\,\ip\ba\bb+|\bb|^2\\
+&\le|\ba|^2+2|\ba||\bb|+|\bb|^2=(|\ba|+|\bb|)^2 .
+\end{aligned}
+\]
+Both sides are nonnegative, so $|\ba+\bb|\le|\ba|+|\bb|$.
+
+\emph{Pythagoras.} If $\ba\perp\bb$, i.e.\ $\ip\ba\bb=0$, the middle term
+above drops out and $|\ba+\bb|^2=|\ba|^2+|\bb|^2$.
+\end{solution}
+
+\begin{remark}[what the hint vector is doing]\label{rem:csuse}
+The vector $\bw=(\ip\ba\ba)\bb-(\ip\ba\bb)\ba$ is (a positive multiple of)
+the part of $\bb$ \emph{perpendicular} to $\ba$: subtracting the projection
+$(\ip\ba\bb/\ip\ba\ba)\ba$ from $\bb$ and scaling by $\ip\ba\ba$ gives
+exactly $\bw$. Cauchy--Schwarz then says nothing more than ``a squared
+length is never negative'': the inequality is tight precisely when that
+perpendicular part is zero, i.e.\ when $\bb$ is parallel to $\ba$. This is
+why Cauchy--Schwarz underlies the very definition of angle
+(Definition~\ref{def:angle}): $\cos\theta=\ip\ba\bb/(|\ba||\bb|)$ lands in
+$[-1,1]$ exactly because $|\bw|^2\ge0$.
+\end{remark}
+
+\begin{problem}[Is the norm linear?]
+Is $f(\bv)=|\bv|$ linear?
+\end{problem}
+\begin{solution}
+No. Linearity requires both $f(\bu+\bv)=f(\bu)+f(\bv)$ and
+$f(\alpha\bv)=\alpha f(\bv)$; each fails.
+
+\emph{Additivity.} Take $\bv=-\bu$ with $\bu\neq\bze$:
+\[
+   f(\bu+\bv)=f(\bze)=0,\qquad
+   f(\bu)+f(\bv)=|\bu|+|-\bu|=2|\bu|>0 .
+\]
+
+\emph{Homogeneity.} For $\alpha<0$,
+\[
+   f(\alpha\bv)=|\alpha\bv|=|\alpha|\,|\bv|=-\alpha|\bv|
+   \neq\alpha|\bv|=\alpha f(\bv)
+\]
+whenever $\bv\neq\bze$.
+
+What the norm does satisfy is $f(\alpha\bv)=|\alpha|f(\bv)$ and
+$f(\bu+\bv)\le f(\bu)+f(\bv)$, the triangle inequality of Problem 1. Those
+two make it a norm, not a linear function.
+\end{solution}
+
+\begin{problem}[A constant map is not a tensor]
+For a fixed $\bmv$, is there a tensor $\bA$ with $\bA\bv=\bmv$ for all
+$\bv$?
+\end{problem}
+\begin{solution}
+No, unless $\bmv=\bze$. A linear map fixes the origin:
+\[
+   \bA\bze=\bA(0\cdot\bze)=0\cdot\bA\bze=\bze ,
+\]
+whereas the requirement gives $\bA\bze=\bmv$. So $\bmv=\bze$.
+
+Second route, without using $\bze$. Homogeneity with $\alpha=2$ gives
+\[
+   \bmv=\bA(2\bv)=2\,\bA\bv=2\bmv
+   \ \Longrightarrow\ \bmv=\bze .
+\]
+In the problem $\bmv=\tfrac{\sqrt2}{2}(\be_{1}+\be_{2})\neq\bze$, so no
+such tensor exists. Contrast Problem 4, where $\bA\bv=(\ip\bv\bn)\bmv$
+\emph{is} linear: the difference is the factor $\ip\bv\bn$, which vanishes
+with $\bv$.
+\end{solution}
+
+\begin{problem}[A rank-one tensor]
+With $\bmv=\tfrac{\sqrt2}{2}(\be_1+\be_2)$,
+$\bn=\tfrac{\sqrt2}{2}(\be_3-\be_1)$, find $\bA$ with
+$\bA\bv=(\ip\bv\bn)\bmv$.
+\end{problem}
+\begin{solution}
+The map $\bv\mapsto(\ip\bv\bn)\bmv$ is linear in $\bv$ (the inner product
+is linear in its second argument) and returns a vector, so it is a tensor.
+By Definition~\ref{def:tp}, $(\bmv\otimes\bn)\bv=(\ip\bn\bv)\bmv$. Hence
+$\bA=\bmv\otimes\bn$.
+
+\emph{Components.} $A_{ij}=m_in_j$ (from Example~\ref{ex:tp}). The
+components of $\bmv$ are
+$m_1=\tfrac{\sqrt2}{2}$, $m_2=\tfrac{\sqrt2}{2}$, $m_3=0$;
+those of $\bn$ are $n_1=-\tfrac{\sqrt2}{2}$, $n_2=0$, $n_3=\tfrac{\sqrt2}{2}$.
+Each entry $A_{ij}=m_in_j$:
+\[
+\begin{aligned}
+A_{11}&=\tfrac{\sqrt2}{2}\cdot(-\tfrac{\sqrt2}{2})=-\tfrac12,\quad
+A_{12}=\tfrac{\sqrt2}{2}\cdot0=0,\quad
+A_{13}=\tfrac{\sqrt2}{2}\cdot\tfrac{\sqrt2}{2}=\tfrac12,\\
+A_{21}&=-\tfrac12,\quad A_{22}=0,\quad A_{23}=\tfrac12,\quad
+A_{31}=0,\quad A_{32}=0,\quad A_{33}=0.
+\end{aligned}
+\]
+Hence
+\[
+(A_{ij})=\tfrac12\begin{pmatrix}-1&0&1\\-1&0&1\\0&0&0\end{pmatrix}.
+\]
+\emph{Check.} $\bA$ has rank $1$ (all rows are multiples of $(-1,0,1)$),
+confirming it is a rank one tensor: the image of $\bA$ is the line
+spanned by $\bmv$.
+\end{solution}
+
+\begin{problem}[$\eps_{ijk}A_{jk}=0\iff\bA=\bA^{t}$]
+\end{problem}
+\begin{solution}
+Write $c_i:=\eps_{ijk}A_{jk}$ (a vector, since $i$ is free while $j,k$ are
+summed). We must show $c_i=0$ for all $i$ exactly when $A_{jk}=A_{kj}$.
+
+\emph{($\Leftarrow$) Symmetric $\Rightarrow c_i=0$.} Suppose $A_{jk}=A_{kj}$.
+In $c_i=\eps_{ijk}A_{jk}$ rename the two summed indices $j\leftrightarrow k$
+(a dummy relabelling changes nothing):
+\[
+c_i=\eps_{ijk}A_{jk}=\eps_{ikj}A_{kj}.
+\]
+Now use symmetry $A_{kj}=A_{jk}$ and the antisymmetry of the permutation
+symbol under swapping its last two slots, $\eps_{ikj}=-\eps_{ijk}$:
+\[
+c_i=\eps_{ikj}A_{kj}=-\eps_{ijk}A_{jk}=-c_i .
+\]
+Thus $c_i=-c_i$, i.e.\ $2c_i=0$, so $c_i=0$ for every $i$.
+
+\emph{($\Rightarrow$) $c_i=0\Rightarrow$ symmetric.} Split $\bA$ into its
+symmetric and skew parts, $A_{jk}=S_{jk}+W_{jk}$ with
+$S_{jk}=\tfrac12(A_{jk}+A_{kj})$, $W_{jk}=\tfrac12(A_{jk}-A_{kj})$. By the
+direction just proved, $\eps_{ijk}S_{jk}=0$, so
+\[
+0=c_i=\eps_{ijk}A_{jk}=\eps_{ijk}S_{jk}+\eps_{ijk}W_{jk}=\eps_{ijk}W_{jk}.
+\]
+Every skew array is $W_{jk}=-\eps_{jkl}w_l$ for a unique axial vector $\bw$
+(this is the general solution of $W_{jk}=-W_{kj}$; see
+Proposition~\ref{prop:axial}). Substitute and contract:
+\[
+\begin{aligned}
+\eps_{ijk}W_{jk}&=\eps_{ijk}(-\eps_{jkl}w_l)=-\eps_{ijk}\eps_{jkl}\,w_l\\
+&=-\eps_{jki}\eps_{jkl}\,w_l=-2\dd_{il}w_l=-2w_i,
+\end{aligned}
+\]
+where we wrote $\eps_{ijk}=\eps_{jki}$ (cyclic shift) and used the contracted
+identity $\eps_{jki}\eps_{jkl}=2\dd_{il}$. Hence $0=c_i=-2w_i$ gives
+$w_i=0$ for all $i$, so $\bw=\bze$, so $W_{jk}=0$, so $A_{jk}=S_{jk}=A_{kj}$:
+$\bA$ is symmetric.
+\end{solution}
+
+\begin{remark}[what the operation $A_{jk}\mapsto\eps_{ijk}A_{jk}$ extracts]\label{rem:p5use}
+The computation shows $\eps_{ijk}A_{jk}=-2w_i$, twice the (negated) axial
+vector of the skew part of $\bA$. So contracting a tensor with the
+permutation symbol on two indices is a machine that \emph{throws away the
+symmetric part and reads off the skew part as a vector}. This is exactly the
+device behind writing the vorticity of a velocity field, or the moment of a
+force, as a single axial vector; it works only in three dimensions, where a
+skew tensor (three independent entries) matches a vector (three
+components).
+\end{remark}
+
+\begin{problem}[Skew/symmetric and the tensor inner product]
+With converses: (a) $\bA^{t}=-\bA\Rightarrow\bA\cdot(\ba\otimes\ba)=0$;
+(b) $\bT\cdot\bS=0\ \forall\bS\Rightarrow\bT=\Ob$;
+(c) $\bT\cdot\bS=0\ \forall\,\bS=\bS^t\Rightarrow\bT$ skew;
+(d) $\bT\cdot\bS=0\ \forall\,\bS=-\bS^t\Rightarrow\bT$ symmetric.
+\end{problem}
+\begin{solution}
+\emph{Preliminary.} Recall: $\bA\cdot\bB=\tr(\bA\bB^t)=A_{ij}B_{ij}$
+(sum of all nine component products), and
+$\bA\cdot(\bu\otimes\bv)=\ip\bu{\bA\bv}$.
+
+\emph{Lemma (the key orthogonality).}
+Let $\bS=\bS^t$ be symmetric and $\bW=-\bW^t$ skew. Then
+$\bS\cdot\bW=S_{ij}W_{ij}$. Relabelling $i\leftrightarrow j$:
+$S_{ij}W_{ij}=S_{ji}W_{ji}=S_{ij}(-W_{ij})=-S_{ij}W_{ij}$, using
+$S_{ji}=S_{ij}$ and $W_{ji}=-W_{ij}$. Thus $2(\bS\cdot\bW)=0$, i.e.
+$\bS\cdot\bW=0$: a symmetric tensor is orthogonal to every skew tensor.
+
+(a) $\bA\cdot(\ba\otimes\ba)=\ip\ba{\bA\ba}$. Since $\bA^t=-\bA$,
+$\ip\ba{\bA\ba}=\ip{\bA^t\ba}\ba=\ip{-\bA\ba}\ba=-\ip\ba{\bA\ba}$,
+hence $\ip\ba{\bA\ba}=0$. \emph{Converse:} if
+$\ip\ba{\bA\ba}=0$ for all $\ba$, put $\ba=\be_i+\be_j$ ($i\neq j$):
+$\ip{(\be_i+\be_j)}{\bA(\be_i+\be_j)}=A_{ii}+A_{ij}+A_{ji}+A_{jj}=0$.
+With $\ba=\be_i$: $A_{ii}=0$; with $\ba=\be_j$: $A_{jj}=0$. Hence
+$A_{ij}+A_{ji}=0$ for all $i\neq j$, together with $A_{ii}=0$: $\bA$ is
+skew.
+
+(b) $\bT\cdot\bS=0$ for all $\bS$: choose $\bS=\bT$, getting
+$|\bT|^2=T_{ij}T_{ij}=0$, so every $T_{ij}=0$, i.e. $\bT=\Ob$.
+
+(c) $\bT\cdot\bS=0$ for all symmetric $\bS$. Decompose
+$\bT=\bT_s+\bT_w$ (symmetric + skew). Choose $\bS=\bT_s$: by the Lemma,
+$\bT_w\cdot\bT_s=0$, so $\bT\cdot\bT_s=\bT_s\cdot\bT_s=|\bT_s|^2=0$,
+hence $\bT_s=\Ob$ and $\bT=\bT_w$ is skew.
+
+(d) $\bT\cdot\bS=0$ for all skew $\bS$. Choose $\bS=\bT_w$: by the Lemma,
+$\bT_s\cdot\bT_w=0$, so $\bT\cdot\bT_w=|\bT_w|^2=0$, hence $\bT_w=\Ob$
+and $\bT=\bT_s$ is symmetric.
+\end{solution}
+
+\begin{problem}[Is $\bA(\bu\times\bv)=\bA\bu\times\bv+\bu\times\bA\bv$?]
+\end{problem}
+\begin{solution}
+Write $D(\bA):=\bA(\bu\times\bv)-\bA\bu\times\bv-\bu\times\bA\bv$. The
+question is when $D(\bA)=\bze$ for all $\bu,\bv$. Note $D$ is linear in
+$\bA$.
+
+\emph{No in general.} Take $\bA=\I$:
+\[
+   D(\I)=\bu\times\bv-\bu\times\bv-\bu\times\bv=-\,\bu\times\bv\neq\bze .
+\]
+
+\emph{Skew tensors do satisfy it.} Let $\bW\bx=\bom\times\bx$, Problem 16.
+The Jacobi identity is
+\[
+   \bom\times(\bu\times\bv)+\bu\times(\bv\times\bom)
+   +\bv\times(\bom\times\bu)=\bze .
+\]
+Use $\bv\times(\bom\times\bu)=-\,(\bom\times\bu)\times\bv$ and
+$\bu\times(\bv\times\bom)=-\,\bu\times(\bom\times\bv)$:
+\[
+   \bom\times(\bu\times\bv)=(\bom\times\bu)\times\bv
+   +\bu\times(\bom\times\bv),
+\]
+that is $D(\bW)=\bze$.
+
+\emph{Only skew tensors do.} Suppose $D(\bA)=\bze$. Split
+$\bA=\bS+\bW$ by Problem 14; $D(\bW)=\bze$, so $D(\bS)=\bze$ by
+linearity. Take the principal basis of $\bS$, $\bS\be_{i}=\lambda_{i}
+\be_{i}$, and put $\bu=\be_{i}$, $\bv=\be_{j}$ with $ijk$ cyclic, so
+$\be_{i}\times\be_{j}=\be_{k}$:
+\[
+   \lambda_{k}\be_{k}
+   =\lambda_{i}\be_{i}\times\be_{j}+\be_{i}\times\lambda_{j}\be_{j}
+   =(\lambda_{i}+\lambda_{j})\be_{k}
+   \ \Longrightarrow\
+   \lambda_{k}=\lambda_{i}+\lambda_{j}.
+\]
+The three cyclic triples give
+\[
+   \lambda_{3}=\lambda_{1}+\lambda_{2},\qquad
+   \lambda_{1}=\lambda_{2}+\lambda_{3},\qquad
+   \lambda_{2}=\lambda_{3}+\lambda_{1}.
+\]
+Adding, $\sum\lambda_{i}=2\sum\lambda_{i}$, so $\sum\lambda_{i}=0$; then
+the first equation gives $\lambda_{3}=-\lambda_{3}$, hence
+$\lambda_{3}=0$, and likewise $\lambda_{1}=\lambda_{2}=0$. So $\bS=\Ob$
+and $\bA=\bW$ is skew.
+\end{solution}
+
+\begin{remark}[what the answer says]\label{rem:P7derivation}
+$D(\bA)=\bze$ is the Leibniz rule for $\bA$ acting on the product
+$\bu\times\bv$. The result is therefore: \emph{a tensor differentiates the
+cross product exactly when it is skew}, i.e.\ when it is an infinitesimal
+rotation. This is the statement that $\Skw$ is the Lie algebra of the
+rotation group, and it recurs in Chapter 4, where the spin $\bW$ is skew
+for precisely this reason.
+\end{remark}
+
+\begin{problem}[Reciprocal bases]
+With $\be_i=a_{ij}\be'_j$, $\be'_i=a'_{ij}\be_j$, show (a)
+$a_{ik}a'_{kj}=\dd_{ij}$; (b) $(a')=(a)^{t}$.
+\end{problem}
+\begin{solution}
+\textbf{(a)} Substitute the second relation into the first:
+\[
+   \be_i=a_{ij}\be'_j=a_{ij}\big(a'_{jk}\be_k\big)=a_{ij}a'_{jk}\,\be_k .
+\]
+But also $\be_i=\dd_{ik}\be_k$. The $\{\be_k\}$ are independent, so the
+coefficients match:
+\[
+   a_{ij}a'_{jk}=\dd_{ik}.
+\]
+
+\textbf{(b)} Dot $\be_i=a_{ij}\be'_j$ with $\be'_k$ and use
+$\ip{\be'_j}{\be'_k}=\dd_{jk}$:
+\[
+   \ip{\be_i}{\be'_k}=a_{ij}\dd_{jk}=a_{ik}.
+\]
+Dot $\be'_i=a'_{ij}\be_j$ with $\be_k$ and use $\ip{\be_j}{\be_k}=\dd_{jk}$:
+\[
+   \ip{\be'_i}{\be_k}=a'_{ij}\dd_{jk}=a'_{ik}.
+\]
+The two left sides are the same number, since the dot product is
+symmetric:
+\[
+   a'_{ik}=\ip{\be'_i}{\be_k}=\ip{\be_k}{\be'_i}=a_{ki},
+   \qquad\text{i.e.}\qquad (a')=(a)^{t}.
+\]
+Part (a) then reads $a_{ij}a_{kj}=\dd_{ik}$: the matrix $(a)$ is
+orthogonal, $(a)(a)^{t}=(a)^{t}(a)=(\dd)$. This is the fact used in
+Problem 9 and again in Problem 3 of Chapter 2.
+\end{solution}
+
+\begin{problem}[Invariance of trace and dot product; a computation]
+(a) $A_{ii}=A'_{ii}$; (b) deduce invariance of $\ip\bu\bv$; (c) compute
+$A'_{ij}$ for the given data.
+\end{problem}
+\begin{solution}
+\textbf{(a)} With $a_{ij}=\ip{\be_i}{\be'_j}$, so that
+$\be'_j=a_{kj}\be_k$, the components transform as
+\[
+   A'_{ij}=\ip{\be'_i}{\bA\be'_j}
+   =\ip{a_{ki}\be_k}{\bA\,a_{lj}\be_l}
+   =a_{ki}a_{lj}\ip{\be_k}{\bA\be_l}
+   =a_{ki}a_{lj}A_{kl}.
+\]
+Orthonormality of the primed basis fixes $(a)$:
+\[
+   \dd_{ij}=\ip{\be'_i}{\be'_j}=a_{ki}a_{lj}\,\ip{\be_k}{\be_l}
+   =a_{ki}a_{lj}\dd_{kl}=a_{ki}a_{kj},
+\]
+so $(a)$ is orthogonal. Set $j=i$ and sum:
+\[
+   A'_{ii}=a_{ki}a_{li}A_{kl}=\dd_{kl}A_{kl}=A_{kk}.
+\]
+
+\textbf{(b)} Vectors carry one factor, $u'_i=\ip{\be'_i}{\bu}
+=a_{ki}u_k$. Hence
+\[
+   u'_iv'_i=a_{ki}a_{li}\,u_kv_l=\dd_{kl}u_kv_l=u_kv_k .
+\]
+Alternatively, apply (a) to $\bA=\bu\otimes\bv$, whose trace is
+$\ip\bu\bv$ by Theorem~\ref{thm:trace}.
+
+(c) The data are
+\[
+(A_{ij})=\begin{pmatrix}1&5&-5\\5&0&0\\-5&0&1\end{pmatrix},\qquad
+\be'_1=\tfrac1{\sqrt5}(-1,0,2),\qquad \be'_2=\be_2=(0,1,0).
+\]
+Fix $\be'_3$ by right-handedness, $\be'_3=\be'_1\times\be'_2$. The cross
+product $(-1,0,2)\times(0,1,0)$ has components
+\[
+\big(0\cdot0-2\cdot1,\ \ 2\cdot0-(-1)\cdot0,\ \ (-1)\cdot1-0\cdot0\big)
+=(-2,0,-1),
+\]
+so $\be'_3=\tfrac1{\sqrt5}(-2,0,-1)$. The change-of-basis matrix
+$\bQ=(a_{ij})$, $a_{ij}=\ip{\be_i}{\be'_j}$, carries the components of
+$\be'_j$ in its $j$th column:
+\[
+\bQ=\tfrac1{\sqrt5}\begin{pmatrix}-1&0&-2\\0&\sqrt5&0\\2&0&-1\end{pmatrix}.
+\]
+The law $A'_{ij}=a_{ki}a_{lj}A_{kl}$ is $\bA'=\bQ^{t}\bA\,\bQ$, which we read
+as $A'_{ij}=\ip{\be'_i}{\bA\be'_j}$. Compute the three columns $\bA\be'_j$
+(matrix times vector); for example
+\[
+\bA\be'_1=\tfrac1{\sqrt5}\bA\!\begin{pmatrix}-1\\0\\2\end{pmatrix}
+=\tfrac1{\sqrt5}\begin{pmatrix}1(-1)+5(0)-5(2)\\5(-1)+0+0\\-5(-1)+0+1(2)\end{pmatrix}
+=\tfrac1{\sqrt5}\begin{pmatrix}-11\\-5\\7\end{pmatrix},
+\]
+and likewise
+$\bA\be'_2=(5,0,0)^t$,
+$\bA\be'_3=\tfrac1{\sqrt5}(3,-10,9)^t$. Now
+$A'_{ij}=\ip{\be'_i}{\bA\be'_j}$ entry by entry:
+\[
+\begin{aligned}
+A'_{11}&=\tfrac1{\sqrt5}(-1,0,2)\!\cdot\!\tfrac1{\sqrt5}(-11,-5,7)
+=\tfrac{11+0+14}{5}=5,\\
+A'_{12}&=\tfrac1{\sqrt5}(-1,0,2)\!\cdot\!(5,0,0)=-\tfrac{5}{\sqrt5}=-\sqrt5,\\
+A'_{13}&=\tfrac1{\sqrt5}(-1,0,2)\!\cdot\!\tfrac1{\sqrt5}(3,-10,9)
+=\tfrac{-3+0+18}{5}=3,\\
+A'_{22}&=(0,1,0)\!\cdot\!(5,0,0)=0,\\
+A'_{23}&=(0,1,0)\!\cdot\!\tfrac1{\sqrt5}(3,-10,9)=-\tfrac{10}{\sqrt5}=-2\sqrt5,\\
+A'_{33}&=\tfrac1{\sqrt5}(-2,0,-1)\!\cdot\!\tfrac1{\sqrt5}(3,-10,9)
+=\tfrac{-6+0-9}{5}=-3,
+\end{aligned}
+\]
+with $A'_{21}=A'_{12}$, $A'_{31}=A'_{13}$, $A'_{32}=A'_{23}$ since $\bA'$ is
+symmetric ($\bA$ is). Therefore
+\[
+\bA'=\begin{pmatrix}5&-\sqrt5&3\\-\sqrt5&0&-2\sqrt5\\3&-2\sqrt5&-3\end{pmatrix}.
+\]
+Check: $\tr\bA'=5+0-3=2=1+0+1=\tr\bA$, confirming the invariance proved in
+part (a).
+\end{solution}
+
+\begin{problem}[Projection and reflection tensors]
+\textup{(a)} Consider a plane $P$ with unit normal $\bn$. Let $\bv\in\Et$ be
+arbitrary and $\bv_p$ its projection onto $P$. Verify
+$\bv=\bv_p+(\ip\bv\bn)\bn$ and find $\Proj{\bn}$ in
+$\bv_p=\Proj{\bn}\bv$.
+\textup{(b)} A tensor $\bA$ is a \emph{projection} iff $\bA^{t}=\bA$ and
+$\bA^{2}=\bA$. Show $\Proj{\bn}$ is a projection, and that
+$\Ob$, $\I$, $\bn\otimes\bn$ are projections.
+\textup{(c)} Let $\Refl{\bn}$ be the \emph{reflection} tensor for $P$. Find
+$\Refl{\bn}$ and its components relative to $\{\be_i\otimes\be_j\}$ for
+\textup{(i)} $\bn=\be_1$, \textup{(ii)}
+$\bn=\tfrac{\sqrt2}{2}(\be_1+\be_2)$.
+\end{problem}
+
+\begin{solution}
+The normal is a unit vector and the plane through the origin with that
+normal consists of the vectors orthogonal to it, so throughout
+\begin{equation}
+   \ip\bn\bn=1,\qquad
+   P=\{\bw\in\Et:\ \ip\bw\bn=0\}=\{\bn\}^{\perp},\qquad
+   \mathcal{N}=\operatorname{span}\{\bn\}, \tag{$\star_1$}
+\end{equation}
+$P$ being two dimensional and $\mathcal{N}$ one dimensional.
+
+\emph{(a)} The shadow of $\bv$ on the direction $\bn$ has signed length
+$\ip\bv\bn$, so the part of $\bv$ along the normal, and what is left after
+removing it, are
+\begin{equation}
+   \bv_n:=(\ip\bv\bn)\bn,\qquad \bv_p:=\bv-(\ip\bv\bn)\bn . \tag{$\star_2$}
+\end{equation}
+That $\bv_p$ lies in $P$ is not an assumption but a computation; dot it with
+$\bn$ and use bilinearity together with $\ip\bn\bn=1$:
+\[
+   \ip{\bv_p}{\bn}=\ip{\big[\bv-(\ip\bv\bn)\bn\big]}{\bn}
+   =\ip\bv\bn-(\ip\bv\bn)\,\ip\bn\bn
+   \overset{(\star_1)}{=}\ip\bv\bn-\ip\bv\bn=0 ,
+\]
+hence $\bv_p\in\{\bn\}^{\perp}=P$, and by construction $\bv=\bv_p+\bv_n$,
+which is the required identity.
+
+The splitting is unique. Suppose $\bv=\bw_p+\alpha\bn$ with $\bw_p\in P$ and
+$\alpha\in\Rn$. Subtracting the two expressions for $\bv$,
+\[
+   \bv_p-\bw_p=(\alpha-\ip\bv\bn)\bn ,
+\]
+whose left side lies in $P$ and whose right side lies in $\mathcal{N}$. A
+vector of $P\cap\mathcal{N}$ satisfies both $\bw=\lambda\bn$ and
+$\ip\bw\bn=0$, so $\lambda=\lambda\,\ip\bn\bn=\ip\bw\bn=0$ and
+$P\cap\mathcal{N}=\{\bze\}$. Therefore $\bw_p=\bv_p$ and
+$\alpha=\ip\bv\bn$, and $\Et=P\oplus\mathcal{N}$.
+
+Before writing $\bv_p=\Proj{\bn}\bv$ we must know the map $\bv\mapsto\bv_p$
+is linear, since only linear maps are tensors:
+\[
+\begin{aligned}
+   (\alpha\bu+\beta\bv)_p
+   &=\alpha\bu+\beta\bv-\big(\ip{(\alpha\bu+\beta\bv)}{\bn}\big)\bn\\
+   &=\alpha\bu+\beta\bv-\big(\alpha\,\ip\bu\bn+\beta\,\ip\bv\bn\big)\bn\\
+   &=\alpha\big[\bu-(\ip\bu\bn)\bn\big]+\beta\big[\bv-(\ip\bv\bn)\bn\big]
+   =\alpha\bu_p+\beta\bv_p .
+\end{aligned}
+\]
+Now recognise the subtracted term as a tensor acting on $\bv$. By the
+definition of the tensor product, $(\bn\otimes\bn)\bv=(\ip\bn\bv)\bn
+=(\ip\bv\bn)\bn$, so $(\star_2)$ becomes
+$\bv_p=\bv-(\bn\otimes\bn)\bv=[\I-\bn\otimes\bn]\bv$ for every $\bv$, and
+equality of tensors is equality of their action. Hence
+\begin{equation}
+   \Proj{\bn}=\I-\bn\otimes\bn,\qquad
+   (\Proj{\bn})_{ij}=\dd_{ij}-n_in_j , \tag{$\star_3$}
+\end{equation}
+the components following from $\I=\dd_{ij}\be_i\otimes\be_j$ and
+$(\bn\otimes\bn)_{ij}=n_in_j$.
+
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.05]
+  \fill[gray!12] (-2.5,-0.55) -- (2.5,-0.55) -- (3.3,0.5) -- (-1.7,0.5) -- cycle;
+  \draw[gray!65,thin] (-2.5,-0.55) -- (2.5,-0.55) -- (3.3,0.5) -- (-1.7,0.5) -- cycle;
+  \node[gray!75] at (-2.15,-0.28) {$P$};
+  \coordinate (O) at (0,0); \fill (O) circle (1.4pt);
+  \draw[vec] (O) -- (0,0.62); \node[left=2pt] at (0,0.38) {$\bn$};
+  \draw[gray!70,thin] (-0.17,0) -- (-0.17,0.17) -- (0,0.17);
+  \coordinate (Q) at (1.95,0.30);
+  \coordinate (V) at (1.95,1.45);
+  \draw[vec] (O) -- (V); \node[above left=-1pt] at (V) {$\bv$};
+  \draw[vec,black] (O) -- (Q);
+  \node[below=3pt] at (1.35,0.24) {$\bv_p=\Proj{\bn}\bv$};
+  \draw[vec,black] (Q) -- (V);
+  \node[right=3pt] at (1.98,0.88) {$(\ip\bv\bn)\bn=(\bn\otimes\bn)\bv$};
+  \draw[gray!70,thin] (Q) ++(-0.19,0.02) -- ++(0.02,0.19) -- ++(0.19,-0.02);
+\end{tikzpicture}
+\\[1.2ex]
+{\footnotesize\textsc{Figure P10.1.} $\bv=\bv_p+(\ip\bv\bn)\bn$ with
+$\ip{\bv_p}\bn=0$; $\Proj{\bn}$ returns the leg in $P$, $\bn\otimes\bn$ the
+leg along $\bn$, and $\Proj{\bn}+\bn\otimes\bn=\I$.}
+\end{figure}
+
+
+\emph{(b)} Everything rests on one property of the dyad, obtained by
+applying it twice to an arbitrary $\bv$ and unfolding the definition at each
+step:
+\begin{equation}
+   (\bn\otimes\bn)^{2}\bv=(\bn\otimes\bn)\big[(\ip\bn\bv)\bn\big]
+   =(\ip\bn\bv)(\ip\bn\bn)\bn
+   \overset{(\star_1)}{=}(\ip\bn\bv)\bn=(\bn\otimes\bn)\bv , \tag{$\star_4$}
+\end{equation}
+true for every $\bv$, so $(\bn\otimes\bn)^{2}=\bn\otimes\bn$. Note where the
+hypothesis enters: the middle step used $\ip\bn\bn=1$, and for a normal of
+length other than one the dyad would not be idempotent. Its symmetry follows
+from the definition of the transpose, since for all $\bu,\bv$
+\[
+   \ip\bu{(\bn\otimes\bn)\bv}=\ip{\bu}{(\ip\bn\bv)\bn}
+   =(\ip\bn\bv)(\ip\bu\bn)=\ip\bv{(\ip\bn\bu)\bn}
+   =\ip\bv{(\bn\otimes\bn)\bu},
+\]
+which says $(\bn\otimes\bn)^{t}=\bn\otimes\bn$. Transposition being linear,
+and $\I^{t}=\I$,
+\[
+   \Proj{\bn}^{t}=\I^{t}-(\bn\otimes\bn)^{t}=\I-\bn\otimes\bn=\Proj{\bn},
+\]
+and expanding the square, the two equal cross terms combining into one,
+\[
+   \Proj{\bn}^{2}=\I-\bn\otimes\bn-\bn\otimes\bn+(\bn\otimes\bn)^{2}
+   =\I-2\,\bn\otimes\bn+(\bn\otimes\bn)^{2}
+   \overset{(\star_4)}{=}\I-\bn\otimes\bn=\Proj{\bn}.
+\]
+The same two facts in components, which is the form used in calculations;
+recall $(\bA\bB)_{ij}=A_{ik}B_{kj}$, and that a Kronecker delta collapses
+the sum it is contracted with, $\dd_{ik}n_k=n_i$ and
+$\dd_{ik}\dd_{kj}=\dd_{ij}$:
+\[
+\begin{aligned}
+   \big[(\bn\otimes\bn)^{2}\big]_{ij}&=(n_in_k)(n_kn_j)
+   =n_i(n_kn_k)n_j=n_in_j,\\
+   \big[\Proj{\bn}^{2}\big]_{ij}&=(\dd_{ik}-n_in_k)(\dd_{kj}-n_kn_j)\\
+   &=\dd_{ik}\dd_{kj}-\dd_{ik}n_kn_j-n_in_k\dd_{kj}+n_in_k n_kn_j\\
+   &=\dd_{ij}-n_in_j-n_in_j+n_in_j\\
+   &=\dd_{ij}-n_in_j=(\Proj{\bn})_{ij},\\
+   (\Proj{\bn})_{ji}&=\dd_{ji}-n_jn_i=\dd_{ij}-n_in_j=(\Proj{\bn})_{ij}.
+\end{aligned}
+\]
+The remaining three are immediate from the definitions. For the zero tensor,
+$\ip\bu{\Ob\bv}=\ip\bu\bze=0=\ip\bv\bze=\ip\bv{\Ob\bu}$ gives $\Ob^{t}=\Ob$,
+and $\Ob^{2}\bv=\Ob(\Ob\bv)=\Ob\bze=\bze=\Ob\bv$ gives $\Ob^{2}=\Ob$; it
+projects onto the trivial subspace $\{\bze\}$. For the identity,
+$\ip\bu{\I\bv}=\ip\bu\bv=\ip\bv\bu=\ip\bv{\I\bu}$ gives $\I^{t}=\I$, and
+$\I^{2}\bv=\I(\I\bv)=\I\bv$ gives $\I^{2}=\I$; it projects onto all of
+$\Et$. For $\bn\otimes\bn$, symmetry and idempotency are exactly what was
+proved above, and it projects onto the normal line, since
+$(\bn\otimes\bn)\bv=\bv_n$ by $(\star_2)$.
+
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=0.95]
+  \fill[gray!12] (-2.2,-0.5) -- (2.6,-0.5) -- (3.35,0.45) -- (-1.45,0.45) -- cycle;
+  \draw[gray!65,thin] (-2.2,-0.5) -- (2.6,-0.5) -- (3.35,0.45) -- (-1.45,0.45) -- cycle;
+  \node[gray!75] at (-1.9,-0.28) {$P$};
+  \coordinate (O) at (0,0); \fill (O) circle (1.3pt);
+  \coordinate (Q) at (1.75,0.22);
+  \coordinate (V) at (1.75,1.45);
+  \draw[vec] (O) -- (V); \node[above left=-1pt] at (V) {$\bv$};
+  \draw[vec] (O) -- (Q); \node[below=3pt] at (1.35,0.18) {$\Proj{\bn}\bv$};
+  \draw[guide] (V) -- (Q);
+  \draw[-{Stealth[length=2mm]},thick,gray!55] (Q) ++(0.12,0.30) arc (110:-110:0.34);
+  \node[gray!70,right=12pt] at (2.05,0.22) {$\Proj{\bn}$ again};
+\end{tikzpicture}
+\\[1.2ex]
+{\footnotesize\textsc{Figure P10.2.} $\Proj{\bn}^{2}=\Proj{\bn}$: the second
+application meets a vector already in $P$, since
+$\ip{(\Proj{\bn}\bv)}{\bn}=0$.}
+\end{figure}
+
+
+The two projections $\Proj{\bn}$ and $\bn\otimes\bn$ are not independent of
+each other: they are \emph{complementary}, and this is the algebraic face of
+$\Et=P\oplus\mathcal{N}$. Directly from $(\star_3)$ and $(\star_4)$,
+\[
+\begin{aligned}
+   \Proj{\bn}&+\bn\otimes\bn=\I,\\
+   \Proj{\bn}(\bn\otimes\bn)&=(\I-\bn\otimes\bn)(\bn\otimes\bn)
+   =\bn\otimes\bn-(\bn\otimes\bn)^{2}\\
+   &\overset{(\star_4)}{=}\Ob=(\bn\otimes\bn)\Proj{\bn},
+\end{aligned}
+\]
+so each annihilates the range of the other. Their traces count the
+dimensions of what they keep; using linearity of the trace with $\tr\I=3$
+and $\tr(\bu\otimes\bv)=\ip\bu\bv$,
+\[
+   \tr\Proj{\bn}=\tr\I-\tr(\bn\otimes\bn)=3-\ip\bn\bn=3-1=2=\dim P,
+\]
+\[
+   \tr(\bn\otimes\bn)=\ip\bn\bn=1=\dim\mathcal{N}.
+\]
+Finally $\Proj{\bn}$ is singular, since it kills the nonzero vector $\bn$:
+\[
+   \Proj{\bn}\bn=\bn-(\bn\otimes\bn)\bn=\bn-(\ip\bn\bn)\bn=\bn-\bn=\bze,
+\]
+\[
+   \bn\neq\bze
+   \ \Longrightarrow\ \det\Proj{\bn}=0 ,
+\]
+so no projection other than $\I$ is invertible.
+
+\emph{(c)} The mirror image must leave the part lying in the plane alone and
+send the normal part to its negative. In the notation of $(\star_2)$ this
+says $\Refl{\bn}\bv=\bv_p-\bv_n$, and subtracting the normal part once to
+reach the plane and once more to pass through it produces the factor $2$:
+\begin{equation}
+   \Refl{\bn}\bv=\bv_p-\bv_n
+   =\big[\bv-(\ip\bv\bn)\bn\big]-(\ip\bv\bn)\bn
+   =\bv-2(\ip\bv\bn)\bn
+   =\big[\I-2\,\bn\otimes\bn\big]\bv,
+\end{equation}
+valid for every $\bv$, whence
+\begin{equation}
+   \Refl{\bn}=\I-2\,\bn\otimes\bn=\Proj{\bn}-\bn\otimes\bn,\qquad
+   (\Refl{\bn})_{ij}=\dd_{ij}-2n_in_j . \tag{$\star_5$}
+\end{equation}
+
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.05]
+  \fill[gray!12] (-2.6,-0.5) -- (2.6,-0.5) -- (3.35,0.45) -- (-1.85,0.45) -- cycle;
+  \draw[gray!65,thin] (-2.6,-0.5) -- (2.6,-0.5) -- (3.35,0.45) -- (-1.85,0.45) -- cycle;
+  \node[gray!75] at (-2.2,-0.28) {$P$};
+  \coordinate (O) at (0,0); \fill (O) circle (1.4pt);
+  \coordinate (Q) at (1.8,-0.02);
+  \coordinate (V) at (1.8,1.2);
+  \coordinate (W) at (1.8,-1.24);
+  \draw[vec] (O) -- (0,0.62); \node[left=2pt] at (0,0.38) {$\bn$};
+  \draw[vec] (O) -- (V); \node[above left=-1pt] at (V) {$\bv$};
+  \draw[vec] (O) -- (W); \node[below left=-1pt] at (W) {$\Refl{\bn}\bv$};
+  \draw[vec,black] (O) -- (Q); \node[above left=-1pt and 6pt] at (Q) {$\bv_p$};
+  \draw[thinvec,black] (Q) -- (V); \node[right=3pt] at (1.83,0.62) {$\bv_n$};
+  \draw[thinvec,black] (Q) -- (W); \node[right=3pt] at (1.83,-0.64) {$-\bv_n$};
+  \draw[gray!70,thin] (Q) ++(-0.19,0.02) -- ++(0.02,0.19) -- ++(0.19,-0.02);
+\end{tikzpicture}
+\\[1.2ex]
+{\footnotesize\textsc{Figure P10.3.} $\Refl{\bn}\bv=\bv_p-\bv_n$; the normal
+part is removed twice, giving the factor $2$ in
+$\Refl{\bn}=\I-2\,\bn\otimes\bn$.}
+\end{figure}
+
+
+Three properties can be established before any component is computed, and
+they will serve as checks on the two matrices below. Symmetry is inherited
+from $\I$ and $\bn\otimes\bn$, and the square collapses because the dyad is
+idempotent:
+\[
+   \Refl{\bn}^{t}=\I^{t}-2(\bn\otimes\bn)^{t}=\I-2\,\bn\otimes\bn
+   =\Refl{\bn},
+\]
+\[
+   \Refl{\bn}^{2}=\I-2\,\bn\otimes\bn-2\,\bn\otimes\bn
+   +4(\bn\otimes\bn)^{2}
+   =\I-4\,\bn\otimes\bn+4(\bn\otimes\bn)^{2}
+   \overset{(\star_4)}{=}\I,
+\]
+and the same in components,
+\[
+\begin{aligned}
+   \big[\Refl{\bn}^{2}\big]_{ij}&=(\dd_{ik}-2n_in_k)(\dd_{kj}-2n_kn_j)\\
+   &=\dd_{ij}-2n_in_j-2n_in_j+4n_i(n_kn_k)n_j=\dd_{ij},
+\end{aligned}
+\]
+Thus $\Refl{\bn}$ is its own inverse, $\Refl{\bn}^{-1}=\Refl{\bn}$:
+reflecting twice restores the original, as it must. Combining this with
+symmetry gives $\Refl{\bn}^{t}\Refl{\bn}=\Refl{\bn}^{2}=\I$, so
+$\Refl{\bn}$ is orthogonal and therefore preserves every inner product,
+hence every length and angle:
+\[
+   \ip{\Refl{\bn}\bu}{\Refl{\bn}\bv}
+   =\ip\bu{\Refl{\bn}^{t}\Refl{\bn}\bv}=\ip\bu{\I\bv}=\ip\bu\bv .
+\]
+For the determinant, write $\Refl{\bn}=\I+\ba\otimes\bb$ with $\ba=-2\bn$
+and $\bb=\bn$; Problem~21(f) states $\det(\I+\ba\otimes\bb)=1+\ip\ba\bb$, so
+\[
+   \det\Refl{\bn}=1+\ip{(-2\bn)}{\bn}=1-2\,\ip\bn\bn=1-2=-1 ,
+\]
+the negative sign saying that a reflection reverses orientation, in contrast
+to a rotation. The eigenvalues follow from the geometry: the normal is
+reversed and the plane is fixed,
+\[
+\begin{aligned}
+   \Refl{\bn}\bn&=\bn-2(\ip\bn\bn)\bn=\bn-2\bn=-\bn,\\
+   \Refl{\bn}\bw&=\bw-2(\ip\bw\bn)\bn=\bw \quad (\bw\in P),
+\end{aligned}
+\]
+so $\lambda=-1$ once and $\lambda=+1$ twice, since $\dim P=2$. This is
+confirmed by the characteristic polynomial: with
+\[
+   I_1=\tr\Refl{\bn}=\tr\I-2\,\tr(\bn\otimes\bn)=3-2\,\ip\bn\bn=1,
+\]
+\[
+   I_2=\tfrac12\big[I_1^{2}-\tr(\Refl{\bn}^{2})\big]
+   =\tfrac12\big[1-\tr\I\big]=\tfrac12[1-3]=-1,
+   \qquad I_3=\det\Refl{\bn}=-1,
+\]
+Problem~23 gives
+\[
+   \det(\Refl{\bn}-\lambda\I)=-\lambda^{3}+I_1\lambda^{2}-I_2\lambda+I_3
+   =-\lambda^{3}+\lambda^{2}+\lambda-1
+   =-(\lambda-1)^{2}(\lambda+1),
+\]
+whose roots are $+1,+1,-1$ as expected.
+
+\emph{(i) $\bn=\be_1$.} Here $n_i=\ip{\be_1}{\be_i}=\dd_{i1}$, so
+$n_1=1$ and $n_2=n_3=0$, and the outer product has entries
+$n_in_j=\dd_{i1}\dd_{j1}$, which vanish unless $i=j=1$:
+\[
+   (n_in_j)=\begin{pmatrix}1&0&0\\0&0&0\\0&0&0\end{pmatrix}.
+\]
+Substituting into $(\star_5)$ and subtracting entry by entry,
+\[
+   (R_{ij})=\dd_{ij}-2n_in_j
+   =\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}
+   -2\begin{pmatrix}1&0&0\\0&0&0\\0&0&0\end{pmatrix}
+   =\begin{pmatrix}-1&0&0\\0&1&0\\0&0&1\end{pmatrix}.
+\]
+Reassembling the tensor from its components,
+$\Refl{\be_1}=R_{ij}\,\be_i\otimes\be_j$, the only surviving terms being the
+diagonal ones,
+\[
+   \Refl{\be_1}=-\be_1\otimes\be_1+\be_2\otimes\be_2+\be_3\otimes\be_3 .
+\]
+Its trace is $R_{11}+R_{22}+R_{33}=-1+1+1=1$ and, the matrix being
+diagonal, its determinant is the product of the diagonal entries,
+$(-1)(1)(1)=-1$, matching the general results.
+
+\emph{(ii) $\bn=\tfrac{\sqrt2}{2}(\be_1+\be_2)$.} First confirm the
+hypothesis $\ip\bn\bn=1$:
+\[
+   |\bn|^{2}=\Big(\tfrac{\sqrt2}{2}\Big)^{2}(1^{2}+1^{2}+0^{2})
+   =\tfrac12\cdot2=1 .
+\]
+The components are $n_1=n_2=\tfrac{\sqrt2}{2}=\tfrac{1}{\sqrt2}$ and
+$n_3=0$, so the nonzero products are
+\[
+   n_1n_1=n_1n_2=n_2n_1=n_2n_2=\tfrac{1}{\sqrt2}\cdot\tfrac{1}{\sqrt2}
+   =\tfrac12 ,
+\]
+every product involving the index $3$ vanishing because $n_3=0$. Hence
+\[
+   (n_in_j)=\tfrac12\begin{pmatrix}1&1&0\\1&1&0\\0&0&0\end{pmatrix},
+   \qquad 2(n_in_j)=\begin{pmatrix}1&1&0\\1&1&0\\0&0&0\end{pmatrix},
+\]
+and $(\star_5)$ gives, subtracting entry by entry,
+\[
+   (R_{ij})=\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}
+   -\begin{pmatrix}1&1&0\\1&1&0\\0&0&0\end{pmatrix}
+   =\begin{pmatrix}0&-1&0\\-1&0&0\\0&0&1\end{pmatrix}.
+\]
+Reassembling $\Refl{\bn}=R_{ij}\be_i\otimes\be_j$ with the three nonzero
+entries $R_{12}=R_{21}=-1$ and $R_{33}=1$,
+\[
+   \Refl{\bn}=-\be_1\otimes\be_2-\be_2\otimes\be_1+\be_3\otimes\be_3 .
+\]
+
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.45]
+  \draw[guide] (-1.75,0) -- (1.55,0); \draw[guide] (0,-1.6) -- (0,1.35);
+  \node[gray!70] at (1.68,0.05) {$x_1$}; \node[gray!70] at (0.15,1.3) {$x_2$};
+  \draw[very thick] (-1.15,1.15) -- (1.15,-1.15);
+  \node[gray!85,font=\footnotesize,align=center] at (-1.45,1.45)
+     {$P:\ x_1+x_2=0$ (edge on),\\[-2pt]fixed pointwise};
+  \draw[vec] (0,0) -- (0.707,0.707);
+  \node[above right=-1pt] at (0.70,0.70) {$\bn$};
+  \draw (0.34,0) arc (0:45:0.34); \node at (0.53,0.16) {\footnotesize$45^{\circ}$};
+  \draw[vec] (0,0) -- (1,0); \node[above right=-1pt] at (1.0,0.02) {$\be_1$};
+  \draw[vec] (0,0) -- (0,1); \node[above left=-1pt] at (0,1.0) {$\be_2$};
+  \draw[vec,gray!62] (0,0) -- (0,-1);
+  \draw[vec,gray!62] (0,0) -- (-1,0);
+  \node[gray!72,font=\small] at (-0.78,-0.30) {$\Refl{\bn}\be_2=-\be_1$};
+  \node[gray!72,font=\small] at (-0.30,-1.18) {$\Refl{\bn}\be_1=-\be_2$};
+  \draw[guide,-{Stealth[length=1.5mm]}] (1.02,0.13) arc (7:-83:1.03);
+  \draw[guide,-{Stealth[length=1.5mm]}] (0.13,1.02) arc (83:173:1.03);
+\end{tikzpicture}
+\\[1.2ex]
+{\footnotesize\textsc{Figure P10.4.} Case (ii): the mirror $x_1+x_2=0$ seen
+edge on, normal at $45^{\circ}$. The axes are swapped and negated, which is
+why $(R_{ij})$ has zero diagonal and $-1$ off it.}
+\end{figure}
+
+
+It remains to verify that this matrix does what the general theory
+predicted. Compute the action on each basis vector from
+$\Refl{\bn}\be_j=R_{ij}\be_i$, that is by reading the $j$th column and
+multiplying it against $\{\be_i\}$:
+\[
+\begin{aligned}
+   \Refl{\bn}\be_1&=R_{11}\be_1+R_{21}\be_2+R_{31}\be_3
+    =0\,\be_1+(-1)\be_2+0\,\be_3=-\be_2,\\
+   \Refl{\bn}\be_2&=R_{12}\be_1+R_{22}\be_2+R_{32}\be_3
+    =(-1)\be_1+0\,\be_2+0\,\be_3=-\be_1,\\
+   \Refl{\bn}\be_3&=R_{13}\be_1+R_{23}\be_2+R_{33}\be_3
+    =0\,\be_1+0\,\be_2+1\,\be_3=\be_3 .
+\end{aligned}
+\]
+\emph{The normal is reversed.} Using linearity and the three images just
+computed,
+\[
+   \Refl{\bn}\bn=\tfrac{\sqrt2}{2}\big(\Refl{\bn}\be_1+\Refl{\bn}\be_2\big)
+   =\tfrac{\sqrt2}{2}(-\be_2-\be_1)
+   =-\tfrac{\sqrt2}{2}(\be_1+\be_2)=-\bn .
+\]
+\emph{The plane is fixed pointwise.} A basis of $P$ is
+$\{\be_1-\be_2,\ \be_3\}$; both really lie in $P$, since
+\[
+   \ip{(\be_1-\be_2)}{\bn}=\tfrac{\sqrt2}{2}(1-1)=0,\qquad
+   \ip{\be_3}{\bn}=\tfrac{\sqrt2}{2}(0+0)=0,
+\]
+and both are fixed,
+\[
+   \Refl{\bn}(\be_1-\be_2)=\Refl{\bn}\be_1-\Refl{\bn}\be_2
+   =-\be_2-(-\be_1)=\be_1-\be_2,\qquad
+   \Refl{\bn}\be_3=\be_3 .
+\]
+So the eigenvalues really are $-1$ once and $+1$ twice.
+\emph{The involution, checked on the matrix.} Multiplying $R$ by itself and
+writing out all nine entries,
+\[
+\begin{aligned}
+   R^{2}&=\begin{pmatrix}0&-1&0\\-1&0&0\\0&0&1\end{pmatrix}
+         \begin{pmatrix}0&-1&0\\-1&0&0\\0&0&1\end{pmatrix}\\[1mm]
+   &={\footnotesize\begin{pmatrix}
+     (0)(0)+(-1)(-1)+0 & (0)(-1)+(-1)(0)+0 & 0\\
+     (-1)(0)+(0)(-1)+0 & (-1)(-1)+(0)(0)+0 & 0\\
+     0 & 0 & (1)(1)\end{pmatrix}}
+   =\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},
+\end{aligned}
+\]
+so $R^{2}=I$, and since $R^{t}=R$ this also confirms $R^{t}R=I$ entry by
+entry. \emph{Trace and determinant.} Summing the diagonal,
+$\tr R=R_{11}+R_{22}+R_{33}=0+0+1=1$; expanding the determinant along the
+third row, whose only nonzero entry is $R_{33}=1$,
+\[
+   \det R=1\cdot\det\begin{pmatrix}0&-1\\-1&0\end{pmatrix}
+   =1\cdot\big[(0)(0)-(-1)(-1)\big]=-1 .
+\]
+Both agree with $I_1=1$ and $I_3=-1$ found from $(\star_5)$, and with the
+spectrum $\{-1,+1,+1\}$.
+\end{solution}
+
+
+\begin{problem}[Triple products; two induced tensors]
+(a) Prove $\ba\times(\bb\times\bc)=(\ip\ba\bc)\bb-(\ip\ba\bb)\bc$ and
+$\bv=(\ip\bv\be)\be+\be\times(\bv\times\be)$ ($\be$ unit); (b) tensor for
+$f(\bv)=\be\times(\bv\times\be)$; (c) tensor for $f(\bv)=\bv+\ba\times\bv$.
+\end{problem}
+\begin{solution}
+\textbf{(a)} Write the inner cross product first, then the outer one:
+\[
+   (\bb\times\bc)_k=\eps_{klm}b_lc_m,
+   \qquad
+   [\ba\times(\bb\times\bc)]_i=\eps_{ijk}a_j\,(\bb\times\bc)_k
+   =\eps_{ijk}\eps_{klm}\,a_jb_lc_m .
+\]
+Contract the two symbols. Theorem~\ref{thm:epsdelta} contracts on the last
+index, and $\eps_{ijk}=\eps_{kij}$ by cyclic shift, so
+\[
+   \eps_{ijk}\eps_{klm}=\eps_{kij}\eps_{klm}
+   =\dd_{il}\dd_{jm}-\dd_{im}\dd_{jl}.
+\]
+Substituting and letting the deltas collapse the sums,
+\[
+   [\ba\times(\bb\times\bc)]_i
+   =(\dd_{il}\dd_{jm}-\dd_{im}\dd_{jl})a_jb_lc_m
+   =a_jc_j\,b_i-a_jb_j\,c_i
+   =(\ip\ba\bc)b_i-(\ip\ba\bb)c_i .
+\]
+Now put $\ba=\bc=\be$ with $|\be|=1$, so $\ip\be\be=1$:
+\[
+   \be\times(\bv\times\be)=(\ip\be\be)\bv-(\ip\be\bv)\be
+   =\bv-(\ip\bv\be)\be ,
+\]
+which rearranges to $\bv=(\ip\bv\be)\be+\be\times(\bv\times\be)$.
+
+\textbf{(b)} From (a), $f(\bv)=\bv-(\ip\be\bv)\be$. Both terms are linear
+in $\bv$, and $(\ip\be\bv)\be=(\be\otimes\be)\bv$, so
+\[
+   f(\bv)=\big(\I-\be\otimes\be\big)\bv,
+   \qquad \bA=\I-\be\otimes\be=\Proj\be ,
+\]
+the projection of Problem 10 onto the plane perpendicular to $\be$. Check:
+$f(\be)=\be-\be=\bze$ and $f(\bw)=\bw$ for $\bw\perp\be$.
+
+\textbf{(c)} $f(\bv)=\bv+\ba\times\bv$. In components,
+$(\ba\times\bv)_i=\eps_{ijk}a_jv_k$, so the second term is
+$\bOm\bv$ with $\Omega_{ik}=\eps_{ijk}a_j=-\eps_{ikj}a_j$, skew by
+Problem 16. Hence
+\[
+   \bA=\I+\bOm,\qquad A_{ij}=\dd_{ij}-\eps_{ijk}a_k .
+\]
+Linearity of $f$ is then visible, and $\det\bA=1+|\ba|^{2}\neq0$ by
+Problem 21(g), so $\bA$ is invertible for every $\ba$.
+\end{solution}
+
+\begin{problem}[Two-point tensors]
+For orthonormal bases $\{\be_i\}$ of $\Et$ and $\{\hbE_A\}$ of $\hEt$,
+show a linear $\bA:\hEt\to\Et$ is $\bA=A_{iB}\be_i\otimes\hbE_B$ with
+$A_{iB}=\ip{\be_i}{\bA\hbE_B}$.
+\end{problem}
+\begin{solution}
+\emph{Step 1.} $\bA\hbE_B\in\Et$, so resolve it on the spatial basis and
+name the coefficients:
+\[
+   \bA\hbE_B=\big(\ip{\be_i}{\bA\hbE_B}\big)\be_i=:A_{iB}\,\be_i .
+\]
+The dot product is legal, both arguments being in $\Et$.
+
+\emph{Step 2.} For $\bV=V_B\hbE_B\in\hEt$, by linearity,
+\[
+   \bA\bV=V_B\,\bA\hbE_B=A_{iB}V_B\,\be_i .
+\]
+
+\emph{Step 3.} The mixed dyad acts by $(\ba\otimes\bb)\bc=(\ip\bb\bc)\ba$:
+\[
+   (\be_i\otimes\hbE_B)\bV=\big(\ip{\hbE_B}{\bV}\big)\be_i=V_B\,\be_i ,
+\]
+legal since $\hbE_B,\bV\in\hEt$ while $\be_i\in\Et$. Hence
+$\big(A_{iB}\be_i\otimes\hbE_B\big)\bV=A_{iB}V_B\be_i=\bA\bV$ for all
+$\bV$, and
+\[
+   \boxed{\ \bA=A_{iB}\,\be_i\otimes\hbE_B,\qquad
+   A_{iB}=\ip{\be_i}{\bA\hbE_B}.\ }
+\]
+
+\emph{Step 4, consistency.} Feed $\hbE_C$ to the dyadic form, then dot
+with $\be_j$:
+\[
+   \big(A_{iB}\be_i\otimes\hbE_B\big)\hbE_C=A_{iB}\dd_{BC}\be_i
+   =A_{iC}\be_i,
+   \qquad
+   \ip{\be_j}{\bA\hbE_C}=A_{iC}\dd_{ji}=A_{jC}.
+\]
+\end{solution}
+
+\begin{remark}[which dots are legal]\label{rem:twopointlegal}
+\[
+\begin{aligned}
+   \ip{\be_i}{\bA\hbE_B}&\quad\text{defined, both in }\Et,\\
+   \ip{\hbE_B}{\bV}&\quad\text{defined, both in }\hEt,\\
+   \ip{\be_i}{\hbE_B}&\quad\text{\emph{not} defined},\\
+   \be_i\otimes\hbE_B&\quad\text{defined, a map }\hEt\to\Et .
+\end{aligned}
+\]
+Also $\bA^{t}=A_{iB}\hbE_B\otimes\be_i$ maps $\Et\to\hEt$, so
+$\bA+\bA^{t}$ is meaningless: a two-point tensor is neither symmetric nor
+skew. The object built here is $\bF=F_{iA}\be_i\otimes\hbE_A$ of \eqr{2.39}.
+\end{remark}
+
+\begin{problem}[Riesz representation for tensors]
+Show a linear $g:\Lin\to\Rn$ is $g(\bV)=\bA\cdot\bV$ for a unique $\bA$.
+\end{problem}
+\begin{solution}
+\emph{Existence.} Define the nine numbers
+\[
+   A_{ij}:=g(\be_i\otimes\be_j),\qquad
+   \bA:=A_{ij}\,\be_i\otimes\be_j .
+\]
+Resolve an arbitrary $\bV$ on the same basis,
+$\bV=V_{ij}\be_i\otimes\be_j$ with $V_{ij}=\ip{\be_i}{\bV\be_j}$. Since
+$g$ is linear and the $V_{ij}$ are scalars,
+\[
+   g(\bV)=g\big(V_{ij}\be_i\otimes\be_j\big)
+        =V_{ij}\,g(\be_i\otimes\be_j)
+        =V_{ij}A_{ij}=\bA\cdot\bV ,
+\]
+the last step being the definition $\bA\cdot\bV=A_{ij}V_{ij}$ of the
+tensor inner product.
+
+\emph{Uniqueness.} If $\bA\cdot\bV=\bA'\cdot\bV$ for every $\bV$, then
+$(\bA-\bA')\cdot\bV=0$ for every $\bV$. Choose $\bV=\bA-\bA'$:
+\[
+   0=(\bA-\bA')\cdot(\bA-\bA')=|\bA-\bA'|^{2}
+   \ \Longrightarrow\ \bA=\bA' .
+\]
+This is the tensor version of Problem 13's vector counterpart, and the
+proof is the same one twice: linearity gives existence through a basis,
+positive definiteness of the inner product gives uniqueness.
+\end{solution}
+
+\begin{problem}[Symmetric--skew decomposition]
+$\bA=\bS+\bW$, $\bS=\tfrac12(\bA+\bA^t)$, $\bW=\tfrac12(\bA-\bA^t)$. (a)
+uniqueness; (b) $\Sym,\Skw$ are orthogonal subspaces,
+$\mathbb{E}^9=\Sym\oplus\Skw$.
+\end{problem}
+\begin{solution}
+\emph{Existence.} With $\bS=\tfrac12(\bA+\bA^{t})$ and
+$\bW=\tfrac12(\bA-\bA^{t})$,
+\[
+   \bS+\bW=\tfrac12(\bA+\bA^{t})+\tfrac12(\bA-\bA^{t})
+   =\tfrac12\big(\bA+\bA^{t}+\bA-\bA^{t}\big)=\tfrac12(2\bA)=\bA ,
+\]
+and, by $(\bA+\bB)^{t}=\bA^{t}+\bB^{t}$ and $(\bA^{t})^{t}=\bA$,
+\[
+\begin{aligned}
+   \bS^{t}&=\tfrac12\big(\bA^{t}+(\bA^{t})^{t}\big)
+         =\tfrac12(\bA^{t}+\bA)=\bS,\\
+   \bW^{t}&=\tfrac12\big(\bA^{t}-\bA\big)
+         =-\tfrac12(\bA-\bA^{t})=-\bW .
+\end{aligned}
+\]
+
+\textbf{(a) Uniqueness.} Let $\bA=\bS'+\bW'$ with $(\bS')^{t}=\bS'$,
+$(\bW')^{t}=-\bW'$. Transpose:
+\[
+   \bA^{t}=(\bS'+\bW')^{t}=(\bS')^{t}+(\bW')^{t}=\bS'-\bW' .
+\]
+Now add and subtract this from $\bA=\bS'+\bW'$:
+\[
+\begin{aligned}
+   \bA+\bA^{t}&=2\bS'\ \Longrightarrow\ \bS'=\tfrac12(\bA+\bA^{t})=\bS,\\
+   \bA-\bA^{t}&=2\bW'\ \Longrightarrow\ \bW'=\tfrac12(\bA-\bA^{t})=\bW .
+\end{aligned}
+\]
+\textbf{(b) Orthogonal subspaces.} Each is a subspace:
+$(\alpha\bS_{1}+\beta\bS_{2})^{t}=\alpha\bS_{1}+\beta\bS_{2}$, and the
+same with a minus sign for $\Skw$. For orthogonality, with
+$\bS\cdot\bW=S_{ij}W_{ij}$,
+\[
+   \bS\cdot\bW=S_{ij}W_{ij}
+   \ \overset{(1)}{=}\ S_{ji}W_{ij}
+   \ \overset{(2)}{=}\ S_{ij}W_{ji}
+   \ \overset{(3)}{=}\ -S_{ij}W_{ij}=-\bS\cdot\bW ,
+\]
+with (1) $S_{ij}=S_{ji}$, (2) a relabelling, (3) $W_{ji}=-W_{ij}$. Hence
+$\bS\cdot\bW=0$.
+
+\emph{Dimensions.} $\bS$ is fixed by
+$S_{11},S_{22},S_{33},S_{12},S_{13},S_{23}$, so $\dim\Sym=6$. For $\bW$,
+$W_{ii}=-W_{ii}$ gives a zero diagonal, leaving
+$W_{12},W_{13},W_{23}$, so $\dim\Skw=3$. Their sum is $9$, and they meet
+only in $\Ob$, since $\bA=\bA^{t}=-\bA$ forces $2\bA=\Ob$. Therefore
+\[
+   \mathbb{E}^{9}=\Sym\oplus\Skw .
+\]
+\end{solution}
+
+\begin{remark}[three uses]\label{rem:symskwuse}
+(i) $\ip{\ba}{\bA\ba}=\ip{\ba}{\bS\ba}$ by Problem 6(a), so positive
+definiteness \eqr{3.13} sees only $\bS$.
+(ii) Chapter 4 splits $\bL=\grad\bv=\bD+\bW$ into stretching and spin;
+part (a) is what makes them unique.
+(iii) By Problem 16 every skew $\bW$ is $\bW\bu=\bom\times\bu$, which is
+why $\dim\Skw=3$.
+
+Expanding $\bA\cdot\bA=(\bS+\bW)\cdot(\bS+\bW)$ and killing the cross
+terms by (b) gives $|\bA|^{2}=|\bS|^{2}+|\bW|^{2}$: the splitting is an
+orthogonal projection, not merely a decomposition.
+\end{remark}
+
+\begin{problem}[Spherical--deviatoric decomposition]
+$\bT=\bA+\alpha\I$, $\tr\bA=0$, $3\alpha=\tr\bT$. (a) uniqueness; (b)
+$\Sph,\Dev$ orthogonal, $\mathbb{E}^9=\Sph\oplus\Dev$.
+\end{problem}
+\begin{solution}
+\emph{Existence.} Put $\alpha=\tfrac13\tr\bT$ and $\bA=\bT-\alpha\I$.
+Then $\bT=\bA+\alpha\I$ and, using $\tr\I=\dd_{ii}=3$,
+\[
+   \tr\bA=\tr\bT-\alpha\,\tr\I=\tr\bT-\tfrac13(\tr\bT)(3)=0 .
+\]
+
+\textbf{(a) Uniqueness.} Let $\bT=\bB+\beta\I$ with $\tr\bB=0$. Take the
+trace:
+\[
+   \tr\bT=\tr\bB+\beta\,\tr\I=0+3\beta
+   \ \Longrightarrow\ \beta=\tfrac13\tr\bT=\alpha ,
+\]
+and then $\bB=\bT-\beta\I=\bT-\alpha\I=\bA$.
+
+\textbf{(b) Orthogonal subspaces.} Both are subspaces: $\Sph$ is the span
+of $\I$, and $\tr$ is linear so $\Dev=\{\bD:\tr\bD=0\}$ is its kernel.
+For $\lambda\I\in\Sph$ and $\bD\in\Dev$, using
+$\I\cdot\bD=\dd_{ij}D_{ij}=D_{ii}$,
+\[
+   (\lambda\I)\cdot\bD=\lambda\,\tr\bD=\lambda\cdot0=0 .
+\]
+Dimensions: $\dim\Sph=1$; $\tr:\mathbb{E}^{9}\to\Rn$ is onto, so its
+kernel has $\dim\Dev=9-1=8$. Since $1+8=9$ and
+$\Sph\cap\Dev=\{\Ob\}$, because $\lambda\I\in\Dev$ forces
+$3\lambda=0$,
+\[
+   \mathbb{E}^{9}=\Sph\oplus\Dev .
+\]
+\end{solution}
+
+\begin{remark}[the two splittings are independent]\label{rem:twosplits}
+Problems 14 and 15 split $\mathbb{E}^{9}$ two different ways,
+$\Sym\oplus\Skw$ and $\Sph\oplus\Dev$, and the two are compatible rather
+than competing: $\Sph\subset\Sym$, so a single tensor decomposes as
+\[
+   \bT=\underbrace{\alpha\I}_{1}
+      +\underbrace{(\Sym\bT-\alpha\I)}_{5}
+      +\underbrace{\Skw\bT}_{3},
+   \qquad \alpha=\tfrac13\tr\bT,
+\]
+with dimensions $1+5+3=9$. In Chapter 3 the middle piece is what carries
+distortion at constant volume and the first is what carries volume change:
+there $\tr(\ln\vek{U})=\ln J$ exactly, so the spherical part of the Hencky
+strain is $\tfrac13(\ln J)\I$.
+\end{remark}
+
+\begin{problem}[Axial vector of a skew tensor]
+$f(\bv)=\bom\times\bv=\bOm\bv$. (a) $\Omega_{ij}=\eps_{jik}\omega_k$, so
+$\bOm\in\Skw$; (b) $\omega_k=\tfrac12\Omega_{ij}\eps_{jik}$.
+\end{problem}
+\begin{solution}
+\textbf{(a)} Write both sides of $\bOm\bv=\bom\times\bv$ in components:
+\[
+   (\bOm\bv)_i=\Omega_{ij}v_j,
+   \qquad
+   (\bom\times\bv)_i=\eps_{ikj}\omega_kv_j ,
+\]
+the second by Proposition~\ref{prop:crosscomp} with the summation indices
+named so that $v$ carries $j$ in both. Equating for every $\bv$,
+\[
+   \Omega_{ij}=\eps_{ikj}\omega_k .
+\]
+Now $\eps_{ikj}=-\eps_{ijk}=\eps_{jik}$: one swap gives a minus, a second
+swap gives it back. So $\Omega_{ij}=\eps_{jik}\omega_k$, and
+interchanging $i,j$,
+\[
+   \Omega_{ji}=\eps_{ijk}\omega_k=-\eps_{jik}\omega_k=-\Omega_{ij},
+\]
+i.e.\ $\bOm\in\Skw$.
+
+\textbf{(b)} Substitute $\Omega_{ij}=\eps_{jil}\omega_l$ and contract:
+\[
+   \tfrac12\,\Omega_{ij}\eps_{jik}
+   =\tfrac12\,\eps_{jil}\eps_{jik}\,\omega_l
+   =\tfrac12\,(2\dd_{lk})\,\omega_l=\omega_k ,
+\]
+the middle step by Theorem~\ref{thm:epsdelta}: $\eps_{jil}\eps_{jik}
+=\eps_{ilj}\eps_{ikj}=2\dd_{lk}$ after a cyclic shift brings the repeated
+pair to the front.
+
+So $\bom\mapsto\bOm$ and $\bOm\mapsto\bom$ invert one another: $\Skw$ and
+$\Et$ are in one-to-one correspondence, which is why
+$\dim\Skw=3$ in Problem 14.
+\end{solution}
+
+\begin{problem}[Identities for the tensor product]
+Verify (a) $(\ba\otimes\bb)^t=\bb\otimes\ba$; (b)
+$\bA(\ba\otimes\bb)=(\bA\ba)\otimes\bb$; (c)
+$(\ba\otimes\bb)\bA=\ba\otimes(\bA^{t}\bb)$; (d)
+$\bA=(\bA\be_i)\otimes\be_i=\be_i\otimes(\bA^{t}\be_i)$.
+\end{problem}
+\begin{solution}
+Throughout, the definition is $(\ba\otimes\bb)\bc=(\ip\bb\bc)\ba$: the
+second slot dots, the first survives.
+
+\textbf{(a)} Test against arbitrary $\bu,\bv$ and use the symmetry of the
+dot product:
+\[
+   \ip{\bu}{(\ba\otimes\bb)\bv}=(\ip\bb\bv)(\ip\ba\bu)
+   =(\ip\ba\bu)(\ip\bb\bv)
+   =\ip{\bv}{(\bb\otimes\ba)\bu} .
+\]
+By the definition of the transpose this says
+$(\ba\otimes\bb)^{t}=\bb\otimes\ba$.
+
+\textbf{(b)} Apply both sides to arbitrary $\bv$ and use linearity of
+$\bA$:
+\[
+   \big[\bA(\ba\otimes\bb)\big]\bv=\bA\big[(\ip\bb\bv)\ba\big]
+   =(\ip\bb\bv)\,\bA\ba
+   =\big[(\bA\ba)\otimes\bb\big]\bv .
+\]
+
+\textbf{(c)} Same test, now moving $\bA$ across the dot product:
+\[
+   \big[(\ba\otimes\bb)\bA\big]\bv=(\ip{\bb}{\bA\bv})\,\ba
+   =(\ip{\bA^{t}\bb}{\bv})\,\ba
+   =\big[\ba\otimes(\bA^{t}\bb)\big]\bv .
+\]
+So post-multiplication touches only the second slot, pre-multiplication
+only the first.
+
+\textbf{(d)} With $\bA=A_{ij}\be_i\otimes\be_j$ one has
+$\bA\be_i=A_{ki}\be_k$ and $\bA^{t}\be_i=A_{ik}\be_k$. Hence, summing on
+$i$,
+\[
+   (\bA\be_i)\otimes\be_i=A_{ki}\,\be_k\otimes\be_i=\bA,
+   \qquad
+   \be_i\otimes(\bA^{t}\be_i)=A_{ik}\,\be_i\otimes\be_k=\bA ,
+\]
+the second after renaming the two dummy indices. Both are \eqr{3.11} with
+$\bA$ inserted on one side or the other.
+\end{solution}
+
+\begin{problem}[Transpose of the inverse]
+Show $(\bA^{t})^{-1}=(\bA^{-1})^{t}=:\bA^{-t}$.
+\end{problem}
+\begin{solution}
+Transpose the two defining relations of $\bA^{-1}$, using
+$(\bB\bC)^{t}=\bC^{t}\bB^{t}$ from Problem 20 and $\I^{t}=\I$:
+\[
+   \bA\bA^{-1}=\I\ \Longrightarrow\ (\bA^{-1})^{t}\bA^{t}=\I,
+   \qquad
+   \bA^{-1}\bA=\I\ \Longrightarrow\ \bA^{t}(\bA^{-1})^{t}=\I .
+\]
+So $(\bA^{-1})^{t}$ is a two-sided inverse of $\bA^{t}$, and inverses are
+unique: if $\bP\bA^{t}=\I=\bA^{t}\bQ$ then
+$\bP=\bP(\bA^{t}\bQ)=(\bP\bA^{t})\bQ=\bQ$. Hence
+$(\bA^{t})^{-1}=(\bA^{-1})^{t}$, and the common value may be written
+$\bA^{-t}$ without ambiguity.
+\end{solution}
+
+\begin{problem}[Inverse of a product]
+$(\bB\bA)^{-1}=\bA^{-1}\bB^{-1}$.
+\end{problem}
+\begin{solution}
+Multiply both ways, cancelling the inner pair first:
+\[
+   (\bA^{-1}\bB^{-1})(\bB\bA)=\bA^{-1}(\bB^{-1}\bB)\bA=\bA^{-1}\I\bA
+   =\bA^{-1}\bA=\I,
+\]
+\[
+   (\bB\bA)(\bA^{-1}\bB^{-1})=\bB(\bA\bA^{-1})\bB^{-1}=\bB\I\bB^{-1}
+   =\bB\bB^{-1}=\I .
+\]
+By uniqueness of inverses, $(\bB\bA)^{-1}=\bA^{-1}\bB^{-1}$. The order
+reverses, as it must: the last map applied is the first to be undone.
+\end{solution}
+
+\begin{problem}[Transpose of a product]
+$(\bB\bA)^{t}=\bA^{t}\bB^{t}$.
+\end{problem}
+\begin{solution}
+Move the two factors across the dot product one at a time, each by the
+definition $\ip{\bu}{\bC\bv}=\ip{\bC^{t}\bu}{\bv}$:
+\[
+   \ip{\bu}{(\bB\bA)\bv}=\ip{\bu}{\bB(\bA\bv)}
+   =\ip{\bB^{t}\bu}{\bA\bv}
+   =\ip{\bA^{t}\bB^{t}\bu}{\bv}
+   =\ip{\bu}{\big(\bA^{t}\bB^{t}\big)^{t}\bv}.
+\]
+Comparing the first and last for all $\bu,\bv$, and using that a tensor is
+determined by its bilinear form, $(\bB\bA)^{t}=\bA^{t}\bB^{t}$. Again the
+order reverses.
+\end{solution}
+
+\begin{problem}[Determinant identities via box products]
+Verify (a) $\det(\alpha\bA)=\alpha^3\det\bA$; (b)
+$\det(\bA\bB)=\det\bA\det\bB$; (c) $\det\I=1$; (d)
+$\det(\bA^{-1})=(\det\bA)^{-1}$; (e) $\det(\ba\otimes\bb)=0$; (f)
+$\det(\I+\ba\otimes\bb)=1+\ip\ba\bb$; (g)
+$\det(\bA+\ba\otimes\bb)=\det\bA\,(1+\ip\ba{\bA^{-t}\bb})$.
+\end{problem}
+\begin{solution}
+The master identity is $\det\bA\,\tbox\ba\bb\bc=\tbox{\bA\ba}{\bA\bb}{\bA\bc}$
+for all $\ba,\bb,\bc$ (Definition~\ref{def:inv3}$_3$). Every part below
+follows from it.
+
+(a)
+\[
+\begin{aligned}
+\det(\alpha\bA)\,\tbox\ba\bb\bc
+&=\tbox{(\alpha\bA)\ba}{(\alpha\bA)\bb}{(\alpha\bA)\bc}\\
+&=\alpha^3\tbox{\bA\ba}{\bA\bb}{\bA\bc}
+=\alpha^3\det\bA\,\tbox\ba\bb\bc;
+\end{aligned}
+\]
+cancel $\tbox\ba\bb\bc\neq0$.
+
+(b)
+\[
+\begin{aligned}
+\tbox{(\bA\bB)\ba}{(\bA\bB)\bb}{(\bA\bB)\bc}
+&=\tbox{\bA(\bB\ba)}{\bA(\bB\bb)}{\bA(\bB\bc)}\\
+&=\det\bA\,\tbox{\bB\ba}{\bB\bb}{\bB\bc}\\
+&=\det\bA\,\det\bB\,\tbox\ba\bb\bc.
+\end{aligned}
+\]
+
+(c) $\det\I\,\tbox\ba\bb\bc=\tbox{\I\ba}{\I\bb}{\I\bc}
+=\tbox\ba\bb\bc$, so $\det\I=1$.
+
+(d) From (b) and (c), $\det\bA\det(\bA^{-1})=\det(\bA\bA^{-1})=\det\I=1$.
+
+(e) $(\ba\otimes\bb)\bu=(\ip\bb\bu)\ba$: each image is a scalar multiple
+of $\ba$. Hence $\tbox{(\ba\otimes\bb)\be_1}{(\ba\otimes\bb)\be_2}
+{(\ba\otimes\bb)\be_3}=\tbox{b_1\ba}{b_2\ba}{b_3\ba}$. A box product
+with two parallel entries vanishes (alternation), so $\det(\ba\otimes\bb)=0$.
+
+(f) Set $\bT=\I+\ba\otimes\bb$. Then $\bT\be_i=\be_i+b_i\ba$, and
+\[
+\det\bT=\tbox{(\be_1+b_1\ba)}{(\be_2+b_2\ba)}{(\be_3+b_3\ba)}.
+\]
+Expand multilinearly: the box product is trilinear, so there are $2^3=8$
+terms, classified by how many of the three factors contribute $b_i\ba$:
+\[
+\begin{aligned}
+&\underbrace{\tbox{\be_1}{\be_2}{\be_3}}_{=1}
++b_1\tbox\ba{\be_2}{\be_3}
++b_2\tbox{\be_1}\ba{\be_3}
++b_3\tbox{\be_1}{\be_2}\ba\\
+&\quad+b_1b_2\underbrace{\tbox\ba\ba{\be_3}}_{=0}
++b_1b_3\underbrace{\tbox\ba{\be_2}\ba}_{=0}
++b_2b_3\underbrace{\tbox{\be_1}\ba\ba}_{=0}
++b_1b_2b_3\underbrace{\tbox\ba\ba\ba}_{=0}.
+\end{aligned}
+\]
+Every term with $\ba$ appearing twice or thrice vanishes by alternation.
+The surviving terms are: $1+b_1a_1+b_2a_2+b_3a_3=1+b_ia_i=1+\ip\ba\bb$.
+
+(g) For invertible $\bA$, factor:
+$\bA+\ba\otimes\bb=\bA(\I+\bA^{-1}(\ba\otimes\bb))
+=\bA(\I+(\bA^{-1}\ba)\otimes\bb)$,
+where Lemma~\ref{lem:Aab} gives
+$\bA^{-1}(\ba\otimes\bb)=(\bA^{-1}\ba)\otimes\bb$. Apply (b), then (f):
+\[
+\det(\bA+\ba\otimes\bb)=\det\bA\,\det(\I+(\bA^{-1}\ba)\otimes\bb)
+=\det\bA\,(1+\ip{\bA^{-1}\ba}\bb).
+\]
+Finally, $\ip{\bA^{-1}\ba}\bb=\ip\ba{(\bA^{-1})^t\bb}=\ip\ba{\bA^{-t}\bb}$,
+using the definition of the transpose.
+\end{solution}
+
+\begin{problem}[Cofactor identities]
+Let $\bA^{*}$ satisfy $\bA^{*}(\ba\times\bb)=\bA\ba\times\bA\bb$. Show:
+(a) $I_2=\tr\bA^{*}$;\ (b) $I_2=\tfrac12[(\tr\bA)^2-\tr(\bA^2)]$;\
+(c) $\bA^{t}\bA^{*}=(\det\bA)\I$, hence $\bA^{*}=(\det\bA)\bA^{-t}$;\
+(d) recover $\det\bA=\tfrac16\eps_{ijk}\eps_{lmn}A_{il}A_{jm}A_{kn}$.
+\end{problem}
+\begin{solution}
+\emph{Step 0: is $\bA^{*}$ even well defined?}
+Definition~\ref{def:cof} prescribes the value of $\bA^{*}$ only on vectors
+that are presented to us in the form $\ba\times\bb$. Before the symbol may
+be used at all, two questions must be answered. Does the prescription reach
+every vector, so that at most one tensor can satisfy it? And does a tensor
+satisfying it exist, given that the same vector can be written as a cross
+product in infinitely many ways, so that the prescription might contradict
+itself?
+
+\emph{Uniqueness.} Every vector is a cross product. If $\bv=\bze$, then
+$\bv=\ba\times\ba$ for any $\ba$, since $\ba\times\ba=\bze$. If
+$\bv\neq\bze$, set $\bu_{3}=\bv/|\bv|$, a unit vector, and complete it to a
+right-handed orthonormal triad $\{\bu_{1},\bu_{2},\bu_{3}\}$, so that
+$\bu_{1}\times\bu_{2}=\bu_{3}$. Then
+\[
+   \bu_{1}\times(|\bv|\,\bu_{2})=|\bv|\,(\bu_{1}\times\bu_{2})
+   =|\bv|\,\bu_{3}=\bv .
+\]
+So the defining relation does prescribe $\bA^{*}\bv$ for every $\bv$, and
+two tensors obeying it take the same value on every vector, hence are the
+same tensor.
+
+\emph{Existence.} We produce $\bA^{*}$ explicitly and verify the definition.
+Put
+\begin{equation}
+   A^{*}_{mi}:=\tfrac12\,\eps_{mjk}\eps_{ipq}A_{jp}A_{kq},
+   \qquad \bA^{*}:=A^{*}_{mi}\,\be_{m}\otimes\be_{i}. \tag{$\ast_1$}
+\end{equation}
+This is a tensor by construction, being a linear combination of dyads. Now
+compute its action on $\ba\times\bb$, whose components are
+$(\ba\times\bb)_{i}=\eps_{irs}a_{r}b_{s}$ by
+Proposition~\ref{prop:crosscomp}:
+\[
+\begin{aligned}
+   \big[\bA^{*}(\ba\times\bb)\big]_{m}
+   &=A^{*}_{mi}\,(\ba\times\bb)_{i}\\
+   &=\tfrac12\,\eps_{mjk}\eps_{ipq}A_{jp}A_{kq}\,\eps_{irs}a_{r}b_{s}\\
+   &=\tfrac12\,\eps_{mjk}A_{jp}A_{kq}\,
+     \big(\eps_{ipq}\eps_{irs}\big)\,a_{r}b_{s}.
+\end{aligned}
+\]
+The bracket is contracted on its \emph{first} index, whereas
+Theorem~\ref{thm:epsdelta} contracts on the last; the two are the same
+statement because $\eps$ is unchanged by a cyclic shift of its indices,
+$\eps_{ipq}=\eps_{pqi}$ and $\eps_{irs}=\eps_{rsi}$, so
+\[
+   \eps_{ipq}\eps_{irs}=\eps_{pqi}\eps_{rsi}
+   =\dd_{pr}\dd_{qs}-\dd_{ps}\dd_{qr}.
+\]
+Substituting,
+\[
+\begin{aligned}
+   \big[\bA^{*}(\ba\times\bb)\big]_{m}
+   &=\tfrac12\,\eps_{mjk}A_{jp}A_{kq}
+     \big(\dd_{pr}\dd_{qs}-\dd_{ps}\dd_{qr}\big)a_{r}b_{s}\\
+   &=\tfrac12\,\eps_{mjk}A_{jp}A_{kq}a_{p}b_{q}
+    -\tfrac12\,\eps_{mjk}A_{jp}A_{kq}a_{q}b_{p},
+\end{aligned}
+\]
+the deltas having collapsed the sums by forcing $r=p,\ s=q$ in the first
+term and $s=p,\ r=q$ in the second. The two terms are in fact equal. In the
+second, first interchange the \emph{names} of the summation indices $p$ and
+$q$, which changes nothing since both are summed over $1,2,3$:
+\[
+   -\tfrac12\,\eps_{mjk}A_{jp}A_{kq}a_{q}b_{p}
+   =-\tfrac12\,\eps_{mjk}A_{jq}A_{kp}a_{p}b_{q};
+\]
+then interchange the names of the summation indices $j$ and $k$:
+\[
+   -\tfrac12\,\eps_{mjk}A_{jq}A_{kp}a_{p}b_{q}
+   =-\tfrac12\,\eps_{mkj}A_{kq}A_{jp}a_{p}b_{q}
+   =+\tfrac12\,\eps_{mjk}A_{jp}A_{kq}a_{p}b_{q},
+\]
+the last equality using $\eps_{mkj}=-\eps_{mjk}$. Hence the two halves add
+rather than cancel, and
+\[
+   \big[\bA^{*}(\ba\times\bb)\big]_{m}
+   =\eps_{mjk}\,(A_{jp}a_{p})(A_{kq}b_{q})
+   =\eps_{mjk}\,(\bA\ba)_{j}(\bA\bb)_{k}
+   =(\bA\ba\times\bA\bb)_{m}.
+\]
+So $(\ast_1)$ does satisfy Definition~\ref{def:cof}, and by the uniqueness
+just proved it is \emph{the} cofactor. Both the object and its components
+are now in hand.
+
+\medskip
+\emph{(a) $I_{2}(\bA)=I_{1}(\bA^{*})$.}
+By Theorem~\ref{thm:trace}, $I_{1}(\bA^{*})=\tr\bA^{*}=A^{*}_{11}+A^{*}_{22}
++A^{*}_{33}$ with $A^{*}_{ii}=\ip{\be_{i}}{\bA^{*}\be_{i}}$ (no sum). For a
+right-handed orthonormal basis,
+$\be_{1}=\be_{2}\times\be_{3}$, $\be_{2}=\be_{3}\times\be_{1}$,
+$\be_{3}=\be_{1}\times\be_{2}$, so the definition of $\bA^{*}$ evaluates on
+each basis vector separately. The three computations, written out in full
+rather than left to a cyclic instruction:
+\[
+\begin{aligned}
+   \bA^{*}\be_{1}&=\bA^{*}(\be_{2}\times\be_{3})=\bA\be_{2}\times\bA\be_{3},
+   &A^{*}_{11}&=\ip{\be_{1}}{\bA\be_{2}\times\bA\be_{3}}
+               =\tbox{\be_{1}}{\bA\be_{2}}{\bA\be_{3}},\\
+   \bA^{*}\be_{2}&=\bA^{*}(\be_{3}\times\be_{1})=\bA\be_{3}\times\bA\be_{1},
+   &A^{*}_{22}&=\ip{\be_{2}}{\bA\be_{3}\times\bA\be_{1}}
+               =\tbox{\be_{2}}{\bA\be_{3}}{\bA\be_{1}},\\
+   \bA^{*}\be_{3}&=\bA^{*}(\be_{1}\times\be_{2})=\bA\be_{1}\times\bA\be_{2},
+   &A^{*}_{33}&=\ip{\be_{3}}{\bA\be_{1}\times\bA\be_{2}}
+               =\tbox{\be_{3}}{\bA\be_{1}}{\bA\be_{2}} .
+\end{aligned}
+\]
+The box product is unchanged by a cyclic permutation of its three slots,
+$\tbox\bu\bv\bw=\tbox\bw\bu\bv$, because a cyclic permutation is two
+transpositions and each transposition reverses the sign. Applying it to the
+second and third lines so that all three entries are ordered as in
+Definition~\ref{def:inv3}$_{2}$:
+\[
+   \tbox{\be_{2}}{\bA\be_{3}}{\bA\be_{1}}
+   =\tbox{\bA\be_{1}}{\be_{2}}{\bA\be_{3}},\qquad
+   \tbox{\be_{3}}{\bA\be_{1}}{\bA\be_{2}}
+   =\tbox{\bA\be_{1}}{\bA\be_{2}}{\be_{3}} .
+\]
+Adding the three diagonal entries,
+\[
+   \tr\bA^{*}=\tbox{\bA\be_{1}}{\bA\be_{2}}{\be_{3}}
+             +\tbox{\bA\be_{1}}{\be_{2}}{\bA\be_{3}}
+             +\tbox{\be_{1}}{\bA\be_{2}}{\bA\be_{3}} .
+\]
+The right side is exactly Definition~\ref{def:inv3}$_{2}$ evaluated at
+$(\ba,\bb,\bc)=(\be_{1},\be_{2},\be_{3})$, for which
+$\tbox{\be_{1}}{\be_{2}}{\be_{3}}=1$. Hence $\tr\bA^{*}=I_{2}(\bA)$, which
+is the assertion.
+
+\medskip
+\emph{(b) $I_{2}(\bA)=\tfrac12[(\tr\bA)^{2}-\tr(\bA^{2})]$.}
+By (a) it suffices to contract $(\ast_1)$ on $m=i$:
+\[
+   I_{2}(\bA)=\tr\bA^{*}=A^{*}_{ii}
+   =\tfrac12\,\eps_{ijk}\eps_{ipq}A_{jp}A_{kq}.
+\]
+Again shifting cyclically to expose the contraction pattern of
+Theorem~\ref{thm:epsdelta},
+$\eps_{ijk}\eps_{ipq}=\eps_{jki}\eps_{pqi}=\dd_{jp}\dd_{kq}
+-\dd_{jq}\dd_{kp}$, so
+\[
+   I_{2}(\bA)=\tfrac12\big(\dd_{jp}\dd_{kq}A_{jp}A_{kq}
+                          -\dd_{jq}\dd_{kp}A_{jp}A_{kq}\big).
+\]
+Take the two pieces one at a time. In the first, $\dd_{jp}$ forces $p=j$ and
+$\dd_{kq}$ forces $q=k$, leaving
+\[
+   \dd_{jp}\dd_{kq}A_{jp}A_{kq}=A_{jj}A_{kk}=(\tr\bA)(\tr\bA)=(\tr\bA)^{2}.
+\]
+In the second, $\dd_{jq}$ forces $q=j$ and $\dd_{kp}$ forces $p=k$, leaving
+\[
+   \dd_{jq}\dd_{kp}A_{jp}A_{kq}=A_{jk}A_{kj}.
+\]
+This last expression is a trace: the components of $\bA^{2}=\bA\bA$ are
+$(\bA^{2})_{jl}=A_{jk}A_{kl}$, so setting $l=j$ and summing gives
+$(\bA^{2})_{jj}=A_{jk}A_{kj}=\tr(\bA^{2})$. Therefore
+\[
+   I_{2}(\bA)=\tfrac12\big[(\tr\bA)^{2}-\tr(\bA^{2})\big].
+\]
+
+\medskip
+\emph{(c) $\bA^{t}\bA^{*}=(\det\bA)\I$.}
+Two independent proofs are given, the first free of components.
+
+\emph{Without coordinates.} Let $\ba,\bb,\bc$ be arbitrary and set
+$\bv=\ba\times\bb$. Using the definition of the transpose,
+$\ip{\bc}{\bA^{t}\bw}=\ip{\bA\bc}{\bw}$, and then the definition of the
+cofactor,
+\[
+\begin{aligned}
+   \ip{\bc}{\bA^{t}\bA^{*}\bv}
+   &=\ip{\bA\bc}{\bA^{*}(\ba\times\bb)}\\
+   &=\ip{\bA\bc}{\bA\ba\times\bA\bb}\\
+   &=\tbox{\bA\bc}{\bA\ba}{\bA\bb}\\
+   &=\tbox{\bA\ba}{\bA\bb}{\bA\bc},
+\end{aligned}
+\]
+the last step being the cyclic shift again. By
+Definition~\ref{def:inv3}$_{3}$ together with Theorem~\ref{thm:det}, which
+identify $I_{3}$ with $\det$,
+\[
+   \tbox{\bA\ba}{\bA\bb}{\bA\bc}=(\det\bA)\tbox\ba\bb\bc
+   =(\det\bA)\,\ip{\bc}{\ba\times\bb}=(\det\bA)\,\ip\bc\bv ,
+\]
+where the middle equality is one more cyclic shift,
+$\tbox\ba\bb\bc=\tbox\bc\ba\bb=\ip{\bc}{\ba\times\bb}$. Comparing the two
+displays,
+\[
+   \ip{\bc}{\big[\bA^{t}\bA^{*}-(\det\bA)\I\big]\bv}=0
+   \qquad\text{for every }\bc .
+\]
+A vector orthogonal to every vector is the zero vector, so
+$[\bA^{t}\bA^{*}-(\det\bA)\I]\bv=\bze$ for every $\bv$ of the form
+$\ba\times\bb$, that is, by Step 0, for \emph{every} $\bv$. A tensor
+sending every vector to $\bze$ is $\Ob$, so $\bA^{t}\bA^{*}=(\det\bA)\I$.
+
+\emph{In components.} Start from $(\bA^{t})_{ik}=A_{ki}$ and $(\ast_1)$:
+\[
+   (\bA^{t}\bA^{*})_{ij}=(\bA^{t})_{ik}A^{*}_{kj}=A_{ki}A^{*}_{kj}
+   =\tfrac12\,\eps_{kmn}\eps_{jpq}\,A_{ki}A_{mp}A_{nq}.
+\]
+The triple sum $\eps_{kmn}A_{ki}A_{mp}A_{nq}$ is precisely
+Proposition~\ref{prop:detforms} read with the matrix $(A_{ij})$ and columns
+$i,p,q$:
+\[
+   \eps_{kmn}A_{ki}A_{mp}A_{nq}=\eps_{ipq}\det\bA .
+\]
+(For completeness, here is why. The left side changes sign whenever two of
+$i,p,q$ are interchanged: swapping $i$ and $p$ gives
+$\eps_{kmn}A_{kp}A_{mi}A_{nq}$, and renaming the dummies $k\leftrightarrow
+m$ turns this into $\eps_{mkn}A_{mp}A_{ki}A_{nq}
+=-\eps_{kmn}A_{ki}A_{mp}A_{nq}$; the other two swaps are identical in form.
+Being trilinear and alternating in the columns, it equals a fixed multiple
+of $\eps_{ipq}$ by Lemma~\ref{lem:altform}, and evaluating at
+$(i,p,q)=(1,2,3)$ identifies that multiple as
+$\eps_{kmn}A_{k1}A_{m2}A_{n3}=\tbox{\bA\be_{1}}{\bA\be_{2}}{\bA\be_{3}}
+=\det\bA$.)
+Substituting and using $\eps_{jpq}\eps_{ipq}=2\dd_{ij}$ from
+Theorem~\ref{thm:epsdelta},
+\[
+   (\bA^{t}\bA^{*})_{ij}=\tfrac12\,(\det\bA)\,\eps_{jpq}\eps_{ipq}
+   =\tfrac12\,(\det\bA)\,2\dd_{ij}=(\det\bA)\,\dd_{ij},
+\]
+which is the component statement of $\bA^{t}\bA^{*}=(\det\bA)\I$.
+
+\emph{The consequence.} Suppose now $\bA$ is invertible, equivalently
+$\det\bA\neq0$ by Theorem~\ref{thm:det}. Then $\bA^{t}$ is invertible too,
+and multiplying $\bA^{t}\bA^{*}=(\det\bA)\I$ on the left by $(\bA^{t})^{-1}$
+gives
+\[
+   \bA^{*}=(\det\bA)\,(\bA^{t})^{-1}=(\det\bA)\,\bA^{-t},
+\]
+the last equality being $(\bA^{t})^{-1}=(\bA^{-1})^{t}$, proved in
+Problem~18, which is what licenses the single symbol $\bA^{-t}$.
+
+\medskip
+\emph{(d) The contracted determinant formula.}
+Take the trace of (c). On the right, $\tr[(\det\bA)\I]=(\det\bA)\dd_{ii}
+=3\det\bA$, since $\dd_{ii}=1+1+1=3$. On the left, setting $j=i$ in the
+component computation just performed,
+\[
+   \tr(\bA^{t}\bA^{*})=(\bA^{t}\bA^{*})_{ii}=A_{ki}A^{*}_{ki}
+   =\tfrac12\,\eps_{kmn}\eps_{ipq}A_{ki}A_{mp}A_{nq}.
+\]
+Equating,
+\[
+   3\det\bA=\tfrac12\,\eps_{kmn}\eps_{ipq}A_{ki}A_{mp}A_{nq},
+   \qquad\text{so}\qquad
+   \det\bA=\tfrac16\,\eps_{kmn}\eps_{ipq}A_{ki}A_{mp}A_{nq}.
+\]
+Renaming the summation indices, $k\to i$, $m\to j$, $n\to k$ in the first
+$\eps$ and $i\to l$, $p\to m$, $q\to n$ in the second, so that the three
+factors read $A_{il},A_{jm},A_{kn}$,
+\[
+   \det\bA=\tfrac16\,\eps_{ijk}\eps_{lmn}A_{il}A_{jm}A_{kn},
+\]
+in agreement with Corollary~\ref{cor:det6}, which reached the same formula
+by contracting Proposition~\ref{prop:detforms} directly. The two routes are
+genuinely different: there the $\tfrac16$ came from
+$\eps_{mnp}\eps_{mnp}=6$, here from $\tfrac12\cdot 3$, the $\tfrac12$ being
+built into the cofactor and the $3$ being $\tr\I$.
+
+\medskip
+\emph{Checks.} Take $\bA=\I$ first. Then $\I\ba\times\I\bb=\ba\times\bb$, so
+$\I^{*}=\I$ and $\tr\I^{*}=3$; part (b) gives
+$\tfrac12[3^{2}-3]=\tfrac12\cdot 6=3$, and part (c) gives
+$\I^{t}\I^{*}=\I=(\det\I)\I$ since $\det\I=1$. Part (d) gives
+$\tfrac16\eps_{ijk}\eps_{lmn}\dd_{il}\dd_{jm}\dd_{kn}
+=\tfrac16\eps_{ijk}\eps_{ijk}=\tfrac16\cdot 6=1$.
+
+Take next $\bA=\alpha\,\be_{1}\otimes\be_{1}+\beta\,\be_{2}\otimes\be_{2}
++\gamma\,\be_{3}\otimes\be_{3}$, so $\bA\be_{1}=\alpha\be_{1}$,
+$\bA\be_{2}=\beta\be_{2}$, $\bA\be_{3}=\gamma\be_{3}$. From the definition,
+\[
+\begin{aligned}
+   \bA^{*}\be_{1}&=\bA\be_{2}\times\bA\be_{3}
+    =\beta\gamma\,(\be_{2}\times\be_{3})=\beta\gamma\,\be_{1},\\
+   \bA^{*}\be_{2}&=\bA\be_{3}\times\bA\be_{1}
+    =\gamma\alpha\,(\be_{3}\times\be_{1})=\gamma\alpha\,\be_{2},\\
+   \bA^{*}\be_{3}&=\bA\be_{1}\times\bA\be_{2}
+    =\alpha\beta\,(\be_{1}\times\be_{2})=\alpha\beta\,\be_{3},
+\end{aligned}
+\]
+so $\tr\bA^{*}=\beta\gamma+\gamma\alpha+\alpha\beta$. Part (b) predicts
+$\tfrac12[(\alpha+\beta+\gamma)^{2}-(\alpha^{2}+\beta^{2}+\gamma^{2})]$, and
+expanding the square,
+$(\alpha+\beta+\gamma)^{2}=\alpha^{2}+\beta^{2}+\gamma^{2}
++2(\alpha\beta+\beta\gamma+\gamma\alpha)$, the squares cancel and the
+$\tfrac12$ removes the $2$, leaving
+$\alpha\beta+\beta\gamma+\gamma\alpha$, which agrees. Part (c) predicts
+$\bA^{t}\bA^{*}=(\alpha\beta\gamma)\I$, and indeed $\bA^{t}=\bA$ here while
+$\bA\bA^{*}\be_{1}=\beta\gamma\,\bA\be_{1}=\alpha\beta\gamma\,\be_{1}$, and
+likewise $\bA\bA^{*}\be_{2}=\alpha\beta\gamma\,\be_{2}$ and
+$\bA\bA^{*}\be_{3}=\alpha\beta\gamma\,\be_{3}$, while
+$\det\bA=\alpha\beta\gamma$.
+\end{solution}
+
+\begin{remark}[what the cofactor is for]\label{rem:cofuse}
+Part (c) is not a curiosity; it is the identity that makes surface
+deformation computable. If $\ba\times\bb$ is the vector area of the
+parallelogram on $\ba$ and $\bb$, then Definition~\ref{def:cof} says that
+$\bA^{*}$ carries vector areas exactly as $\bA$ carries vectors, and (c)
+converts that geometric statement into the working formula
+$\bA^{*}=(\det\bA)\bA^{-t}$. Applied in Chapter~2 to the deformation
+gradient $\bF$ with $J=\det\bF$, the same two lines become
+$\bF^{*}=J\bF^{-t}$ and the Piola--Nanson formula
+$\bn\,\dl a=\bF^{*}\bN\,\dl A$. Part (b) is the identity that makes
+$I_{2}$ computable from $\bA$ alone, without ever forming $\bA^{*}$, and it
+is what turns the characteristic polynomial of Problem~23 into something
+one can evaluate.
+\end{remark}
+
+\begin{problem}[Characteristic polynomial]
+Show $\det(\bA-\lambda\I)=-\lambda^3+I_1\lambda^2-I_2\lambda+I_3$.
+\end{problem}
+\begin{solution}
+By Definition~\ref{def:inv3}$_3$ applied to the tensor $\bA-\lambda\I$,
+\[
+\begin{aligned}
+   \det(\bA-\lambda\I)\,\tbox\ba\bb\bc
+   &=\tbox{(\bA-\lambda\I)\ba}{(\bA-\lambda\I)\bb}{(\bA-\lambda\I)\bc}\\
+   &=\tbox{\bA\ba-\lambda\ba}{\bA\bb-\lambda\bb}{\bA\bc-\lambda\bc}.
+\end{aligned}
+\]
+Expand by linearity in each slot separately. Each slot contributes either
+$\bA(\cdot)$ or $-\lambda(\cdot)$, so there are $2^{3}=8$ terms. Group
+them by how many slots took the $-\lambda$:
+\[
+\begin{aligned}
+   0\ \text{slots}:&\quad \tbox{\bA\ba}{\bA\bb}{\bA\bc}
+     =I_{3}\tbox\ba\bb\bc,\\
+   1\ \text{slot}:&\quad -\lambda\Big[
+     \tbox{\ba}{\bA\bb}{\bA\bc}+\tbox{\bA\ba}{\bb}{\bA\bc}
+     +\tbox{\bA\ba}{\bA\bb}{\bc}\Big]=-\lambda I_{2}\tbox\ba\bb\bc,\\
+   2\ \text{slots}:&\quad \lambda^{2}\Big[
+     \tbox{\bA\ba}{\bb}{\bc}+\tbox{\ba}{\bA\bb}{\bc}
+     +\tbox{\ba}{\bb}{\bA\bc}\Big]=\lambda^{2}I_{1}\tbox\ba\bb\bc,\\
+   3\ \text{slots}:&\quad (-\lambda)^{3}\tbox\ba\bb\bc
+     =-\lambda^{3}\tbox\ba\bb\bc,
+\end{aligned}
+\]
+the three groupings being exactly Definition~\ref{def:inv3}$_{3}$,
+$_{2}$, $_{1}$ in turn. Adding and cancelling the non-zero
+$\tbox\ba\bb\bc$,
+\[
+   \det(\bA-\lambda\I)=-\lambda^{3}+I_{1}(\bA)\lambda^{2}
+   -I_{2}(\bA)\lambda+I_{3}(\bA).
+\]
+The alternating signs are simply the $(-\lambda)^{n}$ of the grouping, and
+this is why the invariants enter \eqr{3.2} in that order: $I_{k}$ is the
+coefficient produced by putting $\bA$ into exactly $k$ of the three slots.
+\end{solution}
+
+\begin{problem}[Field product rules]
+For scalar fields $\varphi,\psi$ and vector fields $\bu,\bv$, show
+(a) $\grad(\varphi+\psi)=\grad\varphi+\grad\psi$;
+(b) $\dvg(\bu+\bv)=\dvg\bu+\dvg\bv$;
+(c) $\dvg(\varphi\bv)=\ip{\grad\varphi}\bv+\varphi\dvg\bv$;
+(d) $\crl(\grad\varphi)=\bze$;
+(e) $\dvg(\crl\bv)=0$;
+(f) $\grad(\varphi\bu)=\bu\otimes\grad\varphi+\varphi\grad\bu$;
+(g) $\dvg(\bu\otimes\bv)=(\grad\bu)\bv+(\dvg\bv)\bu$.
+\end{problem}
+\begin{solution}
+All follow from the Cartesian representations and the ordinary product and
+equality-of-mixed-partials rules; write everything in components.
+
+(a) $[\grad(\varphi+\psi)]_i=(\varphi+\psi)_{,i}=\varphi_{,i}+\psi_{,i}$.
+(b) $\dvg(\bu+\bv)=(u_i+v_i)_{,i}=u_{i,i}+v_{i,i}$.
+(c) $\dvg(\varphi\bv)=(\varphi v_i)_{,i}=\varphi_{,i}v_i+\varphi v_{i,i}
+=\ip{\grad\varphi}\bv+\varphi\dvg\bv$.
+(d) $[\crl(\grad\varphi)]_j=\eps_{kij}(\varphi_{,i})_{,k}
+=\eps_{kij}\varphi_{,ik}$; since $\varphi_{,ik}=\varphi_{,ki}$ is symmetric
+in $(i,k)$ while $\eps_{kij}$ is antisymmetric under $i\leftrightarrow k$,
+the contraction vanishes.
+(e) $\dvg(\crl\bv)=(\eps_{kij}v_{i,k})_{,j}=\eps_{kij}v_{i,kj}$; $v_{i,kj}$
+is symmetric in $(k,j)$ and $\eps_{kij}$ antisymmetric under
+$k\leftrightarrow j$, so the sum is $0$.
+(f) $[\grad(\varphi\bu)]_{ij}=(\varphi u_i)_{,j}=u_i\varphi_{,j}
++\varphi u_{i,j}=(\bu\otimes\grad\varphi)_{ij}+\varphi(\grad\bu)_{ij}$.
+(g) $[\dvg(\bu\otimes\bv)]_i=(u_iv_j)_{,j}=u_{i,j}v_j+u_iv_{j,j}
+=[(\grad\bu)\bv]_i+(\dvg\bv)u_i$.
+(In (d),(e) twice continuous differentiability is assumed, so mixed
+partials commute.)
+
+Parts (d) and (e) are the same statement twice: a symmetric array
+contracted with an antisymmetric one vanishes, since
+$A_{pq}S_{pq}=-A_{qp}S_{pq}=-A_{pq}S_{qp}=-A_{pq}S_{pq}$ after relabelling,
+so the quantity equals minus itself. The same argument proves the Piola
+identity in Problem 2 of Chapter 2.
+\end{solution}
+
+\begin{problem}[Gradient in spherical coordinates]
+With $\bx=r\berho(\theta,\varphi)$, $\berho=\cos\varphi\,\ber(\theta)
++\sin\varphi\,\be_3$, $\beph=\berho\times\beth$, find the components of
+$\grad f$ in the variable basis $\{\berho,\beth,\beph\}$.
+\end{problem}
+\begin{solution}
+\emph{Step 1: build the frame from the Cartesian basis.}
+Nothing is assumed about spherical coordinates; everything is constructed.
+The angle $\theta$ is the azimuth, measured in the equatorial plane from
+$\be_{1}$, and $\varphi$ is the elevation above that plane, so $\varphi$ is
+latitude and not the colatitude used in much of the physics literature.
+Start with the unit vector pointing along the projection of $\bx$ onto the
+equatorial plane,
+\[
+   \ber(\theta)=\cos\theta\,\be_{1}+\sin\theta\,\be_{2},
+\]
+and differentiate it with respect to $\theta$, the $\be_{i}$ being fixed:
+\[
+\begin{aligned}
+   \beth(\theta)&:=\ber'(\theta)=-\sin\theta\,\be_{1}+\cos\theta\,\be_{2},\\
+   \beth'(\theta)&=-\cos\theta\,\be_{1}-\sin\theta\,\be_{2}=-\ber(\theta).
+\end{aligned}
+\]
+Both are unit vectors, since
+$\cos^{2}\theta+\sin^{2}\theta=1$ in each case, and they are orthogonal:
+\[
+   \ip\ber\beth=\cos\theta(-\sin\theta)+\sin\theta(\cos\theta)=0 .
+\]
+Also $\ip\ber{\be_{3}}=0$ and $\ip\beth{\be_{3}}=0$, both vectors having no
+$\be_{3}$ component. Tilting $\ber$ up out of the equatorial plane by the
+angle $\varphi$ produces the radial direction given in the statement,
+\[
+   \berho(\theta,\varphi)=\cos\varphi\,\ber(\theta)+\sin\varphi\,\be_{3}
+   =\cos\varphi\cos\theta\,\be_{1}+\cos\varphi\sin\theta\,\be_{2}
+    +\sin\varphi\,\be_{3},
+\]
+so that $\bx=r\berho$ has Cartesian coordinates
+$x_{1}=r\cos\varphi\cos\theta$, $x_{2}=r\cos\varphi\sin\theta$,
+$x_{3}=r\sin\varphi$, and $|\bx|=r$ as the notation intends.
+
+\emph{Step 2: the third leg of the frame, computed rather than quoted.}
+The statement defines $\beph=\berho\times\beth$. Using
+$(\bu\times\bv)_{1}=u_{2}v_{3}-u_{3}v_{2}$ and its two companions from
+Proposition~\ref{prop:crosscomp}, with
+\[
+   \berho=(\cos\varphi\cos\theta,\ \cos\varphi\sin\theta,\ \sin\varphi),
+   \qquad
+   \beth=(-\sin\theta,\ \cos\theta,\ 0),
+\]
+one obtains
+\[
+\begin{aligned}
+   (\berho\times\beth)_{1}
+   &=(\cos\varphi\sin\theta)(0)-(\sin\varphi)(\cos\theta)\\
+   &=-\sin\varphi\cos\theta,\\
+   (\berho\times\beth)_{2}
+   &=(\sin\varphi)(-\sin\theta)-(\cos\varphi\cos\theta)(0)\\
+   &=-\sin\varphi\sin\theta,\\
+   (\berho\times\beth)_{3}
+   &=(\cos\varphi\cos\theta)(\cos\theta)-(\cos\varphi\sin\theta)(-\sin\theta)\\
+   &=\cos\varphi(\cos^{2}\theta+\sin^{2}\theta)=\cos\varphi .
+\end{aligned}
+\]
+Collecting, and recognising $\cos\theta\,\be_{1}+\sin\theta\,\be_{2}=\ber$,
+\[
+   \beph=-\sin\varphi\cos\theta\,\be_{1}-\sin\varphi\sin\theta\,\be_{2}
+         +\cos\varphi\,\be_{3}
+        =-\sin\varphi\,\ber(\theta)+\cos\varphi\,\be_{3}.
+\]
+
+\emph{Step 3: the frame is orthonormal and right-handed.}
+Each of the six conditions is verified, using
+$\ip\ber\ber=1$, $\ip\beth\beth=1$, $\ip\ber\beth=0$,
+$\ip\ber{\be_{3}}=\ip\beth{\be_{3}}=0$, $\ip{\be_{3}}{\be_{3}}=1$:
+\[
+\begin{aligned}
+   \ip\berho\berho&=\cos^{2}\varphi\,\ip\ber\ber
+     +2\cos\varphi\sin\varphi\,\ip\ber{\be_{3}}
+     +\sin^{2}\varphi\,\ip{\be_{3}}{\be_{3}}\\
+     &=\cos^{2}\varphi+\sin^{2}\varphi=1,\\
+   \ip\beph\beph&=\sin^{2}\varphi\,\ip\ber\ber
+     -2\sin\varphi\cos\varphi\,\ip\ber{\be_{3}}
+     +\cos^{2}\varphi\,\ip{\be_{3}}{\be_{3}}\\
+     &=\sin^{2}\varphi+\cos^{2}\varphi=1,\\
+   \ip\beth\beth&=1,\\
+   \ip\berho\beth&=\cos\varphi\,\ip\ber\beth
+     +\sin\varphi\,\ip{\be_{3}}\beth=0+0=0,\\
+   \ip\beph\beth&=-\sin\varphi\,\ip\ber\beth
+     +\cos\varphi\,\ip{\be_{3}}\beth=0+0=0,\\
+   \ip\berho\beph&=(\cos\varphi)(-\sin\varphi)\ip\ber\ber
+     +(\sin\varphi)(\cos\varphi)\ip{\be_{3}}{\be_{3}}\\
+     &=-\cos\varphi\sin\varphi+\sin\varphi\cos\varphi=0 .
+\end{aligned}
+\]
+For the handedness, use
+$\bu\times(\bv\times\bw)=\ip\bu\bw\,\bv-\ip\bu\bv\,\bw$ from
+Problem~11(a) with $\bu=\bw=\beth$ and $\bv=\berho$:
+\[
+   \beth\times\beph=\beth\times(\berho\times\beth)
+   =\ip\beth\beth\,\berho-\ip\beth\berho\,\beth
+   =1\cdot\berho-0\cdot\beth=\berho,
+\]
+so $\tbox\berho\beth\beph=\ip\berho{\beth\times\beph}
+=\ip\berho\berho=1>0$. The triad is a right-handed orthonormal basis at
+every point where it is defined.
+
+\emph{Step 4: how the frame turns.}
+Differentiate $\berho$ with respect to each angle, remembering that
+$\be_{3}$ is constant and $\ber'=\beth$:
+\[
+   \frac{\partial\berho}{\partial\theta}
+   =\cos\varphi\,\ber'(\theta)+0=\cos\varphi\,\beth,
+   \qquad
+   \frac{\partial\berho}{\partial\varphi}
+   =-\sin\varphi\,\ber+\cos\varphi\,\be_{3}=\beph .
+\]
+The second is exactly the vector computed in Step 2, which is why the
+problem defines $\beph$ by a cross product: the cross product and the
+$\varphi$ derivative deliver the same direction, so the frame that is
+natural geometrically is also the frame that is natural for differentiation.
+Hence, treating $r,\theta,\varphi$ as independent,
+\[
+   \dl\berho=\frac{\partial\berho}{\partial\theta}\,\dl\theta
+            +\frac{\partial\berho}{\partial\varphi}\,\dl\varphi
+            =\cos\varphi\,\dl\theta\ \beth+\dl\varphi\ \beph .
+\]
+
+\emph{Step 5: the line element.}
+Differentiate $\bx=r\berho(\theta,\varphi)$ by the product rule:
+\begin{equation}
+   \dl\bx=\dl r\,\berho+r\,\dl\berho
+         =\underbrace{1}_{h_{r}}\,\dl r\ \berho
+          +\underbrace{r\cos\varphi}_{h_{\theta}}\,\dl\theta\ \beth
+          +\underbrace{r}_{h_{\varphi}}\,\dl\varphi\ \beph .
+   \tag{$\ast_2$}
+\end{equation}
+The three coefficients $h_{r}=1$, $h_{\theta}=r\cos\varphi$, $h_{\varphi}=r$
+are the only content of the problem. They are lengths per unit coordinate:
+increasing $\theta$ by $\dl\theta$ slides the point along the circle of
+latitude, whose radius is not $r$ but $r\cos\varphi$ (Figure~\ref{fig:sph}),
+so the distance travelled is $r\cos\varphi\,\dl\theta$; increasing $\varphi$
+by $\dl\varphi$ slides it along a meridian of radius $r$, a distance
+$r\,\dl\varphi$; increasing $r$ moves it radially a distance $\dl r$,
+whence $h_{r}=1$.
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[x={(-0.62cm,-0.42cm)},y={(1cm,-0.28cm)},z={(0cm,1cm)},
+  scale=2.55,
+  vec/.style={-{Stealth[length=2.4mm]},thick},
+  lbl/.style={fill=white,inner sep=1pt,font=\small}]
+\def\LO{112}   % longitude of the point
+\def\LA{30}    % latitude  of the point
+% polar axis and the reference direction for the azimuth
+\draw[gray!55,thin] (0,0,-1.25) -- (0,0,1.40);
+\node[lbl,text=gray!80] at (0,0,1.52) {$\be_{3}$};
+\draw[gray!45,thin] (0,0,0) -- (1.22,0,0);
+\node[lbl,text=gray!80] at (1.34,0,0) {$\be_{1}$};
+% equator and the meridian through the point
+\draw[gray!45,thin] plot[domain=0:360,samples=120] ({cos(\x)},{sin(\x)},0);
+\draw[gray!45,thin] plot[domain=0:360,samples=120]
+      ({cos(\LO)*cos(\x)},{sin(\LO)*cos(\x)},{sin(\x)});
+% the parallel of latitude, drawn heavy: this is the circle whose radius
+% is r cos(phi), not r
+\draw[black,thick] plot[domain=0:360,samples=120]
+      ({cos(\LA)*cos(\x)},{cos(\LA)*sin(\x)},{sin(\LA)});
+% point, position vector, and the distance from the polar axis
+\coordinate (O) at (0,0,0);
+\coordinate (P) at ({cos(\LA)*cos(\LO)},{cos(\LA)*sin(\LO)},{sin(\LA)});
+\coordinate (Q) at (0,0,{sin(\LA)});
+\draw[vec] (O) -- (P);
+\draw[gray!75,densely dashed] (Q) -- (P);
+\fill (P) circle (0.4pt);  \fill (O) circle (0.4pt);
+\node[lbl] at ({0.32*cos(\LA)*cos(\LO)},{0.32*cos(\LA)*sin(\LO)},
+               {sin(\LA)+0.16}) {$r\cos\varphi$};
+\node[lbl] at ({0.45*cos(\LA)*cos(\LO)},{0.45*cos(\LA)*sin(\LO)},
+               {0.45*sin(\LA)-0.13}) {$r$};
+% the local orthonormal triad
+\draw[vec] (P) -- ++({0.46*cos(\LA)*cos(\LO)},{0.46*cos(\LA)*sin(\LO)},
+                     {0.46*sin(\LA)}) node[lbl,right] {$\berho$};
+\draw[vec] (P) -- ++({-0.46*sin(\LO)},{0.46*cos(\LO)},0)
+                     node[lbl,above right=-1pt] {$\beth$};
+\draw[vec] (P) -- ++({-0.46*sin(\LA)*cos(\LO)},{-0.46*sin(\LA)*sin(\LO)},
+                     {0.46*cos(\LA)}) node[lbl,above left=-1pt] {$\beph$};
+% the two angles
+\draw[gray!80,thin] plot[domain=0:\LO,samples=40]
+      ({0.42*cos(\x)},{0.42*sin(\x)},0);
+\node[lbl,text=gray!90] at ({0.52*cos(0.5*\LO)},{0.52*sin(0.5*\LO)},0)
+     {$\theta$};
+\draw[gray!80,thin] plot[domain=0:\LA,samples=25]
+      ({0.62*cos(\LO)*cos(\x)},{0.62*sin(\LO)*cos(\x)},{0.62*sin(\x)});
+\node[lbl,text=gray!90] at ({0.76*cos(\LO)*cos(0.5*\LA)},
+      {0.76*sin(\LO)*cos(0.5*\LA)},{0.76*sin(0.5*\LA)}) {$\varphi$};
+\end{tikzpicture}
+\hspace{0.35cm}
+\raisebox{1.7cm}{\begin{tikzpicture}[scale=0.92]
+\draw[thick] (0,0) rectangle (2.5,1.55);
+\draw[thick] (2.5,1.55) -- (3.2,2.10) -- (3.2,0.55) -- (2.5,0);
+\draw[thick] (0,1.55) -- (0.7,2.10) -- (3.2,2.10);
+\draw[gray!55,densely dashed] (0,0) -- (0.7,0.55) -- (3.2,0.55);
+\draw[gray!55,densely dashed] (0.7,0.55) -- (0.7,2.10);
+\node[below,font=\small] at (1.25,0) {$r\cos\varphi\,\dl\theta$};
+\node[right,font=\small] at (3.2,1.30) {$r\,\dl\varphi$};
+\node[above left,font=\small] at (0.42,1.87) {$\dl r$};
+\node[font=\small] at (1.55,0.85) {$\dl v$};
+\end{tikzpicture}}
+\caption{Left: the spherical frame at $\bx=r\berho$. The heavy circle is the
+parallel of latitude $\varphi$, and its radius is the dashed distance
+$r\cos\varphi$ from the polar axis, not $r$; this single fact is the whole
+reason $h_{\theta}=r\cos\varphi$. The triad $\{\berho,\beth,\beph\}$ points
+outward, east and north, and $\beth$ appears short only because it is
+foreshortened, pointing towards the reader. Right: the box built on the three
+coordinate increments, with edge lengths $\dl r$, $r\cos\varphi\,\dl\theta$
+and $r\,\dl\varphi$; each edge is a coordinate increment multiplied by its
+scale factor.}
+\label{fig:sph}
+\end{figure}
+
+\begin{remark}[the three scale factors, read off the picture]
+\label{rem:sphscale}
+Each coefficient in $(\ast_{2})$ is the distance moved per unit
+coordinate:
+\[
+\begin{aligned}
+   \dl r\ \text{at fixed }\theta,\varphi&:\quad
+     \text{outward along }\berho,\ \text{distance }\dl r,
+     &&h_{r}=1,\\
+   \dl\theta\ \text{at fixed }r,\varphi&:\quad
+     \text{along the parallel, radius }\varrho=r\cos\varphi,
+     &&h_{\theta}=r\cos\varphi,\\
+   \dl\varphi\ \text{at fixed }r,\theta&:\quad
+     \text{along the meridian, radius }r,
+     &&h_{\varphi}=r .
+\end{aligned}
+\]
+The middle one is the trap: the parallel has radius $\varrho=r\cos\varphi$,
+the distance to the \emph{axis}, not $r$. Two checks. At the equator
+$\cos\varphi=1$ and $h_{\theta}=r$. At a pole $\cos\varphi\to0$ and
+$h_{\theta}\to0$, the degeneracy that excludes the poles below.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.78,
+  vec/.style={-{Stealth[length=2.4mm]},thick},
+  lbl/.style={fill=white,inner sep=1.2pt,font=\small}]
+% meridional section; radius 2.2, latitude phi = 38 deg, so
+% P = 2.2(cos38, sin38) = (1.734, 1.355)
+\draw[gray!45,thin] (-2.75,0)--(2.75,0);
+\draw[gray!45,thin] (0,-2.60)--(0,2.45);
+\node[lbl,text=gray!85,font=\small] at (0,2.62) {polar axis};
+\node[lbl,text=gray!85,font=\small] at (2.90,0.22) {equator};
+\draw[thick] (0,0) circle (2.2);
+\draw[thick,black] (33:2.2) arc (33:43:2.2);
+\fill (0,0) circle (1.0pt);
+\coordinate (P) at (1.734,1.355);
+\fill (P) circle (1.2pt);
+% the radius r
+\draw[vec] (0,0)--(P);
+\node[lbl] at (1.47,0.80) {$r$};
+% the latitude angle, measured up from the equator
+\draw[gray!80,thin] (0:0.75) arc (0:38:0.75);
+\node[lbl,font=\small] at (0.87,0.30) {$\varphi$};
+% the distance from P to the POLAR AXIS
+\draw[guide] (P)--(0,1.355);
+\node[lbl] at (0.78,1.355) {$\varrho=r\cos\varphi$};
+% the outward and northward directions at P
+\draw[vec] (P)--++(0.473,0.369);
+\node[lbl,right] at (2.26,1.76) {$\berho$};
+\draw[vec] (P)--++(-0.369,0.473);
+\node[lbl] at (1.24,2.02) {$\beph$};
+% the azimuthal direction comes out of the page at P
+\draw[thick] (P) circle (0.10);
+\fill (P) circle (0.028);
+\node[lbl] at (2.18,1.10) {$\beth$};
+% the two arc lengths, as a legend clear of the circle
+\node[lbl,align=center,font=\small] at (-1.55,-2.80)
+  {along the meridian\\ (drawn heavy): $r\,\dl\varphi$};
+\node[lbl,align=center,font=\small] at (1.55,-2.80)
+  {around the parallel\\ (out of the page): $r\cos\varphi\,\dl\theta$};
+\end{tikzpicture}
+\caption{A meridional section, showing why $h_{\theta}=r\cos\varphi$ while
+$h_{\varphi}=r$. Since $\varphi$ is measured from the equator, the point
+is at distance $r$ from the origin but only $\varrho=r\cos\varphi$ from
+the polar axis. A change of longitude sweeps it around that smaller
+circle, a change of latitude along a meridian of radius $r$. The
+azimuthal direction $\beth$ comes out of the page, marked by the circled
+dot.}
+\label{fig:sphscale}
+\end{figure}
+
+\emph{Step 6: invert the line element.}
+Because $\{\berho,\beth,\beph\}$ is orthonormal, the three coefficients in
+$(\ast_2)$ are recovered by dotting with the corresponding leg, every cross
+term vanishing:
+\[
+\begin{aligned}
+   \ip\berho{\dl\bx}&=\dl r\,\ip\berho\berho
+     +r\cos\varphi\,\dl\theta\,\ip\berho\beth
+     +r\,\dl\varphi\,\ip\berho\beph=\dl r,\\
+   \ip\beth{\dl\bx}&=\dl r\,\ip\beth\berho
+     +r\cos\varphi\,\dl\theta\,\ip\beth\beth
+     +r\,\dl\varphi\,\ip\beth\beph=r\cos\varphi\,\dl\theta,\\
+   \ip\beph{\dl\bx}&=\dl r\,\ip\beph\berho
+     +r\cos\varphi\,\dl\theta\,\ip\beph\beth
+     +r\,\dl\varphi\,\ip\beph\beph=r\,\dl\varphi .
+\end{aligned}
+\]
+Solving for the coordinate increments, which requires $r\neq0$ and
+$\cos\varphi\neq0$,
+\[
+   \dl r=\ip\berho{\dl\bx},\qquad
+   \dl\theta=\frac{1}{r\cos\varphi}\,\ip\beth{\dl\bx},\qquad
+   \dl\varphi=\frac{1}{r}\,\ip\beph{\dl\bx}.
+\]
+
+\emph{Step 7: the chain rule and the identification.}
+Write $f=\hat f(r,\theta,\varphi)$ for the composite that assigns to the
+coordinates the value of the field at the corresponding point. The ordinary
+chain rule in three variables gives
+\[
+   \dl f=f_{,r}\,\dl r+f_{,\theta}\,\dl\theta+f_{,\varphi}\,\dl\varphi,
+   \qquad f_{,r}:=\frac{\partial\hat f}{\partial r},\ \text{etc.}
+\]
+Substituting the three expressions just obtained and collecting the common
+factor $\dl\bx$ on the right of every dot product,
+\[
+\begin{aligned}
+   \dl f&=f_{,r}\,\ip\berho{\dl\bx}
+        +f_{,\theta}\,\frac{1}{r\cos\varphi}\,\ip\beth{\dl\bx}
+        +f_{,\varphi}\,\frac{1}{r}\,\ip\beph{\dl\bx}\\
+   &=\Big(f_{,r}\,\berho+\frac{1}{r\cos\varphi}\,f_{,\theta}\,\beth
+        +\frac{1}{r}\,f_{,\varphi}\,\beph\Big)\cdot\dl\bx .
+\end{aligned}
+\]
+Compare with \eqr{1.114}, $\dl f=\ip{\grad f}{\dl\bx}$. Subtracting,
+$\ip{\bw}{\dl\bx}=0$ where $\bw$ is the difference of $\grad f$ and the
+bracket. As $(\dl r,\dl\theta,\dl\varphi)$ ranges over $\Rn^{3}$ the vector
+$\dl\bx$ in $(\ast_2)$ ranges over all of $\Vt$, precisely because the three
+scale factors are non-zero and the triad is a basis; so $\bw$ is orthogonal
+to every vector and therefore $\bw=\bze$. Hence
+\begin{equation}
+   \boxed{\ \grad f=f_{,r}\,\berho
+     +\frac{1}{r\cos\varphi}\,f_{,\theta}\,\beth
+     +\frac{1}{r}\,f_{,\varphi}\,\beph\ }
+   \tag{$\ast_3$}
+\end{equation}
+and the components sought are
+$(\grad f)_{\rho}=f_{,r}$,
+$(\grad f)_{\theta}=f_{,\theta}/(r\cos\varphi)$,
+$(\grad f)_{\varphi}=f_{,\varphi}/r$.
+
+\emph{Where it fails.} The derivation used $r\neq0$ and $\cos\varphi\neq0$.
+The first excludes the origin, where no radial direction exists; the second
+excludes the two poles $\varphi=\pm\pi/2$, where the circle of latitude
+degenerates to a point, $\beth$ is undefined, and longitude carries no
+information. These are failures of the coordinate system, not of the field:
+$\grad f$ itself is perfectly well defined there, as \eqr{1.114} makes plain,
+since it never mentions coordinates.
+
+\emph{Checks.} Three independent ones, each computed both ways.
+
+Take $f=r=|\bx|$. Then $f_{,r}=1$ and $f_{,\theta}=f_{,\varphi}=0$, so
+$(\ast_3)$ gives $\grad r=\berho$. Independently, from
+$r^{2}=\ip\bx\bx$ one has $2r\,\dl r=2\ip\bx{\dl\bx}$, hence
+$\dl r=\ip{(\bx/r)}{\dl\bx}$ and $\grad r=\bx/r=\berho$, in agreement.
+
+Take $f=x_{3}=r\sin\varphi$. Then $f_{,r}=\sin\varphi$, $f_{,\theta}=0$,
+$f_{,\varphi}=r\cos\varphi$, so
+\[
+   \grad f=\sin\varphi\,\berho+\frac{1}{r}\,r\cos\varphi\,\beph
+          =\sin\varphi\,\berho+\cos\varphi\,\beph .
+\]
+Substituting the Cartesian forms of $\berho$ and $\beph$,
+\[
+\begin{aligned}
+   \grad f&=\sin\varphi\big(\cos\varphi\,\ber+\sin\varphi\,\be_{3}\big)
+           +\cos\varphi\big(-\sin\varphi\,\ber+\cos\varphi\,\be_{3}\big)\\
+   &=(\sin\varphi\cos\varphi-\cos\varphi\sin\varphi)\,\ber
+     +(\sin^{2}\varphi+\cos^{2}\varphi)\,\be_{3}=\be_{3},
+\end{aligned}
+\]
+which is right, since $\grad x_{3}=\be_{3}$ directly from
+$\dl x_{3}=\ip{\be_{3}}{\dl\bx}$.
+
+Take $f=\theta$. Then $(\ast_3)$ gives
+$\grad\theta=\beth/(r\cos\varphi)$. This is the familiar polar result
+$\grad\theta=\beth/\varrho$ with $\varrho=r\cos\varphi$ the distance from
+the polar axis, which is exactly what the dashed segment in
+Figure~\ref{fig:sph} measures, and it correctly blows up on the axis, where
+$\theta$ is discontinuous.
+\end{solution}
+
+\begin{remark}[the scale-factor recipe, and the colatitude convention]%
+\label{rem:lame}
+Nothing in Steps 5 to 7 used the sphere. Whenever coordinates
+$(q_{1},q_{2},q_{3})$ produce a line element of the orthogonal form
+$\dl\bx=\sum_{k}h_{k}\,\dl q_{k}\,\bff_{k}$ with $\{\bff_{k}\}$ orthonormal,
+the same three steps give
+\[
+   \grad f=\sum_{k}\frac{1}{h_{k}}\frac{\partial f}{\partial q_{k}}\,\bff_{k},
+\]
+the $h_{k}$ being called scale factors. Cartesian coordinates have
+$h_{1}=h_{2}=h_{3}=1$ and the formula returns $f_{,i}\be_{i}$; the polar
+coordinates of \S1.2.5 have $h_{r}=1$, $h_{\theta}=r$, $h_{z}=1$ and it
+returns $f_{,r}\ber+r^{-1}f_{,\theta}\beth+f_{,z}\be_{3}$. The division by
+$h_{k}$ is not a convention but a units statement: $\partial f/\partial
+q_{k}$ is a change per unit \emph{coordinate}, while a gradient component
+must be a change per unit \emph{length}, and $h_{k}$ is the number of
+lengths per coordinate.
+
+One warning on conventions. Most physics texts measure the polar angle
+$\vartheta$ down from the north pole, the colatitude, and obtain
+$h_{\vartheta}=r$, $h_{\theta}=r\sin\vartheta$. Here $\varphi$ is measured
+up from the equator, so $\varphi=\pi/2-\vartheta$ and
+$\sin\vartheta=\cos\varphi$, which is why $\cos\varphi$ appears in
+$(\ast_3)$ where the familiar formula shows a sine. The two agree; only the
+angle being named has moved.
+\end{remark}
+
+\begin{problem}[Laplace's equation between two spheres]
+For $f=f(r)$, $r=|\bx|$, solve $\dvg(\grad f)=0$ on $a\le r\le b$ with
+$f(a)=f_a$, $f(b)=f_b$.
+\end{problem}
+\begin{solution}
+By Problem~25 with $f_{,\theta}=f_{,\varphi}=0$, $\grad f=f'(r)\berho$. Put
+$\bv=\grad f=f'(r)\berho$; then, using $\dl\berho$ as above,
+\[
+\dl\bv=f''(r)\,\dl r\,\berho+f'(r)\big(\cos\varphi\,\beth\,\dl\theta
++\beph\,\dl\varphi\big),
+\]
+and inserting $\dl r=\berho\cdot\dl\bx$,
+$\dl\theta=\tfrac{1}{r\cos\varphi}\beth\cdot\dl\bx$,
+$\dl\varphi=\tfrac1r\beph\cdot\dl\bx$ and
+$(\be_a\cdot\dl\bx)\be_b=(\be_b\otimes\be_a)\dl\bx$,
+\[
+\grad\bv=f''\,\berho\otimes\berho+\frac{f'}{r}\,\beth\otimes\beth
++\frac{f'}{r}\,\beph\otimes\beph,\qquad
+\dvg\bv=\tr(\grad\bv)=f''+\frac{2f'}{r}.
+\]
+So Laplace's equation is $f''+2f'/r=0$, i.e. $(r^2f')'=0$, giving
+$r^2f'=$ const, $f'=\alpha/r^2$, $f(r)=\beta-\alpha/r$. Rewriting the
+constants through the boundary conditions,
+\[
+\boxed{\,f(r)=f_a+(f_b-f_a)\,\frac{\tfrac1a-\tfrac1r}{\tfrac1a-\tfrac1b}\,}
+\]
+which indeed gives $f(a)=f_a$, $f(b)=f_b$.
+\end{solution}
+
+\begin{problem}[A curl identity and the curl of a polar field]
+Establish $\ip\bu{\crl\bv}=\dvg(\bv\times\bu)+\ip\bv{\crl\bu}$ and derive
+the curl of the field \eqr{1.145}'s underlying
+$\bu=u_r\ber+u_\theta\beth+u_z\bk$.
+\end{problem}
+\begin{solution}
+\emph{Identity.} Write $(\crl\bv)_i=\eps_{ijk}v_{k,j}$. Then
+\[
+\dvg(\bv\times\bu)=\eps_{ijk}(v_ju_k)_{,i}
+=\eps_{ijk}v_{j,i}u_k+\eps_{ijk}v_ju_{k,i}.
+\]
+In the first term $\eps_{ijk}v_{j,i}=\eps_{kij}v_{j,i}=(\crl\bv)_k$, so it
+is $\ip\bu{\crl\bv}$; in the second $\eps_{ijk}u_{k,i}
+=-\eps_{jik}u_{k,i}=-(\crl\bu)_j$, so it is $-\ip\bv{\crl\bu}$. Hence
+$\dvg(\bv\times\bu)=\ip\bu{\crl\bv}-\ip\bv{\crl\bu}$, which rearranges to
+the stated identity.
+
+\emph{Curl of the polar field.} For any field, $\crl\bu$ is the axial
+vector of $\grad\bu-(\grad\bu)^t$ (that is,
+$(\grad\bu-(\grad\bu)^t)\ba=(\crl\bu)\times\ba$). From \eqr{1.145},
+\[
+\begin{aligned}
+\grad\bu-(\grad\bu)^t
+&=c\,(\ber\otimes\beth-\beth\otimes\ber)
++u_{z,r}(\bk\otimes\ber-\ber\otimes\bk)\\
+&\quad+\tfrac1r u_{z,\theta}(\bk\otimes\beth-\beth\otimes\bk),
+\end{aligned}
+\]
+with $c=\tfrac1r(u_{r,\theta}-u_\theta)-u_{\theta,r}$. The axial vector of
+$\be_a\otimes\be_b-\be_b\otimes\be_a$ is $\be_b\times\be_a$, so
+\[
+\begin{aligned}
+\crl\bu&=c\,(\beth\times\ber)+u_{z,r}(\ber\times\bk)
++\tfrac1r u_{z,\theta}(\beth\times\bk)\\
+&=\tfrac1r u_{z,\theta}\,\ber-u_{z,r}\,\beth
++\Big[u_{\theta,r}+\tfrac1r(u_\theta-u_{r,\theta})\Big]\bk,
+\end{aligned}
+\]
+using $\beth\times\ber=-\bk$, $\ber\times\bk=-\beth$,
+$\beth\times\bk=\ber$.
+\end{solution}
+
+\begin{problem}[Cartesian formula for the curl of a tensor]
+Establish $\crl\bA=\eps_{ilm}A_{jl,i}\,\be_m\otimes\be_j$.
+\end{problem}
+\begin{solution}
+By definition $(\crl\bA)\bc=\crl(\bA^{t}\bc)$ for fixed $\bc$. Take
+$\bc=\be_j$; then $\bA^{t}\be_j=A_{jl}\be_l$ is a vector field with $l$th
+component $A_{jl}$, and with $(\crl\bw)_m=\eps_{miq}w_{q,i}$,
+\[
+\crl(\bA^{t}\be_j)=\eps_{miq}A_{jq,i}\,\be_m
+=\eps_{ilm}A_{jl,i}\,\be_m
+\]
+(renaming $q\to l$ and using $\eps_{miq}=\eps_{qmi}$, i.e.\ writing the
+antisymmetric symbol in the cyclic order $ilm$). Writing
+$\crl\bA=C_{mj}\be_m\otimes\be_j$ and matching
+$(\crl\bA)\be_j=C_{mj}\be_m$ gives $C_{mj}=\eps_{ilm}A_{jl,i}$, i.e.
+$\crl\bA=\eps_{ilm}A_{jl,i}\,\be_m\otimes\be_j$.
+\end{solution}
+
+%=======================================================================
+\appendix
+\chapter{Dictionary to the book}\label{app:dict}
+%=======================================================================
+
+\renewcommand{\arraystretch}{1.2}
+\begin{center}\footnotesize
+\begin{tabular}{@{}ll@{\hspace{1.3em}}ll@{}}
+\hline
+Book & Here & Book & Here\\
+\hline
+(1.1)--(1.3) & Def.~\ref{def:lindep}, Thm.~\ref{thm:coord}
+ & (1.79)--(1.84) & Thm.~\ref{thm:trace}\\
+ip axioms & Def.~\ref{def:ip}
+ & (1.85), (1.86) & Def.~\ref{def:cof}, Prop.~\ref{prop:I2cof}\\
+(1.4)--(1.6) & Thm.~\ref{thm:cs}--Cor.~\ref{cor:tri}
+ & (1.87)--(1.93) & Def.~\ref{def:tip}, Thm.~\ref{thm:tip}\\
+(1.7)--(1.16) & Def.~\ref{def:onb}--Prop.~\ref{prop:comp}
+ & (1.95) & Prop.~\ref{prop:posvec}\\
+(1.17)--(1.19) & Thm.~\ref{thm:riesz}
+ & \eqr{1.96}, (1.97) & Def.~\ref{def:diff}, Def.~\ref{def:landau}\\
+(1.20)--(1.22) & Thm.~\ref{thm:cob}
+ & (1.98), \eqr{1.99} & Thm.~\ref{thm:grad}\\
+(1.23)--(1.30) & Def.~\ref{def:cross}--Prop.~\ref{prop:crosscomp}
+ & \eqr{1.100}--(1.108) & Thm.~\ref{thm:dir}--Thm.~\ref{thm:cart}\\
+(1.31)--(1.39) & Def.~\ref{def:det}--Cor.~\ref{cor:det6}
+ & \eqr{1.109}--(1.115) & Thm.~\ref{thm:chain}--Ex.~\ref{ex:cartrecover}\\
+(1.40)--(1.50) & Def.~\ref{def:tensor}--Ex.~\ref{ex:tp}
+ & \eqr{1.116}--\eqr{1.125} & Ex.~\ref{ex:polar}, Ex.~\ref{ex:gradr}\\
+(1.55)--(1.58) & Thm.~\ref{thm:tenstrans}
+ & \eqr{1.126}--(1.134) & Def.~\ref{def:diffv}--Cor.~\ref{cor:dv}\\
+(1.59)--(1.62) & Prop.~\ref{prop:transpose}, Prop.~\ref{prop:axial}
+ & (1.135)--\eqr{1.145} & Ex.~\ref{ex:gu1}--Ex.~\ref{ex:gupolar}\\
+(1.63)--(1.72) & Prop.~\ref{prop:prodinv}
+ & (1.146)--(1.152) & Def.~\ref{def:divv}--Prop.~\ref{prop:divprod}\\
+(1.73)--(1.77) & Prop.~\ref{prop:orth}
+ & (1.153)--\eqr{1.162} & Ex.~\ref{ex:divpolar}\\
+(1.78) & Def.~\ref{def:inv3}
+ & (1.163)--(1.166) & Def.~\ref{def:curlv}--Rem.~\ref{rem:curlA}\\
+sym/skw, sph/dev & Def.~\ref{def:splits}
+ & \eqr{1.167}, \eqr{1.168} & Thm.~\ref{thm:div}, Thm.~\ref{thm:stokes}\\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip\noindent
+Lemma~\ref{lem:altform} (one dimensionality of alternating $3$ forms)
+replaces the book's Appendix~A computations in
+Propositions~\ref{prop:detforms},~\ref{prop:invwd} and
+Theorem~\ref{thm:det}. All twenty eight chapter problems are solved in
+\S\ref{sec:problems}.
+
+\end{document}

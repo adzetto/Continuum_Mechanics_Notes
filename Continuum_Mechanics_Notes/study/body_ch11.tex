@@ -1,0 +1,2435 @@
+%=======================================================================
+\chapter{Elastic Solids}
+%=======================================================================
+
+An elastic material is what is left of the general model of Chapter 8
+when the constitutive functions are made blind to the velocity gradient.
+Chapter 9 removed the reference configuration instead and arrived at
+fluids; here the reference configuration stays and the rate of
+deformation goes. The two deletions are independent, and the chapter
+shows how much survives each one.
+
+The list of response functions is that of Chapter 8,
+\begin{equation}
+   \mathcal{C}=\{\bT,\bq,\psi,\eta\},
+   \tag{11.1}\label{eq:11.1}
+\end{equation}
+and the list of variables on which they are allowed to depend is
+\eqr{8.4} with $\bL$ struck out,
+\begin{equation}
+   \mathcal{L}=\{\bx,\bv,\theta,\bF,\grad\theta\},
+   \tag{11.2}\label{eq:11.2}
+\end{equation}
+both evaluated at the same material point $p$. For the Helmholtz free
+energy of \eqr{6.186} this reads
+\begin{equation}
+   \psi=\hat\psi_{\kappa}(\bx,\bv,\theta,\bF_{\kappa},\grad\theta;p),
+   \tag{11.3}\label{eq:11.3}
+\end{equation}
+the subscript $\kappa$ recording that the observer $O$ computes
+$\bF_{\kappa}$ from a reference configuration of its own choosing.
+
+\begin{remark}[what has been deleted, and what that costs]%
+\label{rem:ch11delete}
+Deleting $\bL$ is not a small change. In Chapter 9 the stress of a
+viscous fluid was built out of $\bD$, and \eqr{9.38} showed that when
+$\bD$ is switched off nothing remains but a pressure. Here $\bD$ is
+switched off from the start, and yet Section~\ref{sec:ch11stress} will
+produce a stress that depends on the deformation in full. The
+difference is the reference configuration: a fluid has none to depend
+on, so removing the rate leaves it with only $J$, while a solid
+remembers $\kappa$ and can measure how far it has been carried from it.
+
+The deletion also has a thermodynamical consequence that is not
+obvious. For fluids, Chapter 9 had to \emph{assume} that the stress is
+insensitive to $\grad\theta$. Here that insensitivity will be
+\emph{proved}, at \eqr{11.16}$_{2}$, and the proof is the reason
+\eqr{11.13} is worth writing out in full.
+\end{remark}
+
+Frame invariance, in the form \eqr{7.37} carried through the definition
+\eqr{6.186} of $\psi$, requires that the constitutive function used by a
+second observer $O^{+}$ deliver the same value:
+\begin{equation}
+   \hat\psi_{\kappa}(\bx,\bv,\theta,\bF_{\kappa},\grad\theta;p)
+   =\hat\psi^{+}_{\kappa^{+}}\big(\bx^{+},\bv^{+},\theta^{+},
+   \bF^{+}_{\kappa^{+}},\grad^{+}\theta^{+};p\big).
+   \tag{11.4}\label{eq:11.4}
+\end{equation}
+Now run the argument of Sections~\ref{sec:ch9mfi} and
+\ref{sec:ch10obs}: compare two relative motions of the observers, as at
+\eqr{9.6}, chosen so that $\bQ_{2}(t_{0})=\bQ_{1}(t_{0})$ and
+$\bc_{2}(t_{0})=\bc_{1}(t_{0})$, so that the two agree on the
+configuration at $t_{0}$ and differ only in how they are moving. The
+conclusion is
+\begin{equation}
+   \hat\psi_{\kappa}\big(\bx_{2},\bv_{2},\theta,\bF_{2},
+   (\grad\theta)_{2};p\big)
+   =\hat\psi_{\kappa}\big(\bx_{1},\bv_{1},\theta,\bF_{1},
+   (\grad\theta)_{1};p\big),
+   \tag{11.5}\label{eq:11.5}
+\end{equation}
+where $\bx_{2}$ and $\bv_{2}$ follow from $\bx_{1}$ and $\bv_{1}$ by
+\eqr{9.12} with $\bQ=\bQ^{t}_{2}\bQ_{1}$ a rotation, and where
+\begin{equation}
+   \bF_{2}=\bQ\bF_{1}\qquad\text{and}\qquad
+   (\grad\theta)_{2}=\bQ(\grad\theta)_{1}.
+   \tag{11.6}\label{eq:11.6}
+\end{equation}
+Choosing $\bQ=\I$ leaves $\bF$ and $\grad\theta$ alone while moving
+$\bx$ and $\bv$, so $\hat\psi_{\kappa}$ can depend on neither of the
+latter two:
+\begin{equation}
+   \psi=\Psi(\theta,\bF,\grad\theta;p)
+   \tag{11.7}\label{eq:11.7}
+\end{equation}
+for some function $\Psi$, the subscript $\kappa$ now suppressed.
+Restoring general $\bQ$ in \eqr{11.5} then leaves
+\begin{equation}
+   \Psi(\theta,\bQ\bF,\bQ\grad\theta;p)=\Psi(\theta,\bF,\grad\theta;p)
+   \qquad\text{for all rotations }\bQ .
+   \tag{11.8}\label{eq:11.8}
+\end{equation}
+The identical reasoning applied to the stress and the heat flux removes
+$\bx$ and $\bv$ from them too. For the heat flux,
+\begin{equation}
+   \bq=\hat\bq(\theta,\bF,\grad\theta;p),
+   \tag{11.9}\label{eq:11.9}
+\end{equation}
+where, $\bq$ being a vector rather than a scalar, the transformation
+carries a $\bQ$ on the left as well:
+\begin{equation}
+   \hat\bq(\theta,\bQ\bF,\bQ\grad\theta;p)
+   =\bQ\,\hat\bq(\theta,\bF,\grad\theta;p)
+   \qquad\text{for all rotations }\bQ .
+   \tag{11.10}\label{eq:11.10}
+\end{equation}
+
+%=======================================================================
+\section{Clausius--Duhem inequality}\label{sec:ch11cd}
+%=======================================================================
+
+Before exploiting \eqr{11.8} and \eqr{11.10}, which are statements about
+symmetry, we spend the second law. It is \eqr{6.187},
+\[
+   -\rho\big(\dot\psi+\eta\dot\theta\big)+\bT\cdot\bL
+   -\theta^{-1}\ip\bq{\grad\theta}\geq0 ,
+\]
+and the plan is to convert every term into a referential one and then
+read off what the inequality forbids.
+
+Two ingredients are needed. The first is the chain rule applied to
+\eqr{11.7}, the free energy now being a function of three arguments:
+\begin{equation}
+   \dot\psi=\Psi_{\theta}\dot\theta+\Psi_{\bF}\cdot\dot\bF
+   +\Psi_{\grad\theta}\cdot(\grad\theta)^{\textstyle\cdot} ,
+   \tag{11.11}\label{eq:11.11}
+\end{equation}
+in which $\Psi_{\theta}$ is a scalar, $\Psi_{\bF}$ a two-point tensor
+and $\Psi_{\grad\theta}$ a spatial vector, each paired with its argument
+by the appropriate inner product. The second converts the stress power
+density into one written on $\dot\bF$:
+\begin{equation}
+   \bT\cdot\bL=\bT\cdot\dot\bF\bF^{-1}
+   =\tr\big(\bT\bF^{-t}\dot\bF^{t}\big)=\bT\bF^{-t}\cdot\dot\bF .
+   \tag{11.12}\label{eq:11.12}
+\end{equation}
+The middle step is $\bA\cdot\bB=\tr(\bA\bB^{t})$ from
+Definition~\ref{def:tip} with $\bB=\dot\bF\bF^{-1}$, whose transpose is
+$\bF^{-t}\dot\bF^{t}$; the last step reads the same trace backwards with
+the factors regrouped as $(\bT\bF^{-t})(\dot\bF)^{t}$.
+
+Now multiply the inequality by $J$, which is positive and so does not
+turn it around. Three conversions occur at once. By \eqr{2.59},
+$J\rho=\rho_{\kappa}$. By \eqr{2.55} and \eqr{6.140},
+$J\bT\bF^{-t}=\bT\bF^{*}=\bP$, so the stress power becomes
+$\bP\cdot\dot\bF$, which is \eqr{6.156} again. The dissipation term
+simply acquires the factor $J$. Substituting \eqr{11.11} and collecting
+the coefficient of each rate,
+\begin{equation}
+\begin{aligned}
+   -\rho_{\kappa}\big(\Psi_{\theta}+\eta\big)\dot\theta
+   &+\big(\bP-\rho_{\kappa}\Psi_{\bF}\big)\cdot\dot\bF
+   -\rho_{\kappa}\Psi_{\grad\theta}\cdot(\grad\theta)^{\textstyle\cdot}\\
+   &-J\theta^{-1}\ip\bq{\grad\theta}\geq0 .
+\end{aligned}
+   \tag{11.13}\label{eq:11.13}
+\end{equation}
+
+This has the shape met at \eqr{9.64}. Write
+\begin{equation}
+\begin{aligned}
+   \bz&=\big(\theta,\bF,\grad\theta\big),\qquad
+   \bw=\big(\dot\theta,\dot\bF,(\grad\theta)^{\textstyle\cdot}\big),\\
+   \ba(\bz)&=\big(-\rho_{\kappa}(\Psi_{\theta}+\eta),\
+   \bP-\rho_{\kappa}\Psi_{\bF},\ -\rho_{\kappa}\Psi_{\grad\theta}\big)
+\end{aligned}
+   \tag{11.14}\label{eq:11.14}
+\end{equation}
+and
+\begin{equation}
+   b(\bz)=-J\theta^{-1}\ip\bq{\grad\theta},
+   \tag{11.15}\label{eq:11.15}
+\end{equation}
+so that \eqr{11.13} reads $\ba(\bz)\cdot\bw+b(\bz)\geq0$. The
+Coleman--Noll argument of \eqr{9.68} applies verbatim: at a fixed state
+$\bz$ the rates $\bw$ may be assigned arbitrarily and independently, so
+a non-zero $\ba(\bz)$ could be defeated by choosing $\bw=-\lambda\ba$
+with $\lambda$ large. Hence $\ba(\bz)=\bze$ and $b(\bz)\geq0$. Written
+out, and using $\Psi_{\grad\theta}=\bze$ to drop $\grad\theta$ from the
+list,
+\begin{equation}
+   \eta=-\Psi_{\theta}(\theta,\bF;p),\qquad
+   \bP=W_{\bF}(\theta,\bF;\bX),\qquad
+   \ip\bq{\grad\theta}\leq0 ,
+   \tag{11.16}\label{eq:11.16}
+\end{equation}
+where
+\begin{equation}
+   W(\theta,\bF;\bX)=\rho_{\kappa}(\bX)\,
+   \Psi\big(\theta,\bF;\kappa^{-1}(\bX)\big)
+   \tag{11.17}\label{eq:11.17}
+\end{equation}
+is the free energy per unit volume of $\kappa$. Passing from
+$\rho_{\kappa}\Psi_{\bF}$ to $W_{\bF}$ is legitimate because
+$\rho_{\kappa}$ depends on $\bX$ alone, by \eqr{6.18}, and so rides
+through the differentiation with respect to $\bF$ as a constant. The
+third of \eqr{11.16} follows from $b(\bz)\geq0$ after dividing by the
+positive numbers $J$ and $\theta^{-1}$ and reversing the sign.
+
+\begin{remark}[three results, and the one that is a surprise]%
+\label{rem:ch11three}
+The first of \eqr{11.16} is familiar: entropy is minus the temperature
+derivative of the free energy, exactly as in equilibrium thermostatics.
+The third is the statement that heat does not flow up a temperature
+gradient, which is the local form of the second law one expects.
+
+The second is the one worth pausing on, and it says two things at once.
+That $\bP=W_{\bF}$ is the definition of hyperelasticity: the stress is
+the gradient of a potential, so no closed cycle of deformation at fixed
+temperature can extract work. Chapter 9 had no such statement, because
+the viscous stress there is not a gradient and dissipates.
+
+The other thing it says is hidden in the argument list. Nothing was
+assumed about the dependence of $\bP$ on $\grad\theta$; what was assumed
+is that $\Psi$ may depend on it, and the inequality then forced
+$\Psi_{\grad\theta}=\bze$. The stress inherits that, and so the Piola
+stress, and with it the Cauchy stress by \eqr{6.140}, cannot depend on
+the temperature gradient at all. Remark~\ref{rem:ch11delete} promised
+this. For viscous fluids the same insensitivity had to be put in by
+hand, as Chapter 9 records.
+\end{remark}
+
+%=======================================================================
+\section{Stress response}\label{sec:ch11stress}
+%=======================================================================
+
+With $\grad\theta$ gone from $\Psi$, the invariance requirement
+\eqr{11.8} becomes a statement about $W$ alone. Multiplying \eqr{11.8}
+by $\rho_{\kappa}$ and using \eqr{11.17},
+\begin{equation}
+   W(\theta,\bQ\bF;\bX)=W(\theta,\bF;\bX)
+   \qquad\text{for all rotations }\bQ .
+   \tag{11.18}\label{eq:11.18}
+\end{equation}
+
+\begin{proposition}[the content of \eqr{11.18}]\label{prop:ch11WC}
+A function $W$ satisfies \eqr{11.18} if and only if it depends on $\bF$
+only through $\bC=\bF^{t}\bF$, that is, if and only if
+\begin{equation}
+   W(\theta,\bF;\bX)=\bar W(\theta,\bC;\bX)
+   \tag{11.19}\label{eq:11.19}
+\end{equation}
+for some function $\bar W$.
+\end{proposition}
+
+\begin{proof}
+If \eqr{11.19} holds then \eqr{11.18} follows, because $\bQ\bF$ produces
+the same $\bC$:
+\[
+   (\bQ\bF)^{t}(\bQ\bF)=\bF^{t}\bQ^{t}\bQ\bF=\bF^{t}\I\bF=\bC ,
+\]
+$\bQ$ being orthogonal.
+
+Conversely, suppose \eqr{11.18}. Let $\bF=\bR_{F}\bU$ be the polar
+decomposition \eqr{3.32}, and take
+\[
+   \bQ=\shift\bR^{t}_{F} .
+\]
+This is a rotation of $\Vt$ onto itself: $\bR^{t}_{F}$ carries $\Vt$ to
+$\hVt$ and the shifter $\shift$ carries $\hVt$ back to $\Vt$, both
+preserve inner products, and both have determinant $+1$. Substituting,
+\[
+   \bQ\bF=\shift\bR^{t}_{F}\bR_{F}\bU=\shift\hI\bU=\shift\bU ,
+\]
+so \eqr{11.18} gives $W(\theta,\bF;\bX)=W(\theta,\shift\bU;\bX)$. The
+right-hand side involves $\bF$ only through $\bU$, and $\bU$ is
+determined by $\bC$, being its unique positive-definite square root by
+Theorem~\ref{thm:sqrt}. Defining $\bar W(\theta,\bC;\bX)$ to be
+$W(\theta,\shift\bC^{1/2};\bX)$ gives \eqr{11.19}.
+\end{proof}
+
+\begin{remark}[why $\bC$ and not $\bU$]\label{rem:ch11whyC}
+The proof produced $\bU$ and then traded it for $\bC$. Both are legal
+arguments, and $\bC$ is chosen because it is a polynomial in $\bF$ while
+$\bU$ is a square root: differentiating $\bar W$ with respect to $\bC$
+is elementary, while differentiating with respect to $\bU$ drags in the
+derivative of the square root, which is awkward: Theorem~\ref{thm:sqrt}
+delivers $\bU$ but not a formula for it, and the closed form of
+Theorem~\ref{thm:Uclosed} degenerates when two principal stretches
+coincide. The same reason
+made $\bC$ rather than $\bU$ the working strain measure at \eqr{2.97}.
+\end{remark}
+
+To convert \eqr{11.19} into a formula for the stress, differentiate it
+along a motion. By the chain rule on both sides,
+\begin{equation}
+   W_{\bF}\cdot\dot\bF=\bar W_{\bC}\cdot\dot\bC
+   =\bar W_{\bC}\cdot\big(\dot\bF^{t}\bF+\bF^{t}\dot\bF\big),
+   \tag{11.20}\label{eq:11.20}
+\end{equation}
+where $\bar W_{\bC}=(\bar W_{\bC})^{t}$ is symmetric, being the gradient
+of a scalar with respect to a symmetric tensor. The two terms are now
+moved onto $\dot\bF$ using the rules
+\begin{equation}
+   \bA_{1}\cdot\bA_{2}\bA_{3}=\bA^{t}_{2}\bA_{1}\cdot\bA_{3}
+   =\bA_{3}\bA^{t}_{1}\cdot\bA^{t}_{2},
+   \tag{11.21}\label{eq:11.21}
+\end{equation}
+which are Problem 1 and follow from the cyclic property of the trace.
+Applying the first of them to $\bar W_{\bC}\cdot\bF^{t}\dot\bF$, with
+$\bA_{2}=\bF^{t}$, gives $\bF\bar W_{\bC}\cdot\dot\bF$. Applying the
+second to $\bar W_{\bC}\cdot\dot\bF^{t}\bF$, with $\bA_{2}=\dot\bF^{t}$
+and $\bA_{3}=\bF$, gives $\bF\bar W^{t}_{\bC}\cdot\dot\bF$, and the
+symmetry of $\bar W_{\bC}$ makes this the same thing. The two terms are
+therefore equal, and
+\begin{equation}
+   \big[W_{\bF}-2\bF\big(\bar W_{\bC}\big)\big]\cdot\dot\bF=0 .
+   \tag{11.22}\label{eq:11.22}
+\end{equation}
+The bracket is a two-point tensor and $\dot\bF$ is an arbitrary
+two-point tensor, the motion being at our disposal. Two-point tensors
+form a linear space, so a fixed element of it whose inner product with
+every element vanishes is itself zero. Hence
+\begin{equation}
+   W_{\bF}=2\bF\big(\bar W_{\bC}\big).
+   \tag{11.23}\label{eq:11.23}
+\end{equation}
+Combining this with $\bP=W_{\bF}$ from \eqr{11.16}$_{2}$ and with
+$\bP=\bF\bS$ from \eqr{6.144}, and cancelling the invertible $\bF$,
+\begin{equation}
+   \bS=2\bar W_{\bC} .
+   \tag{11.24}\label{eq:11.24}
+\end{equation}
+This is automatically symmetric, and \eqr{6.145} then makes the Cauchy
+stress symmetric as well.
+
+\begin{remark}[rotational momentum balance comes for free]%
+\label{rem:ch11free}
+Chapter 6 obtained $\bT=\bT^{t}$ at \eqr{6.117} by localizing Euler's
+second postulate, and Proposition~\ref{prop:ch6indep} showed that it is
+genuinely independent information. Here it costs nothing: \eqr{11.24}
+delivers a symmetric $\bS$ because $\bar W_{\bC}$ is the gradient of a
+scalar with respect to a symmetric argument, and \eqr{6.145} transports
+the symmetry to $\bT$.
+
+Nothing has been proved twice. What happened is that \eqr{11.19}, which
+came from frame invariance, already contains the symmetry: a constitutive
+function of $\bC$ cannot produce an unsymmetric stress. Constitutive
+theory and the balance laws have to be consistent, and this is the
+consistency being checked. Had \eqr{11.24} come out unsymmetric, the
+model would have been discarded.
+\end{remark}
+
+%-----------------------------------------------------------------------
+\subsection{Material symmetry}\label{sec:ch11symm}
+%-----------------------------------------------------------------------
+
+Frame invariance restricts how a constitutive function responds to
+rotating the \emph{observer}. Material symmetry restricts how it
+responds to rotating the \emph{reference configuration}, and the two are
+independent. In the form \eqr{8.16} and \eqr{8.17} it reads
+\begin{equation}
+   W(\theta,\bF;\bX)=W(\theta,\bF\bR;\bX)
+   \qquad\text{for all }\bR\in\mathcal{G}_{\kappa}(p),
+   \tag{11.25}\label{eq:11.25}
+\end{equation}
+$\mathcal{G}_{\kappa}(p)$ being the symmetry group at $p$ in the
+configuration $\kappa$. Note where $\bR$ sits: on the right of $\bF$,
+because it acts before the deformation, whereas the $\bQ$ of \eqr{11.18}
+sits on the left and acts after it. Passing to $\bar W$ through
+\eqr{11.19}, and using $(\bF\bR)^{t}(\bF\bR)=\bR^{t}\bC\bR$,
+\begin{equation}
+   \bar W(\theta,\bC;\bX)=\bar W(\theta,\bR^{t}\bC\bR;\bX).
+   \tag{11.26}\label{eq:11.26}
+\end{equation}
+
+\begin{remark}[two rotations that must not be confused]%
+\label{rem:ch11tworot}
+The $\bR$ of \eqr{11.26} is a referential tensor, mapping $\hVt$ to
+itself, and it is a member of the symmetry group. The $\bR_{F}$ of the
+polar decomposition is a two-point tensor, mapping $\hVt$ to $\Vt$, and
+it is determined by the deformation. They are different objects wearing
+the same letter, and the book warns about it at this point. In these
+notes the polar factor carries the subscript $F$ wherever both appear in
+one argument, as in the proof of Proposition~\ref{prop:ch11WC} and in
+\eqr{11.44} below.
+\end{remark}
+
+\subsection*{The unimodular case: fluids again}
+
+Suppose $\mathcal{G}_{\kappa}(p)=U$, the unimodular group of
+\eqr{8.18}. The argument of Chapter 9 then applies unchanged and forces
+$W$ to depend on $\bF$ only through $J=\det\bF$, say
+$W(\theta,\bF;\bX)=w(\theta,J;\bX)$. Hold $\theta$ fixed and
+differentiate along a motion, using \eqr{11.16}$_{2}$ on the left and
+Problem 2(b) of Chapter 4, $\partial J/\partial F_{iA}=F^{*}_{iA}$, on
+the right:
+\begin{equation}
+   \bP\cdot\dot\bF=\dot W=\dot w=w_{J}\dot J
+   =w_{J}\,\bF^{*}\cdot\dot\bF .
+   \tag{11.27}\label{eq:11.27}
+\end{equation}
+As $\dot\bF$ is arbitrary this gives $\bP=w_{J}\bF^{*}$, and \eqr{6.140}
+in the form $\bP=\bT\bF^{*}$ then yields, after cancelling the
+invertible $\bF^{*}$,
+\[
+   \bT=w_{J}\,\I .
+\]
+Combined with conservation of mass, which ties $J$ to $\rho$ through
+\eqr{2.59}, this is exactly the constitutive equation \eqr{9.38} of an
+inviscid fluid, with the pressure $\tilde p=-w_{J}$. So the fluid is not
+a separate theory: it is the elastic solid whose symmetry group is as
+large as it can be.
+
+\subsection*{Isotropy}
+
+For a solid there is a local undistorted configuration in which the
+symmetry group is contained in $\Orth^{+}$. If it is the whole of
+$\Orth^{+}$ the material is called \emph{hemitropic} at the point: no
+rotation applied before the deformation can be detected by any
+experiment. Taking $\kappa(p)$ to be such a configuration,
+\begin{equation}
+   W(\theta,\bF;\bX)=W(\theta,\bF\bR;\bX)
+   \qquad\text{for all }\bR\in\Orth^{+},
+   \tag{11.28}\label{eq:11.28}
+\end{equation}
+and therefore, by \eqr{11.26},
+\begin{equation}
+   \bar W(\theta,\bC;\bX)=\bar W(\theta,\bR^{t}\bC\bR;\bX)
+   \qquad\text{for all }\bR\in\Orth ,
+   \tag{11.29}\label{eq:11.29}
+\end{equation}
+now over the \emph{full} orthogonal group. The upgrade is free because
+$\Orth=\Orth^{+}\cup\{-\hI\}\Orth^{+}$: every improper orthogonal tensor
+is $-\bR$ for some rotation $\bR$, and
+\[
+   (-\bR)^{t}\bC(-\bR)=(-1)^{2}\bR^{t}\bC\bR=\bR^{t}\bC\bR ,
+\]
+so the two signs give the same restriction. A function obeying
+\eqr{11.29} is called \emph{isotropic}.
+
+The representation theorem proved in Part 1 of
+Section~\ref{sec:ch9isotropic} now applies, a scalar isotropic function
+of a symmetric tensor being a function of its principal invariants:
+\begin{equation}
+   \bar W(\theta,\bC;\bX)
+   =\hat W\big(\theta,I_{1}(\bC),I_{2}(\bC),I_{3}(\bC);\bX\big),
+   \tag{11.30}\label{eq:11.30}
+\end{equation}
+where
+\begin{equation}
+   I_{1}(\bC)=\tr\bC,\qquad
+   I_{2}(\bC)=\tfrac12\big[I^{2}_{1}-\tr(\bC^{2})\big],\qquad
+   I_{3}(\bC)=\det\bC
+   \tag{11.31}\label{eq:11.31}
+\end{equation}
+are the principal invariants of \eqr{3.2}. Substituting into
+\eqr{11.24} and writing $\hat W_{k}=\partial\hat W/\partial I_{k}$,
+\begin{equation}
+   \Big[\tfrac12\bS-\sum^{3}_{k=1}\hat W_{k}\,(I_{k})_{\bC}\Big]
+   \cdot\dot\bC=0\qquad\text{for all symmetric }\dot\bC ,
+   \tag{11.32}\label{eq:11.32}
+\end{equation}
+and the gradients of the invariants, computed in Section B.3 of
+Appendix B and reproduced here for use,
+\[
+   (I_{1})_{\bC}=\hI,\qquad
+   (I_{2})_{\bC}=I_{1}\hI-\bC,\qquad
+   (I_{3})_{\bC}=I_{3}\bC^{-1},
+\]
+deliver the Piola--Kirchhoff stress
+\begin{equation}
+   \bS=2\big[\big(\hat W_{1}+I_{1}\hat W_{2}\big)\hI
+   -\hat W_{2}\bC+I_{3}\hat W_{3}\bC^{-1}\big].
+   \tag{11.33}\label{eq:11.33}
+\end{equation}
+Pushing this forward with \eqr{6.145}, $J\bT=\bF\bS\bF^{t}$, and using
+\[
+\begin{aligned}
+   \bF\hI\bF^{t}&=\bB,\qquad
+   \bF\bC\bF^{t}=\bF\bF^{t}\bF\bF^{t}=\bB^{2},\\
+   \bF\bC^{-1}\bF^{t}&=\bF\bF^{-1}\bF^{-t}\bF^{t}=\I ,
+\end{aligned}
+\]
+the middle one by $\bC=\bF^{t}\bF$ and the last by
+$\bC^{-1}=\bF^{-1}\bF^{-t}$, gives the Cauchy stress
+\begin{equation}
+   J\bT=2\big[\big(\hat W_{1}+I_{1}\hat W_{2}\big)\bB
+   -\hat W_{2}\bB^{2}+I_{3}\hat W_{3}\I\big],
+   \tag{11.34}\label{eq:11.34}
+\end{equation}
+$\bB$ being the left Cauchy--Green tensor.
+
+The invariants appearing here may be read off either tensor, because
+\begin{equation}
+\begin{aligned}
+   I_{1}(\bC)&=\lambda^{2}_{1}+\lambda^{2}_{2}+\lambda^{2}_{3}
+   =I_{1}(\bB),\\
+   I_{2}(\bC)&=\lambda^{2}_{1}\lambda^{2}_{2}
+   +\lambda^{2}_{2}\lambda^{2}_{3}+\lambda^{2}_{1}\lambda^{2}_{3}
+   =I_{2}(\bB),\\
+   I_{3}(\bC)&=\lambda^{2}_{1}\lambda^{2}_{2}\lambda^{2}_{3}=I_{3}(\bB),
+\end{aligned}
+   \tag{11.35}\label{eq:11.35}
+\end{equation}
+the $\lambda_{k}$ being the principal stretches. This is Problem 3, and
+it follows from the spectral representations \eqr{3.38}: $\bC$ and $\bB$
+carry the same eigenvalues $\lambda^{2}_{k}$ on different eigenvectors,
+and the invariants see only the eigenvalues.
+
+If the material is incompressible then $J=1$, so $I_{3}=1$ throughout
+the motion and $\hat W_{3}$ is never sampled. The term it multiplied is
+replaced by the reaction of Chapter 10:
+\begin{equation}
+\begin{aligned}
+   \bT&=-p\I+2\big[\big(W^{*}_{1}+I_{1}W^{*}_{2}\big)\bB
+   -W^{*}_{2}\bB^{2}\big],\\
+   &\text{where}\quad W^{*}(I_{1},I_{2};\bX)=\hat W(I_{1},I_{2},1;\bX),
+\end{aligned}
+   \tag{11.36}\label{eq:11.36}
+\end{equation}
+with $W^{*}_{k}=\partial W^{*}/\partial I_{k}$ and $p$ a constitutively
+indeterminate pressure, the multiplier of
+Remark~\ref{rem:ch10lagrange}.
+
+\begin{remark}[which symmetries a constraint tolerates]%
+\label{rem:ch11constraint}
+The constraint \eqr{10.11} of incompressibility, $\det\bC=1$, is
+unchanged when $\bC$ is replaced by $\bR^{t}\bC\bR$ for any
+$\bR\in\Orth$, since $\det(\bR^{t}\bC\bR)=\det\bC$. So isotropy and
+incompressibility can hold together. The same computation works for any
+$\bR\in U$, the determinant being all a unimodular map preserves, so
+incompressibility is compatible with every symmetry group, fluidity
+included.
+
+Inextensibility is different. The constraint \eqr{10.12} singles out a
+direction $\bM$, and there are infinitely many $\bR\in\Orth$ that move
+it. A material reinforced by a family of inextensible fibres therefore
+cannot be isotropic, which is Problem 5 and which
+Example~\ref{ex:ch10fibre} already suggested: the fibre is visible, so
+some rotations of the reference configuration are detectable.
+\end{remark}
+
+\subsection*{Example: simple shear}
+
+Take the simple shear of Section~\ref{sec:shear} and let it be
+suffered by a uniform isotropic material, so that $\hat W$, or $W^{*}$
+in the incompressible case, carries no explicit $\bX$.
+
+The deformation is homogeneous, so by \eqr{3.54} the left Cauchy--Green
+tensor is a constant field. Hence the stress delivered by \eqr{11.34}
+with $J=1$, or by \eqr{11.36}, is also constant, its divergence
+vanishes, and \eqr{6.109} is satisfied with zero body force: simple
+shear is an equilibrium deformation for every uniform isotropic
+material. For the incompressible case one condition is added, that
+$\dvg(p\I)=\grad p$ vanish, so the reactive pressure must be uniform.
+
+From \eqr{3.54}, in the basis $\{\be_{i}\}$,
+\[
+   (B_{ij})=\begin{pmatrix}1+\gamma^{2}&\gamma&0\\
+   \gamma&1&0\\ 0&0&1\end{pmatrix},
+\]
+and squaring the matrix, entry by entry,
+\begin{equation}
+\begin{aligned}
+   \bB^{2}&=\big[(1+\gamma^{2})^{2}+\gamma^{2}\big]\,
+     \be_{1}\otimes\be_{1}
+    +(1+\gamma^{2})\,\be_{2}\otimes\be_{2}+\be_{3}\otimes\be_{3}\\
+   &\quad+\gamma(2+\gamma^{2})\,
+     \big(\be_{1}\otimes\be_{2}+\be_{2}\otimes\be_{1}\big),
+\end{aligned}
+   \tag{11.37}\label{eq:11.37}
+\end{equation}
+the $11$ entry being $(1+\gamma^{2})^{2}+\gamma\cdot\gamma$, the $12$
+entry $(1+\gamma^{2})\gamma+\gamma\cdot1=\gamma(2+\gamma^{2})$, and the
+$22$ entry $\gamma\cdot\gamma+1\cdot1=1+\gamma^{2}$.
+
+\begin{remark}[a misprint in the printed \eqr{11.37} and
+\eqr{11.39}]\label{rem:ch11mis37}
+The text prints the $11$ component of $\bB^{2}$ as
+$(1+\gamma^{2})+\gamma^{2}$, both in \eqr{11.37} and in the third matrix
+of \eqr{11.39}. It should be $(1+\gamma^{2})^{2}+\gamma^{2}$. Squaring
+the matrix above, the $11$ entry is
+\[
+   B_{11}B_{11}+B_{12}B_{21}+B_{13}B_{31}
+   =(1+\gamma^{2})^{2}+\gamma^{2} ,
+\]
+and at $\gamma=1$ this is $5$, whereas the printed expression gives $3$;
+direct squaring of $\left(\begin{smallmatrix}2&1&0\\1&1&0\\
+0&0&1\end{smallmatrix}\right)$ confirms $5$.
+
+The error is not confined to that entry. Section~\ref{sec:ch11normal}
+below derives the universal relation \eqr{11.42} from these components,
+and with the printed value it comes out as
+$T_{11}-T_{22}=\gamma^{2}(f_{1}+f_{2})$, which is not $\gamma T_{12}$
+unless $f_{2}=0$. With the corrected value it comes out exactly. So
+\eqr{11.42}, which the text calls remarkable and which is the
+experimentally interesting statement of the section, is inconsistent
+with \eqr{11.37} as printed and consistent with it as corrected.
+\end{remark}
+
+The invariants follow. With $\gamma$ the uniform shear,
+\begin{equation}
+   I_{1}(\bB)=I_{2}(\bB)=3+\gamma^{2},
+   \tag{11.38}\label{eq:11.38}
+\end{equation}
+and $I_{3}(\bB)=1$. The first is a trace, $(1+\gamma^{2})+1+1$. The
+second uses \eqr{11.31}$_{2}$ with the trace of \eqr{11.37},
+\[
+   \tr\bB^{2}=(1+\gamma^{2})^{2}+\gamma^{2}+(1+\gamma^{2})+1
+   =3+4\gamma^{2}+\gamma^{4},
+\]
+so that
+\[
+   I_{2}=\tfrac12\big[(3+\gamma^{2})^{2}-(3+4\gamma^{2}+\gamma^{4})\big]
+   =\tfrac12\big[9+6\gamma^{2}+\gamma^{4}-3-4\gamma^{2}-\gamma^{4}\big]
+   =3+\gamma^{2},
+\]
+and $I_{3}=\det\bB=(\det\bF)^{2}=1$. This is Problem 6. Every
+coefficient in \eqr{11.34} and \eqr{11.36} is therefore a function of
+$\gamma^{2}$ alone.
+
+Resolving those equations in the basis $\{\be_{i}\otimes\be_{j}\}$ and
+collecting components,
+\begin{equation}
+\begin{aligned}
+   (T_{ij})&=f_{0}\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}
+   +f_{1}(\gamma^{2})\begin{pmatrix}1+\gamma^{2}&\gamma&0\\
+   \gamma&1&0\\0&0&1\end{pmatrix}\\[2pt]
+   &\quad+f_{2}(\gamma^{2})\begin{pmatrix}
+   (1+\gamma^{2})^{2}+\gamma^{2}&\gamma(2+\gamma^{2})&0\\
+   \gamma(2+\gamma^{2})&1+\gamma^{2}&0\\ 0&0&1\end{pmatrix},
+\end{aligned}
+   \tag{11.39}\label{eq:11.39}
+\end{equation}
+where $f_{1}$ and $f_{2}$ are constitutive functions and $f_{0}$ is
+another one in the compressible case, or minus the uniform constraint
+pressure in the incompressible case. Comparing with \eqr{11.34}, the
+three matrices are those of $\I$, $\bB$ and $\bB^{2}$.
+
+%-----------------------------------------------------------------------
+\subsection*{The normal stress effect}\label{sec:ch11normal}
+%-----------------------------------------------------------------------
+
+Reading \eqr{11.39} off the third row and column, $T_{13}=T_{23}=0$:
+the shear does not drag the $\be_{3}$ direction. The shear component is
+\begin{equation}
+   T_{12}=\gamma\mu(\gamma^{2}),\qquad\text{where}\quad
+   \mu(\gamma^{2})=f_{1}(\gamma^{2})+(2+\gamma^{2})f_{2}(\gamma^{2}),
+   \tag{11.40}\label{eq:11.40}
+\end{equation}
+obtained by adding the $12$ entries, $f_{1}\gamma+f_{2}\gamma(2+
+\gamma^{2})$, and taking out the common factor $\gamma$.
+
+\begin{remark}[a second misprint, in \eqr{11.40}]\label{rem:ch11mis40}
+The text prints $\mu(\gamma^{2})=f_{1}(\gamma^{2})+\gamma(2+\gamma^{2})
+f_{2}(\gamma^{2})$, carrying a factor $\gamma$ that does not belong.
+Two independent checks reject it. First, the $12$ entry of \eqr{11.39}
+is $f_{1}\gamma+f_{2}\gamma(2+\gamma^{2})$, and dividing by $\gamma$
+leaves $f_{1}+(2+\gamma^{2})f_{2}$. Second, the notation
+$\mu(\gamma^{2})$ asserts that $\mu$ depends on $\gamma$ only through
+$\gamma^{2}$, and the printed expression contains a term odd in
+$\gamma$, so it contradicts its own argument list. The same factor also
+breaks \eqr{11.42}.
+\end{remark}
+
+If $\mu$ is differentiable then, since it is a function of $\gamma^{2}$,
+its expansion about $\gamma=0$ has no linear term:
+\begin{equation}
+   T_{12}=G\gamma+O(\gamma^{3}),
+   \tag{11.41}\label{eq:11.41}
+\end{equation}
+where $G=\mu(0)$ is the classical shear modulus of small deformations.
+The correction is cubic, not quadratic, and that is a consequence of
+isotropy: reversing the shear must reverse the shear stress.
+
+The diagonal components $T_{11}$, $T_{22}$ and $T_{33}$ are in general
+non-zero, and they satisfy
+\begin{equation}
+   T_{11}-T_{22}=\gamma\,T_{12} .
+   \tag{11.42}\label{eq:11.42}
+\end{equation}
+To see it, subtract the $22$ entries of \eqr{11.39} from the $11$
+entries. The $f_{0}$ terms cancel, being equal, and
+\[
+\begin{aligned}
+   T_{11}-T_{22}&=f_{1}\big[(1+\gamma^{2})-1\big]
+   +f_{2}\big[(1+\gamma^{2})^{2}+\gamma^{2}-(1+\gamma^{2})\big]\\
+   &=f_{1}\gamma^{2}
+   +f_{2}\big[(1+\gamma^{2})\gamma^{2}+\gamma^{2}\big]
+   =\gamma^{2}\big[f_{1}+(2+\gamma^{2})f_{2}\big]
+   =\gamma^{2}\mu ,
+\end{aligned}
+\]
+where the middle step factored $(1+\gamma^{2})^{2}-(1+\gamma^{2})
+=(1+\gamma^{2})\gamma^{2}$. Comparing with \eqr{11.40},
+$\gamma T_{12}=\gamma^{2}\mu$ as well, which is \eqr{11.42}. This is
+Problem 7.
+
+\begin{remark}[what makes \eqr{11.42} worth having]%
+\label{rem:ch11universal}
+No constitutive function survives in \eqr{11.42}. Whatever $\hat W$ or
+$W^{*}$ may be, and whether the material is compressible or not, a
+uniform isotropic body in simple shear satisfies it. A relation of this
+kind is called \emph{universal}, and it is the rarest and most valuable
+thing a nonlinear theory can produce, because it can be checked in the
+laboratory without first identifying the material.
+
+What it predicts is that shearing a block requires normal tractions as
+well as shear tractions, and that the difference between two of them is
+fixed by the shear stress and the shear. Hold the block between two
+plates and slide one of them: the block tries to change its thickness,
+and $T_{11}-T_{22}$ is what must be applied to stop it. The right-hand
+side is $\gamma T_{12}=\gamma^{2}\mu$, of order $\gamma^{2}$, so the
+linear theory of Chapter 12, which discards everything beyond first
+order in the displacement gradient, predicts none of it. The normal
+stress effect is inherently nonlinear.
+
+Pure simple shear is hard to realise in a laboratory. Torsion is not,
+and Section~\ref{sec:torsion} showed that torsion is locally a simple
+shear, which is how the effect has been confirmed: a twisted bar tries
+to lengthen. Problem 12 works that case out.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{A}
+\begin{tikzpicture}[scale=1.05,
+   ar/.style={-{Stealth[length=2.3mm]},thick},
+   thn/.style={-{Stealth[length=1.9mm]},semithick,gray!80}]
+% ---------------- left: what the linear theory expects -------------
+\begin{scope}[xshift=0cm]
+  \draw[guide] (0,0) rectangle (2.0,2.0);
+  \draw[thick] (0,0)--(2.0,0)--(2.7,2.0)--(0.7,2.0)--cycle;
+  \foreach \x in {0.9,1.4,1.9,2.4}{\draw[thn] (\x,2.16)--++(0.42,0);}
+  \foreach \x in {0.15,0.65,1.15,1.65}{\draw[thn] (\x+0.42,-0.16)--++(-0.42,0);}
+  \node[font=\small,anchor=south] at (1.7,2.30) {$T_{12}$};
+  \node[font=\footnotesize,text=gray!80,anchor=north,align=center]
+     at (1.35,-0.46) {shear tractions only};
+  \node[font=\small,anchor=north] at (1.35,-1.02) {$T_{11}=T_{22}$};
+\end{scope}
+% ---------------- right: what the nonlinear theory requires ---------
+\begin{scope}[xshift=5.4cm]
+  \draw[guide] (0,0) rectangle (2.0,2.0);
+  \draw[thick] (0,0)--(2.0,0)--(2.7,2.0)--(0.7,2.0)--cycle;
+  \foreach \x in {0.9,1.4,1.9,2.4}{\draw[thn] (\x,2.16)--++(0.42,0);}
+  \foreach \x in {0.15,0.65,1.15,1.65}{\draw[thn] (\x+0.42,-0.16)--++(-0.42,0);}
+  \node[font=\small,anchor=south] at (1.7,2.30) {$T_{12}$};
+  % the normal tractions that must be supplied as well
+  \draw[ar] (1.35,2.62)--(1.35,2.16);
+  \draw[ar] (1.35,-0.62)--(1.35,-0.16);
+  \node[font=\small,anchor=west] at (1.46,2.62) {$T_{22}$};
+  \draw[ar] (-0.55,1.0)--(-0.09,1.0);
+  \draw[ar] (3.25,1.0)--(2.79,1.0);
+  \node[font=\small,anchor=east] at (-0.62,1.0) {$T_{11}$};
+  \node[font=\footnotesize,text=gray!80,anchor=north,align=center]
+     at (1.35,-1.02) {normal tractions too};
+  \node[font=\small,anchor=north] at (1.35,-1.52)
+     {$T_{11}-T_{22}=\gamma T_{12}$};
+\end{scope}
+\end{tikzpicture}
+\caption{The normal stress effect of \eqr{11.42}, with the undeformed
+block dashed. Sliding the top face of a block over the bottom one is
+not achieved by shear tractions alone. A uniform isotropic solid held
+in simple shear also pushes on the faces normal to $\be_{1}$ and
+$\be_{2}$, and the difference of those two normal stresses is
+$\gamma T_{12}$, whatever the material. Left is what the linear theory
+of Chapter 12 predicts, right what \eqr{11.34} and \eqr{11.36} require;
+the difference is of order $\gamma^{2}$ and vanishes with the
+approximation.}
+\label{fig:ch11normal}
+\end{figure}
+
+%=======================================================================
+\section{Heat flux}\label{sec:ch11heat}
+%=======================================================================
+
+The stress has been reduced by \eqr{11.19} and then by isotropy. The
+same two steps are now applied to the heat flux, and the first of them
+has a different flavour, because $\hat\bq$ carries a free vector index
+and cannot be handled by the polar trick alone.
+
+Let the material be hemitropic at $p$, so that the symmetry condition
+on the constitutive function for the heat flux reads
+\begin{equation}
+   \hat\bq(\theta,\bF,\grad\theta;p)
+   =\hat\bq(\theta,\bF\bR,\grad\theta;p)
+   \qquad\text{for all }\bR\in\Orth^{+}.
+   \tag{11.43}\label{eq:11.43}
+\end{equation}
+For a necessary condition, choose the particular member
+$\bR=\bR^{t}_{F}\shift$, where $\shift$ is the shifter and $\bR_{F}$ the
+two-point rotation of the polar factorization of $\bF$. It is a
+referential rotation, being a composition of two orientation-preserving
+isometries $\hVt\to\Vt\to\hVt$. Using $\bF=\bV\bR_{F}$ from \eqr{3.32},
+\begin{equation}
+   \hat\bq(\theta,\bF,\grad\theta;p)
+   =\hat\bq(\theta,\bV\bR_{F}\bR^{t}_{F}\shift,\grad\theta;p)
+   =\hat\bq(\theta,\bV\shift,\grad\theta;p),
+   \tag{11.44}\label{eq:11.44}
+\end{equation}
+since $\bR_{F}\bR^{t}_{F}=\I$. The shifter is fixed in the frame of $O$
+and carries no information about the deformation, and $\bV$ is
+determined by the left Cauchy--Green tensor $\bB=\bF\bF^{t}=\bV^{2}$,
+uniquely by Theorem~\ref{thm:sqrt}. So the right-hand side is a function
+of $\bB$:
+\begin{equation}
+   \hat\bq(\theta,\bF,\grad\theta;p)=\bq^{*}(\theta,\bB,\grad\theta;\bX)
+   \tag{11.45}\label{eq:11.45}
+\end{equation}
+for some function $\bq^{*}$. The condition is also sufficient.
+Substituting \eqr{11.45} and using $\bR\bR^{t}=\hI$,
+\begin{equation}
+\begin{aligned}
+   \hat\bq(\theta,\bF\bR,\grad\theta;p)
+   &=\bq^{*}(\theta,\bF\bR\bR^{t}\bF^{t},\grad\theta;\bX)\\
+   &=\bq^{*}(\theta,\bF\hI\bF^{t},\grad\theta;\bX)\\
+   &=\bq^{*}(\theta,\bB,\grad\theta;\bX)
+    =\hat\bq(\theta,\bF,\grad\theta;p)
+\end{aligned}
+   \tag{11.46}\label{eq:11.46}
+\end{equation}
+for every $\bR\in\Orth^{+}$, which is \eqr{11.43}. So \eqr{11.45} is
+necessary and sufficient for hemitropy.
+
+Frame invariance \eqr{11.10} may now be rewritten on $\bq^{*}$. Under
+$\bF\mapsto\bQ\bF$ the left Cauchy--Green tensor becomes
+$\bQ\bF\bF^{t}\bQ^{t}=\bQ\bB\bQ^{t}$, so
+\begin{equation}
+\begin{aligned}
+   \bq^{*}(\theta,\bQ\bB\bQ^{t},\bQ\grad\theta;\bX)
+   &=\bQ\,\bq^{*}(\theta,\bB,\grad\theta;\bX)\\
+   &\text{for all rotations }\bQ\colon\Vt\to\Vt .
+\end{aligned}
+   \tag{11.47}\label{eq:11.47}
+\end{equation}
+
+\begin{remark}[why $\bQ$ is a rotation here and orthogonal in
+Chapter 9]\label{rem:ch11whyrot}
+The restriction \eqr{9.40} on the heat flux in a fluid looked the same
+but ranged over all orthogonal $\bQ$. The difference is the reference
+configuration. For a fluid the symmetry group is unimodular, so
+Chapter 9 was able to absorb $\kappa$ entirely and the argument lost
+track of orientation. For a solid $\kappa$ survives explicitly, and it
+was chosen occupiable, so only orientation-preserving maps are
+admissible; the discussion leading to \eqr{10.8} made the same point.
+\end{remark}
+
+The restriction to rotations can be lifted at the cost of one further
+physical assumption. Suppose the heat flux is odd in the temperature
+gradient, as it is in the Fourier law \eqr{9.61} and as it is in every
+material for which measurements exist:
+\begin{equation}
+   \bq^{*}(\theta,\bB,-\grad\theta;\bX)
+   =-\bq^{*}(\theta,\bB,\grad\theta;\bX).
+   \tag{11.48}\label{eq:11.48}
+\end{equation}
+Then \eqr{11.47} holds for every orthogonal $\bQ$. For if $\bQ$ is
+improper, write $\bQ=-\bQ'$ with $\bQ'=-\bQ$ a rotation, and note
+$\bQ\bB\bQ^{t}=\bQ'\bB\bQ'^{t}$, the two signs cancelling, while
+$\bQ\grad\theta=-\bQ'\grad\theta$. Hence
+\[
+\begin{aligned}
+   \bq^{*}(\theta,\bQ\bB\bQ^{t},\bQ\grad\theta;\bX)
+   &=\bq^{*}(\theta,\bQ'\bB\bQ'^{t},-\bQ'\grad\theta;\bX)\\
+   &=-\bq^{*}(\theta,\bQ'\bB\bQ'^{t},\bQ'\grad\theta;\bX)\\
+   &=-\bQ'\bq^{*}(\theta,\bB,\grad\theta;\bX)\\
+   &=\bQ\,\bq^{*}(\theta,\bB,\grad\theta;\bX),
+\end{aligned}
+\]
+the second equality by \eqr{11.48} and the third by \eqr{11.47} for the
+rotation $\bQ'$.
+
+With $\bQ$ now ranging over the full orthogonal group, the
+representation \eqr{9.41} with \eqr{9.42} applies and gives
+\begin{equation}
+   \bq=\big(\phi_{0}\I+\phi_{1}\bB+\phi_{2}\bB^{2}\big)\grad\theta ,
+   \tag{11.49}\label{eq:11.49}
+\end{equation}
+where $\phi_{0},\phi_{1},\phi_{2}$ are functions of $\theta$, of the
+invariants $I_{1}(\bB),I_{2}(\bB),I_{3}(\bB)$, and of
+\begin{equation}
+\begin{aligned}
+   I_{4}(\bB,\grad\theta)&=\ip{\grad\theta}{\bB\grad\theta},\qquad
+   I_{5}(\bB,\grad\theta)=\ip{\grad\theta}{\bB^{2}\grad\theta},\\
+   I_{6}(\grad\theta)&=|\grad\theta| ,
+\end{aligned}
+   \tag{11.50}\label{eq:11.50}
+\end{equation}
+and, for a non-uniform material, of $\bX$ as well.
+
+%-----------------------------------------------------------------------
+\subsection{General form of the heat flux}\label{sec:ch11heatgen}
+%-----------------------------------------------------------------------
+
+Equation \eqr{11.49} is isotropic, and it exhibits the heat flux as a
+linear map applied to $\grad\theta$. That linearity is not a
+consequence of isotropy. It holds for every symmetry group, and the
+reason is the dissipation inequality \eqr{11.16}$_{3}$ alone.
+
+\begin{remark}[a change of letter]\label{rem:ch11gclash}
+The book calls the temperature-gradient variable $\bp$ in what follows.
+That letter already carries two meanings in this chapter, the material
+point $p$ of \eqr{11.3} and the reaction pressure $p$ of \eqr{11.36},
+and the derivative $\nabla\bh(\bp)$ would then be a gradient with
+respect to something that also indexes the body. These notes write
+$\bg$ for the variable and keep $\bq$ for the flux.
+\end{remark}
+
+The claim to be established is
+\begin{equation}
+   \bq=\bK(\theta,\bF,\grad\theta;\bX)\,\grad\theta
+   \tag{11.51}\label{eq:11.51}
+\end{equation}
+for a tensor-valued function $\bK$, a result of [22] holding for every
+symmetry group.
+
+Fix $\theta$, $\bF$ and $\bX$, and hence $p$, and define
+\begin{equation}
+   \bh(\bg)=\hat\bq(\theta,\bF,\bg;p),
+   \tag{11.52}\label{eq:11.52}
+\end{equation}
+a vector-valued function of the single vector variable $\bg$. The
+inequality \eqr{11.16}$_{3}$ says
+\begin{equation}
+   \ip\bg{\bh(\bg)}\leq0\qquad\text{for all }\bg .
+   \tag{11.53}\label{eq:11.53}
+\end{equation}
+
+\begin{proposition}[no gradient, no flux]\label{prop:ch11noflux}
+If $\bh$ is differentiable then $\bh(\bze)=\bze$; that is,
+$\hat\bq(\theta,\bF,\bze;p)=\bze$.
+\end{proposition}
+
+\begin{proof}
+The scalar function $\bg\mapsto\ip\bg{\bh(\bg)}$ is bounded above by
+zero, by \eqr{11.53}, and it attains the value zero at $\bg=\bze$. So it
+is maximized there, and being differentiable it is stationary there. Its
+differential at $\bg$, in the direction $\dl\bg$, is
+\begin{equation}
+   \dl\ip\bg{\bh(\bg)}
+   =\ip{\dl\bg}{\bh(\bg)}+\ip\bg{[\nabla\bh(\bg)]\dl\bg} ,
+   \tag{11.54}\label{eq:11.54}
+\end{equation}
+$\nabla\bh$ being the tensor-valued gradient of $\bh$. Evaluating at
+$\bg=\bze$ kills the second term, whatever $\nabla\bh(\bze)$ may be, and
+stationarity leaves
+\[
+   \ip{\dl\bg}{\bh(\bze)}=0\qquad\text{for every }\dl\bg ,
+\]
+whence $\bh(\bze)=\bze$ by Lemma~\ref{lem:cvec}.
+\end{proof}
+
+\begin{equation}
+   \hat\bq(\theta,\bF,\bze;p)=\bze .
+   \tag{11.55}\label{eq:11.55}
+\end{equation}
+
+So there is no heat flux in the absence of a temperature gradient. The
+statement is worth isolating, because it is often taken as a modelling
+assumption and it is in fact a theorem of the second law.
+
+Now fix $\bg$ and travel out to it along a straight line. Put
+\begin{equation}
+   \by(x)=\bh(x\bg),\qquad x\in[0,1] ,
+   \tag{11.56}\label{eq:11.56}
+\end{equation}
+a curve in $\Vt$ joining $\by(0)=\bh(\bze)=\bze$ to $\by(1)=\bh(\bg)$.
+By the chain rule, the argument $x\bg$ having derivative $\bg$ with
+respect to $x$,
+\begin{equation}
+   \by'(x)=\big[\nabla\bh(x\bg)\big]\bg .
+   \tag{11.57}\label{eq:11.57}
+\end{equation}
+Integrating from $0$ to $1$ and using $\by(0)=\bze$ from
+Proposition~\ref{prop:ch11noflux},
+\begin{equation}
+   \bh(\bg)=\int^{1}_{0}\by'(x)\,\dl x=\big[\bK(\bg)\big]\bg ,
+   \qquad\text{where}\quad
+   \bK(\bg)=\int^{1}_{0}\nabla\bh(x\bg)\,\dl x ,
+   \tag{11.58}\label{eq:11.58}
+\end{equation}
+the constant vector $\bg$ coming outside the integral because the
+integration is over $x$. Reinstating the passive variables gives
+\eqr{11.51}.
+
+\begin{remark}[what \eqr{11.51} is and is not]\label{rem:ch11Kread}
+It is not a linear constitutive law. The tensor $\bK$ depends on
+$\grad\theta$, so \eqr{11.51} is a rewriting rather than a restriction:
+it says only that the flux vanishes with the gradient and that the
+dependence can always be factored through a tensor. Fourier's law is
+the special case in which $\bK$ does not depend on $\grad\theta$, and
+\eqr{11.49} is the special case in which $\bK$ is the isotropic
+combination in parentheses.
+
+Nor is $\bK$ unique or symmetric. The construction integrates
+$\nabla\bh$ along one particular path, the straight line, and a
+different path would give a different $\bK$ with the same product
+$\bK\grad\theta$. In \eqr{11.49} the $\bK$ that appears is symmetric,
+being a polynomial in the symmetric $\bB$; in general it is not.
+
+That last point costs nothing, because the dissipation inequality only
+ever sees the symmetric part. Writing \eqr{11.53} with \eqr{11.51},
+\begin{equation}
+   \bK\cdot\bg\otimes\bg\leq0 ,
+   \tag{11.59}\label{eq:11.59}
+\end{equation}
+since $\bK\cdot(\bg\otimes\bg)=K_{ij}g_{i}g_{j}=\ip\bg{\bK\bg}$, and a
+quadratic form is blind to the skew part of its matrix: $\ip\bg{\bK\bg}
+=\ip\bg{(\Sym\bK)\bg}$ by Lemma~\ref{lem:symskw}, $\bg\otimes\bg$ being
+symmetric.
+\end{remark}
+
+%=======================================================================
+\setcounter{problemenv}{0}
+\section{Problems}\label{sec:problems:c11}
+%=======================================================================
+
+\begin{problem}[The three rearrangement rules]
+Prove \eqr{11.21}.
+\end{problem}
+
+\begin{solution}
+All three expressions are the same trace, read with the factors grouped
+differently. Start from Definition~\ref{def:tip},
+$\bA\cdot\bB=\tr(\bA\bB^{t})$, and expand the left member:
+\[
+   \bA_{1}\cdot\bA_{2}\bA_{3}=\tr\big(\bA_{1}(\bA_{2}\bA_{3})^{t}\big)
+   =\tr\big(\bA_{1}\bA^{t}_{3}\bA^{t}_{2}\big),
+\]
+using $(\bA\bB)^{t}=\bB^{t}\bA^{t}$.
+
+For the first equality, move $\bA^{t}_{2}$ to the front by cyclic
+permutation and regroup:
+\[
+   \tr\big(\bA_{1}\bA^{t}_{3}\bA^{t}_{2}\big)
+   =\tr\big(\bA^{t}_{2}\bA_{1}\bA^{t}_{3}\big)
+   =\tr\big((\bA^{t}_{2}\bA_{1})\bA^{t}_{3}\big)
+   =\bA^{t}_{2}\bA_{1}\cdot\bA_{3} .
+\]
+
+For the second, use $\tr\bX=\tr\bX^{t}$ on the same expression:
+\[
+\begin{aligned}
+   \tr\big(\bA_{1}\bA^{t}_{3}\bA^{t}_{2}\big)
+   &=\tr\big(\bA_{2}\bA_{3}\bA^{t}_{1}\big)
+   =\tr\big(\bA_{3}\bA^{t}_{1}\bA_{2}\big)\\
+   &=\tr\big((\bA_{3}\bA^{t}_{1})(\bA^{t}_{2})^{t}\big)
+   =\bA_{3}\bA^{t}_{1}\cdot\bA^{t}_{2} ,
+\end{aligned}
+\]
+the second step cyclic again. Hence
+\[
+   \boxed{\;
+\begin{aligned}
+   \bA_{1}\cdot\bA_{2}\bA_{3}
+   &=\bA^{t}_{2}\bA_{1}\cdot\bA_{3}\\
+   &=\bA_{3}\bA^{t}_{1}\cdot\bA^{t}_{2}
+\end{aligned}\;}
+\]
+
+The rules say that a factor may be moved from one side of an inner
+product to the other at the cost of a transpose, exactly as
+$\bA\bu\cdot\bv=\bu\cdot\bA^{t}\bv$ does for vectors. They are used at
+\eqr{11.22} and again in Problem 12 of Chapter 6.
+\end{solution}
+
+\begin{problem}[The isotropic Cauchy stress]
+Derive \eqr{11.34}.
+\end{problem}
+
+\begin{solution}
+Start from \eqr{11.33} and push it forward with \eqr{6.145},
+$J\bT=\bF\bS\bF^{t}$:
+\[
+   J\bT=2\bF\big[\big(\hat W_{1}+I_{1}\hat W_{2}\big)\hI
+   -\hat W_{2}\bC+I_{3}\hat W_{3}\bC^{-1}\big]\bF^{t},
+\]
+the scalar coefficients passing through $\bF$ untouched. Three products
+are needed, and each is a one-line computation.
+
+The identity term. $\bF\hI\bF^{t}=\bF\bF^{t}=\bB$, by the definition of
+the left Cauchy--Green tensor at \eqr{2.83}.
+
+The $\bC$ term. Substitute $\bC=\bF^{t}\bF$ and regroup:
+\[
+   \bF\bC\bF^{t}=\bF\big(\bF^{t}\bF\big)\bF^{t}
+   =\big(\bF\bF^{t}\big)\big(\bF\bF^{t}\big)=\bB^{2}.
+\]
+
+The $\bC^{-1}$ term. Inverting $\bC=\bF^{t}\bF$ gives
+$\bC^{-1}=\bF^{-1}\bF^{-t}$, so
+\[
+   \bF\bC^{-1}\bF^{t}=\bF\bF^{-1}\bF^{-t}\bF^{t}=\I\I=\I .
+\]
+
+Assembling,
+\[
+   \boxed{\;J\bT=2\big[\big(\hat W_{1}+I_{1}\hat W_{2}\big)\bB
+   -\hat W_{2}\bB^{2}+I_{3}\hat W_{3}\I\big]\;}
+\]
+
+The pattern is worth noticing. Each referential tensor in \eqr{11.33} is
+raised by one power of $\bB$: $\hI\mapsto\bB$, $\bC\mapsto\bB^{2}$,
+$\bC^{-1}\mapsto\I$. That is the general rule $\bF\bC^{n}\bF^{t}
+=\bB^{n+1}$, valid for every integer $n$, positive or negative, and it
+is why the isotropic stress is a quadratic polynomial in $\bB$ exactly
+when the energy gradient is a linear one in $\bC$ and $\bC^{-1}$.
+\end{solution}
+
+\begin{problem}[$\bC$ and $\bB$ have the same invariants]
+Prove \eqr{11.35}.
+\end{problem}
+
+\begin{solution}
+\textbf{By the spectral representations.} The right Cauchy--Green
+tensor has the representation \eqr{3.38}$_{1}$,
+\[
+   \bC=\sum_{i}\lambda^{2}_{i}\,\bu_{i}\otimes\bu_{i},
+   \qquad\text{and}\qquad
+   \bB=\sum_{i}\lambda^{2}_{i}\,\bv_{i}\otimes\bv_{i},
+\]
+the $\bu_{i}$ being the referential principal axes, the
+$\bv_{i}=\bR\bu_{i}$ the spatial ones, and the $\lambda_{i}$ the
+principal stretches, common to both by
+Theorem~\ref{thm:polar}. The principal invariants \eqr{11.31} are
+symmetric functions of the eigenvalues,
+\[
+\begin{aligned}
+   I_{1}&=\lambda^{2}_{1}+\lambda^{2}_{2}+\lambda^{2}_{3},\\
+   I_{2}&=\lambda^{2}_{1}\lambda^{2}_{2}+\lambda^{2}_{2}\lambda^{2}_{3}
+   +\lambda^{2}_{1}\lambda^{2}_{3},\\
+   I_{3}&=\lambda^{2}_{1}\lambda^{2}_{2}\lambda^{2}_{3},
+\end{aligned}
+\]
+and these expressions mention no eigenvector. Since $\bC$ and $\bB$
+carry the same $\lambda^{2}_{i}$, they carry the same invariants:
+\[
+   \boxed{\;I_{k}(\bC)=I_{k}(\bB),\qquad k=1,2,3 .\;}
+\]
+
+\textbf{By similarity, in one line.} Substituting the polar
+decomposition $\bF=\bR\bU$ into $\bB=\bF\bF^{t}$,
+\[
+   \bB=\bR\bU\bU^{t}\bR^{t}=\bR\bU^{2}\bR^{t}=\bR\bC\bR^{t},
+\]
+using $\bU^{t}=\bU$ and $\bC=\bU^{2}$ from \eqr{2.83}. So $\bB$ and
+$\bC$ are related by a similarity transformation, and similar tensors
+have the same characteristic polynomial:
+\[
+\begin{aligned}
+   \det(\bB-\omega\I)&=\det\big(\bR(\bC-\omega\hI)\bR^{t}\big)\\
+   &=\det\bR\,\det(\bC-\omega\hI)\,\det\bR^{t}
+   =\det(\bC-\omega\hI),
+\end{aligned}
+\]
+since $\det\bR\det\bR^{t}=\det(\bR\bR^{t})=1$. The invariants are the
+coefficients of that polynomial, by \eqr{3.2}, so they agree. This
+version does not need the spectral theorem, and it makes clear what is
+really going on: $\bB$ is $\bC$ seen from the deformed configuration,
+and a change of orthonormal frame cannot alter an invariant.
+\end{solution}
+
+\begin{problem}[The isotropic response as $O^{+}$ writes it]
+Use \eqr{11.34}, or \eqr{11.36}, together with \eqr{11.49} to find
+expressions for the stress and the heat flux in the frame of an
+observer $O^{+}$.
+\end{problem}
+
+\begin{solution}
+Chapter 7 supplies the transformations. Under a change of observer the
+deformation gradient becomes $\bF^{+}=\bQ\bF$, with $\bQ(t)$ the
+relative rotation, and the spatial temperature gradient becomes
+$\grad^{+}\theta^{+}=\bQ\grad\theta$, while $\theta$ itself and the
+reference configuration are untouched.
+
+\textbf{What is invariant.} First,
+\[
+   \bB^{+}=\bF^{+}(\bF^{+})^{t}=\bQ\bF\bF^{t}\bQ^{t}=\bQ\bB\bQ^{t},
+   \qquad
+   \bC^{+}=(\bQ\bF)^{t}(\bQ\bF)=\bF^{t}\bF=\bC ,
+\]
+so $\bC$ does not move at all and $\bB$ moves by conjugation. Second,
+$J^{+}=\det\bF^{+}=\det\bQ\det\bF=J$. Third, the invariants are
+unchanged: $I_{k}(\bB^{+})=I_{k}(\bQ\bB\bQ^{t})=I_{k}(\bB)$ by the
+similarity argument of Problem 3, and for the three of \eqr{11.50},
+\[
+\begin{aligned}
+   I_{4}(\bB^{+},\grad^{+}\theta^{+})
+   &=\ip{\bQ\grad\theta}{\bQ\bB\bQ^{t}\bQ\grad\theta}
+   =\ip{\grad\theta}{\bB\grad\theta}=I_{4},
+\end{aligned}
+\]
+using $\bQ^{t}\bQ=\I$ twice and $\ip{\bQ\ba}{\bQ\bb}=\ip\ba\bb$;
+identically $I_{5}$ is unchanged, and $I_{6}=|\grad\theta|$ is unchanged
+because $\bQ$ preserves length. So every one of the response functions
+$\hat W_{k}$ and $\phi_{k}$ takes the same value for both observers.
+
+\textbf{The stress.} Writing \eqr{11.34} in the frame of $O^{+}$ and
+substituting,
+\[
+\begin{aligned}
+   J\bT^{+}&=2\big[\big(\hat W_{1}+I_{1}\hat W_{2}\big)\bB^{+}
+   -\hat W_{2}(\bB^{+})^{2}+I_{3}\hat W_{3}\I\big]\\
+   &=2\big[\big(\hat W_{1}+I_{1}\hat W_{2}\big)\bQ\bB\bQ^{t}
+   -\hat W_{2}\bQ\bB^{2}\bQ^{t}+I_{3}\hat W_{3}\bQ\bQ^{t}\big]
+   =\bQ\big(J\bT\big)\bQ^{t},
+\end{aligned}
+\]
+where $(\bB^{+})^{2}=\bQ\bB\bQ^{t}\bQ\bB\bQ^{t}=\bQ\bB^{2}\bQ^{t}$ and
+$\I=\bQ\bQ^{t}$. Cancelling $J$,
+\[
+   \boxed{\;\bT^{+}=\bQ\bT\bQ^{t}\;}
+\]
+The incompressible form \eqr{11.36} gives the same conclusion, the
+reaction transforming as $p^{+}=p$ because $\bQ(-p\I)\bQ^{t}=-p\I$.
+
+\textbf{The heat flux.} By \eqr{11.49},
+\[
+\begin{aligned}
+   \bq^{+}&=\big(\phi_{0}\I+\phi_{1}\bB^{+}+\phi_{2}(\bB^{+})^{2}\big)
+   \grad^{+}\theta^{+}\\
+   &=\bQ\big(\phi_{0}\I+\phi_{1}\bB+\phi_{2}\bB^{2}\big)\bQ^{t}
+   \bQ\grad\theta
+   =\bQ\,\bq .
+\end{aligned}
+\]
+So
+\[
+   \boxed{\;\bq^{+}=\bQ\bq\;}
+\]
+
+\textbf{Reading the answer.} Nothing new has been derived. These are
+precisely the transformation rules that Chapter 7 established for the
+Cauchy stress and the heat flux from the balance laws, and the point of
+the exercise is that the constitutive equations reproduce them
+automatically. That is what frame invariance was imposed for: had
+\eqr{11.34} delivered anything other than $\bQ\bT\bQ^{t}$, the two
+observers would have disagreed about the material, and the model would
+be inadmissible.
+\end{solution}
+
+\begin{problem}[Are the laminate constraints compatible with isotropy?]
+Are the constraints considered in Problems 3 and 4 of Chapter 10
+compatible with isotropy?
+\end{problem}
+
+\begin{solution}
+The test is the one applied to incompressibility in
+Remark~\ref{rem:ch11constraint}: a constraint is compatible with
+isotropy when it is unchanged by $\bC\mapsto\bR^{t}\bC\bR$ for every
+$\bR\in\Orth$. The answer in both cases is no, and for the same reason.
+
+\textbf{The inextensible laminate.} The constraints of Problem 3 of
+Chapter 10 are
+\[
+   \ip{\hbE_{1}}{\bC\hbE_{1}}=\ip{\hbE_{2}}{\bC\hbE_{2}}=1,
+   \qquad \ip{\hbE_{1}}{\bC\hbE_{2}}=0 .
+\]
+Replace $\bC$ by $\bR^{t}\bC\bR$ and move $\bR$ across the inner
+product:
+\[
+   \ip{\hbE_{A}}{\bR^{t}\bC\bR\hbE_{B}}
+   =\ip{\bR\hbE_{A}}{\bC\,\bR\hbE_{B}} .
+\]
+The transformed constraints are therefore the original ones written
+about the rotated directions $\bR\hbE_{1}$ and $\bR\hbE_{2}$. They agree
+with the originals for every $\bC$ only if $\bR$ maps the plane spanned
+by $\hbE_{1},\hbE_{2}$ onto itself, and most rotations do not. Take
+$\bR$ to be the quarter turn about $\hbE_{1}$, which sends
+$\hbE_{2}\mapsto\hbE_{3}$: the transformed constraint
+$\ip{\hbE_{3}}{\bC\hbE_{3}}=1$ forbids transverse stretch, which the
+original explicitly permits. So the constraint set is not invariant, and
+the material is not isotropic.
+
+\textbf{The area-preserving laminate.} The constraint of Problem 4 of
+Chapter 10 says that the sheets, whose reference normal is $\hbE_{3}$,
+do not change area. By the Piola--Nanson formula \eqr{2.54} the area
+ratio is $|\bF^{*}\hbE_{3}|$, and
+\[
+   |\bF^{*}\hbE_{3}|^{2}=\ip{\hbE_{3}}{\bF^{*t}\bF^{*}\hbE_{3}}
+   =J^{2}\ip{\hbE_{3}}{\bF^{-1}\bF^{-t}\hbE_{3}}
+   =I_{3}\,\ip{\hbE_{3}}{\bC^{-1}\hbE_{3}},
+\]
+using $\bF^{*}=J\bF^{-t}$ and $J^{2}=\det\bC=I_{3}$. The constraint is
+therefore
+\[
+   I_{3}\,\ip{\hbE_{3}}{\bC^{-1}\hbE_{3}}=1 .
+\]
+Under $\bC\mapsto\bR^{t}\bC\bR$ the factor $I_{3}$ is invariant, but the
+second factor becomes $\ip{\bR\hbE_{3}}{\bC^{-1}\bR\hbE_{3}}$, so again
+the constraint is carried to the same statement about a different
+direction. Only rotations fixing the axis $\hbE_{3}$ leave it alone.
+Not isotropic.
+
+\textbf{Why incompressibility is the exception.} Both of these
+constraints name a direction, $\hbE_{3}$ or the plane normal to it, and
+a named direction is exactly what a rotation of the reference
+configuration can move. Incompressibility names none: $\det\bC=1$
+mentions only an invariant. That is the whole content of
+Remark~\ref{rem:ch11constraint}, and Example~\ref{ex:ch10fibre} said the
+same thing physically. A fibre or a laminate can be seen, so the
+undeformed body is not the same in every direction.
+\end{solution}
+
+\begin{problem}[The invariants in simple shear]
+Verify \eqr{11.38}.
+\end{problem}
+
+\begin{solution}
+From \eqr{3.54} the left Cauchy--Green tensor of simple shear has the
+matrix
+\[
+   (B_{ij})=\begin{pmatrix}1+\gamma^{2}&\gamma&0\\
+   \gamma&1&0\\ 0&0&1\end{pmatrix}.
+\]
+
+\textbf{The first invariant} is the trace, by \eqr{11.31}$_{1}$:
+\[
+   I_{1}=B_{11}+B_{22}+B_{33}=(1+\gamma^{2})+1+1=3+\gamma^{2}.
+\]
+
+\textbf{The second} needs $\tr(\bB^{2})$. From \eqr{11.37}, whose
+correction is the subject of Remark~\ref{rem:ch11mis37},
+\[
+   \tr(\bB^{2})=\big[(1+\gamma^{2})^{2}+\gamma^{2}\big]
+   +(1+\gamma^{2})+1 .
+\]
+Expanding $(1+\gamma^{2})^{2}=1+2\gamma^{2}+\gamma^{4}$ and adding,
+\[
+   \tr(\bB^{2})=1+2\gamma^{2}+\gamma^{4}+\gamma^{2}+1+\gamma^{2}+1
+   =3+4\gamma^{2}+\gamma^{4}.
+\]
+Then \eqr{11.31}$_{2}$ gives
+\[
+   I_{2}=\tfrac12\big[(3+\gamma^{2})^{2}
+   -\big(3+4\gamma^{2}+\gamma^{4}\big)\big]
+   =\tfrac12\big[9+6\gamma^{2}+\gamma^{4}
+   -3-4\gamma^{2}-\gamma^{4}\big]=3+\gamma^{2}.
+\]
+
+\textbf{The third} is a determinant, and simple shear is isochoric:
+\[
+   I_{3}=\det\bB=\det(\bF\bF^{t})=(\det\bF)^{2}=1 .
+\]
+Hence
+\[
+   \boxed{\;I_{1}(\bB)=I_{2}(\bB)=3+\gamma^{2},\qquad I_{3}(\bB)=1 .\;}
+\]
+
+The coincidence $I_{1}=I_{2}$ is not an accident of the algebra. For an
+isochoric deformation $I_{3}=1$, so the principal stretches satisfy
+$\lambda_{1}\lambda_{2}\lambda_{3}=1$, and then
+\[
+   I_{2}=\lambda^{2}_{1}\lambda^{2}_{2}+\lambda^{2}_{2}\lambda^{2}_{3}
+   +\lambda^{2}_{3}\lambda^{2}_{1}
+   =\lambda^{-2}_{3}+\lambda^{-2}_{1}+\lambda^{-2}_{2},
+\]
+which is $I_{1}$ computed for the inverse deformation. Simple shear
+happens to have the same stretches as its own inverse, up to a
+relabelling, which is why the two invariants agree here.
+\end{solution}
+
+\begin{problem}[The universal relation]
+Derive \eqr{11.42}.
+\end{problem}
+
+\begin{solution}
+Take the $11$ and $22$ components of \eqr{11.39}. The first matrix
+contributes $f_{0}$ to each, so it cancels in the difference. The other
+two contribute
+\[
+\begin{aligned}
+   T_{11}&=f_{0}+f_{1}(1+\gamma^{2})
+   +f_{2}\big[(1+\gamma^{2})^{2}+\gamma^{2}\big],\\
+   T_{22}&=f_{0}+f_{1}\cdot1+f_{2}(1+\gamma^{2}).
+\end{aligned}
+\]
+Subtracting,
+\[
+\begin{aligned}
+   T_{11}-T_{22}
+   &=f_{1}\big[(1+\gamma^{2})-1\big]
+    +f_{2}\big[(1+\gamma^{2})^{2}+\gamma^{2}-(1+\gamma^{2})\big]\\
+   &=f_{1}\gamma^{2}
+    +f_{2}\big[(1+\gamma^{2})\big((1+\gamma^{2})-1\big)+\gamma^{2}\big]\\
+   &=f_{1}\gamma^{2}+f_{2}\big[(1+\gamma^{2})\gamma^{2}+\gamma^{2}\big]
+    =\gamma^{2}\big[f_{1}+(2+\gamma^{2})f_{2}\big],
+\end{aligned}
+\]
+the last step taking $\gamma^{2}$ out and simplifying
+$(1+\gamma^{2})+1=2+\gamma^{2}$. The bracket is $\mu(\gamma^{2})$ by
+\eqr{11.40}, so $T_{11}-T_{22}=\gamma^{2}\mu$.
+
+On the other hand $T_{12}=\gamma\mu$, again by \eqr{11.40}, so
+$\gamma T_{12}=\gamma^{2}\mu$ as well. Hence
+\[
+   \boxed{\;T_{11}-T_{22}=\gamma\,T_{12}\;}
+\]
+
+Two remarks on the mechanism. The constitutive functions entered only
+through the combination $\mu$, and they entered the two sides in the
+same way, which is why they cancel; that cancellation is the whole
+content of the word \emph{universal}. And the computation used the
+corrected $11$ entry of $\bB^{2}$ throughout: with the printed value the
+$f_{2}$ bracket collapses to $\gamma^{2}$ instead of
+$\gamma^{2}(2+\gamma^{2})$, and the relation fails, which is the
+evidence given in Remark~\ref{rem:ch11mis37}.
+\end{solution}
+
+\begin{problem}[The neo-Hookean material, and a bar in tension]
+Consider the strain energy $W^{*}=\tfrac12 G(I_{1}-3)$ with $G$ a
+positive constant. This model, the \emph{neo-Hookean} material,
+describes incompressible rubber well while the principal stretches stay
+in the approximate range $\tfrac12<\lambda_{i}<2$.
+\textup{(a)} Show that $\bT=-p\I+G\bB$, and that equilibrium without
+body force requires $\grad p=G\dvg\bB$.
+\textup{(b)} Use the power conjugacy of $\bP$ and $\bF$ to deduce that
+$G$ is the ratio of the shear component of the Piola traction to the
+amount of shear in a simple shear.
+\textup{(c)} For the deformation of Problem 6 of Chapter 4, find $\bC$
+and $\bB$.
+\textup{(d)} Impose $\bT\bn=\bze$ for every unit $\bn$ with
+$\ip\bn{\be_{1}}=0$, simulating the traction-free lateral surface of a
+prismatic bar with axis $\be_{1}$, and deduce $p=G/\lambda$.
+\textup{(e)} Show that $\bT=T(\lambda)\be_{1}\otimes\be_{1}$ with
+$T(\lambda)=G(\lambda^{2}-\lambda^{-1})$.
+\textup{(f)} Young's modulus is $E=T'(1)$. Find $E$ in terms of $G$.
+\textup{(g)} Show that $\bP=P(\lambda)\be_{1}\otimes\hbE_{1}$ and
+$\bS=S(\lambda)\hbE_{1}\otimes\hbE_{1}$, determine $P$ and $S$, and
+relate $P'(1)$ and $S'(1)$ to $E$.
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} With $W^{*}=\tfrac12G(I_{1}-3)$ the derivatives are
+$W^{*}_{1}=\tfrac12G$ and $W^{*}_{2}=0$, so \eqr{11.36} gives
+\[
+   \bT=-p\I+2\big[\big(\tfrac12G+I_{1}\cdot0\big)\bB
+   -0\cdot\bB^{2}\big]=\boxed{\;-p\I+G\bB\;}
+\]
+Equilibrium without body force is $\dvg\bT=\bze$ by \eqr{6.109} with
+$\dot\bv=\bze$. Since $\dvg(p\I)=\grad p$, by Problem 24 of Chapter 1,
+and $G$ is constant,
+\[
+   -\grad p+G\dvg\bB=\bze,\qquad\text{that is}\qquad
+   \boxed{\;\grad p=G\,\dvg\bB\;}
+\]
+The equation determines $p$ up to a constant once the deformation is
+known, and it is solvable only if $\dvg\bB$ is a gradient. That is a
+genuine restriction: not every isochoric deformation of a neo-Hookean
+body can be maintained without body force.
+
+\textbf{(b)} By \eqr{6.156} the stress power per unit reference volume
+is $\bP\cdot\dot\bF$, and for a hyperelastic material at fixed
+temperature that equals $\dot W^{*}$. In simple shear
+$\bF=\shift+\gamma\be_{1}\otimes\hbE_{2}$ with $I_{1}=3+\gamma^{2}$ by
+\eqr{11.38}, so
+\[
+   W^{*}=\tfrac12G\big(3+\gamma^{2}-3\big)=\tfrac12G\gamma^{2},
+   \qquad \dot W^{*}=G\gamma\dot\gamma .
+\]
+On the other side, $\dot\bF=\dot\gamma\,\be_{1}\otimes\hbE_{2}$, and by
+Definition~\ref{def:tip},
+\[
+   \bP\cdot\dot\bF=\dot\gamma\,\bP\cdot\be_{1}\otimes\hbE_{2}
+   =\dot\gamma\,\ip{\be_{1}}{\bP\hbE_{2}}=\dot\gamma\,P_{12}.
+\]
+The reactive part contributes nothing, since its share of the power is
+$-p\bF^{*}\cdot\dot\bF=-p\dot J=0$ by Problem 2 of Chapter 4 and
+$J\equiv1$. Equating and cancelling the arbitrary $\dot\gamma$,
+\[
+   \boxed{\;P_{12}=G\gamma,\qquad G=P_{12}/\gamma\;}
+\]
+and $P_{12}=\ip{\be_{1}}{\bP\hbE_{2}}$ is the $\be_{1}$ component of the
+Piola traction on the material plane whose reference normal is
+$\hbE_{2}$, which is the shear component. So $G$ is the shear stress per
+unit shear, the shear modulus, and here the identification is exact
+rather than a small-strain approximation.
+
+\textbf{(c)} Problem 6 of Chapter 4 has
+\[
+   \bF=\lambda\,\be_{1}\otimes\hbE_{1}
+   +\lambda^{-1/2}\big(\be_{2}\otimes\hbE_{2}+\be_{3}\otimes\hbE_{3}\big),
+\]
+an axial stretch $\lambda$ with equal lateral contractions, isochoric
+because $\lambda\cdot\lambda^{-1/2}\cdot\lambda^{-1/2}=1$. Multiplying
+out with $(\ba\otimes\bb)(\bc\otimes\bd)=(\ip\bb\bc)\ba\otimes\bd$, only
+the diagonal terms surviving,
+\[
+   \boxed{\;
+\begin{aligned}
+   \bC&=\bF^{t}\bF=\lambda^{2}\hbE_{1}\otimes\hbE_{1}
+   +\lambda^{-1}\big(\hbE_{2}\otimes\hbE_{2}
+   +\hbE_{3}\otimes\hbE_{3}\big),\\
+   \bB&=\bF\bF^{t}=\lambda^{2}\be_{1}\otimes\be_{1}
+   +\lambda^{-1}\big(\be_{2}\otimes\be_{2}+\be_{3}\otimes\be_{3}\big).
+\end{aligned}\;}
+\]
+They carry the same numbers on different bases, as Problem 3 requires.
+
+\textbf{(d)} Let $\bn$ be a unit vector with $\ip\bn{\be_{1}}=0$, so
+that $\bn$ lies in the plane spanned by $\be_{2}$ and $\be_{3}$. On that
+plane $\bB$ acts as $\lambda^{-1}$ times the identity, by (c), so
+$\bB\bn=\lambda^{-1}\bn$ and
+\[
+   \bT\bn=-p\bn+G\lambda^{-1}\bn
+   =\big(-p+G\lambda^{-1}\big)\bn .
+\]
+Setting this to zero, and $\bn\neq\bze$,
+\[
+   \boxed{\;p=G/\lambda\;}
+\]
+The pressure is uniform, so $\grad p=\bze$; and $\bB$ is uniform, so
+$\dvg\bB=\bze$; hence (a) is satisfied and the deformation is
+equilibrated without body force.
+
+\textbf{(e)} Substituting $p=G/\lambda$ into (a) and using (c),
+\[
+\begin{aligned}
+   \bT&=-\frac{G}{\lambda}\I+G\Big[\lambda^{2}\be_{1}\otimes\be_{1}
+   +\lambda^{-1}\big(\be_{2}\otimes\be_{2}
+   +\be_{3}\otimes\be_{3}\big)\Big]\\
+   &=G\Big(\lambda^{2}-\frac{1}{\lambda}\Big)\be_{1}\otimes\be_{1}
+   +G\Big(\frac{1}{\lambda}-\frac{1}{\lambda}\Big)
+   \big(\be_{2}\otimes\be_{2}+\be_{3}\otimes\be_{3}\big),
+\end{aligned}
+\]
+the lateral coefficients cancelling exactly, which is what (d) arranged.
+Hence
+\[
+   \boxed{\;\bT=T(\lambda)\,\be_{1}\otimes\be_{1},\qquad
+   T(\lambda)=G\big(\lambda^{2}-\lambda^{-1}\big).\;}
+\]
+The bar carries a uniaxial stress, and $T(1)=0$: the undeformed state is
+unstressed, as it must be for a model with no residual stress.
+
+\textbf{(f)} Differentiating,
+$T'(\lambda)=G(2\lambda+\lambda^{-2})$, so
+\[
+   \boxed{\;E=T'(1)=G(2+1)=3G\;}
+\]
+This is the incompressible limit of the classical relation
+$E=2G(1+\nu)$ at $\nu=\tfrac12$, and Chapter 12 will recover it from the
+linear theory.
+
+\textbf{(g)} By \eqr{6.140}, $\bP=\bT\bF^{*}=J\bT\bF^{-t}$ with $J=1$.
+Problem 6(b) of Chapter 4 gives
+$\bF^{-1}=\lambda^{-1}\hbE_{1}\otimes\be_{1}
++\lambda^{1/2}(\hbE_{2}\otimes\be_{2}+\hbE_{3}\otimes\be_{3})$, so
+\[
+   \bF^{-t}=\lambda^{-1}\be_{1}\otimes\hbE_{1}
+   +\lambda^{1/2}\big(\be_{2}\otimes\hbE_{2}
+   +\be_{3}\otimes\hbE_{3}\big).
+\]
+Multiplying, only the $\be_{1}$ term of $\bT$ surviving,
+\[
+   \bP=T(\lambda)\big(\be_{1}\otimes\be_{1}\big)\bF^{-t}
+   =T(\lambda)\lambda^{-1}\,\be_{1}\otimes\hbE_{1},
+\]
+and by \eqr{6.144}, $\bS=\bF^{-1}\bP=P(\lambda)\lambda^{-1}
+\hbE_{1}\otimes\hbE_{1}$. So
+\[
+   \boxed{\;P(\lambda)=\frac{T(\lambda)}{\lambda}
+   =G\big(\lambda-\lambda^{-2}\big),\qquad
+   S(\lambda)=\frac{P(\lambda)}{\lambda}
+   =G\big(1-\lambda^{-3}\big).\;}
+\]
+Differentiating, $P'(\lambda)=G(1+2\lambda^{-3})$ and
+$S'(\lambda)=3G\lambda^{-4}$, so
+\[
+   P'(1)=3G=E,\qquad S'(1)=3G=E .
+\]
+All three stress measures have the same slope at the undeformed state.
+That is the general reason why the linear theory of Chapter 12 need not
+say which stress it means: the three differ at second order in the
+strain, and the linear theory keeps only the first.
+\end{solution}
+
+\begin{problem}[Anti-plane shear of a neo-Hookean tube]
+A circular cylindrical bar of neo-Hookean material, with axis $\hbE_{3}$
+in $\kappa$ and inner and outer radii $A$ and $B$, undergoes the static
+anti-plane shear of Problem 5 of Chapter 3. It is in equilibrium under
+negligible body force, and $w(A)=W$, $w(B)=0$ with $W$ a specified
+constant. Obtain $w(R)$.
+\end{problem}
+
+\begin{solution}
+\textbf{The kinematics.} The deformation is $r=R$, $\theta=\Theta$,
+$z=Z+w(R)$: cylinders slide along the axis without changing radius.
+Identifying $\hbE_{R}$ with $\ber$ and $\hbE_{\Theta}$ with $\bet$
+through the shifter, since $r=R$ and $\theta=\Theta$,
+\[
+   \bF=\shift+w'(r)\,\be_{3}\otimes\hbE_{R},\qquad \det\bF=1 ,
+\]
+the determinant being that of a matrix with unit diagonal and a single
+entry below it. Then
+\[
+   \bB=\bF\bF^{t}=\I+w'\big(\ber\otimes\be_{3}+\be_{3}\otimes\ber\big)
+   +w'^{2}\,\be_{3}\otimes\be_{3},
+\]
+so the non-zero components are $B_{rr}=B_{\theta\theta}=1$,
+$B_{33}=1+w'^{2}$ and $B_{r3}=B_{3r}=w'$.
+
+\textbf{The stress.} By Problem 8(a),
+\[
+   T_{rr}=T_{\theta\theta}=-p+G,\qquad T_{33}=-p+G(1+w'^{2}),
+   \qquad T_{r3}=G\,w'(r),
+\]
+all functions of $r$ alone, the remaining components zero.
+
+\textbf{Equilibrium.} With nothing depending on $\theta$ or $z$, the
+cylindrical components of $\dvg\bT$ reduce to
+\[
+   (\dvg\bT)_{r}=\frac{\partial T_{rr}}{\partial r}
+   +\frac{T_{rr}-T_{\theta\theta}}{r},
+   \qquad
+   (\dvg\bT)_{3}=\frac{1}{r}\frac{\partial}{\partial r}\big(rT_{3r}\big),
+\]
+and $(\dvg\bT)_{\theta}=0$ identically. Since $T_{rr}=T_{\theta\theta}$,
+the radial equation is $-p'(r)=0$, so the reactive pressure is uniform.
+The axial equation is the one that determines the motion:
+\[
+   \frac{1}{r}\big(G\,r\,w'\big)'=0
+   \qquad\Longrightarrow\qquad r\,w'(r)=c
+\]
+for a constant $c$, whence $w'=c/r$ and
+\[
+   w(r)=c\ln r+d .
+\]
+
+\textbf{The boundary conditions.} Imposing $w(A)=W$ and $w(B)=0$,
+\[
+   c\ln A+d=W,\qquad c\ln B+d=0 ,
+\]
+so $d=-c\ln B$ and $c\ln(A/B)=W$. Therefore
+\[
+   \boxed{\;w(R)=W\,\frac{\ln(R/B)}{\ln(A/B)}\;}
+\]
+which returns $W$ at $R=A$ and $0$ at $R=B$, as required.
+
+\textbf{Reading the answer.} The profile is logarithmic, and it contains
+no material constant: $G$ cancelled when the axial equation was divided
+through. So every neo-Hookean tube, stiff or soft, shears into the same
+shape, and $G$ affects only the force needed. The axial traction on the
+inner surface is $T_{3r}(A)=Gc/A=GW/[A\ln(A/B)]$, and the total axial
+force there, over a length $l$, is $2\pi A l\,T_{3r}(A)
+=2\pi lGW/\ln(A/B)$, independent of $A$; the same magnitude with
+opposite sign acts on the outer surface, as it must for equilibrium of
+the tube.
+\end{solution}
+
+\begin{problem}[Residual stress in an isotropic solid]
+An elastic solid is isotropic at all material points relative to the
+adopted reference configuration, and is stressed in its undeformed
+state, so that $\bT\neq\Ob$ when $\bF=\shift$. Suppose this residually
+stressed undeformed configuration is in equilibrium without body force,
+and that the traction vanishes on a portion of the boundary. Show that
+the residual stress vanishes identically.
+\end{problem}
+
+\begin{solution}
+\textbf{Step 1: isotropy forces the residual stress to be a pressure.}
+At $\bF=\shift$ the left Cauchy--Green tensor is
+$\bB=\shift\shift^{t}=\I$, so
+\[
+   I_{1}=\tr\I=3,\qquad I_{2}=\tfrac12\big[9-\tr\I\big]=3,
+   \qquad I_{3}=\det\I=1 ,
+\]
+and $\bB^{2}=\I$. Substituting into \eqr{11.34}, with $J=1$,
+\[
+   \bT=2\big[\big(\hat W_{1}+3\hat W_{2}\big)\I
+   -\hat W_{2}\I+\hat W_{3}\I\big]
+   =2\big[\hat W_{1}+2\hat W_{2}+\hat W_{3}\big]\I ,
+\]
+every derivative evaluated at $(\theta,3,3,1)$. So
+\[
+   \bT=-p_{0}(\bX)\,\I,\qquad
+   p_{0}=-2\big[\hat W_{1}+2\hat W_{2}+\hat W_{3}\big]\big|_{(3,3,1)} .
+\]
+This is the whole force of isotropy: whatever the material, a residual
+stress compatible with isotropy can only be hydrostatic. It may still
+vary from point to point, since $\hat W$ may depend on $\bX$.
+
+\textbf{Step 2: equilibrium forces it to be uniform.} With no body force
+and no acceleration, \eqr{6.109} reads $\dvg\bT=\bze$, and by Problem 24
+of Chapter 1,
+\[
+   \dvg(-p_{0}\I)=-\grad p_{0}=\bze ,
+\]
+so $p_{0}$ is constant throughout the body, the body being connected.
+
+\textbf{Step 3: the free boundary forces it to be zero.} Let $\bn$ be
+the unit normal at a point of the traction-free portion. There
+\[
+   \bze=\bT\bn=-p_{0}\bn ,
+\]
+and $|\bn|=1$, so $p_{0}=0$. Being constant, $p_{0}$ vanishes
+everywhere, and therefore
+\[
+   \boxed{\;\bT=\Ob\ \text{ throughout the body.}\;}
+\]
+
+\textbf{What each hypothesis did.} Drop isotropy and Step 1 fails: an
+anisotropic solid can carry a residual stress with a non-zero deviator,
+which is what a shrink-fit ring or a cold-drawn wire does, and such
+stresses are the reason residual stress is a subject at all. Drop
+equilibrium and Step 2 fails. Drop the traction-free patch and Step 3
+fails, leaving an arbitrary uniform pressure, which is exactly the
+indeterminacy met in Problem 13(e) below. So the result is sharp: an
+isotropic body cannot hold residual stress unless something holds it
+from outside.
+\end{solution}
+
+\begin{problem}[An azimuthal anti-plane shear, and what it is]
+Consider the deformation $\bx=\shift\bX+w(\Theta)\be_{3}$, with $\Theta$
+the azimuthal angle of a cylindrical polar system $\{R,\Theta,Z\}$ in
+the reference configuration.
+\textup{(a)} Using $\bx=r\ber(\theta)+z\be_{3}$ with a suitable choice
+of basis vectors, show that one may take $R=r$, $\Theta=\theta$ and
+$Z+w=z$ without loss of generality.
+\textup{(b)} Show that
+$\bF=\shift+R^{-1}w'(\Theta)\,\be_{3}\otimes\hbE_{\Theta}$, obtain
+$\bB$, and show $\det\bF=1$.
+\textup{(c)} If a neo-Hookean material occupies an annular tube of
+radii $A$ and $B$, is in equilibrium with zero body force, and has
+traction-free inner and outer cylindrical surfaces, show that
+$w(\Theta)=C\Theta+D$. Interpret the deformation.
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} The shifter carries $\hbE_{R}(\Theta)\mapsto\ber(\Theta)$,
+$\hbE_{\Theta}\mapsto\bet$ and $\hbE_{3}\mapsto\be_{3}$, so with
+$\bX=R\hbE_{R}(\Theta)+Z\hbE_{3}$,
+\[
+   \bx=\shift\bX+w(\Theta)\be_{3}
+   =R\,\ber(\Theta)+\big(Z+w(\Theta)\big)\be_{3}.
+\]
+Comparing with $\bx=r\ber(\theta)+z\be_{3}$, and using that
+$\{\ber,\bet,\be_{3}\}$ is a basis at each point, the radial components
+give $r=R$ and the polar angle of $\ber$ gives $\theta=\Theta$, while
+the axial components give $z=Z+w$.
+
+\textbf{(b)} Write $\bx=\shift\bX+w(\Theta)\be_{3}$ and take the
+referential gradient term by term. The first term contributes $\shift$,
+since $\Grad(\shift\bX)=\shift$. For the second, $\be_{3}$ is constant
+and $w$ is a scalar field, so $\Grad(w\be_{3})=\be_{3}\otimes\Grad w$ by
+Problem 24(f) of Chapter 1, and the cylindrical gradient of a function
+of $\Theta$ alone is $\Grad w=R^{-1}w'(\Theta)\hbE_{\Theta}$. Hence
+\[
+   \boxed{\;\bF=\shift+\alpha\,\be_{3}\otimes\hbE_{\Theta},
+   \qquad \alpha=\frac{w'(\Theta)}{R} .\;}
+\]
+On the ordered bases $\{\hbE_{R},\hbE_{\Theta},\hbE_{3}\}$ and
+$\{\ber,\bet,\be_{3}\}$ its matrix is
+$\left(\begin{smallmatrix}1&0&0\\0&1&0\\0&\alpha&1\end{smallmatrix}
+\right)$, lower triangular with unit diagonal, so $\det\bF=1$ and the
+deformation is isochoric. For the left Cauchy--Green tensor,
+\[
+\begin{aligned}
+   \bB&=\bF\bF^{t}
+   =\big(\shift+\alpha\be_{3}\otimes\hbE_{\Theta}\big)
+    \big(\shift^{t}+\alpha\hbE_{\Theta}\otimes\be_{3}\big)\\
+   &=\shift\shift^{t}
+    +\alpha\big(\shift\hbE_{\Theta}\big)\otimes\be_{3}
+    +\alpha\,\be_{3}\otimes\big(\shift\hbE_{\Theta}\big)
+    +\alpha^{2}\big(\ip{\hbE_{\Theta}}{\hbE_{\Theta}}\big)
+     \be_{3}\otimes\be_{3}\\
+   &=\I+\alpha\big(\bet\otimes\be_{3}+\be_{3}\otimes\bet\big)
+    +\alpha^{2}\,\be_{3}\otimes\be_{3},
+\end{aligned}
+\]
+using $\shift\shift^{t}=\I$ and $\shift\hbE_{\Theta}=\bet$.
+
+\textbf{(c)} By Problem 8(a) the stress is $\bT=-p\I+G\bB$, so
+\[
+   T_{rr}=T_{\theta\theta}=-p+G,\qquad
+   T_{33}=-p+G(1+\alpha^{2}),\qquad
+   T_{\theta3}=G\alpha ,
+\]
+the remaining components zero.
+
+\emph{The lateral surfaces.} On $r=A$ and $r=B$ the normal is $\pm\ber$,
+and $\bT\ber=T_{rr}\ber$ since $T_{r\theta}=T_{r3}=0$. Traction-free
+therefore means $p=G$ on both.
+
+\emph{The radial equation.} With $T_{r\theta}=0$ and
+$T_{rr}=T_{\theta\theta}$,
+\[
+   (\dvg\bT)_{r}=\frac{\partial T_{rr}}{\partial r}
+   +\frac{T_{rr}-T_{\theta\theta}}{r}
+   =-\frac{\partial p}{\partial r}=0 ,
+\]
+so $p$ does not depend on $r$. Combined with $p=G$ at $r=A$, this gives
+$p\equiv G$ throughout, and then $T_{rr}=T_{\theta\theta}=0$ everywhere.
+
+\emph{The axial equation.} With $T_{3r}=0$ and $T_{33}$ independent of
+$z$,
+\[
+   (\dvg\bT)_{3}=\frac{1}{r}\frac{\partial T_{3\theta}}{\partial\theta}
+   =\frac{G}{r}\frac{\partial\alpha}{\partial\theta}=0 ,
+\]
+so $\alpha=w'(\theta)/r$ must not depend on $\theta$. Hence
+$w'(\Theta)$ is a constant $C$ and
+\[
+   \boxed{\;w(\Theta)=C\Theta+D\;}
+\]
+The azimuthal equation is satisfied identically, every relevant
+component being independent of $\theta$.
+
+\textbf{Interpretation.} The deformation is $z=Z+C\Theta$: material at
+azimuth $\Theta$ is lifted along the axis in proportion to $\Theta$.
+Going once around the tube, $\Theta\mapsto\Theta+2\pi$ returns to the
+same material line but at an axial offset $2\pi C$, so $w$ is not single
+valued on the tube unless $C=0$. The deformation cannot be produced from
+the intact tube. It is produced by cutting the tube along a half plane
+$\Theta=\text{const}$, sliding one face axially by $2\pi C$, and welding
+the faces together again. That is a \emph{screw dislocation} of Burgers
+vector $2\pi C\be_{3}$ along the axis, and \eqr{11.42} has nothing to do
+with it: the stress computed above has $T_{rr}=T_{\theta\theta}=0$ and
+the only non-zero component is the shear $T_{\theta3}=GC/r$, which is
+singular on the axis and is why real dislocation cores need a separate
+model. Remark~\ref{rem:P9multi} of Chapter 4 met the same
+multivaluedness in a velocity field.
+\end{solution}
+
+\begin{problem}[Torsion of a neo-Hookean bar, and the Poynting effect]
+A solid circular cylindrical bar of neo-Hookean material is subjected to
+the torsion of Section~\ref{sec:torsion}. It is in equilibrium without
+body force and the traction on its cylindrical surface vanishes. Obtain
+the stress field and use it to compute the net force and torque on a
+cross-section. Show that the torque and twist are related as classical
+strength of materials predicts, that the axial force is non-zero
+contrary to that theory, and that it is proportional to the square of
+the twist.
+\end{problem}
+
+\begin{solution}
+\textbf{The kinematics.} Torsion carries $\bX=R\hbE_{R}(\Theta)+Z
+\hbE_{3}$ to $\bx=R\ber(\Theta+\tau Z)+Z\be_{3}$, with $\tau$ the twist
+per unit length. Differentiating along the three referential
+directions,
+\[
+   \frac{\partial\bx}{\partial R}=\ber,\qquad
+   \frac{1}{R}\frac{\partial\bx}{\partial\Theta}=\bet,\qquad
+   \frac{\partial\bx}{\partial Z}=\tau R\,\bet+\be_{3},
+\]
+so
+\[
+   \bF=\shift+\gamma\,\bet\otimes\hbE_{3},\qquad \gamma=\tau R=\tau r ,
+\]
+and $\det\bF=1$. The local shear is $\gamma$, growing linearly with
+radius, which is the sense in which torsion is locally a simple shear.
+Squaring as in Problem 11(b),
+\[
+   \bB=\I+\gamma\big(\bet\otimes\be_{3}+\be_{3}\otimes\bet\big)
+   +\gamma^{2}\,\bet\otimes\bet .
+\]
+
+\textbf{The stress.} By Problem 8(a), $\bT=-p\I+G\bB$, so
+\[
+   T_{rr}=-p+G,\qquad T_{\theta\theta}=-p+G\big(1+\gamma^{2}\big),
+   \qquad T_{zz}=-p+G,\qquad T_{\theta z}=G\gamma ,
+\]
+the rest zero. Note $T_{rr}=T_{zz}$ and
+$T_{rr}-T_{\theta\theta}=-G\gamma^{2}=-G\tau^{2}r^{2}$.
+
+\textbf{Equilibrium.} The azimuthal and axial components of $\dvg\bT$
+vanish identically, nothing depending on $\theta$ or $z$ and $T_{zr}=0$.
+The radial component gives
+\[
+   \frac{\partial T_{rr}}{\partial r}
+   +\frac{T_{rr}-T_{\theta\theta}}{r}=0
+   \qquad\Longrightarrow\qquad
+   -p'(r)-G\tau^{2}r=0 ,
+\]
+so $p'(r)=-G\tau^{2}r$ and $p(r)=-\tfrac12G\tau^{2}r^{2}+c$.
+
+\textbf{The free lateral surface.} At $r=a$ the normal is $\ber$ and
+$\bT\ber=T_{rr}\ber$, so $T_{rr}(a)=0$, that is $p(a)=G$. Hence
+$c=G+\tfrac12G\tau^{2}a^{2}$ and
+\[
+   \boxed{\;p(r)=G+\tfrac12G\tau^{2}\big(a^{2}-r^{2}\big)\;}
+\]
+Substituting back, the stress field is
+\[
+   \boxed{\;
+\begin{aligned}
+   T_{rr}&=T_{zz}=-\tfrac12G\tau^{2}\big(a^{2}-r^{2}\big),\\
+   T_{\theta\theta}&=G\tau^{2}\big(\tfrac32r^{2}-\tfrac12a^{2}\big),
+   \qquad T_{\theta z}=G\tau r .
+\end{aligned}\;}
+\]
+
+\textbf{The torque.} The traction on a cross-section, whose normal is
+$\be_{3}$, is $\bT\be_{3}=T_{\theta z}\bet+T_{zz}\be_{3}$. Its moment
+about the axis is
+\[
+   M=\int_{\text{section}}\big[(r\ber)\times\bT\be_{3}\big]
+   \cdot\be_{3}\,\dl a
+   =\int^{a}_{0}\!\!\big(r\cdot G\tau r\big)\,2\pi r\,\dl r
+   =2\pi G\tau\,\frac{a^{4}}{4},
+\]
+using $\ber\times\bet=\be_{3}$ and $\dl a=2\pi r\,\dl r$. Hence
+\[
+   \boxed{\;M=\tfrac12\pi G\,\tau\,a^{4}=G\,J_{p}\,\tau,
+   \qquad J_{p}=\tfrac12\pi a^{4} ,\;}
+\]
+$J_{p}$ being the polar second moment of the section. This is exactly
+the classical formula, with no nonlinear correction whatever: the
+torque is linear in the twist however large the twist becomes. The
+reason is visible in the computation: $T_{\theta z}=G\gamma$ exactly,
+the neo-Hookean shear response being linear in the amount of shear.
+
+\textbf{The axial force.} On the same section,
+\[
+   N=\int^{a}_{0}T_{zz}\,2\pi r\,\dl r
+   =-\pi G\tau^{2}\int^{a}_{0}\big(a^{2}-r^{2}\big)r\,\dl r
+   =-\pi G\tau^{2}\Big[\frac{a^{4}}{2}-\frac{a^{4}}{4}\Big],
+\]
+so
+\[
+   \boxed{\;N=-\tfrac14\pi G\,\tau^{2}a^{4}\;}
+\]
+It is not zero, it is compressive, and it is quadratic in $\tau$.
+Classical strength of materials, being linear, predicts $N=0$.
+
+\textbf{What it means.} To hold the bar at fixed length while twisting
+it, one must push on the ends with the force $|N|$. Release the ends and
+the bar lengthens instead. This is the \emph{Poynting effect}, and it is
+the same phenomenon as the normal stress effect of
+Remark~\ref{rem:ch11universal}: torsion is locally a simple shear of
+amount $\gamma=\tau r$, and \eqr{11.42} demands normal stresses of order
+$\gamma^{2}$ to accompany it. Integrating those over the section is
+exactly the calculation just done. The ratio
+\[
+   \frac{|N|}{M/a}=\frac{\tfrac14\pi G\tau^{2}a^{4}}
+   {\tfrac12\pi G\tau a^{3}}=\tfrac12\tau a
+\]
+is half the surface shear, so the effect becomes measurable when the
+twist per unit length times the radius is not small.
+\end{solution}
+
+\bookfig{1}\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.2mm]},thick},
+   dim/.style={{Stealth[length=1.7mm]}-{Stealth[length=1.7mm]},
+               semithick,gray!75}]
+% ---------------- reference: a sector of angular extent gamma --------
+\begin{scope}[xshift=0cm]
+  \fill[gray!10] (0,0) -- (-30:1.85) arc (-30:240:1.85) -- cycle;
+  \draw[thick] (0,0) -- (-30:1.85) arc (-30:240:1.85) -- cycle;
+  % the wedge that was removed
+  \draw[guide] (240:1.85) arc (240:330:1.85);
+  \fill (0,0) circle (1.2pt);
+  % the angular extent of the material
+  \draw[gray!75,thin] (-30:0.55) arc (-30:240:0.55);
+  \node[font=\small] at (150:0.80) {$\gamma$};
+  % the reference radius
+  \draw[dim] (0.05,0.05) -- (45:1.80);
+  \node[font=\small,fill=white,inner sep=1.5pt] at (45:1.22) {$A$};
+  \node[font=\footnotesize,text=gray!80,anchor=north] at (0,-2.22)
+     {$\kappa$: a wedge is missing};
+\end{scope}
+% ---------------- deformed: the full disc ----------------------------
+\begin{scope}[xshift=5.6cm]
+  \fill[gray!10] (0,0) circle (1.52);
+  \draw[thick] (0,0) circle (1.52);
+  \draw[thick,gray!55] (0,0) -- (270:1.52);
+  \fill (0,0) circle (1.2pt);
+  \draw[dim] (0.05,0.05) -- (45:1.47);
+  \node[font=\small,fill=white,inner sep=1.5pt] at (45:0.92) {$a$};
+  \node[font=\footnotesize,text=gray!80,anchor=east] at (-0.14,-1.02)
+     {seam};
+  \node[font=\footnotesize,text=gray!80,anchor=north] at (0,-2.22)
+     {$\kappa_{t}$: the gap is closed};
+\end{scope}
+\end{tikzpicture}
+\caption{Problem 13. In the reference configuration the material of a
+circular cylinder occupies an angular extent $\gamma<2\pi$, a wedge
+having been removed; the missing wedge is dashed. The cross-section is
+then deformed so that the two cut faces meet, the material spanning the
+full $2\pi$. The map is $r=f(R)$, $\theta=g(\Theta)$, $z=Z$, and
+isochoricity together with regularity on the axis fixes both functions.
+The deformed radius comes out proportional to $\sqrt\gamma$, so closing
+a larger gap makes a thinner bar.}
+\label{fig:ch11wedge}
+\end{figure}
+
+\begin{problem}[Closing a wedge: the cylinder with a sector removed]
+A circular cylinder of radius $A$ has a wedge removed, so that the
+angular extent of the material in $\kappa$ is $\gamma$
+(Figure~\ref{fig:ch11wedge}). The cross-section is deformed so that the
+gap closes, by
+\[
+\begin{aligned}
+   \bX&=R\hbE_{R}(\Theta)+Z\hbE_{3},\qquad
+   \bx=r\ber(\theta)+z\be_{3},\\
+   z&=Z,\qquad r=f(R),\qquad \theta=g(\Theta).
+\end{aligned}
+\]
+\textup{(a)} Find $\bF$ for known $f$ and $g$.
+\textup{(b)} Assume the deformation isochoric and find $f$ and $g$ from
+the boundary conditions; show the deformed radius $a$ is proportional to
+$\sqrt\gamma$.
+\textup{(c)} Find $\bR$, $\bU$, $\bV$.
+\textup{(d)} Obtain the principal stretches in terms of $\gamma$.
+\textup{(e)} Solve the equilibrium problem without body force for a
+neo-Hookean material. Find the reactive pressure and show it is singular
+on the centreline. Evaluate the traction at the outer boundary required
+to maintain the deformation and show it is an arbitrary uniform
+pressure. What contact traction acts on the planar surfaces where the
+two faces of the wedge meet, if there is no traction at the outer
+boundary?
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} Differentiating $\bx$ along the three referential
+directions, and remembering that $\ber$ depends on $\theta=g(\Theta)$
+so that $\partial\ber/\partial\Theta=g'(\Theta)\bet$,
+\[
+   \frac{\partial\bx}{\partial R}=f'(R)\ber,\qquad
+   \frac{1}{R}\frac{\partial\bx}{\partial\Theta}
+   =\frac{f(R)g'(\Theta)}{R}\,\bet,\qquad
+   \frac{\partial\bx}{\partial Z}=\be_{3},
+\]
+so
+\[
+   \boxed{\;\bF=f'(R)\,\ber\otimes\hbE_{R}
+   +\frac{f(R)g'(\Theta)}{R}\,\bet\otimes\hbE_{\Theta}
+   +\be_{3}\otimes\hbE_{3} .\;}
+\]
+
+\textbf{(b)} Both frames are orthonormal, so $\det\bF$ is the product of
+the three coefficients:
+\[
+   \det\bF=f'\,\frac{fg'}{R}\cdot1=1 .
+\]
+The variables separate. Rearranged, $R/(ff')=g'(\Theta)$, and the left
+side depends on $R$ alone while the right depends on $\Theta$ alone, so
+both equal a constant $k$:
+\[
+   g'(\Theta)=k,\qquad f(R)f'(R)=\frac{R}{k} .
+\]
+The gap closes when the material of angular extent $\gamma$ covers
+$2\pi$, so $g(0)=0$ and $g(\gamma)=2\pi$, giving
+\[
+   k=\frac{2\pi}{\gamma},\qquad g(\Theta)=\frac{2\pi}{\gamma}\Theta .
+\]
+Integrating the radial equation, $\tfrac12f^{2}=R^{2}/(2k)+\text{const}$,
+and the axis must map to the axis, $f(0)=0$, which kills the constant:
+\[
+   \boxed{\;f(R)=\frac{R}{\sqrt k}=R\sqrt{\frac{\gamma}{2\pi}},
+   \qquad g(\Theta)=\frac{2\pi}{\gamma}\Theta .\;}
+\]
+Hence the deformed radius is
+\[
+   a=f(A)=A\sqrt{\frac{\gamma}{2\pi}}\ \propto\ \sqrt\gamma ,
+\]
+so closing a larger gap, that is starting from a smaller $\gamma$, gives
+a thinner bar. The area is preserved: $\pi a^{2}=\pi A^{2}\gamma/(2\pi)
+=\tfrac12 A^{2}\gamma$, which is exactly the area of the original
+sector.
+
+\textbf{(c)} With $f'=1/\sqrt k$ and $fg'/R=(R/\sqrt k)k/R=\sqrt k$,
+\[
+   \bF=\frac{1}{\sqrt k}\,\ber\otimes\hbE_{R}
+   +\sqrt k\,\bet\otimes\hbE_{\Theta}+\be_{3}\otimes\hbE_{3},
+\]
+which is already the canonical form $\bF=\sum_{i}\lambda_{i}
+\bv_{i}\otimes\bu_{i}$ of \eqr{3.43}, both triads being orthonormal.
+Reading off the polar factors,
+\[
+   \boxed{\;
+\begin{aligned}
+   \bR&=\ber\otimes\hbE_{R}+\bet\otimes\hbE_{\Theta}
+        +\be_{3}\otimes\hbE_{3},\\
+   \bU&=\frac{1}{\sqrt k}\hbE_{R}\otimes\hbE_{R}
+        +\sqrt k\,\hbE_{\Theta}\otimes\hbE_{\Theta}
+        +\hbE_{3}\otimes\hbE_{3},\\
+   \bV&=\frac{1}{\sqrt k}\ber\otimes\ber
+        +\sqrt k\,\bet\otimes\bet+\be_{3}\otimes\be_{3} .
+\end{aligned}\;}
+\]
+Note that $\bR$ is not the shifter: it carries $\hbE_{R}(\Theta)$ to
+$\ber(g(\Theta))$, and those are different directions unless $k=1$.
+
+\textbf{(d)} The principal stretches are the coefficients:
+\[
+   \boxed{\;\lambda_{1}=\frac{1}{\sqrt k}=\sqrt{\frac{\gamma}{2\pi}},
+   \qquad \lambda_{2}=\sqrt k=\sqrt{\frac{2\pi}{\gamma}},
+   \qquad\lambda_{3}=1 .\;}
+\]
+Their product is $1$, as isochoricity requires. For $\gamma<2\pi$ the
+material is stretched azimuthally and compressed radially by reciprocal
+factors, which is a state of pure shear in the cross-sectional plane.
+
+\textbf{(e)} With $\bB=\bV^{2}$ from (c),
+\[
+   T_{rr}=-p+\frac{G}{k},\qquad T_{\theta\theta}=-p+Gk,
+   \qquad T_{zz}=-p+G ,
+\]
+off-diagonal components zero, and all quantities functions of $r$ alone.
+The radial equilibrium equation is
+\[
+   \frac{\partial T_{rr}}{\partial r}
+   +\frac{T_{rr}-T_{\theta\theta}}{r}=0,
+   \qquad T_{rr}-T_{\theta\theta}=G\Big(\frac1k-k\Big),
+\]
+so
+\[
+   p'(r)=\frac{G}{r}\Big(\frac1k-k\Big),
+   \qquad
+   p(r)=G\Big(\frac1k-k\Big)\ln r+\text{const}.
+\]
+Since $\gamma<2\pi$ gives $k>1$, the coefficient $1/k-k$ is negative and
+$p\to+\infty$ as $r\to0$:
+\[
+   \boxed{\;p\ \text{is logarithmically singular on the centreline.}\;}
+\]
+
+\emph{The outer traction.} At $r=a$ the normal is $\ber$ and
+$\bT\ber=T_{rr}(a)\ber$, a normal traction, uniform because it depends
+only on $r$. The constant of integration is not fixed by the field
+equations, so $T_{rr}(a)$ may be given any value: the deformation is
+maintained by an \emph{arbitrary uniform pressure} on the outer
+boundary. This is the indeterminacy that Problem 10 removed by assuming
+a traction-free patch.
+
+\emph{The seam.} Fix the constant by requiring no traction at the outer
+boundary, $T_{rr}(a)=0$, that is $p(a)=G/k$. Then
+\[
+   p(r)=\frac{G}{k}+G\Big(\frac1k-k\Big)\ln\frac{r}{a} .
+\]
+The two faces of the wedge meet on a half plane whose normal is $\bet$,
+and the traction there is $\bT\bet=T_{\theta\theta}\bet$, purely normal
+since $T_{r\theta}=T_{z\theta}=0$. Substituting,
+\[
+   \boxed{\;T_{\theta\theta}(r)
+   =G\Big(k-\frac1k\Big)\Big[1+\ln\frac{r}{a}\Big],
+   \qquad k=\frac{2\pi}{\gamma} .\;}
+\]
+So the glue transmits a pure normal traction, with no shear. It is
+tensile at the rim, where $\ln(r/a)=0$ and $T_{\theta\theta}
+=G(k-1/k)>0$, changes sign at $r=a/e$, and is compressive and
+logarithmically unbounded towards the axis. The bar is trying to spring
+open at its surface and is crushed together at its core, which is what
+one would expect of a wedge forced shut.
+\end{solution}
+
+\begin{problem}[The referential energy balance for an elastic solid]
+Derive the energy balance equation
+\[
+   \rho_{\kappa}r=\Dvg\bq_{\kappa}
+   -\theta\big(W_{\theta}\big)^{\textstyle\cdot},
+   \qquad\text{where}\quad
+   \big(W_{\theta}\big)^{\textstyle\cdot}
+   =W_{\theta\theta}\dot\theta+W_{\theta\bF}\cdot\dot\bF ,
+\]
+with $\bq_{\kappa}$ the referential heat flux of \eqr{6.174}.
+\end{problem}
+
+\begin{solution}
+\begin{remark}[the overdot in the statement]\label{rem:ch11dotW}
+The book writes the second factor as $\dot W$, but the expression given
+for it, $W_{\theta\theta}\dot\theta+W_{\theta\bF}\cdot\dot\bF$, is the
+material derivative of $W_{\theta}$, not of $W$. The chain rule for $W$
+itself would be $\dot W=W_{\theta}\dot\theta+W_{\bF}\cdot\dot\bF$, with
+first derivatives. These notes write
+$(W_{\theta})^{\textstyle\cdot}$, and the derivation below shows it is
+the right object.
+\end{remark}
+
+\textbf{Step 1: the internal energy in terms of $W$.} By \eqr{6.186},
+$\psi=\varepsilon-\theta\eta$, so $\varepsilon=\psi+\theta\eta$.
+Multiply by $\rho_{\kappa}$ and use \eqr{11.17} on the first term:
+\[
+   \rho_{\kappa}\varepsilon=\rho_{\kappa}\psi+\theta\rho_{\kappa}\eta
+   =W+\theta\,\rho_{\kappa}\eta .
+\]
+The entropy is given by \eqr{11.16}$_{1}$, $\eta=-\Psi_{\theta}$, and
+$\rho_{\kappa}$ passes through the $\theta$ derivative as a constant,
+so $\rho_{\kappa}\eta=-\rho_{\kappa}\Psi_{\theta}=-W_{\theta}$. Hence
+\[
+   \rho_{\kappa}\varepsilon=W-\theta W_{\theta} .
+\]
+
+\textbf{Step 2: differentiate.} Taking the material derivative, and
+using the chain rule $\dot W=W_{\theta}\dot\theta+W_{\bF}\cdot\dot\bF$
+on the first term and the product rule on the second,
+\[
+\begin{aligned}
+   \rho_{\kappa}\dot\varepsilon
+   &=\dot W-\dot\theta\,W_{\theta}
+     -\theta\big(W_{\theta}\big)^{\textstyle\cdot}\\
+   &=\big(W_{\theta}\dot\theta+W_{\bF}\cdot\dot\bF\big)
+     -W_{\theta}\dot\theta-\theta\big(W_{\theta}\big)^{\textstyle\cdot}
+   =W_{\bF}\cdot\dot\bF
+     -\theta\big(W_{\theta}\big)^{\textstyle\cdot} ,
+\end{aligned}
+\]
+the two $W_{\theta}\dot\theta$ terms cancelling. Since $\bP=W_{\bF}$ by
+\eqr{11.16}$_{2}$,
+\[
+   \rho_{\kappa}\dot\varepsilon
+   =\bP\cdot\dot\bF-\theta\big(W_{\theta}\big)^{\textstyle\cdot} .
+\]
+
+\textbf{Step 3: compare with the balance.} The referential energy
+balance is \eqr{6.174},
+\[
+   \rho_{\kappa}\dot\varepsilon
+   =\bP\cdot\dot\bF-\Dvg\bq_{\kappa}+\rho_{\kappa}r .
+\]
+Subtracting the two displays, the stress power cancels and
+\[
+   -\theta\big(W_{\theta}\big)^{\textstyle\cdot}
+   =-\Dvg\bq_{\kappa}+\rho_{\kappa}r ,
+\]
+that is
+\[
+   \boxed{\;\rho_{\kappa}r=\Dvg\bq_{\kappa}
+   -\theta\big(W_{\theta}\big)^{\textstyle\cdot}\;}
+\]
+Finally, $W_{\theta}$ is a function of $\theta$ and $\bF$, so the chain
+rule gives $(W_{\theta})^{\textstyle\cdot}=W_{\theta\theta}\dot\theta
++W_{\theta\bF}\cdot\dot\bF$, as stated.
+
+\textbf{Reading the result.} The stress power has disappeared entirely.
+In a hyperelastic solid the mechanical working is stored, not dissipated,
+so it cannot appear as a source of heat; what remains is the conduction
+term and a coupling term $-\theta(W_{\theta})^{\textstyle\cdot}$,
+which is the rate of latent heat associated with changes of temperature
+and deformation. Its second piece, $-\theta W_{\theta\bF}\cdot\dot\bF$,
+is the thermoelastic coupling: deforming the body at fixed temperature
+absorbs or releases heat unless $W_{\theta\bF}=\hOb$, in which case the
+thermal and mechanical problems decouple as they did for rigid bodies at
+Section~\ref{sec:ch6energy}.
+\end{solution}
+
+\begin{problem}[The referential heat flux]
+Show that if the spatial heat flux is \eqr{11.49}, then the referential
+heat flux is
+\[
+   \bq_{\kappa}=\big(\psi_{0}\hI+\psi_{1}\bC+\psi_{2}\bC^{2}\big)
+   \Grad\theta ,
+\]
+with $\psi_{0},\psi_{1},\psi_{2}$ functions of $\theta$ and of the
+invariants
+\[
+   I_{1}(\bC),\quad I_{2}(\bC),\quad I_{3}(\bC),\quad
+   I_{4}(\bC,\Grad\theta),\quad I_{5}(\bC,\Grad\theta),\quad
+   I_{6}(\Grad\theta).
+\]
+\end{problem}
+
+\begin{solution}
+\textbf{Two conversions.} By \eqr{6.171}, $\bq_{\kappa}=J\bF^{-1}\bq$.
+By the chain rule applied to the temperature field,
+$\Grad\theta=\bF^{t}\grad\theta$, whence
+$\grad\theta=\bF^{-t}\Grad\theta$. Substituting \eqr{11.49},
+\[
+   \bq_{\kappa}=J\bF^{-1}
+   \big(\phi_{0}\I+\phi_{1}\bB+\phi_{2}\bB^{2}\big)
+   \bF^{-t}\,\Grad\theta .
+\]
+
+\textbf{Pulling the three tensors back.} Each is a one-line
+computation, the reverse of the ones in Problem 2:
+\[
+   \bF^{-1}\I\bF^{-t}=\bF^{-1}\bF^{-t}=\big(\bF^{t}\bF\big)^{-1}
+   =\bC^{-1},
+\]
+\[
+   \bF^{-1}\bB\bF^{-t}=\bF^{-1}\big(\bF\bF^{t}\big)\bF^{-t}=\hI,
+\]
+\[
+   \bF^{-1}\bB^{2}\bF^{-t}
+   =\bF^{-1}\bF\bF^{t}\bF\bF^{t}\bF^{-t}=\bF^{t}\bF=\bC .
+\]
+Therefore
+\[
+   \bq_{\kappa}=J\big(\phi_{0}\bC^{-1}+\phi_{1}\hI
+   +\phi_{2}\bC\big)\Grad\theta .
+\]
+
+\textbf{Removing the inverse.} The result is not yet in the stated form,
+because of $\bC^{-1}$. The Cayley--Hamilton theorem of
+Section~\ref{sec:ch9isotropic}, applied to $\bC$, gives
+$\bC^{3}-I_{1}\bC^{2}+I_{2}\bC-I_{3}\hI=\hOb$, and multiplying by
+$\bC^{-1}$ and rearranging,
+\[
+   \bC^{-1}=\frac{1}{I_{3}}\big(\bC^{2}-I_{1}\bC+I_{2}\hI\big),
+\]
+legitimate because $I_{3}=\det\bC=J^{2}>0$. Substituting and collecting
+powers of $\bC$,
+\[
+   \boxed{\;\bq_{\kappa}=\big(\psi_{0}\hI+\psi_{1}\bC
+   +\psi_{2}\bC^{2}\big)\Grad\theta\;}
+\]
+with
+\[
+   \psi_{0}=J\Big(\phi_{1}+\frac{I_{2}}{I_{3}}\phi_{0}\Big),
+   \qquad
+   \psi_{1}=J\Big(\phi_{2}-\frac{I_{1}}{I_{3}}\phi_{0}\Big),
+   \qquad
+   \psi_{2}=\frac{J}{I_{3}}\phi_{0} .
+\]
+
+\textbf{The argument lists match.} The $\phi_{k}$ depend on $\theta$, on the invariants of $\bB$ and on
+the three scalars \eqr{11.50}. The invariants of $\bB$ are those of
+$\bC$, by \eqr{11.35}. For the others, substitute
+$\grad\theta=\bF^{-t}\Grad\theta$ and pull back as above:
+\[
+\begin{aligned}
+   I_{4}(\bB,\grad\theta)
+   &=\ip{\Grad\theta}{\bF^{-1}\bB\bF^{-t}\Grad\theta}
+   =\ip{\Grad\theta}{\Grad\theta}=I_{6}(\Grad\theta)^{2},\\
+   I_{5}(\bB,\grad\theta)
+   &=\ip{\Grad\theta}{\bC\,\Grad\theta}=I_{4}(\bC,\Grad\theta),\\
+   I_{6}(\grad\theta)^{2}
+   &=\ip{\Grad\theta}{\bC^{-1}\Grad\theta}\\
+   &=\frac{1}{I_{3}}\big[I_{5}(\bC,\Grad\theta)
+   -I_{1}I_{4}(\bC,\Grad\theta)+I_{2}I_{6}(\Grad\theta)^{2}\big],
+\end{aligned}
+\]
+the last line using the same Cayley--Hamilton substitution, and with the
+referential scalars defined by
+$I_{4}(\bC,\Grad\theta)=\ip{\Grad\theta}{\bC\Grad\theta}$,
+$I_{5}(\bC,\Grad\theta)=\ip{\Grad\theta}{\bC^{2}\Grad\theta}$ and
+$I_{6}(\Grad\theta)=|\Grad\theta|$. Every argument of the $\phi_{k}$ is
+therefore a function of the referential list, and so is every
+$\psi_{k}$.
+
+The moral is the one of Remark~\ref{rem:ch6threestress} transposed to
+fluxes: the referential and spatial descriptions carry the same physical
+content, and converting between them replaces $\bB$ by $\bC$ and turns
+$\grad$ into $\Grad$, at the price of factors of $\bF$ that
+Cayley--Hamilton then tidies away.
+\end{solution}
+
+\begin{problem}[A torsion with an axial temperature gradient]
+A solid circular cylindrical bar undergoes the static torsion of
+Section~\ref{sec:torsion}. The $\phi$'s in \eqr{11.49} are independent
+of temperature, though they may depend on $I_{1}$ to $I_{6}$, and the
+material is uniform. The temperature is independent of time and depends
+only on $z$, with the ends $z=0$ and $z=l$ held at $\theta_{0}$ and
+$\theta_{l}$. Assuming this function linear, show that the energy
+balance with zero internal heating supply is automatically satisfied,
+and that the lateral surface of the bar is insulated.
+\end{problem}
+
+\begin{solution}
+\textbf{The data.} From Problem 12,
+\[
+   \bB=\I+\gamma\big(\bet\otimes\be_{3}+\be_{3}\otimes\bet\big)
+   +\gamma^{2}\bet\otimes\bet,\qquad \gamma=\tau r ,
+\]
+and the temperature is
+\[
+   \theta(z)=\theta_{0}+\beta z,\qquad
+   \beta=\frac{\theta_{l}-\theta_{0}}{l},\qquad
+   \grad\theta=\beta\,\be_{3},
+\]
+a constant vector field.
+
+\textbf{The heat flux.} Apply $\bB$ and $\bB^{2}$ to $\be_{3}$:
+\[
+   \bB\be_{3}=\be_{3}+\gamma\bet,\qquad
+   \bB\bet=(1+\gamma^{2})\bet+\gamma\be_{3},
+\]
+so
+\[
+\begin{aligned}
+   \bB^{2}\be_{3}&=\bB\big(\be_{3}+\gamma\bet\big)
+   =\big(\be_{3}+\gamma\bet\big)
+   +\gamma\big[(1+\gamma^{2})\bet+\gamma\be_{3}\big]\\
+   &=(1+\gamma^{2})\be_{3}+\gamma(2+\gamma^{2})\bet .
+\end{aligned}
+\]
+Substituting into \eqr{11.49},
+\[
+   \boxed{\;\bq=\beta\Big\{\big[\phi_{0}+\phi_{1}
+   +\phi_{2}(1+\gamma^{2})\big]\be_{3}
+   +\gamma\big[\phi_{1}+\phi_{2}(2+\gamma^{2})\big]\bet\Big\}\;}
+\]
+
+\textbf{The lateral surface is insulated.} Its outward normal is
+$\ber$, and the flux has no $\ber$ component:
+\[
+   \ip\bq\ber=0 ,
+\]
+so no heat crosses the cylindrical surface. The flux runs along the
+axis, as the boundary data demand, and around it, which is the
+thermal signature of the torsion.
+
+\textbf{The energy balance.} The local spatial form is \eqr{6.168},
+\[
+   \rho\dot\varepsilon=\bT\cdot\bL-\dvg\bq+\rho r ,
+\]
+with $r=0$ by hypothesis. The deformation is static, so $\bv=\bze$,
+$\bL=\Ob$ and the stress power vanishes; and $\varepsilon$ depends on
+$\theta$ and $\bF$, neither of which depends on time, so
+$\dot\varepsilon=0$. What is left is $\dvg\bq=0$, and this holds
+identically. To see it, note first what the coefficients depend on. The
+$\phi_{k}$ are independent of $\theta$ by hypothesis and of $\bX$ by
+uniformity, so they depend only on the six invariants, and
+\[
+\begin{aligned}
+   I_{1}=I_{2}&=3+\gamma^{2},\qquad I_{3}=1,\\
+   I_{4}&=\ip{\grad\theta}{\bB\grad\theta}=\beta^{2}
+   \ip{\be_{3}}{\be_{3}+\gamma\bet}=\beta^{2},\\
+   I_{5}&=\ip{\grad\theta}{\bB^{2}\grad\theta}
+   =\beta^{2}(1+\gamma^{2}),\qquad I_{6}=|\beta| ,
+\end{aligned}
+\]
+the first line by \eqr{11.38}, torsion being locally a simple shear of
+amount $\gamma$. Every one of these is a function of $r$ alone, through
+$\gamma=\tau r$. So the boxed flux has the form
+\[
+   \bq=q_{\theta}(r)\,\bet+q_{z}(r)\,\be_{3},\qquad q_{r}=0 ,
+\]
+and the cylindrical divergence of such a field is
+\[
+   \dvg\bq=\frac{1}{r}\frac{\partial}{\partial r}\big(r\,q_{r}\big)
+   +\frac{1}{r}\frac{\partial q_{\theta}}{\partial\theta}
+   +\frac{\partial q_{z}}{\partial z}
+   =0+0+0=0 ,
+\]
+the first term because $q_{r}=0$, the second because $q_{\theta}$ does
+not depend on $\theta$, the third because $q_{z}$ does not depend on
+$z$. Hence
+\[
+   \boxed{\;\dvg\bq=0\ \text{ identically, and the balance is
+   satisfied with }r=0 .\;}
+\]
+
+\textbf{Why it worked.} Three separate facts conspired. The temperature
+gradient is uniform, so it contributes nothing to any derivative. The
+deformation is a function of $r$ only, so the constitutive coefficients
+are too. And the flux has no radial component, so the one term of the
+divergence that would have differentiated an $r$-dependent quantity is
+absent. Remove any one of them, for instance by letting the $\phi$'s
+depend on temperature, and $\dvg\bq$ would acquire a term in
+$\partial_{z}$ through $\theta(z)$, and an internal supply $r$ would be
+needed to maintain the assumed field.
+\end{solution}

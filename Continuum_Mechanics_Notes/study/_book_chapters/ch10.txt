@@ -1,0 +1,318 @@
+BOLUM 10: Kinematic Constraints
+Kitap sayfalari: PDF 213-220
+========================================================================
+
+----- PDF sayfa 213 -----
+Chapter 10
+Kinematic Constraints
+Quite often the motions that a material can undergo are such as to
+satisfy one or more kinematic constraints. Guided by our experience
+with incompressible ﬂuids, we consider local constraints of the form
+gκ(F ) = 0,
+(10.1)
+from the perspective of observer O, say, where gκ is a scalar-valued
+function, F is the deformation gradient and the subscript κ identiﬁes
+the reference conﬁguration relative to which it is deﬁned. For the case
+of incompressibility, for example, gκ(F ) = det F −1.
+10.1
+Observer consensus
+Recall that we require all observers to agree on material response.
+Because the constraints characterize the nature of such response, we
+require that all observers agree that a constraint of the form (10.1)
+is in force. Thus, the constraint, as perceived by observer O+, say, is
+g+
+κ+(F +) = 0,
+(10.2)
+where
+g+
+κ+(F +) = gκ(F ).
+(10.3)
+From (7.17), we then have
+g+
+κ+(F +) = gκ(QtF +K).
+(10.4)
+199
+
+----- PDF sayfa 214 -----
+200
+Principles of Continuum Mechanics
+As in the previous chapter, we impose this requirement for two
+relative motions of the observers from the perspective of O+, con-
+cluding, in terms of the notation used there, that
+gκ(Qt
+2F +K) = g+
+κ+(F +) = gκ(Qt
+1F +K).
+(10.5)
+Here, we assume that Q2(t0) = Q1(t0), so that K is the same for
+both relative motions (see (7.15)). Let Q = Qt
+2Q1: E3 →E3, as in
+(9.11), and let
+F = Qt
+1F +K.
+(10.6)
+Then,
+Qt
+2F +K = QF;
+hence (det Q)J = (det Q2)(det K)J+.
+(10.7)
+Recalling the discussion leading to (7.19), pertaining to the choice
+of occupiable reference conﬁgurations, we have (det Q2)(det K) = 1
+and J+ = J. Thus, det Q = 1 and (10.5) yields
+gκ(QF) = gκ(F ),
+(10.8)
+for arbitrary rotations Q.
+To obtain a necessary condition we select Q = 1Rt, where 1 is
+the shifter and R is the two-point rotation in the polar factorization
+(3.32) of F . This furnishes gκ(F ) = gκ(1 ˆIU) = gκ(1U), where U is
+the right stretch tensor. Because 1 is ﬁxed in the frame of O, this is
+a function of U alone, and since the latter is uniquely determined by
+the right Cauchy–Green tensor C = F tF (see (3.38)), we conclude
+that
+gκ(F ) = ¯gκ(C)
+(10.9)
+for some function ¯gκ. Conversely, if this holds, then
+gκ(QF) = ¯gκ((QF)tQF) = ¯gκ(F tIF) = ¯gκ(F tF ) = gκ(F )
+for all rotations Q, so that (10.9) is both necessary and suﬃcient for
+(10.8).
+
+----- PDF sayfa 215 -----
+Kinematic Constraints
+201
+The constraint, from the perspective of O+, follows from (10.4):
+g+
+κ+(F +) = gκ(QtF +K) = ¯gκ((QtF +K)tQtF +K)
+= ¯gκ(Kt(F +)tQQtF +K) = ¯gκ(Kt(F +)tI+F +K)
+= ¯gκ(Kt(F +)tF +K) = ¯gκ(KtC+K)
+= ¯g+
+κ+(C+),
+(10.10)
+where K is a ﬁxed parameter and Q: E3 →E3+ is now the orthog-
+onal tensor characterizing the observer transformation.
+Examples
+1. Incompressibility
+Because J > 0, the constraint J = 1 associated with incompressibil-
+ity is equivalent to 1 = J2 = det(F tF ) = det C; hence,
+¯gκ(C) = det C −1.
+(10.11)
+2. Inextensibility
+In the engineering theory of ﬁber-reinforced composites, the ﬁbers
+are idealized as being continuously distributed material curves in κ
+having the unit-tangent ﬁeld M(X), say. If the ﬁbers are very stiﬀ
+in comparison to the matrix material in which they are embedded,
+then their stretches μ remain close to unity in a typical deformation.
+In these circumstances it is appropriate to impose the constraint
+M · CM = 1 (see (2.83)). Accordingly,
+¯gκ(C) = M · CM −1.
+(10.12)
+3. Rigidity
+If the body is rigid then F is a spatially uniform rotation (see
+Section 3.7), and therefore C = ˆI. Because of the symmetry of C,
+this is equivalent to the six constraints
+¯g(κ)AB = CAB −δAB.
+(10.13)
+
+----- PDF sayfa 216 -----
+202
+Principles of Continuum Mechanics
+We note that, in general, there can be no more than six independent
+constraints because there at most six independent entries of the sym-
+metric matrix (CAB). Thus rigidity is the maximal constraint, in that
+all components of this matrix are ﬁxed.
+10.2
+Modiﬁcation of the stress to accommodate
+constraints
+We have seen, in connection with the incompressible Newtonian ﬂuid,
+that the stress decomposes into the sum of a reactive part, −pI, and a
+constitutive part that depends on the properties of the material. The
+salient feature of the reactive part is that it makes no contribution to
+the stress power density whenever the constraint is operative; that
+is, −pI · D = −p trD vanishes whenever trD = 0. We extend this
+idea to general constraints by assuming that the net Cauchy stress
+T is of the form
+T = N + G,
+(10.14)
+where G is a symmetric-tensor-valued constitutive function appro-
+priate to the material and conditions at hand, and N is a symmetric
+tensor such that N · D vanishes in any motion that is compatible
+with the constraint. Once the structure of this tensor is determined,
+any remaining indeterminacy must be such as to secure a solution, if
+indeed one exists, to the equations of motion and any boundary and
+initial conditions.
+Suppose, then, that the constraint is operative at a particular
+material point in an interval I of time. We then require that
+N · D = 0
+for all D
+such that
+¯gκ(C(t)) = 0;
+t ∈I.
+(10.15)
+Because ¯gκ vanishes identically in this interval we may diﬀerentiate
+it to arrive at
+0 = ˙g = gC · ˙C = tr((gC) ˙C),
+(10.16)
+where gC = (gC)t is the symmetric referential tensor-valued gradient
+of g (see Sections B.2 and B.3 of Appendix B), and we have written
+g in place of ¯gκ in the interests of promoting a tractable notation.
+The symmetry of gC follows from the fact that
+˙C — the limit of
+
+----- PDF sayfa 217 -----
+Kinematic Constraints
+203
+the diﬀerence quotient of positive deﬁnite symmetric tensors — is
+a symmetric tensor. Accordingly the inner product picks out only
+the symmetric part of gC. Because the latter is eﬀectively deﬁned
+by the second equality in (10.16), it follows that no generality is lost
+by taking gC to be symmetric. We remark that g(C) is well deﬁned
+for all symmetric positive deﬁnite C, not only those that satisfy
+the constraint. Accordingly gC is similarly well deﬁned for all such
+C. The derivative gC appearing in (10.16), however, is obtained by
+imposing the constraint a posteriori.
+Recalling (4.11) and making use of the properties of the trace
+operation, (10.16) is seen to be equivalent to
+0 = tr(gC(F tDF)) = tr((F (gC)F t)D) = F (gC)F t · D,
+(10.17)
+in which the ﬁrst factor on the right-hand side of the third equality
+is a symmetric spatial tensor. Thus, we require that N be perpen-
+dicular, in the vector space Sym of symmetric spatial tensors, to all
+D that are perpendicular to F (gC)F t (Figure 10.1). Accordingly, N
+must be parallel to F (gC)F t, i.e.,
+N = λ(x, t)F (gC)F t,
+(10.18)
+in which the multiplier λ(x, t) is determined solely by the equations of
+motion, with the stress given by (10.14), together with the constraint
+equation and initial/boundary conditions.
+If n constraints g(i)(C) = 0; i = 1, . . . , n are in force during
+an interval of time, then N · D vanishes for all D such that the
+F (g(i)
+C )F t · D vanish for each i. The n constraints are independent
+provided that the elements of the set {F (g(i)
+C )F t} are linearly inde-
+pendent, in which the g(i)
+C
+are computed for all positive deﬁnite
+Figure 10.1.
+Orthogonality of F (gC)F t and D in the space of symmetric
+tensors.
+
+----- PDF sayfa 218 -----
+204
+Principles of Continuum Mechanics
+symmetric C. In this case n ≤6 because Sym is six-dimensional,
+and Span{F (g(i)
+C )F t} is then a subspace of Sym. Thus,
+N =
+n≤6
+
+i=1
+λi(x, t)F (g(i)
+C )F t = F
+ n
+
+i=1
+λig(i)
+C
+
+F t,
+(10.19)
+where the multipliers λi(x, t) are again such as to secure a solution to
+the equations of motion together with the n constraint equations and
+initial/boundary conditions; and the derivatives g(i)
+C are evaluated,
+post facto, at those C′s that satisfy all n constraints simultaneously.
+Examples
+We determine the forms of the reactive stresses for the constraints
+of incompressibility, inextensibility and rigidity.
+(1) In the case of incompressibility we use (10.11), with (B.26)
+and (B.27) of Appendix B, to obtain
+gC · ˙C = (det C)· = C∗· ˙C = (det C)C−1 · ˙C,
+(10.20)
+for arbitrary symmetric ˙C. Thus,
+gC = (det C)C−1,
+(10.21)
+which reduces to
+gC = C−1
+(10.22)
+on the set of C′s that satisfy the constraint. Writing λ = −¯p, the
+associated reactive stress is found, from (10.18), to be of the form
+N = −¯pFC −1F t = −¯pF (F tF )−1F t = −¯pI,
+(10.23)
+and is therefore mechanically equivalent to a pressure.
+For example, in the case of the Newtonian viscous ﬂuid model
+(9.60),
+T = −pI + 2μD
+(10.24)
+if the constraint is operative, where p = ˜p + ¯p. The constitutive
+indeterminacy of ¯p implies that p is likewise indeterminate, and we
+arrive at (9.83).
+
+----- PDF sayfa 219 -----
+Kinematic Constraints
+205
+(2) For the case of inextensibility of embedded ﬁbers having unit
+tangent M in κ, we use (10.12) to derive
+gC · ˙C = M · ˙CM = M ⊗M · ˙C
+(10.25)
+for all symmetric ˙C. Thus,
+gC = M ⊗M.
+(10.26)
+Writing λ = σ, we use (10.18) to obtain
+N = σF (M ⊗M)F t = σF M ⊗FM ,
+(10.27)
+which reduces to
+N = σm ⊗m
+(10.28)
+when the constraint is in eﬀect (see (2.67)), where m is the unit
+tangent to a ﬁber in κt. Thus, the reactive stress is mechanically
+equivalent to a uniaxial stress along the ﬁbers (cf. (6.130)).
+(3) In the case of rigidity it follows from (10.13) that
+(gAB)C · ˙C = ˙CAB = ( ˆEA · C ˆEB)·
+= ( ˆEA ⊗ˆEB) · ˙C
+= Sym( ˆEA ⊗ˆEB) · ˙C,
+(10.29)
+on account of the symmetry of ˙C, where
+Sym( ˆEA ⊗ˆEB) = 1
+2( ˆEA ⊗ˆEB + ˆEB ⊗ˆEA).
+(10.30)
+Thus,
+(gAB)C = Sym( ˆEA ⊗ˆEB)
+(10.31)
+and it follows from (10.19) that
+N = λABQ[Sym( ˆEA ⊗ˆEB)]Qt = Q[λ(AB) ˆEA ⊗ˆEB]Qt,
+with λ(AB) = 1
+2(λAB + λBA),
+(10.32)
+where the usual summation convention is in eﬀect; the constraint
+has been imposed in the form F = Q, a rotation; and where λAB
+
+----- PDF sayfa 220 -----
+206
+Principles of Continuum Mechanics
+are arbitrary scalars. The term in square brackets to the right of the
+second equality is an arbitrary symmetric referential tensor. Thus,
+N is an arbitrary symmetric spatial tensor. It follows that the net
+stress T is constitutively indeterminate. Accordingly, the stress in
+a rigid body is indeterminate. Nevertheless, the equations of rigid-
+body dynamics (see Section 6.4.2) suﬃce to determine the motion in
+terms of the applied forces and torques, and vice versa.
+10.3
+Problems
+1. Write the constraints of incompressibility, inextensibility and
+rigidity in the frame of observer O+.
+2. Find an expression for the reactive stress N+, as perceived by
+O+, associated with a generic constraint. Show that all observers
+agree on the values of the various constitutively indeterminate
+multipliers.
+3. Consider a laminated material formed from thin sheets of stiﬀ
+paper interspersed in a soft matrix material. Take the sheets to be
+continuously distributed parallel planes spanned by ˆE1 and ˆE2 in
+the reference conﬁguration. The constraints are ˆE1 ·C ˆE2 = 0 and
+ˆE1·C ˆE1 = ˆE2·C ˆE2 = 1. Show that there can be no extensional or
+shear strain in the plane of the sheets, but that transverse normal
+and shear strains are permitted. What is the form of the reactive
+stress?
+4. The body is laminated as in the previous problem, but now con-
+strained in such a way that the planes experience no change in
+local surface area as they deform. Find the form of the reactive
+stress.

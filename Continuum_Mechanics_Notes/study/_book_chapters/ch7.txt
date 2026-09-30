@@ -1,0 +1,493 @@
+BOLUM 7: Observers and Frames of Reference
+Kitap sayfalari: PDF 167-180
+========================================================================
+
+----- PDF sayfa 167 -----
+Chapter 7
+Observers and Frames of Reference
+We have alluded to the notion of a frame of reference in connection
+with Euler’s laws of motion. We explore the concept in detail in the
+present chapter.
+7.1
+Observers
+An observer O, perceiving a conﬁguration κt of a body, is equipped
+for the purpose with the point space E3 and associated translation
+space E3. These constitute the frame of reference adopted by O. We
+are concerned with the relationship between this observer’s percep-
+tion and that of an alternative observer O+, say, who perceives the
+same conﬁguration as κ+
+t+, relative to a frame of reference consisting
+of the point space E3+ and translation space E3+.
+In classical non-relativistic physics, including classical continuum
+mechanics, all observers are presumed to agree on two things: the
+time intervals between successive events, and the distance between
+arbitrary pairs of material points. Thus, if t and t+ are the times on
+the watches worn by O and O+, respectively, then
+t+ = t + a,
+(7.1)
+where a is a constant; and, if x, y ∈E3 and x+, y+ ∈E3+, respec-
+tively, are the positions of material points p and q as perceived by O
+and O+, then (Figure 7.1)
+x+ −y+ = |x −y| .
+(7.2)
+153
+
+----- PDF sayfa 168 -----
+154
+Principles of Continuum Mechanics
+Figure 7.1.
+A body as perceived by two observers.
+Assuming the two point spaces to be related by a diﬀerentiable
+mapping, we may proceed, as in the analysis of rigid-body motion
+(cf. Section 3.7), to conclude that the latter requirement is met if
+and only if
+x+ = Q(t)x + c(t),
+(7.3)
+where c(t) ∈E3+ is arbitrary and Q(t) is an arbitrary spatially
+uniform two-point orthogonal tensor mapping E3 to E3+. Because
+tensors operate on vectors rather than positions, this should be inter-
+preted to mean [13]
+x+ −y+ = Q(t)(x −y).
+(7.4)
+In fact, as suggested by the ﬁgure, (7.3) also holds if the positions
+therein are replaced by position vectors [4].
+7.2
+Transformation of the motion
+Following the development of Section 2.1, the motions of p ∈B, as
+perceived by O and O+, are expressible as
+x = χ(p, t)
+and
+x+ = χ+(p, t+),
+(7.5)
+respectively. Accordingly,
+χ+(p, t+) = Q(t)χ(p, t) + c(t).
+(7.6)
+
+----- PDF sayfa 169 -----
+Observers and Frames of Reference
+155
+The velocity of p in the frame E3+ is
+v+ =
+∂
+∂t+ χ+ = ∂
+∂tχ+ = ˙Qx + Qv + ˙c,
+(7.7)
+where v = ∂χ/∂t is its velocity in the frame E3. Thus, the velocities
+in the two frames are related by
+v+ −Qv = Ω(x+ −c) + ˙c,
+where Ω(t) = ˙QQt
+(7.8)
+is the spin of E3+. Using this result it is straightforward to show that
+the accelerations a+ ∈E3+ and a ∈E3 of p are related by
+a+ −Qa = ¨c + 2Ω(v+ −˙c) + ( ˙Ω −Ω2)(x+ −c).
+(7.9)
+We observe that if ¨c = 0, i.e., if c = V t + c0 for constant V and
+c0, and, if Q is independent of t, then
+x+ = Qx + V t + c0
+and
+a+ = Qa.
+(7.10)
+This is called a Galilean transformation. Its signiﬁcance will be dis-
+cussed later, in connection with the equations of motion.
+7.3
+Transformation of kinematic variables
+To analyze the motion, observers O and O+ select reference con-
+ﬁgurations κ and κ+, respectively, in which the positions of p are
+X = κ(p) and X+ = κ+(p). The motions of p in the two frames are
+then given by
+x = χκ(X, t)
+and
+x+ = χ+
+κ+(X+, t+),
+(7.11)
+where
+χκ(X, t)
+=
+χ(κ−1(X), t)
+and
+χ+
+κ+(X+, t+)
+=
+χ+
+(κ+−1(X+), t+). Thus,
+χ+
+κ+(X+, t+) = Q(t)χκ(X, t) + c(t).
+(7.12)
+
+----- PDF sayfa 170 -----
+156
+Principles of Continuum Mechanics
+Suppose the observers O and O+ adopt κt0 and κ+
+t+
+0 as their
+respective reference conﬁgurations. Following the development of
+Section 2.6, we interpret this to mean
+χκ(X, t0) = 1X
+and
+χ+
+κ+(X+, t+
+0 ) = 1+X+,
+(7.13)
+with X and X+ regarded as position vectors in ˆE3 and ˆE3+, respec-
+tively, and where 1: ˆE3 →E3 and 1+: ˆE3+ →E3+ are the (uniform
+and orthogonal) shifters in the two frames. Thus,
+X+ = KX + c+,
+(7.14)
+where
+K = (1+)tQ(t0)1
+and
+c+ = (1+)tc(t0),
+(7.15)
+with the shifters evaluated at the times t0 and t+
+0 . Here, K: ˆE3 →
+ˆE3+ is a ﬁxed orthogonal tensor and c+ ∈ˆE3+ is a ﬁxed vector.
+Fixing t (and hence t+) and combining (2.34) with (7.3) and
+dX+ = KdX, which follows from (7.14), we ﬁnd that the defor-
+mation gradients in the two frames are related by
+F +dX+ = dx+ = Q(t)dx = Q(t)F dX = Q(t)FK tdX+,
+(7.16)
+i.e., that
+F + = Q(t)FK t.
+(7.17)
+This is a linear map from ˆE3+ to E3+. Because the shifter 1+ is also
+such a map, it is natural to assume that
+1+ = Q(t)1Kt.
+(7.18)
+This recovers (7.15)1 at time t0 and ensures that E3+ and O+ evolve
+together as time passes. It also yields F +(X, t+
+0 ) = 1+ in accordance
+with (2.79) and the chosen reference conﬁgurations.
+An inertial frame is a frame that neither accelerates nor spins.
+In this book, we always regard the frame E3 of O as being inertial.
+Accordingly the shifter 1 is ﬁxed, independent of time. It then follows
+that the shifter is ﬁxed in any frame related to O by a Galilean
+transformation, i.e., in all inertial frames.
+
+----- PDF sayfa 171 -----
+Observers and Frames of Reference
+157
+Because both observers have selected occupiable reference con-
+ﬁgurations, we have that 0 < J+ = det F + = J det Q det K in
+which J = det F > 0. Then, because Q and K are orthogonal,
+det Q det K = 1, and hence
+J+ = J.
+(7.19)
+It is then a simple matter to show that the cofactor of F transforms to
+(F +)∗= QF ∗Kt.
+(7.20)
+With reference to (2.77), the displacement of p in the frame of
+O+ is
+u+(X+, t+) = χ+
+κ+(X+, t+) −1+X+
+= Q(t)[χκ(X, t) −1Kt(KX + c+)] + c(t)
+= Q(t)[χκ(X, t) −1X] + c(t) −Q(t)1Ktc+
+= Q(t)u(X, t) + d(t),
+(7.21)
+where u is the displacement in the frame of O and d(t) = c(t) −
+Q(t)1Ktc+ vanishes at time t0. Here, we have used the fact that
+KtK = ˆI, the identity for ˆE3.
+Let H be the gradient of u with respect to X, i.e., HdX = du
+at ﬁxed t. It follows from (2.77) that
+H = F −1.
+(7.22)
+In terms of Cartesian components (cf. (2.78)),
+H = HiAei ⊗ˆEA,
+where HiA = ˆui,A = FiA −δiA.
+(7.23)
+This is a two-point tensor, mapping ˆE3 to E3.
+Let H+ be the gradient of u+ with respect to X+. Then, from
+(7.21),
+H+dX+ = du+ = Q(t)du = Q(t)HdX = Q(t)HK tdX+, (7.24)
+yielding
+H+ = Q(t)HK t = F + −1+.
+(7.25)
+This, of course, is also a two-point tensor, mapping ˆE3+ to E3+.
+
+----- PDF sayfa 172 -----
+158
+Principles of Continuum Mechanics
+It is at this stage that the signiﬁcance of the shifter becomes
+apparent. In particular, it ensures that every tensor in (7.22) is of
+the same type, and hence that it remains invariant under basis trans-
+formations in a given frame. It also ensures that the relationship
+between the deformation and displacement gradients is the same in
+all frames. In contrast, in the extant literature the shifter in (7.22)
+is typically replaced by the referential identity ˆI. This transforms to
+ˆI+, where, according to (7.14),
+ˆI+dX+ = dX+ = KdX = K ˆIdX = K ˆIKtdX+;
+hence,
+ˆI+ = K ˆIKt.
+(7.26)
+Now, if (7.22) is replaced by H = F −ˆI, then (7.25)1 yields
+H+ = F + −Q(t) ˆIKt ̸= F + −ˆI+, so that the proposed relation-
+ship, if deemed valid by O, must be regarded by O+ as being invalid.
+This would imply that O enjoys a privileged status, not shared by
+other observers. Such a state of aﬀairs runs counter to the philoso-
+phy underlying modern physics. We will consider the displacement
+gradient again later, in the context of linear elasticity theory.
+Continuing, we have the polar decompositions (3.32) of F and the
+polar decompositions
+F + = R+U + = V +R+,
+(7.27)
+of F + in terms of the symmetric, positive-deﬁnite stretch tensors U +
+and V + and the two-point rotation R+. Then,
+R+U + = QRUKt = QRU ˆIKt = QRK t(KUK t)
+and
+V +R+ = QV RKt = QV IRKt = (QVQt)QRK t,
+(7.28)
+and the uniqueness of the polar decompositions furnishes
+U + = KUK t,
+V + = QVQt
+and
+R+ = QRK t.
+(7.29)
+The right- and left- Cauchy–Green tensors in the frame of O+ are
+thus given by
+C+ = (U +)2 = KUK tKUK t = KU ˆIUKt = KU 2Kt = KCK t,
+
+----- PDF sayfa 173 -----
+Observers and Frames of Reference
+159
+and
+B+ = (V +)2 = QVQtQVQt = QV IV Qt = QV 2Qt = QBQt,
+(7.30)
+respectively. These also follow directly from (7.17) with C+ =
+(F +)tF + and B+ = F +(F +)t.
+Equation (7.17) also furnishes
+˙F + = Q ˙F Kt + ˙QFK t.
+(7.31)
+Using ˙F + = L+F + and ˙F = LF, where L+ and L, respectively, are
+the spatial velocity gradients as perceived by O+ and O, we conclude
+that
+L+F + = QLQtF + + ˙QQtF +,
+(7.32)
+and right-multiplication by (F +)−1 gives
+L+ = QLQt + Ω,
+(7.33)
+where Ω is the skew tensor deﬁned in (7.8)2. The stretching and spin
+tensors thus transform as
+D+ = QDQt
+and
+W + = QW Qt + Ω.
+(7.34)
+To any unit vector n ∈E3 we can associate two positions
+x, y ∈E3 by n = (y −x)/ |y −x| (Figure 7.2).
+Figure 7.2.
+A unit vector as perceived by two observers.
+
+----- PDF sayfa 174 -----
+160
+Principles of Continuum Mechanics
+Its counterpart in E3+ is
+n+ = (y+ −x+)/
+y+ −x+
+= (y+ −x+)/ |y −x|
+= Q(y −x)/ |y −x|
+= Qn.
+(7.35)
+Similarly, for a unit vector N ∈ˆE3 we have its counterpart in ˆE3+:
+N+ = (Y + −X+)/
+Y + −X+
+= (Y + −X+)/ |Y −X|
+= K(Y −X)/ |Y −X|
+= KN .
+(7.36)
+7.4
+Further transformations
+We assume the density, energy, heating supply, temperature and
+entropy to be absolute scalars, and hence the same for all observers.
+Thus,
+ρ+ = ρ,
+ε+ = ε,
+r+ = r,
+h+ = h,
+θ+ = θ
+and
+η+ = η.
+(7.37)
+The ﬁrst of these is a natural consequence of the fact that neither
+the mass of a body, nor its volume, are aﬀected by a change from one
+observer to another. It combines with (7.19) to yield the equality of
+the referential mass densities: ρ+
+κ+ = ρκ.
+Further, we assume that the Cauchy and Piola tractions t, p ∈E3
+and body force density b ∈E3 transform as spatial vectors, i.e.,
+t+ = Qt,
+p+ = Qp
+and
+b+ = Qb.
+(7.38)
+The Cauchy stress T + in the frame of O+ is then such that
+T +n+ = t+ = Qt = QT n = QTQtn+
+(7.39)
+for all unit vectors n+; thus,
+T + = QTQt,
+(7.40)
+
+----- PDF sayfa 175 -----
+Observers and Frames of Reference
+161
+and the Piola stress P + is
+P + = T +(F +)∗= QTQtQF ∗Kt = QPK t.
+(7.41)
+This furnishes
+p+ = P +N+ = QPK tKN = QPN = Qp,
+(7.42)
+in accordance with (7.38)2. Lastly, the Piola–Kirchhoﬀstress S+
+follows from P + = F +S+. We obtain
+S+ = KSK t.
+(7.43)
+The relationship between the heat ﬂux h through a surface with
+unit normal n and the heat ﬂux vector q is h = −q · n (cf. (6.166)).
+The corresponding relationship in the frame of O+ is h+ = −q+·n+.
+We thus have, from (7.35) and (7.37)4, that q+ · n+ = q · Qtn+ =
+Qq · n+ for all unit vectors n+. Hence,
+q+ = Qq,
+(7.44)
+and the referential heat ﬂux vectors in the two frames are related by
+q+
+κ+ = [(F +)∗]tq+ = (QF ∗Kt)tQq
+= K(F ∗)tQtQq = K(F ∗)tIq
+= Kqκ.
+(7.45)
+7.5
+Transformation of the balance laws
+Let w(x, t) be an arbitrary spatial vector in the frame of O, and
+suppose w+(x+, t+) is its counterpart in the frame of O+, i.e.,
+w+(x+, t+) = Q(t)w(x, t).
+(7.46)
+Then,
+Q(gradw)dx = Qdw = dw+ = (grad+w+)dx+ = (grad+w+)Qdx,
+(7.47)
+and therefore
+grad+w+ = Q(gradw)Qt.
+(7.48)
+
+----- PDF sayfa 176 -----
+162
+Principles of Continuum Mechanics
+This implies that the divergence is the same in both frames:
+div+w+ = tr(grad+w+) = tr[Q(gradw)Qt] = tr[QtQ(gradw)]
+= tr(gradw) = divw.
+(7.49)
+From (7.40),
+T +w+ = QTQtQw = Q(T w).
+(7.50)
+If w is independent of x (i.e., gradw = 0), then w+ is independent
+of x+, and the deﬁnition (1.148) of the divergence of a tensor yields
+Qt(div+T +) · w = div+T + · w+ = div+[(T +)tw+] = div(T tw)
+= divT · w,
+(7.51)
+leading, as w is arbitrary, to the conclusion that
+div+T + = Q(divT ).
+(7.52)
+Suppose now that O is an inertial observer. The laws holding in
+the frame of this observer are the conservation of mass, the balance
+of energy, the balances of linear and rotational momenta, and the
+Clausius–Duhem inequality:
+˙ρ + ρdivv = 0,
+ρ ˙ε + divq −T · L = ρr,
+ρa −divT = ρb,
+T t = T ,
+and
+−ρ( ˙ψ + η ˙θ) + T · L −θ−1q · gradθ ≥0,
+(7.53)
+where a is the material acceleration. We seek the corresponding laws
+pertaining to an arbitrary observer O+. To this end we use (7.44),
+(7.46) and (7.49) to infer that
+div+q+ = divq.
+(7.54)
+
+----- PDF sayfa 177 -----
+Observers and Frames of Reference
+163
+Also, from grad+θ+ · dx+ = dθ+ = dθ = gradθ · dx = gradθ · Qtdx+
+we have that
+grad+θ+ = Q(gradθ),
+and therefore
+q+ · grad+θ+ = q · gradθ.
+(7.55)
+The transformation formula (7.8) for the material velocity is not
+of the form (7.46). Nevertheless,
+div+v+ = divv.
+(7.56)
+This follows from (7.33), i.e.,
+div+v+ = trL+ = tr(QLQt + Ω) = tr(QLQt) = tr(QtQL)
+= trL = divv.
+(7.57)
+Further, the symmetry of T , and hence that of QTQt, yields
+T + · L+ = QTQt · (QLQt + Ω) = QTQt · QLQt
+= tr[QTQt(QLtQt)] = tr(QTLtQt)
+= tr(QtQTLt) = tr(TLt) = T · L.
+(7.58)
+With these results and (7.37), together with the invariance of the
+Helmholtz free energy (cf. (6.186)) and the material derivative, we
+conclude that the balances of mass and energy, and the Clausius–
+Duhem inequality, are the same in all frames:
+˙ρ+ + ρ+div+v+ = 0,
+ρ+ ˙ε+ + div+q+ −T + · L+ = ρ+r+,
+and
+−ρ+( ˙ψ+ + η+ ˙θ+) + T + · L+ −(θ+)−1q+ · grad+θ+ ≥0,
+(7.59)
+and, of course, (7.40) and (7.53)4 ensure that
+(T +)t = T +.
+(7.60)
+The situation for the linear momentum balance is diﬀerent. To
+investigate this we combine (7.38)3 and (7.53)3, obtaining
+ρ+b+ = ρ+Qb = ρQb = ρQa −Q(divT )
+= ρ+Qa −div+T +.
+(7.61)
+
+----- PDF sayfa 178 -----
+164
+Principles of Continuum Mechanics
+Substituting from (7.9), we arrive at the linear momentum balance
+div+T + + ρ+(b+ + i+) = ρ+a+,
+(7.62)
+where
+i+ = ¨c + 2Ω(v+ −˙c) + ( ˙Ω −Ω2)(x+ −c)
+(7.63)
+is the contribution to the net body force arising from the spin and
+translation of the frame of O+. This is typically referred to as the
+inertial force. However, if the frame of O+ is related to that of O
+by a Galilean transformation, then i+ vanishes and the balance of
+linear momentum is identical in both frames, i.e.,
+div+T + + ρ+b+ = ρ+a+.
+(7.64)
+Thus, if an inertial frame exists (cf. Euler’s postulates (6.34) and
+(6.35)), then there are inﬁnitely many, simply because there are
+inﬁnitely many Galilean transformations.
+It is possible to show [7] that
+a++ −i++ = Q+(t+)(a+ −i+)
+(7.65)
+under a further transformation
+x++ = Q+(t+)x+ + c+(t+),
+t++ = t+ + a+
+(7.66)
+from the frame of O+ to that of another observer O++, where i++
+is the inertial force in the latter frame, and hence that
+div++T ++ + ρ++(b++ + i++) = ρ++a++.
+(7.67)
+Thus, the linear momentum balance, with the inertial forces included,
+is valid in all frames. Moreover, the jump conditions derived in
+Chapter 6 are identical in all frames [7].
+7.6
+Problems
+1. Derive (7.9).
+2. Show that (1+)· = Ω1+, where Ω = ˙QQt.
+
+----- PDF sayfa 179 -----
+Observers and Frames of Reference
+165
+3. Observer O+ adopts a frame of reference attached to the sur-
+face of a planet of radius R, with origin located at azimuth θ
+(degrees longitude) and elevation φ (degrees latitude). The planet
+spins about its axis (unit vector e3) at the constant rate ω, i.e.,
+θ = ωt + θ0, where θ0 = θ(0). What are the equations of motion
+for this observer?
+
+----- PDF sayfa 180 -----
+This page intentionally left blank
+This page intentionally left blank
+This page intentionally left blank
+This page intentionally left blank

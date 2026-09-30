@@ -1,0 +1,1487 @@
+%======================================================================
+%  READER'S NOTES -- Chapter 6, Balance Laws
+%
+%  Written as a working notebook: a marker, a ledger of equalities with
+%  the reason for each in the right-hand column, a conclusion.  Prose
+%  appears only where a line of algebra cannot carry the point.
+%
+%  They live here, and not in body_ch6.tex, so that the chapter body
+%  reads as a chapter rather than as a chapter interleaved with
+%  commentary.  Each note is registered under a key by \rnotedef and
+%  placed in the text by a matching \rnote{key} in body_ch6.tex; both
+%  macros, the readernote environment and the \rnlab marker are defined
+%  in readernotes.tex.  Moving a note is a matter of moving one line;
+%  rewriting one never touches the chapter body.
+%======================================================================
+
+%----------------------------------------------------------------------
+%  (6.131)  ---  assembling the referential momentum balance
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.131-combining}{%
+\begin{readernote}[assembling \eqr{6.131} from the axiom]
+\rnlab{axiom}
+\[
+   \frac{\dl}{\dl t}\vek{l}(S,t)=\vek{f}(S,t)
+   =\vek{f}_{b}(S,t)+\vek{f}_{c}(S,t)
+   \qquad\eqr{6.34},\ \eqr{6.30}
+\]
+No configuration is named: $S$ is a set of material points.
+
+\rnlab{pull back, one line each}
+\[
+\begin{aligned}
+   \rho\,\dl v&=\rho\big(J\,\dl V\big)=(\rho J)\,\dl V
+     =\rho_{\kappa}\,\dl V
+   &&\rnwhy{\eqr{2.50}\times\eqr{2.59}}\\[1mm]
+   \vek{l}&=\int_{P_{t}}\rho\bv\,\dl v=\int_{P}\rho_{\kappa}\bv\,\dl V
+   &&\rnwhy{\eqr{6.25}_{2}}\\[1mm]
+   \frac{\dl}{\dl t}\int_{P}\rho_{\kappa}\bv\,\dl V
+     &=\int_{P}\rho_{\kappa}\,
+       \frac{\partial\hat\bv(\bX,t)}{\partial t}\,\dl V
+      =\int_{P}\rho_{\kappa}\dot\bv\,\dl V
+   &&\rnwhy{\dot\rho_{\kappa}=0,\ \eqr{6.18}}\\[1mm]
+   \vek{f}_{b}&=\int_{P_{t}}\rho\bb\,\dl v
+     =\int_{P}\rho_{\kappa}\bb\,\dl V
+   &&\rnwhy{\eqr{6.27}_{2}}\\[1mm]
+   \vek{f}_{c}&=\int_{\partial P}\bp\,\dl A
+   &&\rnwhy{\eqr{6.29},\ \text{definition of }\bp}
+\end{aligned}
+\]
+
+\rnlab{assemble}
+\[
+\begin{aligned}
+   \int_{P}\rho_{\kappa}\dot\bv\,\dl V
+     &=\int_{P}\rho_{\kappa}\bb\,\dl V+\int_{\partial P}\bp\,\dl A
+   &&\rnwhy{\eqr{6.38}}\\[1mm]
+   \therefore\quad\int_{\partial P}\bp\,\dl A
+     &=\int_{P}\rho_{\kappa}\big(\dot\bv-\bb\big)\,\dl V
+   &&\rnwhy{\text{linearity}=\eqr{6.131}}
+\end{aligned}
+\]
+
+\rnlab{shape}
+$\displaystyle\int_{\partial P}(\text{unknown})\,\dl A
+=\int_{P}(\text{bounded})\,\dl V$, that is $O(\ell^{2})=O(\ell^{3})$
+under shrinking. This is the sole input to Noll and to Cauchy, and it
+recurs at \eqr{6.79} and at \eqr{6.165}.
+
+\rnlab{caution}
+Mass conservation is spent once, in the third line; with
+$\dot\rho_{\kappa}\neq0$ a term $\int\dot\rho_{\kappa}\bv\,\dl V$
+survives and \eqr{6.131} is false. Nothing is yet known about $\bp$:
+\eqr{6.29} only names it.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.132)  ---  Noll and Cauchy transplanted to kappa
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.132-transplant}{%
+\begin{readernote}[Noll and Cauchy read again in $\kappa$]
+\rnlab{dictionary}
+\[
+\begin{aligned}
+   \kappa_{t}&\to\kappa, &\quad
+   \bx&\to\bX, &\quad
+   \bn&\to\bN, &\quad
+   \dl a&\to\dl A, &\quad
+   \dl v&\to\dl V, &\quad
+   \bt&\to\bp .
+\end{aligned}
+\]
+
+\rnlab{noll}
+The traction entered only through
+$\big|\int_{\sigma}\bt\,\dl a\big|\leq\big(\max_{\sigma}|\bt|\big)A(\sigma)$
+and the boundedness of the volume term. Under the dictionary the bound
+is the same statement, and the volume term is
+$\rho_{\kappa}(\dot\bv-\bb)$, bounded whenever $\rho_{\kappa}$,
+$\dot\bv$, $\bb$ are continuous. Hence
+\[
+   \bp=\bp(\bX,t;\bN),
+   \qquad
+   \bp(\bX,t;-\bN)=-\bp(\bX,t;\bN).
+\]
+
+\rnlab{cauchy}
+Tetrahedron in $\kappa$: vertex $\bX_{0}$, coordinate faces on
+$\{\hbE_{A}\}$, oblique normal $\bM$, height $\delta$.
+\[
+\begin{aligned}
+   A_{A}&=A(s)\,\ip{\hbE_{A}}{\bM}
+   &&\rnwhy{\eqr{6.104}\text{ in }\kappa}\\[1mm]
+   \frac{1}{A(s)}\int_{\partial\tau}\bp\,\dl A
+     &=\bp(\bX^{*};\bM)-\sum_{A}\big(\ip{\hbE_{A}}{\bM}\big)
+       \bp(\bX^{*}_{A};\hbE_{A})
+   &&\rnwhy{\eqr{6.105}\text{ in }\kappa}\\[1mm]
+   \Big|\frac{1}{A(s)}\int_{\partial\tau}\bp\,\dl A\Big|
+     &\leq\max_{\tau}\big|\rho_{\kappa}(\dot\bv-\bb)\big|
+       \,\frac{V(\tau)}{A(s)}=O(\delta)
+   &&\rnwhy{\eqr{6.131},\ \text{Lem.~\ref{lem:ch6cone}}}\\[1mm]
+   \delta\to0:\quad \bp(\bX_{0},t;\bM)&=\bP\bM,
+     \qquad \bP=\bp(\bX_{0},t;\hbE_{A})\otimes\hbE_{A}
+   &&\rnwhy{\eqr{6.132},\ \eqr{6.133}}
+\end{aligned}
+\]
+
+\rnlab{type}
+$\bN\in\hVt$ in, $\bp\in\Vt$ out $\Rightarrow\bP\colon\hVt\to\Vt$. The
+two-point character is forced by reckoning the surface in $\kappa$ and
+the force in $\kappa_{t}$; it is not a convention. Consequence:
+Remark~\ref{rem:ch6Pnotsym}.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.134)-(6.137)  ---  Div of a two-point tensor, and the localization
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.134-divergence}{%
+\begin{readernote}[$\Dvg\bP$ in components, and the localization]
+\rnlab{what $\bP\bN$ is}
+\[
+   \bP\bN=\big(P_{iA}\,\be_{i}\otimes\hbE_{A}\big)\bN
+   =P_{iA}\big(\ip{\hbE_{A}}{\bN}\big)\be_{i}=P_{iA}N_{A}\,\be_{i},
+   \qquad
+   \ip{\be_{i}}{\bP\bN}=P_{iA}N_{A}.
+\]
+
+\rnlab{three ordinary vector fields}
+Freeze $i$ and put $\bp^{(i)}=P_{iA}\hbE_{A}\in\hVt$, so that
+$\ip{\be_{i}}{\bP\bN}=\ip{\bp^{(i)}}{\bN}$. Then
+\[
+\begin{aligned}
+   \int_{\partial P}\ip{\bp^{(i)}}{\bN}\,\dl A
+     &=\int_{P}\Dvg\bp^{(i)}\,\dl V=\int_{P}P_{iA,A}\,\dl V
+   &&\rnwhy{\eqr{5.1}\text{ in }\kappa}\\[1mm]
+   \times\,\be_{i},\ \textstyle\sum_{i}:\quad
+   \int_{\partial P}\bP\bN\,\dl A
+     &=\int_{P}P_{iA,A}\,\be_{i}\,\dl V=\int_{P}\Dvg\bP\,\dl V
+   &&\rnwhy{\eqr{6.134},\ \eqr{6.135}}
+\end{aligned}
+\]
+the sum over $i$ being legitimate because $\{\be_{i}\}$ is fixed
+(Remark~\ref{rem:symbolic}).
+
+\rnlab{type check}
+$\partial/\partial X_{A}$ makes a referential index; the only
+referential index on $\bP$ is $A$; so $\Dvg$ closes the referential leg
+and $\Dvg\bP\in\Vt$, the space of $\rho_{\kappa}\dot\bv$. Writing
+$\dvg\bP$ would leave a free referential index and equate a $\Vt$
+vector to an $\hVt$ vector.
+
+\rnlab{localize}
+\[
+   \int_{P}\big[\rho_{\kappa}(\dot\bv-\bb)-\Dvg\bP\big]\,\dl V=\bze
+   \quad\forall P
+   \ \overset{\text{Thm.~\ref{thm:localization}}}{\Longrightarrow}\
+   \boxed{\ \rho_{\kappa}\dot\bv=\rho_{\kappa}\bb+\Dvg\bP\ }
+\]
+componentwise \eqr{6.137}. On a singular surface the integrand is not
+continuous and the step fails: hence the proviso, and Problem 1.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.138)  ---  why the factor is J
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.138-whyJ}{%
+\begin{readernote}[why the factor is $J$, and what \eqr{6.138} is]
+\rnlab{densities}
+\[
+\begin{aligned}
+   \eqr{6.109}&:\ \text{force per unit }\dl v, &\qquad
+   \eqr{6.136}&:\ \text{force per unit }\dl V, &\qquad
+   \frac{\dl v}{\dl V}&=J
+   \quad\eqr{2.50}.
+\end{aligned}
+\]
+Sanity check on the first term: $J\rho\dot\bv=\rho_{\kappa}\dot\bv$ by
+\eqr{2.59}, and $\rho_{\kappa}$ is mass per unit reference volume.
+
+\rnlab{quantifier}
+\[
+   \left.
+   \begin{aligned}
+      \rho_{\kappa}\dot\bv&=\rho_{\kappa}\bb+J\dvg\bT\\
+      \rho_{\kappa}\dot\bv&=\rho_{\kappa}\bb+\Dvg\bP
+   \end{aligned}\ \right\}
+   \ \text{for every motion}
+   \quad\Longleftrightarrow\quad
+   J\dvg\bT=\Dvg\bP .
+\]
+
+\rnlab{moral}
+Both arrows hold, so \eqr{6.138} is an equivalence, not an assumption
+about $\bP$. Nor is it an equation to be solved: \eqr{6.139} constructs
+the $\bP$ that satisfies it and Problem 8 verifies it afterwards.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.139)-(6.141)  ---  the chain in components
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.139-chain}{%
+\begin{readernote}[the chain \eqr{6.139} in components]
+\[
+\begin{aligned}
+   \int_{P}J\,T_{ij,j}\,\dl V
+   &=\int_{P_{t}}T_{ij,j}\,\dl v
+   &&\rnwhy{\dl v=J\,\dl V,\ \eqr{2.50}}\\
+   &=\int_{\partial P_{t}}T_{ij}n_{j}\,\dl a
+   &&\rnwhy{\text{div.\ thm.\ in }\kappa_{t},\ \eqr{5.7}_{2}}\\
+   &=\int_{\partial P}T_{ij}F^{*}_{jA}N_{A}\,\dl A
+   &&\rnwhy{n_{j}\,\dl a=F^{*}_{jA}N_{A}\,\dl A,\ \eqr{2.54}}\\
+   &=\int_{\partial P}P_{iA}N_{A}\,\dl A
+   &&\rnwhy{P_{iA}:=T_{ij}F^{*}_{jA}\ \ \text{\emph{(a choice)}}}\\
+   &=\int_{P}P_{iA,A}\,\dl V
+   &&\rnwhy{\text{div.\ thm.\ in }\kappa,\ \eqr{5.1}}
+\end{aligned}
+\]
+
+\rnlab{the one step that is not bookkeeping}
+The fourth: a product is given a name. It works because the contracted
+$j$ is spatial on both factors, leaving one spatial and one referential
+index --- the structure \eqr{6.133} demands. In direct notation,
+$\bT(\bF^{*}\bN)=(\bT\bF^{*})\bN$, and $\bF^{*}\colon\hVt\to\Vt$
+followed by $\bT\colon\Vt\to\Vt$ admits only this composite.
+
+\rnlab{localize}
+\[
+   \int_{P}\big[J\,T_{ij,j}-P_{iA,A}\big]\,\dl V=0\quad\forall P
+   \ \Longrightarrow\
+   \boxed{\ J\dvg\bT=\Dvg\bP,\qquad \bP=\bT\bF^{*}\ }
+\]
+one result and the definition that makes it true, not two results.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.142)  ---  p dA = t da
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.142-tractions}{%
+\begin{readernote}[$\bp\,\dl A=\bt\,\dl a$, and one case done in the
+head]
+\rnlab{get it}
+\[
+   \int_{\partial P}\bp\,\dl A=\int_{\partial P_{t}}\bt\,\dl a
+   \quad\forall\,\partial P
+   \qquad\Longrightarrow\qquad
+   \boxed{\ \bp\,\dl A=\bt\,\dl a\ }
+\]
+one force, two areas; localization on area rather than volume.
+
+\rnlab{three consequences}
+\[
+\begin{aligned}
+   \frac{|\bp|}{|\bt|}&=\frac{\dl a}{\dl A}=\big|\bF^{*}\bN\big|
+   &&\rnwhy{\eqr{2.54}}\\[1mm]
+   \bp&\parallel\bt
+   &&\rnwhy{\text{a positive scalar, never a rotation}}\\[1mm]
+   \bP\bN&=\bT\bF^{*}\bN\quad\forall\bN
+     \ \Longrightarrow\ \bP=\bT\bF^{*}
+   &&\rnwhy{\text{third route to }\eqr{6.140}}
+\end{aligned}
+\]
+
+\rnlab{check: uniform dilatation $x_{i}=\lambda\dd_{iA}X_{A}$}
+\[
+\begin{aligned}
+   F_{iA}&=\lambda\dd_{iA}, &\quad J&=\lambda^{3}, &\quad
+   F^{*}_{iA}&=\lambda^{3}\lambda^{-1}\dd_{iA}=\lambda^{2}\dd_{iA},\\
+   \dl a&=\lambda^{2}\,\dl A, &\quad \bp&=\lambda^{2}\bt, &\quad
+   P_{iA}&=T_{ij}F^{*}_{jA}=\lambda^{2}T_{iA}. \ \checkmark
+\end{aligned}
+\]
+Stretch by two in every direction: the force on a material face is
+unchanged, its area is four times larger, $\bt$ falls by four, $\bp$
+does not move.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.143)  ---  the symmetry restriction in components
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.143-components}{%
+\begin{readernote}[\eqr{6.143} in components, and how many conditions]
+\rnlab{derive}
+\[
+\begin{aligned}
+   \bP\bF^{t}&=\bT\bF^{*}\bF^{t}
+     =\bT\big(J\bF^{-t}\big)\bF^{t}
+     =J\,\bT\underbrace{\big(\bF^{t}\big)^{-1}\bF^{t}}_{\I}=J\bT
+   &&\rnwhy{\eqr{6.140},\ \eqr{2.55}}\\[1mm]
+   \bP\bF^{t}&=\big(\bP\bF^{t}\big)^{t}
+     =\big(\bF^{t}\big)^{t}\bP^{t}=\bF\bP^{t}
+   &&\rnwhy{\bT=\bT^{t},\ \eqr{6.117};\ J>0}
+\end{aligned}
+\]
+with $\bF^{-t}:=(\bF^{t})^{-1}=(\bF^{-1})^{t}$, the two agreeing
+because transposing $\bF^{-1}\bF=\hI$ gives
+$\bF^{t}(\bF^{-1})^{t}=\hI$.
+
+\rnlab{components}
+\[
+   M_{ij}:=\big(\bP\bF^{t}\big)_{ij}
+   =P_{iA}\big(\bF^{t}\big)_{Aj}=P_{iA}F_{jA},
+   \qquad
+   M_{ij}=M_{ji}\ \Longleftrightarrow\ P_{iA}F_{jA}=F_{iA}P_{jA}.
+\]
+Both free indices are spatial, so symmetry is askable. ``$P_{iA}=P_{Ai}$''
+is not a sentence: $i$ and $A$ run over different alphabets.
+
+\rnlab{count}
+$M_{12}=M_{21}$, $M_{13}=M_{31}$, $M_{23}=M_{32}$: three conditions,
+$9\to6$, the same count as $\bT=\bT^{t}$. But the coefficients are the
+$F_{iA}$, so \emph{which} six depends on $\bF$; there is no fixed
+six-dimensional subspace of two-point tensors to work in. Hence
+\eqr{6.144}, whose $\bS=\bS^{t}$ constrains $\bS$ alone. Problem 6 runs
+this arithmetic on numbers.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.146)  ---  components, and the six conversions
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.146-table}{%
+\begin{readernote}[the components of \eqr{6.146}, and the six
+conversions]
+\rnlab{components}
+\[
+\begin{aligned}
+   P_{iA}&=F_{iB}S_{BA}
+   &&\rnwhy{\bP=\bF\bS,\ \eqr{6.144};\ \text{closes the referential }B}\\[1mm]
+   \big(\bF\bS\bF^{t}\big)_{ij}
+     &=F_{iA}S_{AB}\big(\bF^{t}\big)_{Bj}=F_{iA}F_{jB}S_{AB}=JT_{ij}
+   &&\rnwhy{\eqr{6.145};\ S_{AB}=S_{BA}\Rightarrow i\leftrightarrow j}
+\end{aligned}
+\]
+
+\rnlab{the six conversions}
+\[
+   \renewcommand{\arraystretch}{1.45}
+   \begin{array}{c|c|c|c}
+     & \text{from }\bT & \text{from }\bP & \text{from }\bS\\ \hline
+   \bT & --- & J^{-1}\bP\bF^{t} & J^{-1}\bF\bS\bF^{t}\\
+   \bP & \bT\bF^{*}=J\bT\bF^{-t} & --- & \bF\bS\\
+   \bS & J\bF^{-1}\bT\bF^{-t} & \bF^{-1}\bP & ---
+   \end{array}
+\]
+Two are definitions, \eqr{6.140} and \eqr{6.144}; the rest follow by
+multiplying by $\bF$, $\bF^{-1}$ or $J^{\pm1}$ on the right side.
+
+\rnlab{the same table as a type check}
+\[
+   \renewcommand{\arraystretch}{1.35}
+   \begin{array}{l|c|c|c|l}
+     & \text{maps} & \text{indices} & \text{symmetric?}
+     & \text{force per unit}\\ \hline
+   \bT & \Vt\to\Vt & T_{ij} & \text{yes, }\eqr{6.117}
+     & \dl a\\
+   \bP & \hVt\to\Vt & P_{iA} & \text{meaningless}
+     & \dl A\\
+   \bS & \hVt\to\hVt & S_{AB} & \text{yes}
+     & \dl A,\ \text{pulled back}
+   \end{array}
+\]
+An equation in this chapter is wrong the moment a spatial index is set
+equal to a referential one. Problem 7 computes all three for one
+deformation.
+
+\rnlab{what $\bS$ costs}
+$\bS\bN$ is the force on nothing: the pull-back $\bF^{-1}$ has undone
+the geometry along with the bookkeeping. $\bT$ is what a gauge reads,
+$\bP$ is what a free-body diagram in $\kappa$ balances, $\bS$ is what a
+constitutive equation is written in.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.147)  ---  assembled from the equation of motion
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.147-assembly}{%
+\begin{readernote}[\eqr{6.147} assembled from nothing]
+\[
+\begin{aligned}
+   \rho\dot\bv&=\rho\bb+\dvg\bT
+   &&\rnwhy{\eqr{6.109}}\\[1mm]
+   \ip{\cdot}{\bv}:\quad
+   \rho\,\ip{\dot\bv}\bv&=\rho\,\ip\bb\bv+\ip{\dvg\bT}\bv
+   &&\rnwhy{\text{linearity of }\ip\cdot\cdot}\\[1mm]
+   \big(\ip\bv\bv\big)^{\textstyle\cdot}&=2\,\ip{\dot\bv}\bv
+     \ \Longrightarrow\
+     \ip{\dot\bv}\bv=\tfrac12\big(|\bv|^{2}\big)^{\textstyle\cdot}
+   &&\rnwhy{\text{product rule},\ \ip\cdot\cdot\text{ symmetric}}\\[1mm]
+   \ip\bv{\dvg\bT}&=\dvg\big(\bT^{t}\bv\big)
+     -\tr\big[\bT^{t}\grad\bv\big]
+   &&\rnwhy{\text{Prop.~\ref{prop:divprod}}}\\[1mm]
+   \tr\big(\bT^{t}\bL\big)&=T_{ij}L_{ij}=\bT\cdot\bL
+   &&\rnwhy{\grad\bv=\bL,\ \eqr{4.1};\ \text{Thm.~\ref{thm:tip}}}\\[1mm]
+   \therefore\quad
+   \tfrac12\rho\big(|\bv|^{2}\big)^{\textstyle\cdot}
+     &=\rho\,\ip\bb\bv+\dvg\big(\bT^{t}\bv\big)-\bT\cdot\bL
+   &&\rnwhy{\eqr{6.147}}
+\end{aligned}
+\]
+
+\rnlab{the mechanism, in indices}
+\[
+   \underbrace{T_{ij,j}v_{i}}_{\ip{\dvg\bT}\bv}
+   =\underbrace{\big(T_{ij}v_{i}\big)_{,j}}_{\dvg(\bT^{t}\bv)}
+   -\underbrace{T_{ij}v_{i,j}}_{\bT\cdot\bL},
+   \qquad
+   \big(\bT^{t}\bv\big)_{j}=T_{ij}v_{i},\quad v_{i,j}=L_{ij}.
+\]
+Read right to left: $T_{ij}v_{i}$ is a vector, its divergence
+integrates to a boundary term, and the price of manufacturing it is
+$T_{ij}v_{i,j}$. A particle has no $v_{i,j}$; hence no stress power.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.149)  ---  integrating, term by term
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.149-integrating}{%
+\begin{readernote}[integrating \eqr{6.147}: four terms]
+\[
+\begin{aligned}
+   \int_{P_{t}}\tfrac12\rho\big(|\bv|^{2}\big)^{\textstyle\cdot}\dl v
+     &=\frac{\dl}{\dl t}\int_{P_{t}}\tfrac12\rho|\bv|^{2}\,\dl v
+   &&\rnwhy{\eqr{6.24}_{1},\ \varphi=\tfrac12|\bv|^{2}}\\[1mm]
+   \int_{P_{t}}\rho\,\ip\bb\bv\,\dl v
+     &=\int_{P_{t}}\rho\,\ip\bb\bv\,\dl v
+   &&\rnwhy{\text{already final}}\\[1mm]
+   \int_{P_{t}}\dvg\big(\bT^{t}\bv\big)\,\dl v
+     &=\int_{\partial P_{t}}\ip{\bT^{t}\bv}\bn\,\dl a
+      =\int_{\partial P_{t}}\ip\bt\bv\,\dl a
+   &&\rnwhy{\eqr{5.1};\ \ip{\bT^{t}\bv}\bn=\ip\bv{\bT\bn},\ \eqr{6.94}}\\[1mm]
+   \int_{P_{t}}\bT\cdot\bL\,\dl v
+     &\quad\text{stays inside}
+   &&\rnwhy{\text{not a boundary term}}
+\end{aligned}
+\]
+Moving the last to the left gives \eqr{6.149}; naming the four objects
+gives \eqr{6.150}--\eqr{6.153}.
+
+\rnlab{caution}
+The derivative in the first line is taken at fixed \emph{material} set
+$S$, not fixed region $P_{t}$. Differentiating under the integral over
+a moving region without \eqr{6.24} produces two extra terms.
+
+\rnlab{units}
+$[\bT\cdot\bL]=\mathrm{N\,m^{-2}\,s^{-1}}=\mathrm{W/m^{3}}$ and
+$[\rho|\bv|^{2}]=\mathrm{J/m^{3}}$: every term of \eqr{6.150} is a
+watt.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.155)  ---  the two Jacobians cancel
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.155-cancellation}{%
+\begin{readernote}[why \eqr{6.155} carries no factor of $J$]
+\[
+   \bT\cdot\bL\,\dl v
+   =\underbrace{\big(J^{-1}\bP\bF^{t}\big)}_{\text{stress: }\dl a\to\dl A}
+     \cdot\bL\;
+     \underbrace{\big(J\,\dl V\big)}_{\text{volume: }\dl v\to\dl V}
+   =\big(\bP\bF^{t}\big)\cdot\bL\,\dl V
+   =\tr\big(\bP\bF^{t}\bL^{t}\big)\,\dl V
+\]
+by \eqr{6.145}$/J$, \eqr{2.50} and Definition~\ref{def:tip}, the scalar
+$J^{-1}$ passing through the inner product.
+
+\rnlab{why they cancel}
+Both factors are the same Jacobian, once because area elements change
+and once because volume elements do, and the stress power is a
+force-density times a volume. Special to the stress power: the kinetic
+energy \eqr{6.154}$_{1}$ keeps its factor, absorbed into
+$\rho_{\kappa}=\rho J$.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.156)  ---  an inner product for two-point tensors
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.156-innerproduct}{%
+\begin{readernote}[$\bP\cdot\dot\bF$: how a two-point tensor gets an
+inner product]
+\rnlab{substitution}
+\[
+   \bL=\dot\bF\bF^{-1}\ \Longrightarrow\ \dot\bF=\bL\bF
+   \ \Longrightarrow\ \dot\bF^{t}=\bF^{t}\bL^{t}
+   \qquad\eqr{4.3},\ (\bA\bB)^{t}=\bB^{t}\bA^{t}
+\]
+so $\tr(\bP\bF^{t}\bL^{t})=\tr(\bP\dot\bF^{t})$, with no rearrangement.
+
+\rnlab{legs}
+\[
+   \dot\bF^{t}\colon\Vt\to\hVt,
+   \qquad
+   \bP\colon\hVt\to\Vt,
+   \qquad\Longrightarrow\qquad
+   \bP\dot\bF^{t}\colon\Vt\to\Vt \quad\text{--- trace defined.}
+\]
+\[
+   \tr\big(\bP\dot\bF^{t}\big)=\big(\bP\dot\bF^{t}\big)_{ii}
+   =P_{iA}\big(\dot\bF^{t}\big)_{Ai}=P_{iA}\dot F_{iA}
+   =:\bP\cdot\dot\bF ,
+   \qquad
+   \mathcal{S}=\int_{P}\bP\cdot\dot\bF\,\dl V .
+\]
+
+\rnlab{caution}
+$\tr\bP$ alone is undefined: $P_{iA}$ has no diagonal, $i$ and $A$
+being indices of different alphabets. And $\bP\cdot\bS$ would ask for
+$P_{iA}S_{iA}$, spatial against referential --- not a sentence. Two
+two-point tensors pair only when they have the \emph{same} legs.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.160)  ---  P.Fdot = S.Edot in components
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.160-components}{%
+\begin{readernote}[$\bP\cdot\dot\bF=\bS\cdot\dot\bE$ in components]
+\[
+\begin{aligned}
+   \bP\cdot\dot\bF&=P_{iA}\dot F_{iA}=F_{iB}S_{BA}\dot F_{iA}
+   &&\rnwhy{\eqr{6.146}_{1}}\\[1mm]
+   &=S_{AB}\big(\dot F_{iB}F_{iA}\big)
+   &&\rnwhy{\text{numbers commute; }A\leftrightarrow B}\\[1mm]
+   \dot F_{iB}F_{iA}&=\big(\dot\bF^{t}\big)_{Bi}F_{iA}
+     =\big(\dot\bF^{t}\bF\big)_{BA}=:M_{BA}
+   &&\rnwhy{\text{referential, both indices}}\\[1mm]
+   \bP\cdot\dot\bF&=S_{AB}M_{BA}=\tr\big(\bS\bM\big)
+   &&\rnwhy{\eqr{6.158}}\\[1mm]
+   &=S_{AB}\big(\Sym\bM\big)_{BA}
+   &&\rnwhy{\bS=\bS^{t},\ \text{Lem.~\ref{lem:symskw}}}\\[1mm]
+   \Sym\bM&=\tfrac12\big(\dot\bF^{t}\bF+\bF^{t}\dot\bF\big)
+     =\tfrac12\big(\bF^{t}\bF\big)^{\textstyle\cdot}
+     =\tfrac12\dot\bC=\dot\bE
+   &&\rnwhy{\eqr{2.83}_{2},\ \eqr{2.97},\ \dot{\hI}=\hOb}\\[1mm]
+   \therefore\quad \bP\cdot\dot\bF&=\bS\cdot\dot\bE
+   &&\rnwhy{\text{integrate}\Rightarrow\eqr{6.160}}
+\end{aligned}
+\]
+
+\rnlab{why $\bE$ and not $\bC$}
+The same lines with $\dot\bC$ give
+$\bP\cdot\dot\bF=\tfrac12\bS\cdot\dot\bC$. The $\tfrac12$ in the
+definition \eqr{2.97} of $\bE$ is chosen exactly so that the pairing
+carries coefficient one, and so that $\bS=W_{\bE}$ has no stray factor.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  Remark 6.34  ---  the cancellation argument for P = W_F
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.160-conjugacy}{%
+\begin{readernote}[the cancellation in Remark~\ref{rem:ch6conjugate},
+with its hypotheses]
+\rnlab{notation}
+\[
+   \big(W_{\bF}\big)_{iA}:=\frac{\partial W}{\partial F_{iA}},
+   \qquad
+   \dot W=\frac{\partial W}{\partial F_{iA}}\dot F_{iA}
+   =W_{\bF}\cdot\dot\bF
+   \qquad\text{(chain rule in nine variables)}
+\]
+so $W_{\bF}$ carries the index structure of $\bP$ and may be compared
+with it.
+
+\rnlab{argument}
+\[
+\begin{aligned}
+   \dot W&=W_{\bF}\cdot\dot\bF=\bP\cdot\dot\bF
+   &&\rnwhy{\text{hypothesis},\ \eqr{6.156}}\\[1mm]
+   \big(\bP-W_{\bF}\big)\cdot\dot\bF&=0\quad\forall\,\dot\bF
+   &&\rnwhy{\dot\bF=\bL\bF\text{ with }\bL\text{ free},\ \eqr{4.3}}\\[1mm]
+   \bA:=\bP-W_{\bF},\quad \dot\bF=\bA:\quad
+     |\bA|^{2}&=A_{iA}A_{iA}=0
+   &&\rnwhy{\text{nine squares}}\\[1mm]
+   \therefore\quad \bA&=\Ob,\qquad \bP=W_{\bF}
+\end{aligned}
+\]
+This is Lemma~\ref{lem:cvec} with a tensor in place of a vector, and
+the choice $\dot\bF=\bA$ is the choice $\bc=\bu$ made there.
+
+\rnlab{small print on $\bS=W_{\bE}$}
+$\dot\bE=\Sym(\bF^{t}\dot\bF)$ is symmetric always, so $\dot\bE$ ranges
+over six dimensions, not nine. The conclusion weakens to
+$\Sym(\bS-W_{\bE})=\hOb$ --- enough, since $\bS=\bS^{t}$ and $W_{\bE}$
+may be symmetrized, but a caveat \eqr{6.156} does not carry.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.164)  ---  the kinetic energy cancels
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.164-cancelK}{%
+\begin{readernote}[the cancellation of \eqr{6.164}, with every integral]
+\rnlab{first law, written out}
+\[
+\begin{aligned}
+   \frac{\dl}{\dl t}\int_{P_{t}}\tfrac12\rho|\bv|^{2}\,\dl v
+   +\frac{\dl}{\dl t}\int_{P_{t}}\rho\eps\,\dl v
+   ={}&\int_{P_{t}}\rho\,\ip\bb\bv\,\dl v
+     +\int_{\partial P_{t}}\ip\bt\bv\,\dl a\\
+   &+\int_{P_{t}}\rho r\,\dl v+\int_{\partial P_{t}}h\,\dl a
+\end{aligned}
+\]
+by \eqr{6.161} with \eqr{6.151}, \eqr{6.162}, \eqr{6.152},
+\eqr{6.163}.
+
+\rnlab{mechanical balance, rearranged}
+\[
+   \underbrace{\int_{P_{t}}\rho\,\ip\bb\bv\,\dl v
+   +\int_{\partial P_{t}}\ip\bt\bv\,\dl a}_{\mathcal{P}}
+   =\frac{\dl}{\dl t}\int_{P_{t}}\tfrac12\rho|\bv|^{2}\,\dl v
+   +\int_{P_{t}}\bT\cdot\bL\,\dl v
+   \qquad\eqr{6.149}
+\]
+
+\rnlab{substitute and cancel}
+The kinetic-energy integral then stands once on each side with the same
+sign; subtract it:
+\[
+   \frac{\dl}{\dl t}\int_{P_{t}}\rho\eps\,\dl v
+   =\int_{P_{t}}\bT\cdot\bL\,\dl v+\int_{P_{t}}\rho r\,\dl v
+   +\int_{\partial P_{t}}h\,\dl a ,
+   \qquad\text{i.e.}\qquad
+   \dot{\mathcal{U}}=\mathcal{S}+\mathcal{H} .
+\]
+
+\rnlab{what was used}
+Only that the same $\mathcal{P}$ appears in \eqr{6.150} and in
+\eqr{6.161}. The mechanical balance is a theorem, not an axiom, so it
+may be spent to eliminate $\mathcal{P}$; what survives contains no
+force, and the stress enters solely through $\bT\cdot\bL$ --- the whole
+of the thermomechanical coupling.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.165)  ---  the normal form, and why
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.165-shape}{%
+\begin{readernote}[\eqr{6.165}: three steps, and the shape it is put
+into]
+\[
+\begin{aligned}
+   \frac{\dl}{\dl t}\mathcal{U}
+     &=\frac{\dl}{\dl t}\int_{P_{t}}\rho\eps\,\dl v
+      =\int_{P_{t}}\rho\dot\eps\,\dl v
+   &&\rnwhy{\eqr{6.24}_{1},\ \varphi=\eps}\\[1mm]
+   \int_{P_{t}}\rho r\,\dl v+\int_{\partial P_{t}}h\,\dl a
+     &=\int_{P_{t}}\rho\dot\eps\,\dl v
+      -\int_{P_{t}}\bT\cdot\bL\,\dl v
+   &&\rnwhy{\eqr{6.164}}\\[1mm]
+   \therefore\quad\int_{\partial P_{t}}h\,\dl a
+     &=\int_{P_{t}}\big[\rho(\dot\eps-r)-\bT\cdot\bL\big]\,\dl v
+   &&\rnwhy{\text{fuse the volume terms}}
+\end{aligned}
+\]
+
+\rnlab{the shape}
+\[
+   \underbrace{\int_{\partial P}\bp\,\dl A}_{\eqr{6.131}}
+   =\int_{P}\rho_{\kappa}(\dot\bv-\bb)\,\dl V ,
+   \qquad
+   \underbrace{\int_{\partial P_{t}}h\,\dl a}_{\eqr{6.165}}
+   =\int_{P_{t}}\big[\rho(\dot\eps-r)-\bT\cdot\bL\big]\,\dl v .
+\]
+Same statement, different letters: unknown boundary field on the left,
+bounded interior field on the right. That, and only that, is what Noll
+and Cauchy consume, so the next subsection transplants both proofs onto
+$h$ with no new work. Writing \eqr{6.165} this way round is not
+cosmetic.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.168)  ---  localization, and the four terms
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.168-localization}{%
+\begin{readernote}[getting \eqr{6.168}, and reading its four terms]
+\rnlab{two lines}
+\[
+\begin{aligned}
+   -\int_{P_{t}}\dvg\bq\,\dl v
+     &=\int_{P_{t}}\big[\rho(\dot\eps-r)-\bT\cdot\bL\big]\,\dl v
+   &&\rnwhy{\eqr{6.167}\text{ into }\eqr{6.165}}\\[1mm]
+   \int_{P_{t}}\big[\rho\dot\eps-\rho r-\bT\cdot\bL+\dvg\bq\big]\dl v
+     &=0\quad\forall P_{t}
+   &&\rnwhy{\text{Thm.~\ref{thm:localization}}}
+\end{aligned}
+\]
+\[
+   \boxed{\ \rho\dot\eps=\bT\cdot\bL-\dvg\bq+\rho r\ }
+   \qquad\text{in components}\quad
+   \rho\dot\eps=T_{ij}v_{i,j}-q_{i,i}+\rho r .
+\]
+
+\rnlab{budget, per unit $\dl v$ per unit time}
+\[
+   \renewcommand{\arraystretch}{1.3}
+   \begin{array}{l|l|l}
+     \text{term} & \text{what} & \text{positive when}\\ \hline
+   \rho\dot\eps & \text{storage} & \text{the parcel warms or strains}\\
+   \bT\cdot\bL & \text{stress power} & \text{stress does work on it}\\
+   -\dvg\bq & \text{net conduction in} & \text{more enters than leaves}\\
+   \rho r & \text{bulk supply} & \text{a source is present}
+   \end{array}
+\]
+
+\rnlab{the minus sign, accounted for}
+Two conventions, one surviving sign: the divergence theorem uses the
+\emph{exterior} normal, so $\dvg\bq>0$ is net outflow; and \eqr{6.166}
+sets $h=-\ip\bq\bn$ so that $\bq$ points where heat goes. Their product
+makes $-\dvg\bq$ a gain.
+
+\rnlab{status}
+\eqr{6.168} is the first equation of the chapter that does \emph{not}
+follow from \eqr{6.34}. It needs the independent axiom \eqr{6.161},
+which is why $\eps$, $r$, $\bq$ are new letters.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.169)  ---  identifications, and why sigma never appears
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.169-identifications}{%
+\begin{readernote}[the identifications, and why a supply never reaches
+a jump condition]
+\rnlab{read off \eqr{6.168}}
+\[
+   \rho\,\dot{\underbrace{\eps}_{\varphi}}
+   =\dvg\underbrace{(-\bq)}_{\vek\pi}
+   +\underbrace{\rho r+\bT\cdot\bL}_{\rho\sigma}
+   \qquad\text{against}\qquad
+   \rho\dot\varphi=\dvg\vek\pi+\rho\sigma
+   \quad\eqr{6.21}
+\]
+The flux of the generic law points \emph{into} the region and $\bq$
+points out, hence $\vek\pi=-\bq$.
+
+\rnlab{into \eqr{6.6}}
+\[
+   \ip{\jump{\rho\varphi(\bv-\bu)-\vek\pi}}\bn=0
+   \ \longrightarrow\
+   \ip{\jump{\rho\eps(\bv-\bu)+\bq}}\bn=0 ,
+   \qquad \sigma\ \text{has vanished.}
+\]
+
+\rnlab{why it had to vanish}
+Pillbox of thickness $\eta$, face area $A$: volume $\eta A$, surface
+$2A+O(\eta)$. Divide by $A$, let $\eta\to0$; every volume term carries
+$\eta$ and dies, every surface term survives. So only $\varphi$ and
+$\vek\pi$ can appear, never $\sigma$, however large. Hence the stress
+power --- the entire bulk difference between the mechanical and thermal
+balances --- makes no difference on a shock. Problem 11 uses exactly
+this.
+
+\rnlab{mass-flux form}
+With $m^{*}=\rho(\ip\bv\bn-u)$ and $\jump{m^{*}}=0$ from \eqr{6.15},
+\[
+   m^{*}\jump\eps+\ip{\jump\bq}\bn=0 ;
+   \qquad m^{*}=0\ \Longrightarrow\ \ip{\jump\bq}\bn=0 ,
+\]
+the interface condition of every heat-conduction problem.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.170)-(6.175)  ---  the referential energy balance, both routes
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.175-referential}{%
+\begin{readernote}[the referential energy balance, both routes]
+\rnlab{route 1: pull the integral statement back}
+\[
+\begin{aligned}
+   \int_{\partial P_{t}}h\,\dl a
+   &=-\int_{\partial P_{t}}\ip\bq\bn\,\dl a
+   &&\rnwhy{\eqr{6.166}}\\
+   &=-\int_{\partial P}\ip\bq{\bF^{*}\bN}\,\dl A
+   &&\rnwhy{\bn\,\dl a=\bF^{*}\bN\,\dl A,\ \eqr{2.54}}\\
+   &=-\int_{\partial P}\ip{\big(\bF^{*}\big)^{t}\bq}{\bN}\,\dl A
+   &&\rnwhy{\text{definition of the transpose}}\\
+   &=-\int_{\partial P}\ip{\bq_{\kappa}}\bN\,\dl A
+   &&\rnwhy{\bq_{\kappa}:=\big(\bF^{*}\big)^{t}\bq=J\bF^{-1}\bq,\ \eqr{6.171}}
+\end{aligned}
+\]
+with the volume terms by $\rho\,\dl v=\rho_{\kappa}\,\dl V$ and the
+stress power by \eqr{6.155}. Then \eqr{6.173} and localization give
+\eqr{6.174}.
+
+\rnlab{route 2: multiply \eqr{6.168} by $J$}
+\[
+   \renewcommand{\arraystretch}{1.45}
+   \begin{array}{l|l|l}
+     \text{spatial} & \times J & \text{by}\\ \hline
+   \rho\dot\eps & \rho_{\kappa}\dot\eps & \rho J=\rho_{\kappa},
+     \ \eqr{2.59}\\
+   \bT\cdot\bL & \bP\cdot\dot\bF & \text{the computation of }\eqr{6.155}\\
+   -\dvg\bq & -\Dvg\bq_{\kappa} & \eqr{6.175}\\
+   \rho r & \rho_{\kappa}r & \rho J=\rho_{\kappa}
+   \end{array}
+\]
+Four lines, and their sum is \eqr{6.174}.
+
+\rnlab{where the residue would be}
+A priori
+$J\dvg\bq=\Dvg\big(J\bF^{-1}\bq\big)+q_{i}F^{*}_{iA,A}$, and the second
+term vanishes identically by the Piola identity \eqr{5.11}. That, and
+nothing else, is why every referential balance in this chapter has the
+shape of its spatial counterpart. Geometrically $\Dvg\bF^{*}=\bze$ is
+the differentiated form of
+$\int_{\partial P}\bF^{*}\bN\,\dl A=\int_{\partial P_{t}}\bn\,\dl a
+=\bze$: the vector area of a closed surface vanishes.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.176)-(6.177)  ---  reading the entropy postulate
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.177-reading}{%
+\begin{readernote}[\eqr{6.176} read against \eqr{6.163}, and where the
+inequality is born]
+\rnlab{the postulate is the heating with $\theta^{-1}$ pasted on}
+\[
+\begin{aligned}
+   \mathcal{H}&=\int_{P_{t}}\rho r\,\dl v
+     +\int_{\partial P_{t}}h\,\dl a
+   &&\rnwhy{\eqr{6.163}}\\[1mm]
+   \text{supply}+\text{flux in }\eqr{6.176}
+     &=\int_{P_{t}}\theta^{-1}\rho r\,\dl v
+     +\int_{\partial P_{t}}\theta^{-1}h\,\dl a
+   &&\rnwhy{\dl S=\dl Q/\theta,\ \text{applied \emph{locally}}}
+\end{aligned}
+\]
+The whole modelling content is the word \emph{locally}: each parcel of
+heat is divided by the temperature at the point where it is delivered.
+
+\rnlab{birth of the inequality}
+\[
+   X=Y+\int_{P_{t}}\rho s\,\dl v
+   \quad\text{and}\quad
+   \int_{P_{t}}\rho s\,\dl v\geq0
+   \qquad\Longrightarrow\qquad
+   X\geq Y .
+\]
+Nothing more. The production is not computed or bounded but
+\emph{discarded}, and the result is weaker than the start.
+
+\rnlab{why discard it}
+$s$ is unobservable, so an equation containing it constrains nothing;
+\eqr{6.177} contains only $\eta$, $\theta$, $r$, $h$. Same trade as at
+\eqr{6.184}, where $r$ goes.
+
+\rnlab{units}
+$[\theta^{-1}h]=\mathrm{J\,K^{-1}m^{-2}s^{-1}}$,
+$[\eta]=\mathrm{J\,K^{-1}kg^{-1}}$: every term an entropy per unit
+time.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.182)-(6.183)  ---  identifications and the orientation check
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.183-orientation}{%
+\begin{readernote}[the entropy identifications, and the orientation
+check]
+\rnlab{put the flux in the required shape}
+\[
+   \theta^{-1}h
+   \overset{\eqr{6.166}}{=}\theta^{-1}\big(-\ip\bq\bn\big)
+   =\ip{\big(-\theta^{-1}\bq\big)}\bn
+   \qquad\Longrightarrow\qquad
+   \vek\pi=-\theta^{-1}\bq,\quad \sigma=\theta^{-1}r .
+\]
+
+\rnlab{substitute}
+\[
+\begin{aligned}
+   \eqr{6.21}:\quad \rho\dot\eta&\geq\theta^{-1}(\rho r)
+     -\dvg\big(\theta^{-1}\bq\big)
+   &&\rnwhy{\eqr{6.182}}\\[1mm]
+   \eqr{6.6}:\quad
+   \ip{\jump{\rho\eta(\bv-\bu)+\theta^{-1}\bq}}\bn&\geq0
+   &&\rnwhy{\eqr{6.183}}
+\end{aligned}
+\]
+the two minus signs cancelling as they did at \eqr{6.169}.
+
+\rnlab{orientation}
+Reverse the normal: the labels $\pm$ swap, so
+$\jump\cdot\mapsto-\jump\cdot$ and $\bn\mapsto-\bn$; hence
+\[
+   \ip{\big(-\jump{\,\cdot\,}\big)}{\big(-\bn\big)}
+   =\ip{\jump{\,\cdot\,}}\bn ,
+\]
+unchanged. Every jump condition in this chapter is linear in
+$\jump\cdot$ and in $\bn$, exactly once each, which is what makes them
+statements about the world rather than about the reader.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.184)-(6.187)  ---  the reduction as one ledger
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.187-reduction}{%
+\begin{readernote}[the reduction \eqr{6.182}$\to$\eqr{6.187}, and the
+referential form]
+\rnlab{the ledger}
+\[
+\begin{aligned}
+   \rho\dot\eta&\geq\theta^{-1}(\rho r)
+     -\dvg\big(\theta^{-1}\bq\big)
+   &&\rnwhy{\eqr{6.182}}\\[1mm]
+   \rho\theta\dot\eta&\geq\rho\dot\eps-\bT\cdot\bL+\dvg\bq
+     -\theta\,\dvg\big(\theta^{-1}\bq\big)
+   &&\rnwhy{\text{drop }\rho r,\ \eqr{6.168};\ \times\,\theta>0}\\[1mm]
+   \rho\theta\dot\eta&\geq\rho\dot\eps-\bT\cdot\bL
+     +\theta^{-1}\ip\bq{\grad\theta}
+   &&\rnwhy{\dvg\bq\text{ cancels}}\\[1mm]
+   \rho\big(\theta\dot\eta-\dot\eps\big)+\bT\cdot\bL
+     &-\theta^{-1}\ip\bq{\grad\theta}\geq0
+   &&\rnwhy{\text{collect}=\eqr{6.185}}\\[1mm]
+   -\rho\big(\dot\psi+\eta\dot\theta\big)+\bT\cdot\bL
+     &-\theta^{-1}\ip\bq{\grad\theta}\geq0
+   &&\rnwhy{\eqr{6.186}=\eqr{6.187}}
+\end{aligned}
+\]
+
+\rnlab{the expansion, line 4}
+\[
+\begin{aligned}
+   \dvg\big(\theta^{-1}\bq\big)
+     &=\ip{\grad\big(\theta^{-1}\big)}\bq+\theta^{-1}\dvg\bq
+   &&\rnwhy{\text{Prob.\ 24(c), Ch.\ 1}}\\
+   \grad\big(\theta^{-1}\big)&=-\theta^{-2}\grad\theta
+   &&\rnwhy{\text{Thm.~\ref{thm:chain}}}\\
+   \therefore\quad
+   \dvg\bq-\theta\,\dvg\big(\theta^{-1}\bq\big)
+     &=\theta^{-1}\ip\bq{\grad\theta}
+\end{aligned}
+\]
+The point of expanding is that $\dvg\bq$ --- a \emph{derivative} of the
+flux, against which no constitutive equation for $\bq$ could be tested
+pointwise --- drops out.
+
+\rnlab{the Legendre transform, line 6}
+\[
+   \psi=\eps-\theta\eta
+   \ \Longrightarrow\
+   \dot\psi=\dot\eps-\dot\theta\,\eta-\theta\,\dot\eta
+   \ \Longrightarrow\
+   \theta\dot\eta-\dot\eps=-\dot\psi-\eta\dot\theta .
+\]
+
+\rnlab{referential form: multiply \eqr{6.187} by $J>0$}
+\[
+\begin{aligned}
+   -J\rho\big(\dot\psi+\eta\dot\theta\big)
+     &=-\rho_{\kappa}\big(\dot\psi+\eta\dot\theta\big)
+   &&\rnwhy{\rho J=\rho_{\kappa},\ \eqr{2.59}}\\
+   J\,\bT\cdot\bL&=\bP\cdot\dot\bF
+   &&\rnwhy{\text{the computation of }\eqr{6.155}}\\
+   \ip{\bq_{\kappa}}{\Grad\theta}
+     &=\ip{J\bF^{-1}\bq}{\bF^{t}\grad\theta}=J\,\ip\bq{\grad\theta}
+   &&\rnwhy{\eqr{6.171},\ \text{Thm.~\ref{thm:GradgradF}}}
+\end{aligned}
+\]
+\[
+   \boxed{\ -\rho_{\kappa}\big(\dot\psi+\eta\dot\theta\big)
+   +\bP\cdot\dot\bF
+   -\theta^{-1}\ip{\bq_{\kappa}}{\Grad\theta}\geq0\ }
+\]
+at every $\bX\in\kappa$ off a singular surface, with jump condition
+\[
+   \jump{\rho_{\kappa}\eta}\,U
+   -\ip{\jump{\theta^{-1}\bq_{\kappa}}}{\bN}\leq0 ,
+\]
+the reciprocal temperature staying \emph{inside} the bracket since
+$\theta$ may itself jump, and the sense reversing for the reason set
+out in Problem 1. The arguments of the boxed inequality are $\bF$,
+$\theta$, $\Grad\theta$ and their rates --- which is what Chapters 8
+and 9 write constitutive equations in.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  Problem 1  ---  the four sign changes
+%----------------------------------------------------------------------
+\rnotedef{ch6:prob1-signs}{%
+\begin{readernote}[the sign comparison, one factor at a time]
+\[
+\begin{aligned}
+   \text{spatial}&:\quad
+     \ip{\jump{\rho\varphi(\bv-\bu)-\vek\pi}}{\bn}=0
+   &&\rnwhy{\eqr{6.6}}\\[1mm]
+   \text{(i)}\quad \bv&\to\bze
+   &&\rnwhy{\text{material points do not move in }\kappa}\\[1mm]
+   \text{(ii)}\quad \bu&\to U\bN
+   &&\rnwhy{\text{the surface does}}\\[1mm]
+   \Longrightarrow\quad \bv-\bu&\to-U\bN
+   &&\rnwhy{\text{\emph{the one sign change}}}\\[1mm]
+   \text{(iii)}\quad
+     \ip{\big(-\rho_{\kappa}\varphi U\bN\big)}{\bN}
+     &=-\rho_{\kappa}\varphi U
+   &&\rnwhy{|\bN|=1}\\[1mm]
+   \text{(iv)}\quad
+     -\Big\{\jump{\rho_{\kappa}\varphi}U
+     +\ip{\jump{\vek\pi_{\kappa}}}{\bN}\Big\}&=0
+   &&\rnwhy{U,\bN\text{ single-valued}}\\[1mm]
+   \therefore\quad
+     \jump{\rho_{\kappa}\varphi}U
+     +\ip{\jump{\vek\pi_{\kappa}}}{\bN}&=0
+   &&\rnwhy{\times(-1)}
+\end{aligned}
+\]
+
+\rnlab{reading}
+Not a discrepancy between two derivations: one factor of $(-1)$,
+introduced at (ii) and removed at the end. Spatially, $\bv-\bu$ is the
+velocity of matter relative to the surface; referentially the matter is
+at rest and the surface sweeps through it, so the same relative motion
+is described with the opposite sign.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  Problem 5  ---  the completed square verified
+%----------------------------------------------------------------------
+\rnotedef{ch6:prob5-identity}{%
+\begin{readernote}[the check that \eqref{eq:ch6shearmax} is an
+identity]
+\rnlab{abbreviate}
+\[
+   p=(a+b)^{2},\quad q=(a-b)^{2}
+   \qquad\Longrightarrow\qquad
+   a^{2}+b^{2}=\tfrac12(p+q),\quad q-p=-4ab .
+\]
+
+\rnlab{complete the square}
+\[
+\begin{aligned}
+   \tau^{2}&=-p\,u^{2}+w_{2}\big(a^{2}-b^{2}\big)u+K,
+   &&\rnwhy{K:=\tfrac{s}{2}w_{2}\big(a^{2}+b^{2}\big)+\tfrac{s^{2}}{4}p}\\[1mm]
+   u^{*}&=\frac{w_{2}\big(a^{2}-b^{2}\big)}{2p}
+     =\frac{w_{2}(a+b)(a-b)}{2(a+b)^{2}}=\frac{(a-b)w_{2}}{2(a+b)}
+   &&\rnwhy{a^{2}-b^{2}=(a+b)(a-b)}\\[1mm]
+   \tau^{2}&=-p\big(u-u^{*}\big)^{2}+C,
+   &&\rnwhy{C:=p\,u^{*2}+K}
+\end{aligned}
+\]
+
+\rnlab{evaluate $C$}
+\[
+\begin{aligned}
+   4C&=w_{2}^{2}q+2w_{2}(1-w_{2})\big(a^{2}+b^{2}\big)+(1-w_{2})^{2}p
+   &&\rnwhy{p\,u^{*2}=\tfrac14w_{2}^{2}q,\ s=1-w_{2}}\\[1mm]
+   &=w_{2}^{2}q+w_{2}(1-w_{2})(p+q)+(1-w_{2})^{2}p
+   &&\rnwhy{2\big(a^{2}+b^{2}\big)=p+q}\\[1mm]
+   &=q\,w_{2}\underbrace{\big[w_{2}+1-w_{2}\big]}_{1}
+     +p\,(1-w_{2})\underbrace{\big[(1-w_{2})+w_{2}\big]}_{1}
+   &&\rnwhy{\text{collect on }p,\,q}\\[1mm]
+   &=p+w_{2}(q-p)=p-4ab\,w_{2}
+   &&\rnwhy{q-p=-4ab}\\[1mm]
+   \therefore\quad C&=\frac{(a+b)^{2}}{4}-ab\,w_{2}
+   &&\rnwhy{=\eqref{eq:ch6shearmax}\ \checkmark}
+\end{aligned}
+\]
+An identity in $a,b,u,w_{2}$: no inequality was used. Only afterwards
+are $a,b,w_{2}\geq0$ invoked, to read off the sign of each term.
+
+\rnlab{why substitute at all}
+\eqref{eq:ch6shearw} is a quadratic form in three constrained
+variables; eliminating the constraint leaves a downward parabola in one
+free $u$, maximized by inspection, and $w_{2}$ then appears only in the
+manifestly non-positive $-ab\,w_{2}$. Both maximizations are read off
+\eqref{eq:ch6shearmax} without differentiating.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  Problem 6  ---  columns, not rows
+%----------------------------------------------------------------------
+\rnotedef{ch6:prob6-columns}{%
+\begin{readernote}[columns, not rows]
+\[
+   \bP\hbE_{A}=P_{iB}\big(\ip{\hbE_{B}}{\hbE_{A}}\big)\be_{i}
+   =P_{iB}\dd_{BA}\,\be_{i}=P_{iA}\,\be_{i}
+   \overset{\eqr{6.132}}{=}\bp_{A}
+\]
+and $(P_{1A},P_{2A},P_{3A})$ is the $A$th \emph{column}, the first
+index being the row (Thm.~\ref{thm:comprep}). Hence
+\[
+   \boxed{\ A\text{th column of }(P_{iA})
+   =\text{the traction on }\bN=\hbE_{A}\ }
+\]
+
+\rnlab{mnemonic}
+The free index of the traction is the row; the normal's index is the
+column. The tensor acts on the normal, and the normal contracts with
+the second slot.
+
+\rnlab{reading this problem's data}
+\[
+   \bp_{1}=a\be_{1}+10\be_{2},\qquad
+   \bp_{2}=\underbrace{3\be_{2}+(b-6)\be_{3}}
+     _{\text{stated as }(b-6)\be_{3}+3\be_{2}},\qquad
+   \bp_{3}=c\be_{2}+3\be_{3}
+\]
+\[
+   \Longrightarrow\quad
+   (a,10,0),\quad (0,3,b-6),\quad (0,c,3)
+   \quad\text{as \emph{columns}.}
+\]
+Reading $\bp_{2}$ in the order printed, or stacking as rows, gives the
+transpose --- which then fails part (c) with different and wrong
+$a,b,c$.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  Problem 7  ---  the product F^{-1}P entry by entry
+%----------------------------------------------------------------------
+\rnotedef{ch6:prob7-product}{%
+\begin{readernote}[$\bS=\bF^{-1}\bP$, all nine entries]
+$S_{AB}=F^{-1}_{Ai}P_{iB}$: row $A$ of $\bF^{-1}$ against column $B$ of
+$\bP$, with
+\[
+   \big(F^{-1}_{Ai}\big)=\begin{pmatrix}
+   1/a_{1}&-b/a_{2}&0\\ 0&1/a_{2}&0\\ 0&0&1/a_{3}\end{pmatrix},
+   \qquad
+   \big(P_{iA}\big)=\begin{pmatrix}
+   -\tau a_{1}a_{3}b&\tau a_{1}a_{3}&0\\
+   \tau a_{2}a_{3}&0&0\\ 0&0&0\end{pmatrix}.
+\]
+\[
+\begin{aligned}
+   S_{11}&=\tfrac{1}{a_{1}}\big(-\tau a_{1}a_{3}b\big)
+     +\big(-\tfrac{b}{a_{2}}\big)\big(\tau a_{2}a_{3}\big)+0
+     =-\tau a_{3}b-\tau a_{3}b=-2\tau a_{3}b,\\
+   S_{12}&=\tfrac{1}{a_{1}}\big(\tau a_{1}a_{3}\big)+0+0
+     =\tau a_{3},\\
+   S_{21}&=0+\tfrac{1}{a_{2}}\big(\tau a_{2}a_{3}\big)+0
+     =\tau a_{3},\\
+   S_{22}&=\tfrac{1}{a_{2}}\cdot0=0,
+   \qquad S_{13}=S_{23}=0,
+   \qquad S_{3B}=\tfrac{1}{a_{3}}P_{3B}=0 .
+\end{aligned}
+\]
+
+\rnlab{the check}
+$S_{12}$ and $S_{21}$ arrive by different routes --- the $(1,1)$ entry
+of $\bF^{-1}$ on $P_{12}$, against the $(2,2)$ entry on $P_{21}$ ---
+and agree. That is \eqr{6.145} guaranteeing it in advance, and it is
+the strongest arithmetic check on the whole calculation: an error in
+$\bF$, $\bF^{*}$ or $\bP$ almost certainly breaks it.
+
+\rnlab{$S_{11}$}
+\[
+   T_{11}=0
+   \quad\longrightarrow\quad
+   P_{11}=-\tau a_{1}a_{3}b
+   \quad\longrightarrow\quad
+   S_{11}=-2\tau a_{3}b .
+\]
+Pure shear in $\kappa_{t}$; $\bP$ picks up a normal entry from the tilt
+of the area element, and $\bS$ doubles it because $\bF^{-1}$ tilts the
+remaining leg the same way. The stress did not change --- the surfaces
+on which it is reckoned did.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  Problem 8  ---  three moves in one line
+%----------------------------------------------------------------------
+\rnotedef{ch6:prob8-moves}{%
+\begin{readernote}[the three moves in one line]
+\[
+\begin{aligned}
+   \text{(1)}\quad\frac{\partial T_{ij}}{\partial X_{A}}
+     &=\frac{\partial T_{ij}}{\partial x_{k}}
+       \frac{\partial\chi_{k}}{\partial X_{A}}=T_{ij,k}F_{kA}
+   &&\rnwhy{\text{chain rule},\ \eqr{2.37}}\\[1mm]
+   \text{(2)}\quad F_{kA}F^{*}_{jA}
+     &=\big(\bF\bF^{*t}\big)_{kj}=J\dd_{kj}
+   &&\rnwhy{\bF^{*t}=J\bF^{-1}}\\[1mm]
+   \text{(3)}\quad T_{ij,k}\,J\dd_{kj}&=J\,T_{ij,j}
+   &&\rnwhy{\dd\text{ renames }k\to j}
+\end{aligned}
+\]
+Move (1) is why $\bF$ appears at all: a spatial field differentiated by
+a referential coordinate must produce one deformation gradient. Move
+(3) turns a gradient into a divergence.
+
+\rnlab{the term that was dropped}
+\[
+   P_{iA,A}=\frac{\partial T_{ij}}{\partial X_{A}}F^{*}_{jA}
+   +T_{ij}\underbrace{F^{*}_{jA,A}}_{=\,0\ \text{by}\ \eqr{5.11}} .
+\]
+Without the Piola identity, \eqr{6.138} would read
+$J\dvg\bT=\Dvg\bP-\bT\,\Dvg\bF^{*}$: the two descriptions would differ
+by a term in second derivatives of the motion, and would no longer be
+equivalent term by term. Same remark for $q_{i}F^{*}_{iA,A}$ in the
+heat flux.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.161)-(6.163)  ---  where the internal energy came from
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.161-history}{%
+\begin{readernote}[where $\eps$ came from, and what the first law
+asserts]
+\rnlab{the caloric picture, and what killed it}
+Until the 1840s heat was a substance. Caloric was conserved, and an
+engine produced work by letting caloric fall from a hot body to a cold
+one as water falls through a mill wheel. Two measurements destroyed the
+picture.
+\[
+\begin{aligned}
+   \text{Rumford, }1798&:
+     &&\rnwhy{\text{boring cannon: unlimited heat from a blunt tool}}\\
+   &&&\rnwhy{\text{an inexhaustible supply is not a substance}}\\[1mm]
+   \text{Joule, }1843\text{--}1850&:
+     &&\rnwhy{\text{stirring, electrical heating, compressing gas}}\\
+   &&&\rnwhy{\text{all give }4.19\ \mathrm{J\,cal^{-1}}}
+\end{aligned}
+\]
+Mayer (1842) and Helmholtz (1847) drew the consequence: work and heat
+are two ways of transferring one conserved quantity.
+
+\rnlab{what the first law actually claims}
+The content is \emph{path independence}. Along a process from state $A$
+to state $B$,
+\[
+\begin{aligned}
+   \int_{A}^{B}\mathcal{P}\,\dl t
+     &\ \text{depends on the path}
+   &&\rnwhy{\text{work is not a state function}}\\
+   \int_{A}^{B}\mathcal{H}\,\dl t
+     &\ \text{depends on the path}
+   &&\rnwhy{\text{heat is not a state function}}\\
+   \int_{A}^{B}\big(\mathcal{P}+\mathcal{H}\big)\,\dl t
+     &=\Big[\mathcal{K}+\mathcal{U}\Big]_{A}^{B}
+   &&\rnwhy{\text{the sum is},\ \eqr{6.161}}
+\end{aligned}
+\]
+So \eqr{6.161} posits a function $\eps$ whose increment along
+\emph{any} process is the work plus the heating, less the change in
+kinetic energy. That such an $\eps$ exists is the whole of the first
+law; \eqr{6.162} adds only that it is distributed rather than
+concentrated, in the sense of \eqr{6.1}.
+
+\rnlab{why it is not enough}
+Nothing in \eqr{6.161} distinguishes a direction. Let a bar with a hot
+end and a cold end equalise its temperature: energy is conserved. Let
+the same bar spontaneously separate into a hot end and a cold end:
+energy is conserved again. Only the first occurs, and no sharpening of
+the constitutive equations can exclude the second, since both processes
+use the same material. What is missing is a one-sided statement, and
+Section~\ref{sec:ch6entropy} supplies it.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.176)  ---  why entropy: Carnot, Clausius, Boltzmann
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.176-history}{%
+\begin{readernote}[why anyone needed entropy: Carnot, Clausius,
+Boltzmann]
+Finding the one-sided statement took forty years, and the route explains
+the shape of \eqr{6.176}.
+
+\rnlab{carnot, 1824}
+Carnot asked for the greatest work obtainable from a given quantity of
+heat, and answered before the first law was known. His theorem: no
+engine working between two reservoirs beats a reversible one, and all
+reversible engines between the same pair have the same efficiency,
+whatever the working substance.
+
+The proof needs no analysis. Were $X$ more efficient than a reversible
+$R$, run $X$ forward and $R$ backward on $X$'s work; the pair returns to
+its initial state, delivers no net work, and moves heat from cold to hot
+as its sole effect. Hence
+\[
+\begin{aligned}
+   \eps_{\text{eff}}&=1-\frac{|Q_{C}|}{Q_{H}}
+     =1-f(\theta_{C},\theta_{H})
+   &&\rnwhy{\text{a universal function of the two temperatures}}\\[1mm]
+   f(\theta_{C},\theta_{H})&=\frac{g(\theta_{C})}{g(\theta_{H})}
+   &&\rnwhy{\text{two cycles in series}}\\[1mm]
+   \frac{Q_{H}}{\theta_{H}}+\frac{Q_{C}}{\theta_{C}}&=0
+   &&\rnwhy{\text{Kelvin, }1848:\ g(\theta)=\theta}
+\end{aligned}
+\]
+around a reversible cycle, heat counted positive inwards. The
+combination $Q/\theta$ balances; $Q$ does not.
+
+\rnlab{clausius, 1850--1865}
+Approximating an arbitrary cycle by Carnot cycles turns the last display
+into the \emph{Clausius inequality}
+\[
+   \oint\frac{\dl Q}{\theta}\leq0 ,
+   \qquad\text{with equality iff the cycle is reversible.}
+\]
+Its consequence is the definition of entropy. If $\Gamma_{1}$,
+$\Gamma_{2}$ are reversible paths from $A$ to $B$, then $\Gamma_{1}$
+forward and $\Gamma_{2}$ backward is a reversible cycle, so
+\[
+   \int_{\Gamma_{1}}\frac{\dl Q}{\theta}
+   =\int_{\Gamma_{2}}\frac{\dl Q}{\theta}:
+\]
+the integral depends on the end states alone and defines a function of
+state up to a constant. Clausius named it in 1865, coining
+\emph{Entropie} from $\tau\rho o\pi\acute\eta$, transformation, shaped
+to sound like \emph{Energie}, and closed the paper with the two laws in
+the form still quoted: the energy of the world is constant, the entropy
+of the world tends to a maximum. For an irreversible process the
+inequality is strict,
+\[
+   S(B)-S(A)\geq\int_{A}^{B}\frac{\dl Q}{\theta} ,
+\]
+which is \eqr{6.177} for a body at a single temperature. Passing to
+\eqr{6.177} replaces $\dl Q$ by the supply and flux of \eqr{6.163} and
+lets $\theta$ vary from point to point, which is the whole of the
+modelling step.
+
+\rnlab{boltzmann, 1872--1877}
+Clausius left entropy defined but unexplained: a state function that
+increases, with no account of why. Boltzmann counted. If a macrostate is
+realised by $W$ microstates,
+\[
+   \boxed{\ S=k\log W ,\qquad
+   k=1.38\times10^{-23}\ \mathrm{J\,K^{-1}} .\ }
+\]
+The logarithm is forced rather than chosen: entropy is additive over
+independent subsystems while configuration counts multiply,
+$W=W_{1}W_{2}$, and up to a constant the only continuous solution of
+$S(W_{1}W_{2})=S(W_{1})+S(W_{2})$ is a logarithm.
+
+This explains the direction. A system moves to a macrostate of larger
+$W$ not because a law forbids the reverse but because the ratios are of
+order $e^{N}$ with $N\sim10^{23}$. Two objections sharpened the claim.
+Loschmidt (1876) noted that reversing every velocity carries a solution
+to a solution, so no strictly decreasing functional of the mechanical
+state exists; Zermelo (1896), using Poincar\'e recurrence, noted that a
+bounded Hamiltonian system returns arbitrarily close to its initial
+state. Both are correct and both are compatible with the
+$H$-theorem, which is a statement about a distribution under an
+assumption of molecular chaos, not about one trajectory. Recurrence
+times for $10^{23}$ particles exceed the age of the universe by many
+orders.
+
+\rnlab{what this chapter takes from it}
+Not the counting. Continuum mechanics takes the licence: entropy is a
+field, extensive, defined out of equilibrium, and its production is
+non-negative. Equation \eqr{6.176} postulates that and nothing more, and
+Remark~\ref{rem:ch6truesdell} is right that the theory stands or falls
+by experiment rather than by $S=k\log W$.
+\end{readernote}%
+}
+
+%----------------------------------------------------------------------
+%  (6.187)  ---  Coleman-Noll: what the inequality decides
+%----------------------------------------------------------------------
+\rnotedef{ch6:6.187-colemannoll}{%
+\begin{readernote}[what \eqr{6.187} decides: the Coleman--Noll theorem]
+Coleman and Noll (1963) showed what \eqr{6.187} is worth. Take a
+constitutive assumption of the widest reasonable form and the inequality
+returns three equalities and one inequality, none of them assumed.
+
+\rnlab{hypothesis}
+\[
+   \psi=\hat\psi(\bF,\theta,\bG),
+   \quad
+   \eta=\hat\eta(\bF,\theta,\bG),
+   \quad
+   \bP=\hat\bP(\bF,\theta,\bG),
+   \quad
+   \bq_{\kappa}=\hat\bq_{\kappa}(\bF,\theta,\bG),
+\]
+with $\bG=\Grad\theta$, subject to the referential form of \eqr{6.187}
+in every process.
+
+\rnlab{expand and collect}
+\[
+\begin{aligned}
+   \dot\psi&=\hat\psi_{\bF}\cdot\dot\bF+\hat\psi_{\theta}\dot\theta
+     +\hat\psi_{\bG}\cdot\dot\bG
+   &&\rnwhy{\text{chain rule}}\\[1mm]
+   \big(\bP-\rho_{\kappa}\hat\psi_{\bF}\big)\cdot\dot\bF
+     -\rho_{\kappa}\big(\hat\psi_{\theta}+\eta\big)\dot\theta&
+     -\rho_{\kappa}\hat\psi_{\bG}\cdot\dot\bG
+     -\theta^{-1}\ip{\bq_{\kappa}}{\bG}\geq0
+   &&\rnwhy{\text{substitute}}
+\end{aligned}
+\]
+
+\rnlab{the argument}
+Fix a point and an instant. The left side is \emph{affine} in the triple
+$(\dot\bF,\dot\theta,\dot\bG)$, while its coefficients depend only on
+$(\bF,\theta,\bG)$. The two may be assigned independently: any state and
+any rates are realised by some motion and temperature field, and the
+balances \eqr{6.136} and \eqr{6.174} are then met by choosing $\bb$ and
+$r$, both of which are at one's disposal. An affine function with
+$\ip\ba\bx+b\geq0$ for every $\bx$ has $\ba=\bze$, since otherwise
+$\bx=-\lambda\ba$ with $\lambda$ large violates it. Applying this to
+each rate in turn,
+\[
+   \boxed{\ \hat\psi_{\bG}=\bze,
+   \qquad
+   \bP=\rho_{\kappa}\hat\psi_{\bF},
+   \qquad
+   \eta=-\hat\psi_{\theta},
+   \qquad
+   \ip{\bq_{\kappa}}{\bG}\leq0 .\ }
+\]
+
+\rnlab{reading the four}
+The free energy cannot depend on the temperature gradient, so one
+potential $\hat\psi(\bF,\theta)$ delivers both stress and entropy by
+differentiation. The pairing $\eta=-\hat\psi_{\theta}$ is the
+thermodynamic analogue of the power conjugacy of
+Remark~\ref{rem:ch6conjugate}, and it is the statement
+Remark~\ref{rem:ch6cdread} anticipated. What survives is the
+\emph{heat conduction inequality}: heat flows down the temperature
+gradient. Fourier's law $\bq_{\kappa}=-\bK\bG$ satisfies it exactly when
+$\bK$ is positive semi-definite, so a sign usually asserted is here
+proved. The minus sign put into \eqr{6.166} was chosen to make this
+inequality read in this direction.
+
+\rnlab{dissipation}
+Naming the left side of \eqr{6.187} the entropy production,
+\[
+   \rho\theta s
+   =\underbrace{-\rho\big(\dot\psi+\eta\dot\theta\big)
+     +\bT\cdot\bL}_{\text{internal}}
+   \;\underbrace{-\;\theta^{-1}\ip\bq{\grad\theta}}_{\text{thermal}}
+   \;\geq0 .
+\]
+Under the boxed results the internal bracket vanishes identically, so
+conduction carries the whole production. A material of this kind is
+\emph{thermoelastic}: it stores and returns energy without loss.
+Admitting $\bL$ among the arguments restores viscosity and leaves a
+residual inequality in $\bL$ as well.
+
+\rnlab{two hypotheses worth naming}
+The rates must be assignable independently of the state. That uses the
+freedom in $\bb$ and $r$, and it fails under an internal constraint,
+where the admissible $\dot\bF$ span a proper subspace; the conclusion
+then holds only modulo the constraint, which is why the pressure in an
+incompressible fluid is left undetermined, as
+Remark~\ref{rem:ch6cdread} records.
+
+The entropy flux is taken to be $\theta^{-1}h$. M\"uller (1967) and Liu
+(1972) drop that, admit an independent entropy flux, and treat the
+balance laws as constraints with Lagrange multipliers; the multiplier
+conjugate to the energy balance comes out as $\theta^{-1}$, so the
+classical choice becomes a theorem rather than the postulate
+Remark~\ref{rem:ch6truesdell} calls it.
+\end{readernote}%
+}

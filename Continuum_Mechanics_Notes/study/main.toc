@@ -1,0 +1,227 @@
+\contentsline {chapter}{\numberline {1}Mathematical Preliminaries}{1}{chapter.2}%
+\contentsline {section}{\numberline {1.1}Vector and tensor theory}{1}{section.3}%
+\contentsline {subsection}{\numberline {1.1.1}Vector spaces}{1}{subsection.4}%
+\contentsline {subsection}{\numberline {1.1.2}Change-of-basis formulas}{6}{subsection.22}%
+\contentsline {subsection}{\numberline {1.1.3}Vector products in $\mathbb {E}^{3}$}{7}{subsection.26}%
+\contentsline {subsection}{\numberline {1.1.4}Tensors}{9}{subsection.37}%
+\contentsline {subsection}{\numberline {1.1.5}Algebraic operations with second-order tensors}{12}{subsection.48}%
+\contentsline {section}{\numberline {1.2}Scalar, vector and tensor fields; gradient, divergence and curl; integral formulae}{16}{section.74}%
+\contentsline {subsection}{\numberline {1.2.1}Euclidean point spaces}{16}{subsection.75}%
+\contentsline {subsection}{\numberline {1.2.2}Gradients}{17}{subsection.83}%
+\contentsline {subsection}{\numberline {1.2.3}Directional derivatives}{20}{subsection.95}%
+\contentsline {subsection}{\numberline {1.2.4}Parameterized paths and the chain rule}{21}{subsection.107}%
+\contentsline {subsection}{\numberline {1.2.5}Gradients of vector fields}{24}{subsection.143}%
+\contentsline {subsection}{\numberline {1.2.6}Divergence and curl}{26}{subsection.162}%
+\contentsline {subsection}{\numberline {1.2.7}Integral formulae}{28}{subsection.176}%
+\contentsline {section}{\numberline {1.3}Problems}{29}{section.184}%
+\contentsline {subsection}{Problem 1: Cauchy--Schwarz, triangle, Pythagoras}{29}{problemenv.187}%
+\contentsline {subsection}{Problem 2: Is the norm linear?}{30}{problemenv.189}%
+\contentsline {subsection}{Problem 3: A constant map is not a tensor}{31}{problemenv.190}%
+\contentsline {subsection}{Problem 4: A rank-one tensor}{31}{problemenv.191}%
+\contentsline {subsection}{Problem 5: $\varepsilon _{ijk}A_{jk}=0\DOTSB \tmspace +\thickmuskip {.2777em}\DOTSB \Leftarrow \joinrel \Rightarrow \tmspace +\thickmuskip {.2777em}\vek {A}=\vek {A}^{t}$}{32}{problemenv.192}%
+\contentsline {subsection}{Problem 6: Skew/symmetric and the tensor inner product}{33}{problemenv.194}%
+\contentsline {subsection}{Problem 7: Is $\vek {A}(\vek {u}\times \vek {v})=\vek {A}\vek {u}\times \vek {v}+\vek {u}\times \vek {A}\vek {v}$?}{33}{problemenv.195}%
+\contentsline {subsection}{Problem 8: Reciprocal bases}{34}{problemenv.197}%
+\contentsline {subsection}{Problem 9: Invariance of trace and dot product; a computation}{35}{problemenv.198}%
+\contentsline {subsection}{Problem 10: Projection and reflection tensors}{37}{problemenv.199}%
+\contentsline {subsection}{Problem 11: Triple products; two induced tensors}{44}{problemenv.211}%
+\contentsline {subsection}{Problem 12: Two-point tensors}{45}{problemenv.212}%
+\contentsline {subsection}{Problem 13: Riesz representation for tensors}{46}{problemenv.214}%
+\contentsline {subsection}{Problem 14: Symmetric--skew decomposition}{47}{problemenv.215}%
+\contentsline {subsection}{Problem 15: Spherical--deviatoric decomposition}{48}{problemenv.217}%
+\contentsline {subsection}{Problem 16: Axial vector of a skew tensor}{49}{problemenv.219}%
+\contentsline {subsection}{Problem 17: Identities for the tensor product}{50}{problemenv.220}%
+\contentsline {subsection}{Problem 18: Transpose of the inverse}{51}{problemenv.221}%
+\contentsline {subsection}{Problem 19: Inverse of a product}{51}{problemenv.222}%
+\contentsline {subsection}{Problem 20: Transpose of a product}{51}{problemenv.223}%
+\contentsline {subsection}{Problem 21: Determinant identities via box products}{52}{problemenv.224}%
+\contentsline {subsection}{Problem 22: Cofactor identities}{53}{problemenv.225}%
+\contentsline {subsection}{Problem 23: Characteristic polynomial}{58}{problemenv.229}%
+\contentsline {subsection}{Problem 24: Field product rules}{59}{problemenv.230}%
+\contentsline {subsection}{Problem 25: Gradient in spherical coordinates}{60}{problemenv.231}%
+\contentsline {subsection}{Problem 26: Laplace's equation between two spheres}{67}{problemenv.240}%
+\contentsline {subsection}{Problem 27: A curl identity and the curl of a polar field}{67}{problemenv.241}%
+\contentsline {subsection}{Problem 28: Cartesian formula for the curl of a tensor}{68}{problemenv.242}%
+\contentsline {chapter}{\numberline {2}Bodies, Configurations, and Motions}{69}{chapter.243}%
+\contentsline {section}{\numberline {2.1}Position, velocity and acceleration}{69}{section.244}%
+\contentsline {section}{\numberline {2.2}Material, referential and spatial descriptions}{72}{section.270}%
+\contentsline {section}{\numberline {2.3}Cartesian coordinates}{76}{section.296}%
+\contentsline {section}{\numberline {2.4}The deformation gradient}{80}{section.318}%
+\contentsline {section}{\numberline {2.5}Mass and density}{85}{section.361}%
+\contentsline {section}{\numberline {2.6}Material curves and the shifter}{87}{section.384}%
+\contentsline {section}{\numberline {2.7}The Cauchy--Green deformation tensors and the Lagrange--Euler strain tensors}{90}{section.417}%
+\contentsline {section}{\numberline {2.8}Problems}{97}{section.473}%
+\contentsline {subsection}{Problem 1: components of the cofactor of $\vek {F}$.}{97}{theorem.474}%
+\contentsline {subsection}{Problem 2(a): $F^{*}_{iA}$ as a referential divergence.}{98}{figure.476}%
+\contentsline {subsection}{Problem 2(b): the Piola identity.}{99}{section*.477}%
+\contentsline {subsection}{Problem 2(c): $\det \vek {F}$ as a divergence.}{100}{theorem.480}%
+\contentsline {subsection}{Problem 2(d): $\det \vek {F}^{t}=\det \vek {F}$.}{101}{theorem.482}%
+\contentsline {subsection}{Problem 3: change of basis for a two-point tensor.}{102}{AMS.485}%
+\contentsline {chapter}{\numberline {3}Further Preliminaries, with Applications to the Analysis of Deformation}{104}{chapter.488}%
+\contentsline {section}{\numberline {3.1}Principal values and vectors: spectral representation of a symmetric tensor}{105}{section.489}%
+\contentsline {section}{\numberline {3.2}Positive definiteness and the extremal property of principal values}{112}{section.524}%
+\contentsline {section}{\numberline {3.3}Square root theorem}{116}{section.559}%
+\contentsline {section}{\numberline {3.4}Polar decomposition theorem}{119}{section.573}%
+\contentsline {section}{\numberline {3.5}Examples}{131}{section.620}%
+\contentsline {subsection}{\numberline {3.5.1}Simple shear}{133}{subsection.624}%
+\contentsline {subsection}{\numberline {3.5.2}Radial deformation of a right circular cylinder}{142}{subsection.682}%
+\contentsline {subsection}{\numberline {3.5.3}Azimuthal shear}{151}{subsection.714}%
+\contentsline {subsection}{\numberline {3.5.4}Torsion}{162}{subsection.749}%
+\contentsline {section}{\numberline {3.6}Homogeneous deformations}{166}{section.759}%
+\contentsline {subsection}{\numberline {3.6.1}Some properties of homogeneous deformations}{167}{subsection.770}%
+\contentsline {section}{\numberline {3.7}Rigid-body motions}{175}{section.801}%
+\contentsline {section}{\numberline {3.8}Problems}{178}{section.825}%
+\contentsline {subsection}{Problem 1: Triaxial stretch: area change and normals}{178}{problemenv.826}%
+\contentsline {subsection}{Problem 2: Products of orthogonal tensors}{182}{problemenv.829}%
+\contentsline {subsection}{Problem 3: Torsion: Cauchy--Green tensors and principal stretches}{183}{problemenv.830}%
+\contentsline {subsection}{Problem 4: Spherically symmetric deformation}{185}{problemenv.831}%
+\contentsline {subsection}{Problem 5: Telescopic, or anti-plane, shear}{187}{problemenv.833}%
+\contentsline {subsection}{Problem 6: Flexure of a block}{189}{problemenv.834}%
+\contentsline {subsection}{Problem 7: Invariants in terms of principal values; Cayley--Hamilton}{192}{problemenv.836}%
+\contentsline {subsection}{Problem 8: Two-dimensional Cayley--Hamilton}{193}{problemenv.837}%
+\contentsline {subsection}{Problem 9: The stretch tensor without eigenvectors}{195}{problemenv.839}%
+\contentsline {chapter}{\numberline {4}Rate of Deformation}{201}{chapter.842}%
+\contentsline {section}{\numberline {4.1}Velocity gradient, stretching and spin}{201}{section.843}%
+\contentsline {section}{\numberline {4.2}Material curves}{209}{section.880}%
+\contentsline {section}{\numberline {4.3}Example: a spinning disc}{221}{section.912}%
+\contentsline {section}{\numberline {4.4}Rigid-body motions}{222}{section.925}%
+\contentsline {section}{\numberline {4.5}Problems}{223}{section.937}%
+\contentsline {subsection}{Problem 1: Rules for time derivatives of tensors}{223}{problemenv.938}%
+\contentsline {subsection}{Problem 2: $\cc@accent {"705F}J=J\operatorname {tr}\vek {L}$, and $\partial J/\partial F_{iA}=F^{*}_{iA}$}{225}{problemenv.939}%
+\contentsline {subsection}{Problem 3: A material derivative from a spatial field}{226}{problemenv.940}%
+\contentsline {subsection}{Problem 4: The convective acceleration in Lamb form}{226}{problemenv.941}%
+\contentsline {subsection}{Problem 5: A given velocity field}{227}{problemenv.942}%
+\contentsline {subsection}{Problem 6: Spin of a fibre when $\vek {W}=\vek {O}$}{229}{problemenv.943}%
+\contentsline {subsection}{Problem 7: Rate of area change and rotation of the normal}{230}{problemenv.944}%
+\contentsline {subsection}{Problem 8: Stretching when the principal axes are frozen in the body}{232}{problemenv.946}%
+\contentsline {subsection}{Problem 9: An azimuthally graded axial flow}{233}{problemenv.947}%
+\contentsline {subsection}{Problem 10: Circular flow}{234}{problemenv.949}%
+\contentsline {chapter}{\numberline {5}Transport Formulas}{237}{chapter.951}%
+\contentsline {section}{\numberline {5.1}The divergence theorem and its variants}{238}{section.952}%
+\contentsline {subsection}{\numberline {5.1.1}Example: The Piola identity}{241}{subsection.976}%
+\contentsline {section}{\numberline {5.2}Reynolds' transport formula}{243}{section.985}%
+\contentsline {section}{\numberline {5.3}Extensions and generalizations}{248}{section.999}%
+\contentsline {subsection}{\numberline {5.3.1}Reynolds' formula for vector fields}{248}{subsection.1000}%
+\contentsline {subsection}{\numberline {5.3.2}The flux derivative}{248}{subsection.1005}%
+\contentsline {subsection}{\numberline {5.3.3}Non-material regions}{251}{subsection.1016}%
+\contentsline {section}{\numberline {5.4}Discontinuous fields}{254}{section.1028}%
+\contentsline {subsection}{\numberline {5.4.1}Reynolds' formula for fields that suffer a discontinuity across a surface}{254}{subsection.1029}%
+\contentsline {subsection}{\numberline {5.4.2}The divergence theorem for discontinuous fields}{257}{subsection.1040}%
+\contentsline {section}{\numberline {5.5}Problems}{258}{section.1048}%
+\contentsline {subsection}{Problem 1: Transport of a line integral}{258}{problemenv.1049}%
+\contentsline {subsection}{Problem 2: A second form of the flux derivative}{260}{problemenv.1050}%
+\contentsline {subsection}{Problem 3: The referential statements}{261}{problemenv.1051}%
+\contentsline {chapter}{\numberline {6}Balance Laws}{263}{chapter.1052}%
+\contentsline {section}{\numberline {6.1}Generic forms of the balance laws}{264}{section.1053}%
+\contentsline {section}{\numberline {6.2}Conservation of mass}{271}{section.1084}%
+\contentsline {section}{\numberline {6.3}Linear and rotational momenta; forces and torques}{277}{section.1114}%
+\contentsline {subsection}{\numberline {6.3.1}Linear and rotational momenta}{277}{subsection.1115}%
+\contentsline {subsection}{\numberline {6.3.2}Forces}{278}{subsection.1121}%
+\contentsline {subsection}{\numberline {6.3.3}Torques}{280}{subsection.1131}%
+\contentsline {section}{\numberline {6.4}Euler's postulates}{281}{section.1139}%
+\contentsline {subsection}{\numberline {6.4.1}Center of mass}{286}{subsection.1155}%
+\contentsline {subsection}{\numberline {6.4.2}Rigid bodies}{289}{subsection.1181}%
+\contentsline {section}{\numberline {6.5}Forces of mutual interaction in the body and the local equations of motion}{303}{section.1229}%
+\contentsline {subsection}{\numberline {6.5.1}Action and reaction}{303}{subsection.1230}%
+\contentsline {subsection}{\numberline {6.5.2}Cauchy's hypothesis and Noll's theorem}{307}{subsection.1261}%
+\contentsline {subsection}{\numberline {6.5.3}Cauchy's stress theorem}{316}{subsection.1295}%
+\contentsline {subsection}{\numberline {6.5.4}Rotational momentum balance}{327}{subsection.1348}%
+\contentsline {subsection}{\numberline {6.5.5}Decomposition of the stress into normal and shear components}{330}{subsection.1367}%
+\contentsline {subsection}{\numberline {6.5.6}Referential equations of motion}{334}{subsection.1395}%
+\contentsline {subsection}{\numberline {6.5.7}Mechanical energy balance}{344}{subsection.1432}%
+\contentsline {section}{\numberline {6.6}Energy balance}{352}{section.1464}%
+\contentsline {section}{\numberline {6.7}Entropy and the Clausius--Duhem inequality}{361}{section.1499}%
+\contentsline {section}{\numberline {6.8}Problems}{370}{section.1529}%
+\contentsline {subsection}{Problem 1: The referential balance laws}{370}{problemenv.1530}%
+\contentsline {subsection}{Problem 2: The referential center of mass}{376}{problemenv.1537}%
+\contentsline {subsection}{Problem 3: The co-rotational derivative in components}{378}{problemenv.1540}%
+\contentsline {subsection}{Problem 4: The inertia tensor is positive definite}{380}{problemenv.1545}%
+\contentsline {subsection}{Problem 5: Shear stress on an arbitrary plane; the octahedral shear}{383}{problemenv.1546}%
+\contentsline {subsection}{Problem 6: Piola tractions and the symmetry restriction}{389}{problemenv.1551}%
+\contentsline {subsection}{Problem 7: Three stresses for one shear state}{393}{problemenv.1552}%
+\contentsline {subsection}{Problem 8: The two Piola transforms, by direct calculation}{397}{problemenv.1553}%
+\contentsline {subsection}{Problem 9: The virtual power equation, or weak form}{400}{problemenv.1556}%
+\contentsline {subsection}{Problem 10: The mean stress in a body at rest}{403}{problemenv.1560}%
+\contentsline {subsection}{Problem 11: The energy flux and the jump conditions it carries}{406}{problemenv.1561}%
+\contentsline {subsection}{Problem 12: Cofactors, and two more power-conjugate pairs}{409}{problemenv.1562}%
+\contentsline {chapter}{\numberline {7}Observers and Frames of Reference}{414}{chapter.1563}%
+\contentsline {section}{\numberline {7.1}Observers}{415}{section.1564}%
+\contentsline {section}{\numberline {7.2}Transformation of the motion}{425}{section.1583}%
+\contentsline {section}{\numberline {7.3}Transformation of kinematic variables}{434}{section.1605}%
+\contentsline {section}{\numberline {7.4}Further transformations}{455}{section.1670}%
+\contentsline {section}{\numberline {7.5}Transformation of the balance laws}{464}{section.1695}%
+\contentsline {section}{\numberline {7.6}Problems}{476}{section.1747}%
+\contentsline {subsection}{Problem 1: The transformation of the acceleration}{476}{problemenv.1748}%
+\contentsline {subsection}{Problem 2: The rate of the shifter in a spinning frame}{478}{problemenv.1749}%
+\contentsline {subsection}{Problem 3: An observer standing on a spinning planet}{479}{problemenv.1750}%
+\contentsline {chapter}{\numberline {8}Constitutive Equations}{486}{chapter.1753}%
+\contentsline {section}{\numberline {8.1}Elastic materials with heat conduction and viscosity}{488}{section.1754}%
+\contentsline {section}{\numberline {8.2}Change of reference configuration and material symmetry}{494}{section.1776}%
+\contentsline {section}{\numberline {8.3}Noll's rule}{508}{section.1815}%
+\contentsline {section}{\numberline {8.4}Frame invariance}{516}{section.1836}%
+\contentsline {chapter}{\numberline {9}Viscous Fluids}{527}{chapter.1864}%
+\contentsline {section}{\numberline {9.1}Material frame indifference}{531}{section.1875}%
+\contentsline {subsection}{\numberline {9.1.1}Isotropic symmetric tensor-valued functions of a symmetric tensor}{542}{subsection.1926}%
+\contentsline {section}{\numberline {9.2}The heat flux}{553}{section.1970}%
+\contentsline {section}{\numberline {9.3}Thermodynamical considerations}{566}{section.2030}%
+\contentsline {section}{\numberline {9.4}Problems}{580}{section.2090}%
+\contentsline {subsection}{Problem 1: The two relative motions, verified}{580}{problemenv.2091}%
+\contentsline {subsection}{Problem 2: The same laws as the second observer writes them}{581}{problemenv.2092}%
+\contentsline {subsection}{Problem 3: Sufficiency of the heat-flux representation}{583}{problemenv.2093}%
+\contentsline {subsection}{Problem 4: Observers agree on the reaction pressure}{584}{problemenv.2094}%
+\contentsline {subsection}{Problem 5: Axial flow along a pipe, and the elliptical cross section}{585}{problemenv.2095}%
+\contentsline {subsection}{Problem 6: Two classical unidirectional flows}{589}{problemenv.2096}%
+\contentsline {subsection}{Problem 7: Rigid rotation, and the shape of the free surface}{592}{problemenv.2097}%
+\contentsline {subsection}{Problem 8: Circular Couette flow in an annulus}{594}{problemenv.2098}%
+\contentsline {subsection}{Problem 9: Archimedes}{598}{problemenv.2099}%
+\contentsline {subsection}{Problem 10: The thermal energy balance for an incompressible fluid}{602}{problemenv.2100}%
+\contentsline {subsection}{Problem 11: The temperature field between rotating cylinders}{604}{problemenv.2101}%
+\contentsline {subsection}{Problem 12: A spherically symmetric flow}{606}{problemenv.2102}%
+\contentsline {chapter}{\numberline {10}Kinematic Constraints}{611}{chapter.2103}%
+\contentsline {section}{\numberline {10.1}Observer consensus}{612}{section.2107}%
+\contentsline {section}{\numberline {10.2}Modification of the stress to accommodate constraints}{618}{section.2139}%
+\contentsline {section}{\numberline {10.3}Problems}{633}{section.2194}%
+\contentsline {subsection}{Problem 1: The three constraints as $O^{+}$ writes them}{633}{problemenv.2195}%
+\contentsline {subsection}{Problem 2: The reactive stress seen by another observer}{635}{problemenv.2196}%
+\contentsline {subsection}{Problem 3: A laminate of inextensible sheets}{637}{problemenv.2197}%
+\contentsline {subsection}{Problem 4: A laminate whose sheets preserve area}{639}{problemenv.2198}%
+\contentsline {chapter}{\numberline {11}Elastic Solids}{643}{chapter.2199}%
+\contentsline {section}{\numberline {11.1}Clausius--Duhem inequality}{645}{section.2221}%
+\contentsline {section}{\numberline {11.2}Stress response}{647}{section.2237}%
+\contentsline {subsection}{\numberline {11.2.1}Material symmetry}{649}{subsection.2255}%
+\contentsline {section}{\numberline {11.3}Heat flux}{657}{section.2302}%
+\contentsline {subsection}{\numberline {11.3.1}General form of the heat flux}{659}{subsection.2320}%
+\contentsline {section}{\numberline {11.4}Problems}{661}{section.2342}%
+\contentsline {subsection}{Problem 1: The three rearrangement rules}{661}{problemenv.2343}%
+\contentsline {subsection}{Problem 2: The isotropic Cauchy stress}{662}{problemenv.2344}%
+\contentsline {subsection}{Problem 3: $\vek {C}$ and $\vek {B}$ have the same invariants}{663}{problemenv.2345}%
+\contentsline {subsection}{Problem 4: The isotropic response as $O^{+}$ writes it}{664}{problemenv.2346}%
+\contentsline {subsection}{Problem 5: Are the laminate constraints compatible with isotropy?}{665}{problemenv.2347}%
+\contentsline {subsection}{Problem 6: The invariants in simple shear}{667}{problemenv.2348}%
+\contentsline {subsection}{Problem 7: The universal relation}{668}{problemenv.2349}%
+\contentsline {subsection}{Problem 8: The neo-Hookean material, and a bar in tension}{669}{problemenv.2350}%
+\contentsline {subsection}{Problem 9: Anti-plane shear of a neo-Hookean tube}{671}{problemenv.2351}%
+\contentsline {subsection}{Problem 10: Residual stress in an isotropic solid}{673}{problemenv.2352}%
+\contentsline {subsection}{Problem 11: An azimuthal anti-plane shear, and what it is}{674}{problemenv.2353}%
+\contentsline {subsection}{Problem 12: Torsion of a neo-Hookean bar, and the Poynting effect}{676}{problemenv.2354}%
+\contentsline {subsection}{Problem 13: Closing a wedge: the cylinder with a sector removed}{678}{problemenv.2356}%
+\contentsline {subsection}{Problem 14: The referential energy balance for an elastic solid}{682}{problemenv.2357}%
+\contentsline {subsection}{Problem 15: The referential heat flux}{683}{problemenv.2359}%
+\contentsline {subsection}{Problem 16: A torsion with an axial temperature gradient}{685}{problemenv.2360}%
+\contentsline {chapter}{\numberline {12}Linear Elasticity}{688}{chapter.2361}%
+\contentsline {section}{\numberline {12.1}Kinematics}{688}{section.2362}%
+\contentsline {section}{\numberline {12.2}Stress--deformation relation}{696}{section.2431}%
+\contentsline {section}{\numberline {12.3}Equation of motion}{702}{section.2514}%
+\contentsline {section}{\numberline {12.4}Problems}{704}{section.2535}%
+\contentsline {subsection}{Problem 1: The kinematic transformations}{704}{problemenv.2536}%
+\contentsline {subsection}{Problem 2: Energy balance in the purely mechanical theory}{705}{problemenv.2537}%
+\contentsline {subsection}{Problem 3: Residual stress in the linear theory}{706}{problemenv.2538}%
+\contentsline {subsection}{Problem 4: The cofactor at leading order, and the two volume formulas}{707}{problemenv.2539}%
+\contentsline {subsection}{Problem 5: The symmetries of the spatial stiffness}{709}{problemenv.2540}%
+\contentsline {subsection}{Problem 6: The strain energy as a quadratic form}{710}{problemenv.2541}%
+\contentsline {subsection}{Problem 7: Isotropic moduli, and when the energy is positive definite}{711}{problemenv.2542}%
+\contentsline {subsection}{Problem 8: The spatial equation of motion}{713}{problemenv.2543}%
+\contentsline {subsection}{Problem 9: The equation of motion for a second inertial observer}{714}{problemenv.2544}%
+\contentsline {subsection}{Problem 10: A non-inertial second observer}{715}{problemenv.2545}%
+\contentsline {chapter}{\numberline {A}Dictionary to the book: Chapter 1 notation}{717}{appendix.2547}%
+\contentsline {chapter}{\numberline {B}Dictionary to the book: Chapter 2 notation}{718}{appendix.2548}%

@@ -1,0 +1,118 @@
+%=======================================================================
+%  READER'S NOTES -- the environment, and the registry that keeps their
+%  text out of the chapter bodies.
+%
+%  A reader's note is a long-form expansion of a step the running text
+%  compresses: the algebra written out with nothing assumed.  The notes
+%  are set in from the margin, in a smaller face, behind a coloured rule,
+%  so that the spine of the argument can be read straight through and the
+%  arithmetic is there for whoever wants it.
+%
+%  The notes themselves live in readernotes_ch<N>.tex, one file per
+%  chapter.  A chapter body calls
+%
+%       \rnote{ch6:6.131-combining}
+%
+%  at the point where the note belongs, and the matching
+%
+%       \rnotedef{ch6:6.131-combining}{%
+%       \begin{readernote}[the five substitutions ...]
+%       ...
+%       \end{readernote}%
+%       }
+%
+%  in the notes file supplies the text.  Moving a note is therefore a
+%  matter of moving one line, and rewriting one never touches the
+%  chapter.  A \rnote whose key was never registered prints a visible
+%  red placeholder and warns, rather than vanishing silently.
+%
+%  Requires: xcolor.  Input from the preamble, before the notes files.
+%=======================================================================
+
+\makeatletter
+
+% ------------------------------- the environment -----------------------
+% The optional argument is the note's title, shown in parentheses after
+% the words "Reader's note".  It may be omitted.
+% ------------------------------- the two inks --------------------------
+% The whole note -- prose, algebra, boxes and rules alike -- is set in
+% rnink, so that a note reads as one object and the chapter's own text is
+% the only black on the page.  The reason column is set in rnfaint, the
+% same ink lightened, which keeps the algebra ahead of its justification
+% without introducing a second hue.  Change these two lines to recolour
+% every note in the book.
+\colorlet{rnink}{blue!45!black}
+\colorlet{rnfaint}{blue!45!black!58!white}
+
+\newenvironment{readernote}[1][]{%
+  \par\smallskip
+  \def\rn@arg{#1}\def\rn@empty{}%
+  \begingroup
+  \advance\leftskip by 1.2em
+  \tolerance=1400 \emergencystretch=3em
+  % Tighten the gap between the algebra and the reason column.  NOTE:
+  % amsmath's \minalignsep is a *macro* expanding to 10pt, not a dimen
+  % register, so `\minalignsep=6pt' would typeset the words `10pt=6pt'
+  % into the page rather than assigning anything.  It must be redefined.
+  \renewcommand{\minalignsep}{6pt}%
+  \small\color{rnink}\noindent
+  \rule[-0.18em]{1.6pt}{0.95em}\enspace
+  {\scshape Reader's note}%
+  \ifx\rn@arg\rn@empty\else\ \textit{(#1)}\fi
+  {\bfseries.}\enspace\ignorespaces
+}{\par\endgroup\smallskip}
+
+% --------------------------------- the registry ------------------------
+% \rnotedef{key}{text} stores the text; \newcommand makes \rnotedef long,
+% so blank lines inside the text are allowed.  The stored macro takes no
+% arguments, so no \long is needed on the \gdef itself.
+\newcommand{\rnotedef}[2]{%
+  \@ifundefined{rn@text@#1}{}%
+    {\@latex@warning@no@line{Reader's note `#1' registered twice}}%
+  \expandafter\gdef\csname rn@text@#1\endcsname{#2}}
+
+\newcommand{\rnote}[1]{%
+  \@ifundefined{rn@text@#1}%
+    {\@latex@warning@no@line{Reader's note `#1' is undefined}%
+     \par\smallskip\noindent
+     \textcolor{red}{[reader's note \texttt{#1} missing]}\par\smallskip}%
+    {\csname rn@text@#1\endcsname}}
+
+% ------------------------------ notebook furniture ---------------------
+% The notes are written as a working notebook is written: a marker, a
+% ledger of equalities with the reason for each in the right-hand column,
+% a conclusion.  Prose appears only where a line of algebra cannot carry
+% the point.  \rnlab is the marker; it opens a paragraph.
+%
+%       \rnlab{goal}  ...one line...
+%
+%       \[\begin{aligned}
+%          x &= y   &&\eqr{2.50}\\
+%          y &= z   &&\text{product rule}
+%       \end{aligned}\]
+%
+% The reason column is the second alignment pair of amsmath's aligned,
+% opened by the literal `&&'.  Write those two ampersands out: an
+% alignment tab arriving from a macro is not seen by the alignment
+% scanner, so \rnby-style shorthands do not work here.  What follows the
+% tabs is wrapped in \rnwhy, which sets the justification a size down and
+% in grey, so that the eye reads the algebra first and the reason second:
+%
+%       x &= y   &&\rnwhy{\eqr{2.50}}\\
+%       y &= z   &&\rnwhy{\text{product rule}}
+%
+% The argument of \rnwhy is ordinary MATH, written exactly as it would be
+% in the display itself, with \text{...} round any prose: the macro boxes
+% it at \footnotesize and re-opens math inside the box, so nothing about
+% the content has to change.  Being an \mbox it will not line-break, which
+% is the right behaviour for a marginal reason and a warning when one has
+% grown too long to be a reason.
+%
+% Conclusions use \therefore and \boxed, both already available from
+% amssymb and amsmath.
+\newcommand{\rnlab}[1]{%
+  {\footnotesize\scshape #1}\enspace\ignorespaces}
+\newcommand{\rnwhy}[1]{%
+  \mbox{\footnotesize\textcolor{rnfaint}{$#1$}}}
+
+\makeatother

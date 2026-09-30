@@ -1,0 +1,272 @@
+%=======================================================================
+%  PRINCIPLES OF CONTINUUM MECHANICS -- study notes
+%  Chapters 1-12 after Steigmann & Shirani, assembled into one document.
+%
+%  The chapter bodies live in  body_ch1.tex ... body_ch12.tex and are
+%  generated from the standalone chapter files; the preamble below is
+%  their union.  Problems appear in the table of contents and hence in
+%  the PDF bookmarks.
+%
+%  Compile:  latexmk -pdf main.tex
+%=======================================================================
+\documentclass[17pt,a4paper,openany]{extreport}
+
+\usepackage[margin=1.8cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{bm}
+\usepackage{accents}
+% book style: boldface is rendered by an under-tilde
+\DeclareRobustCommand{\vek}[1]{\underaccent{\tilde}{#1}}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,angles,quotes,patterns}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\tikzset{vec/.style={-{Stealth[length=2.3mm]},thick},
+         thinvec/.style={-{Stealth[length=1.8mm]},semithick},
+         mapar/.style={-{Stealth[length=2.4mm]},thick},
+         guide/.style={gray!65,densely dashed,thin},
+         bodyline/.style={thick,dashed},
+         configline/.style={thick},
+         lbl/.style={fill=white,inner sep=1pt}}
+\newcommand{\blob}[1]{\draw[#1] plot[smooth cycle,tension=0.85] coordinates
+  {(0,1.05) (1.15,0.72) (1.5,-0.35) (0.6,-1.15) (-0.75,-0.95) (-1.3,0.05)};}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,
+            hypertexnames=false,pdfencoding=unicode,
+            bookmarksnumbered=true,bookmarksopen=true,
+            bookmarksopenlevel=1]{hyperref}
+
+%=============================== notation ==============================
+\newcommand{\Rn}{\mathbb{R}}
+\newcommand{\Cn}{\mathbb{C}}
+\newcommand{\Et}{\mathbb{E}^{3}}
+\newcommand{\hEt}{\hat{\mathbb{E}}^{3}}
+\newcommand{\Vt}{\mathbb{E}^{3}}
+\newcommand{\hVt}{\hat{\mathbb{E}}^{3}}
+\newcommand{\Ept}{\mathcal{E}^{3}}
+\newcommand{\hEpt}{\hat{\mathcal{E}}^{3}}
+\newcommand{\Lin}{\operatorname{Lin}}
+\newcommand{\Orth}{\operatorname{Orth}}
+\newcommand{\Sym}{\operatorname{sym}}
+\newcommand{\Skw}{\operatorname{skw}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\grad}{\operatorname{grad}}
+\newcommand{\Grad}{\operatorname{Grad}}
+\newcommand{\dvg}{\operatorname{div}}
+\newcommand{\Dvg}{\operatorname{Div}}
+\newcommand{\I}{\vek{I}}
+\newcommand{\hI}{\hat{\vek{I}}}
+\newcommand{\Ob}{\vek{O}}
+\newcommand{\hOb}{\hat{\vek{O}}}
+\newcommand{\ba}{\vek{a}}
+\newcommand{\bb}{\vek{b}}
+\newcommand{\bc}{\vek{c}}
+\newcommand{\bd}{\vek{d}}
+\renewcommand{\bm}{\vek{m}}
+\newcommand{\bg}{\vek{g}}
+\newcommand{\bff}{\vek{f}}
+\newcommand{\be}{\vek{e}}
+\newcommand{\bn}{\vek{n}}
+\newcommand{\bp}{\vek{p}}
+\newcommand{\br}{\vek{r}}
+\newcommand{\bs}{\vek{s}}
+\newcommand{\bt}{\vek{t}}
+\newcommand{\bu}{\vek{u}}
+\newcommand{\bv}{\vek{v}}
+\newcommand{\bw}{\vek{w}}
+\newcommand{\bx}{\vek{x}}
+\newcommand{\by}{\vek{y}}
+\newcommand{\bz}{\vek{z}}
+\newcommand{\bM}{\vek{M}}
+\newcommand{\bN}{\vek{N}}
+\newcommand{\bX}{\vek{X}}
+\newcommand{\bY}{\vek{Y}}
+\newcommand{\bZ}{\vek{Z}}
+\newcommand{\bA}{\vek{A}}
+\newcommand{\bB}{\vek{B}}
+\newcommand{\bC}{\vek{C}}
+\newcommand{\bD}{\vek{D}}
+\newcommand{\bE}{\vek{E}}
+\newcommand{\bF}{\vek{F}}
+\newcommand{\bG}{\vek{G}}
+\newcommand{\bH}{\vek{H}}
+\newcommand{\bK}{\vek{K}}
+\newcommand{\bL}{\vek{L}}
+\newcommand{\bP}{\vek{P}}
+\newcommand{\bQ}{\vek{Q}}
+\newcommand{\bR}{\vek{R}}
+\newcommand{\bS}{\vek{S}}
+\newcommand{\bT}{\vek{T}}
+\newcommand{\bU}{\vek{U}}
+\newcommand{\bV}{\vek{V}}
+\newcommand{\bW}{\vek{W}}
+\newcommand{\bze}{\vek{0}}
+\newcommand{\hbE}{\hat{\vek{E}}}
+\newcommand{\bchi}{\vek{\chi}}
+\newcommand{\bkap}{\kappa}
+\newcommand{\shift}{\vek{1}}
+\newcommand{\ber}{\vek{e}_{r}}
+\newcommand{\bet}{\vek{e}_{\theta}}
+\newcommand{\hER}{\hat{\vek{E}}_{R}}
+\newcommand{\hETh}{\hat{\vek{E}}_{\Theta}}
+\newcommand{\dd}{\delta}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dl}{\mathrm{d}}
+\newcommand{\tbox}[3]{[\,#1,#2,#3\,]}
+\newcommand{\ip}[2]{#1\cdot#2}
+\newcommand{\rest}[1]{\big|_{#1}}
+\newcommand{\Proj}[1]{\mathbb{P}_{(#1)}}
+\newcommand{\Refl}[1]{\mathbb{R}_{(#1)}}
+% ---- pulled in from the Chapter 1 and 2 preambles -------------------
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\Vn}{\mathcal{V}_{n}}
+\newcommand{\En}{\mathbb{E}^{n}}
+\newcommand{\Sph}{\operatorname{Sph}}
+\newcommand{\Dev}{\operatorname{Dev}}
+\newcommand{\crl}{\operatorname{curl}}
+\newcommand{\bh}{\vek{h}}
+\newcommand{\bq}{\vek{q}}
+\newcommand{\bo}{\vek{o}}
+\newcommand{\bmv}{\vek{m}}
+\newcommand{\btt}{\vek{t}}
+\newcommand{\bk}{\vek{k}}
+\newcommand{\bOm}{\vek{\Omega}}
+\newcommand{\bom}{\vek{\omega}}
+\renewcommand{\beth}{\vek{e}_{\theta}}
+\newcommand{\beph}{\vek{e}_{\varphi}}
+\newcommand{\berho}{\vek{e}_{\rho}}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\newcommand{\bmm}{\vek{m}}
+\newcommand{\bnu}{\vek{\nu}}
+\newcommand{\bkappa}{\vek{\kappa}}
+% Chapter 5 needs the jump of a field across a singular surface. Written
+% out of basic pieces rather than with stmaryrd's \llbracket, so that the
+% same definition serves the PDF and the web reader's KaTeX.
+\newcommand{\jump}[1]{[\![#1]\!]}
+
+%========================= theorem environments ========================
+\newtheoremstyle{scplain}{\topsep}{\topsep}{\itshape}{0pt}
+  {\scshape}{.}{5pt plus 1pt minus 1pt}{}
+\newtheoremstyle{scdefn}{\topsep}{\topsep}{\normalfont}{0pt}
+  {\scshape}{.}{5pt plus 1pt minus 1pt}{}
+\theoremstyle{scplain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{scdefn}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{claimx}[theorem]{Claim}
+
+% Problems: numbered afresh in every chapter, and listed in the ToC (and
+% therefore in the PDF bookmarks) so that they can be jumped to directly.
+\newtheorem{problemenv}{Problem}
+\makeatletter
+\newcommand{\prob@toc}[1]{%
+  \def\pr@a{#1}\def\pr@b{}%
+  \ifx\pr@a\pr@b
+    \addcontentsline{toc}{subsection}{Problem \theproblemenv}%
+  \else
+    \addcontentsline{toc}{subsection}{%
+      \texorpdfstring{Problem \theproblemenv: #1}{Problem \theproblemenv}}%
+  \fi}
+\newenvironment{problem}[1][]%
+  {\begin{problemenv}[#1]\prob@toc{#1}}%
+  {\end{problemenv}}
+\makeatother
+\newenvironment{solution}{\par\smallskip\noindent\textit{Solution.}\ }
+  {\hfill$\square$\par\smallskip}
+
+% ---------------------------- reader's notes --------------------------
+% The readernote environment and the \rnote / \rnotedef registry, then
+% the notes themselves, one file per chapter.  Keeping the text of the
+% notes out of this file and out of the chapter bodies is what lets each
+% of the three be read on its own; see the header of readernotes.tex.
+\input{readernotes}
+\input{readernotes_ch6}
+
+% figure numbering pinned to the book's, where a chapter body asks for it
+\newcommand{\bookfig}[1]{\setcounter{figure}{\numexpr#1-1\relax}}
+
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+\title{Principles of Continuum Mechanics\\[3mm]
+\large Worked notes on Chapters 1 to 12\\[2mm]
+\large after D. J. Steigmann and M. Shirani}
+\author{}
+\date{}
+
+
+%------------------- clickable equation references ---------------------
+% \eqr{4.11} prints "(4.11)" exactly as before and turns it into a link
+% when equation (4.11) is present in this document.  When it is not -- a
+% standalone chapter referring to an equation of another chapter -- it
+% degrades silently to plain text instead of raising an undefined
+% reference.  Must sit after hyperref.
+\makeatletter
+% a display carrying \tag{2.48--2.50} can hold only one \label, so the
+% remaining members of the range are routed to it by this alias table
+\newcommand{\eqalias}[2]{\expandafter\gdef\csname eqal@#1\endcsname{#2}}
+\newcommand{\eqr@do}[1]{%
+  \begingroup
+    \@ifundefined{eqal@#1}{\def\eqr@t{#1}}%
+                          {\edef\eqr@t{\csname eqal@#1\endcsname}}%
+    \@ifundefined{r@eq:\eqr@t}%
+      {\textup{(#1)}}%
+      {\hyperref[eq:\eqr@t]{\textup{(#1)}}}%
+  \endgroup}
+\DeclareRobustCommand{\eqr}[1]{%
+  \ifmmode\text{\eqr@do{#1}}\else\eqr@do{#1}\fi}
+\makeatother
+\input{eq_aliases}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+{\Huge\scshape Principles of\\[3mm] Continuum Mechanics\par}
+\vspace{1.2cm}
+{\LARGE Worked notes on Chapters 1 to 12\par}
+\vspace{0.8cm}
+{\large after D. J. Steigmann and M. Shirani\par}
+\vspace{1.8cm}
+\begin{minipage}{0.86\textwidth}
+{\large Every result is derived from the algebra of Chapter 1, with no
+step omitted. Section and equation numbers match the book. All chapter
+problems are solved in full, and each appears in the table of contents and
+in the PDF bookmarks. Suspected misprints in the printed text are recorded
+where they occur and collected in \texttt{book\_questions.pdf}.\par}
+\end{minipage}
+\vfill
+\end{titlepage}
+
+\pagenumbering{roman}
+\tableofcontents
+\cleardoublepage
+\pagenumbering{arabic}
+
+
+\input{body_ch1}
+\input{body_ch2}
+\input{body_ch3}
+\input{body_ch4}
+\input{body_ch5}
+\input{body_ch6}
+\input{body_ch7}
+\input{body_ch8}
+\input{body_ch9}
+\input{body_ch10}
+\input{body_ch11}
+\input{body_ch12}
+
+\appendix
+\input{body_appendix}
+
+\end{document}

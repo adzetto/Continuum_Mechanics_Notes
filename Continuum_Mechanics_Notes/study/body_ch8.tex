@@ -1,0 +1,2054 @@
+%=======================================================================
+\chapter{Constitutive Equations}
+%=======================================================================
+
+The balance laws of Chapter 6 are true of every material. Mass is
+conserved in steel and in honey; linear momentum balances in glass and
+in air. That universality is what made them worth proving once and for
+all, and it is also precisely why they cannot, by themselves, predict
+anything at all. A law that does not distinguish steel from honey
+cannot tell you what either of them will do.
+
+The deficit can be counted exactly, and the count is the reason this
+chapter exists. The unknown fields at a point of the body are the mass
+density $\rho$, the motion $\bchi$ or equivalently the velocity $\bv$
+(three components), the temperature $\theta$, the Cauchy stress $\bT$
+(six components, the symmetry $\bT=\bT^{t}$ having been extracted in
+Chapter 6 from the balance of moment of momentum), the heat flux $\bq$
+(three), the internal energy density $\eps$ and the entropy density
+$\eta$. That is
+\[
+   1+3+1+6+3+1+1=16
+\]
+scalar fields. Against them Chapter 6 supplies conservation of mass
+(one equation), the balance of linear momentum (three) and the balance
+of energy (one): five. The Clausius--Duhem inequality \eqr{6.187} adds
+nothing to the tally, since an inequality selects among candidates but
+determines none of them.
+
+Eleven relations are therefore missing, and it is no accident that the
+set $C'=\{\bT,\bq,\eps,\eta\}$ of \eqr{8.2} below has exactly eleven
+components. Supply those eleven as functions of the rest and the system
+closes: five equations left, five unknowns left, namely $\rho$, $\bchi$
+and $\theta$. The eleven relations are the \emph{constitutive
+equations}, and they are where the particular material enters the
+theory. Everything before this chapter was true of all matter;
+everything in it is true of some matter and false of the rest.
+
+Such relations are idealizations. They are not deduced from anything
+more fundamental within continuum mechanics, and they are judged solely
+by whether the predictions they deliver agree with what is measured. For
+any real substance that agreement is to be expected only within a
+limited range of conditions, so a constitutive equation encodes both the
+material and the circumstances: the same steel is elastic under a light
+load, plastic under a heavy one, and molten at $1700$ degrees, and no
+single relation covers all three. This book treats only the classical
+cases, viscous and inviscid fluids and elastic solids, which are the
+most fully developed and most widely used, and which are the
+prerequisite for everything more elaborate.
+
+What this chapter does \emph{not} do is write down a particular
+constitutive equation. It asks the prior question: what may a
+constitutive equation look like at all? Four answers are given to it,
+and only the first is a free modelling choice.
+
+\begin{itemize}\itemsep2pt
+\item \emph{Locality}, Section~\ref{sec:ch8elastic}: the response at a
+      material point is settled by what happens in an arbitrarily small
+      neighbourhood of that point, and, in the class treated here, by
+      the values of the deformation, the velocity and the temperature
+      there to first order. This is an assumption, and a restrictive
+      one.
+\item \emph{Material symmetry}, Section~\ref{sec:ch8symm}: certain
+      rearrangements of the reference neighbourhood are undetectable by
+      any experiment, and the set of them is a group. Whether that group
+      consists of rotations or of all volume-preserving maps is the
+      difference between a solid and a fluid.
+\item \emph{Noll's rule}, Section~\ref{sec:ch8noll}: the symmetry group
+      belongs jointly to the material and to the reference
+      configuration, and changing the reference conjugates the group.
+      This is a theorem, not a choice.
+\item \emph{Frame invariance}, Section~\ref{sec:ch8frame}: two observers
+      must agree about the material, and the demand that they use the
+      same response function restricts that function. This too is
+      forced.
+\end{itemize}
+
+A fifth restriction, compatibility with the Clausius--Duhem inequality
+of Section 6.7, is stated at the end of the chapter and exploited in the
+two that follow.
+
+%=======================================================================
+\section{Elastic materials with heat conduction and viscosity}
+\label{sec:ch8elastic}
+%=======================================================================
+
+The quantities for which constitutive equations are sought are the
+present values of the stress $\bT$, the heat flux $\bq$, the energy
+density $\eps$ and the entropy density $\eta$, all at a material point
+$p\in B$ whose position in the reference configuration $\kappa$ is
+$\bX$. We construct these relations from the standpoint of a single
+observer $O$, and only in Section~\ref{sec:ch8frame} bring in a second
+observer $O^{+}$ and ask what the two must agree about.
+
+The order matters, and it is worth saying why we do not impose observer
+agreement from the start. Material frame indifference is the
+requirement that constitutive relations written by $O^{+}$ describe the
+same material as those written by $O$. If they did not, then what a
+substance \emph{is} would depend on who was watching it, and every
+laboratory would have to publish its own elasticity of copper. Experience
+says otherwise: material behaviour is intrinsic. Agreement between the
+two observers is therefore not a further physical hypothesis but a
+consistency condition, and consistency conditions are cleanest to apply
+to a structure that already exists. So we build the structure first.
+
+\subsection*{Locality, and the expansions it licenses}
+
+The first restriction to suggest itself is \emph{locality}: the response
+of the material at $p$ should depend on the values of the variables
+constituting a process in a neighbourhood of $p$, that is, in a
+neighbourhood of $\bX$, and on nothing further afield. This rules out
+action at a distance: what the material does here is not directly
+affected by what is happening a metre away, except through the
+intervening material.
+
+We narrow this further. The processes to which the material is deemed
+sensitive are taken to consist of the current deformation
+$\bchi_{\kappa}(\bX',t)$, the current material velocity
+$\hat\bv(\bX',t)$ and the current temperature $\hat\theta(\bX',t)$ for
+all $\bX'\in\kappa$ in an arbitrarily small neighbourhood of $\bX$. The
+carets are the ones introduced in Remark~\ref{rem:decorations}: they
+select the referential description, the function whose input is a place
+in $\kappa$, which is the only description in which ``a neighbourhood of
+the material point'' is a neighbourhood of a fixed set.
+
+Assuming these to be smooth functions of position in $\kappa$, each may
+be expanded about $\bX$. The expansions are ordinary first-order Taylor
+expansions, and the coefficient of $\bX'-\bX$ in each is the referential
+gradient of the quantity being expanded, evaluated at $\bX$:
+\begin{equation}
+\begin{aligned}
+   \bchi_{\kappa}(\bX',t)&=\bchi_{\kappa}(\bX,t)+\bF(\bX,t)(\bX'-\bX)
+     +o(|\bX'-\bX|),\\
+   \hat\bv(\bX',t)&=\hat\bv(\bX,t)+\dot\bF(\bX,t)(\bX'-\bX)
+     +o(|\bX'-\bX|),\\
+   \hat\theta(\bX',t)&=\hat\theta(\bX,t)
+     +\ip{\big(\Grad\hat\theta(\bX,t)\big)}{(\bX'-\bX)}
+     +o(|\bX'-\bX|).
+\end{aligned}
+   \tag{8.1}\label{eq:8.1}
+\end{equation}
+Each of the three coefficients has already been computed in an earlier
+chapter, and it is worth saying which is which, because the middle one
+is the only one that is not a definition.
+
+The first line is the statement that $\bF=\Grad\bchi_{\kappa}$, written
+as an expansion; it is \eqr{3.102}, the local approximation of an
+arbitrary deformation by a homogeneous one.
+
+The second line has coefficient $\Grad\hat\bv$, and \eqr{4.2} showed
+that $\Grad\hat\bv=\dot\bF$: differentiating $\chi_{i}$ with respect to
+$X_{A}$ and then with respect to $t$ gives the same thing in either
+order, so the referential gradient of the velocity is the material time
+derivative of the deformation gradient. That interchange, and hence the
+appearance of $\dot\bF$ rather than some new tensor, is the whole
+content of the second line.
+
+The third line is the definition of the gradient of a scalar field,
+Theorem~\ref{thm:grad}, transplanted to $\kappa$.
+
+The symbol $o(|\bX'-\bX|)$ is the Landau symbol of
+Definition~\ref{def:landau}: a quantity which, divided by $|\bX'-\bX|$,
+tends to zero as $\bX'\to\bX$. It is what makes ``for $|\bX'-\bX|$
+sufficiently small these are dominated by the terms shown'' a precise
+statement rather than a hope.
+
+\begin{remark}[what the truncation is, and what it costs]
+\label{rem:ch8trunc}
+Nothing so far forces a stopping point. One could keep the next term in
+each expansion, which for the first line would be the second gradient
+$\Grad\bF$, and obtain a wider class of models. Truncating at first
+order is a modelling decision and should be recognised as one.
+
+The decision says: whatever the material at $p$ is sensitive to, it is
+captured to sufficient accuracy by the value and the first derivative of
+the deformation, the velocity and the temperature at $p$. If two
+processes agree in those data at $p$, the material at $p$ cannot tell
+them apart.
+
+What it costs is every phenomenon carried by the higher gradients. A
+material whose response involves $\Grad\bF$ has an intrinsic length
+scale, since $\Grad\bF$ carries dimensions of one over length while
+$\bF$ is dimensionless; such theories are used for surface tension, for
+the width of a phase boundary and for the size effects seen in very
+small specimens. None of that is available here. In exchange, the
+theory becomes a theory of \emph{fields at a point}, and the whole
+apparatus of Sections~\ref{sec:ch8symm} to \ref{sec:ch8frame} becomes
+statements about tensors rather than about functionals.
+
+A material whose response depends on the deformation only through $\bF$
+is called \emph{simple}, following Noll. The present class is that of
+simple materials with heat conduction and viscosity.
+\end{remark}
+
+\subsection*{The two lists}
+
+Accordingly, if we mean to account for effects at this order, we assume
+the constitutive response of the material, consisting of the set
+\begin{equation}
+   C'=\{\bT,\bq,\eps,\eta\},
+   \tag{8.2}\label{eq:8.2}
+\end{equation}
+evaluated at $\bX$ and $t$, to be determined by the list
+\begin{equation}
+   L'=\{\bx,\bv,\theta,\bF,\dot\bF,\Grad\theta\},
+   \tag{8.3}\label{eq:8.3}
+\end{equation}
+also evaluated at $\bX$ and $t$. Here $\bx=\bchi_{\kappa}(\bX,t)$,
+$\bv=\hat\bv(\bX,t)$ and $\theta=\hat\theta(\bX,t)$: the list contains
+the values at $\bX$ from \eqr{8.1} together with the three gradients
+that accompany them.
+
+It will prove more convenient to work not with $C'$ but with the
+equivalent set
+\begin{equation}
+   C=\{\bT,\bq,\psi,\eta\},
+   \tag{8.4}\label{eq:8.4}
+\end{equation}
+where $\psi$ is the Helmholtz free energy per unit mass, defined in
+Chapter 6 by \eqr{6.186},
+\[
+   \psi=\eps-\theta\eta .
+\]
+The two sets carry the same information. Given $\theta$, which is in the
+list $L'$ and therefore always available, the relation
+$\psi=\eps-\theta\eta$ determines $\psi$ from $(\eps,\eta)$ and
+$\eps=\psi+\theta\eta$ recovers $\eps$ from $(\psi,\eta)$; the map is a
+bijection with $\eta$ and $\theta$ held fixed. Nothing is gained or lost
+in the exchange, which is why \eqr{8.4} may replace \eqr{8.2} without
+comment.
+
+What is gained is convenience later. The local Clausius--Duhem
+inequality was reduced in Chapter 6 to \eqr{6.187},
+\[
+   -\rho\big(\dot\psi+\eta\dot\theta\big)+\ip\bT\bL
+   -\theta^{-1}\ip\bq{\grad\theta}\ \geq\ 0 ,
+\]
+in which $\psi$, not $\eps$, is the energy that appears. Since that
+inequality is the instrument by which the chapters that follow will
+extract restrictions on the constitutive functions, it pays to have the
+constitutive list already written in the variable the inequality uses.
+The exchange $\eps\mapsto\psi$ is a Legendre transformation trading the
+entropy for the temperature as the independent thermal variable, and
+$\theta$ is what appears in the list \eqr{8.3}, not $\eta$.
+
+\subsection*{Two gradients of the temperature}
+
+The list $L'$ contains $\Grad\theta$, a referential vector. The list we
+shall actually use contains $\grad\theta$, a spatial one. They determine
+each other, and the relation between them is worth deriving rather than
+quoting, since the same two-line argument recurs three more times in
+this chapter.
+
+Let $\dl\bX$ be a material line element at $\bX$ and $\dl\bx=\bF\dl\bX$
+its image, \eqr{2.34}. The increment of temperature between the two ends
+of that element is one number, and each description computes it its own
+way:
+\begin{equation}
+   \ip{\Grad\hat\theta}{\dl\bX}=\dl\theta
+   =\ip{\grad\tilde\theta}{\dl\bx}
+   =\ip{\grad\tilde\theta}{\bF\,\dl\bX},
+   \tag{8.5}\label{eq:8.5}
+\end{equation}
+the first and third equalities being the definition of the gradient in
+$\kappa$ and in $\kappa_{t}$ respectively, and the last the substitution
+$\dl\bx=\bF\dl\bX$. Now move $\bF$ across the inner product using the
+definition of the transpose, Definition~\ref{def:transpose},
+$\ip\ba{\bF\bb}=\ip{\bF^{t}\ba}\bb$:
+\[
+   \ip{\grad\tilde\theta}{\bF\,\dl\bX}
+   =\ip{\bF^{t}\grad\tilde\theta}{\dl\bX}.
+\]
+The two ends of \eqr{8.5} are therefore inner products of $\dl\bX$ with
+two fixed vectors, and they agree:
+\[
+   \ip{\big(\Grad\hat\theta-\bF^{t}\grad\tilde\theta\big)}{\dl\bX}=0 .
+\]
+The element $\dl\bX$ was arbitrary, so Lemma~\ref{lem:cvec}, the
+constant-vector argument of Chapter 5, applies and the bracket vanishes:
+\begin{equation}
+   \Grad\hat\theta=\bF^{t}\grad\tilde\theta .
+   \tag{8.6}\label{eq:8.6}
+\end{equation}
+This is Theorem~\ref{thm:GradgradF} of Chapter 2 specialised to a scalar
+field. Note that it is the arbitrariness of $\dl\bX$ that does the work,
+exactly as Remark~\ref{rem:cancel} warned: from a single $\dl\bX$ one
+could conclude nothing, since any vector perpendicular to it would
+satisfy the display.
+
+Since $\bF$ is invertible, \eqr{8.6} may be read either way,
+$\grad\tilde\theta=\bF^{-t}\Grad\hat\theta$, so the two gradients
+determine each other once $\bF$ is known. And $\bF$ is known: it is
+already in the list. The same is true of the other exchange we are about
+to make. By \eqr{4.3}, $\bL=\dot\bF\bF^{-1}$, so $\dot\bF=\bL\bF$ and
+$\bL=\dot\bF\bF^{-1}$ pass between $\dot\bF$ and $\bL$ in either
+direction, again using only $\bF$. Hence $L'$ is equivalent to the list
+\begin{equation}
+   L=\{\bx,\bv,\theta,\bF_{\kappa},\bL,\grad\theta\},
+   \tag{8.7}\label{eq:8.7}
+\end{equation}
+where $\bL$ is the spatial velocity gradient of \eqr{4.3} and the
+subscript $\kappa$ has been attached to the deformation gradient to
+record the reference configuration relative to which it is computed.
+None of the other entries of \eqr{8.7} depends on a reference
+configuration: $\bx$, $\bv$, $\theta$, $\bL$ and $\grad\theta$ are all
+spatial, and $\bL$ in particular was shown in Remark~\ref{rem:whyL} to
+be indifferent to the choice of $\kappa$. The deformation gradient is
+the sole entry that is not, and the whole of
+Sections~\ref{sec:ch8symm} and \ref{sec:ch8noll} is the consequence of
+that single fact.
+
+\begin{remark}[three letters that look alike]\label{rem:ch8letters}
+Equation \eqr{8.7} contains both $L$ and $\bL$, and they are unrelated.
+The plain italic $L$ is the \emph{list}, a set of six entries; the
+under-tilde $\bL$ is the spatial velocity gradient, one of them. The
+book distinguishes them by boldface, we by the under-tilde, and the
+distinction is not decorative: the sentence ``$\bL\in L$'' is true and
+``$L\in L$'' is nonsense.
+
+The same warning will be needed twice more. From \eqr{8.10} onward,
+$F$ without an under-tilde denotes a generic member of the response set
+$C$, so that $F$ may stand for the stress, the heat flux, the free
+energy or the entropy, while $\bF$ remains the deformation gradient and
+$F_{\kappa}$ is a \emph{function}, not a value. And $\kappa$ denotes the
+reference configuration while $\bkappa$ denotes the map $p\mapsto\bX$
+that produces it. In each pair the two objects sit in the same formula,
+so reading the decoration is not optional.
+\end{remark}
+
+\subsection*{Why this particular list}
+
+The constitutive assumption adopted here may be motivated by an analogy
+with a spring and a damper. The force in a spring is fixed by its
+present elongation; the force in a damper is fixed by the present rate
+of elongation. A device made of the two in parallel responds to the pair
+(elongation, rate of elongation) and to nothing else, in particular not
+to how it arrived at that state. The list \eqr{8.7} is the continuum
+version of that pair: $\bF_{\kappa}$ is the local elongation and $\bL$
+its rate. So the class of materials studied here is the class that
+exhibits both elasticity and viscosity, and we should expect the
+constitutive functions to split, eventually, into a part depending on
+$\bF$ that stores energy and a part depending on $\bL$ that dissipates
+it. The chapters that follow carry that split out, Chapter 9 doing it
+for viscous fluids first.
+
+\begin{remark}[what this class cannot do]\label{rem:ch8viscoel}
+The analogy also marks the boundary. A real polymer stretched and held
+does not settle instantly to the force its present elongation would
+dictate; the force decays over minutes or hours. Its stress at time $t$
+depends on the whole history $\bF(s)$ for $s\leq t$, not on $\bF(t)$ and
+$\dot\bF(t)$ alone. The response is then a \emph{functional} on a space
+of histories rather than a function on a finite list, and the entire
+apparatus of this chapter, which manipulates the arguments of a
+function, has to be rebuilt.
+
+That is the general theory of materials with memory, and it lies outside
+the scope of this book. The class treated here is not general
+viscoelasticity, and it should not be represented as such. It is,
+however, enough for the two applications that follow, and it is the case
+in which every idea of the subject can be seen without the analytic
+machinery that histories require.
+\end{remark}
+
+%=======================================================================
+\section{Change of reference configuration and material symmetry}
+\label{sec:ch8symm}
+%=======================================================================
+
+The list $L$ of variables presumed to constitute the relevant process
+depends on the choice of reference configuration, and depends on it
+through exactly one entry, the deformation gradient. To see what that
+dependence does to the theory, change the reference configuration from
+$\kappa$ to $\mu$ (Figure~\ref{fig:ch8chref}).
+
+\bookfig{1}\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.4mm]},thick}]
+% ---------------- the body B (top) ----------------
+\draw[bodyline] plot[smooth cycle,tension=0.85] coordinates
+  {(0,4.13) (0.64,3.93) (0.83,3.33) (0.34,2.91) (-0.43,3.03)
+   (-0.72,3.58)};
+\node[font=\small] at (-1.30,4.12) {$B$};
+\fill (0,3.55) circle (1.4pt);
+\node[font=\small,anchor=west] at (0.10,3.59) {$p$};
+% ---------------- kappa (left) ----------------
+\draw[configline] plot[smooth cycle,tension=0.85] coordinates
+  {(-4.30,1.18) (-3.66,0.98) (-3.47,0.38) (-3.96,-0.04) (-4.73,0.08)
+   (-5.02,0.63)};
+\node[font=\small] at (-5.55,1.35) {$\kappa$};
+\fill (-4.30,0.60) circle (1.4pt);
+\node[font=\small,anchor=west] at (-4.20,0.64) {$\bX$};
+% ---------------- mu (right) ----------------
+\draw[configline] plot[smooth cycle,tension=0.85] coordinates
+  {(4.30,1.18) (4.94,0.98) (5.13,0.38) (4.64,-0.04) (3.87,0.08)
+   (3.58,0.63)};
+\node[font=\small] at (5.65,1.35) {$\mu$};
+\fill (4.30,0.60) circle (1.4pt);
+\node[font=\small,anchor=west] at (4.40,0.64) {$\bY$};
+% ---------------- kappa_t (bottom) ----------------
+\draw[configline] plot[smooth cycle,tension=0.85] coordinates
+  {(0,-1.87) (0.64,-2.07) (0.83,-2.67) (0.34,-3.09) (-0.43,-2.97)
+   (-0.72,-2.42)};
+\node[font=\small] at (1.35,-3.05) {$\kappa_{t}$};
+\fill (0,-2.45) circle (1.4pt);
+\node[font=\small,anchor=west] at (0.10,-2.41) {$\bx$};
+% ---------------- the four maps ----------------
+\draw[ar] (-0.90,3.20) to[bend right=14] (-3.45,1.25);
+\node[font=\small,lbl] at (-2.95,2.75) {$\bX=\bkappa(p)$};
+\draw[ar] (0.90,3.20) to[bend left=14] (3.45,1.25);
+\node[font=\small,lbl] at (2.95,2.75) {$\bY=\vek{\mu}(p)$};
+\draw[ar] (-3.95,-0.10) to[bend right=14] (-0.95,-2.05);
+\node[font=\small,lbl] at (-3.45,-1.65) {$\bx=\bchi_{\kappa}(\bX,t)$};
+\draw[ar] (3.95,-0.10) to[bend left=14] (0.95,-2.05);
+\node[font=\small,lbl] at (3.45,-1.65) {$\bx=\bchi_{\mu}(\bY,t)$};
+% ---------------- lambda, the induced map ----------------
+\draw[ar,red!65!black,densely dashed] (-3.30,0.60) -- (3.42,0.60);
+\node[font=\small,lbl,text=red!65!black] at (0,0.60)
+  {$\bY=\vek{\lambda}(\bX)$};
+\end{tikzpicture}
+\caption{Change of reference configuration. The body $B$ is a set of
+material points and is not a region of space; $\bkappa$ and
+$\vek{\mu}$ are two ways of laying it out in $\hEt$, and
+$\bchi_{\kappa}$, $\bchi_{\mu}$ are the two descriptions of one and the
+same motion. Because both placements are one to one, the diagram can be
+closed along the top: $\vek{\lambda}=\vek{\mu}\circ\bkappa^{-1}$ takes
+$\kappa$ to $\mu$ without passing through $B$, and it is the gradient of
+this map, and nothing about $B$ itself, that enters \eqr{8.8} and
+\eqr{8.9}. The current configuration $\kappa_{t}$ is reached by two
+routes and does not care which was taken; that is the content of
+$\bF_{\kappa}=\bF_{\mu}\bR$.}
+\label{fig:ch8chref}
+\end{figure}
+
+Because the body and any reference configuration are in one-to-one
+correspondence, there is an invertible map $\vek{\mu}(p)$ taking $p\in
+B$ to $\bY\in\mu$. And $B$ and $\kappa$ are in one-to-one
+correspondence as well, so the same is true of $\kappa$ and $\mu$:
+composing the inverse of one placement with the other gives a map from
+$\kappa$ straight to $\mu$ that never mentions $B$. We assume it smooth,
+and call it $\vek{\lambda}$:
+\begin{equation}
+   \bY=\vek{\lambda}(\bX)
+   \quad\text{and}\quad
+   \dl\bY=\bR(\bX)\dl\bX,
+   \quad\text{where }\bR(\bX)=\Grad\vek{\lambda}.
+   \tag{8.8}\label{eq:8.8}
+\end{equation}
+The second statement is the first differentiated:
+$\vek{\lambda}$ is a differentiable vector field on $\kappa$, so by
+Definition~\ref{def:diffv} its increment is
+$\vek{\lambda}(\bX+\dl\bX)-\vek{\lambda}(\bX)
+=(\Grad\vek{\lambda})\dl\bX+o(|\dl\bX|)$, and the tensor
+$\Grad\vek{\lambda}$ carrying $\dl\bX$ to $\dl\bY$ is what \eqr{8.8}
+calls $\bR$.
+
+The deformation gradients relative to $\kappa$ and to $\mu$ are now
+related. Take one material line element and write its image in
+$\kappa_{t}$ in the two ways the diagram permits:
+\begin{equation}
+   \bF_{\kappa}\dl\bX=\dl\bx=\bF_{\mu}\dl\bY=\bF_{\mu}\bR\,\dl\bX;
+   \qquad\text{hence}\qquad
+   \bF_{\kappa}=\bF_{\mu}\bR .
+   \tag{8.9}\label{eq:8.9}
+\end{equation}
+The word ``hence'' is doing a small job here and it should be watched.
+What the first chain gives is
+$\big(\bF_{\kappa}-\bF_{\mu}\bR\big)\dl\bX=\bze$ for the particular
+$\dl\bX$ chosen; but $\dl\bX$ was any material element at $\bX$, so the
+tensor in the bracket annihilates every vector of $\hVt_{\kappa}$, and a
+tensor that sends every vector to $\bze$ is the zero tensor by
+Definition~\ref{def:tensor}. That is what licenses cancelling $\dl\bX$,
+and it is the same quantifier argument as in \eqr{8.6}.
+
+Two consequences of \eqr{8.9} are worth extracting at once. Taking
+determinants and using Theorem~\ref{thm:det},
+\[
+   \det\bF_{\kappa}=(\det\bF_{\mu})(\det\bR),
+\]
+and both deformation gradients have positive determinant because both
+$\kappa$ and $\mu$ are occupiable configurations; hence $\det\bR>0$ and
+$\bR$ is invertible. Second, $\bR$ does not depend on $t$: it is built
+from two reference configurations, neither of which moves.
+
+\begin{remark}[this $\bR$ is not the rotation of the polar
+decomposition]\label{rem:ch8Rwarning}
+The letter is unfortunate and the book flags it explicitly, so we do
+too. The $\bR$ of \eqr{3.32}, $\bF=\bR\bU=\bV\bR$, is orthogonal and
+maps $\hVt$ to $\Vt$, from the reference translation space to the
+current one. The $\bR$ of \eqr{8.8} maps $\hVt_{\kappa}$ to
+$\hVt_{\mu}$, from one \emph{reference} translation space to another,
+and it is not orthogonal: nothing has been assumed about it beyond
+invertibility and $\det\bR>0$.
+
+The index test of Remark~\ref{rem:hatinch4} separates them at a glance.
+The polar rotation carries $\be_{i}\otimes\hbE_{A}$, one Latin index and
+one capital. The present $\bR$ carries $\hbE_{A}\otimes\hbE_{B}$, two
+capitals, and that is exactly why it can stand on the right of
+$\bF_{\mu}$ in \eqr{8.9} and produce a two-point tensor again.
+Confusing the two would make $\bR^{t}\bR=\hI$ look like a triviality
+instead of what it becomes in \eqr{8.19}, namely the defining property
+of a solid.
+\end{remark}
+
+\subsection*{The response function, and why it must change with
+$\kappa$}
+
+Let $F\in C$ be an entry in the list of variables characterizing the
+response of the material: $F$ may be $\bT$, or $\bq$, or $\psi$, or
+$\eta$: whichever of the four is under discussion. Its value is
+determined by the entries of $L$, which we have just seen depends on the
+choice of reference. Choosing $\kappa$,
+\begin{equation}
+   F(p,t)=F_{\kappa}(\bx,\bv,\theta,\bF_{\kappa},\bL,\grad\theta;\bX),
+   \tag{8.10}\label{eq:8.10}
+\end{equation}
+where the right-hand side is the constitutive function delivering the
+values of $F$. The semicolon is not a typographical flourish: the
+entries before it are the process variables, which change from instant
+to instant, while $\bX$ after it identifies which material point is
+being asked about and is a parameter, fixed once the point is chosen.
+The dependence on $\bX$ is what allows a body to be inhomogeneous.
+
+\begin{remark}[the value does not depend on $\kappa$; the function
+must]\label{rem:ch8valfun}
+This is the pivot of the whole section, and it is one sentence: $F(p,t)$
+is a number, or a vector, or a tensor, that the material actually has,
+whereas $F_{\kappa}$ is a rule we wrote down for computing it.
+
+The rule takes $\bF_{\kappa}$ among its arguments, and $\bF_{\kappa}$
+changes when $\kappa$ changes. The output does not change: the stress
+at $p$ at time $t$ is whatever it is, and no bookkeeping we perform can
+alter it. So if the input changes and the output does not, the rule must
+change to compensate. That is the entire argument, and \eqr{8.12} is its
+statement.
+
+This is the same distinction as Remark~\ref{rem:decorations}, where one
+velocity was carried by three different functions $\bv$, $\hat\bv$,
+$\tilde\bv$ according to what was fed in. Here one response is carried
+by a family of functions $F_{\kappa}$, one for each reference
+configuration. Miss the distinction and \eqr{8.16}, the definition of a
+symmetry transformation, reads as the false claim that $\bF$ and
+$\bF\bR$ are the same tensor. They are not. The claim is that a
+particular function does not distinguish them.
+\end{remark}
+
+Using \eqr{8.8} and \eqr{8.9} we may rewrite \eqr{8.10} in terms of
+$\mu$. The recipe is mechanical: wherever $\bX$ appears, substitute
+$\bX=\vek{\lambda}^{-1}(\bY)$, and wherever $\bF_{\kappa}$ appears,
+substitute $\bF_{\kappa}=\bF_{\mu}\bR$ with $\bR$ evaluated at that same
+$\bX$. Then
+\begin{equation}
+   F(p,t)=F_{\mu}(\bx,\bv,\theta,\bF_{\mu},\bL,\grad\theta;\bY),
+   \tag{8.11}\label{eq:8.11}
+\end{equation}
+where
+\begin{equation}
+\begin{aligned}
+   &F_{\mu}(\bx,\bv,\theta,\bF_{\mu},\bL,\grad\theta;\bY)\\
+   &\qquad=F_{\kappa}\big(\bx,\bv,\theta,
+     \bF_{\mu}\bR(\vek{\lambda}^{-1}(\bY)),\bL,\grad\theta;
+     \vek{\lambda}^{-1}(\bY)\big),
+\end{aligned}
+   \tag{8.12}\label{eq:8.12}
+\end{equation}
+which produces the constitutive function pertaining to any choice of
+reference configuration once the function pertaining to one is given.
+
+Read \eqr{8.12} carefully, because it is a definition dressed as an
+equation. The left-hand side is not known in advance; the right-hand
+side is a formula built from the known $F_{\kappa}$, from
+$\vek{\lambda}$ and from $\bR$, and \eqr{8.12} defines $F_{\mu}$ to be
+that formula. What is being asserted, then, is not the equality itself
+but two things that follow from it.
+
+First, $F_{\mu}$ exists: a change of reference never destroys the
+possibility of a constitutive description, it merely relabels it.
+Second, and this is the substantive point, the \emph{list of arguments}
+is unchanged. On the right-hand side of \eqr{8.12} the fourth slot is
+occupied by a deformation gradient, the sixth by a spatial temperature
+gradient, and so on, exactly as on the left. No new kind of variable had
+to be introduced to make the transfer work. Hence the list of variables
+deemed relevant to material response is the same for all reference
+configurations, even though the function of them is not. Had this failed,
+the constitutive assumption of Section~\ref{sec:ch8elastic} would have
+been an assumption about $\kappa$ rather than about the material, and it
+would have been worthless.
+
+\subsection*{Localizing the change of reference}
+
+Constitutive response is defined pointwise, so nothing is lost by
+confining attention to changes of reference in a neighbourhood of one
+material point $p_{0}$, rather than over the whole body
+(Figure~\ref{fig:ch8local}). Let $\vek{\lambda}(\bX)$ be smooth and
+invertible on an open neighbourhood $N_{\kappa}(p_{0})\subset\kappa$,
+mapping it onto another open neighbourhood $N_{\mu}(p_{0})$, and let
+$\bX_{0}=\bkappa(p_{0})$ be a \emph{pivot point} of the map:
+\[
+   \bY_{0}=\vek{\lambda}(\bX_{0})=\bX_{0}.
+\]
+
+\bookfig{2}\begin{figure}[htbp]\centering
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.4mm]},thick}]
+% ------------- kappa, with the neighbourhood inside it -------------
+\draw[configline] plot[smooth cycle,tension=0.85] coordinates
+  {(-3.10,1.50) (-1.65,1.00) (-1.35,-0.40) (-2.45,-1.60) (-4.10,-1.35)
+   (-4.75,0.05)};
+\node[font=\small] at (-5.15,1.30) {$\kappa$};
+\draw[guide] (-3.05,0.05) circle (0.66);
+\fill (-3.05,0.05) circle (1.5pt);
+\node[font=\small,anchor=south] at (-3.05,0.16) {$p_{0}$};
+\node[font=\small] at (-3.05,2.40) {$N_{\kappa}(p_{0})$};
+\draw[gray!70] (-3.05,2.15) .. controls (-2.85,1.55) .. (-2.70,0.62);
+% ------------- the image neighbourhood -------------
+\draw[guide] (3.05,0.35) circle (0.66);
+\fill (3.05,0.35) circle (1.5pt);
+\node[font=\small,anchor=south] at (3.05,0.46) {$p_{0}$};
+\node[font=\small] at (3.05,2.40) {$N_{\mu}(p_{0})$};
+\draw[gray!70] (3.05,2.15) .. controls (2.85,1.60) .. (2.70,0.97);
+\node[font=\footnotesize,text=gray!80,align=left,anchor=west]
+  at (3.95,-0.80) {$\mu$ need exist\\ only here};
+% ------------- the map -------------
+\draw[ar] (-2.30,0.30) to[bend left=12] (2.30,0.60);
+\node[font=\small,lbl] at (0,1.20) {$\bY=\vek{\lambda}(\bX)$};
+% ------------- the pivot -------------
+\draw[thinvec,red!65!black] (-1.55,-2.30) -- (-3.20,-0.42);
+\node[font=\small,text=red!65!black,anchor=north] at (-1.50,-2.35)
+  {$\bX_{0}$};
+\draw[thinvec,red!65!black] (1.60,-2.30) -- (2.92,-0.20);
+\node[font=\small,text=red!65!black,anchor=north] at (1.65,-2.35)
+  {$\bX_{0}$};
+\node[font=\footnotesize,text=red!65!black,anchor=north] at (0,-3.05)
+  {one and the same point: $\vek{\lambda}(\bX_{0})=\bX_{0}$};
+\end{tikzpicture}
+\caption{Local change of reference. Only a neighbourhood of the one
+material point $p_{0}$ is relabelled, so $\vek{\lambda}$ need not, and
+in general does not, extend to a map of the whole body; $\mu$ is a local
+reference configuration and nothing more. The two arrows on the right
+carry the same label because $\bX_{0}$ is a pivot: $p_{0}$ is assigned
+the same position vector by both placements, which is what allows the
+two response functions in \eqr{8.13} to be compared at a single point.
+The pivot costs no generality, since translating $\mu$ leaves
+$\bR=\Grad\vek{\lambda}$ untouched.}
+\label{fig:ch8local}
+\end{figure}
+
+The pivot condition looks like an extra hypothesis and is not one. The
+placement $\vek{\mu}$ is ours to choose, and replacing $\vek{\mu}$ by
+$\vek{\mu}+\bc$ for a constant vector $\bc$ shifts every $\bY$ by $\bc$
+and leaves $\bR=\Grad\vek{\lambda}$ completely unchanged, a constant
+having zero gradient. So one may always translate $\mu$ until
+$\vek{\lambda}(\bX_{0})=\bX_{0}$, and since $\bR$ is the only feature of
+$\vek{\lambda}$ that will be used, nothing has been given up. What has
+been bought is that both response functions may be evaluated at the same
+label $\bX_{0}$, so that \eqr{8.13} compares like with like:
+\begin{equation}
+\begin{aligned}
+   F(p_{0},t)
+   &=F_{\kappa}(\bx,\bv,\theta,\bF_{\kappa},\bL,\grad\theta;\bX_{0})\\
+   &=F_{\mu}(\bx,\bv,\theta,\bF_{\mu},\bL,\grad\theta;\bX_{0}),
+   \qquad\text{with }\bF_{\kappa}=\bF_{\mu}\bR(\bX_{0}),
+\end{aligned}
+   \tag{8.13}\label{eq:8.13}
+\end{equation}
+all arguments being evaluated at $\bX_{0}$.
+
+\subsection*{One experiment, two neighbourhoods}
+
+Now the definition of material symmetry. Subject both
+$N_{\kappa}(p_{0})$ and $N_{\mu}(p_{0})$ to the \emph{same} experiment,
+consisting of a prescribed deformation $\bchi(\cdot,t)$ and temperature
+distribution $\theta(\cdot,t)$. Acting on $N_{\kappa}(p_{0})$ the
+experiment produces the fields
+\begin{equation}
+\begin{aligned}
+   \bchi(\bX,t)&=\bchi(\bX_{0},t)+\bF(\bX_{0},t)(\bX-\bX_{0})
+     +o(|\bX-\bX_{0}|),\\
+   \hat\bv(\bX,t)&=\hat\bv(\bX_{0},t)+\dot\bF(\bX_{0},t)(\bX-\bX_{0})
+     +o(|\bX-\bX_{0}|),\\
+   \theta(\bX,t)&=\theta(\bX_{0},t)
+     +\ip{\Grad\theta(\bX_{0},t)}{(\bX-\bX_{0})}+o(|\bX-\bX_{0}|),
+\end{aligned}
+   \tag{8.14}\label{eq:8.14}
+\end{equation}
+for $\bX\in N_{\kappa}(p_{0})$, with $\hat\bv(\bX_{0},t)=
+\dot\bchi(\bX_{0},t)$ and $\bF(\bX_{0},t)=\Grad\bchi\rest{\bX_{0}}$;
+and acting on $N_{\mu}(p_{0})$ it produces
+\begin{equation}
+\begin{aligned}
+   \bchi(\bY,t)&=\bchi(\bX_{0},t)+\bF(\bX_{0},t)(\bY-\bX_{0})
+     +o(|\bY-\bX_{0}|),\\
+   \hat\bv(\bY,t)&=\hat\bv(\bX_{0},t)+\dot\bF(\bX_{0},t)(\bY-\bX_{0})
+     +o(|\bY-\bX_{0}|),\\
+   \theta(\bY,t)&=\theta(\bX_{0},t)
+     +\ip{\Grad\theta(\bX_{0},t)}{(\bY-\bX_{0})}+o(|\bY-\bX_{0}|),
+\end{aligned}
+   \tag{8.15}\label{eq:8.15}
+\end{equation}
+for $\bY\in N_{\mu}(p_{0})$. The point of writing both out is that the
+coefficients are literally the same symbols: the values of the fields
+and of their gradients agree at $\bX_{0}$, which is possible only
+because $\bX_{0}$ is a pivot and therefore belongs to both
+neighbourhoods.
+
+Now compute the response twice. Using $N_{\kappa}(p_{0})$ as reference,
+it is $F_{\kappa}(\bx,\bv,\theta,\bF,\bL,\grad\theta;\bX_{0})$ with
+\[
+   \bx=\bchi(\bX_{0},t),\quad
+   \bv=\dot\bchi(\bX_{0},t),\quad
+   \theta=\theta(\bX_{0},t),\quad
+   \bF=\bF(\bX_{0},t),
+\]
+\[
+   \bL=\dot\bF(\bX_{0},t)\bF(\bX_{0},t)^{-1},\quad
+   \grad\theta=\bF(\bX_{0},t)^{-t}\Grad\theta(\bX_{0},t),
+\]
+the last two being \eqr{4.3} and \eqr{8.6} read backwards. Using
+$N_{\mu}(p_{0})$ as reference it is
+$F_{\mu}(\bx,\bv,\theta,\bF,\bL,\grad\theta;\bX_{0})$, and by
+\eqr{8.15} the six arguments are the very same six numbers, vectors and
+tensors. So we have two functions evaluated at identical arguments.
+
+Having subjected two different local neighbourhoods of $p_{0}$ to the
+same experiment, we should expect the two response functions, evaluated
+at the same arguments, to return \emph{different} values, and \eqr{8.13}
+says exactly why: the two are related by an insertion of $\bR$ in the
+fourth slot, and a function need not be blind to that. However, there
+may be distinguished maps $\vek{\lambda}$ for which the two responses at
+$p_{0}$ are nevertheless identical. For such a map no experiment
+whatever can tell the two neighbourhoods apart. These are the
+\emph{material symmetry transformations}.
+
+Suppose then that $N_{\kappa}(p_{0})$ and $N_{\mu}(p_{0})$ are related
+by a symmetry transformation, so that
+\[
+   F_{\kappa}(\bx,\bv,\theta,\bG,\bL,\grad\theta;\bX_{0})
+   =F_{\mu}(\bx,\bv,\theta,\bG,\bL,\grad\theta;\bX_{0})
+\]
+for every admissible value $\bG$ of the fourth argument. Equation
+\eqr{8.13} read as an identity between functions says
+\[
+   F_{\mu}(\bx,\bv,\theta,\bG,\bL,\grad\theta;\bX_{0})
+   =F_{\kappa}(\bx,\bv,\theta,\bG\bR,\bL,\grad\theta;\bX_{0}),
+\]
+again for every $\bG$, since \eqr{8.13} holds whatever deformation the
+material happens to be undergoing. Eliminating $F_{\mu}$ between the two
+displays and renaming $\bG$ as $\bF$,
+\begin{equation}
+\begin{aligned}
+   &F_{\kappa}(\bx,\bv,\theta,\bF,\bL,\grad\theta;\bX_{0})
+   =F_{\kappa}(\bx,\bv,\theta,\bF\bR,\bL,\grad\theta;\bX_{0}),\\
+   &\qquad\text{where }\bR=\Grad\vek{\lambda}(\bX)\rest{\bX_{0}} .
+\end{aligned}
+   \tag{8.16}\label{eq:8.16}
+\end{equation}
+
+Two features of \eqr{8.16} deserve emphasis before it is used.
+
+It is a statement about \emph{one} function. The second reference
+configuration has vanished from it entirely, which is what makes it
+usable: \eqr{8.16} is a functional equation constraining $F_{\kappa}$,
+and one may test a candidate constitutive function against it without
+ever constructing $\mu$.
+
+And it is required to hold \emph{for all admissible} $\bF$, with $\bR$
+fixed. This quantifier is not decoration. Every argument in the rest of
+the section, and the whole of Section~\ref{sec:ch8noll}, proceeds by
+substituting some new tensor for $\bF$ in \eqr{8.16}, and each such
+substitution is legal only because the equation was demanded of every
+$\bF$ to begin with.
+
+\begin{remark}[symmetry is a local notion]\label{rem:ch8localsym}
+The map $\vek{\lambda}$ in this discussion is defined on a neighbourhood
+of the material point in question, and on nothing more. In particular
+$\bR$ need not be the gradient of a single function defined on the whole
+body: there is no requirement that the local relabellings at different
+points fit together into a global change of reference configuration.
+
+Two things follow. Different points of one body may have different
+symmetries, so the theory accommodates a composite, in which the type of
+material varies from place to place, or a polycrystal, in which the
+lattice orientation does. And, less obviously, the freedom to choose
+$\vek{\lambda}$ point by point is exactly what Section~\ref{sec:ch8noll}
+will exploit and what makes Noll's rule matter in plasticity, where the
+local relaxed configurations at neighbouring points genuinely fail to
+fit together.
+\end{remark}
+
+\subsection*{The symmetry group}
+
+It follows from \eqr{8.16} that $\bF\bR$ is the value of an admissible
+deformation gradient at $\bX_{0}$: the right-hand side evaluates the
+constitutive function with $\bF\bR$ in the deformation-gradient slot,
+and a constitutive function is only defined for arguments the material
+can actually present. If $\kappa$ is an occupiable reference
+configuration this requires
+\[
+   0<\det(\bF\bR)=(\det\bF)(\det\bR),
+   \qquad\text{with }\det\bF>0,
+\]
+whence $\det\bR>0$. Denote by $\mathcal{G}_{\kappa(p_{0})}$ the set of
+those $\bR$ for which \eqr{8.16} holds for all admissible values of
+$\bF$:
+\begin{equation}
+   \mathcal{G}_{\kappa(p_{0})}
+   =\{\bR:\det\bR>0\ \text{and \eqr{8.16} holds}\}.
+   \tag{8.17}\label{eq:8.17}
+\end{equation}
+
+This set is a \emph{group}. Three properties have to be checked, and
+each is a two-line calculation in which every step uses the ``for all
+$\bF$'' clause of \eqr{8.16}. Throughout, all arguments not involving
+$\bR$ are suppressed, so that $F_{\kappa}(\bF)$ abbreviates
+$F_{\kappa}(\bx,\bv,\theta,\bF,\bL,\grad\theta;\bX_{0})$.
+
+\medskip
+\noindent
+\textbf{(1) $\hI\in\mathcal{G}_{\kappa(p_{0})}$.} With $\bR=\hI$,
+\eqr{8.16} reads $F_{\kappa}(\bF)=F_{\kappa}(\bF\hI)=F_{\kappa}(\bF)$,
+which is true of any function whatever, and $\det\hI=1>0$. The identity
+is a symmetry of every material: doing nothing to the reference
+neighbourhood is certainly undetectable.
+
+\medskip
+\noindent
+\textbf{(2) If $\bR_{1},\bR_{2}\in\mathcal{G}_{\kappa(p_{0})}$ then
+$\bR_{1}\bR_{2}\in\mathcal{G}_{\kappa(p_{0})}$.} Compute, for arbitrary
+admissible $\bF$,
+\[
+   F_{\kappa}\big(\bF(\bR_{1}\bR_{2})\big)
+   =F_{\kappa}\big((\bF\bR_{1})\bR_{2}\big)
+   =F_{\kappa}(\bF\bR_{1})
+   =F_{\kappa}(\bF).
+\]
+The first equality is associativity of the tensor product, nothing more.
+The second applies \eqr{8.16} for $\bR_{2}$ \emph{with $\bF$ replaced by
+$\bF\bR_{1}$}, which is permitted because $\bF\bR_{1}$ is itself an
+admissible deformation gradient and \eqr{8.16} was demanded for all such.
+The third applies \eqr{8.16} for $\bR_{1}$. Finally
+$\det(\bR_{1}\bR_{2})=(\det\bR_{1})(\det\bR_{2})>0$, so the product
+qualifies on both counts.
+
+\medskip
+\noindent
+\textbf{(3) If $\bR\in\mathcal{G}_{\kappa(p_{0})}$ then
+$\bR^{-1}\in\mathcal{G}_{\kappa(p_{0})}$.} The inverse exists because
+$\det\bR>0$. Apply \eqr{8.16} with $\bF$ replaced by $\bF\bR^{-1}$:
+\[
+   F_{\kappa}(\bF\bR^{-1})
+   =F_{\kappa}\big((\bF\bR^{-1})\bR\big)
+   =F_{\kappa}(\bF\hI)
+   =F_{\kappa}(\bF),
+\]
+which is \eqr{8.16} for $\bR^{-1}$. And
+$\det(\bR^{-1})=1/\det\bR>0$.
+
+\medskip
+Associativity needs no proof, being inherited from the composition of
+linear maps, so $\mathcal{G}_{\kappa(p_{0})}$ is a subgroup of the group
+of invertible tensors of positive determinant. The physical reading of
+the three properties is worth pausing on: (1) says that doing nothing is
+undetectable, (2) that two undetectable rearrangements performed in
+succession are undetectable, and (3) that undoing an undetectable
+rearrangement is undetectable. Stated that way the group structure is
+obvious, which is the point; the calculations above are only the
+translation of the obvious into the language of \eqr{8.16}.
+
+\subsection*{The unimodular restriction}
+
+Property (2) applied repeatedly gives $\bR^{n}\in
+\mathcal{G}_{\kappa(p_{0})}$ for every positive integer $n$: if
+$\bR^{n-1}$ is in the group then so is $\bR^{n-1}\bR=\bR^{n}$, and the
+induction starts at $\bR^{1}=\bR$. Hence
+$F_{\kappa}(\bF)=F_{\kappa}(\bF\bR^{n})$ for every $n$, and
+\[
+   \det(\bF\bR^{n})=(\det\bF)(\det\bR^{n})=(\det\bF)(\det\bR)^{n},
+\]
+using Theorem~\ref{thm:det} twice. Let $n\to\infty$ and read off the
+two cases.
+
+If $\det\bR>1$ then $(\det\bR)^{n}\to\infty$, so
+$\det(\bF\bR^{n})\to\infty$. If $\det\bR<1$ then $(\det\bR)^{n}\to0$ and
+$\det(\bF\bR^{n})\to0$. In the first case the material at $p_{0}$ is
+dilated without bound and in the second compacted without bound, and in
+neither case does its response change at all: the left-hand side
+$F_{\kappa}(\bF)$ never moved.
+
+That is untenable, and it is worth being explicit about why rather than
+resting on the word. By \eqr{2.50} and \eqr{2.59} the current density is
+$\rho=\rho_{\kappa}(\bX)/\det\bF$, so a deformation gradient with
+$\det\bF\to0$ is one in which a finite mass is squeezed into vanishing
+volume and $\rho\to\infty$, while $\det\bF\to\infty$ is unlimited
+rarefaction. A material insensitive to either is a material one could
+compress to a point at no cost in stress and no change in energy. No
+substance behaves so. To avoid the conclusion we must restrict $\bR$ so
+that neither limit can be reached, that is, so that $(\det\bR)^{n}$ does
+not run away, and for a positive number that means $\det\bR=1$.
+Therefore
+\begin{equation}
+   \mathcal{G}_{\kappa(p_{0})}\subset U=\{\bR:\det\bR=1\},
+   \tag{8.18}\label{eq:8.18}
+\end{equation}
+which is called the \emph{unimodular group}. It is a group by the same
+determinant identities used above: $\det\hI=1$, $\det(\bR_{1}\bR_{2})=
+1\cdot1=1$ and $\det(\bR^{-1})=1/1=1$.
+
+\begin{remark}[what \eqr{8.18} does and does not say]\label{rem:ch8unim}
+It does not say that symmetry transformations preserve shape. It says
+they preserve \emph{volume}, by Remark~\ref{rem:vol}, since the
+determinant is the ratio of oriented volumes. A unimodular $\bR$ may
+stretch the reference neighbourhood by a factor of ten in one direction
+provided it compresses it correspondingly in others, and \eqr{8.18}
+permits that; whether the material notices is a separate question,
+answered by \eqr{8.19}.
+
+Nor is $U$ the largest group one might have written. Some authors define
+the unimodular group by $|\det\bR|=1$, which admits reflections. Here
+$\det\bR>0$ was forced before \eqr{8.18} was reached, by the requirement
+that $\bF\bR$ be an admissible deformation gradient, so reflections are
+excluded from the outset. They are excluded for a physical reason and
+not a conventional one: a reflection of the reference neighbourhood
+would have to be realised by an actual motion of material, and no motion
+can pass continuously from $\det\bF>0$ to $\det\bF<0$ without passing
+through $\det\bF=0$, at which the deformation ceases to be invertible
+(Remark~\ref{rem:localinv}).
+
+Finally, \eqr{8.18} is an upper bound and nothing else. Every material
+of the class considered satisfies it, in every reference configuration.
+The interesting question is how far below the bound a given material
+sits, and that is the question the next two definitions answer.
+\end{remark}
+
+\subsection*{Solid and fluid, defined by the symmetry group}
+
+It was Noll's idea to classify materials as solid or fluid on the basis
+of the symmetry group. The classification is not a description of how a
+substance looks or pours; it is a statement about which rearrangements
+of a material neighbourhood the substance can detect.
+
+\medskip
+\noindent\textbf{Fluids.} Take the simplest constitutive equation there
+is: the stress in a compressible inviscid fluid under isothermal
+conditions,
+\[
+   \bT=-p(\rho)\I ,
+\]
+where $p(\rho)$ is the constitutive function for the density-dependent
+pressure. Ask which $\bR$ satisfy \eqr{8.16} for it. From \eqr{2.50} and
+\eqr{2.59},
+\[
+   \rho=\frac{\rho_{\kappa}(\bX)}{\det\bF}
+   =\frac{\rho_{\kappa}(\bX)}{\det(\bF\bR)}
+   \qquad\text{provided }\bR\in U,
+\]
+the second equality holding because $\det(\bF\bR)=(\det\bF)(\det\bR)=
+\det\bF$ when $\det\bR=1$. So replacing $\bF$ by $\bF\bR$ leaves $\rho$
+unchanged, hence leaves $p(\rho)$ unchanged, hence leaves $\bT$
+unchanged: \eqr{8.16} holds for every $\bR\in U$. Therefore
+$U\subset\mathcal{G}_{\kappa(p_{0})}$, and with \eqr{8.18} in the
+opposite direction,
+\[
+   \mathcal{G}_{\kappa(p_{0})}=U .
+\]
+This motivates the definition: a \emph{fluid} is a material of the class
+considered here for which there exists a local reference configuration
+$\kappa^{*}(p_{0})$ such that
+$\mathcal{G}_{\kappa^{*}(p_{0})}=U$.
+
+The stress depended on $\bF$ only through $\det\bF$, and $\det$ is
+exactly the feature of $\bF$ that a unimodular map cannot change. A
+fluid has the largest symmetry group available: it is a material that
+cannot detect any volume-preserving rearrangement of its own reference
+neighbourhood whatever. That is what it means to say a fluid has no
+preferred shape, expressed constitutively rather than anecdotally.
+
+\medskip
+\noindent\textbf{Solids.} For these the situation is different, and the
+difference is one sentence of physics: experience indicates that a
+strain induced by the map $\vek{\lambda}$ is experimentally detectable.
+A solid remembers a shape, and deforming it away from that shape
+produces stress that can be measured.
+
+If $\vek{\lambda}$ is to be a symmetry transformation, and hence
+undetectable, it must therefore be strain free. Strain was defined in
+Chapter 2 through the right Cauchy--Green tensor, \eqr{2.96} and
+\eqr{2.97}: a deformation with gradient $\bR$ is strain free exactly
+when the associated $\bC=\bR^{t}\bR$ equals $\hI$, for then the Lagrange
+strain $\bE=\tfrac12(\bC-\hI)$ vanishes and, by
+Proposition~\ref{prop:undeformed}, every material line element keeps its
+length and every pair of them its angle. So a symmetry transformation of
+a solid satisfies $\bR^{t}\bR=\hI$. Combined with \eqr{8.18} this makes
+$\bR$ a rotation: $\bR^{t}\bR=\hI$ makes $\bR$ orthogonal, hence
+$\det\bR=\pm1$ by Proposition~\ref{prop:orth}, and $\det\bR=1$ selects
+the proper orthogonal case.
+
+Accordingly a \emph{solid} is defined to be a material of the class
+considered for which there exists a local reference $\kappa^{*}(p_{0})$
+such that $\mathcal{G}_{\kappa^{*}(p_{0})}$ is contained in
+$\Orth^{+}$, the set of proper-orthogonal tensors, or simply the
+rotations:
+\begin{equation}
+   \mathcal{G}_{\kappa^{*}(p_{0})}\subset\Orth^{+}
+   =\{\bR:\bR\in U\ \text{and}\ \bR^{t}\bR=\hI\}.
+   \tag{8.19}\label{eq:8.19}
+\end{equation}
+
+We note that $\kappa^{*}(p_{0})$ need bear no relationship to any
+particular reference configuration one may use for the purposes of
+analysis. In a solid it would correspond to a unit cell of an undistorted
+lattice of a crystalline material. Such cells are mapped to themselves
+by certain discrete rotations, and those rotations are what characterize
+the crystalline symmetry at hand: four of them about a four-fold axis
+for a square cell, twenty-four in all for a cubic crystal, and only the
+identity for a triclinic one. For this reason $\kappa^{*}(p_{0})$ is
+often called an \emph{undistorted} local configuration of the solid.
+
+\begin{remark}[isotropy, and the whole ladder in one line]
+\label{rem:ch8ladder}
+Definitions \eqr{8.18} and \eqr{8.19} between them organise every
+material of the class considered on a single scale, and the scale is
+worth writing out because the later chapters use its rungs by name.
+Every symmetry group satisfies
+\[
+   \{\hI\}\ \subseteq\ \mathcal{G}_{\kappa(p_{0})}\ \subseteq\ U ,
+\]
+with the lower end forced by property (1) above and the upper by
+\eqr{8.18}. Between the ends:
+\begin{itemize}\itemsep1pt
+\item $\mathcal{G}=\{\hI\}$: no symmetry at all. A triclinic crystal.
+      Every rearrangement, however slight, is detectable.
+\item $\mathcal{G}$ a finite subgroup of $\Orth^{+}$: a crystalline
+      solid, the finite group being its point group.
+\item $\mathcal{G}\subseteq\Orth^{+}$, possibly infinite: a solid.
+      A transversely isotropic solid, for instance, has the continuous
+      group of rotations about one axis.
+\item $\mathcal{G}=\Orth^{+}$: an \emph{isotropic} solid. It is the
+      largest a solid's group can be, since \eqr{8.19} caps it, so an
+      isotropic solid is a solid with as much symmetry as the definition
+      of a solid allows: no direction in $\kappa^{*}$ is distinguished
+      from any other.
+\item $\mathcal{G}=U$: a fluid.
+\end{itemize}
+Two consequences follow immediately from $\Orth^{+}\subset U$, and both
+are the kind of statement that is obvious once the group language is in
+place and obscure without it.
+
+\emph{Every fluid is isotropic.} A fluid's group is $U$, which contains
+$\Orth^{+}$; so a fluid has at least the symmetry an isotropic solid
+has. The converse fails: an isotropic solid has $\Orth^{+}$ and not $U$,
+and the elements of $U$ outside $\Orth^{+}$ are exactly the
+volume-preserving distortions it can feel and a fluid cannot. Steel and
+water are both indifferent to direction; only one of them is indifferent
+to shape.
+
+\emph{The classification is exhaustive but not complete.} A group
+strictly between $\Orth^{+}$ and $U$ describes a material that is
+neither a solid nor a fluid in the above sense. Such groups exist and
+such materials exist, liquid crystals among them. The two definitions
+are the two extremes of a range, and the range in between is where much
+of modern constitutive theory lives.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{A}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.3mm]},thick},
+   dot/.style={fill=black}]
+% =============== ROW 1 : a solid ===============
+\node[font=\small,anchor=west] at (-7.40,1.30) {\textsc{a solid}};
+% lattice 1 : square, undistorted
+\foreach \i in {-1,0,1}{\foreach \j in {-1,0,1}{
+   \fill (-5.60+0.62*\i,0.62*\j) circle (1.3pt);}}
+\draw[thin,gray!70] (-6.22,-0.62) rectangle (-5.60,0);
+\node[font=\footnotesize,align=center,anchor=north] at (-5.60,-1.15)
+   {$\kappa^{*}(p_{0})$\\ undistorted};
+% arrow 1
+\draw[ar] (-4.60,0) -- (-2.30,0);
+\node[font=\footnotesize,anchor=south] at (-3.45,0.14)
+   {$\bR\in\Orth^{+}$};
+\node[font=\footnotesize,anchor=north,text=gray!80] at (-3.45,-0.16)
+   {$90^{\circ}$ turn};
+% lattice 2 : square again
+\foreach \i in {-1,0,1}{\foreach \j in {-1,0,1}{
+   \fill (-1.30+0.62*\i,0.62*\j) circle (1.3pt);}}
+\draw[thin,gray!70] (-1.92,-0.62) rectangle (-1.30,0);
+\node[font=\footnotesize,align=center,anchor=north] at (-1.30,-1.15)
+   {the same lattice\\ undetectable};
+% arrow 2
+\draw[ar] (-0.30,0) -- (2.00,0);
+\node[font=\footnotesize,anchor=south] at (0.85,0.14) {$\bH\in U$};
+\node[font=\footnotesize,anchor=north,text=gray!80] at (0.85,-0.16)
+   {$\bH^{t}\bH\neq\hI$};
+% lattice 3 : rectangular
+\foreach \i in {-1,0,1}{\foreach \j in {-1,0,1}{
+   \fill (3.35+0.99*\i,0.39*\j) circle (1.3pt);}}
+\draw[thin,gray!70] (2.36,-0.39) rectangle (3.35,0);
+\node[font=\footnotesize,align=center,anchor=north] at (3.35,-1.15)
+   {a strained lattice\\ detectable};
+% =============== ROW 2 : a fluid ===============
+\node[font=\small,anchor=west] at (-7.40,-2.50) {\textsc{a fluid}};
+\draw[thick,fill=blue!7] (-6.25,-4.25) rectangle (-4.95,-2.95);
+\foreach \p in {(-6.02,-4.03),(-5.44,-3.72),(-5.90,-3.28),
+                (-5.18,-4.08),(-5.52,-3.14),(-5.08,-3.50)}{
+   \fill[gray!75] \p circle (1.1pt);}
+\node[font=\footnotesize,anchor=north] at (-5.60,-4.45) {volume $V$};
+\draw[ar] (-4.60,-3.60) -- (-2.30,-3.60);
+\node[font=\footnotesize,anchor=south] at (-3.45,-3.46)
+   {any $\bH\in U$};
+\draw[thick,fill=blue!7] (-1.95,-4.25)--(-0.25,-4.25)--(0.30,-3.26)
+   --(-1.40,-3.26)--cycle;
+\foreach \p in {(-1.62,-4.03),(-0.92,-3.83),(-1.20,-3.52),
+                (-0.55,-4.11),(-0.48,-3.44),(-0.10,-3.72)}{
+   \fill[gray!75] \p circle (1.1pt);}
+\node[font=\footnotesize,anchor=north] at (-0.85,-4.45) {volume $V$};
+\node[font=\footnotesize,align=left,anchor=west] at (0.95,-3.60)
+   {same $V\Rightarrow$ same $\rho$\\
+    $\Rightarrow$ same $\bT=-p(\rho)\I$\\
+    undetectable, so $\mathcal{G}=U$};
+% =============== ROW 3 : the ladder ===============
+\draw[thick,rounded corners=5pt] (-6.60,-7.70) rectangle (1.00,-5.75);
+\node[font=\footnotesize,anchor=north west] at (-6.45,-5.85) {$U$};
+\draw[thick,rounded corners=5pt] (-4.70,-7.40) rectangle (-0.30,-6.20);
+\node[font=\footnotesize,anchor=north west] at (-4.55,-6.28)
+   {$\Orth^{+}$};
+\draw[thick,rounded corners=4pt] (-2.60,-7.20) rectangle (-0.95,-6.65);
+\node[font=\footnotesize] at (-1.78,-6.92) {$\mathcal{G}$};
+\node[font=\footnotesize,anchor=west,text=gray!85] at (1.90,-6.05)
+   {fluid: $\mathcal{G}=U$};
+\node[font=\footnotesize,anchor=west,text=gray!85] at (1.90,-6.72)
+   {isotropic solid: $\mathcal{G}=\Orth^{+}$};
+\node[font=\footnotesize,anchor=west,text=gray!85] at (1.90,-7.40)
+   {crystal: $\mathcal{G}$ finite};
+\draw[gray!60,-{Stealth[length=1.6mm]}] (1.82,-6.05) -- (1.08,-5.95);
+\draw[gray!60,-{Stealth[length=1.6mm]}] (1.82,-6.72) -- (-0.22,-6.60);
+\draw[gray!60,-{Stealth[length=1.6mm]}] (1.82,-7.40) -- (-0.88,-7.05);
+\end{tikzpicture}
+\caption{Solid and fluid, told apart by the symmetry group. Top: in an
+undistorted configuration a crystalline solid is carried onto itself by
+certain rotations, which no experiment can detect, but a unimodular map
+that is not a rotation strains the lattice, and by \eqr{8.19} that is
+detectable; the group is confined to $\Orth^{+}$. Middle: the response
+of an inviscid fluid depends on $\bF$ only through $\det\bF$, and no
+member of $U$ changes that, so every volume-preserving rearrangement is
+undetectable and the group is the whole of $U$. Bottom: the two
+definitions as nested sets, with $\Orth^{+}\subset U$ showing at a
+glance that every fluid is isotropic while an isotropic solid is not a
+fluid.}
+\label{fig:ch8solidfluid}
+\end{figure}
+
+%=======================================================================
+\section{Noll's rule}\label{sec:ch8noll}
+%=======================================================================
+
+Material symmetry, as \eqr{8.16} defines it, is a characteristic of two
+things at once: of the material, and of the reference configuration
+adopted. The definitions of solid and fluid both had to say ``there
+exists a local reference configuration such that\ldots'', which is an
+admission that the group could look different in another one. It is
+therefore of interest to determine exactly how much the choice of
+reference matters. The answer is complete and is due to Noll.
+
+Consider two reference configurations $\kappa_{1}$ and $\kappa_{2}$ in
+which the positions of $p_{0}\in B$ are $\bX_{1}$ and $\bX_{2}$
+respectively, and assume a smooth invertible map $\vek{\pi}$, defined on
+a neighbourhood of $\bX_{1}$, with $\bX_{2}=\vek{\pi}(\bX_{1})$. Write
+$\bK=\Grad\vek{\pi}\rest{\bX_{1}}$. This is the situation of \eqr{8.8}
+with new names, so \eqr{8.12} applies verbatim; suppressing the
+variables that do not involve a reference configuration, it reads
+\begin{equation}
+\begin{aligned}
+   F_{\kappa_{2}}(\bF;\bX_{2})&=F_{\kappa_{1}}(\bF\bK;\bX_{1}),
+   \qquad\text{where }\bK\\
+   &=\Grad\vek{\pi}\rest{\bX_{1}} .
+\end{aligned}
+   \tag{8.20}\label{eq:8.20}
+\end{equation}
+Here $\bF$ in the argument slot is the deformation gradient computed
+from $\kappa_{2}$, and $\bF\bK$ is the corresponding one computed from
+$\kappa_{1}$, which is \eqr{8.9} again.
+
+Everything that follows is obtained by putting different tensors into
+the one slot of \eqr{8.20}, so it is worth repeating that this is legal:
+\eqr{8.20} holds for every admissible $\bF$, and $\det\bK>0$ because
+both configurations are occupiable, so $\bF\bK$, $\bF\bK^{-1}$ and
+$\bF\bR\bK^{-1}$ are all admissible whenever $\bF$ is.
+
+Now replace $\bF$ by $\bF\bK^{-1}$ in \eqr{8.20}. The right-hand side
+becomes $F_{\kappa_{1}}(\bF\bK^{-1}\bK;\bX_{1})=F_{\kappa_{1}}
+(\bF\hI;\bX_{1})=F_{\kappa_{1}}(\bF;\bX_{1})$, so
+\begin{equation}
+   F_{\kappa_{2}}(\bF\bK^{-1};\bX_{2})=F_{\kappa_{1}}(\bF;\bX_{1}).
+   \tag{8.21}\label{eq:8.21}
+\end{equation}
+This is \eqr{8.20} solved the other way round, and it is the form we
+shall use, because it has $\kappa_{1}$, whose symmetry group is known,
+standing alone on the right.
+
+Now suppose $\bR\in\mathcal{G}_{\kappa_{1}(p_{0})}$, so that by
+\eqr{8.16}
+\begin{equation}
+   F_{\kappa_{1}}(\bF;\bX_{1})=F_{\kappa_{1}}(\bF\bR;\bX_{1})
+   \tag{8.22}\label{eq:8.22}
+\end{equation}
+for every admissible $\bF$. Replacing $\bF$ by $\bF\bR$ in \eqr{8.21},
+\begin{equation}
+   F_{\kappa_{1}}(\bF\bR;\bX_{1})
+   =F_{\kappa_{2}}(\bF\bR\bK^{-1};\bX_{2}).
+   \tag{8.23}\label{eq:8.23}
+\end{equation}
+Chaining \eqr{8.23}, \eqr{8.22} and \eqr{8.21} in that order gives
+\begin{equation}
+   F_{\kappa_{2}}(\bF\bR\bK^{-1};\bX_{2})
+   =F_{\kappa_{1}}(\bF;\bX_{1})
+   =F_{\kappa_{2}}(\bF\bK^{-1};\bX_{2}).
+   \tag{8.24}\label{eq:8.24}
+\end{equation}
+The two ends of \eqr{8.24} are values of the same function
+$F_{\kappa_{2}}$, so the statement is now entirely about $\kappa_{2}$:
+$\kappa_{1}$ has served its purpose and may be discarded. All that
+remains is to recognise \eqr{8.16} in it.
+
+Set $\hat\bF=\bF\bK^{-1}$, so that $\bF=\hat\bF\bK$ and
+\[
+   \bF\bR\bK^{-1}=\hat\bF\bK\bR\bK^{-1}.
+\]
+Then \eqr{8.24} becomes
+\begin{equation}
+   F_{\kappa_{2}}(\hat\bF;\bX_{2})
+   =F_{\kappa_{2}}(\hat\bF\bK\bR\bK^{-1};\bX_{2}).
+   \tag{8.25}\label{eq:8.25}
+\end{equation}
+As $\bF$ runs over all admissible tensors so does $\hat\bF=\bF\bK^{-1}$,
+because $\bF\mapsto\bF\bK^{-1}$ is a bijection of the admissible set
+onto itself; so \eqr{8.25} holds for every admissible $\hat\bF$. Comparing
+it with \eqr{8.16}, and noting
+\[
+   \det(\bK\bR\bK^{-1})
+   =(\det\bK)(\det\bR)(\det\bK)^{-1}=\det\bR>0,
+\]
+we conclude that $\bK\bR\bK^{-1}\in\mathcal{G}_{\kappa_{2}(p_{0})}$. We
+thus arrive at \emph{Noll's rule}:
+\begin{equation}
+   \mathcal{G}_{\kappa_{2}(p_{0})}
+   =\{\bK\bR\bK^{-1}:\bR\in\mathcal{G}_{\kappa_{1}(p_{0})}\}.
+   \tag{8.26}\label{eq:8.26}
+\end{equation}
+
+\begin{remark}[the missing half of \eqr{8.26}]\label{rem:ch8converse}
+What the calculation established is one inclusion,
+$\bK\mathcal{G}_{\kappa_{1}(p_{0})}\bK^{-1}\subseteq
+\mathcal{G}_{\kappa_{2}(p_{0})}$: every conjugate of a $\kappa_{1}$
+symmetry is a $\kappa_{2}$ symmetry. Equality needs the other direction,
+and it costs one line.
+
+The situation is symmetric in the two configurations. Running the whole
+argument again with $\kappa_{1}$ and $\kappa_{2}$ interchanged uses
+$\vek{\pi}^{-1}$ in place of $\vek{\pi}$, whose gradient at $\bX_{2}$ is
+$\bK^{-1}$, and yields
+$\bK^{-1}\mathcal{G}_{\kappa_{2}(p_{0})}\bK\subseteq
+\mathcal{G}_{\kappa_{1}(p_{0})}$. So if $\bS\in
+\mathcal{G}_{\kappa_{2}(p_{0})}$ then $\bK^{-1}\bS\bK\in
+\mathcal{G}_{\kappa_{1}(p_{0})}$, and
+\[
+   \bS=\bK\big(\bK^{-1}\bS\bK\big)\bK^{-1}
+\]
+exhibits $\bS$ as a conjugate of a member of
+$\mathcal{G}_{\kappa_{1}(p_{0})}$. Both inclusions hold, so \eqr{8.26}
+is an equality. The gap is worth closing because the two statements are
+not interchangeable: the inclusion alone would leave open the
+possibility that $\kappa_{2}$ has \emph{more} symmetry than $\kappa_{1}$,
+and the whole force of the section is that it has exactly as much.
+\end{remark}
+
+\subsection*{Why conjugation, and why nothing else would do}
+
+Equation \eqr{8.26} is stated compactly and can be read as a formula
+that fell out of an algebraic manipulation. It is not. Conjugation is
+the only thing that could have appeared, and there are three ways to see
+that, each of which is worth having.
+
+\medskip
+\noindent\textbf{First: a symmetry is an object, and $\bK$ is a change
+of description.} Recall what $\bR$ is. By \eqr{8.16} and the pivot
+arrangement of Figure~\ref{fig:ch8local}, $\bR=\Grad\vek{\lambda}$ where
+$\vek{\lambda}$ carries a neighbourhood of $\bX_{0}$ to another
+neighbourhood of the same point. So $\bR$ is a linear map of the local
+reference translation space to \emph{itself}: it takes a material fibre
+of the reference neighbourhood and returns another material fibre of the
+same neighbourhood, and it is a symmetry when the material cannot tell
+the two apart.
+
+Now change the reference. The tensor $\bK$ maps $\hVt_{\kappa_{1}}$ to
+$\hVt_{\kappa_{2}}$: it is the dictionary between the two descriptions
+of the same set of material fibres. A fibre described in $\kappa_{2}$ by
+$\dl\bX_{2}$ is described in $\kappa_{1}$ by
+$\dl\bX_{1}=\bK^{-1}\dl\bX_{2}$. To apply the rearrangement, translate
+into $\kappa_{1}$, apply $\bR$ there, and translate back:
+\[
+   \dl\bX_{2}\ \overset{\bK^{-1}}{\longmapsto}\ \bK^{-1}\dl\bX_{2}
+   \ \overset{\bR}{\longmapsto}\ \bR\bK^{-1}\dl\bX_{2}
+   \ \overset{\bK}{\longmapsto}\ \bK\bR\bK^{-1}\dl\bX_{2},
+\]
+which is Figure~\ref{fig:ch8noll}. That is the whole of \eqr{8.26}, and
+it is the same statement as Theorem~\ref{thm:tenstrans}, the
+transformation law for the components of a tensor under a change of
+basis, with one difference: there the change of basis was orthogonal and
+the conjugation read $\bQ\bA\bQ^{t}$; here $\bK$ is merely invertible
+and the conjugation reads $\bK\bA\bK^{-1}$. Remark~\ref{rem:2ptlaw} made
+the point that the transformation law identifies the type of an object.
+Equation \eqr{8.26} is that law, and it identifies $\bR$ as a linear map
+of a translation space to itself.
+
+\medskip
+\noindent\textbf{Second: any other rule would break under composition.}
+Change the reference twice, from $\kappa_{1}$ to $\kappa_{2}$ with
+gradient $\bK_{12}$, then from $\kappa_{2}$ to $\kappa_{3}$ with
+gradient $\bK_{23}$. The composite map has gradient
+$\bK_{13}=\bK_{23}\bK_{12}$, by the chain rule. Applying \eqr{8.26}
+twice,
+\[
+   \bK_{23}\big(\bK_{12}\,\mathcal{G}_{\kappa_{1}(p_{0})}\,
+   \bK_{12}^{-1}\big)\bK_{23}^{-1}
+   =(\bK_{23}\bK_{12})\,\mathcal{G}_{\kappa_{1}(p_{0})}\,
+   (\bK_{23}\bK_{12})^{-1}
+   =\bK_{13}\,\mathcal{G}_{\kappa_{1}(p_{0})}\,\bK_{13}^{-1},
+\]
+using $(\bK_{23}\bK_{12})^{-1}=\bK_{12}^{-1}\bK_{23}^{-1}$, which is the
+same as applying \eqr{8.26} once with $\bK_{13}$. Doing it in two steps
+agrees with doing it in one. A rule such as
+$\bR\mapsto\bK\bR\bK^{t}$ or $\bR\mapsto\bK^{t}\bR\bK$ fails this test
+at once, since $\bK^{t}$ does not compose in the required way, and it
+would then matter through which intermediate configurations one had
+passed. Nothing physical can depend on that.
+
+\medskip
+\noindent\textbf{Third: conjugation is an isomorphism, and that is the
+real content.} The map $\bR\mapsto\bK\bR\bK^{-1}$ is one to one, is onto
+$\mathcal{G}_{\kappa_{2}(p_{0})}$ by \eqr{8.26}, and respects products:
+\[
+   (\bK\bR_{1}\bK^{-1})(\bK\bR_{2}\bK^{-1})
+   =\bK\bR_{1}(\bK^{-1}\bK)\bR_{2}\bK^{-1}
+   =\bK(\bR_{1}\bR_{2})\bK^{-1}.
+\]
+So the two symmetry groups are isomorphic as groups. Whatever is
+intrinsic to the group survives a change of reference: how many elements
+it has, whether it is finite, the order of each element, whether it is
+abelian. What does \emph{not} survive is how the group sits inside the
+set of all tensors, which is to say whether its elements happen to be
+rotations. The distinction between the abstract group and its
+representation is exactly the distinction between what a material is and
+how a particular reference configuration displays it.
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{B}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.4mm]},thick},
+   nd/.style={inner sep=2pt}]
+\node[nd] (a1) at (0,2.20)   {$\hVt_{\kappa_{2}}$};
+\node[nd] (b1) at (5.40,2.20) {$\hVt_{\kappa_{2}}$};
+\node[nd] (a2) at (0,0)      {$\hVt_{\kappa_{1}}$};
+\node[nd] (b2) at (5.40,0)   {$\hVt_{\kappa_{1}}$};
+\draw[ar] (a1)--(a2) node[midway,left,font=\small] {$\bK^{-1}$};
+\draw[ar] (a2)--(b2) node[midway,below,font=\small] {$\bR$};
+\draw[ar] (b2)--(b1) node[midway,right,font=\small] {$\bK$};
+\draw[ar] (a1)--(b1)
+   node[midway,above,font=\small] {$\bK\bR\bK^{-1}$};
+\node[font=\small,text=gray!75] at (2.70,1.10) {commutes};
+\node[font=\footnotesize,text=gray!85,align=center,anchor=north]
+   at (2.70,-0.85)
+   {to act in $\kappa_{2}$: go back to $\kappa_{1}$,\\
+    act there, come forward again};
+\end{tikzpicture}
+\caption{Noll's rule as a change of description. A symmetry
+transformation is a linear map of the local reference translation space
+to itself, and $\bK$ is the dictionary between the two descriptions of
+that space. Going round the square the long way and the short way must
+give the same answer, and that single requirement is \eqr{8.26}. Since
+$\det(\bK\bR\bK^{-1})=\det\bR$, the top arrow is unimodular exactly when
+the bottom one is; but $\bK\bR\bK^{-1}$ is orthogonal only under special
+circumstances, which is why $U$ is preserved and $\Orth^{+}$ is not.}
+\label{fig:ch8noll}
+\end{figure}
+
+\begin{remark}[$\bK$ is local, and what that buys]\label{rem:ch8Klocal}
+As with $\bR$ in Remark~\ref{rem:ch8localsym}, $\bK$ is the gradient at
+$\bX_{1}$ of a map defined on a neighbourhood of $\bX_{1}$. It need not
+be the gradient of any map defined on the whole body, and in the
+applications that matter most it is not.
+
+Plasticity is the standard example. There one imagines the deformation
+gradient factored as $\bF=\bF_{e}\bF_{p}$, where $\bF_{p}$ carries the
+reference neighbourhood to a locally relaxed state, from which $\bF_{e}$
+produces the actual current state elastically. The relaxed states are
+precisely local reference configurations in the sense of this section,
+one for each material point, chosen so that the lattice is undistorted
+there. In general no single configuration of the body relaxes every
+neighbourhood at once: the relaxed neighbourhoods do not fit together,
+$\bF_{p}$ is not a gradient, and the residual stresses of a plastically
+worked body are the visible consequence. Noll's rule is what governs how
+the symmetry group is carried along by $\bF_{p}$ as the material yields,
+and it is the reason the theory can speak of a lattice orientation that
+evolves while the crystal class does not.
+\end{remark}
+
+\subsection*{A worked example: a four-fold axis in a distorted
+configuration}
+
+Take the smallest interesting symmetry group and watch what \eqr{8.26}
+does to it. Let $\{\hbE_{A}\}$ be a fixed orthonormal basis of $\hVt$
+and let $\kappa_{1}$ be a configuration in which the material is a
+lattice generated by $\hbE_{1}$ and $\hbE_{2}$, with a four-fold axis
+along $\hbE_{3}$. Its symmetry group is cyclic of order four,
+\[
+   \mathcal{G}_{\kappa_{1}(p_{0})}
+   =\{\hI,\bR,\bR^{2},\bR^{3}\},
+   \qquad
+   \bR\hbE_{1}=\hbE_{2},\quad
+   \bR\hbE_{2}=-\hbE_{1},\quad
+   \bR\hbE_{3}=\hbE_{3},
+\]
+so that $\bR$ is the rotation through $90^{\circ}$ about $\hbE_{3}$,
+with components
+\[
+   [\bR]=\begin{pmatrix}0&-1&0\\ 1&0&0\\ 0&0&1\end{pmatrix}.
+\]
+Since $\bR^{t}\bR=\hI$ and $\det\bR=1$, this group lies in $\Orth^{+}$
+and $\kappa_{1}$ is an undistorted configuration in the sense of
+\eqr{8.19}: the material is a solid and $\kappa_{1}$ displays it as one.
+
+Now change the reference by a pure stretch that preserves volume,
+\[
+   \bK=\alpha\,\hbE_{1}\otimes\hbE_{1}
+      +\alpha^{-1}\hbE_{2}\otimes\hbE_{2}
+      +\hbE_{3}\otimes\hbE_{3},
+   \qquad
+   [\bK]=\begin{pmatrix}\alpha&0&0\\ 0&\alpha^{-1}&0\\
+                        0&0&1\end{pmatrix},
+\]
+with $\alpha>0$ and $\alpha\neq1$; note $\det\bK=1$, so $\kappa_{2}$
+holds the same volume of material as $\kappa_{1}$. Its inverse is
+$[\bK^{-1}]=\operatorname{diag}(\alpha^{-1},\alpha,1)$. Conjugate,
+multiplying the matrices in order:
+\[
+   [\bK][\bR]
+   =\begin{pmatrix}\alpha&0&0\\ 0&\alpha^{-1}&0\\ 0&0&1\end{pmatrix}
+    \begin{pmatrix}0&-1&0\\ 1&0&0\\ 0&0&1\end{pmatrix}
+   =\begin{pmatrix}0&-\alpha&0\\ \alpha^{-1}&0&0\\
+                   0&0&1\end{pmatrix},
+\]
+and then
+\[
+   [\bH]:=[\bK][\bR][\bK^{-1}]
+   =\begin{pmatrix}0&-\alpha&0\\ \alpha^{-1}&0&0\\
+                   0&0&1\end{pmatrix}
+    \begin{pmatrix}\alpha^{-1}&0&0\\ 0&\alpha&0\\
+                   0&0&1\end{pmatrix}
+   =\begin{pmatrix}0&-\alpha^{2}&0\\ \alpha^{-2}&0&0\\
+                   0&0&1\end{pmatrix}.
+\]
+Now read off what has and has not changed.
+
+\emph{The determinant is unchanged.} $\det\bH=
+-(-\alpha^{2})(\alpha^{-2})\cdot 1$ computed along the third row gives
+$\det\bH=1$, so $\bH\in U$, as \eqr{8.26} guarantees in general.
+
+\emph{Orthogonality is destroyed.}
+\[
+   [\bH^{t}][\bH]
+   =\begin{pmatrix}0&\alpha^{-2}&0\\ -\alpha^{2}&0&0\\
+                   0&0&1\end{pmatrix}
+    \begin{pmatrix}0&-\alpha^{2}&0\\ \alpha^{-2}&0&0\\
+                   0&0&1\end{pmatrix}
+   =\begin{pmatrix}\alpha^{-4}&0&0\\ 0&\alpha^{4}&0\\
+                   0&0&1\end{pmatrix},
+\]
+which is $\hI$ only when $\alpha=1$. So
+$\mathcal{G}_{\kappa_{2}(p_{0})}\not\subset\Orth^{+}$: in $\kappa_{2}$
+the symmetry is no longer a rotation, and $\kappa_{2}$ is a distorted
+configuration.
+
+\emph{The group structure is untouched.} Squaring,
+\[
+   [\bH]^{2}
+   =\begin{pmatrix}0&-\alpha^{2}&0\\ \alpha^{-2}&0&0\\
+                   0&0&1\end{pmatrix}^{2}
+   =\begin{pmatrix}-1&0&0\\ 0&-1&0\\ 0&0&1\end{pmatrix}
+   =[\bR^{2}],
+\]
+the two factors of $\alpha$ cancelling, and $\bH^{4}=(\bH^{2})^{2}=\hI$.
+So $\bH$ still has order four and
+$\mathcal{G}_{\kappa_{2}(p_{0})}=\{\hI,\bH,\bH^{2},\bH^{3}\}$ is still
+cyclic of order four, as Remark~\ref{rem:ch8converse} and the
+isomorphism argument require. The characteristic polynomial is likewise
+preserved by conjugation, so $\bH$ has the same eigenvalues $1$ and
+$\pm i$ as the rotation it came from, even though it is not a rotation.
+
+\emph{And the geometry is exactly what one would draw.} In $\kappa_{2}$
+the lattice is generated by $\bK\hbE_{1}=\alpha\hbE_{1}$ and
+$\bK\hbE_{2}=\alpha^{-1}\hbE_{2}$, a rectangle rather than a square.
+Apply $\bH$ to those generators:
+\[
+   \bH(\alpha\hbE_{1})=\alpha\cdot\alpha^{-2}\hbE_{2}
+   =\alpha^{-1}\hbE_{2},
+   \qquad
+   \bH(\alpha^{-1}\hbE_{2})=\alpha^{-1}\cdot(-\alpha^{2})\hbE_{1}
+   =-\alpha\hbE_{1}.
+\]
+Each generator is carried onto the other, so $\bH$ maps the rectangular
+lattice onto itself, exactly as $\bR$ mapped the square one onto itself.
+The symmetry is still there and is still detectable by no experiment;
+what has changed is that expressing it now requires a map that stretches
+one lattice direction by $\alpha^{-2}$ while compressing the other by
+$\alpha^{2}$. A rotation could not do it, because the two lattice
+directions no longer have equal spacing.
+
+\subsection*{Consequences: fluidity is intrinsic, undistortedness is
+not}
+
+Two conclusions follow from \eqr{8.26}, and they are the reason the
+definitions of Section~\ref{sec:ch8symm} were phrased as they were.
+
+\medskip
+\noindent\textbf{$\Orth^{+}$ is not preserved.} The worked example is a
+counterexample: $\mathcal{G}_{\kappa_{1}(p_{0})}\subset\Orth^{+}$ while
+$\mathcal{G}_{\kappa_{2}(p_{0})}$ is not. So if $\kappa_{1}(p_{0})$ is
+an undistorted state of a crystalline lattice, the lattice is distorted
+in $\kappa_{2}(p_{0})$, and \eqr{8.19} fails there. This is why the
+existence of \emph{some} local configuration in which \eqr{8.19} holds
+is an essential part of the definition of a solid: solidity is the
+statement that an undistorted configuration exists, not that the one in
+front of us is undistorted.
+
+It is worth recording exactly when nothing goes wrong. If
+$\bK=c\bQ$ with $c>0$ and $\bQ$ orthogonal, then $\bK^{-1}=c^{-1}\bQ^{t}$
+and
+\[
+   \bK\bR\bK^{-1}=c\bQ\bR\,c^{-1}\bQ^{t}=\bQ\bR\bQ^{t},
+\]
+the scalars cancelling, and $\bQ\bR\bQ^{t}$ is orthogonal whenever $\bR$
+is, since $(\bQ\bR\bQ^{t})^{t}(\bQ\bR\bQ^{t})=
+\bQ\bR^{t}\bQ^{t}\bQ\bR\bQ^{t}=\bQ\bR^{t}\bR\bQ^{t}=\bQ\bQ^{t}=\hI$.
+So rotating an undistorted configuration, or dilating it uniformly,
+leaves it undistorted, and the undistorted configurations of a solid
+form a family closed under those operations and no others. Anything that
+strains the neighbourhood spoils it, which is the same statement as
+\eqr{8.19} viewed from the other side.
+
+\medskip
+\noindent\textbf{$U$ is preserved.} Suppose
+$\mathcal{G}_{\kappa_{1}(p_{0})}=U$. Every $\bR\in U$ has
+$\det(\bK\bR\bK^{-1})=\det\bR=1$, so $\bK U\bK^{-1}\subseteq U$;
+conversely every $\bS\in U$ is $\bK(\bK^{-1}\bS\bK)\bK^{-1}$ with
+$\det(\bK^{-1}\bS\bK)=\det\bS=1$, so $U\subseteq\bK U\bK^{-1}$. Hence
+$\bK U\bK^{-1}=U$ and, by \eqr{8.26},
+$\mathcal{G}_{\kappa_{2}(p_{0})}=U$ as well.
+
+So \eqr{8.18} is satisfied in all configurations, and more: the
+\emph{identification} of the symmetry group with the unimodular group is
+independent of the reference configuration. Being a fluid is a property
+of the substance and of nothing else, and no change of reference,
+however violent, can make a fluid look like a solid or a solid like a
+fluid. That is in accord with the intuitive notion of fluidity, and it
+is the reason the definition of a fluid could have been stated without
+the words ``there exists a local reference configuration'', whereas the
+definition of a solid could not.
+
+%=======================================================================
+\section{Frame invariance}\label{sec:ch8frame}
+%=======================================================================
+
+In building the class of constitutive equations of
+Section~\ref{sec:ch8elastic} we adopted the perspective of one
+particular observer $O$. Chapter 7 was written to make the second
+observer available, and this section spends it.
+
+Recall the setting. An observer is equipped with a point space and its
+translation space, and two observers agree about time intervals and
+about distances between material points. Section 7.1 showed that these
+two agreements force the relation between their perceptions to be
+\eqr{7.3},
+\[
+   \bx^{+}=\bQ(t)\bx+\bc(t),
+\]
+with $\bc(t)$ arbitrary and $\bQ(t)$ a spatially uniform, time-dependent
+two-point orthogonal tensor, together with $t^{+}=t+a$ from \eqr{7.1}.
+Sections 7.3 and 7.4 then computed what every kinematic and mechanical
+variable does under such a change, and those computations are the
+dictionary this section uses. The entries needed here are
+
+\[
+\begin{aligned}
+   \theta^{+}&=\theta,\qquad \eps^{+}=\eps,\qquad \eta^{+}=\eta,
+     &&\text{\eqr{7.37}: absolute scalars,}\\
+   \bF^{+}_{\kappa^{+}}&=\bQ\bF_{\kappa}\bK^{t},
+     &&\text{\eqr{7.17},}\\
+   \bL^{+}&=\bQ\bL\bQ^{t}+\bOm,\qquad \bOm=\dot\bQ\bQ^{t},
+     &&\text{\eqr{7.33},}\\
+   \bT^{+}&=\bQ\bT\bQ^{t},
+     &&\text{\eqr{7.40},}\\
+   \bq^{+}&=\bQ\bq,
+     &&\text{\eqr{7.44},}
+\end{aligned}
+\]
+where $\bK$ is the fixed orthogonal two-point tensor of \eqr{7.14}
+relating the two observers' reference placements, $\bX^{+}=\bK\bX+
+\bc^{+}$. One entry of the list \eqr{8.7} was not computed in Chapter 7
+and takes one line here. Temperature is an absolute scalar, so the
+increment $\dl\theta$ across a given pair of neighbouring places is the
+same for both observers, while $\dl\bx^{+}=\bQ\,\dl\bx$ by \eqr{7.3};
+therefore
+\[
+\begin{aligned}
+   \ip{\grad^{+}\theta^{+}}{\bQ\,\dl\bx}
+   &=\dl\theta^{+}=\dl\theta
+   \\
+   &=\ip{\grad\theta}{\dl\bx}
+   \quad\Longrightarrow\quad
+   \ip{\big(\bQ^{t}\grad^{+}\theta^{+}-\grad\theta\big)}{\dl\bx}=0
+\end{aligned}
+\]
+for every $\dl\bx$, whence $\bQ^{t}\grad^{+}\theta^{+}=\grad\theta$ and,
+multiplying by $\bQ$ and using $\bQ\bQ^{t}=\I$,
+\[
+   \grad^{+}\theta^{+}=\bQ\grad\theta .
+\]
+The move is \eqr{8.5}--\eqr{8.6} once more, with $\bQ$ in place of
+$\bF$; it is the third time in this chapter that the arbitrariness of a
+line element has converted a statement about increments into a statement
+about gradients.
+
+\subsection*{What both observers must be given}
+
+Material frame indifference is the requirement that all observers agree
+on the nature of the material at hand, and hence on the class of
+processes to which the material responds. With reference to \eqr{8.4}
+and \eqr{8.7}, then, the response functions in the frame of $O^{+}$
+should deliver the values of the elements of the set
+\begin{equation}
+   C^{+}=\{\bT^{+},\bq^{+},\psi^{+},\eta^{+}\}
+   \tag{8.27}\label{eq:8.27}
+\end{equation}
+in terms of the elements of the list
+\begin{equation}
+   L^{+}=\{\bx^{+},\bv^{+},\theta^{+},\bF^{+}_{\kappa^{+}},\bL^{+},
+   \grad^{+}\theta^{+}\},
+   \tag{8.28}\label{eq:8.28}
+\end{equation}
+all evaluated at the material point $p\in B$ and the time $t^{+}$. So if
+$O$ adopts the constitutive function
+$F_{\kappa}(\bx,\bv,\theta,\bF_{\kappa},\bL,\grad\theta;\bX)$ to
+determine the values of $F(p,t)\in C$, then $O^{+}$ should adopt a
+function $F^{+}_{\kappa^{+}}$ of the starred arguments to evaluate its
+counterpart $F^{+}(p,t^{+})\in C^{+}$.
+
+Note what \eqr{8.27} and \eqr{8.28} are asserting, since at first sight
+they assert nothing. They say that the \emph{form} of the constitutive
+hypothesis is the same for both observers: $O^{+}$ has a set of four
+responses determined by a list of six process variables, in one-to-one
+correspondence with $O$'s. If this failed, the two observers would not be
+describing the same material at all, and there would be nothing left to
+compare. It is the counterpart, for a change of observer, of the
+statement made after \eqr{8.12} for a change of reference.
+
+\begin{remark}[the star on $\kappa$]\label{rem:ch8starkappa}
+The reference configuration carries a star too, and it is worth saying
+why this changes little. A reference configuration is a placement of the
+body chosen for bookkeeping, not a thing either observer watches, and by
+\eqr{7.14} the two placements differ by $\bX^{+}=\bK\bX+\bc^{+}$ with
+$\bK$ a \emph{fixed orthogonal} two-point tensor and $\bc^{+}$ a fixed
+vector. Fixed, because it is built in \eqr{7.15} from $\bQ(t_{0})$ and
+the shifters at the initial instant, and none of those depends on $t$.
+
+Two things follow. First, $\bK$ is a change of reference configuration
+of exactly the kind treated in Section~\ref{sec:ch8noll}, so its effect
+on the symmetry group is Noll's rule, and since $\bK$ is orthogonal the
+conjugation is $\bK\mathcal{G}\bK^{t}$, which by the calculation after
+\eqr{8.26} carries $\Orth^{+}$ into itself: a change of observer never
+distorts an undistorted configuration. Second, if the two observers
+agree to use the same reference placement, as one always may by taking
+$\bQ(t_{0})=\I$ and equal shifters, then $\bK=\hI$, $\bc^{+}=\bze$,
+$\bX^{+}=\bX$, $\kappa^{+}=\kappa$ and \eqr{7.17} reduces to
+$\bF^{+}=\bQ\bF$. That is the convention used in every calculation
+below. It costs nothing, and it removes a star that would otherwise
+clutter every formula without changing any conclusion.
+\end{remark}
+
+\subsection*{The four transformation statements}
+
+Take the four members of $C$ in turn. If the free energy and entropy are
+determined by $O$ to be
+\begin{equation}
+\begin{aligned}
+   \psi&=\hat\psi_{\kappa}(\bx,\bv,\theta,\bF_{\kappa},\bL,
+     \grad\theta;\bX)\\
+   \text{and}\quad
+   \eta&=\hat\eta_{\kappa}(\bx,\bv,\theta,\bF_{\kappa},\bL,
+     \grad\theta;\bX),
+\end{aligned}
+   \tag{8.29}\label{eq:8.29}
+\end{equation}
+in terms of constitutive functions $\hat\psi_{\kappa}$ and
+$\hat\eta_{\kappa}$, then the corresponding constitutive equations in
+the frame of $O^{+}$ are
+\begin{equation}
+\begin{aligned}
+   \hat\psi^{+}_{\kappa^{+}}\big(\bx^{+},\bv^{+},\theta^{+},
+     \bF^{+}_{\kappa^{+}},\bL^{+},\grad^{+}\theta^{+};\bX^{+}\big)
+   &=\hat\psi_{\kappa}(\bx,\bv,\theta,\bF_{\kappa},\bL,
+     \grad\theta;\bX)\\
+   \text{and}\quad
+   \hat\eta^{+}_{\kappa^{+}}\big(\bx^{+},\bv^{+},\theta^{+},
+     \bF^{+}_{\kappa^{+}},\bL^{+},\grad^{+}\theta^{+};\bX^{+}\big)
+   &=\hat\eta_{\kappa}(\bx,\bv,\theta,\bF_{\kappa},\bL,
+     \grad\theta;\bX),
+\end{aligned}
+   \tag{8.30}\label{eq:8.30}
+\end{equation}
+respectively. There is no $\bQ$ anywhere in \eqr{8.30}, and the reason
+is \eqr{6.186} together with \eqr{7.37}: the energy $\eps$, the
+temperature $\theta$ and the entropy $\eta$ are absolute scalars, hence
+$\psi^{+}=\eps^{+}-\theta^{+}\eta^{+}=\eps-\theta\eta=\psi$, and a
+scalar has no components to rotate.
+
+Similarly, if the heat flux is determined by $O$ to be
+\begin{equation}
+   \bq=\hat\bq_{\kappa}(\bx,\bv,\theta,\bF_{\kappa},\bL,\grad\theta;\bX)
+   \tag{8.31}\label{eq:8.31}
+\end{equation}
+in terms of a constitutive function $\hat\bq_{\kappa}$, then, with
+reference to \eqr{7.44}, the corresponding constitutive equation in the
+frame of $O^{+}$ is
+\begin{equation}
+   \hat\bq^{+}_{\kappa^{+}}\big(\bx^{+},\bv^{+},\theta^{+},
+     \bF^{+}_{\kappa^{+}},\bL^{+},\grad^{+}\theta^{+};\bX^{+}\big)
+   =\bQ\,\hat\bq_{\kappa}(\bx,\bv,\theta,\bF_{\kappa},\bL,
+     \grad\theta;\bX),
+   \tag{8.32}\label{eq:8.32}
+\end{equation}
+where $\bQ$ is the orthogonal transformation of \eqr{7.3} that
+characterizes the change of frame. The single factor $\bQ$ is the mark
+of a spatial vector: one index, one rotation.
+
+\begin{remark}[$\hat\bq_{\kappa}$ is not $\bq_{\kappa}$]
+\label{rem:ch8qwarn}
+The subscript $\kappa$ on $\hat\bq_{\kappa}$ records that the function
+takes $\bF_{\kappa}$ among its arguments and therefore depends on the
+reference configuration, exactly as in \eqr{8.10}. It does \emph{not}
+mean that the output is referential. The output is the spatial heat flux
+$\bq$, a vector in $\Vt$, and it transforms with one factor of $\bQ$.
+
+The referential heat flux of \eqr{6.171}, $\bq_{\kappa}=(\bF^{*})^{t}
+\bq=J\bF^{-1}\bq$, is a different object living in $\hVt$, and by
+\eqr{7.45} it transforms with $\bK$ rather than $\bQ$. The two are
+distinguished here by the caret, which marks a constitutive
+\emph{function} rather than a value, and by nothing else, so the caret
+has to be read. Getting them confused would put a $\bQ$ where a $\bK$
+belongs and would make a frame-indifferent theory look frame dependent.
+\end{remark}
+
+Lastly, if $O$ finds the stress to be determined constitutively by
+\begin{equation}
+   \bT=\hat\bT_{\kappa}(\bx,\bv,\theta,\bF_{\kappa},\bL;\bX),
+   \tag{8.33}\label{eq:8.33}
+\end{equation}
+then the stress is determined by $O^{+}$ to be
+\begin{equation}
+   \bT^{+}=\hat\bT^{+}_{\kappa^{+}}\big(\bx^{+},\bv^{+},\theta^{+},
+     \bF^{+}_{\kappa^{+}},\bL^{+};\bX^{+}\big),
+   \tag{8.34}\label{eq:8.34}
+\end{equation}
+where, by \eqr{7.40},
+\begin{equation}
+   \hat\bT^{+}_{\kappa^{+}}\big(\bx^{+},\bv^{+},\theta^{+},
+     \bF^{+}_{\kappa^{+}},\bL^{+};\bX^{+}\big)
+   =\bQ\,\hat\bT_{\kappa}(\bx,\bv,\theta,\bF_{\kappa},\bL;\bX)\,\bQ^{t}.
+   \tag{8.35}\label{eq:8.35}
+\end{equation}
+Two factors of $\bQ$, one for each index, which is what
+Theorem~\ref{thm:tenstrans} says a second-order spatial tensor must do.
+
+The dependence of the stress on the temperature gradient has been
+suppressed in \eqr{8.33} to \eqr{8.35}. This is in accord with classical
+treatments of the present class of constitutive equations, and it is a
+restriction on the model rather than a consequence of anything proved so
+far; the entropy inequality is what eventually justifies it, and the
+matter is taken up again in the chapters that follow.
+
+\subsection*{Where the restriction actually comes from}
+
+Equations \eqr{8.30}, \eqr{8.32} and \eqr{8.35} look like restrictions
+and, taken by themselves, are not. Read literally, each of them
+\emph{defines} the starred function on the left in terms of the unstarred
+one on the right: given $\hat\bT_{\kappa}$, and given the dictionary of
+Chapter 7 that expresses the starred arguments through the unstarred, the
+right-hand side of \eqr{8.35} is a computable expression in the starred
+arguments, and \eqr{8.35} names it $\hat\bT^{+}_{\kappa^{+}}$. Nothing
+has been forbidden.
+
+The physical principle is the further demand that the two observers use
+\emph{the same function}:
+\[
+   \hat\psi^{+}_{\kappa^{+}}=\hat\psi_{\kappa},\qquad
+   \hat\eta^{+}_{\kappa^{+}}=\hat\eta_{\kappa},\qquad
+   \hat\bq^{+}_{\kappa^{+}}=\hat\bq_{\kappa},\qquad
+   \hat\bT^{+}_{\kappa^{+}}=\hat\bT_{\kappa},
+\]
+under the convention $\kappa^{+}=\kappa$ of
+Remark~\ref{rem:ch8starkappa}. This is the content of material frame
+indifference: the elasticity of copper is a property of copper, so the
+function that gives the stress of copper cannot depend on which
+laboratory bench it was measured from. Impose it on \eqr{8.35} and the
+definition turns into a functional equation,
+\[
+   \hat\bT_{\kappa}\big(\bx^{+},\bv^{+},\theta,\bQ\bF,
+     \bQ\bL\bQ^{t}+\bOm;\bX\big)
+   =\bQ\,\hat\bT_{\kappa}(\bx,\bv,\theta,\bF,\bL;\bX)\,\bQ^{t},
+\]
+required to hold for every change of frame, that is, for every choice of
+the functions $\bQ(t)$ and $\bc(t)$. Now something is forbidden, and
+what is forbidden is found by choosing $\bQ$ and $\bc$ cleverly.
+The chapters that follow carry this out in full for the two sub-models,
+viscous fluids and elastic solids. Two
+consequences are worth extracting here, the first because
+Section~\ref{sec:ch8elastic} promised it.
+
+\begin{remark}[the constitutive functions cannot depend on $\bx$ or
+$\bv$]\label{rem:ch8noxv}
+Fix an instant $t$ later than the instant $t_{0}$ at which the reference
+placements were fixed, and consider the change of frame with
+\[
+   \bQ(\tau)=\I\ \text{for all }\tau,
+   \qquad
+   \bc(t_{0})=\bze,\qquad
+   \bc(t)=\ba,\qquad
+   \dot\bc(t)=\bb ,
+\]
+where $\ba$ and $\bb$ are arbitrary vectors. Such a $\bc$ exists: three
+conditions at two distinct instants are met by, for example, a cubic
+polynomial in $\tau$, and no relation between $\ba$ and $\bb$ is
+implied because $t\neq t_{0}$.
+
+Work out what this frame change does to each entry of the list, at the
+instant $t$.
+\begin{itemize}\itemsep1pt
+\item $\bQ(t_{0})=\I$ and equal shifters give $\bK=\hI$ and
+      $\bc^{+}=\bze$ in \eqr{7.14}, so $\bX^{+}=\bX$ and
+      $\kappa^{+}=\kappa$.
+\item $\bx^{+}=\bQ\bx+\bc=\bx+\ba$ by \eqr{7.3}.
+\item $\bOm=\dot\bQ\bQ^{t}=\Ob$ since $\bQ$ is constant, so \eqr{7.8}
+      gives $\bv^{+}=\bv+\dot\bc=\bv+\bb$.
+\item $\bF^{+}=\bQ\bF\bK^{t}=\bF$ and, by \eqr{7.33},
+      $\bL^{+}=\bQ\bL\bQ^{t}+\bOm=\bL$.
+\item $\theta^{+}=\theta$ and $\grad^{+}\theta^{+}=\bQ\grad\theta
+      =\grad\theta$.
+\end{itemize}
+So this change of frame moves $\bx$ and $\bv$ and moves nothing else at
+all. Since $\bQ=\I$, \eqr{8.35} reads $\hat\bT^{+}_{\kappa}=
+\hat\bT_{\kappa}$, and frame indifference then gives
+\[
+   \hat\bT_{\kappa}(\bx+\ba,\bv+\bb,\theta,\bF,\bL;\bX)
+   =\hat\bT_{\kappa}(\bx,\bv,\theta,\bF,\bL;\bX)
+\]
+for every $\ba$ and every $\bb$. A function whose value is unchanged
+when its first two arguments are shifted by arbitrary amounts does not
+depend on those arguments. The same argument applied to \eqr{8.30} and
+\eqr{8.32}, in which $\bQ=\I$ likewise removes every factor of $\bQ$,
+disposes of $\bx$ and $\bv$ in $\hat\psi_{\kappa}$,
+$\hat\eta_{\kappa}$ and $\hat\bq_{\kappa}$ as well. This is the claim
+announced without proof in Section~\ref{sec:ch8elastic}, and the reason
+it holds is worth stating in words: $\bx$ is where the particle
+happens to be and $\bv$ is how fast it happens to be going, and both are
+artefacts of the observer's choice of origin and of state of motion. A
+material cannot respond to either, because neither is a property of the
+material.
+
+The reduced lists are therefore
+\[
+   C=\{\bT,\bq,\psi,\eta\}
+   \quad\text{determined by}\quad
+   \{\theta,\bF_{\kappa},\bL,\grad\theta\},
+\]
+and it is these four arguments, not six, that the following chapters
+work with.
+\end{remark}
+
+\begin{remark}[a preview: why viscous stress is written in $\bD$]
+\label{rem:ch8Donly}
+One more choice of $\bQ$ is instructive, and it explains a feature of
+every viscous constitutive equation the reader has ever seen.
+
+Choose $\bQ(\tau)$ with $\bQ(t_{0})=\I$ and $\bQ(t)=\I$ but
+$\dot\bQ(t)=\bOm$ an arbitrary skew tensor; a rotation that starts at
+the identity, wanders, and returns to the identity at time $t$ with
+non-zero angular velocity will do. At the instant $t$ we then have
+$\bQ=\I$, so
+\[
+   \bF^{+}=\bF,\qquad
+   \theta^{+}=\theta,\qquad
+   \grad^{+}\theta^{+}=\grad\theta,\qquad
+   \bT^{+}=\bT,
+\]
+while \eqr{7.33} gives $\bL^{+}=\bL+\bOm$. Frame indifference applied to
+\eqr{8.35}, with $\bx$ and $\bv$ already gone by
+Remark~\ref{rem:ch8noxv}, therefore requires
+\[
+   \hat\bT_{\kappa}(\theta,\bF,\bL+\bOm;\bX)
+   =\hat\bT_{\kappa}(\theta,\bF,\bL;\bX)
+   \qquad\text{for every skew }\bOm .
+\]
+Choose $\bOm=-\bW$, the spin tensor of \eqr{4.7}, which is admissible
+because $\bW$ is skew. Then $\bL+\bOm=\bD+\bW-\bW=\bD$ and
+\[
+   \hat\bT_{\kappa}(\theta,\bF,\bL;\bX)
+   =\hat\bT_{\kappa}(\theta,\bF,\bD;\bX):
+\]
+the stress can depend on the velocity gradient only through its
+symmetric part. The same holds for $\hat\psi_{\kappa}$,
+$\hat\eta_{\kappa}$ and $\hat\bq_{\kappa}$.
+
+This is the constitutive counterpart of Remark~\ref{rem:Wtrap}. The spin
+$\bW$ measures rotation relative to the observer's frame, and an
+observer who spins along with the material sees a different $\bW$;
+\eqr{7.34} says so explicitly, $\bW^{+}=\bQ\bW\bQ^{t}+\bOm$, with the
+inhomogeneous term $\bOm$ that $\bD^{+}=\bQ\bD\bQ^{t}$ does not have.
+A material cannot respond to a quantity that an observer can change by
+turning around, so $\bW$ must drop out and $\bD$ must remain. Every
+constitutive law for a viscous fluid is written in $\bD$ for this
+reason and for no other.
+\end{remark}
+
+\subsection*{What frame invariance leaves undone}
+
+Frame invariance alone does not suffice to restrict the class of
+admissible constitutive functions. Nothing said so far prevents a
+material from generating energy out of nothing, or from conducting heat
+from cold to hot; those are thermodynamic prohibitions and the
+requirement that two observers agree cannot see them. We must also
+ensure that the constitutive functions are compatible with the balances
+of mass, energy and momentum and with the Clausius--Duhem inequality of
+Section 6.7.
+
+Of those four, three are quickly disposed of. Conservation of mass
+imposes nothing on the list, since it merely determines $\rho$ from
+$\rho_{\kappa}$ and $\det\bF$. The balance of energy imposes nothing
+either, since the heat supply $r$ is at our disposal and may be chosen
+to satisfy it whatever the other fields do; this is exactly the freedom
+that the Coleman--Noll argument below exploits. The balance of linear
+momentum imposes nothing beyond what \eqr{8.35} already contains, but
+the balance of moment of momentum does: it requires $\bT=\bT^{t}$, hence
+$\hat\bT_{\kappa}=\hat\bT_{\kappa}^{t}$ identically in its arguments,
+which is six scalar conditions rather than nine.
+
+The Clausius--Duhem inequality is the substantial one, and the following
+remark sketches how it is used, both because it is the organising
+principle of every constitutive chapter that follows and because it
+shows why Section~\ref{sec:ch8elastic} took the trouble to trade $\eps$
+for $\psi$.
+
+\begin{remark}[how the entropy inequality bites]\label{rem:ch8cd}
+The local inequality \eqr{6.187} of Chapter 6 is
+\[
+   -\rho\big(\dot\psi+\eta\dot\theta\big)+\ip\bT\bL
+   -\theta^{-1}\ip\bq{\grad\theta}\ \geq\ 0 ,
+\]
+and it is required to hold in \emph{every} admissible process, not in
+some. Substitute the constitutive equations in their reduced form,
+\[
+   \psi=\hat\psi_{\kappa}(\theta,\bF,\bL,\grad\theta;\bX)
+\]
+and so on, and expand $\dot\psi$ by the chain rule:
+\[
+   \dot\psi=\frac{\partial\hat\psi_{\kappa}}{\partial\theta}\dot\theta
+   +\frac{\partial\hat\psi_{\kappa}}{\partial\bF}\cdot\dot\bF
+   +\frac{\partial\hat\psi_{\kappa}}{\partial\bL}\cdot\dot\bL
+   +\frac{\partial\hat\psi_{\kappa}}{\partial(\grad\theta)}
+     \cdot(\grad\theta)^{\textstyle\cdot} .
+\]
+Collect terms:
+\[
+\begin{aligned}
+   &-\rho\Big(\frac{\partial\hat\psi_{\kappa}}{\partial\theta}
+   +\eta\Big)\dot\theta
+   -\rho\frac{\partial\hat\psi_{\kappa}}{\partial\bL}\cdot\dot\bL
+   -\rho\frac{\partial\hat\psi_{\kappa}}{\partial(\grad\theta)}
+     \cdot(\grad\theta)^{\textstyle\cdot}\\
+   &\qquad
+   -\rho\frac{\partial\hat\psi_{\kappa}}{\partial\bF}\cdot\dot\bF
+   +\ip\bT\bL-\theta^{-1}\ip\bq{\grad\theta}\ \geq\ 0 .
+\end{aligned}
+\]
+Now the decisive observation. The three quantities $\dot\theta$,
+$\dot\bL$ and $(\grad\theta)^{\textstyle\cdot}$ appear \emph{linearly},
+and their coefficients do not contain them: the coefficients are
+functions of $(\theta,\bF,\bL,\grad\theta)$ alone. But at a given
+material point and instant one may prescribe a process realising any
+values of $\dot\theta$, $\dot\bL$ and $(\grad\theta)^{\textstyle\cdot}$
+one pleases, with $(\theta,\bF,\bL,\grad\theta)$ held at whatever values
+are under consideration. A quantity of the form $\alpha z+\beta$, with
+$\alpha$ and $\beta$ independent of $z$ and $z$ free to take any value
+including large negative ones, is bounded below only if $\alpha=0$.
+Hence each of the three coefficients vanishes:
+\[
+   \eta=-\frac{\partial\hat\psi_{\kappa}}{\partial\theta},
+   \qquad
+   \frac{\partial\hat\psi_{\kappa}}{\partial\bL}=\Ob,
+   \qquad
+   \frac{\partial\hat\psi_{\kappa}}{\partial(\grad\theta)}=\bze .
+\]
+Three results at once, and none of them was assumed. The free energy
+depends on $\theta$ and $\bF$ only, so it is purely elastic; the
+entropy is not an independent constitutive function at all but the
+temperature derivative of the free energy; and the viscosity, which
+lives in the dependence on $\bL$, has been banished from the energy and
+confined to the stress.
+
+What remains, after $\dot\bF=\bL\bF$ from \eqr{4.3} is used to write
+$(\partial\hat\psi_{\kappa}/\partial\bF)\cdot\dot\bF=
+\big[(\partial\hat\psi_{\kappa}/\partial\bF)\bF^{t}\big]\cdot\bL$, is
+\[
+   \Big(\bT-\rho\frac{\partial\hat\psi_{\kappa}}{\partial\bF}
+   \bF^{t}\Big)\cdot\bL-\theta^{-1}\ip\bq{\grad\theta}\ \geq\ 0 ,
+\]
+the \emph{residual dissipation inequality}. It does not determine
+anything, because $\bL$ and $\grad\theta$ are among the constitutive
+arguments and so cannot be varied freely against $\bT$ and $\bq$. What
+it does is split the stress into an equilibrium part
+$\rho(\partial\hat\psi_{\kappa}/\partial\bF)\bF^{t}$, delivered by the
+free energy, and a dissipative remainder that must do non-negative work,
+and it forces heat to flow down the temperature gradient. Those two
+statements are the whole thermodynamic content of the theory, and the
+following chapters develop them in the contexts of distinct sub-models
+for viscous fluids and elastic solids.
+
+The sketch also settles a question left open at \eqr{8.33}: why the
+temperature gradient could be dropped from the stress. It is not dropped
+by fiat. Once $\hat\psi_{\kappa}$ is known to be independent of
+$\grad\theta$, the residual inequality above must hold for
+$\grad\theta=\bze$ as well, and the argument that then bounds the
+$\grad\theta$ dependence of $\bT$ is the one carried out in the chapters
+that follow.
+\end{remark}
+
+With that the general theory stops. Nothing more can be said about
+constitutive equations without committing to a particular kind of
+material, since everything assembled here holds equally of steel and of
+honey: the locality assumption of Section~\ref{sec:ch8elastic}, the
+functional equation \eqr{8.16} and the group it defines, Noll's rule
+\eqr{8.26}, and the frame-invariance requirements \eqr{8.30},
+\eqr{8.32} and \eqr{8.35}. The commitment is made along the fault line
+that Section~\ref{sec:ch8symm} opened. Take $\mathcal{G}=U$ and the
+material is a fluid, which is the subject of the next chapter; take
+$\mathcal{G}\subseteq\Orth^{+}$ in some undistorted configuration and it
+is a solid. The constraints of this chapter are what both of them are
+built inside.

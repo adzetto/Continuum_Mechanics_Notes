@@ -1,0 +1,456 @@
+Chapter 12
+Linear Elasticity
+The theory of linear elasticity is among the most successful analytical
+tools in all of engineering. Itunderlies thevast majority of analyses of
+engineering structures and materials in applications involving small
+strains and rotations. Accordingly it has been the subject of a great
+deal of research and has reached a very high level of development.
+Our purpose in this ﬁnal chapter is to outline the essential aspects
+of this important subject. For the sake of simplicity we conﬁne our
+attention to the purely mechanical theory in which the free energy is
+independent of temperature, which we assume to be constant every-
+where in the material. It then follows, from (11.51) and the result of
+Problem 14 of the preceding chapter, that the thermal energy bal-
+ance is identically satisﬁed provided that the internal heating supply
+vanishes.
+12.1 Kinematics
+The basic premise of linear elasticity theory is that the norm of the
+displacement gradientH issmalleverywherein thebody(see(7.22)).
+Assuming H to be a continuous function ofX, we then have
+ε=m a x
+X∈κ
+|H(X,t)|≪ 1, (12.1)
+where |H|2 = tr(HHt)= tr(HtH). In terms of Cartesian compo-
+nents, |H| = √
+HiAHiA. Thus the absolute value of each component
+is much less than unity:|HiA|≪ 1.
+223
+=== p224 ===
+224 Principles of Continuum Mechanics
+It follows from (7.22) that the right Cauchy–Green tensor is
+C = ˆI + 1tH +Ht1+HtH. (12.2)
+Equivalently,
+C = ˆI +G+Gt +GtG, where G = 1tH (12.3)
+is a referential tensor, with Cartesian componentsGAB = δiAHiB.
+This yields
+GdX = 1tHdX = 1tdu = dw, where w = 1tu (12.4)
+is the referential displacement, in whichu is the spatial displacement
+and we have used the fact that the shifter is uniform. Thus,
+G = Gradw, (12.5)
+and u = 1w. In terms of components, wA = δiAui, ui = δiAwA
+and GAB = wA,B. Using (7.22) with H = 1G,w em a yw r i t et h e
+deformation gradient in the form
+F = 1(ˆI +G). (12.6)
+It is a simple matter to verify that|H| = |G|(= √
+GABGAB), and
+hencethat(12.1) isequivalent totherequirementthat |G|≪ 1e v e ry-
+where in the body, i.e., that each component is such that|GAB|≪ 1.
+Accordingly C is everywhere close toˆI. For this reason, it is more
+convenient to work with the Lagrange strainE deﬁned by (2.97).
+This is given in terms of the displacement gradient by
+E = 1
+2(G+Gt +GtG). (12.7)
+If |G|≪ 1, as we assume, then
+E ≃ ϵ, where ϵ = 1
+2(G+Gt) (12.8)
+is thereferential inﬁnitesimal strain tensor. Here and henceforth we
+use the notation≃ to identify statements that are valid to leading
+order in|G|.T h u s ,|G|≪ 1 implies that|E|≪ 1, but the converse
+is not true. That is, a small strain does not necessarily yield a small
+displacement gradient.
+=== p225 ===
+Linear Elasticity 225
+These results pertain to the frame used by observerO, say. It
+follows easily from (12.3)2,(7.18) and (7.25) that, in the frame ofO+,
+G+ = KGKt, (12.9)
+where K: ˆE3 → ˆE3+ is the ﬁxed orthogonal tensor relating the
+reference conﬁgurations adopted by the two observers. This in turn
+implies that
+E+ = KEKt, (12.10)
+a result that may becorroborated independentlyby combining (7.20)
+and (7.26) with E+ = 1
+2[(F +)tF + − ˆI+]. Further, (12.9) yields
+|G+| = |G|, which combines with
+ϵ+ = 1
+2[G+ +(G+)t]= KϵKt (12.11)
+to establish that (12.8) is equivalent to
+E+ ≃ ϵ+. (12.12)
+Thus, if one observer perceives the strain to be small, then the
+same is true of all observers. This follows from the exact trans-
+formation formulas (12.9) and (12.10), and we have proved that
+it also follows from the approximation (12.8) in the case of small
+displacement gradients. In contrast, in the extant literature the
+strain–displacement relation is obtained from (12.2) with the shifter
+omitted. In particular, for small displacement gradients it yields
+2E ≃ H + Ht in the frame of O, in which the left-hand side is
+a referential tensor and the right-hand side involves two-point ten-
+sors. Accordingly, this is not a valid tensor equation. Further, (7.25)
+shows thatH+H
+t transforms in a manner that is incompatible with
+(12.10). Therefore, from the perspective ofO+, H+ +(H+)t cannot
+furnish an approximation to 2E+. This observation underscores the
+necessity of the shifter concept in the formulation of an acceptable
+theory.
+Recall that u is a spatial vector (see (2.77) and (2.78)). Its
+spatial gradient, gradu, is such that du =( gradu)dx at ﬁxed t.
+Thus, HdX = du =( gradu)FdX. Taken together with (12.6), this
+furnishes
+H =( gradu)F ≃ (gradu)1, (12.13)
+=== p226 ===
+226 Principles of Continuum Mechanics
+or, in terms of components, ˆui,A =˜ui,jFjA =˜ui,jδjB(δBA +GBA) ≃
+˜ui,jδjA. This is an example of the general estimate
+(·),A ≃ (·),jδjA, (12.14)
+valid to leading order for small displacement gradients. Using (12.3)2
+we also have
+G ≃ 1t(gradu)1 and gradu ≃ 1G1t, (12.15)
+and therefore
+|H| = |G|≃| gradu|. (12.16)
+Thus, |˜ui,j|≪ 1. In addition,
+ϵ ≃ 1tε1, where ε= 1
+2[gradu+(gradu)t] (12.17)
+is thespatial inﬁnitesimal strain tensor. The components satisfy the
+estimates ϵAB ≃ δiAδjBεij. Using the exact relation (12.13)1, or
+either of the estimates (12.13)2 or (12.15), we have that
+grad+u+ = Q(gradu)Qt and ε+ = QεQt, (12.18)
+where Q: E3 → E3+ is the orthogonal tensor in the transformation
+from the frame ofO to that ofO+. These also follow directly from
+(7.3) and (7.21).
+Recall the polar decomposition F = RU, where the U is the
+symmetric, positive deﬁnite referential right stretch tensor andR is
+a two-point rotation tensor. From (12.3) and (12.8),
+U 2 −ˆI ≃ 2ϵ, (12.19)
+and therefore,
+U −ˆI ≃ ϵ, U−1 −ˆI ≃−ϵ and R−1 ≃ 1ˆω, (12.20)
+where
+ˆω= 1
+2(G−Gt) (12.21)
+=== p227 ===
+Linear Elasticity 227
+is thereferential inﬁnitesimal rotationtensor. Equivalently,
+R−1 ≃ ω1, where ω= 1
+2[gradu−(gradu)t]= 1ˆω1t (12.22)
+is thespatial inﬁnitesimal rotationtensor.
+The local volume change induced by a deformation isJ−1, where
+J2 =d e tC. On combining (12.3) with the result of Problem 23 in
+Chapter 1, we have
+J2 =d e t (ˆI +A)=d e t (A−λˆI)|λ=−1, where A = G+Gt +GtG.
+(12.23)
+Thus,
+J2 −1 ≃ trA ≃ 2trG ≃ 2tr(gradu), (12.24)
+where the ﬁnal estimate on the right follows from (12.15) and
+tr[1t(gradu)1]= tr[11t(gradu)] =tr[I(gradu)] =tr(gradu). Thus,
+J −1 ≃ Divw ≃ divu. (12.25)
+The change of volume, ΔV(S,t), of an arbitrary part S of the
+body is thus approximated by
+ΔV =
+∫
+P
+(J −1)dV ≃
+∫
+P
+DivwdV =
+∫
+∂P
+w·NdA, (12.26)
+whereP is thevolume occupiedbyS inκ,boundedby thesurface ∂P
+with exterior unit normalN. Alternatively, withJ−1 −1 ≃−divu
+we have
+ΔV ≃
+∫
+P
+divudV =
+∫
+Pt
+J−1divudv ≃
+∫
+Pt
+divudv =
+∫
+∂Pt
+u·nda,
+(12.27)
+where Pt is the volume occupied byS in κt, bounded by the surface
+∂Pt with exterior unit normaln. Thus the volume change is given,
+to leading order, by the ﬂux of displacement through the boundary.
+Lastly, the change of density induced by a deformation is
+Δρ= ρ−ρκ, where ρκ= ρJ. (12.28)
+=== p228 ===
+228 Principles of Continuum Mechanics
+Thus,
+Δρ≃−ρκDivw ≃−ρκdivu, yielding ρ≃ ρκ (12.29)
+at leading order.
+12.2 Stress–deformation relation
+We seek small-displacement-gradient estimates of the Piola, Piola–
+Kirchhoﬀ and Cauchy stresses. To this end we introduce thestrain-
+energy function
+U(E;X)= ¯W(θ0, ˆI +2E;X), (12.30)
+where ¯W is the free energy per unit reference volume (see (11.19))
+and θ0 is the ﬁxed uniform temperature of the body. Proceeding as
+in (11.20), we have
+UE · ˙E = ¯WC · ˙C =2 ¯WC · ˙E = S · ˙E, (12.31)
+for all symmetric˙E, where (11.24) has been invoked and whereUE is
+the symmetric tensor-valued gradient ofU with respect to the strain
+E. Thus,
+S = UE. (12.32)
+Recalling that a small displacem ent gradient implies a small
+strain, we seek an estimate of the strain-energy function for strains
+close to zero. This estimate is provided by the low-order Taylor
+expansion [2]
+U(E;X)= U(O;X)+ S0(X)·E + 1
+2E ·D (X)[E]+ o(|E|2),
+(12.33)
+where
+S0(X)= UE|E=O and D(X)= UEE|E=O, (12.34)
+is a referentialfourth-order tensor.H e r eD(X)[E] is a linear second-
+order-tensor-valued function of E. Using the basis decomposition
+=== p229 ===
+Linear Elasticity 229
+E = ECD ˆEC ⊗ ˆED, we have
+D(X)[E]= D(X)[ECD ˆEC ⊗ ˆEC]
+= ECDD(X)[ ˆEC ⊗ ˆED], by linearity, (12.35)
+and
+E ·D (X)[E]= EABECDDABCD(X),
+where DABCD = ˆEA ⊗ ˆEB ·D [ ˆEC ⊗ ˆED]= ˆEA ·(D[ ˆEC ⊗ ˆED]) ˆEB.
+(12.36)
+Observe that, by relabeling summation indices and because ordinary
+multiplication commutes,
+EABECDDABCD = ECDEABDCDAB = EABECDDCDAB, (12.37)
+and so we may assume, without loss of generality, that
+DABCD = DCDAB. (12.38)
+Further, on relabeling summation indices and invoking the symmetry
+EAB = EBA,w eh a v e
+EBAECDDBACD = EABECDDABCD = EBAECDDABCD, (12.39)
+so that we may take
+DBACD = DABCD (12.40)
+without loss of generality, and hence also, from (12.38),
+DABCD = DABDC. (12.41)
+Let AAB and BCD respectively be the components of arbitrary
+referential tensorsA and B in the basis{ ˆEA ⊗ˆEB}. Then (12.36)2,
+(12.38) and the linearity of D(X)[·] yield the major symmetry
+property
+A·D [B]= AABBCDDABCD = BCDAABDCDAB = B ·D [A]
+(12.42)
+=== p230 ===
+230 Principles of Continuum Mechanics
+for allA and B, whereas (12.40) and (12.41), respectively, yield the
+minor symmetries
+At ·D [B]= A·D [B]a n d A·D [Bt]= A·D [B]. (12.43)
+If we retain only terms through quadratic order in (12.33) and
+invoke major symmetry, together with
+(D(X)[E])· = ˙ECDD(X)[ ˆEC ⊗ ˆED]= D(X)[ ˙E], (12.44)
+which follows from (12.35), we obtain
+UE · ˙E = S0(X)· ˙E + 1
+2{E ·D (X)[ ˙E]+ ˙E ·D (X)[E]}
+= {S0(X)+ D(X)[E]}· ˙E, (12.45)
+for all symmetric ˙E, and (12.32) and (12.40) then deliver the Piola–
+Kirchhoﬀ stress
+S = S0(X)+ D(X)[E]. (12.46)
+Here, S0(X)i st h eresidual stress, i.e., the stress in the absence of
+strain, whereas D(X), the stiﬀness tensor,a l s ok n o w na st h eelas-
+tic modulus tensor, characterizes the linear part of the relationship
+between S and E.
+For example, in the case of isotropy, we have (see (11.29))
+U(E;X)= ¯W(θ0, ˆI +2E;X)= ¯W(θ0,Rt(ˆI +2E)R;X)
+= ¯W(θ0, ˆI +2RtER;X)
+= U(RtER;X) for all R ∈Orth, (12.47)
+and thusU depends on E through its principal invariantsI1(E)=
+trE = ˆI ·E,I 2(E)= 1
+2[I2
+1 −tr(E2)] andI3(E)=d e tE;o r ,e q u i v -
+alently, through ˆI · E, E · E and detE. Retaining terms through
+quadratic order, we thus obtain
+U(E;X)= U(O;X)+ α(X)ˆI ·E + 1
+2λ(X)(ˆI ·E)2 +μ(X)E ·E,
+(12.48)
+=== p231 ===
+Linear Elasticity 231
+where the functions α, λand μare properties of the particular
+isotropic material at hand. This yields
+UE · ˙E = {[α+λ(trE)]ˆI +2μE}· ˙E, (12.49)
+and (12.46) furnishes
+S0(X)= α(X)ˆI and D(X)[E]= λ(X)(trE)ˆI +2μ(X)E.
+(12.50)
+Equation (12.46) provides an accurate estimate of the stress when
+|E| is small. It yields a nonlinear relationship betweenS and the ref-
+erential displacement gradientG. However, if|G| is also small, as we
+assume in linear elasticity theory, then from (12.8) this relationship
+is approximately linear, i.e.,
+S −S0(X) ≃D (X)[ϵ]= D(X)[G], (12.51)
+on account of the minor symmetry (12.43)2;t h u s ,SAB −S(0)AB ≃
+DABCDwC,D. Classical linear elasticity theory is concerned with cir-
+cumstances in which the residual stress vanishes, i.e.,
+S ≃D (X)[G]. (12.52)
+In the case of isotropy this is given simply by
+S ≃ λ(X)(trG)ˆI +μ(X)(G+Gt). (12.53)
+To estimate the Piola stress for small displacement gradients we
+combine (6.144) and (12.6). The latter givesF ≃ 1, yielding
+P = FS ≃ 1S. (12.54)
+To the same order of approximation we haveF∗≃ 1, and either of
+(6.140) or (6.145) furnishes the estimate
+T ≃ 1S1t (12.55)
+of the Cauchy stress. In terms of components,PiA ≃ δiBSBA and
+Tij ≃ δiAδjBSAB.
+=== p232 ===
+232 Principles of Continuum Mechanics
+In the case of vanishing residual stress, (12.15) and (12.52) com-
+bine to give
+T ≃C [gradu], where C[gradu]= 1{D[1t(gradu)1]}1t. (12.56)
+This rather bewildering result is perhaps best expressed in terms of
+components. Thus,
+Tij = ei ·Tej = 1tei ·(D[uk,lδkCδlD ˆEC ⊗ ˆED])1tej
+= δiAδjB ˆEA ·(D[δkCδlDuk,l ˆEC ⊗ ˆED]) ˆEB
+= δiAδjBδkCδlDuk,l ˆEA ·(D[ ˆEC ⊗ ˆED]) ˆEB, by linearity
+= Cijkluk,l, (12.57)
+where
+Cijkl = δiAδjBδkCδlDDABCD. (12.58)
+It is straightforward to show thatC enjoys thesame symmetries asD;
+namely, the major symmetry
+Cijkl = Cklij, (12.59)
+a n dt h et w om i n o rs y m m e t r i e s
+Cijkl = Cjikl and Cijkl = Cijlk. (12.60)
+thelastof theseimplyingthat Tij = Cijklεkl,whereεij arethe compo-
+nents of the spatial inﬁnitesimal strain tensor. In the case of isotropy,
+we may proceed directly from (12.15) and (12.53) to obtain
+T ≃ λ(divu)I +μ[gradu+(gradu)
+t]. (12.61)
+The Piola traction isp = PN and the Cauchy traction ist = Tn,
+where N and n, respectively, are the unit normals to a material
+surface in κand its image inκt (see (6.94) and (6.132)). Using the
+leading-order estimate
+nda ≃ 1NdA, (12.62)
+=== p233 ===
+Linear Elasticity 233
+which follows from the Piola–Nanson formula (2.54), we conclude
+that da ≃ dA and n ≃ 1N. Then,
+p = PN = TF∗N ≃ T 1N ≃ Tn = t, (12.63)
+i.e., the two tractions coincide at leading order. From (12.54) we see
+that these estimates are equivalent to
+1tp ≃ SN. (12.64)
+The counterparts of the foregoing approximations in the frame of
+O+ are obtained with the aid of the transformation formulas devel-
+oped in Chapter 7. Thus,
+S+ ≃D +[G+], T + ≃ 1+S+(1+)t ≃C +[grad+u+]
+and ( 1+)tp+ ≃ S+N +, (12.65)
+where
+D+[G+]= K(D[KtG+K])Kt
+and C+[grad+u+]= Q{C[Qt(grad+u+)Q]}Qt. (12.66)
+In the special case of isotropy the latter furnish
+D+[G+]= λ(trG+)ˆI+ +μ[G+ +(G+)t]a n d
+C+[grad+u+]= λ(div+u+)I+ +μ[grad+u+ +
+(
+grad+u+)t],(12.67)
+respectively.
+12.3 Equation of motion
+Assuming the frame ofO to be inertial, the referential equation of
+motion is given by (6.136) in whichP = FS and
+˙v = ¨χκ=( u+ 1X)·· = ¨u, (12.68)
+on recalling, from the discussion in Chapter 7, that 1 is ﬁxed.
+The divergence of the Piola stress appearing in this equation is
+=== p234 ===
+234 Principles of Continuum Mechanics
+DivP = PiA,Aei, where
+PiA,A =( FiBSBA),A = FiBSBA,A +δiCGCB,ASBA
+≃ δiBSBA,A +δiCGCB,ASBA. (12.69)
+In the absence of residual stress (12.52) implies that the non-
+dimensionalized stressesSBA are of orderO(ε), whereεis the small
+number representing the maximum of the norm of the displacement
+gradient in the body (see (12.1)). If we make the further assumption
+that GCB,A, suitably non-dimensionalized by a length scale in the
+problem at hand, is also of orderO(ε), then PiA,A ≃ δiBSBA,A at
+leading order, i.e.,
+DivP ≃ 1(DivS). (12.70)
+The restriction on the derivatives GCB,A leading to this result is
+tacitly made throughout the literature on linear elasticity theory (see
+[23], for example). The paper by Carlson [24] may be consulted for
+an interesting discussion of its implications.
+With these estimates, we may approximate theequation of motion
+in the frame ofO by
+DivS +ρκf = ρκ¨w, (12.71)
+wheref = 1tbisthe referential form of the bodyforce,¨w =( 1tu)·· =
+1t¨u is the referential acceleration, and
+S = D[Gradw]. (12.72)
+This is a linear second-order partial diﬀerential system for the deter-
+mination ofw(X,t). In typical initial-boundary-value problems this
+system is augmented by initial conditionsw|t=0 and ˙w|t=0, together
+with boundary conditions specifying1tp on a part∂κp of the bound-
+ary ∂κand w on the complementary part∂κw = ∂κ\∂κp.
+In principle, once a solution to this problem has been obtained,
+it should be checked to ensure that our assumptions regarding the
+norm of the displacement gradient, and its gradient, are veriﬁed.
+It is a simple matter to show that in the frame ofO+,D i v+S+
+is given by
+Div+S+ = K(DivS), (12.73)
+=== p235 ===
+Linear Elasticity 235
+and hence, with the aid of (7.38)3, that
+Div+S+ +ρ+
+κ+f + = ρ+
+κ+K ¨w, (12.74)
+with
+f + =( 1+)tb+ and S+ = D+[Grad+w+], where w+ =( 1+)tu+.
+(12.75)
+If the frame ofO+ is also inertial, then it is related to the frame
+of O by a Galilean transformation of the form (7.10) in whichQ is
+a ﬁxed orthogonal tensor andV i saﬁ x e dv e c t o r .I nt h i sc a s ei ti s
+possible to show thatK ¨w = ¨w+, and hence that
+Div+S+ +ρ+
+κ+f + = ρ+
+κ+ ¨w+. (12.76)
+Thus linear elasticity theory also holds in the frame ofO+.W el e a v e
+the derivation of the equations holding in a non-inertial frame to the
+interested reader.
+Finally, while the shifter plays an essential role in establishing
+the frame invariance of the theory [25], in any particular problem it
+may be eﬀectively avoided. For example,O is always free to choose
+shifted basis vectors EA = 1 ˆEA ∈E3 (see (2.68)) that coincide
+with the basis vectorsei ∈E3. In this case the componentsδiA are
+numerically equal to the components of the Kronecker delta, and the
+components of the various spatial and referential variables discussed
+in this chapter are then indistinguishable.
+12.4 Problems
+1. Derive Eqs. (12.9)–(12.11). Show that|G+| = |G|. What is the
+relationship betweenw+ and w?
+2. Show that in the purely mechanical theory,d
+dtE(S,t)= P(S,t),
+where P is the power of the forces acting onS ⊂B and
+E =
+∫
+P
+UdV +K(S,t),
+where K is the kinetic energy andP = κ(S).
+=== p236 ===
+236 Principles of Continuum Mechanics
+3. Suppose the residually stressed undeformed conﬁguration of an
+isotropic material to be in equilibrium without body force, and
+that the associated traction vanishes on a portion of the bound-
+ary. Prove that the residual stress vanishes everywhere in the
+body.
+4. Show that
+F∗−1 ≃ 1[(trG)ˆI −Gt]
+andhencethat F∗≃ 1,asclaimed inthetext. Usethistoconﬁrm
+that u·nda ≃ w ·NdA and hence that the right-hand sides of
+Eqs. (12.26) and (12.27) agree at leading order.
+5. Verify Eqs. (12.59) and (12.60).
+6. Establish the fact that in the absence of residual stress, the strain
+energyU is approximated at leading order by1
+2ϵ·D[ϵ], or, equiva-
+lently, by1
+2ε·C[ε]. Thus, demonstrate thatS andT, respectively,
+are approximated by the gradientsUϵ and Uε.
+7. Find expressions for the components Cijkl and DABCD for
+isotropic solids. In the theory of linearly elastic solids it is always
+assumed that the strain-energy function is positive deﬁnite, i.e.,
+that U ≥0, with equality holding if and only if the strain van-
+ishes. Show, for isotropic solids, that this condition is satisﬁed if
+and only ifμ>0a n dκ>0, where κ= λ+ 2
+3μ.
+8. Show that Cauchy’s equation of motion in an inertial frame
+is approximated, at leading order in the small displacement
+gradient, by
+divT +ρκb = ρκ¨u.
+9. Verify (12.73). Show that ¨w → ¨w+ = K ¨w under a Galilean
+transformation and hence that (12.76) holds if the frame ofO+
+is inertial.
+10. How is (12.76) modiﬁed if the frame ofO+ is not inertial?
+=== p237 ===

@@ -1,0 +1,2184 @@
+BOLUM 6: Balance Laws
+Kitap sayfalari: PDF 125-166
+========================================================================
+
+----- PDF sayfa 125 -----
+Chapter 6
+Balance Laws
+We are now in a position to study the basic balance laws of continuum
+physics. These are axioms concerning the nature of mass, momentum,
+energy and entropy pertaining to arbitrary parts of a material body.
+We are concerned with scalar and vector balance laws.
+6.1
+Generic forms of the balance laws
+We will show that scalar balance laws are all of the form
+d
+dt
+
+Pt
+ρφdv =
+
+Pt
+ρσdv +
+
+∂Pt
+π · nda,
+(6.1)
+where Pt ⊂κt is the region occupied by an arbitrary part S of the
+body B, n is the exterior unit normal to its boundary ∂Pt; φ = ˜φ(x, t)
+is the mass density of the considered quantity; σ = ˜σ(x, t) is the rate,
+per unit mass, at which the quantity is supplied; the vector ﬁeld
+π = ˜π(x, t) is the ﬂux, or rate of supply per unit area, through the
+boundary; and, of course, ρ is the spatial density. The time derivative
+on the left-hand side pertains to a ﬁxed set of material points. The
+relevant examples of this kind of balance law are the balances of
+mass, energy and entropy.
+Vector balance laws will be shown, with the caveat noted in
+Chapter 5, to have the symbolic form
+d
+dt
+
+Pt
+ρψdv =
+
+Pt
+ρrdv +
+
+∂Pt
+Anda,
+(6.2)
+111
+
+----- PDF sayfa 126 -----
+112
+Principles of Continuum Mechanics
+where ψ = ˜ψ(x, t) is the mass density of the vector-valued variable
+in question, r = ˜r(x, t) is the rate, per unit mass, at which it is
+supplied, and A =
+˜
+A(x, t) is its tensor-valued ﬂux. The relevant
+examples are the balances of linear and rotational momentum, i.e.,
+the equations of motion.
+Before proceeding to the study of particular balance laws, we ﬁrst
+pause to derive the local forms of the generic balances (6.1) and (6.2)
+holding at points x in κt and on any singular surfaces that may be
+present. Starting with (6.1), we replace the left-hand side by the
+expression obtained on substituting ρφ in place of φ in (5.31). Thus,
+d
+dt
+
+Pt
+ρφdv =
+
+Pt
+(ρφ)′dv +
+
+∂Pt
+ρφv · nda −
+
+s
+ρφuda
+=
+
+Pt
+{(ρφ)′ + div(ρφv)}dv +
+
+s
+ρφ(v −u) · nda
+(6.3)
+where u is the vector deﬁned by u · n = u, the speed of the singular
+surface, and we have invoked (5.34). This combines with (6.1) to give
+
+Pt
+{(ρφ)′ + div(ρφv −π) −ρσ}dv +
+
+s
+ρφ(v −u) −π · nda = 0,
+(6.4)
+where we have again invoked (5.34) to recast the ﬂux term. Recall
+that u · n is deﬁned only on the singular surface; accordingly it can
+be placed outside the square brackets.
+Applying this to an arbitrary part Pt that contains no singular
+surface, i.e., s = ∅, and assuming, as usual, that the integrand is
+continuous, we conclude, from the localization theorem, that
+(ρφ)′ + div(ρφv) = divπ + ρσ
+(6.5)
+at all points x ∈κt that do not belong to a singular surface. If Pt
+contains a part s of a singular surface, then it is divided into sub-
+volumes V ± wherein this local equation holds. It then follows from
+(6.4) that the integral over s vanishes. As the part Pt is otherwise
+arbitrary, its intersection s with the singular surface is likewise arbi-
+trary, and we can invoke a version of the localization theorem for
+
+----- PDF sayfa 127 -----
+Balance Laws
+113
+Figure 6.1.
+Parts of a body with and without a singular surface.
+surface integrals to conclude, assuming continuity of the integrand
+on s, that the integrand vanishes. We thus derive the jump condition
+ρφ(v −u) −π · n = 0
+(6.6)
+holding at all points on a singular surface (Figure 6.1). This reduces
+to
+π · n = 0
+(6.7)
+if the singular surface is a material surface; that is, if it moves with
+speed u = v · n with v = 0. However, as (6.6) places no restric-
+tion on the tangential discontinuity (I −n ⊗n)v, the latter con-
+dition remains valid under the weaker restrictions: u = v · n with
+v · n = 0.
+Turning now to (6.2), we can proceed as above, and as explained
+in Section 5.3.1, to cast (6.2) in the symbolic form
+
+Pt
+{(ρψ)′ + div(ρψ ⊗v −A) −ρr}dv
++
+
+s
+ρψ ⊗(v −u) −Anda = 0,
+(6.8)
+use having been made of the relevant extensions of (5.31) and (5.34),
+namely
+d
+dt
+
+Pt
+ρψdv =
+
+Pt
+(ρψ)′dv +
+
+∂Pt
+(ρψ ⊗v)nda −
+
+s
+ρψuda
+and
+
+∂Pt
+Anda =
+
+Pt
+divAdv +
+
+s
+Anda,
+(6.9)
+respectively.
+
+----- PDF sayfa 128 -----
+114
+Principles of Continuum Mechanics
+Accordingly, the local equation holding at points in κt, excluding
+singular surfaces, is
+(ρψ)′ + div(ρψ ⊗v) = divA + ρr,
+(6.10)
+and the jump condition holding at every point on a singular surface
+is
+ρψ ⊗(v −u) −An = 0,
+(6.11)
+reducing to
+An = 0
+(6.12)
+under the conditions stated following (6.7).
+Of course the foregoing balance statements are expressed in terms
+of the spatial description. It is a straightforward matter, which we
+leave to the reader, to derive their referential counterparts.
+6.2
+Conservation of mass
+We have already referred, in Section 2.5, to the notion that the mass
+of any ﬁxed set S ⊂B of material points is conserved in the course
+of any motion that the body B may undergo, i.e.,
+d
+dt
+
+Pt
+ρ(x, t)dv = 0.
+(6.13)
+This is of the form (6.1), with φ = 1, σ = 0 and π = 0. Accordingly,
+(6.5) and (6.6) respectively furnish the local diﬀerential equation
+ρ′ + div(ρv) = 0,
+(6.14)
+holding in regions of smoothness of the ﬁelds involved, and the jump
+condition
+ρ(v −u) · n = 0,
+(6.15)
+operative on singular surfaces.
+Equation (6.13) must be modiﬁed in the presence of diﬀusion. In
+this case, σ is the supply of the diﬀusing species, per unit mass of the
+
+----- PDF sayfa 129 -----
+Balance Laws
+115
+mixture, and π is the mass ﬂux of the species through the boundary
+∂Pt [8]. We will not discuss diﬀusion in this book, however.
+Using
+div(ρv) = gradρ · v + ρdivv,
+(6.16)
+together with divv = trL, where L is the spatial velocity gradient,
+and recalling the result of Problem 2 in Chapter 4, we cast (6.14) in
+the alternative form
+0 = ˙ρ + ρdivv = ˙ρ + ρ( ˙J/J),
+(6.17)
+where ˙ρ = ρ′ + gradρ · v is the material derivative of the density.
+Equivalently, (ρJ)· = 0. With reference to (2.59), this in turn is
+equivalent to the vanishing of the material derivative of the referential
+mass density ρκ:
+˙ρκ = 0.
+(6.18)
+Recalling that ˙ρκ = ∂ρκ(X, t)/∂t, it follows that the referential den-
+sity, expressed as a function of X and t, is a function of X alone.
+We indicate this by writing ρκ(X).
+An alternative derivation of this result is obtained by diﬀerentiat-
+ing (2.56), assuming P ⊂κ to be a region in which ρκ and ˙ρκ satisfy
+the continuity conditions stated after (5.13). Thus,
+0 = d
+dt
+
+P
+ρκdV =
+
+P
+˙ρκdV.
+(6.19)
+Choosing P to be otherwise arbitrary, we localize as usual to arrive
+at (6.18) directly.
+The results just derived may be used to eﬀect a signiﬁcant sim-
+pliﬁcation of the generic balances (6.5) and (6.10). Concerning the
+former, we use
+(ρφ)′ + div(ρφv) = (ρφ)′ + grad(ρφ) · v + ρφdivv
+= (ρφ)· + ρφdivv
+= ( ˙ρ + ρdivv)φ + ρ ˙φ
+= ρ ˙φ,
+(6.20)
+
+----- PDF sayfa 130 -----
+116
+Principles of Continuum Mechanics
+where conservation of mass in the form (6.17)1 has been applied.
+Accordingly, (6.5) simpliﬁes to
+ρ ˙φ = divπ + ρσ.
+(6.21)
+In the same way, we use (see Problem 24(g) in Chapter 1)
+div(ρψ ⊗v) = [grad(ρψ)]v + (ρdivv)ψ,
+(6.22)
+together with conservation of mass to simplify (6.10) to
+ρ ˙ψ = divA + ρr.
+(6.23)
+Alternatively, these reduced equations may be derived directly by
+localizing the global statements (6.1) and (6.2) if we ﬁrst replace the
+left-hand sides by
+d
+dt
+
+Pt
+ρφdv = d
+dt
+
+P
+ρκφdV =
+
+P
+ρκ ˙φdV =
+
+Pt
+ρ ˙φdv
+and
+d
+dt
+
+Pt
+ρψdv = d
+dt
+
+P
+ρκψdV =
+
+P
+ρκ ˙ψdV =
+
+Pt
+ρ ˙ψdv,
+(6.24)
+respectively, where use has been made of (2.50), (2.59), and mass
+conservation in the form (6.18) has been invoked.
+6.3
+Linear and rotational momenta; forces and torques
+The equations of motion for a continuum, due to Euler, are relations
+connecting the linear and rotational momenta of a set S ⊂B of
+material points to the forces and torques acting on it.
+6.3.1
+Linear and rotational momenta
+The linear momentum of an arbitrary sub-body is the vector
+l(S, t) =
+
+Pt
+ρvdv =
+
+P
+ρκvdV,
+(6.25)
+and the rotational momentum relative to an origin located at posi-
+tion o, also called the moment of momentum, is
+ho(S, t) =
+
+Pt
+ρx × vdv =
+
+P
+ρκx × vdV,
+(6.26)
+
+----- PDF sayfa 131 -----
+Balance Laws
+117
+where x is the position vector of a material point p ∈S relative to
+o, deﬁned by (1.95).
+6.3.2
+Forces
+We assume the forces acting on S to be of two types. The ﬁrst, called
+body forces, are expressible in the form
+fb(S, t) =
+
+Pt
+ρbdv =
+
+P
+ρκbdV,
+(6.27)
+where b = ˜b(x, t) = ˆb(X, t) is the body force per unit mass. For
+example, near a point on the surface of the Earth the body force
+due to gravity is b = −gk, where g ≃9.81 m/s2 is the gravitational
+constant and k is a ﬁxed unit vector directed vertically upward from
+the point in question.
+The second type are the contact forces arising from contact of S
+with its surroundings. These act at the surface ∂Pt and are expressed
+in the form
+fc(S, t) =
+
+∂Pt
+tda,
+(6.28)
+where t = ˜t(x, t), the force per unit area, is the Cauchy traction, or
+simply the traction (Figure 6.2). It is often convenient to express this
+force in the form of an integral over ∂P. Thus,
+fc(S, t) =
+
+∂P
+pdA,
+(6.29)
+Figure 6.2.
+Traction acting at the surface of a part of the body.
+
+----- PDF sayfa 132 -----
+118
+Principles of Continuum Mechanics
+in which p = ˆp(X, t), the Piola traction, furnishes the same force,
+but measured per unit area of ∂P rather than ∂Pt. That is, while p
+is deﬁned on ∂P, the actual contact forces are acting on ∂Pt.
+The net force acting on S is
+f(S, t) = fb(S, t) + fc(S, t).
+(6.30)
+6.3.3
+Torques
+The moment of the body forces, relative to the origin located at
+position o, is
+mb(S, t) =
+
+Pt
+ρx × bdv =
+
+P
+ρκx × bdV,
+(6.31)
+and that of the contact forces is
+mc(S, t) =
+
+∂Pt
+x × tda =
+
+∂P
+x × pdA.
+(6.32)
+In this book, we follow the development of classical continuum
+mechanics as conceived by Cauchy, and thus assume that intrinsic
+body and contact torques are absent. These classical continua are
+called non-polar materials. As an example of a polar medium, con-
+sider a material reinforced by a continuous distribution of embed-
+ded ﬁbers (Figure 6.3). Intrinsic contact torques are produced if the
+ﬁbers oﬀer resistance to local bending and torsion. These generate
+a distribution of couple traction — a typical characteristic of polar
+Figure 6.3.
+Couple traction acting at the surface of a body consisting of a
+ﬁber-reinforced polar material.
+
+----- PDF sayfa 133 -----
+Balance Laws
+119
+media — where they intersect the boundary of a body [9]. Assuming
+such eﬀects to be absent or negligible, we have that the net torque
+acting on S, relative to o, is
+mo(S, t) = mb(S, t) + mc(S, t).
+(6.33)
+Further, the expression (6.26) for the rotational momentum is appro-
+priate for non-polar media and must typically be generalized to
+accommodate polar media.
+6.4
+Euler’s postulates
+Euler’s postulates apply to an arbitrary part S of a body. They entail
+the fundamental assumption that the motion of the part is governed
+by the same equations that govern the motion of a rigid body. Thus,
+the rate of change of the linear momentum of a ﬁxed set of material
+points is balanced by the net force acting on it, i.e.,
+d
+dtl(S, t) = f(S, t),
+(6.34)
+and the rate of change of the rotational momentum is balanced by
+the net torque:
+d
+dtho(S, t) = mo(S, t).
+(6.35)
+A frame of reference in which these apply, consisting of point
+spaces E3 and ˆE3, associated translation spaces E3 and ˆE3, respec-
+tively, and an origin located at a ﬁxed position o, is called an inertial
+frame. Thus Euler’s postulates are tantamount to the assumption
+that an inertial frame exists. We shall prove later that there are
+inﬁnitely many inertial frames, and we shall also obtain the equa-
+tions holding relative to arbitrary, generally non-inertial, frames.
+On invoking conservation of mass and making use of (6.24),
+Euler’s postulates reduce to
+
+Pt
+ρ ˙vdv =
+
+Pt
+ρbdv +
+
+∂Pt
+tda
+(6.36)
+and
+
+Pt
+ρx × ˙vdv =
+
+Pt
+ρx × bdv +
+
+∂Pt
+x × tda,
+(6.37)
+
+----- PDF sayfa 134 -----
+120
+Principles of Continuum Mechanics
+respectively, use having been made of (x × v)· = v × v + x × ˙v =
+x × ˙v. Equivalently, the linear momentum balance may be expressed
+in the form
+
+P
+ρκ ˙vdV =
+
+P
+ρκbdV +
+
+∂P
+pdA,
+(6.38)
+and the rotational momentum balance, in the form
+
+P
+ρκx × ˙vdV =
+
+P
+ρκx × bdV +
+
+∂P
+x × pdA,
+(6.39)
+with x = χκ(X, t).
+6.4.1
+Center of mass
+The center of mass of S, occupying position ¯x relative to o, is located
+at the mass-weighted average of the position, i.e.,
+m(S)¯x(t) =
+
+Pt
+ρxdv =
+
+P
+ρκxdV,
+(6.40)
+where m(S) is the ﬁxed mass of S. The position of a material point
+p ∈S, relative to the center of mass, is
+π = x −¯x.
+(6.41)
+Accordingly, the mass weighted average of the relative position van-
+ishes identically:
+
+Pt
+ρπdv =
+
+Pt
+ρ(x −¯x)dv
+=
+
+m(S) −
+
+Pt
+ρdv
+
+¯x = 0,
+(6.42)
+and therefore, on invoking conservation of mass,
+0 = d
+dt
+
+Pt
+ρπdv =
+
+Pt
+ρ ˙πdv
+=
+
+Pt
+ρvdv −m(S)(¯x)·,
+(6.43)
+i.e., the linear momentum of S is the identical to that of a particle of
+the same mass located at the center of mass. Euler’s postulate (6.34)
+
+----- PDF sayfa 135 -----
+Balance Laws
+121
+is thus equivalent, granted conservation of mass, to
+m(S)(¯x)·· = f(S, t),
+(6.44)
+where (¯x)·· is the acceleration of the center of mass.
+Using (6.41), we also have
+ho(S, t) =
+
+Pt
+ρx × ˙xdv =
+
+Pt
+ρ(¯x + π) × [(¯x)· + ˙π]dv
+= m(S) ¯x × (¯x)· + ¯x ×
+
+Pt
+ρ ˙πdv
++
+
+Pt
+ρπdv
+
+× (¯x)· + h(S, t),
+(6.45)
+where
+h(S, t) =
+
+Pt
+ρπ × ˙πdv
+(6.46)
+is the rotational momentum relative to the center of mass. Noting
+that the integrals in (6.45) vanish, we conclude that
+ho(S, t) = ¯x(t) × l(S, t) + h(S, t).
+(6.47)
+We also have
+mo(S, t) =
+
+Pt
+ρ(¯x + π) × bdv +
+
+∂Pt
+ρ(¯x + π) × tda
+= ¯x(t) × f(S, t) + m(S, t),
+(6.48)
+where
+m(S, t) =
+
+Pt
+ρπ × bdv +
+
+∂Pt
+ρπ × tda
+(6.49)
+is the net torque about the center of mass. We thus recast Euler’s
+postulate (6.35) as
+¯x(t) × f(S, t) + m(S, t)
+= d
+dth(S, t) + [¯x(t)]· × l(S, t) + ¯x(t) × d
+dtl(S, t),
+(6.50)
+
+----- PDF sayfa 136 -----
+122
+Principles of Continuum Mechanics
+which reduces, using (6.34), together with (6.43) in the form
+l = m¯x·, to
+m(S, t) = d
+dth(S, t).
+(6.51)
+Thus, Euler’s postulate also holds relative to the center of mass, its
+motion in the inertial frame notwithstanding.
+6.4.2
+Rigid bodies
+The foregoing development naturally subsumes the motions of rigid
+bodies. These are necessarily of the form (3.121), i.e.,
+x = Q(t)X + c(t),
+(6.52)
+where Q(t) is a spatially uniform two-point rotation tensor and c(t)
+is a vector-valued function. Accordingly,
+π = Q(t)Π,
+where Π = X −¯
+X
+(6.53)
+is the referential position of p ∈S relative to the center of mass of
+P, located at position ¯
+X. Thus,
+˙π = ˙QΠ = Ω(t)π = ω(t) × π,
+(6.54)
+where ω is the axial vector of the skew tensor
+Ω = ˙QQt,
+(6.55)
+this of course being simply a special case of (4.33).
+Consider a material curve with unit tangent M at X. From (2.67)
+and (3.120), we have that the unit tangent m to the image of this
+curve after deformation, and the associated stretch μ, satisfy
+μm = FM = QM ;
+hence,
+μ = 1 and m = QM ,
+(6.56)
+so that
+˙m = Ωm = ω × m.
+(6.57)
+Let { ˆEi} be a ﬁxed orthonormal basis for ˆE3 and let
+e∗
+i (t) = Q(t) ˆEi ∈E3.
+(6.58)
+
+----- PDF sayfa 137 -----
+Balance Laws
+123
+Then {e∗
+i } is ﬁxed in the body and rotates with it. On identifying
+m at the point in question with an element of this basis, we have
+simply
+˙e∗
+i = ω × e∗
+i .
+(6.59)
+Let u ∈E3 be an arbitrary vector. We decompose it in the rotating
+basis: u = uie∗
+i . Thus,
+˙u = ˙uie∗
+i + ui ˙e∗
+i
+= ˚
+u + ω × u,
+(6.60)
+where
+˚
+u = ˙uie∗
+i ,
+(6.61)
+the co-rotational derivative, is the derivative relative to the rotating
+basis. Thus ˚
+u vanishes if and only if u is ﬁxed in the rotating body.
+From (6.54) it follows that π is such a vector.
+From (6.46), we have that
+h(S, t) =
+
+Pt
+ρπ × (ω × π)dv
+(6.62)
+for rigid bodies. We would like to exploit the spatial uniformity of
+the spin ω to ‘factor it out’ of the integral. This may be achieved
+with the aid of the result of Problem 11 in Chapter 1. Thus,
+π × (ω × π) = (π · π)ω −(π · ω)π
+= [(π · π)I −π ⊗π]ω,
+(6.63)
+yielding
+h(S, t) = J(S, t)ω(t),
+(6.64)
+where
+J(S, t) =
+
+Pt
+ρ[(π · π)I −π ⊗π]dv
+(6.65)
+is the symmetric inertia tensor of the rigid body.
+
+----- PDF sayfa 138 -----
+124
+Principles of Continuum Mechanics
+This may be simpliﬁed on noting that J = det Q = 1, and hence
+that ρ = ρκ. Further, (6.53) implies that π · π = Π · Π, and hence
+that
+J(S, t) =
+
+P
+ρκ[(Π · Π)QQt −QΠ ⊗QΠ]dV
+= Q(t)Jκ(S)Q(t)t,
+(6.66)
+where Jκ(S) is the ﬁxed referential tensor deﬁned by
+Jκ(S) =
+
+P
+ρκ[(Π · Π) ˆI −Π ⊗Π]dV.
+(6.67)
+The inertia tensor is ﬁxed in the body in the sense that its co-
+rotational derivative ˚
+J, deﬁned by
+˚
+J = ˙J −ΩJ + JΩ
+(6.68)
+vanishes. This follows easily from (6.55) and (6.66).
+Thus, the rotational momentum balance (6.51) combines with
+(6.64) to give
+m(S, t) = (Jω)· = ˙Jω + J ˙ω
+= (ΩJ −JΩ)ω + J ˙ω.
+(6.69)
+This simpliﬁes further on noting that Ωω = ω × ω vanishes. Thus,
+m(S, t) = ω × Jω + J ˙ω,
+with ˙ω = ˚ω.
+(6.70)
+Equations (6.70) and (6.44) are the classical equations of rigid-body
+dynamics for the determination of the motion of the center of mass
+and the rotation in terms of the net force and torque about the mass
+center. Conversely, these equations yield the net force and torque
+required to eﬀect the motion of the center of mass and the rotation.
+6.5
+Forces of mutual interaction in the body and the
+local equations of motion
+6.5.1
+Action and reaction
+Consider an arbitrary part Pt of the region κt occupied by the body at
+time t. Let σ be a surface dividing it into two sub-parts Pt1 and Pt2
+
+----- PDF sayfa 139 -----
+Balance Laws
+125
+Figure 6.4.
+An arbitrary part of a body divided into two sub-parts by an
+interior surface.
+(Figure 6.4). Let ∂P ′
+t = ∂Pt1 ∩∂Pt and ∂P ′′
+t
+= ∂Pt2 ∩∂Pt, with
+∂Pt1 = ∂P ′
+t ∪σ and ∂Pt2 = ∂P ′′
+t ∪σ. Then, Pt = Pt1 ∪Pt2 and
+∂Pt = ∂P ′
+t ∪∂P ′′
+t .
+The forces acting on Pt1 are the body force and the contact force.
+We express the former as
+fb1 =
+
+Pt1
+ρ(¯b + b12)dv,
+(6.71)
+where ¯b is due to sources external to Pt and b12 is the body force per
+unit mass arising from Pt2. The latter may be due to the gravitational
+attraction of the two parts, for example. The contact force is
+fc1 =
+
+∂Pt1
+tda =
+
+∂P ′
+t
+tda +
+
+σ
+t12da,
+(6.72)
+where t12 is the traction transmitted to Pt1 by Pt2. The net force
+applied to Pt1 is
+f1 = fb1 + fc1.
+(6.73)
+Similarly, the net force acting on Pt2 is
+f2 = fb2 + fc2,
+(6.74)
+
+----- PDF sayfa 140 -----
+126
+Principles of Continuum Mechanics
+where
+fb2 =
+
+Pt2
+ρ(¯b + b21)dv
+and
+fc2 =
+
+∂P ′′
+t
+tda +
+
+σ
+t21da,
+(6.75)
+wherein b21 is due to Pt1 and t21 is the traction exerted by Pt1 on Pt2.
+The linear momenta of parts Pt1 and Pt2 are
+l1 =
+
+Pt1
+ρvdv
+and
+l2 =
+
+Pt2
+ρvdv,
+(6.76)
+respectively, and the momentum of Pt(= Pt1 ∪Pt2) is l = l1 + l2.
+Euler’s postulate, for Pt1 and Pt2 separately, yields
+
+Pt1
+ρ(¯b + b12)dv +
+
+∂P ′
+t
+tda +
+
+σ
+t12da = d
+dtl1
+and
+
+Pt2
+ρ(¯b + b21)dv +
+
+∂P ′′
+t
+tda +
+
+σ
+t21da = d
+dtl2.
+(6.77)
+On adding these and recalling that ∂Pt = ∂P ′
+t ∪∂P ′′
+t , we obtain
+
+Pt
+ρ¯bdv +
+
+Pt1
+ρb12dv +
+
+Pt2
+ρb21dv +
+
+∂Pt
+tda
++
+
+σ
+(t12 + t21)da = d
+dtl.
+(6.78)
+On the other hand, for the whole of Pt, we have
+
+Pt
+ρ¯bdv +
+
+∂Pt
+tda = d
+dtl,
+(6.79)
+whence it follows that the force applied to Pt2 by Pt1 is opposite that
+applied to Pt1 by Pt2:
+
+Pt2
+ρb21dv +
+
+σ
+t21da = −
+
+Pt1
+ρb12dv +
+
+σ
+t12da
+
+.
+(6.80)
+In contrast to Newton’s laws for a particle, for continua this “action
+and reaction” statement is a consequence of the balance of linear
+momentum and not a separate postulate.
+Consider now a sequence of parts Pt, all with the same interior
+surface σ and collapsing onto it in the limit (Figure 6.5). Each of
+
+----- PDF sayfa 141 -----
+Balance Laws
+127
+Figure 6.5.
+A sequence of parts, each containing the same interior surface.
+these parts has associated sub-parts Pt1 and Pt2 with volumes that
+tend to zero in the limit. Assuming |ρb21| and |ρb12| to be bounded,
+the volume integrals in (6.80) vanish in the limit, yielding
+
+σ
+(t21 + t12)da = 0.
+(6.81)
+Substituting back into (6.80), we conclude that
+
+Pt2
+ρb21dv = −
+
+Pt1
+ρb12dv.
+(6.82)
+Because Pt is arbitrary, σ is an arbitrary surface in κt. Assuming
+the integrand in (6.81) to be continuous, we may invoke a version of
+the localization theorem to arrive at Cauchy’s lemma, namely
+t21 = −t12.
+(6.83)
+6.5.2
+Cauchy’s hypothesis and Noll’s theorem
+Let ts(x, t) be the traction acting at x ∈s, a surface in κt. Here
+the subscript conveys the notion that the traction depends on the
+surface s. This idea is motivated by a simple thought experiment
+involving a bar subjected to an axial force F, say (Figure 6.6).
+Given the force F, we expect that the force per unit area — the
+traction — should depend on the surface area; hence, in this instance,
+on the orientation of s. Thus we expect that the tractions acting on
+s1 and s2 at their common point x should be diﬀerent. Because the
+
+----- PDF sayfa 142 -----
+128
+Principles of Continuum Mechanics
+Figure 6.6.
+Surfaces having diﬀerent orientations in a bar under axial force.
+traction is deﬁned locally at points of the surface, logically it should
+depend on a local measure of the surface orientation; namely, a unit
+normal n to the surface s at the point x. This assumption is the
+content of the famous Cauchy hypothesis: There exists a function
+t(x, t; ·) such that
+ts(x, t) = t(x, t; n).
+(6.84)
+Cauchy’s lemma (6.83) then assumes the form
+t(x, t; −n) = −t(x, t; n).
+(6.85)
+Cauchy’s hypothesis has occupied a central place in continuum
+mechanics since it was proposed by Cauchy in the early nineteenth
+century. More recently, in the mid-twentieth century, Noll strength-
+ened it to the status of a proved theorem. He proved that it is actually
+a consequence of Euler’s linear momentum balance [10].
+Sketch of Noll’s theorem
+With reference to Figure 6.7, let s1 and s2 be two surfaces in κt
+intersecting at a point with position x0, and suppose they share a
+common tangent plane T, with unit normal n, at this point.
+Let Pt1 be the part of the body bounded by ∂Pt1 = d1 ∪f1 ∪e,
+where d1 is a subset of s1, f1 is a piece of the lateral surface of a
+circular cylinder of radius R and axis n, and e is the part of the
+surface of the cylinder which is common to both ∂Pt1 and ∂Pt2. The
+part Pt2, which is not shown, is the region bounded on top by s2,
+and ∂Pt2 = d2 ∪f2 ∪e, with corresponding deﬁnitions of d2 and f2.
+Denoting by A(s) the area of a surface s, we conclude, on noting that
+d1 and d2 approach a circular disc on T of radius R as R →0, that
+A(dα) = πR2 + o(R2)
+and
+A(fα) = o(R2);
+α = 1, 2;
+(6.86)
+
+----- PDF sayfa 143 -----
+Balance Laws
+129
+Figure 6.7.
+A part of a body bounded by part of a cylinder and a surface s1.
+and, if V (P) is the volume of a region P, that
+V (Ptα) = O(R3) = o(R2);
+α = 1, 2.
+(6.87)
+The balances of linear momentum for Pt1 and Pt2 are given by
+(6.36):
+
+Pt1
+ρ( ˙v −b)dv =
+
+∂Pt1
+t∂Pt1da and
+
+Pt2
+ρ( ˙v −b)dv =
+
+∂Pt2
+t∂Pt2da,
+(6.88)
+which, when subtracted, give
+
+d1
+td1da −
+
+d2
+td2da =
+
+Pt1
+ρ( ˙v −b)dv −
+
+Pt2
+ρ( ˙v −b)dv
++
+
+f2
+tf2da −
+
+f1
+tf1da.
+(6.89)
+Assuming all the integrands to be continuous and hence bounded on
+their respective domains of integration, from (6.86)2 and (6.87), we
+then have
+
+d1
+td1da =
+
+d2
+td2da + o(R2),
+(6.90)
+where o(ϵ) is a vector such that |o(ϵ)| = o(ϵ). Then, on dividing by
+πR2 and invoking (6.86)1, we obtain
+1
+A(d1)
+
+d1
+td1da =
+1
+A(d2)
+
+d2
+td2da + o(R2)
+R2
+.
+(6.91)
+
+----- PDF sayfa 144 -----
+130
+Principles of Continuum Mechanics
+Under our continuity hypothesis the Mean–Value theorem [2] —
+essentially the same thing as the Localization Theorem — is appli-
+cable and implies that
+lim
+R→0
+1
+A(dα)
+
+dα
+tdα(x, t)da = tdα(x0, t);
+α = 1, 2.
+(6.92)
+On passing to the limit in (6.91), we ﬁnally reach
+td1(x0, t) = td2(x0, t),
+(6.93)
+and thus conclude that the traction at a point takes the same value
+for all surfaces that have the same unit normal at that point. Accord-
+ingly, the traction is determined by the unit normal n and (6.84) is
+proved. It follows that the traction acting on a surface at a particular
+point is identical to the traction acting on the tangent plane to the
+surface at the point in question. Here, for deﬁniteness, n is taken to
+be the exterior unit normal to ∂Pt1 and ∂Pt2 at x0.
+Rigorous proofs of Noll’s theorem may be found in [10,11].
+6.5.3
+Cauchy’s stress theorem
+This theorem establishes the existence of a tensor ﬁeld T (x, t), the
+Cauchy Stress Tensor, such that
+t(x, t; n) = T (x, t)n.
+(6.94)
+Cauchy’s theorem is a cornerstone of continuum mechanics. To prove
+it we apply the linear momentum balance to a part of the body in the
+shape of a tetrahedron τ, say, formed by three Cartesian coordinate
+planes intersecting at a point x0 ∈κt, and an oblique plane situated
+at a distance δ from this point (Figure 6.8).
+Thus,
+
+∂τ
+tda =
+
+τ
+ρ( ˙v −b)dv.
+(6.95)
+Recall that this is symbolic notation representing the vector
+equation
+ei
+
+∂τ
+tida = ei
+
+τ
+ρ( ˙vi −bi)dv,
+(6.96)
+
+----- PDF sayfa 145 -----
+Balance Laws
+131
+Figure 6.8.
+Cauchy tetrahedron with vertex at x0 and m · ei > 0.
+which is equivalent to the three equations
+
+∂τ
+tida =
+
+τ
+ρ( ˙vi −bi)dv;
+i = 1, 2, 3.
+(6.97)
+Assuming ρ( ˙vi −bi) to be continuous functions of x, it follows, by
+the compactness of τ, that
+
+∂τ
+tida ≤
+
+
+∂τ
+tida
+ ≤
+
+τ
+|ρ( ˙vi −bi)| dv ≤kiV (τ),
+(6.98)
+where V (τ) is the volume of the tetrahedron and
+ki = max
+x∈τ |ρ( ˙vi −bi)|.
+(6.99)
+Let A(s) be the area of the oblique face of the tetrahedron. Then
+A(s) = c1δ2 for some positive constant c1, whereas V (τ) = c2δ3 with
+c2 a positive constant. Thus,
+1
+A(s)
+
+∂τ
+tida = O(δ).
+(6.100)
+Reverting to symbolic notation, we then have that
+lim
+δ→0
+1
+A(s)
+
+∂τ
+tda = 0.
+(6.101)
+
+----- PDF sayfa 146 -----
+132
+Principles of Continuum Mechanics
+In view of (6.84) and suppressing the passive argument t,
+
+∂τ
+t(x; n)da =
+
+s
+t(x; m)da +
+3
+
+i=1
+
+si
+t(x; −ei)da
+=
+
+s
+t(x; m)da −
+3
+
+i=1
+
+si
+t(x; ei)da,
+(6.102)
+where Cauchy’s lemma (6.85) has been invoked in the form
+t(x; −ei) = −t(x; ei). Assuming the integrands to be continuous
+functions of x on their respective integration domains, we can invoke
+the mean-value theorem [2] to conclude that
+
+s
+t(x; m)da = A(s)t(x∗; m)
+for some
+x∗∈s,
+and
+
+si
+t(x; ei)da = Ait(x∗
+i ; ei);
+i ∈{1, 2, 3}
+ﬁxed,
+for some x∗
+i ∈si,
+(6.103)
+where Ai is the area of the plane triangle si.
+Here, we invoke the ﬁrst equality in (5.9) to conclude, with ref-
+erence to Figure 6.8 and noting that n is piecewise uniform on ∂τ,
+that A(s)m −Ajej = 0. Accordingly,
+Ai = A(s)ei · m,
+(6.104)
+yielding
+1
+A(s)
+
+∂τ
+t(x; n)da = t(x∗; m) −
+3
+
+i=1
+(ei · m)t(x∗
+i ; ei).
+(6.105)
+Passing to the limit δ →0, on noting that x∗→x0 and x∗
+i →x0 we
+then have, from (6.101), that
+t(x0; m) = T (x0)m,
+where T (x0) = t(x0; ei) ⊗ei.
+(6.106)
+This establishes (6.94) on reinstating the argument t. Thus,
+T (x, t) = ti ⊗ei,
+where ti = t(x, t; ei)
+(6.107)
+is the traction acting on the ith coordinate plane at x ∈κt.
+
+----- PDF sayfa 147 -----
+Balance Laws
+133
+Figure 6.9.
+Tetrahedron-like regions adjoining the boundary of a part of a
+body.
+We can repeat the foregoing construction by adjoining a small
+tetrahedron-like region with a curved oblique surface to the surface
+of an arbitrary part Pt of a body with piecewise smooth boundary
+∂Pt (Figure 6.9).
+This region approaches a tetrahedron in the limit as it collapses
+onto a point, and we again recover (6.94) at the boundary. We are
+thus able to express Euler’s linear momentum balance (6.36) in the
+form
+
+Pt
+ρ ˙vdv =
+
+Pt
+ρbdv +
+
+∂Pt
+T nda.
+(6.108)
+Comparison with (6.2) and (6.23) immediately delivers the local
+form of the linear momentum balance:
+ρ ˙v = ρb + divT ,
+(6.109)
+holding in a region of smoothness, or
+ρ ˙vi = ρbi + Tij,j,
+(6.110)
+in terms of Cartesian coordinates, where Tij = ei · T ej = ei ·
+t(x, t; ej) = ei · tj. Thus, the traction on a surface with normal ej is
+tj = (ei · tj)ei = Tijei (Figure 6.10).
+The relevant jump condition at a singular surface is given by
+(6.11):
+ρv ⊗(v −u) −T n = 0.
+(6.111)
+
+----- PDF sayfa 148 -----
+134
+Principles of Continuum Mechanics
+Figure 6.10.
+Components of traction on two faces of a block.
+6.5.4
+Rotational momentum balance
+The combination of (6.94) with x × ˙v = (x × v)· reduces the rota-
+tional momentum balance (6.37) to
+
+Pt
+ρ(x × v)·dv =
+
+Pt
+ρx × bdv +
+
+∂Pt
+x × T nda,
+(6.112)
+which is symbolic notation for the vector equation
+eieijk
+
+Pt
+ρ(xjvk)·dv = eieijk
+
+Pt
+ρxjbkdv + eieijk
+
+∂Pt
+xjTklnlda,
+(6.113)
+where eijk is the permutation symbol. This is of the form (6.2).
+Taking (6.24)2 into account, we have the identiﬁcations
+ψi = eijkxjvk,
+ri = eijkxjbk
+and
+Ail = eijkxjTkl.
+(6.114)
+Inserting into the local balance law (6.23), i.e.,
+ρ ˙ψi = ρri + Ail,l,
+(6.115)
+expanding the derivatives, and using eijkvjvk = 0 and xj,l = δjl, we
+reduce this to
+eijkxj{ρ( ˙vk −bk) + Tkl,l} = eijkTkj.
+(6.116)
+
+----- PDF sayfa 149 -----
+Balance Laws
+135
+The terms in the braces vanish by (6.110), leaving the algebraic
+restriction eijkTkj = 0. Recalling Problem 5 of Chapter 1, we con-
+clude that T is a symmetric spatial tensor, i.e.,
+T = T t.
+(6.117)
+The jump condition (6.11) at a singular surface is
+0 = eiρψi(vl −ul) −Ailnl
+= eieijkρxjvk(vl −ul) −xjTklnl.
+(6.118)
+If the position x of a material point is continuous across the singular
+surface, i.e., if the motion of the body introduces no gaps or ﬁssures
+in the material, then the xj vanish and this reduces further to
+x × {ρv ⊗(v −u) −T n} = 0,
+(6.119)
+in which the term in braces vanishes by (6.111). In this case the
+jump condition is identically satisﬁed. In the event that position is
+discontinuous, however, (6.118) yields a non-trivial jump condition.
+6.5.5
+Decomposition of the stress into normal and
+shear components
+Consider the traction acting on the tangent plane to a surface s ⊂κt
+at the point x (Figure 6.11). The traction on this plane at the point
+x is t = T n, where n is a unit normal to the tangent plane.
+Figure 6.11.
+Resolution of traction into normal and shear components.
+
+----- PDF sayfa 150 -----
+136
+Principles of Continuum Mechanics
+Evidently,
+t = It = (n ⊗n)t + P(n)t,
+(6.120)
+where I is the spatial identity and
+P(n) = I −n ⊗n
+(6.121)
+is the projection onto the tangent plane (see Problem 10 in
+Chapter 1). We write this in the form
+t = σn + τs,
+(6.122)
+where
+σ = n · t
+and
+τs = P(n)t,
+(6.123)
+with |s| = 1 and
+τ =
+P(n)t
+ .
+(6.124)
+We refer to σ and τ respectively as the normal and shear components
+of the traction. These are given in terms of the stress tensor by
+σ = n · T n
+and
+τ = s · T n.
+(6.125)
+The normal part can be positive, negative or zero, whereas the shear
+part is non-negative. We observe that s · T n = n · T ts = n · T s.
+This is called the complementary property of shear. It is also clear
+that the shear traction is determined entirely by T and n. Thus,
+τs = T n −(n · T n)n.
+(6.126)
+If τ vanishes on the tangent plane at the point in question, then
+T n = σn,
+(6.127)
+and n is a principal vector of T associated with the principal stress σ.
+Because of the symmetry of T there are three real-valued principal
+stresses and an associated orthonormal triad of principal vectors.
+Thus, there exist three mutually orthogonal planes intersecting at
+each x ∈κt on which the shear tractions vanish. These are uniquely
+determined if all the σ′s are distinct.
+
+----- PDF sayfa 151 -----
+Balance Laws
+137
+Examples of states of stress
+1. Pure pressure
+In a state of pure pressure the traction on every plane containing a
+point x is perpendicular to that plane. Thus, t(x, t; n) = −p(x, t)n
+for all unit vectors n, where p is the pressure. Suppressing the passive
+arguments x and t, we have that T n = −pn. On multiplying by an
+arbitrary scalar v, say, we conclude that T v = −pv = (−pI)v in
+which v = vn is an arbitrary vector. From (1.41), it then follows
+that the stress is
+T = −pI,
+(6.128)
+which is clearly symmetric, as required.
+Alternatively, Tij = ei · T ej = ei · t(ej) = −pei · ej = −pδij,
+which of course is the component form of our result. We may
+also derive it by using (6.107) to obtain T (x, t) = t(x, t; ei) ⊗
+ei = −p(x, t)ei ⊗ei and recalling (1.54).
+2. Uniaxial tension/compression
+In this example, the traction is of the form t(x, t; n) = α(x, t; n)e
+for all unit vectors n, where α is a scalar and e is a ﬁxed unit vector
+(Figure 6.12).
+Thus, T (x, t)n = α(x, t; n)e. Let α∗(x, t; ·) be an extension of
+α(x, t; ·) from the set of unit vectors to the set of all vectors, i.e.,
+α∗(x, t; v) = α(x, t; v) for all v with |v| = 1. Then, T (x, t)v =
+α∗(x, t; v)e for all v. Clearly T (x, t)v is a linear function of v. Thus
+α∗(x, t; v) is also a linear function of v, and it follows from (1.19) that
+there is a vector function a(x, t) such that α∗(x, t; v) = a(x, t) · v.
+We note that to reach this conclusion it is necessary to introduce the
+extension α∗because the set of unit vectors is not a linear space;
+that is, an arbitrary linear combination of unit vectors is not a unit
+vector, and, moreover, the zero vector is obviously not a unit vector.
+Figure 6.12.
+Uniaxial tension/compression.
+
+----- PDF sayfa 152 -----
+138
+Principles of Continuum Mechanics
+We thus have T v = (a · v)e = (e ⊗a)v for all v and hence
+T = e ⊗a. The symmetry condition (6.117) requires that e ⊗a =
+a ⊗e, and this in turn yields
+a = a(e · e) = (a ⊗e)e = (e ⊗a)e = σe,
+where σ = a · e.
+(6.129)
+Finally,
+T (x, t) = σ(x, t)e ⊗e,
+(6.130)
+where σ is the uniaxial tension or compression according as it is
+positive or negative, respectively.
+6.5.6
+Referential equations of motion
+The reader will have noticed that we have obtained the local equa-
+tions and associated jump conditions entirely in terms of the spatial
+description. In particular, we have not used the referential expres-
+sions (6.25)2, (6.27)2 or (6.29) in the course of deducing local equa-
+tions and jump conditions from the linear momentum balance (6.34).
+We do so here in respect of the local equations and leave the deriva-
+tion of the associated jump conditions as an exercise. On combining
+these equations we arrive at the linear momentum balance for an
+arbitrary part P ⊂κ:
+
+∂P
+pdA =
+
+P
+ρκ( ˙v −b)dV,
+(6.131)
+where p is the Piola traction. We could use this in a version of Noll’s
+theorem to conclude that p depends on ∂P through its local unit
+normal N, and then adapt Cauchy’s theorem to conclude that
+p(X, t; N) = P (X, t)N,
+(6.132)
+where P — the Piola Stress — is a two-point tensor ﬁeld; the
+Cartesian-component representation is
+P = PiAei ⊗ˆEA.
+(6.133)
+We can combine this with the referential form of the divergence
+theorem, for smooth (and hence continuous) ﬁelds, to obtain
+
+P
+ρκ( ˙v −b)dV =
+
+∂P
+PN dA =
+
+P
+DivP dV,
+(6.134)
+
+----- PDF sayfa 153 -----
+Balance Laws
+139
+where, in terms of Cartesians,
+DivP = PiA,Aei,
+(6.135)
+and then localize as usual to conclude that
+ρκ ˙v = ρκb + DivP ,
+(6.136)
+i.e.,
+ρκ ˙vi = ρκbi + PiA,A,
+(6.137)
+at all points X ∈κ that do not belong to a singular surface.
+This formulation has the convenient feature that ρκ(X) is a spec-
+iﬁed function, whereas the spatial mass density ρ appearing in the
+spatial equations must be such as to satisfy the diﬀerential equa-
+tion (6.14), involving the material velocity ﬁeld, and is not known
+in advance. Moreover, ˙v = ∂ˆv(X, t)/∂t is simply the partial time
+derivative in the referential description.
+The connection (2.59) between the referential and spatial mass
+densities, combined with (6.109), suggests that if P is such that
+JdivT = DivP ,
+(6.138)
+then the referential and spatial forms of the balance of linear momen-
+tum are equivalent. To determine the requisite expression for P we
+combine (6.94) with (2.50) and the Piola–Nanson formula (2.54),
+obtaining
+
+P
+JdivT dV =
+
+Pt
+divT dv =
+
+∂Pt
+T nda =
+
+∂P
+TF ∗NdA
+=
+
+P
+Div(TF ∗)dV.
+(6.139)
+Collecting the ﬁrst and last integrals together and localizing then
+gives (6.138) with
+P = TF ∗,
+(6.140)
+or, terms of components,
+PiA = TijF ∗
+jA.
+(6.141)
+
+----- PDF sayfa 154 -----
+140
+Principles of Continuum Mechanics
+Indeed, the two expressions (6.28) and (6.29) for the contact force
+fc imply that
+
+∂P
+pdA =
+
+∂Pt
+tda =
+
+∂Pt
+T nda =
+
+∂P
+TF ∗NdA,
+(6.142)
+which is identically satisﬁed by (6.132) and (6.140).
+The symmetry of the Cauchy stress imposes a restriction on the
+Piola stress and the deformation jointly. This follows easily on com-
+bining (6.140) with (2.55):
+PF t = FPt,
+(6.143)
+i.e., PiAFjA = FiAPjA.
+The purely referential Piola–KirchhoﬀStress S, deﬁned by
+P = FS,
+(6.144)
+is often useful in the formulation of constitutive equations, especially
+for solids. Its relationship to the Cauchy stress follows easily from
+(6.140) and (2.55). Thus,
+JT = FSF t.
+(6.145)
+It is clearly symmetric because JT t = FS tF t and T t = T . We then
+have FStF t = FSF t, and pre- and post-multiplication by F −1 and
+F −t, respectively, yields St = S. In terms of components,
+PiA = FiBSBA
+and
+JTij = FiAFjBSAB.
+(6.146)
+6.5.7
+Mechanical energy balance
+In particle mechanics the power generated by the force f acting on
+a particle is balanced by the rate of change of the kinetic energy of
+the particle. This follows easily from Newton’s law f = m ˙v, where
+m and v respectively are, of course, the particle mass and velocity.
+The power is P = f · v = mv · ˙v = 1
+2m(v · ˙v + ˙v · v) = 1
+2m(v · v)·.
+Thus, P = ˙K as claimed, where K = 1
+2m |v|2 is the kinetic energy.
+We derive an analogous result for continua.
+
+----- PDF sayfa 155 -----
+Balance Laws
+141
+To achieve this we form the inner product of (6.109) with the
+material velocity v, obtaining
+1
+2ρ(|v|2)· = ρb · v + divT · v
+= ρb · v + div(T tv) −T · L,
+(6.147)
+where L is the spatial velocity gradient deﬁned by (4.1)2, the inner
+product is deﬁned by (1.87), and use has been made of the identity
+(1.152) together with the symmetry tr(AB) = tr(BA). A reduction
+employing Cartesian coordinates is arguably more enlightening:
+divT · v = Tij,jvi = (Tijvi),j −Tijvi,j = div(T tv) −T · L.
+(6.148)
+Integrating over an arbitrary part Pt = χ(S, t) ⊂κt and invoking
+conservation of mass gives
+d
+dt
+
+Pt
+1
+2ρ |v|2 dv +
+
+Pt
+T · Ldv =
+
+Pt
+ρb · vdv +
+
+∂Pt
+t · vda,
+(6.149)
+where the time derivative pertains to the ﬁxed set S of material
+points under consideration and we have used the divergence theorem
+for smooth ﬁelds to convert the integral of div(T tv) over Pt to an
+integral over ∂Pt of T tv · n = v · T n = t · v.
+Whence the Mechanical Energy Balance:
+d
+dtK(S, t) + S(S, t) = P(S, t),
+(6.150)
+where
+K(S, t) = 1
+2
+
+Pt
+ρ |v|2 dv
+(6.151)
+is the kinetic energy of S,
+P(S, t) =
+
+Pt
+ρb · vdv +
+
+∂Pt
+t · vda
+(6.152)
+
+----- PDF sayfa 156 -----
+142
+Principles of Continuum Mechanics
+is the power of the forces acting on S, and
+S(S, t) =
+
+Pt
+T · Ldv
+(6.153)
+is the stress power contained in S.
+We observe that the stress power has no analog in particle
+mechanics. This is due, naturally, to the fact that ideal particles
+have no surface area. Thus, the concepts of traction and stress have
+no meaning for them.
+The referential forms of the kinetic energy and power are
+K(S, t) = 1
+2
+
+P
+ρκ |v|2 dV
+and
+P(S, t) =
+
+P
+ρκb · vdV +
+
+∂P
+p · vdA,
+(6.154)
+respectively. As for the stress power, we use (6.140) to write
+
+Pt
+T · Ldv =
+
+Pt
+J−1PF t · Ldv
+=
+
+P
+PF t · LdV
+=
+
+P
+tr(PF tLt)dV.
+(6.155)
+Using F tLt = (LF)t = ˙F t we then have tr(PF tLt) = tr(P ˙F t) =
+P · ˙F . In terms of components, P · ˙F = PiA ˙FiA. We note that
+whereas the trace of a two-point tensor is not deﬁned, the product
+P ˙F t is a spatial tensor, and its trace furnishes a well-deﬁned inner
+product of two-point tensors. Accordingly, the trace is meaningful
+and we reach
+S(S, t) =
+
+P
+P · ˙F dV.
+(6.156)
+Indeed the energy balance (6.150), with the kinetic energy, power and
+stress power given by (6.154) and (6.156), may be derived directly by
+repeating the foregoing procedure with (6.109) replaced by (6.136).
+
+----- PDF sayfa 157 -----
+Balance Laws
+143
+A stress measure that is juxtaposed with the material derivative
+of a deformation measure in an expression for the stress power is
+said to be power conjugate to that deformation measure. Thus, the
+Piola stress is power conjugate to the deformation gradient. We show
+that the Piola–Kirchhoﬀstress is power conjugate to the Lagrangian
+strain E deﬁned by (2.97). This is easily proved by combining (2.83)2
+with (2.97) to obtain
+˙E = 1
+2(F tF −ˆI)· = 1
+2(F t ˙F + ˙F tF )
+= 1
+2[F t ˙F + (F t ˙F )t] = Sym(F t ˙F ).
+(6.157)
+Then,
+P · ˙F = FS · ˙F = tr(FS ˙F t) = tr(S ˙F tF ),
+(6.158)
+in which the ﬁrst trace pertains to a spatial tensor, yielding an inner
+product of two-point tensors, and the second pertains to a referen-
+tial tensor. In detail, tr(FS ˙F t) = (FiASAB) ˙FiB = SAB( ˙FiBFiA) =
+tr(S ˙F tF ). Thus, P · ˙F
+= S · F t ˙F , and the symmetry of the
+Piola–Kirchhoﬀstress reduces this to
+P · ˙F = S · Sym(F t ˙F ),
+(6.159)
+yielding the stress power in the form
+S(S, t) =
+
+P
+S · ˙EdV.
+(6.160)
+6.6
+Energy balance
+The mechanical energy balance (6.150) does not account for the inter-
+convertibility of heat and mechanical power, a fundamental aspect of
+thermomechanical phenomena. To address this we introduce a new
+postulate, the Balance of Energy. Thus we assume the existence of
+scalars U(S, t) and H(S, t), the internal energy and heating of S ⊂B,
+respectively, such that
+d
+dt[K(S, t) + U(S, t)] = P(S, t) + H(S, t).
+(6.161)
+
+----- PDF sayfa 158 -----
+144
+Principles of Continuum Mechanics
+We assume that U can be represented as an integral over Pt, i.e.,
+that there exists a function ε(x, t) — the internal energy per unit
+mass — such that
+U(S, t) =
+
+Pt
+ρεdv,
+(6.162)
+and that the heating is expressible in the form
+H(S, t) =
+
+Pt
+ρrdv +
+
+∂Pt
+hda,
+(6.163)
+where r(x, t) is the heating per unit mass — through radioactive
+decay, for example — and h(x, t) is the heating inﬂux supplied via
+conduction; for example, by contact with material outside Pt.
+We can combine the mechanical energy balance with (6.161) to
+arrive at the Thermal Energy Balance
+H(S, t) = d
+dtU(S, t) −S(S, t).
+(6.164)
+This is coupled to the mechanical energy balance by the stress power.
+For example, if the stress is a pure pressure, then T · L = −p trL =
+−p ˙J/J, and if the motion is isochoric ( ˙J = 0), then the stress power
+vanishes and there is no thermomechanical coupling. The thermal
+and mechanical problems for inviscid incompressible ﬂuids can thus
+be treated independently.
+For rigid bodies the stress power is T · L = T · W , where W is
+the skew spin tensor, and this also vanishes because T is symmetric.
+Thus, the thermal and mechanical problems are decoupled in rigid
+bodies. This is why traditional courses on heat transfer treat bodies
+as rigid, with no consideration given to mechanical response. This
+can only be valid in an approximate sense, however, since real bodies
+are not perfectly rigid, just as real ﬂuids are not perfectly inviscid.
+Proceeding, we write the thermal energy balance, granted conser-
+vation of mass, as
+
+∂Pt
+hda =
+
+Pt
+[ρ( ˙ε −r) −T · L]dv.
+(6.165)
+Assuming ρ, ˙ε, r and T · L to be continuous, and hence bounded, we
+can adapt Noll’s theorem to conclude that h depends on ∂Pt through
+
+----- PDF sayfa 159 -----
+Balance Laws
+145
+its local unit normal n, and then adapt Cauchy’s theorem to conclude
+that there is a vector ﬁeld q(x, t), the heat ﬂux vector, such that
+h(x, t; n) = −q(x, t) · n,
+(6.166)
+in which the minus sign is inserted to conform to the convention that
+q · n > 0 corresponds to heat outﬂow (h < 0); and q · n < 0, to heat
+inﬂow (h > 0). Then,
+
+∂Pt
+hda = −
+
+∂Pr
+q · nda = −
+
+Pt
+divqdv,
+(6.167)
+for smooth ﬁelds, and we can localize (6.165) to arrive at the local
+form
+ρ ˙ε = T · L −divq + ρr,
+(6.168)
+holding at points in κt that do not belong to a singular surface.
+Alternatively, this follows directly on making the appropriate iden-
+tiﬁcations in (6.1) and (6.21), and (6.6) then delivers the associated
+jump condition
+ρε(v −u) + q · n = 0,
+(6.169)
+holding at all points on a singular surface.
+A referential form of the energy balance proceeds by re-writing
+the thermal energy balance as
+
+P
+[ρκ( ˙ε −r) −P · ˙F ]dV = −
+
+∂Pr
+q · nda = −
+
+∂P
+q · F ∗NdA
+= −
+
+∂P
+qκ · NdA,
+(6.170)
+where
+qκ(X, t) = (F ∗)tq = JF −1q
+(6.171)
+is the referential heat ﬂux vector, with components
+q(κ)A = F ∗
+iAqi,
+(6.172)
+in which qi are those of the spatial vector q. Then, for smooth ﬁelds,
+
+∂P
+qκ · NdA =
+
+P
+DivqκdV,
+where Divqκ = q(κ)A,A,
+(6.173)
+
+----- PDF sayfa 160 -----
+146
+Principles of Continuum Mechanics
+and we localize to obtain
+ρκ ˙ε = P · ˙F −Divqκ + ρκr
+(6.174)
+at points X ∈κ removed from a singular surface. The derivation of
+the associated jump condition is again left to the reader.
+This result may be derived directly if (6.168) is multiplied by J
+and use is made of the easily proved identity
+Jdivq = Div(JF −1q).
+(6.175)
+6.7
+Entropy and the Clausius–Duhem inequality
+To account for the thermodynamical concept of dissipation attend-
+ing any real physical process, we introduce a further hypothesis: the
+Entropy Balance. This is assumed to take the form
+d
+dt
+
+Pt
+ρηdv =
+
+Pt
+θ−1(ρr)dv +
+
+∂Pt
+θ−1hda +
+
+Pt
+ρsdv,
+(6.176)
+where η(x, t) is the entropy, per unit mass, contained in S, θ(x, t)
+(> 0) is the absolute temperature, and s is the entropy production
+rate per unit mass. The ﬁrst integral on the right-hand side repre-
+sents the entropy supplied by sources in the bulk and the second, the
+ﬂux of entropy through the surface. Their forms are suggested by the
+classical thermostatics of reversible processes, whereas the last inte-
+gral on the right, which vanishes in a reversible process, represents
+the net entropy production attending an irreversible process. These
+are, by deﬁnition, such that this integral is positive and hence that
+s > 0. All admissible processes are then subject to the Clausius–
+Duhem Inequality
+d
+dt
+
+Pt
+ρηdv ≥
+
+Pt
+θ−1(ρr)dv +
+
+∂Pt
+θ−1hda.
+(6.177)
+This inequality may be motivated by an argument due to Trues-
+dell [12]. Thus, we assume that there is a function B(S, t), depend-
+ing on material constitution, that bounds the heating from above,
+i.e., B(S, t) ≥H(S, t). From the energy balance (6.161), we then
+have that, in accordance with experience, there is a limit to the rate
+
+----- PDF sayfa 161 -----
+Balance Laws
+147
+at which heat can be converted to energy in the absence of forces
+(P = 0), i.e.,
+d
+dt[K(S, t) + U(S, t)] ≤B(S, t).
+(6.178)
+For uniformly distributed temperatures (gradθ = 0) we deﬁne the
+entropy
+C(S, t) =
+
+Pt
+ρηdv
+(6.179)
+by
+C(S, t) =
+ t
+t0
+θ(τ)−1B(S, τ)dτ,
+(6.180)
+where t0 is a ﬁxed time. Then,
+θ(t) d
+dtC(S, t) = B(S, t) ≥H(S, t),
+(6.181)
+which is just inequality (6.177) with the uniform reciprocal temper-
+ature factored outside the integrals on the right-hand side. Plac-
+ing this inside the integrals and making the further assumption
+that the resulting inequality also applies to non-uniform tempera-
+ture ﬁelds then yields the Clausius–Duhem inequality. Combining it
+with (6.166) and localizing as usual yields the inequality
+ρ ˙η ≥θ−1(ρr) −div(θ−1q),
+(6.182)
+holding in regions of smoothness, whereas the jump condition
+ρη(v −u) + θ−1q · n ≥0,
+(6.183)
+operative on singular surfaces, follows by making the appropriate
+identiﬁcations in (6.6) in which the equality is replaced by an inequal-
+ity. Here we recall, with reference to Figure 5.2 in Chapter 5, that n
+is directed into the “+ region”, and hence, with our deﬁnition (5.28)
+of the jump, that this inequality is independent of the orientation
+of n.
+The referential form of the Clausius–Duhem inequality and its
+associated local form and jump condition are easily derived and
+
+----- PDF sayfa 162 -----
+148
+Principles of Continuum Mechanics
+therefore not made explicit here. Further, the entropy supply and
+ﬂux represented by the ﬁrst two integrals on the right-hand side of
+the entropy balance (6.176) are not the most general forms that could
+be contemplated. The text by Liu [7] may be consulted for a general
+formulation of this balance law.
+A more useful form of the local inequality (6.182) is obtained by
+substituting ρr from the thermal energy balance (6.168):
+ρ ˙η ≥θ−1(ρ ˙ε −T · L + divq) −div(θ−1q),
+(6.184)
+which, since θ > 0 and recalling Problem 24(c) of Chapter 1, is
+equivalent to
+ρ(θ ˙η −˙ε) + T · L −θ−1q · gradθ ≥0.
+(6.185)
+On introducing the Helmholtz free energy per unit mass ψ, deﬁned by
+ψ = ε −θη,
+(6.186)
+we ﬁnally reduce the local Clausius–Duhem inequality to
+−ρ( ˙ψ + η ˙θ) + T · L −θ−1q · gradθ ≥0.
+(6.187)
+This will play a central role in the discussion of constitutive equations
+for materials in subsequent chapters.
+6.8
+Problems
+1. Derive the referential forms of the local balance laws and jump
+conditions discussed in Section 6.1. [Hint: Recall Problem 3 in
+Chapter 5].
+2. Verify that ¯
+X appearing in (6.53) is, in fact, the position of the
+center of mass of P ⊂κ.
+3. Show that the co-rotational derivative deﬁned by (6.68) is
+expressible in the form ˚
+J = ˙Jije∗
+i ⊗e∗
+j.
+4. Recall the inertia tensor J(S, t) =
+	
+Pt ρ[(π · π)I −π ⊗π]dv
+associated with an arbitrary part S of a body, where π is the
+position of a point in the region Pt, currently occupied by S,
+relative to the center of mass of Pt.
+
+----- PDF sayfa 163 -----
+Balance Laws
+149
+(a) Show that the integrand is positive semi-deﬁnite (A symmet-
+ric tensor A is positive semi-deﬁnite if and only if a · Aa ≥0
+for all a ∈E3).
+(b) Show that J is positive deﬁnite (a · Ja > 0 for all a ̸= 0).
+5. Let {σi} and {ni} be the principal Cauchy stresses and asso-
+ciated (normalized) principal stress axes at a given position
+x in a body. We can use these axes to deﬁne a unit vector
+n(θ, φ) = cos φ er(θ)+sin φ n3, where er(θ) = cos θ n1 +sin θ n2
+and 0 ≤θ < 2π, −π ≤φ ≤π. This is essentially the radial unit
+vector with origin located at x.
+(a) Compute the shear stress τ(θ, φ) on a plane with unit normal
+n(θ, φ).
+(b) Compute the octahedral shear stress, i.e., the shear stress on
+a plane with normal inclined at equal angles to each of the
+principal axes.
+6. Consider a body undergoing a homogeneous deformation, such
+that the components of the deformation gradient at a given
+time t are
+(FiA) =
+⎛
+⎜
+⎝
+2 3 0
+1 2 0
+0 0 1
+⎞
+⎟
+⎠.
+All components are with respect to the ﬁxed basis {ei ⊗ˆEA}.
+Assume that the Piola tractions p(N) acting on deformed sur-
+faces that have unit normals ˆEA in the reference conﬁguration
+are
+p( ˆE1) = ae1 + 10e2,
+p( ˆE2) = (b −6)e3 + 3e2,
+p( ˆE3) = ce2 + 3e3,
+where a, b and c are constants.
+(a) Use p(N) = PN , where P is the Piola stress tensor,
+together with ˆI = ˆEA ⊗ˆEA, to show that P = pA ⊗ˆEA,
+where pA = p( ˆEA).
+
+----- PDF sayfa 164 -----
+150
+Principles of Continuum Mechanics
+(b) Find the components PiA of the Piola stress tensor as func-
+tions of a, b, c.
+(c) Apply the rotational momentum balance T = T t to deter-
+mine the values of a, b, c.
+(d) Calculate the values of the components Tij of the Cauchy
+stress tensor T .
+7. Consider the deformation
+x1 = a1(X1 + bX2),
+x2 = a2X2,
+x3 = a3X3.
+Suppose the Cauchy traction is given by t = τe1, τe2, 0 on
+planes with unit normals n = e2, e1 and e3, respectively (care-
+fully note the correspondences). Find the stress tensors T , P
+and S. Express your answers in terms of τ, a1, a2, a3 and b.
+8. Establish the formulas (6.138) and (6.175) by direct calculation
+with the aid of the Piola identity.
+9. Suppose a body is in equilibrium in conﬁguration κt. Derive the
+virtual power equation
+
+Pt
+Tijui,jdv =
+
+Pt
+ρbiuidv +
+
+∂Pt
+tiuida,
+where Pt ⊂κt is any part of κt and u is any diﬀerentiable vec-
+tor ﬁeld whatsoever. This is also called the weak form of the
+equilibrium equation, because it is well deﬁned even if the Tij
+are not diﬀerentiable. The local form derived in the text requires
+diﬀerentiability — a stronger requirement — and is accordingly
+called the strong form. Note: This formula is the basis of the
+Finite Element Method.
+10. Let V (κt) be the volume of a conﬁguration κt of a body. Deﬁne
+the mean Cauchy stress
+¯T = [V (κt)]−1
+
+κt
+T dv.
+(a) If the body is in equilibrium in this conﬁguration, show that
+[V (κt)] ¯Tij =
+
+∂κt
+tixjda +
+
+κt
+ρbixjdv.
+(b) Apply the global form of the rotational momentum balance
+to show that ekij ¯Tij = 0 in equilibrium.
+
+----- PDF sayfa 165 -----
+Balance Laws
+151
+Figure 6.13.
+A clamped block (width w and height h) subjected to a uniform
+pressure on part of its top surface.
+(c) Suppose the body lies on a rigid plane and is subjected to
+the gravity force b = −ge3. Suppose there are no tractions
+applied to its boundary (except for those due to contact).
+Show that ¯T33 = −¯ρg¯x3, where ¯ρ is the mean density in the
+conﬁguration in question and ¯x3 = ¯x · e3, where ¯x is the
+position of the center of mass relative to an origin lying on
+the plane. Note that the result involves the distance from
+the plane to the center of mass, and thus appears to depend
+on the choice of origin. Show that in fact this is not the case.
+(d) Consider a block clamped at x1 = 0, subjected to a uniform
+pressure acting in the interval l1 < x1 < l2 (Figure 6.13).
+Evaluate ¯T12 in terms of the dimensions shown in the ﬁgure.
+11. All scalar balance laws that we have considered have the generic
+form
+d
+dt
+
+Pt
+ρφdv =
+
+Pt
+ρσdv +
+
+∂Pt
+π · nda,
+for all Pt ⊂κt, where ρ is the density, φ is the amount of the
+considered quantity per unit mass, σ is the rate, per unit mass,
+at which the quantity is supplied in the interior of Pt, and π is
+the ﬂux of the quantity through the boundary.
+If φ is the total energy per unit mass (φ = ε + 1
+2 |v|2), then
+what is the energy ﬂux π? Obtain the relevant jump condition,
+and compare it to (6.169). Thus, derive the jump condition for
+(6.150).
+
+----- PDF sayfa 166 -----
+152
+Principles of Continuum Mechanics
+12. Let A and B be invertible tensors.
+(a) Show that (AB)∗= A∗B∗.
+(b) For invertible Q, show that Q∗= Q if, and only if, Q is a
+rotation.
+(c) Consider the referential Biot stress tensor σ (named after
+M. Biot) deﬁned by σ = Sym(P tR), where R is the rotation
+in the polar decomposition of F and Sym(·) is the symmetric
+part of the indicated tensor. Show that σ is power-conjugate
+to the right-stretch tensor U, i.e., that the stress power per
+unit reference volume is expressible as σ · ˙U.
+(d) The spatial Bell stress tensor Σ (named after J.F. Bell) is
+deﬁned by Σ = Sym(PRt). Derive an expression for the
+tensor A if Σ · A is the stress power per unit reference
+volume.
+The Biot and Bell stress tensors are sometimes used in consti-
+tutive equations for solids. For applications involving the Biot
+stress, see [4].

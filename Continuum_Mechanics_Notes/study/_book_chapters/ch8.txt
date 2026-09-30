@@ -1,0 +1,443 @@
+BOLUM 8: Constitutive Equations
+Kitap sayfalari: PDF 181-192
+========================================================================
+
+----- PDF sayfa 181 -----
+Chapter 8
+Constitutive Equations
+To make progress in the formulation of predictive theories in contin-
+uum mechanics it is necessary to connect the variables appearing in
+the balance laws, such as stress and heat ﬂux, for example, to the
+processes experienced by the material at hand. These constitutive
+relations are mathematical idealizations of material behavior. They
+are judged to be useful models if they deliver predictions that are
+found to be in accord with experimental observation. In general, for
+any particular substance, such ﬁdelity is to be expected only under a
+limited set of conditions. Moreover, given the vast range of behavior
+of actual materials, constitutive relations necessarily reﬂect both the
+properties of the material and the conditions to which it is subjected.
+In consideration of the introductory nature of this book, we con-
+sider only the classical constitutive theories pertaining to viscous and
+inviscid ﬂuids and elastic solids. These represent the most highly
+developed and widely applied classes of constitutive relations. They
+are far from comprehensive models of material behavior, however.
+Nevertheless, mastery of these models is a ﬁrm pre-requisite to the
+study of more complex theories of material behavior. Indeed the sub-
+ject of constitutive theory is a principal aspect of ongoing research.
+8.1
+Elastic materials with heat conduction and viscosity
+For our purposes the dependent variables for which constitutive equa-
+tions are sought are the present values of the stress T , the heat ﬂux q,
+the energy density ε and the entropy density η. These all pertain to
+167
+
+----- PDF sayfa 182 -----
+168
+Principles of Continuum Mechanics
+a material point p ∈B, with position X ∈κ. We will develop these
+relations from the perspective of an observer O. Later, we will impose
+the requirement of material frame indiﬀerence, which stipulates that
+constitutive relations pertaining to another observer, O+ say, should
+reﬂect the agreement of the two observers regarding the nature of
+material response. Were it otherwise, then the characterization of
+material behavior would depend on who is determining it, whereas
+experience supports the intuitive notion that such behavior should
+instead be intrinsic to the material. We will see that such observer
+agreement imposes certain restrictions on the constitutive relations
+pertaining to any one observer.
+In the course of constructing models of material behavior, certain
+other restrictions suggest themselves. Among these is the notion of
+locality. This is the idea that the response of a material at a point p
+should depend on the values of the variables constituting a process
+in a neighborhood of p, i.e., in a neighborhood of X. In particular,
+we limit attention here to the special class of material models in
+which the processes to which the material is deemed to be sensitive
+consist of the values of the current deformation χκ(X′, t), the current
+material velocity ˆv(X′, t) and the current temperature ˆθ(X′, t) for
+all X′ ∈κ contained in an arbitrarily small neighborhood of X.
+Assuming these to be smooth functions of position in κ, we may
+approximate them by (see (3.102) and (4.2))
+χκ(X′, t) = χκ(X, t) + F (X, t)(X′ −X) + o(
+X′ −X
+),
+ˆv(X′, t) = ˆv(X, t) + ˙F (X, t)(X′ −X) + o(
+X′ −X
+),
+and
+ˆθ(X′, t) = ˆθ(X, t) + (Gradˆθ(X, t)) · (X′ −X) + o(
+X′ −X
+).
+(8.1)
+For |X′ −X| suﬃciently small these are all dominated by the terms
+shown explicitly; for example, χκ(X′, t) is determined to linear-
+order accuracy by χκ(X, t) and F (X, t). Accordingly, if we seek
+to account for eﬀects at this order then we would assume the consti-
+tutive response of the material, consisting of the set
+C′ = {T , q, ε, η},
+(8.2)
+evaluated at X and t, to be determined by the list
+L′ = {x, v, θ, F , ˙F , Gradθ},
+(8.3)
+
+----- PDF sayfa 183 -----
+Constitutive Equations
+169
+also evaluated at X and t. Here, x = χκ(X, t), v = ˆv(X, t) and
+θ = ˆθ(X, t). We will show later that considerations having to do with
+frame indiﬀerence imply that the constitutive equations pertaining
+to the point p cannot, in fact, depend on x or v.
+In place of C′, it will prove to be more convenient to work with
+the equivalent set
+C = {T , q, ψ, η},
+(8.4)
+where ψ is the Helmholtz free energy. Further, from
+Gradˆθ · dX = dθ = grad˜θ · dx = grad˜θ · F dX,
+(8.5)
+it follows that
+Gradˆθ = F tgrad˜θ
+(8.6)
+and hence that L′ is equivalent to the list
+L = {x, v, θ, Fκ, L, gradθ},
+(8.7)
+where L is the spatial velocity gradient (cf. (4.3)) and the subscript
+κ has been attached to the deformation gradient to identify the refer-
+ence conﬁguration relative to which it is computed. Of course none of
+the other variables in this list depends on a reference conﬁguration.
+The special constitutive assumption adopted here may be moti-
+vated by an analogy with a spring-damper system, the response of
+which is determined by the present values of deformation and veloc-
+ity. Accordingly we study a particular class of material models that
+exhibit both elasticity and viscosity. We emphasize that this class
+is not suﬃcient to capture general viscoelastic behavior [14,15], the
+consideration of which lies outside the scope of this book. It does,
+however, suﬃce for our limited purposes.
+8.2
+Change of reference conﬁguration and material
+symmetry
+The list L of variables, presumed to constitute the relevant process,
+depends on the choice of reference conﬁguration due to the pres-
+ence of the deformation gradient. To see how this choice aﬀects the
+theory, consider a change of reference conﬁguration from κ to μ,
+
+----- PDF sayfa 184 -----
+170
+Principles of Continuum Mechanics
+say (Figure 8.1). Because the body and any reference conﬁguration
+are presumed to be in one-to-one correspondence, we assume that
+there exists an invertible map μ(p) taking p ∈B to Y ∈μ. Further,
+as B and κ are also in one-to-one correspondence, the same is true
+of κ and μ. Thus we assume the existence of a smooth, invertible
+function λ such that
+Y = λ(X)
+and
+dY = R(X)dX,
+where R(X) = Gradλ.
+(8.8)
+The deformation gradients relative to κ and μ are related by
+FκdX = dx = FμdY = FμRdX;
+hence Fκ = FμR.
+(8.9)
+We emphasize that this R must not be confused with the two-point
+rotation tensor occurring in the polar decomposition of the deforma-
+tion gradient.
+Let F ∈C be an entry in the list of variables characterizing the
+response of the material. Its value is determined by the entries of
+list L, which, as we have noted, depends on the choice of reference
+Figure 8.1.
+Change of reference conﬁguration.
+
+----- PDF sayfa 185 -----
+Constitutive Equations
+171
+conﬁguration. For example, choosing κ as reference, we have
+F(p, t) = Fκ(x, v, θ, Fκ, L, gradθ; X),
+(8.10)
+where the right-hand side is the constitutive function delivering
+the values of F. This function necessarily depends on κ because
+it involves the deformation gradient, whereas it values do not. The
+function itself must therefore depend on the reference conﬁguration
+adopted. We have also included a parametric dependence on X, to
+identify the material point in question. Using (8.8) and (8.9), we then
+have
+F(p, t) = Fμ(x, v, θ, Fμ, L, gradθ; Y ),
+(8.11)
+where
+Fμ(x, v, θ, Fμ, L, gradθ; Y )
+= Fκ(x, v, θ, FμR(λ−1(Y )), L, gradθ; λ−1(Y )),
+(8.12)
+yielding the constitutive function pertaining to any choice of refer-
+ence conﬁguration when that pertaining to one is given. Thus, the
+list of variables deemed to be relevant to material response is the
+same for all reference conﬁgurations.
+Since constitutive response is deﬁned pointwise, it suﬃces for our
+purposes to conﬁne attention to local changes of reference conﬁgu-
+ration in the neighborhood of a material point p0, say, rather than
+for the entire body (Figure 8.2). Thus consider a smooth invertible
+function λ(X), deﬁned on an open neighborhood Nκ(p0) ⊂κ and
+Figure 8.2.
+Local change of reference.
+
+----- PDF sayfa 186 -----
+172
+Principles of Continuum Mechanics
+mapping it to another open neighborhood Nμ(p0). Let X0 = κ(p0)
+be a pivot point of the map, i.e., Y0 = λ(X0) = X0.
+Then,
+F(p0, t) = Fκ(x, v, θ, Fκ, L, gradθ; X0)
+= Fμ(x, v, θ, Fμ, L, gradθ; X0),
+with Fκ = FμR(X0),
+(8.13)
+in which all arguments are evaluated at X0.
+Suppose now that both Nκ(p0) and Nμ(p0) are subjected to the
+same experiment, consisting of a given deformation χ(·, t) and tem-
+perature distribution θ(·, t). This experiment acts on Nκ(p0) to pro-
+duce the ﬁelds
+χ(X, t) = χ(X0, t) + F (X0, t)(X −X0) + o(|X −X0|),
+ˆv(X, t) = ˆv(X0, t) + ˙F (X0, t)(X −X0) + o(|X −X0|)
+and
+θ(X, t) = θ(X0, t) + Gradθ(X0, t) · (X −X0) + o(|X −X0|),
+(8.14)
+where X ∈Nκ(p0), with ˆv(X0, t) =
+˙χ(X0, t) and F (X0, t) =
+Gradχ|X0; and on Nμ(p0) to produce
+χ(Y, t) = χ(X0, t) + F (X0, t)(Y −X0) + o(|Y −X0|),
+ˆv(Y, t) = ˆv(X0, t) + ˙F (X0, t)(Y −X0) + o(|Y −X0|)
+and
+θ(Y, t) = θ(X0, t) + Gradθ(X0, t) · (Y −X0) + o(|Y −X0|),
+(8.15)
+where Y ∈Nμ(p0), the point being that the values of these variables,
+and their gradients, are identical at the point X0.
+The response of the material at p0, using Nκ(p0) as refer-
+ence, is given by Fκ(x, v, θ, F , L, gradθ; X0), with x = χ(X0, t),
+v = ˙χ(X0, t), θ = θ(X0, t), F = F (X0, t), L = ˙F (X0, t)F (X0, t)−1
+and gradθ = F (X0, t)−tGradθ(X0, t). On the other hand, the
+response elicited at p0 by using Nμ(p0) as reference is Fμ(x, v,
+θ, F , L, gradθ; X0), in which the arguments of the two functions are
+identical. Having subjected two diﬀerent local neighborhoods of p0
+to the same experiment, we would expect the two response functions,
+
+----- PDF sayfa 187 -----
+Constitutive Equations
+173
+insofar as they are evaluated at the same arguments, to yield diﬀer-
+ent values. This conclusion follows from (8.13). However, there may
+be certain distinguished maps λ for which the responses of the two
+neighborhoods, evaluated at the point p0, are identical. In this case,
+no experiment can distinguish between local neighborhoods that are
+related by such a map. These special maps are called material sym-
+metry transformations.
+Thus, if Nκ(p0) and Nμ(p0) are related by a symmetry transfor-
+mation, then Fκ(x, v, θ, F , L, gradθ; X0) = Fμ(x, v, θ, F , L, gradθ;
+X0), and it then follows from (8.13) that
+Fκ(x, v, θ, F , L, gradθ; X0) = Fκ(x, v, θ, FR, L, gradθ; X0),
+where R = Gradλ(X)|X0.
+(8.16)
+We recall that the map λ in this discussion is deﬁned on a neigh-
+borhood of the material point in question. In particular, R need not
+be the gradient of a single function deﬁned on the body. Thus, the
+notion of material symmetry is purely local. This allows for diﬀerent
+symmetries at diﬀerent points. The concept of material symmetry
+thus accommodates composites, for example, in which the type of
+material varies from one point of a body to another.
+It follows from (8.16) that FR is the value of an admissible defor-
+mation gradient at the point X0. If κ is an occupiable reference
+conﬁguration, this requires that 0 < det(FR) = (det F )(det R) with
+det F > 0. Thus, det R > 0. We denote by Gκ(p0) the set of R′s for
+which (8.16) holds for all admissible values of F . Thus,
+Gκ(p0) = {R : det R > 0 and (8.16) holds}.
+(8.17)
+This set is a group, i.e., it has the following three properties:
+(1) ˆI ∈Gκ(p0)
+(2) If R1 ∈Gκ(p0) and R2 ∈Gκ(p0), then R1R2 ∈Gκ(p0).
+(3) If R ∈Gκ(p0), then R−1 ∈Gκ(p0).
+The ﬁrst of these follows trivially from the deﬁnition of Gκ(p0).
+The second property follows, on suppressing all arguments that do
+not involve R, from Fκ(F (R1R2)) = Fκ((FR1)R2) = Fκ(FR1) =
+Fκ(F ); and the third from Fκ(FR−1) = Fκ((FR−1)R) = Fκ(F ˆI) =
+Fκ(F ).
+
+----- PDF sayfa 188 -----
+174
+Principles of Continuum Mechanics
+It follows from the second property that if R ∈Gκ(p0), then Rn ∈
+Gκ(p0) for any positive integer n. Thus, Fκ(F ) = Fκ(F Rn), where
+det(FRn) = (det F )(det Rn) = (det F )(det R)n. Let n →∞. If
+det R > 1 we have det(FRn) →∞, corresponding to unbounded
+dilation of the material, whereas if det R < 1 then det(FRn) →0,
+corresponding to unbounded compaction, neither of which aﬀects the
+response of the material. To avoid this untenable conclusion, we must
+restrict R such that det R = 1. Therefore,
+Gκ(p0) ⊂U = {R : det R = 1}.
+(8.18)
+This is called the unimodular group.
+It was Noll’s elegant idea [16] to classify materials as being either
+solid or ﬂuid on the basis of the symmetry group. For example,
+the stress in a compressible inviscid ﬂuid under isothermal condi-
+tions is T = −p(ρ)I, where p(ρ) is the constitutive function for
+the density-dependent pressure. From (2.50) and (2.59) we have
+ρ = ρκ(X)/det F = ρκ(X)/det(FR), provided that R ∈U. There-
+fore Gκ(p0) = U. This motivates the deﬁnition of a ﬂuid as a material
+of the considered class for which there exists a local reference conﬁg-
+uration κ∗(p0), say, such that Gκ∗(p0) = U.
+The situation for solids is diﬀerent. For these, experience indicates
+that a strain induced by the map λ(X) is experimentally detectable.
+Thus, if λ is to be a symmetry transformation, and hence unde-
+tectable, then it should be strain free; that is, the right Cauchy–Green
+tensor associated with R should be such that RtR = ˆI. Combining
+this with (8.18) we conclude that R is a rotation. Accordingly, we
+deﬁne a solid to be a material of the considered class for which there
+exists a local reference κ∗(p0) such that Gκ∗(p0) is contained in Orth+,
+the set of proper-orthogonal tensors, or simply the rotations, i.e., the
+orthogonal tensors having determinant equal to +1. Thus,
+Gκ∗(p0) ⊂Orth+ = {R : R ∈U and RtR = ˆI}.
+(8.19)
+We note that κ∗(p0) need not bear any relationship to any partic-
+ular reference conﬁguration one may use for the purposes of analysis.
+In solids, for example, κ∗(p0) would correspond to a unit cell of an
+undistorted lattice of a crystalline material. These are mapped to
+themselves by certain discrete rotations that characterize the partic-
+ular crystalline symmetry at hand. For this reason, κ∗(p0) is often
+called an undistorted local conﬁguration of the solid.
+
+----- PDF sayfa 189 -----
+Constitutive Equations
+175
+8.3
+Noll’s rule
+We have seen that material symmetry is a characteristic of the nature
+of the material as well as the adopted reference conﬁguration. It is
+therefore of interest to examine the extent to which material symme-
+try is inﬂuenced by the choice of reference conﬁguration. To inves-
+tigate this issue consider two reference conﬁgurations κ1 and κ2 in
+which the positions of p0 ∈B are X1 and X2, respectively. We
+assume the existence of a smooth invertible map π, deﬁned on a
+neighborhood of X1, such that X2 = π(X1). Suppressing the vari-
+ables that do not involve a reference conﬁguration, we have, from
+(8.12), that
+Fκ2(F ; X2) = Fκ1(FK; X1),
+where K = Gradπ|X1.
+(8.20)
+This in turn implies that
+Fκ2(FK −1; X2) = Fκ1(F ; X1).
+(8.21)
+Suppose R ∈Gκ1(p0), so that
+Fκ1(F ; X1) = Fκ1(FR; X1).
+(8.22)
+Then, on replacing F by FR in (8.21),
+Fκ1(FR; X1) = Fκ2(FRK −1; X2).
+(8.23)
+Thus,
+Fκ2(FRK −1; X2) = Fκ1(F ; X1) = Fκ2(FK −1; X2).
+(8.24)
+Let ˆF = FK −1. Then, FRK −1 = ˆF KRK −1 and
+Fκ2( ˆF ; X2) = Fκ2( ˆF KRK −1; X2).
+(8.25)
+We thus arrive at Noll’s rule:
+Gκ2(p0) = {KRK −1 : R ∈Gκ1(p0)}.
+(8.26)
+Here, again K is the gradient, at X1, of a map deﬁned on a neigh-
+borhood of X1. It need not be the gradient of a map deﬁned on the
+entire body. This fact has major implications for plasticity theory,
+for example [17–19].
+
+----- PDF sayfa 190 -----
+176
+Principles of Continuum Mechanics
+We observe that if Gκ1(p0) is in Orth+ then Gκ2(p0) is not, in gen-
+eral. Thus, if κ1(p0) is an undistorted state of a crystalline lattice,
+for example, then the lattice is distorted in κ2(p0). For this reason
+the existence of a (local) conﬁguration such that (8.19) holds is an
+essential part of the deﬁnition of a solid. However, (8.18) is satisﬁed
+in all conﬁgurations. Thus, the fact of a substance being ﬂuid, i.e.,
+the identiﬁcation of the symmetry group with the unimodular group,
+is independent of a reference conﬁguration. This is in accord with the
+intuitive notion of ﬂuidity.
+8.4
+Frame invariance
+In the course of formulating the basic structure of our restricted
+class of constitutive equations we have adopted the perspective of a
+particular observer, O say. We have already mentioned the concept of
+material frame indiﬀerence, according to which all observers should
+agree on the nature of the material at hand, and hence on the class of
+processes to which the material responds. Accordingly, with reference
+to (8.4) and (8.7), the response functions in the frame of observer O+
+should deliver the values of the elements of the set
+C+ = {T +, q+, ψ+, η+}
+(8.27)
+in terms of the elements of the list
+L+ = {x+, v+, θ+, F +
+κ+, L+, grad+θ+},
+(8.28)
+all evaluated at the material point p ∈B and the time t+. Thus, if O
+adopts the constitutive function Fκ(x, v, θ, Fκ, L, gradθ; X) to deter-
+mine the values of F(p, t) ∈C, then O+ should adopt the function
+F +
+κ+(x+, v+, θ+, F +
+κ+, L+, grad+θ+; X+) to evaluate its counterpart
+F +(p, t+) ∈C+. Of course all variables pertaining to O+ are given
+in terms of their counterparts in the frame of O by the formulas
+developed in Chapter 7.
+For example, if the free energy and entropy are determined by O
+to be
+ψ = ˆψκ(x, v, θ, Fκ, L, gradθ; X)
+and
+η = ˆηκ(x, v, θ, Fκ, L, gradθ; X),
+(8.29)
+
+----- PDF sayfa 191 -----
+Constitutive Equations
+177
+in terms of constitutive functions ˆψκ and ˆηκ, respectively, then, with
+reference to (6.186) and (7.37), the corresponding constitutive equa-
+tions in the frame of observer O+ are
+ˆψ+
+κ+(x+, v+, θ+, F +
+κ+, L+, grad+θ+; X+)
+= ˆψκ(x, v, θ, Fκ, L, gradθ; X)
+and
+ˆη+
+κ+(x+, v+, θ+, F +
+κ+, L+, grad+θ+; X+)
+= ˆηκ(x, v, θ, Fκ, L, gradθ; X),
+(8.30)
+respectively.
+Similarly, if the heat ﬂux is determined by O to be
+q = ˆqκ(x, v, θ, Fκ, L, gradθ; X)
+(8.31)
+in terms of a constitutive function ˆqκ (not to be confused with the
+values of the referential heat ﬂux — see (6.171)), then, with reference
+to (7.44), the corresponding constitutive equation in the frame of
+observer O+ is
+ˆq+
+κ+(x+, v+, θ+, F +
+κ+, L+, grad+θ+; X+)
+= Qˆqκ(x, v, θ, Fκ, L, gradθ; X),
+(8.32)
+where Q is the orthogonal transformation of (7.3) that characterizes
+the change of frame.
+Lastly, if O ﬁnds the stress to be determined constitutively by
+T = ˆTκ(x, v, θ, Fκ, L; X),
+(8.33)
+then the stress is determined by O+ to be
+T + = ˆT +
+κ+(x+, v+, θ+, F +
+κ+, L+; X+),
+(8.34)
+where (see (7.40))
+ˆT +
+κ+(x+, v+, θ+, F +
+κ+, L+; X+) = Q ˆTκ(x, v, θ, Fκ, L; X)Qt. (8.35)
+Here, we have suppressed the dependence of the stress on the tem-
+perature gradient. This is in accord with classical treatments of the
+present class of constitutive equations. See [16,20], for example. We
+will return to this issue in subsequent chapters.
+
+----- PDF sayfa 192 -----
+178
+Principles of Continuum Mechanics
+Frame invariance alone does not suﬃce to restrict the class of
+admissible constitutive functions. We must also ensure that they are
+compatible with the balances of mass, energy, momentum and the
+Clausius–Duhem inequality. These matters are explored in depth in
+the following chapters, in the contexts of distinct sub-models for
+viscous ﬂuids and elastic solids.

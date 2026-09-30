@@ -1,0 +1,533 @@
+Chapter 11
+Elastic Solids
+We deﬁne elastic materials to be the subclass of the idealized mod-
+els discussed in Chapter 8 for which the constitutive functions are
+insensitive to the velocity gradient. The elements of the list
+C = {T,q,ψ,η} (11.1)
+of response functions at a material point p are thus presumed to
+depend on the abbreviated list
+L = {x,v,θ,F,gradθ}, (11.2)
+evaluated at the same point. For example, the Helmholtz energyψ
+is given by
+ψ= ˆψκ(x,v,θ,Fκ,gradθ;p), (11.3)
+in terms of a constitutive functionˆψκbased on the reference conﬁg-
+uration used by observerO to computeFκ.
+Considerations of frame invariance, combined with (6.186) and
+(7.37), imply that
+ˆψκ(x,v,θ,Fκ,gradθ;p)= ˆψ+
+κ+(x+,v+,θ+,F+
+κ+,grad+θ+;p),
+(11.4)
+where ˆψ+
+κ+ is the constitutive function pertaining to observerO+.
+We may then proceed, as in Sections 9.1 and 10.1, to impose this
+207
+=== p208 ===
+208 Principles of Continuum Mechanics
+requirement for two relative motions of the observers (see (9.6)),
+with Q2(t0)= Q1(t0)a n dc2(t0)= c1(t0), concluding that
+ˆψκ(x2,v2,θ,F2,(gradθ)2;p)= ˆψκ(x1,v1,θ,F1,(gradθ)1;p), (11.5)
+where x2 and v2 are given in terms ofx1 and v1 by (9.12), in which
+Q = Qt
+2Q1 is arotation,a n dw h e r e
+F2 = QF1 and ( gradθ)2 = Q(gradθ)1. (11.6)
+Choosing Q = I, we ﬁnd, as in Chapter 9, thatˆψκdoes not depend
+on x or v, and hence that
+ψ=Ψ (θ,F,gradθ;p), (11.7)
+for some function Ψ, where we have lightened the notation by sup-
+pressing the subscriptκ. This function is such that
+Ψ(θ,QF,Qgradθ;p)=Ψ (θ,F,gradθ;p) for all rotations Q.
+(11.8)
+The same reasoning leads to the conclusion that the constitutive
+equations for the stress and heat ﬂux are likewise insensitive tox
+and v. For example, the heat ﬂux in the frame ofO is given by
+q = ˆq(θ,F,gradθ;p), (11.9)
+where
+ˆq(θ,QF,Qgradθ;p)= Qˆq(θ,F,gradθ;p) for all rotations Q.
+(11.10)
+11.1 Clausius–Duhem inequality
+Before exploring the consequences of these restrictions, we ﬁrst con-
+sider the implications of the Clausius-Duhem inequality (6.187) for
+our constitutive hypotheses. Here we use the chain rule
+˙ψ=Ψ
+θ˙θ+ΨF · ˙F +Ψgradθ·(gradθ)·, (11.11)
+together with
+T ·L = T · ˙FF −1 = tr(T(F−t ˙Ft)) =TF−t · ˙F (11.12)
+=== p209 ===
+Elastic Solids 209
+to reduce (6.187) — after multiplying byJ(> 0) and invoking (2.55)
+and (2.59) — to
+−ρκ(Ψθ+η)˙θ+(P −ρκΨF)· ˙F −ρκΨgradθ·(gradθ)·
+−Jθ−1q ·gradθ≥0, (11.13)
+where P is the Piola stress (see (6.140)). This is again of the form
+(9.64), now with
+z =( θ,F,gradθ), w =( ˙θ,˙F,(gradθ)·), a(z)=( −ρκ(Ψθ+η),
+P −ρκΨF,−ρκΨgradθ) (11.14)
+and
+b(z)= −Jθ−1q ·gradθ. (11.15)
+From (9.68) we conclude that Ψgradθ= 0, together with
+η= −Ψθ(θ,F;p), P = WF(θ,F;X)a n d q ·gradθ≤0,
+(11.16)
+where we continue to denote the free energy by Ψ, and where
+W(θ,F;X)= ρκ(X)Ψ(θ,F;κ−1(X)) (11.17)
+is the free energy per unit volume of the reference conﬁgurationκ.
+Thus the entropy is independent of the temperature gradient, as in
+the case of viscous ﬂuids. Further, we have proved that the Piola
+stress (and hence also the Cauchy stress) is insensitive to the tem-
+perature gradient. This stands in contrast to the situation for vis-
+cous ﬂuids encountered in Chapter 9, in which such insensitivity was
+assumed ap r i o r i.
+11.2 Stress response
+It follows from (11.8) and (11.17) that
+W(θ,QF;X)= W(θ,F;X) for all rotations Q. (11.18)
+=== p210 ===
+210 Principles of Continuum Mechanics
+Proceeding as in the passage from (10.8) to (10.9), we conclude that
+for this to be satisﬁed it is necessary and suﬃcient that
+W(θ,F;X)= ¯W(θ,C;X) (11.19)
+for some function ¯W, where C is the right Cauchy–Green deforma-
+tion tensor. Accordingly,
+WF · ˙F = ¯WC · ˙C = ¯WC ·( ˙FtF +Ft ˙F), (11.20)
+where ¯WC =( ¯WC)t is the symmetric referential gradient of¯W with
+respect toC. Using the rules
+A1 ·A2A3 = At
+2A1 ·A3 = A3At
+1 ·At
+2, (11.21)
+which follow from the properties of the trace operator, we conclude
+that ¯WC · ˙FtF and ¯WC · Ft ˙F are both equal toF( ¯WC) · ˙F, and
+hence that
+[WF −2F( ¯WC)]· ˙F =0 , (11.22)
+in which the expression in brackets is a two-point tensor and˙F is
+an arbitrary two-point tensor. Because the set of two-point tensors
+is a linear space, we conclude that the inner product of the bracket
+with an arbitrary element of this space vanishes, and hence that the
+bracket vanishes, yielding
+WF =2 F( ¯WC). (11.23)
+From (6.144) and (11.16)2, the Piola–Kirchhoﬀ stressS is thus
+given by
+S =2 ¯WC. (11.24)
+This is automatically symmetric, and (6.145) ensures that the
+Cauchy stress is also symmetric.
+11.2.1 Material symmetry
+The energy W is subject to the material symmetry condition (cf.
+(8.16) and (8.17))
+W(θ,F;X)= W(θ,FR;X) for all R ∈G
+κ(p), (11.25)
+=== p211 ===
+Elastic Solids 211
+where Gκ(p) is the symmetry group atp ∈B in the conﬁgurationκ.
+From (11.19), ¯W is therefore such that
+¯W(θ,C;X)= ¯W(θ,RtCR;X). (11.26)
+Here again we emphasize thatR, a referential tensor, must not be
+confused with the two-point rotation tensor in the polar decomposi-
+tion ofF.
+For example, ifGκ(p) = U, the unimodular group, then we may
+proceed, as in Chapter 9, to conclude thatW depends onF via J =
+detF, i.e., thatW(θ,F;X)= w(θ,J;X) for some functionw. This
+implies, on holdingθﬁxed (and invoking the result of Problem 2(b)
+in Chapter 4), that
+P · ˙F = ˙W =˙w = wJ ˙J = wJF∗· ˙F, (11.27)
+and hence that P = wJF∗. It then follows from (6.140) that the
+Cauchy stress isT = wJI. This may be combined with conservation
+of massto arrive at theconstitutive equation (9.38) for inviscid ﬂuids,
+with the pressure given by ˜p = −wJ.
+For elastic solids, recall that there exists a local undistorted con-
+ﬁguration relative to which the symmetry group is contained in the
+group Orth+ of rotation tensors. If this symmetry group coincides
+with Orth+, then the material is said to behemitropic at the point in
+question. In this case there is no rotation preceding a deformation at
+the point in question that can be detected experimentally. Assuming
+κ(p) — a neighborhood ofp in conﬁgurationκ—t ob es u c hal o c a l
+conﬁguration, we have that
+W(θ,F;X)= W(θ,FR;X) for all R ∈Orth+, (11.28)
+and hence, from (11.26), that
+¯W(θ,C;X)= ¯W(θ,RtCR;X) for all R ∈Orth, (11.29)
+where Orth is the full orthogonal group consisting of all orthogonal
+tensors. This follows from the fact thatOrth = Orth+∪{−ˆI}. Thus,
+if R ∈Orth+ satisﬁes this restriction for all symmetric, positive
+deﬁnite C, then it is also satisﬁed by −R ∈Orth, i.e, the sign
+cancels out. Such functions, with the symmetry group extended to
+Orth,a r eisotropic.
+=== p212 ===
+212 Principles of Continuum Mechanics
+We may thus invoke the result proved in Part 1 of Section 9.1.1
+to conclude that
+¯W(θ,C;X)= ˆW(θ,I1(C),I2(C),I3(C);X), (11.30)
+where
+I1(C)= trC,I 2(C)= 1
+2[I2
+1 −tr(C2)],I 3(C)=d e tC (11.31)
+are the principal invariants of C. We combine this with (11.24),
+obtaining
+[
+1
+2S −
+3∑
+k=1
+ˆWk(Ik)C
+]
+· ˙C =0
+for all symmetric ˙C,where ˆWk = ∂ˆW/∂Ik, (11.32)
+and the formulas developed in Section B.3 of Appendix B for the
+gradients (Ik)C then deliver the Piola–Kirchhoﬀ stress
+S =2 [ (ˆW1 +I1 ˆW2)ˆI − ˆW2C +I3 ˆW3C−1]. (11.33)
+This may be substituted into (6.145) to obtain the Cauchy stress.
+Thus,
+JT =2 [ (ˆW1 +I1 ˆW2)B − ˆW2B2 +I3 ˆW3I], (11.34)
+where B is the left Cauchy–Green deformation tensor.
+In connection with these results, we note that the principal invari-
+ants ofC coincide with those ofB, i.e., Ik(C)= Ik(B); k =1 ,2,3.
+One way to demonstrate this is to use the spectral decomposi-
+tion (3.38)2 of the right Cauchy–Green tensor, and that of the left
+Cauchy–Green tensor, to obtain
+I1(C)= λ2
+1 +λ2
+2 +λ2
+3 = I1(B),
+I2(C)= λ2
+1λ2
+2 +λ2
+2λ2
+3 +λ2
+1λ2
+3 = I2(B), and
+I3(C)= λ2
+1λ2
+2λ2
+3 = I3(B), (11.35)
+where λk are the principal stretches.
+=== p213 ===
+Elastic Solids 213
+If the material is incompressible, then
+T = −pI +2[(W∗
+1 +I1W∗
+2 )B −W∗
+2 B2],
+where W∗(I1,I2;X)= ˆW(I1,I2,1;X), (11.36)
+with W∗
+k = ∂W∗/∂Ik; k =1 ,2, and wherep is a constitutively inde-
+terminate pressure. In particular, the constraint (10.11) of incom-
+pressibility is unaltered ifC is replaced byRtCR for allR ∈Orth.
+Thus isotropy is compatible with incompressibility, in the sense that
+an isotropic material could conceivably be incompressible, though
+of course not every incompressible material is isotropic. That is,
+(10.11) also remains unaltered ifR is an element of the discrete set
+of rotations constituting the symmetry group of a crystalline solid,
+for example. In fact, (10.11) is unaltered by anyR ∈U, the unimod-
+ular group, and so all kinds of symmetry, including that associated
+with ﬂuidity, are compatible with incompressibility. The same cannot
+be said of inextensibility, however. For example, there are inﬁnitely
+many R′s in Orth that do not leave (10.12) invariant. Accordingly a
+material reinforced by a family of inextensible ﬁbers is not isotropic.
+Example: Simple shear
+Consider the simple shear deformation discussed in Section 3.5.1.
+We suppose this deformation is experienced by a uniform isotropic
+material, i.e., a material that is isotropic at every material point, with
+the energy ˆW (or W∗) not dependent onX explicitly. The relevant
+left Cauchy–Green tensor, given by (3.54), is uniform. Accordingly,
+for compressible materials, (11.34), withJ =1 , delivers a uniform
+stress with zero divergence, and (6.109) implies that the deformation
+is equilibrated provided that the body force vanishes. If the mate-
+rial is incompressible, then (11.36) is operative, and again the defor-
+mation is equilibrated in the absence of body force, provided that
+div(pI)= gradp vanishes, i.e., provided that the reactive pressurep
+is uniform.
+Using (3.54) we ﬁnd that
+B2 =[ ( 1+γ2)+ γ2]e1 ⊗e1 +(1+ γ2)e2 ⊗e2 +e3 ⊗e3
++γ(2+ γ2)(e1 ⊗e2 +e2 ⊗e1), (11.37)
+=== p214 ===
+214 Principles of Continuum Mechanics
+where γis the uniform shear. Straightforward calculations yield
+I1(B)= I2(B)=3+ γ2, (11.38)
+and, of course, I3(B)=1 . Thus the coeﬃcients involving ˆW and
+W∗on the right-hand sides of (11.34) and (11.36), respectively, are
+functions ofγ2. Resolving the latter equations in the basis{ei ⊗ej},
+we collect the associated componentsTij in the matrix equation
+(Tij)= f0
+⎛
+⎜⎝
+100
+010
+001
+⎞
+⎟⎠ +f1(γ2)
+⎛
+⎜⎝
+1+ γ2 γ 0
+γ 10
+00 1
+⎞
+⎟⎠
++f2(γ2)
+⎛
+⎜⎝
+(1+ γ2)+ γ2 γ(2+ γ2)0
+γ(2+ γ2)1 + γ2 0
+00 1
+⎞
+⎟⎠, (11.39)
+wheref1 andf2 areconstitutive functionsand f0 isalso aconstitutive
+function ofγ2 in the case of a compressible material, or the negative
+of the uniform constraint pressure in the case of an incompressible
+material.
+It follows that, in simple shear,T13 = T23 =0 , whereas
+T12 = γμ(γ2), where μ(γ2)= f1(γ2)+ γ(2+ γ2)f2(γ2). (11.40)
+Assuming the functionμto be diﬀerentiable, we have
+T12 = Gγ+O(γ3) (11.41)
+whereG = μ(0) is theclassical shear modulusfor small deformations.
+We also ﬁnd thatT11, T22 and T33 are non-zero, and that
+T11 −T22 = γT12. (11.42)
+This result is remarkable in that it does not involve material prop-
+erties. Accordingly, this universal relation holds for all uniform
+isotropic materials, and therefore, to the extent that it involves only
+directly measurable quantities, furnishes the experimenter with a
+critical test of the underlying theory. Although pure simple shear
+is diﬃcult to attain in the laboratory, other modes of deformation
+involving simple shear locally, such as torsion (see Section 3.5.4) are
+=== p215 ===
+Elastic Solids 215
+experimentally feasible andhave beenused to corroborate thenormal
+stress eﬀectpredicted here.
+We note that the right-hand side of (11.42) is of orderγ2 for
+small gamma and is therefore zero according to the the linear theory
+of elasticity in which nonlinear eﬀects are disregarded. The normal
+stress eﬀect is thus an inherently nonlinear phenomenon.
+11.3 Heat ﬂux
+If the material is hemitropic at the material pointp, then the con-
+stitutive function ˆq for the heat ﬂux is such that
+ˆq(θ,F,gradθ;p)= ˆq(θ,FR,gradθ;p) for all R ∈Orth+. (11.43)
+To derive a necessary condition for this, let R = Rt
+F 1,w h e r e1
+is the shifter andRF is the two-point rotation tensor in the polar
+factorization of F. From (3.32) (withRF in place of R), we then
+have
+ˆq(θ,F,gradθ;p)= ˆq(θ,VI 1,gradθ;p)= ˆq(θ,V 1,gradθ;p),
+(11.44)
+where V is the left stretch tensor. Because1 is ﬁxed in the frame of
+O, and becauseV is uniquely determined by the left Cauchy–Green
+tensor B(= FFt = V 2), it follows that
+ˆq(θ,F,gradθ;p)= q∗(θ,B,gradθ;X) (11.45)
+for some functionq∗. Conversely, if this holds then
+ˆq(θ,FR,gradθ;p)= q∗(θ,FRRtFt,gradθ;X)
+= q∗(θ,F ˆIFt,gradθ;X)
+= q∗(θ,B,gradθ;X)= ˆq(θ,F,gradθ;p) (11.46)
+for all R ∈Orth+, and so (11.45) is both necessary and suﬃcient
+for hemitropy.
+=== p216 ===
+216 Principles of Continuum Mechanics
+The restriction (11.10) associated with frame invariance may then
+be cast as
+q∗(θ,QBQt,Qgradθ;X)= Qq∗(θ,B,gradθ;X)
+for all rotationsQ: E3 → E3. (11.47)
+This is very similar to the restriction (9.40) on the constitutive equa-
+tion for the heat ﬂux in a ﬂuid.However, in that contextQ is an arbi-
+trary orthogonal tensor. This is due to having eliminated the eﬀect
+of the conﬁgurationκby operating within the unimodular symme-
+try group for ﬂuids (see (9.3) and (9.39)). In contrast, for solids, the
+conﬁguration κmanifests itself explicitly. Having chosen this to be
+occupiable, with reference to the discussion leading to (10.8) we then
+require thatQ be a rotation.
+However, if we further stipulate that the heat ﬂux be an odd
+function of the temperature gradient, as in the classical Fourier law
+(9.61) — this being realistic for most (and perhaps all) materials —
+i.e., if
+q∗(θ,B,−gradθ;X)= −q∗(θ,B,gradθ;X), (11.48)
+then the restriction to rotations is eﬀectively removed and (11.47)
+holds for allorthogonal Q. In this case we may invoke the represen-
+tation (9.41), with (9.42), to arrive at
+q =( φ0I +φ1B +φ2B2)gradθ, (11.49)
+whereφ0,φ1 andφ2 are functions ofθ;ofthein v arian tsI1(B),I 2(B),
+I3(B); and of the scalars
+I4(B,gradθ)= gradθ·B(gradθ),I 5(B,gradθ)=gradθ·B2(gradθ)
+and I6(gradθ)= |gradθ|, (11.50)
+and also explicitly dependent on X in the case of a non-uniform
+material.
+11.3.1 General form of the heat ﬂux
+The result (11.49) is a special case of the general relation
+q = K(θ,F,gradθ;X)gradθ (11.51)
+=== p217 ===
+Elastic Solids 217
+derived in [22] for all types of material symmetry, in whichK is a
+tensor-valued function. To establish this we ﬁxθ,F andX (hence p),
+and deﬁne
+h(p)= ˆq(θ,F,p;p). (11.52)
+Inequality (11.16)3 takes the form
+p·h(p) ≤0 for all p. (11.53)
+Thusp·h(p) is maximized, and hence stationary, atp = 0. Assuming
+h(p) to be diﬀerentiable, we have
+0= dp·h(0)+ {p·[∇h(p)]dp}|p=0, (11.54)
+where ∇h(p) is the tensor-valued gradient ofh with respect to p.
+Thus, dp·h(0) = 0 for alldp, implying thath(0)= 0, i.e.,
+ˆq(θ,F, 0;p)= 0. (11.55)
+Thus, there is no heat ﬂux in the absence of a temperature gradient.
+Following [22], we ﬁxp and deﬁne
+g(x)= h(xp)w i t hx ∈[0,1]. (11.56)
+The derivative of this function is
+g′(x)=[ ∇h(xp)](xp)′ =[ ∇h(xp)]p. (11.57)
+Then, withg(0) =0 and g(1) =h(p), we have
+h(p)=
+∫ 1
+0
+g′(x)dx =[ K(p)]p, where K(p)=
+∫ 1
+0
+∇h(xp)dx,
+(11.58)
+which yields (11.51) on reinstating the passive variables.
+In the special case of (11.49),K is given by the symmetric tensor
+in parentheses. However, in the general case the foregoing deriva-
+tion does not furnish a symmetricK. Nevertheless the dissipation
+inequality (11.53), i.e.,
+K ·p⊗p ≤0 (11.59)
+involves only the symmetric part ofK.
+=== p218 ===
+218 Principles of Continuum Mechanics
+11.4 Problems
+1. Prove (11.21).
+2. Derive (11.34).
+3. Prove (11.35).
+4. Use (11.34) (or (11.36)) and (11.49) to ﬁnd expressions for the
+stress and heat ﬂux in the frame of observerO+.
+5. Are the constraints considered in Problems 3 and 4 of Chapter 10
+compatible with isotropy?
+6. Verify (11.38).
+7. Derive (11.42).
+8. Consider the strain-energy function W∗ = 1
+2G(I1 −3), where
+G is a positive constant. This model, called the neo-Hookean
+material, furnishes an accurate model of the behavior of incom-
+pressible rubber provided that the principal stretchesλi lie in
+the approximate range1
+2 <λi < 2.
+(a) Show that the Cauchy stressT is given by
+T = −pI +GB,
+where p is a pressure ﬁeld associated with the incompress-
+ibility constraint. Show that for this material, equilibrium
+without body force requires that
+gradp = GdivB.
+(b) Use the fact that the Piola stress is power-conjugate to the
+deformation gradient to deduce thatG is the ratio of the
+shear component of the Piola traction to the amount of
+shear in a simple-shear deformation. ThereforeG is the shear
+modulus.
+(c) Consider the deformation described in Problem 6 of
+Chapter 4. Find expressions forC and B.
+(d) Impose the zero-traction conditionTn = 0 for any unit vec-
+tor n such thatn ·e1 =0 . This simulates the traction-free
+lateral surface of a prismatic bar with axis e1. Assuming
+equilibrium without body force, use this condition to show
+that p = G/λ.
+(e) Use the previous result to show that
+T = T(λ)e1 ⊗e1, where T(λ)= G(λ2 −λ−1).
+=== p219 ===
+Elastic Solids 219
+(f) By deﬁnition, Young’s modulusE is equal to the derivative
+T′(λ), evaluated atλ=1 . Determine E in terms ofG.
+(g) Show that the Piola and Piola-Kirchhoﬀ stresses,P and S
+respectively, are given by
+P = P(λ)e1 ⊗ ˆE1 and S = S(λ) ˆE1 ⊗ ˆE1,
+for certain functionsP(λ)a n dS(λ). Determine these func-
+tions. How are the values of the derivativesP′(λ)|λ=1 and
+S′(λ)|λ=1 related to Young’s modulus?
+9. Suppose a circular cylindrical bar, consisting of a neo-Hookean
+material and with axis ˆE3 in κ, is subjected to a static anti-
+plane shear deformation of the form discussed in Problem 5 of
+Chapter 3. The bar has inner and outer radiiA and B. Assume
+the bar to bein equilibrium undernegligible bodyforce, and that
+w(A)= W, w(B)=0 , where W i sas p e c i ﬁ e dc o n s t a n t .O b t a i n
+the functionw(R).
+10. Consider an elastic solid that is isotropic at all material points
+relative totheadoptedreferenceconﬁguration.Supposethissolid
+is stressed in its undeformed state; i.e., T is non-zero when
+F = 1. In this case we say that the undeformedstate isresidually
+stressed. Suppose the residually stressed undeformed conﬁgura-
+tion of the body to be in equilibrium without body force. Also,
+suppose the traction acting on a portion of the boundary of the
+undeformed body vanishes. Show that the residual stress van-
+ishes identically everywhere in the body.
+11. Consider the deformation described by
+x = 1X + w(Θ)e3,
+where Θ is the azimuthal angle in a cylindrical polar coordinate
+system {R,Θ,Z} in the reference conﬁguration.
+(a) Use x = rer(θ)+ ze3 with an appropriate selection of basis
+vectors to show that we can assume, without loss of gener-
+ality, thatR = r, Θ= θand Z +w = z.
+(b) Show that the deformation gradient is
+F = 1 + R−1w′(Θ)e3 ⊗ ˆEΘ(Θ)
+and obtain an expression for the left Cauchy–Green ten-
+sor B. Show that detF =1 .
+=== p220 ===
+220 Principles of Continuum Mechanics
+(c) Suppose this deformation is experienced by a neo-Hookean
+material occupying an annular cylindrical tube of inner and
+outer radiiA and B. Suppose the material is in equilibrium
+with zero body force. If the inner and outer cylindrical sur-
+faces are traction free, show that
+w(Θ) =CΘ+D,
+where C and D are constants. Can you interpret this defor-
+mation in physical terms?
+12. Suppose a solid circular cylindrical bar composed of a neo-
+Hookean material is subjected to the torsional deformation
+described in Section 3.5.4. Assume the bar to be in equilibrium
+without body force and that the traction on the cylindrical sur-
+face of the bar vanishes. Obtain the stress ﬁeld and use it to
+compute the net force and torque acting on a cross-section of the
+bar. Show that the relation between the torque and twist is the
+same as that predicted by classical linear strength-of-materials
+theory, and, contrary to that theory, that the axial force is non-
+zero. Show that the latter is proportional to the square of the
+twist and is therefore a nonlinear eﬀect. This is a manifestation
+of the normal-stress eﬀect described in the text.
+13. Consider a circular cylinder of radiusA with a wedge removed
+(Figure 11.1). The angular extent of the material in the reference
+conﬁguration isγ.Suppose the cross section is deformed in such
+a way that the gap is closed in the deformed conﬁguration. The
+deformation is described by
+X = R ˆEr(Θ)+Z ˆE3, x = rer(θ)+ ze3,
+where z = Z, r= f(R)a n dθ= g(Θ).
+(a) Find an expression forF assuming thatf and g are known
+functions.
+(b) Assume the deformation to be isochoric and ﬁnd the func-
+tions f and g that satisfy the boundary conditions inferred
+from the ﬁgure. Show that the deformed radiusa is propor-
+tional to√
+γ.
+(c) Find R,U,V .
+(d) Obtain the principal stretches in terms ofγ.
+=== p221 ===
+Elastic Solids 221
+Figure 11.1. Deformation of a circular cylinder with a wedge removed.
+(e) Solve the problem of equilibrium without body force for a
+neo-Hookean material. Find the reactive pressure distribu-
+tion and show that it is singular at the centerline of the bar.
+Evaluate the traction, acting at the outer circular bound-
+ary in the deformed conﬁguration, required to maintain the
+deformation. Show that this is an arbitrary uniformpressure.
+What is the contact traction on the planar surfaceswhere the
+two sides of the wedge meet in the deformed conﬁguration?
+If contact between these surfaces is maintained by glue, what
+traction must the glue transmit if there is no traction acting
+at the outer boundary?
+14. Derive the energy balance equation
+ρκr = Divqκ−θ˙W, where ˙W = Wθθ˙θ+WθF · ˙F,
+where qκis the referential heat ﬂux (see (6.174)).
+15. Show that if the spatial heat ﬂux is given by (11.49), then the
+referential heat ﬂux is given by
+qκ=( ψ0 ˆI +ψ1C +ψ2C2)Gradθ,
+where ψ0,ψ1 and ψ2 are functions ofθ;o ft h ei n v a r i a n t sI1(C),
+I2(C),I 3(C); and of the scalarsI4(C,Gradθ),I 5(C,Gradθ)a n d
+I6(Gradθ).
+=== p222 ===
+222 Principles of Continuum Mechanics
+16. A solid circular cylindrical bar is subjected to the static tor-
+sional deformation described in Section 3.5.4. Suppose theφ′s
+in (11.49) are independent of temperature and the material is
+uniform (they may still depend onI1 −I6). Assume the temper-
+ature to be independent of time and dependent onlyz,w i t ht h e
+ends z =0 ,l of the bar held at the constant temperaturesθ0 and
+θl, respectively. Assuming this function to be linear, show that
+the energy balance equation with zero internal heating supply is
+automatically satisﬁed, and that the lateral surface of the bar is
+insulated, i.e., there is no heat ﬂux across this surface.
+=== p223 ===

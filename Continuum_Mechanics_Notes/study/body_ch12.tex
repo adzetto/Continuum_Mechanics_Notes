@@ -1,0 +1,1578 @@
+%=======================================================================
+\chapter{Linear Elasticity}
+%=======================================================================
+
+Linear elasticity is the theory that carries almost all of engineering
+practice, and it is obtained from Chapter 11 by one approximation:
+the displacement gradient is small. The chapter works out what that
+approximation does to each object built in the preceding eleven
+chapters, and it takes some care over one point that most treatments
+pass over, the shifter.
+
+For simplicity the theory is developed in its purely mechanical form,
+the free energy being independent of temperature and the temperature
+itself uniform and constant throughout the body. By \eqr{11.51} and
+Problem 14 of Chapter 11, the thermal energy balance is then satisfied
+identically provided the internal heating supply vanishes: with
+$\grad\theta=\bze$ the flux vanishes by \eqr{11.55}, and with
+$\dot\theta=0$ and $W$ independent of $\theta$ the coupling term
+$\theta(W_{\theta})^{\textstyle\cdot}$ vanishes too.
+
+%=======================================================================
+\section{Kinematics}\label{sec:ch12kin}
+%=======================================================================
+
+The premise of the theory is that the displacement gradient $\bH$ of
+\eqr{7.22} is small everywhere in the body. Taking $\bH$ continuous in
+$\bX$, this is
+\begin{equation}
+   \varepsilon=\max_{\bX\in\kappa}|\bH(\bX,t)|\ll1 ,
+   \tag{12.1}\label{eq:12.1}
+\end{equation}
+where $|\bH|^{2}=\tr(\bH\bH^{t})=\tr(\bH^{t}\bH)$, so that
+$|\bH|=\sqrt{H_{iA}H_{iA}}$ in Cartesian components. Since a sum of
+squares dominates each of its terms, $|H_{iA}|\ll1$ for every pair
+$iA$.
+
+\begin{remark}[the letter $\varepsilon$ in this chapter]%
+\label{rem:ch12eps}
+Three near-identical symbols are about to appear, and the book uses all
+three. The scalar $\varepsilon$ of \eqr{12.1} is the small parameter.
+The referential infinitesimal strain of \eqr{12.8} is
+$\vek{\epsilon}$, the closed epsilon. The spatial infinitesimal strain
+of \eqr{12.17} is $\vek{\varepsilon}$, the open one. Both strains carry
+the under-tilde that marks a tensor, so the scalar is distinguishable
+at sight; the two tensors are told apart by their shape, and the
+shifter is what converts one into the other. The internal energy, which
+also wore the letter $\varepsilon$ in Chapter 6, does not appear here at
+all, the theory being purely mechanical.
+\end{remark}
+
+\subsection*{Strain}
+
+By \eqr{7.22}, $\bF=\shift+\bH$, so the right Cauchy--Green tensor is
+\begin{equation}
+   \bC=\bF^{t}\bF=\hI+\shift^{t}\bH+\bH^{t}\shift+\bH^{t}\bH ,
+   \tag{12.2}\label{eq:12.2}
+\end{equation}
+the first term because $\shift^{t}\shift=\hI$, the shifter being an
+isometry. The three remaining terms are all referential, but the middle
+two are built from a two-point tensor, and it is worth introducing the
+object that removes that awkwardness. Set
+\begin{equation}
+   \bC=\hI+\bG+\bG^{t}+\bG^{t}\bG,\qquad\text{where}\quad
+   \bG=\shift^{t}\bH
+   \tag{12.3}\label{eq:12.3}
+\end{equation}
+is a referential tensor with components $G_{AB}=\dd_{iA}H_{iB}$. The
+identification of the last term uses
+$\bG^{t}\bG=\bH^{t}\shift\shift^{t}\bH=\bH^{t}\I\bH=\bH^{t}\bH$, and of
+the second $\bG^{t}=(\shift^{t}\bH)^{t}=\bH^{t}\shift$.
+
+What $\bG$ is becomes clear on applying it to a material line element:
+\begin{equation}
+   \bG\,\dl\bX=\shift^{t}\bH\,\dl\bX=\shift^{t}\,\dl\bu=\dl\bw,
+   \qquad\text{where}\quad \bw=\shift^{t}\bu
+   \tag{12.4}\label{eq:12.4}
+\end{equation}
+is the \emph{referential displacement}, $\bu$ being the spatial
+displacement of \eqr{2.77}, and where the shifter has been taken through
+the differential because it is uniform. Hence
+\begin{equation}
+   \bG=\Grad\bw ,
+   \tag{12.5}\label{eq:12.5}
+\end{equation}
+and $\bu=\shift\bw$. In components $w_{A}=\dd_{iA}u_{i}$,
+$u_{i}=\dd_{iA}w_{A}$ and $G_{AB}=w_{A,B}$. Substituting
+$\bH=\shift\bG$ into \eqr{7.22},
+\begin{equation}
+   \bF=\shift\big(\hI+\bG\big).
+   \tag{12.6}\label{eq:12.6}
+\end{equation}
+The norms agree,
+\[
+   |\bG|^{2}=\tr\big(\bG\bG^{t}\big)
+   =\tr\big(\shift^{t}\bH\bH^{t}\shift\big)
+   =\tr\big(\bH\bH^{t}\shift\shift^{t}\big)=\tr\big(\bH\bH^{t}\big)
+   =|\bH|^{2},
+\]
+by the cyclic property of the trace, so \eqr{12.1} is equivalent to
+$|\bG|\ll1$, and again $|G_{AB}|\ll1$ componentwise.
+
+Since $\bC$ is close to $\hI$, it is more convenient to work with the
+Lagrange strain \eqr{2.97}, which measures departure from $\hI$
+directly. From \eqr{12.3},
+\begin{equation}
+   \bE=\tfrac12\big(\bC-\hI\big)
+   =\tfrac12\big(\bG+\bG^{t}+\bG^{t}\bG\big).
+   \tag{12.7}\label{eq:12.7}
+\end{equation}
+Discarding the quadratic term,
+\begin{equation}
+   \bE\simeq\vek{\epsilon},\qquad\text{where}\quad
+   \vek{\epsilon}=\tfrac12\big(\bG+\bG^{t}\big)
+   \tag{12.8}\label{eq:12.8}
+\end{equation}
+is the \emph{referential infinitesimal strain tensor}, the symbol
+$\simeq$ marking a statement valid to leading order in $|\bG|$.
+
+\begin{remark}[small strain is weaker than small displacement
+gradient]\label{rem:ch12weaker}
+Equation \eqr{12.8} runs one way only. If $|\bG|\ll1$ then $|\bE|\ll1$,
+since $|\bE|\le|\bG|+\tfrac12|\bG|^{2}$. The converse fails, and the
+standard counterexample is a rigid rotation: take $\bF=\bQ$ with $\bQ$ a
+finite rotation. Then $\bC=\hI$ and $\bE=\hOb$ exactly, so the strain is
+not merely small but zero, while $\bG=\shift^{t}\bQ-\hI$ has norm of
+order the rotation angle and is not small at all.
+
+The whole theory therefore assumes more than small strain. It assumes
+small \emph{rotation} as well, and \eqr{12.20}$_{3}$ makes that explicit
+by producing a rotation tensor differing from the shifter by a term of
+order $|\bG|$. A structure that strains by a thousandth while rotating
+through a radian is outside the theory, which is why the analysis of
+slender beams and thin shells needs more than what follows.
+\end{remark}
+
+\subsection*{Two observers, and why the shifter cannot be dropped}
+
+These statements belong to the frame of one observer $O$. From
+\eqr{12.3}$_{2}$ together with \eqr{7.18}, $\shift^{+}=\bQ\shift\bK^{t}$,
+and \eqr{7.25}, $\bH^{+}=\bQ\bH\bK^{t}$,
+\begin{equation}
+   \bG^{+}=\bK\bG\bK^{t},
+   \tag{12.9}\label{eq:12.9}
+\end{equation}
+$\bK\colon\hVt\to\hat{\mathbb{E}}^{3+}$ being the fixed orthogonal tensor relating the
+two reference configurations. The computation is
+\[
+   \bG^{+}=(\shift^{+})^{t}\bH^{+}
+   =\big(\bQ\shift\bK^{t}\big)^{t}\bQ\bH\bK^{t}
+   =\bK\shift^{t}\bQ^{t}\bQ\bH\bK^{t}
+   =\bK\shift^{t}\bH\bK^{t}=\bK\bG\bK^{t},
+\]
+$\bQ^{t}\bQ=\I$ removing the observer rotation entirely. Symmetrizing
+\eqr{12.7} and \eqr{12.8} under conjugation, which commutes with
+transposition because $(\bK\bA\bK^{t})^{t}=\bK\bA^{t}\bK^{t}$,
+\begin{equation}
+   \bE^{+}=\bK\bE\bK^{t},
+   \tag{12.10}\label{eq:12.10}
+\end{equation}
+a result that also follows from \eqr{7.20} and \eqr{7.26} through
+$\bE^{+}=\tfrac12[(\bF^{+})^{t}\bF^{+}-\hI^{+}]$. Further \eqr{12.9}
+gives $|\bG^{+}|=|\bG|$, by the same cyclic-trace computation as above
+with $\bK$ in place of $\shift$, and
+\begin{equation}
+   \vek{\epsilon}^{+}=\tfrac12\big[\bG^{+}+(\bG^{+})^{t}\big]
+   =\bK\vek{\epsilon}\bK^{t},
+   \tag{12.11}\label{eq:12.11}
+\end{equation}
+so that
+\begin{equation}
+   \bE^{+}\simeq\vek{\epsilon}^{+}.
+   \tag{12.12}\label{eq:12.12}
+\end{equation}
+If one observer finds the strain small, so does every other, and
+\eqr{12.12} says the approximation itself survives the change of
+observer. This is Problem 1.
+
+\begin{remark}[the equation that is not a tensor
+equation]\label{rem:ch12shifter}
+The literature almost always writes the strain--displacement relation by
+dropping the shifter from \eqr{12.2}, obtaining
+\[
+   2\bE\simeq\bH+\bH^{t}
+\]
+in the frame of $O$. The left side is a referential tensor, mapping
+$\hVt$ to $\hVt$. On the right, $\bH$ maps $\hVt$ to $\Vt$ and $\bH^{t}$
+maps $\Vt$ to $\hVt$, so their sum is not defined: the two terms do not
+even have the same domain, let alone the same codomain
+(Figure~\ref{fig:ch12shifter}). The expression is not a tensor equation
+and cannot be one.
+
+The damage is visible under a change of observer. By \eqr{7.25},
+\[
+   \bH^{+}+(\bH^{+})^{t}=\bQ\bH\bK^{t}+\bK\bH^{t}\bQ^{t},
+\]
+which carries the observer rotation $\bQ$ on the outside, whereas
+\eqr{12.10} requires $2\bE^{+}=\bK(2\bE)\bK^{t}$, with $\bK$ on both
+sides and no $\bQ$ anywhere. So $\bH^{+}+(\bH^{+})^{t}$ cannot
+approximate $2\bE^{+}$ for the second observer even if
+$\bH+\bH^{t}$ did for the first. What makes \eqr{12.8} work is exactly
+that $\bG=\shift^{t}\bH$ is referential on both legs, and \eqr{12.9}
+then carries no $\bQ$.
+
+None of this is an obstacle in practice, as the last paragraph of the
+chapter records: an observer may choose the shifted basis
+$\bE_{A}=\shift\hbE_{A}$ of \eqr{2.68} to coincide with $\be_{i}$, after
+which $\dd_{iA}$ are numerically the Kronecker components and the
+distinction is invisible. The point is that the invisibility is a
+consequence of a choice, not a licence to write an equation that is
+false in general.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{A}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.4mm]},thick},
+   nd/.style={inner sep=2pt}]
+% ---- left: the illegal sum -----------------------------------------
+\begin{scope}[xshift=0cm]
+  \node[nd] (A) at (0,1.70)   {$\hVt$};
+  \node[nd] (B) at (2.35,1.70) {$\Vt$};
+  \draw[ar] (A) to[bend left=24]
+     node[midway,above,font=\small] {$\bH$} (B);
+  \draw[ar] (B) to[bend left=24]
+     node[midway,below,font=\small] {$\bH^{t}$} (A);
+  \node[font=\small,anchor=north,align=center] at (1.18,0.42)
+     {$\bH+\bH^{t}$\\[1pt] has no domain};
+\end{scope}
+% ---- divider -------------------------------------------------------
+\draw[gray!40] (4.05,-0.95)--(4.05,2.30);
+% ---- right: the legal one ------------------------------------------
+\begin{scope}[xshift=5.55cm]
+  \node[nd] (C) at (0,1.70)   {$\hVt$};
+  \node[nd] (D) at (2.35,1.70) {$\Vt$};
+  \node[nd] (E) at (1.18,0.05) {$\hVt$};
+  \draw[ar] (C)--(D) node[midway,above,font=\small] {$\bH$};
+  \draw[ar] (D)--(E) node[midway,right=2pt,font=\small] {$\shift^{t}$};
+  \draw[ar] (C)--(E) node[midway,left=2pt,font=\small] {$\bG$};
+  \node[font=\small,anchor=north,align=center] at (1.18,-0.52)
+     {$\bG+\bG^{t}$\\[1pt] maps $\hVt$ to $\hVt$};
+\end{scope}
+\end{tikzpicture}
+\caption{Why Remark~\ref{rem:ch12shifter} insists on the shifter. The
+displacement gradient $\bH$ of \eqr{7.22} is a two-point tensor, so its
+transpose runs the other way and the sum $\bH+\bH^{t}$ is not defined
+on any space. Composing with $\shift^{t}$ brings the second leg home,
+and the resulting $\bG=\shift^{t}\bH$ is referential, so
+$\bG+\bG^{t}$ is a legitimate referential tensor and is what
+\eqr{12.8} uses. The triangle on the right commutes by the definition
+\eqr{12.3}$_{2}$ of $\bG$.}
+\label{fig:ch12shifter}
+\end{figure}
+
+\subsection*{The spatial description}
+
+The displacement $\bu$ is a spatial vector, by \eqr{2.77} and
+\eqr{2.78}, so it has a spatial gradient, defined by
+$\dl\bu=(\grad\bu)\dl\bx$ at fixed $t$. Since also $\bH\dl\bX=\dl\bu$
+and $\dl\bx=\bF\dl\bX$,
+\begin{equation}
+   \bH=(\grad\bu)\bF\simeq(\grad\bu)\shift ,
+   \tag{12.13}\label{eq:12.13}
+\end{equation}
+the estimate by \eqr{12.6} and $|\bG|\ll1$. In components,
+$\hat u_{i,A}=\tilde u_{i,j}F_{jA}=\tilde u_{i,j}\dd_{jB}
+(\dd_{BA}+G_{BA})\simeq\tilde u_{i,j}\dd_{jA}$. This is an instance of
+the general estimate
+\begin{equation}
+   (\cdot)_{,A}\simeq(\cdot)_{,j}\,\dd_{jA},
+   \tag{12.14}\label{eq:12.14}
+\end{equation}
+valid to leading order: differentiating with respect to $\bX$ and with
+respect to $\bx$ differ only by $\bF$, which is $\shift$ to leading
+order. Combining \eqr{12.13} with \eqr{12.3}$_{2}$,
+\begin{equation}
+   \bG\simeq\shift^{t}(\grad\bu)\shift
+   \qquad\text{and}\qquad
+   \grad\bu\simeq\shift\bG\shift^{t},
+   \tag{12.15}\label{eq:12.15}
+\end{equation}
+the second obtained from the first by multiplying by $\shift$ on the
+left and $\shift^{t}$ on the right and using $\shift\shift^{t}=\I$.
+Hence
+\begin{equation}
+   |\bH|=|\bG|\simeq|\grad\bu| ,
+   \tag{12.16}\label{eq:12.16}
+\end{equation}
+so $|\tilde u_{i,j}|\ll1$ as well. Symmetrizing \eqr{12.15},
+\begin{equation}
+   \vek{\epsilon}\simeq\shift^{t}\vek{\varepsilon}\shift,
+   \qquad\text{where}\quad
+   \vek{\varepsilon}=\tfrac12\big[\grad\bu+(\grad\bu)^{t}\big]
+   \tag{12.17}\label{eq:12.17}
+\end{equation}
+is the \emph{spatial infinitesimal strain tensor}, with components
+satisfying $\epsilon_{AB}\simeq\dd_{iA}\dd_{jB}\varepsilon_{ij}$. From
+the exact relation \eqr{12.13}$_{1}$, or from either estimate,
+\begin{equation}
+   \grad^{+}\bu^{+}=\bQ(\grad\bu)\bQ^{t}
+   \qquad\text{and}\qquad
+   \vek{\varepsilon}^{+}=\bQ\vek{\varepsilon}\bQ^{t},
+   \tag{12.18}\label{eq:12.18}
+\end{equation}
+$\bQ\colon\Vt\to\mathbb{E}^{3+}$ being the observer rotation. These also follow
+from \eqr{7.3} and \eqr{7.21}. Note the contrast with \eqr{12.9} and
+\eqr{12.11}: the spatial objects are conjugated by $\bQ$, the
+referential ones by $\bK$, and the shifter is what carries one rule into
+the other.
+
+\subsection*{Stretch and rotation}
+
+Take the polar decomposition $\bF=\bR\bU$ of \eqr{3.32}. From
+\eqr{12.3} and \eqr{12.8},
+\begin{equation}
+   \bU^{2}-\hI=\bC-\hI=2\bE\simeq2\vek{\epsilon} .
+   \tag{12.19}\label{eq:12.19}
+\end{equation}
+Write $\bU=\hI+\vek{\beta}$, which defines $\vek{\beta}$; then
+$\bU^{2}=\hI+2\vek{\beta}+\vek{\beta}^{2}$, and discarding the square,
+$2\vek{\beta}\simeq2\vek{\epsilon}$. Hence, with
+$\bU^{-1}=(\hI+\vek{\beta})^{-1}\simeq\hI-\vek{\beta}$,
+\begin{equation}
+   \bU-\hI\simeq\vek{\epsilon},\qquad
+   \bU^{-1}-\hI\simeq-\vek{\epsilon},\qquad
+   \bR-\shift\simeq\shift\hat{\vek{\omega}},
+   \tag{12.20}\label{eq:12.20}
+\end{equation}
+where
+\begin{equation}
+   \hat{\vek{\omega}}=\tfrac12\big(\bG-\bG^{t}\big)
+   \tag{12.21}\label{eq:12.21}
+\end{equation}
+is the \emph{referential infinitesimal rotation tensor}. The third of
+\eqr{12.20} is the one that needs a computation. From $\bR=\bF\bU^{-1}$
+with \eqr{12.6} and $\bU^{-1}\simeq\hI-\vek{\epsilon}$,
+\[
+   \bR\simeq\shift\big(\hI+\bG\big)\big(\hI-\vek{\epsilon}\big)
+   \simeq\shift\big(\hI+\bG-\vek{\epsilon}\big)
+   =\shift\big(\hI+\hat{\vek{\omega}}\big),
+\]
+the product $\bG\vek{\epsilon}$ being of second order, and
+$\bG-\vek{\epsilon}=\bG-\tfrac12(\bG+\bG^{t})
+=\tfrac12(\bG-\bG^{t})=\hat{\vek{\omega}}$. Equivalently,
+\begin{equation}
+   \bR-\shift\simeq\vek{\omega}\shift,\qquad\text{where}\quad
+   \vek{\omega}=\tfrac12\big[\grad\bu-(\grad\bu)^{t}\big]
+   =\shift\hat{\vek{\omega}}\shift^{t}
+   \tag{12.22}\label{eq:12.22}
+\end{equation}
+is the \emph{spatial infinitesimal rotation tensor}, the two forms
+agreeing because
+$\vek{\omega}\shift=\shift\hat{\vek{\omega}}\shift^{t}\shift
+=\shift\hat{\vek{\omega}}$.
+
+\begin{remark}[the linearized polar decomposition]%
+\label{rem:ch12polar}
+Collecting \eqr{12.8}, \eqr{12.21} and \eqr{12.20},
+\[
+   \bG=\vek{\epsilon}+\hat{\vek{\omega}},\qquad
+   \bF=\shift\big(\hI+\vek{\epsilon}+\hat{\vek{\omega}}\big)
+   \simeq\shift\big(\hI+\hat{\vek{\omega}}\big)
+   \big(\hI+\vek{\epsilon}\big),
+\]
+the last step discarding
+$\hat{\vek{\omega}}\vek{\epsilon}$. So at leading order the polar
+decomposition degenerates into the additive split of $\bG$ into its
+symmetric and skew parts, and the multiplicative structure that
+Chapter 3 worked so hard for collapses into a sum. That collapse is the
+whole simplification of linear elasticity, and
+Remark~\ref{rem:ch12weaker} is the price: the additive split is
+faithful only while the rotation is small, since
+$\hI+\hat{\vek{\omega}}$ is a rotation only to first order.
+
+The additive split is also the linear analogue of \eqr{4.7}. There
+$\grad\bv$ split into stretching and spin; here $\grad\bu$ splits into
+strain and infinitesimal rotation. Chapter 4's split is exact and
+Chapter 12's is not, because velocity is a rate and displacement is
+not.
+\end{remark}
+
+\subsection*{Volume and density}
+
+The local volume change is $J-1$, and $J^{2}=\det\bC$. Writing
+$\bC=\hI+\bA$ with $\bA=\bG+\bG^{t}+\bG^{t}\bG$ from \eqr{12.3}, and
+using the result of Problem 23 of Chapter 1 for the expansion of a
+determinant,
+\begin{equation}
+   J^{2}=\det\big(\hI+\bA\big)
+   =\det\big(\bA-\lambda\hI\big)\big|_{\lambda=-1},
+   \tag{12.23}\label{eq:12.23}
+\end{equation}
+whose expansion is $1+I_{1}(\bA)+I_{2}(\bA)+I_{3}(\bA)$. The last two
+invariants are quadratic and cubic in $\bA$ and so are discarded, and
+$\tr(\bG^{t}\bG)$ is quadratic in $\bG$, leaving
+\begin{equation}
+   J^{2}-1\simeq\tr\bA\simeq2\tr\bG\simeq2\tr(\grad\bu),
+   \tag{12.24}\label{eq:12.24}
+\end{equation}
+the last estimate by \eqr{12.15} and
+$\tr[\shift^{t}(\grad\bu)\shift]=\tr[(\grad\bu)\shift\shift^{t}]
+=\tr[(\grad\bu)\I]=\tr(\grad\bu)$. Since $J$ is close to $1$,
+$J^{2}-1=(J-1)(J+1)\simeq2(J-1)$, and therefore
+\begin{equation}
+   J-1\simeq\Dvg\bw\simeq\dvg\bu .
+   \tag{12.25}\label{eq:12.25}
+\end{equation}
+
+The change of volume of an arbitrary part $S$ follows by integrating,
+$P$ being the region occupied by $S$ in $\kappa$:
+\begin{equation}
+   \Delta V=\int_{P}\big(J-1\big)\,\dl V\simeq\int_{P}\Dvg\bw\,\dl V
+   =\int_{\partial P}\ip\bw\bN\,\dl A ,
+   \tag{12.26}\label{eq:12.26}
+\end{equation}
+by \eqr{2.50} and the divergence theorem. Alternatively, from
+$J^{-1}-1\simeq-\dvg\bu$,
+\begin{equation}
+   \Delta V\simeq\int_{P}\dvg\bu\,\dl V
+   =\int_{P_{t}}J^{-1}\dvg\bu\,\dl v
+   \simeq\int_{P_{t}}\dvg\bu\,\dl v=\int_{\partial P_{t}}\ip\bu\bn\,\dl a .
+   \tag{12.27}\label{eq:12.27}
+\end{equation}
+To leading order the volume change is the flux of the displacement
+through the boundary, computed with either description. That the two
+right-hand sides agree is Problem 4.
+
+Finally the density. By \eqr{2.59}, $\rho_{\kappa}=\rho J$, so
+\begin{equation}
+   \Delta\rho=\rho-\rho_{\kappa},
+   \tag{12.28}\label{eq:12.28}
+\end{equation}
+and $\rho=\rho_{\kappa}J^{-1}\simeq\rho_{\kappa}(1-\Dvg\bw)$ gives
+\begin{equation}
+   \Delta\rho\simeq-\rho_{\kappa}\Dvg\bw\simeq-\rho_{\kappa}\dvg\bu,
+   \qquad\text{yielding}\qquad \rho\simeq\rho_{\kappa}
+   \tag{12.29}\label{eq:12.29}
+\end{equation}
+at leading order. The density change is of first order in $|\bG|$ and
+the density itself is $\rho_{\kappa}$ to zeroth order, which is why the
+linear equation of motion may carry either symbol.
+
+%=======================================================================
+\section{Stress--deformation relation}\label{sec:ch12stress}
+%=======================================================================
+
+We now want small-displacement-gradient estimates of the three stresses.
+Introduce the \emph{strain-energy function}
+\begin{equation}
+   U(\bE;\bX)=\bar W\big(\theta_{0},\hI+2\bE;\bX\big),
+   \tag{12.30}\label{eq:12.30}
+\end{equation}
+$\bar W$ being the free energy per unit reference volume of \eqr{11.19}
+and $\theta_{0}$ the fixed uniform temperature. The substitution
+$\bC=\hI+2\bE$ is \eqr{2.97} read backwards. Proceeding as at
+\eqr{11.20}, and using $\dot\bC=2\dot\bE$,
+\begin{equation}
+   U_{\bE}\cdot\dot\bE=\bar W_{\bC}\cdot\dot\bC
+   =2\bar W_{\bC}\cdot\dot\bE=\bS\cdot\dot\bE
+   \tag{12.31}\label{eq:12.31}
+\end{equation}
+for every symmetric $\dot\bE$, the last step by \eqr{11.24}. Since
+$U_{\bE}$ is symmetric, being a gradient with respect to a symmetric
+argument, and $\dot\bE$ ranges over all symmetric tensors,
+\begin{equation}
+   \bS=U_{\bE} .
+   \tag{12.32}\label{eq:12.32}
+\end{equation}
+
+\subsection*{Expanding the energy}
+
+A small displacement gradient implies a small strain, by
+Remark~\ref{rem:ch12weaker}, so we want $U$ near $\bE=\hOb$. Taylor's
+theorem gives
+\begin{equation}
+   U(\bE;\bX)=U(\hOb;\bX)+\bS_{0}(\bX)\cdot\bE
+   +\tfrac12\bE\cdot\mathbb{D}(\bX)[\bE]+o\big(|\bE|^{2}\big),
+   \tag{12.33}\label{eq:12.33}
+\end{equation}
+where
+\begin{equation}
+   \bS_{0}(\bX)=U_{\bE}\big|_{\bE=\hOb}
+   \qquad\text{and}\qquad
+   \mathbb{D}(\bX)=U_{\bE\bE}\big|_{\bE=\hOb}
+   \tag{12.34}\label{eq:12.34}
+\end{equation}
+is a referential fourth-order tensor, $\mathbb{D}(\bX)[\bE]$ being a
+linear second-order-tensor-valued function of $\bE$.
+
+\begin{remark}[$\mathbb{C}$ here is not the complex
+numbers]\label{rem:ch12Cclash}
+The spatial counterpart of $\mathbb{D}$, introduced at \eqr{12.56}, is
+written $\mathbb{C}$, following the book. Chapter 1 used the same
+blackboard letter for the complex numbers in the proof that the
+principal values of a symmetric tensor are real. The two never meet:
+this chapter has no complex numbers in it. Nor should $\mathbb{C}$ be
+confused with $\bC$, the right Cauchy--Green tensor, which carries an
+under-tilde and is of second order.
+\end{remark}
+
+Resolving on a basis, $\bE=E_{CD}\hbE_{C}\otimes\hbE_{D}$, linearity
+gives
+\begin{equation}
+   \mathbb{D}(\bX)[\bE]
+   =E_{CD}\,\mathbb{D}(\bX)\big[\hbE_{C}\otimes\hbE_{D}\big],
+   \tag{12.35}\label{eq:12.35}
+\end{equation}
+and therefore
+\begin{equation}
+\begin{aligned}
+   \bE\cdot\mathbb{D}(\bX)[\bE]&=E_{AB}E_{CD}\,\mathbb{D}_{ABCD}(\bX),\\
+   \text{where}\quad \mathbb{D}_{ABCD}
+   &=\hbE_{A}\otimes\hbE_{B}\cdot
+     \mathbb{D}\big[\hbE_{C}\otimes\hbE_{D}\big]
+   =\hbE_{A}\cdot\big(\mathbb{D}\big[\hbE_{C}\otimes\hbE_{D}\big]\big)
+     \hbE_{B}.
+\end{aligned}
+   \tag{12.36}\label{eq:12.36}
+\end{equation}
+
+Three symmetries may now be assumed without loss of generality, because
+only the combination $E_{AB}E_{CD}\mathbb{D}_{ABCD}$ ever appears.
+Relabelling the summation indices, and using that ordinary
+multiplication commutes,
+\begin{equation}
+   E_{AB}E_{CD}\mathbb{D}_{ABCD}=E_{CD}E_{AB}\mathbb{D}_{CDAB}
+   =E_{AB}E_{CD}\mathbb{D}_{CDAB},
+   \tag{12.37}\label{eq:12.37}
+\end{equation}
+so nothing is lost by taking
+\begin{equation}
+   \mathbb{D}_{ABCD}=\mathbb{D}_{CDAB} .
+   \tag{12.38}\label{eq:12.38}
+\end{equation}
+Relabelling again and using $E_{AB}=E_{BA}$,
+\begin{equation}
+   E_{BA}E_{CD}\mathbb{D}_{BACD}=E_{AB}E_{CD}\mathbb{D}_{ABCD}
+   =E_{BA}E_{CD}\mathbb{D}_{ABCD},
+   \tag{12.39}\label{eq:12.39}
+\end{equation}
+so we may take
+\begin{equation}
+   \mathbb{D}_{BACD}=\mathbb{D}_{ABCD}
+   \tag{12.40}\label{eq:12.40}
+\end{equation}
+and hence, combining with \eqr{12.38},
+\begin{equation}
+   \mathbb{D}_{ABCD}=\mathbb{D}_{ABDC} .
+   \tag{12.41}\label{eq:12.41}
+\end{equation}
+
+In tensor form, let $A_{AB}$ and $B_{CD}$ be the components of arbitrary
+referential tensors. Then \eqr{12.36}$_{2}$, \eqr{12.38} and linearity
+give the \emph{major symmetry}
+\begin{equation}
+   \bA\cdot\mathbb{D}[\bB]=A_{AB}B_{CD}\mathbb{D}_{ABCD}
+   =B_{CD}A_{AB}\mathbb{D}_{CDAB}=\bB\cdot\mathbb{D}[\bA]
+   \tag{12.42}\label{eq:12.42}
+\end{equation}
+for all $\bA$ and $\bB$, while \eqr{12.40} and \eqr{12.41} give the two
+\emph{minor symmetries}
+\begin{equation}
+   \bA^{t}\cdot\mathbb{D}[\bB]=\bA\cdot\mathbb{D}[\bB]
+   \qquad\text{and}\qquad
+   \bA\cdot\mathbb{D}\big[\bB^{t}\big]=\bA\cdot\mathbb{D}[\bB].
+   \tag{12.43}\label{eq:12.43}
+\end{equation}
+
+Now differentiate \eqr{12.33}, keeping terms through quadratic order.
+The rate of the linear map is
+\begin{equation}
+   \big(\mathbb{D}(\bX)[\bE]\big)^{\textstyle\cdot}
+   =\dot E_{CD}\,\mathbb{D}(\bX)\big[\hbE_{C}\otimes\hbE_{D}\big]
+   =\mathbb{D}(\bX)\big[\dot\bE\big],
+   \tag{12.44}\label{eq:12.44}
+\end{equation}
+by \eqr{12.35}, the basis dyads being fixed. Hence, using major
+symmetry to merge the two quadratic contributions,
+\begin{equation}
+\begin{aligned}
+   U_{\bE}\cdot\dot\bE
+   &=\bS_{0}(\bX)\cdot\dot\bE
+   +\tfrac12\big\{\bE\cdot\mathbb{D}(\bX)[\dot\bE]
+   +\dot\bE\cdot\mathbb{D}(\bX)[\bE]\big\}\\
+   &=\big\{\bS_{0}(\bX)+\mathbb{D}(\bX)[\bE]\big\}\cdot\dot\bE ,
+\end{aligned}
+   \tag{12.45}\label{eq:12.45}
+\end{equation}
+for all symmetric $\dot\bE$, and \eqr{12.32} with \eqr{12.40} delivers
+the Piola--Kirchhoff stress
+\begin{equation}
+   \bS=\bS_{0}(\bX)+\mathbb{D}(\bX)[\bE].
+   \tag{12.46}\label{eq:12.46}
+\end{equation}
+Here $\bS_{0}$ is the \emph{residual stress}, the stress carried at zero
+strain, and $\mathbb{D}$ is the \emph{stiffness tensor}, also called the
+elastic modulus tensor.
+
+\subsection*{Isotropy}
+
+For an isotropic material, \eqr{11.29} gives
+\begin{equation}
+\begin{aligned}
+   U(\bE;\bX)&=\bar W\big(\theta_{0},\hI+2\bE;\bX\big)
+   =\bar W\big(\theta_{0},\bR^{t}(\hI+2\bE)\bR;\bX\big)\\
+   &=\bar W\big(\theta_{0},\hI+2\bR^{t}\bE\bR;\bX\big)
+   =U\big(\bR^{t}\bE\bR;\bX\big)
+\end{aligned}
+   \tag{12.47}\label{eq:12.47}
+\end{equation}
+for all $\bR\in\Orth$, the third step by $\bR^{t}\hI\bR=\bR^{t}\bR=\hI$.
+So $U$ is an isotropic scalar function of $\bE$ and depends on it
+through the principal invariants $I_{1}(\bE)=\tr\bE=\hI\cdot\bE$,
+$I_{2}(\bE)=\tfrac12[I^{2}_{1}-\tr(\bE^{2})]$ and $I_{3}(\bE)=\det\bE$,
+or equivalently through $\hI\cdot\bE$, $\bE\cdot\bE$ and $\det\bE$.
+Keeping terms through quadratic order, and noting that $\det\bE$ is
+cubic while $I_{2}$ is quadratic,
+\begin{equation}
+   U(\bE;\bX)=U(\hOb;\bX)+\alpha(\bX)\,\hI\cdot\bE
+   +\tfrac12\lambda(\bX)\big(\hI\cdot\bE\big)^{2}
+   +\mu(\bX)\,\bE\cdot\bE ,
+   \tag{12.48}\label{eq:12.48}
+\end{equation}
+the functions $\alpha,\lambda,\mu$ being properties of the material.
+Differentiating term by term,
+\begin{equation}
+   U_{\bE}\cdot\dot\bE
+   =\big\{\big[\alpha+\lambda(\tr\bE)\big]\hI+2\mu\bE\big\}\cdot\dot\bE ,
+   \tag{12.49}\label{eq:12.49}
+\end{equation}
+since $(\hI\cdot\bE)^{\textstyle\cdot}=\hI\cdot\dot\bE$ and
+$(\bE\cdot\bE)^{\textstyle\cdot}=2\bE\cdot\dot\bE$, and comparison with
+\eqr{12.46} gives
+\begin{equation}
+   \bS_{0}(\bX)=\alpha(\bX)\hI
+   \qquad\text{and}\qquad
+   \mathbb{D}(\bX)[\bE]=\lambda(\bX)(\tr\bE)\hI+2\mu(\bX)\bE .
+   \tag{12.50}\label{eq:12.50}
+\end{equation}
+
+\begin{remark}[what isotropy costs the residual
+stress]\label{rem:ch12resid}
+Equation \eqr{12.50}$_{1}$ says that an isotropic material can carry
+only a hydrostatic residual stress. That is the linearized form of the
+statement proved at Problem 10 of Chapter 11, and Problem 3 below turns
+it into the same conclusion: with equilibrium and one traction-free
+patch, an isotropic body cannot be residually stressed at all. The two
+constants $\lambda$ and $\mu$ are the Lam\'e moduli, and $\mu$ is the
+shear modulus $G$ of \eqr{11.41}.
+\end{remark}
+
+\subsection*{Linearizing, and the other two stresses}
+
+Equation \eqr{12.46} is accurate whenever $|\bE|$ is small, and it is a
+nonlinear relation between $\bS$ and $\bG$, since $\bE$ is quadratic in
+$\bG$ by \eqr{12.7}. If $|\bG|$ is also small, \eqr{12.8} linearizes it:
+\begin{equation}
+   \bS-\bS_{0}(\bX)\simeq\mathbb{D}(\bX)[\vek{\epsilon}]
+   =\mathbb{D}(\bX)[\bG],
+   \tag{12.51}\label{eq:12.51}
+\end{equation}
+the second equality by the minor symmetry \eqr{12.43}$_{2}$, which lets
+the skew part of $\bG$ be discarded; in components
+$S_{AB}-S_{(0)AB}\simeq\mathbb{D}_{ABCD}w_{C,D}$. Classical linear
+elasticity assumes the residual stress vanishes, so
+\begin{equation}
+   \bS\simeq\mathbb{D}(\bX)[\bG],
+   \tag{12.52}\label{eq:12.52}
+\end{equation}
+and for an isotropic material, by \eqr{12.50}$_{2}$ with
+$\vek{\epsilon}=\tfrac12(\bG+\bG^{t})$,
+\begin{equation}
+   \bS\simeq\lambda(\bX)(\tr\bG)\hI+\mu(\bX)\big(\bG+\bG^{t}\big).
+   \tag{12.53}\label{eq:12.53}
+\end{equation}
+
+For the Piola stress, combine \eqr{6.144} with \eqr{12.6}, which gives
+$\bF\simeq\shift$:
+\begin{equation}
+   \bP=\bF\bS\simeq\shift\bS .
+   \tag{12.54}\label{eq:12.54}
+\end{equation}
+To the same order $\bF^{*}\simeq\shift$, which is Problem 4, and either
+\eqr{6.140} or \eqr{6.145} then gives
+\begin{equation}
+   \bT\simeq\shift\bS\shift^{t}
+   \tag{12.55}\label{eq:12.55}
+\end{equation}
+for the Cauchy stress. In components $P_{iA}\simeq\dd_{iB}S_{BA}$ and
+$T_{ij}\simeq\dd_{iA}\dd_{jB}S_{AB}$: all three stresses carry the same
+numbers, and differ only in which legs are referential.
+
+With vanishing residual stress, \eqr{12.15} and \eqr{12.52} combine into
+\begin{equation}
+   \bT\simeq\mathbb{C}[\grad\bu],\qquad\text{where}\quad
+   \mathbb{C}[\grad\bu]
+   =\shift\big\{\mathbb{D}\big[\shift^{t}(\grad\bu)\shift\big]\big\}
+   \shift^{t}.
+   \tag{12.56}\label{eq:12.56}
+\end{equation}
+The definition is easier to read in components. Using
+\eqr{12.36}$_{2}$ and linearity at each step,
+\begin{equation}
+\begin{aligned}
+   T_{ij}&=\ip{\be_{i}}{\bT\be_{j}}
+   =\ip{\shift^{t}\be_{i}}
+     {\big(\mathbb{D}\big[u_{k,l}\dd_{kC}\dd_{lD}
+      \hbE_{C}\otimes\hbE_{D}\big]\big)\shift^{t}\be_{j}}\\
+   &=\dd_{iA}\dd_{jB}\,\hbE_{A}\cdot
+     \big(\mathbb{D}\big[\dd_{kC}\dd_{lD}u_{k,l}
+     \hbE_{C}\otimes\hbE_{D}\big]\big)\hbE_{B}\\
+   &=\dd_{iA}\dd_{jB}\dd_{kC}\dd_{lD}\,u_{k,l}\,
+     \hbE_{A}\cdot\big(\mathbb{D}\big[\hbE_{C}\otimes\hbE_{D}\big]\big)
+     \hbE_{B}
+   =\mathbb{C}_{ijkl}\,u_{k,l},
+\end{aligned}
+   \tag{12.57}\label{eq:12.57}
+\end{equation}
+where
+\begin{equation}
+   \mathbb{C}_{ijkl}
+   =\dd_{iA}\dd_{jB}\dd_{kC}\dd_{lD}\,\mathbb{D}_{ABCD}.
+   \tag{12.58}\label{eq:12.58}
+\end{equation}
+The spatial stiffness inherits every symmetry of the referential one,
+which is Problem 5: the major symmetry
+\begin{equation}
+   \mathbb{C}_{ijkl}=\mathbb{C}_{klij}
+   \tag{12.59}\label{eq:12.59}
+\end{equation}
+and the two minor ones
+\begin{equation}
+   \mathbb{C}_{ijkl}=\mathbb{C}_{jikl}
+   \qquad\text{and}\qquad
+   \mathbb{C}_{ijkl}=\mathbb{C}_{ijlk}.
+   \tag{12.60}\label{eq:12.60}
+\end{equation}
+The last of these lets $u_{k,l}$ in \eqr{12.57} be replaced by its
+symmetric part, so $T_{ij}=\mathbb{C}_{ijkl}\varepsilon_{kl}$ with
+$\varepsilon_{ij}$ the components of \eqr{12.17}. For an isotropic
+material, \eqr{12.15} and \eqr{12.53} give directly
+\begin{equation}
+   \bT\simeq\lambda(\dvg\bu)\I
+   +\mu\big[\grad\bu+(\grad\bu)^{t}\big].
+   \tag{12.61}\label{eq:12.61}
+\end{equation}
+
+\subsection*{Tractions}
+
+The Piola traction is $\bp=\bP\bN$ and the Cauchy traction $\bt=\bT\bn$,
+by \eqr{6.132} and \eqr{6.94}. The Piola--Nanson formula \eqr{2.54} with
+$\bF^{*}\simeq\shift$ gives
+\begin{equation}
+   \bn\,\dl a\simeq\shift\bN\,\dl A ,
+   \tag{12.62}\label{eq:12.62}
+\end{equation}
+so $\dl a\simeq\dl A$, the shifter preserving length, and
+$\bn\simeq\shift\bN$. Therefore
+\begin{equation}
+   \bp=\bP\bN=\bT\bF^{*}\bN\simeq\bT\shift\bN\simeq\bT\bn=\bt :
+   \tag{12.63}\label{eq:12.63}
+\end{equation}
+the two tractions coincide at leading order, which is why elementary
+treatments need not distinguish them. By \eqr{12.54} this is the same
+as
+\begin{equation}
+   \shift^{t}\bp\simeq\bS\bN .
+   \tag{12.64}\label{eq:12.64}
+\end{equation}
+
+In the frame of $O^{+}$ the counterparts follow from Chapter 7:
+\begin{equation}
+\begin{aligned}
+   \bS^{+}&\simeq\mathbb{D}^{+}[\bG^{+}],\qquad
+   \bT^{+}\simeq\shift^{+}\bS^{+}(\shift^{+})^{t}
+   \simeq\mathbb{C}^{+}[\grad^{+}\bu^{+}],\\
+   (\shift^{+})^{t}\bp^{+}&\simeq\bS^{+}\bN^{+},
+\end{aligned}
+   \tag{12.65}\label{eq:12.65}
+\end{equation}
+where
+\begin{equation}
+\begin{aligned}
+   \mathbb{D}^{+}[\bG^{+}]&=\bK\big(\mathbb{D}[\bK^{t}\bG^{+}\bK]\big)
+   \bK^{t},\\
+   \mathbb{C}^{+}[\grad^{+}\bu^{+}]
+   &=\bQ\big\{\mathbb{C}\big[\bQ^{t}(\grad^{+}\bu^{+})\bQ\big]\big\}
+   \bQ^{t}.
+\end{aligned}
+   \tag{12.66}\label{eq:12.66}
+\end{equation}
+For an isotropic material these reduce to
+\begin{equation}
+\begin{aligned}
+   \mathbb{D}^{+}[\bG^{+}]
+   &=\lambda(\tr\bG^{+})\hI^{+}+\mu\big[\bG^{+}+(\bG^{+})^{t}\big],\\
+   \mathbb{C}^{+}[\grad^{+}\bu^{+}]
+   &=\lambda(\dvg^{+}\bu^{+})\I^{+}
+   +\mu\big[\grad^{+}\bu^{+}+\big(\grad^{+}\bu^{+}\big)^{t}\big],
+\end{aligned}
+   \tag{12.67}\label{eq:12.67}
+\end{equation}
+with the same two constants: the moduli are numbers and no observer can
+change them.
+
+%=======================================================================
+\section{Equation of motion}\label{sec:ch12eom}
+%=======================================================================
+
+Take the frame of $O$ to be inertial. The referential equation of motion
+is \eqr{6.136} with $\bP=\bF\bS$ and, the shifter being fixed,
+\begin{equation}
+   \dot\bv=\ddot{\bchi}_{\kappa}
+   =\big(\bu+\shift\bX\big)^{\textstyle\cdot\cdot}=\ddot\bu .
+   \tag{12.68}\label{eq:12.68}
+\end{equation}
+The divergence of the Piola stress is $\Dvg\bP=P_{iA,A}\be_{i}$, and by
+the product rule together with $F_{iB}=\dd_{iB}+\dd_{iC}G_{CB}$ from
+\eqr{12.6},
+\begin{equation}
+\begin{aligned}
+   P_{iA,A}&=\big(F_{iB}S_{BA}\big)_{,A}
+   =F_{iB}S_{BA,A}+\dd_{iC}G_{CB,A}S_{BA}\\
+   &\simeq\dd_{iB}S_{BA,A}+\dd_{iC}G_{CB,A}S_{BA}.
+\end{aligned}
+   \tag{12.69}\label{eq:12.69}
+\end{equation}
+With no residual stress, \eqr{12.52} makes the non-dimensionalized
+$S_{BA}$ of order $\varepsilon$, the small number of \eqr{12.1}. If we
+assume in addition that $G_{CB,A}$, non-dimensionalized by a length
+scale of the problem, is also of order $\varepsilon$, the second term is
+of order $\varepsilon^{2}$ and drops:
+\begin{equation}
+   \Dvg\bP\simeq\shift\big(\Dvg\bS\big).
+   \tag{12.70}\label{eq:12.70}
+\end{equation}
+
+\begin{remark}[the assumption hidden in \eqr{12.70}]%
+\label{rem:ch12extra}
+Smallness of $\bG$ says nothing about smallness of $\Grad\bG$. A field
+may be uniformly small and vary arbitrarily rapidly, and then the
+discarded term in \eqr{12.69} is not negligible. The restriction on
+$G_{CB,A}$ is therefore a second and independent hypothesis, tacitly
+made throughout the literature. It is what confines the theory to
+displacement fields whose variation is slow on the scale of the body,
+and it excludes, for instance, the immediate neighbourhood of a crack
+tip, where the strain is small but its gradient is not.
+
+The same caution applies to the solution rather than the data. Once a
+boundary-value problem has been solved, both hypotheses should be
+checked against the answer, since nothing in the linear theory enforces
+them.
+\end{remark}
+
+With these estimates, and applying $\shift^{t}$ to
+$\shift\Dvg\bS+\rho_{\kappa}\bb=\rho_{\kappa}\ddot\bu$,
+\begin{equation}
+   \Dvg\bS+\rho_{\kappa}\bff=\rho_{\kappa}\ddot\bw ,
+   \tag{12.71}\label{eq:12.71}
+\end{equation}
+where $\bff=\shift^{t}\bb$ is the referential body force,
+$\ddot\bw=(\shift^{t}\bu)^{\textstyle\cdot\cdot}=\shift^{t}\ddot\bu$ the
+referential acceleration, and
+\begin{equation}
+   \bS=\mathbb{D}[\Grad\bw].
+   \tag{12.72}\label{eq:12.72}
+\end{equation}
+This is a linear second-order partial differential system for
+$\bw(\bX,t)$. A typical initial-boundary-value problem adds initial data
+$\bw|_{t=0}$ and $\dot\bw|_{t=0}$, together with $\shift^{t}\bp$
+prescribed on a part $\partial\kappa_{p}$ of the boundary and $\bw$
+prescribed on the complement
+$\partial\kappa_{w}=\partial\kappa\setminus\partial\kappa_{p}$.
+
+In the frame of $O^{+}$,
+\begin{equation}
+   \Dvg^{+}\bS^{+}=\bK\big(\Dvg\bS\big),
+   \tag{12.73}\label{eq:12.73}
+\end{equation}
+which is Problem 9, and hence, with \eqr{7.38}$_{3}$,
+\begin{equation}
+   \Dvg^{+}\bS^{+}+\rho^{+}_{\kappa^{+}}\bff^{+}
+   =\rho^{+}_{\kappa^{+}}\bK\ddot\bw ,
+   \tag{12.74}\label{eq:12.74}
+\end{equation}
+with
+\begin{equation}
+   \bff^{+}=(\shift^{+})^{t}\bb^{+}
+   \qquad\text{and}\qquad
+   \bS^{+}=\mathbb{D}^{+}[\Grad^{+}\bw^{+}],\quad
+   \bw^{+}=(\shift^{+})^{t}\bu^{+}.
+   \tag{12.75}\label{eq:12.75}
+\end{equation}
+If the frame of $O^{+}$ is also inertial then the two are related by a
+Galilean transformation \eqr{7.10}, with $\bQ$ a fixed orthogonal tensor
+and $\bV$ a fixed vector, and then $\bK\ddot\bw=\ddot\bw^{+}$, so that
+\begin{equation}
+   \Dvg^{+}\bS^{+}+\rho^{+}_{\kappa^{+}}\bff^{+}
+   =\rho^{+}_{\kappa^{+}}\ddot\bw^{+}.
+   \tag{12.76}\label{eq:12.76}
+\end{equation}
+Linear elasticity therefore holds in every inertial frame, in the same
+form. The non-inertial case is Problem 10.
+
+\begin{remark}[how to make the shifter disappear]%
+\label{rem:ch12disappear}
+The shifter has done real work: without it, \eqr{12.8} is not a tensor
+equation and \eqr{12.9} does not follow, as
+Remark~\ref{rem:ch12shifter} showed. In any single problem, however, it
+can be made invisible. The observer $O$ is free to choose the shifted
+basis $\bE_{A}=\shift\hbE_{A}$ of \eqr{2.68} to coincide with the
+spatial basis $\be_{i}$. Then $\dd_{iA}$ are numerically the components
+of the Kronecker delta, the components of a referential tensor and of
+its spatial shift are the same numbers, and one may write
+$2\bE\simeq\bH+\bH^{t}$ without harm.
+
+That is why the omission survives in the literature. It is a legitimate
+computational convenience for one observer, and an illegitimate
+statement about tensors. The distinction matters exactly when a second
+observer appears, which is the situation \eqr{12.65} and \eqr{12.66}
+describe.
+\end{remark}
+
+%=======================================================================
+\setcounter{problemenv}{0}
+\section{Problems}\label{sec:problems:c12}
+%=======================================================================
+
+\begin{problem}[The kinematic transformations]
+Derive \eqr{12.9} to \eqr{12.11}. Show that $|\bG^{+}|=|\bG|$. What is
+the relationship between $\bw^{+}$ and $\bw$?
+\end{problem}
+
+\begin{solution}
+\textbf{\eqr{12.9}.} By definition $\bG^{+}=(\shift^{+})^{t}\bH^{+}$.
+Chapter 7 supplies both factors: $\shift^{+}=\bQ\shift\bK^{t}$ by
+\eqr{7.18} and $\bH^{+}=\bQ\bH\bK^{t}$ by \eqr{7.25}. Hence
+\[
+   \bG^{+}=\big(\bQ\shift\bK^{t}\big)^{t}\,\bQ\bH\bK^{t}
+   =\bK\shift^{t}\bQ^{t}\bQ\bH\bK^{t}
+   =\bK\shift^{t}\bH\bK^{t}
+   =\boxed{\;\bK\bG\bK^{t}\;}
+\]
+using $(\bA\bB\bC)^{t}=\bC^{t}\bB^{t}\bA^{t}$ and $\bQ^{t}\bQ=\I$. The
+observer rotation cancels completely, which is the point: $\bG$ is a
+referential tensor and only $\bK$ can act on it.
+
+\textbf{\eqr{12.10}.} Substituting into \eqr{12.7} and using
+$(\bK\bG\bK^{t})^{t}=\bK\bG^{t}\bK^{t}$,
+\[
+\begin{aligned}
+   \bE^{+}&=\tfrac12\big[\bG^{+}+(\bG^{+})^{t}
+   +(\bG^{+})^{t}\bG^{+}\big]\\
+   &=\tfrac12\big[\bK\bG\bK^{t}+\bK\bG^{t}\bK^{t}
+   +\bK\bG^{t}\bK^{t}\bK\bG\bK^{t}\big]
+   =\bK\bE\bK^{t},
+\end{aligned}
+\]
+the last step by $\bK^{t}\bK=\hI$ in the quadratic term and by
+factoring $\bK$ out on the left and $\bK^{t}$ on the right. So
+\eqr{12.10} is exact, not an approximation.
+
+\textbf{\eqr{12.11}.} The same computation without the quadratic term
+gives $\vek{\epsilon}^{+}=\tfrac12[\bG^{+}+(\bG^{+})^{t}]
+=\bK\vek{\epsilon}\bK^{t}$. Comparing with \eqr{12.10}, the two agree
+to leading order exactly when $\bE\simeq\vek{\epsilon}$ does, which is
+\eqr{12.12}: the approximation is preserved under change of observer.
+
+\textbf{The norm.} Using the cyclic property of the trace and
+$\bK^{t}\bK=\hI$ twice,
+\[
+\begin{aligned}
+   |\bG^{+}|^{2}&=\tr\big(\bG^{+}(\bG^{+})^{t}\big)
+   =\tr\big(\bK\bG\bK^{t}\bK\bG^{t}\bK^{t}\big)\\
+   &=\tr\big(\bG\bG^{t}\bK^{t}\bK\big)
+   =\tr\big(\bG\bG^{t}\big)=|\bG|^{2},
+\end{aligned}
+\]
+so $\boxed{|\bG^{+}|=|\bG|}$. The two observers agree on how small the
+displacement gradient is, and therefore on whether the linear theory
+applies at all.
+
+\textbf{The displacements.} By \eqr{7.21}, $\bu^{+}=\bQ\bu+\bd(t)$ with
+$\bd$ spatially uniform. Hence
+\[
+   \bw^{+}=(\shift^{+})^{t}\bu^{+}
+   =\bK\shift^{t}\bQ^{t}\big(\bQ\bu+\bd\big)
+   =\boxed{\;\bK\bw+\bd_{\kappa}(t),\qquad
+   \bd_{\kappa}=\bK\shift^{t}\bQ^{t}\bd\;}
+\]
+so the referential displacements differ by a rotation and a
+spatially uniform translation. Taking $\Grad^{+}$ kills the translation
+and returns \eqr{12.9}, as it must: a uniform displacement is a rigid
+translation and strains nothing.
+\end{solution}
+
+\begin{problem}[Energy balance in the purely mechanical theory]
+Show that in the purely mechanical theory
+$\tfrac{\dl}{\dl t}E(S,t)=P(S,t)$, where $P$ is the power of the forces
+acting on $S\subset B$ and
+\[
+   E=\int_{P}U\,\dl V+K(S,t),
+\]
+$K$ being the kinetic energy and $P=\kappa(S)$. The letter $P$ carries
+two meanings in this statement, the power on the left and the reference
+region under the integral sign; both are the book's, and they are told
+apart by position.
+\end{problem}
+
+\begin{solution}
+The mechanical energy balance \eqr{6.150} reads
+\[
+   \frac{\dl}{\dl t}K(S,t)+\mathcal{S}(S,t)=P(S,t),
+\]
+with the stress power $\mathcal{S}$ given in referential form by
+\eqr{6.156}, $\mathcal{S}=\int_{P}\bP\cdot\dot\bF\,\dl V$. Everything
+turns on identifying that integrand.
+
+By \eqr{6.159}, $\bP\cdot\dot\bF=\bS\cdot\dot\bE$, the
+Piola--Kirchhoff stress being power conjugate to the Lagrange strain.
+By \eqr{12.32}, $\bS=U_{\bE}$, and the temperature being fixed, the
+chain rule for $U(\bE;\bX)$ gives
+\[
+   \dot U=U_{\bE}\cdot\dot\bE=\bS\cdot\dot\bE=\bP\cdot\dot\bF .
+\]
+Therefore
+\[
+   \mathcal{S}(S,t)=\int_{P}\dot U\,\dl V
+   =\frac{\dl}{\dl t}\int_{P}U\,\dl V ,
+\]
+the differentiation passing through the integral because $P$ is a fixed
+region of $\kappa$: it is the reference placement of the fixed set $S$
+of material points, and it does not move as the body deforms. This is
+the one place where the referential form of the stress power is
+essential; the spatial form would have a moving domain and the
+interchange would need Reynolds' formula.
+
+Substituting,
+\[
+   \frac{\dl}{\dl t}K+\frac{\dl}{\dl t}\int_{P}U\,\dl V=P(S,t),
+   \qquad\text{that is}\qquad
+   \boxed{\;\frac{\dl}{\dl t}E(S,t)=P(S,t)\;}
+\]
+with $E=\int_{P}U\,\dl V+K$.
+
+\textbf{What is being said.} In a hyperelastic body at constant
+temperature the working of the external forces goes entirely into
+kinetic energy and stored strain energy, and none of it is lost. The
+stress power, which Remark~\ref{rem:ch6stresspower} of Chapter 6
+identified as the term with no counterpart in particle mechanics,
+turns out here to be the rate of a potential. Chapter 9 had no such
+statement, the viscous stress power being a dissipation; and
+Chapter 11 needed the full Clausius--Duhem inequality to see that
+$\bP=W_{\bF}$, which is what makes the potential exist.
+\end{solution}
+
+\begin{problem}[Residual stress in the linear theory]
+Suppose the residually stressed undeformed configuration of an isotropic
+material is in equilibrium without body force, and that the associated
+traction vanishes on a portion of the boundary. Prove that the residual
+stress vanishes everywhere in the body.
+\end{problem}
+
+\begin{solution}
+This is the linearized twin of Problem 10 of Chapter 11, and it runs in
+three steps of the same shape.
+
+\textbf{Isotropy makes it hydrostatic.} By \eqr{12.50}$_{1}$ the
+residual stress of an isotropic material is
+\[
+   \bS_{0}(\bX)=\alpha(\bX)\hI ,
+\]
+a scalar multiple of the referential identity at each point. Isotropy
+permits no deviatoric part, because $U$ can depend on $\bE$ only through
+its invariants, and at $\bE=\hOb$ the only tensor available from
+$I_{1}=\hI\cdot\bE$ is $\hI$ itself.
+
+\textbf{Equilibrium makes it uniform.} With no body force and no
+acceleration, \eqr{12.71} reduces to $\Dvg\bS_{0}=\bze$. For a spherical
+field this is a gradient,
+\[
+   \Dvg\big(\alpha\hI\big)=\Grad\alpha=\bze ,
+\]
+by the referential form of Problem 24 of Chapter 1, so $\alpha$ is
+constant throughout the body, which is connected.
+
+\textbf{The free patch makes it zero.} On the traction-free portion,
+\eqr{12.64} gives $\bS_{0}\bN=\bze$ for the unit normal $\bN$ there,
+that is $\alpha\bN=\bze$; and $|\bN|=1$, so $\alpha=0$. Being constant,
+$\alpha$ vanishes identically and
+\[
+   \boxed{\;
+\begin{aligned}
+   &\bS_{0}=\hOb\ \text{ throughout the body},\\
+   &\text{and by \eqr{12.54} and \eqr{12.55} so do }\bP
+   \text{ and }\bT .
+\end{aligned}\;}
+\]
+
+\textbf{Why the linear theory may assume \eqr{12.52}.} The result is the
+justification for dropping $\bS_{0}$ from \eqr{12.51}. It is not a
+theorem about all materials: an anisotropic body can hold residual
+stress with a non-zero deviator, and the shrink-fitted ring and the
+toughened glass plate are engineered to do exactly that. What the
+problem shows is that isotropy plus equilibrium plus one free patch
+leaves no room for it.
+\end{solution}
+
+\begin{problem}[The cofactor at leading order, and the two volume
+formulas]
+Show that
+\[
+   \bF^{*}-\shift\simeq\shift\big[(\tr\bG)\hI-\bG^{t}\big],
+\]
+and hence that $\bF^{*}\simeq\shift$ as claimed in the text. Use this to
+confirm $\ip\bu\bn\,\dl a\simeq\ip\bw\bN\,\dl A$, and hence that the
+right-hand sides of \eqr{12.26} and \eqr{12.27} agree at leading order.
+\end{problem}
+
+\begin{solution}
+\textbf{The cofactor.} By \eqr{2.55}, $\bF^{*}=J\bF^{-t}$, so both
+factors are needed to first order in $\bG$.
+
+From \eqr{12.6}, $\bF=\shift(\hI+\bG)$, and inverting a product,
+\[
+   \bF^{-1}=\big(\hI+\bG\big)^{-1}\shift^{-1}
+   \simeq\big(\hI-\bG\big)\shift^{t},
+\]
+the expansion $(\hI+\bG)^{-1}\simeq\hI-\bG$ being the geometric series
+truncated after one term, legitimate because $|\bG|\ll1$, and
+$\shift^{-1}=\shift^{t}$. Transposing,
+\[
+   \bF^{-t}\simeq\shift\big(\hI-\bG^{t}\big).
+\]
+From \eqr{12.25}, $J\simeq1+\tr\bG$. Multiplying and discarding the
+product of two first-order terms,
+\[
+   \bF^{*}=J\bF^{-t}\simeq\big(1+\tr\bG\big)\shift
+   \big(\hI-\bG^{t}\big)
+   \simeq\shift\big[\hI+(\tr\bG)\hI-\bG^{t}\big],
+\]
+that is
+\[
+   \boxed{\;\bF^{*}-\shift\simeq\shift
+   \big[(\tr\bG)\hI-\bG^{t}\big] .\;}
+\]
+The right-hand side has norm of order $|\bG|$, so $\bF^{*}\simeq\shift$
+to leading order, as \eqr{12.55} and \eqr{12.62} assumed.
+
+\textbf{The two volume formulas.} By Piola--Nanson \eqr{2.54} and the
+estimate just proved,
+\[
+   \bn\,\dl a=\bF^{*}\bN\,\dl A\simeq\shift\bN\,\dl A .
+\]
+Taking the inner product with the spatial displacement $\bu$, and moving
+the shifter across by the definition of the transpose,
+\[
+   \ip\bu\bn\,\dl a\simeq\ip\bu{\shift\bN}\,\dl A
+   =\ip{\shift^{t}\bu}\bN\,\dl A
+   =\boxed{\;\ip\bw\bN\,\dl A\;}
+\]
+by \eqr{12.4}. Integrating over the boundary,
+\[
+   \int_{\partial P_{t}}\ip\bu\bn\,\dl a
+   \simeq\int_{\partial P}\ip\bw\bN\,\dl A ,
+\]
+which is exactly the equality of the right-hand sides of \eqr{12.27} and
+\eqr{12.26}. Both compute the same $\Delta V$, one over the deformed
+boundary and one over the reference boundary, and at leading order it
+does not matter which.
+
+\textbf{A check on the order of the errors.} Every discarded term above
+was of order $|\bG|^{2}$, while $\Delta V$ itself is of order $|\bG|$
+by \eqr{12.25}. So the relative error in $\Delta V$ is of order
+$|\bG|$, which is the accuracy the whole chapter works to.
+\end{solution}
+
+\begin{problem}[The symmetries of the spatial stiffness]
+Verify \eqr{12.59} and \eqr{12.60}.
+\end{problem}
+
+\begin{solution}
+Everything follows from \eqr{12.58},
+\[
+   \mathbb{C}_{ijkl}=\dd_{iA}\dd_{jB}\dd_{kC}\dd_{lD}\,
+   \mathbb{D}_{ABCD},
+\]
+in which the four shifter components are attached one to each index and
+are the same for every term. Relabelling the referential summation
+indices is therefore free, and the symmetries pass straight through.
+
+\textbf{Major symmetry.} Interchange the index pairs $(ij)$ and $(kl)$
+on the left, and correspondingly relabel $A\leftrightarrow C$,
+$B\leftrightarrow D$ on the right:
+\[
+   \mathbb{C}_{klij}=\dd_{kA}\dd_{lB}\dd_{iC}\dd_{jD}\mathbb{D}_{ABCD}
+   =\dd_{iC}\dd_{jD}\dd_{kA}\dd_{lB}\mathbb{D}_{CDAB}
+   =\mathbb{C}_{ijkl},
+\]
+the middle step renaming the dummies $A\leftrightarrow C$,
+$B\leftrightarrow D$ and the last using \eqr{12.38},
+$\mathbb{D}_{CDAB}=\mathbb{D}_{ABCD}$. Hence
+$\boxed{\mathbb{C}_{ijkl}=\mathbb{C}_{klij}}$.
+
+\textbf{First minor symmetry.} Interchanging $i$ and $j$ interchanges
+$A$ and $B$ after relabelling:
+\[
+   \mathbb{C}_{jikl}=\dd_{jA}\dd_{iB}\dd_{kC}\dd_{lD}\mathbb{D}_{ABCD}
+   =\dd_{iA}\dd_{jB}\dd_{kC}\dd_{lD}\mathbb{D}_{BACD}
+   =\mathbb{C}_{ijkl},
+\]
+by \eqr{12.40}. Hence $\boxed{\mathbb{C}_{ijkl}=\mathbb{C}_{jikl}}$.
+
+\textbf{Second minor symmetry.} The same argument on the pair $(kl)$,
+using \eqr{12.41}, gives
+$\boxed{\mathbb{C}_{ijkl}=\mathbb{C}_{ijlk}}$.
+
+\textbf{What each one is for.} The first minor symmetry says the stress
+comes out symmetric, $T_{ij}=T_{ji}$, which is \eqr{6.117} and hence
+Euler's second postulate. The second says only the symmetric part of
+$\grad\bu$ enters, so $T_{ij}=\mathbb{C}_{ijkl}\varepsilon_{kl}$ and
+rigid infinitesimal rotations produce no stress. The major symmetry is
+the one that has no counterpart in the balance laws: it says the
+stiffness derives from a potential, and it is what makes Problem 2
+work. Counting independent constants, a general fourth-order tensor in
+three dimensions has $81$ components; the two minor symmetries reduce
+this to $36$, and the major symmetry to $21$.
+\end{solution}
+
+\begin{problem}[The strain energy as a quadratic form]
+Establish that in the absence of residual stress the strain energy $U$
+is approximated at leading order by
+$\tfrac12\vek{\epsilon}\cdot\mathbb{D}[\vek{\epsilon}]$, or equivalently
+by $\tfrac12\vek{\varepsilon}\cdot\mathbb{C}[\vek{\varepsilon}]$. Hence
+show that $\bS$ and $\bT$ are approximated by the gradients
+$U_{\vek{\epsilon}}$ and $U_{\vek{\varepsilon}}$.
+\end{problem}
+
+\begin{solution}
+\textbf{The quadratic form.} Take the energy datum at the undeformed
+state, $U(\hOb;\bX)=0$, which costs nothing since only differences of
+energy have meaning. With $\bS_{0}=\hOb$, \eqr{12.33} reduces to
+\[
+   U(\bE;\bX)=\tfrac12\bE\cdot\mathbb{D}(\bX)[\bE]+o\big(|\bE|^{2}\big),
+\]
+and substituting $\bE\simeq\vek{\epsilon}$ from \eqr{12.8}, whose error
+is of order $|\bG|^{2}$ and therefore contributes at order $|\bG|^{3}$
+inside a quadratic form,
+\[
+   \boxed{\;U\simeq\tfrac12\,\vek{\epsilon}\cdot
+   \mathbb{D}[\vek{\epsilon}]\;}
+\]
+
+\textbf{The spatial form.} Write both sides in components, using
+\eqr{12.17}$_{2}$ in the form
+$\epsilon_{AB}\simeq\dd_{iA}\dd_{jB}\varepsilon_{ij}$ and \eqr{12.58}:
+\[
+\begin{aligned}
+   \vek{\epsilon}\cdot\mathbb{D}[\vek{\epsilon}]
+   &=\epsilon_{AB}\epsilon_{CD}\mathbb{D}_{ABCD}\\
+   &\simeq\dd_{iA}\dd_{jB}\varepsilon_{ij}\,
+    \dd_{kC}\dd_{lD}\varepsilon_{kl}\,\mathbb{D}_{ABCD}
+   =\varepsilon_{ij}\varepsilon_{kl}\mathbb{C}_{ijkl}
+   =\vek{\varepsilon}\cdot\mathbb{C}[\vek{\varepsilon}],
+\end{aligned}
+\]
+so
+\[
+   \boxed{\;U\simeq\tfrac12\,\vek{\varepsilon}\cdot
+   \mathbb{C}[\vek{\varepsilon}]\;}
+\]
+The strain energy is the same number computed on either description, as
+it must be, being a scalar.
+
+\textbf{The stresses as gradients.} Differentiate the first boxed
+expression with respect to $\vek{\epsilon}$. For a quadratic form with
+major symmetry the gradient is twice the linear map, halved by the
+factor $\tfrac12$: taking the rate,
+\[
+   \dot U\simeq\tfrac12\big\{\dot{\vek{\epsilon}}\cdot
+   \mathbb{D}[\vek{\epsilon}]+\vek{\epsilon}\cdot
+   \mathbb{D}[\dot{\vek{\epsilon}}]\big\}
+   =\mathbb{D}[\vek{\epsilon}]\cdot\dot{\vek{\epsilon}},
+\]
+the two terms merging by \eqr{12.42}. Since $\dot{\vek{\epsilon}}$ is an
+arbitrary symmetric tensor,
+\[
+   U_{\vek{\epsilon}}=\mathbb{D}[\vek{\epsilon}]\simeq\bS
+\]
+by \eqr{12.52} and \eqr{12.51}. The identical computation on the spatial
+form gives $U_{\vek{\varepsilon}}=\mathbb{C}[\vek{\varepsilon}]\simeq\bT$
+by \eqr{12.56}. So
+\[
+   \boxed{\;\bS\simeq U_{\vek{\epsilon}},\qquad
+   \bT\simeq U_{\vek{\varepsilon}} .\;}
+\]
+Both stresses are gradients of the same potential, taken with respect to
+the strain measure that lives in the same space. This is the linearized
+form of $\bP=W_{\bF}$ from \eqr{11.16}$_{2}$, and it is why the major
+symmetry \eqr{12.42} could not have been dispensed with.
+\end{solution}
+
+\begin{problem}[Isotropic moduli, and when the energy is positive
+definite]
+Find expressions for the components $\mathbb{C}_{ijkl}$ and
+$\mathbb{D}_{ABCD}$ for isotropic solids. Linear elasticity always
+assumes the strain-energy function positive definite, that is $U\ge0$
+with equality only at zero strain. Show that for isotropic solids this
+holds if and only if $\mu>0$ and $\kappa>0$, where
+$\kappa=\lambda+\tfrac23\mu$.
+\end{problem}
+
+\begin{solution}
+\textbf{The components.} By \eqr{12.50}$_{2}$,
+$\mathbb{D}[\bE]=\lambda(\tr\bE)\hI+2\mu\bE$. In components this is
+$\mathbb{D}_{ABCD}E_{CD}$, so we need a $\mathbb{D}_{ABCD}$ reproducing
+$\lambda\dd_{AB}E_{CC}+2\mu E_{AB}$. Take
+\[
+   \boxed{\;\mathbb{D}_{ABCD}=\lambda\,\dd_{AB}\dd_{CD}
+   +\mu\big(\dd_{AC}\dd_{BD}+\dd_{AD}\dd_{BC}\big)\;}
+\]
+and check by contracting with $E_{CD}$:
+\[
+   \mathbb{D}_{ABCD}E_{CD}
+   =\lambda\dd_{AB}E_{CC}+\mu\big(E_{AB}+E_{BA}\big)
+   =\lambda(\tr\bE)\dd_{AB}+2\mu E_{AB},
+\]
+using $E_{AB}=E_{BA}$. The expression has both minor symmetries by
+inspection and the major symmetry because it is unchanged under
+$(AB)\leftrightarrow(CD)$. By \eqr{12.58} the spatial components are the
+same numbers,
+\[
+   \boxed{\;\mathbb{C}_{ijkl}=\lambda\,\dd_{ij}\dd_{kl}
+   +\mu\big(\dd_{ik}\dd_{jl}+\dd_{il}\dd_{jk}\big)\;}
+\]
+the shifter components turning each referential Kronecker delta into a
+spatial one.
+
+\textbf{The quadratic form.} By Problem 6, and with $\bS_{0}=\hOb$,
+\[
+   2U=\vek{\epsilon}\cdot\mathbb{D}[\vek{\epsilon}]
+   =\lambda\big(\tr\vek{\epsilon}\big)^{2}
+   +2\mu\,\vek{\epsilon}\cdot\vek{\epsilon}.
+\]
+The two terms are not independent as they stand, because
+$\vek{\epsilon}\cdot\vek{\epsilon}$ contains the trace. Split off the
+spherical part: write
+\[
+   \vek{\epsilon}=\vek{\epsilon}'+\tfrac13\big(\tr\vek{\epsilon}\big)\hI,
+   \qquad \tr\vek{\epsilon}'=0 ,
+\]
+the deviator of Chapter 1. The two pieces are orthogonal, since
+$\vek{\epsilon}'\cdot\hI=\tr\vek{\epsilon}'=0$, so
+\[
+   \vek{\epsilon}\cdot\vek{\epsilon}
+   =\vek{\epsilon}'\cdot\vek{\epsilon}'
+   +\tfrac19\big(\tr\vek{\epsilon}\big)^{2}\,\hI\cdot\hI
+   =|\vek{\epsilon}'|^{2}+\tfrac13\big(\tr\vek{\epsilon}\big)^{2},
+\]
+using $\hI\cdot\hI=\tr\hI=3$. Substituting,
+\[
+   2U=\Big(\lambda+\tfrac23\mu\Big)\big(\tr\vek{\epsilon}\big)^{2}
+   +2\mu\,|\vek{\epsilon}'|^{2}
+   =\boxed{\;\kappa\big(\tr\vek{\epsilon}\big)^{2}
+   +2\mu\,|\vek{\epsilon}'|^{2}\;}
+\]
+with $\kappa=\lambda+\tfrac23\mu$.
+
+\textbf{The criterion.} The two terms are now genuinely independent: the
+scalar $\tr\vek{\epsilon}$ and the traceless tensor $\vek{\epsilon}'$
+may be chosen separately, and together they determine
+$\vek{\epsilon}$.
+
+If $\mu>0$ and $\kappa>0$ then $2U$ is a sum of two non-negative terms,
+so $U\ge0$; and $U=0$ forces both $\tr\vek{\epsilon}=0$ and
+$\vek{\epsilon}'=\hOb$, hence $\vek{\epsilon}=\hOb$.
+
+Conversely, suppose $U$ is positive definite. Taking
+$\vek{\epsilon}=c\hI$ with $c\neq0$ gives $\vek{\epsilon}'=\hOb$ and
+$\tr\vek{\epsilon}=3c$, so $2U=9\kappa c^{2}>0$ and hence $\kappa>0$.
+Taking $\vek{\epsilon}$ any non-zero traceless tensor, for instance
+$\hbE_{1}\otimes\hbE_{2}+\hbE_{2}\otimes\hbE_{1}$, gives
+$\tr\vek{\epsilon}=0$ and $2U=2\mu|\vek{\epsilon}'|^{2}>0$, hence
+$\mu>0$. So
+\[
+   U\ \text{positive definite}\iff \mu>0\ \text{ and }\ \kappa>0 .
+\]
+
+\textbf{Reading the two constants.} The decomposition separates the two
+ways a body can be strained. A pure dilatation has
+$\vek{\epsilon}'=\hOb$ and costs $\tfrac12\kappa(\tr\vek{\epsilon})^{2}$,
+so $\kappa$ is the bulk modulus. A pure shear has $\tr\vek{\epsilon}=0$
+and costs $\mu|\vek{\epsilon}'|^{2}$, so $\mu$ is the shear modulus,
+the $G$ of \eqr{11.41}. Positive definiteness says both cost energy.
+Note that $\lambda$ itself need not be positive: $\lambda=-\tfrac23\mu$
+gives $\kappa=0$, which is excluded, but any $\lambda>-\tfrac23\mu$ is
+admissible, and negative $\lambda$ corresponds to materials that
+thicken laterally when compressed.
+\end{solution}
+
+\begin{problem}[The spatial equation of motion]
+Show that Cauchy's equation of motion in an inertial frame is
+approximated at leading order in the small displacement gradient by
+\[
+   \dvg\bT+\rho_{\kappa}\bb=\rho_{\kappa}\ddot\bu .
+\]
+\end{problem}
+
+\begin{solution}
+Start from the referential form \eqr{12.71} and push every term forward
+with the shifter.
+
+\textbf{The divergence.} By \eqr{12.55}, $T_{ij}\simeq\dd_{iA}\dd_{jB}
+S_{AB}$. Differentiating with respect to $x_{j}$ and converting the
+derivative by \eqr{12.14} in the form
+$(\cdot)_{,j}\simeq(\cdot)_{,C}\dd_{jC}$,
+\[
+   T_{ij,j}\simeq\dd_{iA}\dd_{jB}S_{AB,C}\dd_{jC}
+   =\dd_{iA}\dd_{BC}S_{AB,C}=\dd_{iA}S_{AB,B},
+\]
+using $\dd_{jB}\dd_{jC}=\dd_{BC}$, which is $\shift^{t}\shift=\hI$ in
+components. Hence
+\[
+   \dvg\bT\simeq\shift\big(\Dvg\bS\big).
+\]
+
+\textbf{The other terms.} The body force satisfies
+$\shift\bff=\shift\shift^{t}\bb=\bb$, and the acceleration
+$\shift\ddot\bw=\shift\shift^{t}\ddot\bu=\ddot\bu$, both by
+$\shift\shift^{t}=\I$.
+
+\textbf{Assembling.} Apply $\shift$ to \eqr{12.71}:
+\[
+   \shift\big(\Dvg\bS\big)+\rho_{\kappa}\shift\bff
+   =\rho_{\kappa}\shift\ddot\bw ,
+\]
+that is
+\[
+   \boxed{\;\dvg\bT+\rho_{\kappa}\bb=\rho_{\kappa}\ddot\bu\;}
+\]
+at leading order.
+
+\textbf{Which density.} By \eqr{12.29}, $\rho\simeq\rho_{\kappa}$, so
+the same equation may be written with $\rho$ in place of
+$\rho_{\kappa}$: the difference is of first order in $|\bG|$ and
+multiplies terms that are already of first order, so it is of second
+order and lies below the accuracy of the theory. That is why the
+literature is free to write either, and it is worth remembering that the
+freedom is an approximation, not an identity. In the exact theory
+\eqr{6.109} carries $\rho$ and \eqr{6.136} carries $\rho_{\kappa}$, and
+the two equations are genuinely different.
+
+For an isotropic material with constant moduli, substituting
+\eqr{12.61} and using $\dvg[(\grad\bu)^{t}]=\grad(\dvg\bu)$ gives the
+Navier equation
+\[
+   \mu\,\dvg\grad\bu+(\lambda+\mu)\grad(\dvg\bu)+\rho_{\kappa}\bb
+   =\rho_{\kappa}\ddot\bu ,
+\]
+which is the equation almost every elasticity calculation begins from.
+\end{solution}
+
+\begin{problem}[The equation of motion for a second inertial observer]
+Verify \eqr{12.73}. Show that $\ddot\bw\mapsto\ddot\bw^{+}=\bK\ddot\bw$
+under a Galilean transformation, and hence that \eqr{12.76} holds if the
+frame of $O^{+}$ is inertial.
+\end{problem}
+
+\begin{solution}
+\textbf{\eqr{12.73}.} By Problem 1 and \eqr{12.72}, $\bS$ transforms
+like $\bE$, so $\bS^{+}=\bK\bS\bK^{t}$, that is
+$S^{+}_{AB}=K_{AC}K_{BD}S_{CD}$. The reference positions are related by
+$\bX^{+}=\bK\bX+\bc^{+}$ with $\bc^{+}$ constant, so
+$X^{+}_{B}=K_{BE}X_{E}+c^{+}_{B}$ and, $\bK$ being orthogonal,
+$\partial X_{E}/\partial X^{+}_{B}=K_{BE}$. The chain rule then gives
+\[
+   \frac{\partial S^{+}_{AB}}{\partial X^{+}_{B}}
+   =K_{AC}K_{BD}\,\frac{\partial S_{CD}}{\partial X_{E}}\,K_{BE}
+   =K_{AC}\dd_{DE}\,S_{CD,E}
+   =K_{AC}\,S_{CD,D},
+\]
+using $K_{BD}K_{BE}=\dd_{DE}$, which is $\bK^{t}\bK=\hI$. Hence
+\[
+   \boxed{\;\Dvg^{+}\bS^{+}=\bK\big(\Dvg\bS\big)\;}
+\]
+
+\textbf{The acceleration.} By Problem 1, $\bw^{+}=\bK\bw+\bd_{\kappa}$
+with $\bd_{\kappa}=\bK\shift^{t}\bQ^{t}\bd$. Differentiating twice, and
+noting that $\bK$ is constant in time by hypothesis,
+\[
+   \ddot\bw^{+}=\bK\ddot\bw+\ddot{\bd}_{\kappa} .
+\]
+Under a Galilean transformation \eqr{7.10} the rotation $\bQ$ is
+constant and $\bc(t)=\bV t+\bc_{0}$ is linear in $t$. By \eqr{7.21} the
+uniform part of the displacement is
+$\bd(t)=\bc(t)-\bQ\shift\bK^{t}\bc^{+}$, which is therefore also linear
+in $t$, so $\ddot{\bd}=\bze$; and $\bd_{\kappa}=\bK\shift^{t}\bQ^{t}\bd$
+with all three tensors constant, so $\ddot{\bd}_{\kappa}=\bze$ too.
+Hence
+\[
+   \boxed{\;\ddot\bw^{+}=\bK\ddot\bw\;}
+\]
+
+\textbf{Assembling.} Substituting into \eqr{12.74},
+\[
+   \Dvg^{+}\bS^{+}+\rho^{+}_{\kappa^{+}}\bff^{+}
+   =\rho^{+}_{\kappa^{+}}\bK\ddot\bw
+   =\rho^{+}_{\kappa^{+}}\ddot\bw^{+},
+\]
+which is \eqr{12.76}. So the second observer writes the same equation,
+with the same moduli by \eqr{12.67}: linear elasticity is Galilean
+invariant, and no experiment within it can distinguish one inertial
+frame from another.
+\end{solution}
+
+\begin{problem}[A non-inertial second observer]
+How is \eqr{12.76} modified if the frame of $O^{+}$ is not inertial?
+\end{problem}
+
+\begin{solution}
+Only the acceleration changes; \eqr{12.73} and the constitutive
+transformations \eqr{12.66} used nothing about the motion of the
+frames.
+
+\textbf{The extra terms.} For general $\bQ(t)$ and $\bc(t)$ the
+accelerations are related by \eqr{7.9},
+\[
+   \ba^{+}-\bQ\ba=\ba_{\mathrm{f}},\qquad
+   \ba_{\mathrm{f}}=\ddot\bc+2\bOm\big(\bv^{+}-\dot\bc\big)
+   +\big(\dot\bOm-\bOm^{2}\big)\big(\bx^{+}-\bc\big),
+\]
+$\bOm=\dot\bQ\bQ^{t}$ being the spin of the relative motion. In the
+linear theory $\ba=\ddot\bu$ and $\ba^{+}=\ddot\bu^{+}$, by
+\eqr{12.68} applied in each frame, so
+\[
+   \ddot\bw^{+}=(\shift^{+})^{t}\ba^{+}
+   =\bK\shift^{t}\bQ^{t}\big(\bQ\ba+\ba_{\mathrm{f}}\big)
+   =\bK\shift^{t}\ba+\bK\shift^{t}\bQ^{t}\ba_{\mathrm{f}}
+   =\bK\ddot\bw+(\shift^{+})^{t}\ba_{\mathrm{f}} ,
+\]
+using $(\shift^{+})^{t}=\bK\shift^{t}\bQ^{t}$ from \eqr{7.18} and
+$\shift^{t}\ba=\ddot\bw$. Hence
+$\bK\ddot\bw=\ddot\bw^{+}-(\shift^{+})^{t}\ba_{\mathrm{f}}$, and
+substituting into \eqr{12.74},
+\[
+   \boxed{\;
+\begin{aligned}
+   \Dvg^{+}\bS^{+}+\rho^{+}_{\kappa^{+}}
+   \big[\bff^{+}+\bff^{+}_{\mathrm{f}}\big]
+   &=\rho^{+}_{\kappa^{+}}\ddot\bw^{+},\\
+   \text{where}\quad
+   \bff^{+}_{\mathrm{f}}&=(\shift^{+})^{t}\ba_{\mathrm{f}} .
+\end{aligned}\;}
+\]
+The non-inertial observer writes the same equation with an additional
+body force per unit mass, and Chapter 7 already named its three parts:
+$\ddot\bc$ is the translational term, $2\bOm(\bv^{+}-\dot\bc)$ the
+Coriolis term, and $(\dot\bOm-\bOm^{2})(\bx^{+}-\bc)$ the Euler and
+centrifugal terms.
+
+\begin{remark}[what the Coriolis term does to the
+equation]\label{rem:ch12coriolis}
+The apparent force is not merely an inconvenience of bookkeeping. Two
+of its parts spoil the structure of \eqr{12.76}.
+
+The Coriolis term contains $\bv^{+}$, hence $\dot\bu^{+}$, so the
+equation acquires a first derivative in time. It ceases to be the wave
+equation of \eqr{12.76} and becomes one with a gyroscopic term, which
+is why the vibration of a rotating shaft cannot be analysed with the
+non-rotating modes.
+
+The centrifugal term contains $\bx^{+}$, hence $\bu^{+}$, so it adds a
+term proportional to the displacement itself. It behaves like a
+negative stiffness and can destabilize a structure that is stable at
+rest, which is the mechanism of spin softening in turbine blades. Both
+effects are linear in $\bu^{+}$ and belong properly to the linear
+theory; nothing here required an additional approximation.
+\end{remark}
+\end{solution}

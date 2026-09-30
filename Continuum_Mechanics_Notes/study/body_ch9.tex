@@ -1,0 +1,4389 @@
+%=======================================================================
+\chapter{Viscous Fluids}
+%=======================================================================
+
+Everything so far has been preparation. Chapters 1 to 5 built the
+algebra and the calculus, Chapter 6 the balance laws, Chapter 7 the
+comparison of observers, Chapter 8 the shape a constitutive equation may
+take. None of it, taken alone, predicts anything. This chapter is where
+the machinery is turned on a real material, and the reward is worth the
+wait: the Navier--Stokes equations, which are ordinarily written down as
+a plausible postulate, appear here as the only possibility left standing
+once fluidity, frame indifference and the entropy inequality have each
+had their say.
+
+The route is worth seeing whole before it is walked, because each step
+deletes something from the constitutive function and the deletions
+compound.
+
+\begin{itemize}\itemsep2pt
+\item \emph{Fluidity} removes the reference configuration. The symmetry
+      group of a fluid is the whole unimodular group, and a unimodular
+      map cannot change $\det\bF$; so all that survives of the
+      deformation gradient is its determinant, and by conservation of
+      mass that is the density. Six functions of nine arguments collapse
+      to functions of one.
+\item \emph{Frame indifference} removes the position and the velocity
+      outright, and removes the spin $\bW$ from the velocity gradient.
+      What is left of $\bL$ is $\bD$.
+\item \emph{Isotropy} of the resulting function, which is a consequence
+      of frame indifference and not an extra hypothesis, forces the
+      stress to be a polynomial of degree two in $\bD$ with coefficients
+      depending on three scalars. This is the representation theorem of
+      Section~\ref{sec:ch9isotropic} and it is the mathematical heart of
+      the chapter.
+\item \emph{Linearity in $\bD$}, the one modelling assumption made
+      rather than derived, reduces the three coefficient functions to
+      two numbers, the viscosities.
+\item \emph{The Clausius--Duhem inequality} then fixes the signs of
+      those two numbers and of the conductivity, and identifies the
+      pressure at rest with a derivative of the free energy.
+\end{itemize}
+
+Chapter 8 ended with the general constitutive statement \eqr{8.33} for
+the stress,
+\[
+   \bT=\hat\bT_{\kappa}(\bx,\bv,\theta,\bF_{\kappa},\bL;\bX),
+\]
+together with \eqr{8.31} for the heat flux and \eqr{8.29} for the free
+energy and the entropy. We begin by imposing on \eqr{8.33} the symmetry
+condition that defines a fluid.
+
+%-----------------------------------------------------------------------
+\subsection*{Fluidity, and the disappearance of the reference
+configuration}
+%-----------------------------------------------------------------------
+
+For fluids the constitutive equation \eqr{8.33} for the stress, in the
+frame of $O$, satisfies the material symmetry condition \eqr{8.16} with
+$\mathcal{G}_{\kappa(p_{0})}=U$, that is
+\begin{equation}
+   \hat\bT_{\kappa}(\bx,\bv,\theta,\bF,\bL;\bX)
+   =\hat\bT_{\kappa}(\bx,\bv,\theta,\bF\bR,\bL;\bX)
+   \tag{9.1}\label{eq:9.1}
+\end{equation}
+for all fixed $\bR\in U$, the unimodular group of \eqr{8.18}.
+
+To derive a necessary condition for \eqr{9.1} we consider a fixed
+instant $t^{*}$, say, and select
+\begin{equation}
+   \bR=J^{1/3}\big(\shift^{t}\bF\big)^{-1},
+   \tag{$\ast$}
+\end{equation}
+in which $\shift$ is the fixed shifter of Definition~\ref{def:shifter}
+in the frame of $O$ and $\bF$ is fixed at the value $\bF(\bX,t^{*})$,
+with determinant $J$. In terms of components,
+\[
+   \shift^{t}\bF=\dd_{iA}F_{iB}\,\hbE_{A}\otimes\hbE_{B}.
+\]
+
+Three things about this choice have to be checked, and each is a line.
+
+\emph{It is a referential tensor.} A symmetry transformation is
+required by \eqr{8.8} to be the gradient of a map from one reference
+configuration to another, hence a linear map of $\hVt$ to itself. Now
+$\bF$ maps $\hVt$ to $\Vt$, so $\bF^{-1}$ maps $\Vt$ to $\hVt$ and
+$\bF^{-1}$ alone will not do: we need something that first returns to
+$\hVt$. The shifter is exactly that, $\shift\colon\hEt\to\Et$ with
+$\shift^{t}\colon\Vt\to\hVt$, so $\shift^{t}\bF\colon\hVt\to\hVt$ is a
+referential tensor and so is its inverse. This is
+Remark~\ref{rem:shifteruse} in action: without the shifter the
+expression would not even typecheck, and the whole calculation would be
+meaningless.
+
+\emph{It is unimodular.} By Problem 21(a) of Chapter 1,
+$\det(\alpha\bA)=\alpha^{3}\det\bA$, and by
+Proposition~\ref{prop:prodinv}, $\det(\bA^{-1})=(\det\bA)^{-1}$. The
+matrix of $\shift^{t}\bF$ displayed above is $\dd_{iA}F_{iB}$, which is
+the matrix $[F_{AB}]$ with its first index relabelled, so
+$\det(\shift^{t}\bF)=\det\bF=J$. Hence
+\[
+   \det\bR=\big(J^{1/3}\big)^{3}\det\big[(\shift^{t}\bF)^{-1}\big]
+   =J\cdot J^{-1}=1 ,
+\]
+so $\bR\in U$ as required. It is fixed, because $\bF$ was frozen at its
+value at $t^{*}$.
+
+\emph{It annihilates $\bF$.} Since $\shift$ is orthogonal,
+$(\shift^{t})^{-1}=\shift$, and by Proposition~\ref{prop:prodinv},
+$(\shift^{t}\bF)^{-1}=\bF^{-1}(\shift^{t})^{-1}=\bF^{-1}\shift$.
+Therefore
+\[
+   \bF\bR=J^{1/3}\bF\bF^{-1}\shift=J^{1/3}\shift .
+\]
+
+That is the point of the choice: the arbitrary $\bF$ has been replaced
+by a multiple of the shifter, and the only trace of $\bF$ left is the
+scalar $J$. Substituting into \eqr{9.1},
+\begin{equation}
+   \hat\bT_{\kappa}(\bx,\bv,\theta,\bF_{\kappa},\bL;\bX)
+   =\hat\bT_{\kappa}\big(\bx,\bv,\theta,J^{1/3}\shift,\bL;\bX\big).
+   \tag{9.2}\label{eq:9.2}
+\end{equation}
+
+Conversely, \eqr{9.2} satisfies \eqr{9.1} for all unimodular $\bR$, and
+is thus also sufficient for fluidity at the instant $t^{*}$. The
+converse costs one line: replacing $\bF$ by $\bF\bR$ with $\det\bR=1$
+leaves $\det(\bF\bR)=(\det\bF)(\det\bR)=J$ unchanged, so the right-hand
+side of \eqr{9.2} does not move, and neither therefore does the left.
+This instant is arbitrary, however, and so \eqr{9.2} holds at all
+instants.
+
+Further, from \eqr{2.59} and the conservation of mass \eqr{6.18} we have
+that
+\[
+   J=\frac{\rho_{\kappa}(\bX)}{\rho} .
+\]
+Thus the stress at $\bX$ is determined by the list
+$\{\bx,\bv,\theta,\rho,\bL\}$: the deformation gradient has been traded
+for a single scalar, and that scalar is the current density, which is a
+spatial field owing nothing to $\kappa$. Then, using $\bX=\bkappa(p)$,
+which is \eqr{2.3}, we may eliminate the reference configuration from
+the constitutive function altogether and write
+\begin{equation}
+   \bT=\bG(\bx,\bv,\theta,\rho,\bL;p).
+   \tag{9.3}\label{eq:9.3}
+\end{equation}
+
+\begin{remark}[what has just been bought]\label{rem:ch9nokappa}
+Compare \eqr{9.3} with \eqr{8.10}. Two changes have occurred, and the
+second is the important one.
+
+The obvious change is arithmetic: a tensor argument with nine components
+has become a scalar argument with one. The subtle change is that the
+parameter after the semicolon is now the material point $p$ itself and
+not its label $\bX$ in some chosen configuration. Every other chapter of
+this book has had to carry a reference configuration because $\bF$ has
+no meaning without one, and Sections 8.2 and 8.3 were entirely about the
+consequences of that dependence: how the response function changes when
+$\kappa$ changes, and how the symmetry group is conjugated. For a fluid
+all of that machinery becomes vacuous, because $\kappa$ has vanished
+from \eqr{9.3}.
+
+That is what ``a fluid has no preferred shape'' means when it is written
+out. A solid remembers a configuration and its constitutive function
+must say which; a fluid remembers nothing but how much of itself is
+packed into a given volume. Everything else in this chapter is a
+consequence of the shortness of the list in \eqr{9.3}, and the list is
+short because $\mathcal{G}=U$ is as large as a symmetry group can be.
+\end{remark}
+
+%=======================================================================
+\section{Material frame indifference}\label{sec:ch9mfi}
+%=======================================================================
+
+Of course any other observer, $O^{+}$ say, can follow the same line of
+reasoning to conclude that the stress is expressible in the form
+\begin{equation}
+   \bT^{+}=\bG^{+}(\bx^{+},\bv^{+},\theta^{+},\rho^{+},\bL^{+};p),
+   \tag{9.4}\label{eq:9.4}
+\end{equation}
+for some suitable constitutive function $\bG^{+}$. This function is
+related to $\bG$ by
+\begin{equation}
+   \bG^{+}(\bx^{+},\bv^{+},\theta^{+},\rho^{+},\bL^{+};p)
+   =\bQ\,\bG(\bx,\bv,\theta,\rho,\bL;p)\,\bQ^{t},
+   \tag{9.5}\label{eq:9.5}
+\end{equation}
+where $\bQ(t)\colon\Et\to\mathbb{E}^{3+}$ is the orthogonal tensor
+associated with the change of frame, and where \eqr{9.5} is \eqr{8.35}
+with the reduced list of \eqr{9.3}. We wish to use this statement to
+derive restrictions on the constitutive function $\bG$ pertaining to
+$O$. That pertaining to $O^{+}$, if desired, can then be obtained a
+posteriori; Problem 2 does exactly that.
+
+\begin{remark}[why \eqr{9.5} alone forbids nothing]\label{rem:ch9defn}
+Section 8.4 made this point in general and it is worth repeating in the
+particular case, because the whole of the present section is built to
+get around it. Read literally, \eqr{9.5} \emph{defines} $\bG^{+}$: the
+right-hand side is a computable expression once $\bG$ and the dictionary
+of Chapter 7 are given, and \eqr{9.5} names that expression $\bG^{+}$.
+Nothing has been forbidden, because nothing has been asserted about
+$\bG$.
+
+The physical content enters when $\bG^{+}$ must give one stress for one
+set of arguments in the $O^{+}$ frame, independently of which relative
+motion was used to describe those arguments from $O$. This does not mean
+writing $\bG^{+}=\bG$: their inputs and outputs live in different point
+and vector spaces. The device below compares \emph{two} relative motions
+with the same $O^{+}$ data. Eliminating that common $\bG^{+}$ value
+leaves \eqr{9.10}, an equation involving $\bG$ alone.
+\end{remark}
+
+Following the argument of the reference cited by the book, consider two
+relative motions of the observers, characterized by orthogonal tensors
+$\bQ_{1}(t)$ and $\bQ_{2}(t)$, and vectors $\bc_{1}(t)$ and
+$\bc_{2}(t)$, respectively. Fix a material particle $p$ and a time $t$.
+In the first comparison $O$ records $\bx_{1},\bv_{1},\bL_{1}$; in the
+second it records $\bx_{2},\bv_{2},\bL_{2}$. The subscripts label two
+alternative placements and motions of $O$, not two particles. Both
+descriptions use the same constitutive rule $\bG$ in $\Et$. The common
+observer $O^{+}$ records $\bx^{+},\bv^{+},\bL^{+}$ in
+$\mathbb{E}^{3+}$. Figure~\ref{fig:ch9three} shows the three records.
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{A}
+\begin{tikzpicture}[scale=0.98,
+  ar/.style={-{Stealth[length=2.4mm]},thick},
+  positionvec/.style={-{Stealth[length=2.4mm]},very thick,blue!55!black}]
+% The two outer panels are alternative descriptions by O, not two materials.
+\begin{scope}[xshift=0cm]
+  \draw[gray!55,rounded corners] (0,0) rectangle (4.5,3.6);
+  \node[font=\small,anchor=north] at (2.25,3.48) {$O_{1}$: first run};
+  \coordinate (o1) at (0.76,0.66);
+  \coordinate (p1) at (3.20,2.13);
+  \draw[thinvec,gray!70] (o1)--(1.91,0.79);
+  \draw[thinvec,gray!70] (o1)--(0.55,1.77);
+  \draw[positionvec] (o1)--(p1) node[midway,above,sloped] {$\bx_{1}$};
+  \fill (o1) circle (1.5pt) node[below] {$o_{1}$};
+  \fill (p1) circle (1.8pt) node[above] {$p$};
+\end{scope}
+\begin{scope}[xshift=5.8cm]
+  \draw[gray!55,rounded corners] (0,0) rectangle (4.5,3.6);
+  \node[font=\small,anchor=north] at (2.25,3.48) {$O^{+}$};
+  \coordinate (op) at (0.76,0.66);
+  \coordinate (pp) at (3.05,2.26);
+  \draw[thinvec,gray!70] (op)--(1.92,0.66);
+  \draw[thinvec,gray!70] (op)--(0.76,1.79);
+  \draw[positionvec] (op)--(pp) node[midway,above,sloped] {$\bx^{+}$};
+  \fill (op) circle (1.5pt) node[below] {$o^{+}$};
+  \fill (pp) circle (1.8pt) node[above] {$p$};
+\end{scope}
+\begin{scope}[xshift=11.6cm]
+  \draw[gray!55,rounded corners] (0,0) rectangle (4.5,3.6);
+  \node[font=\small,anchor=north] at (2.25,3.48) {$O_{2}$: second run};
+  \coordinate (o2) at (0.76,0.66);
+  \coordinate (p2) at (2.98,2.02);
+  \draw[thinvec,gray!70] (o2)--(1.90,0.38);
+  \draw[thinvec,gray!70] (o2)--(1.04,1.77);
+  \draw[positionvec] (o2)--(p2) node[midway,above,sloped] {$\bx_{2}$};
+  \fill (o2) circle (1.5pt) node[below] {$o_{2}$};
+  \fill (p2) circle (1.8pt) node[above] {$p$};
+\end{scope}
+\draw[ar] (4.63,3.95)--(5.67,3.95)
+  node[midway,above,font=\scriptsize] {$\bQ_{1},\bc_{1}$};
+\draw[ar] (11.47,3.95)--(10.43,3.95)
+  node[midway,above,font=\scriptsize] {$\bQ_{2},\bc_{2}$};
+\end{tikzpicture}
+\caption{The setup of \eqr{9.6}--\eqr{9.9}. Each panel shows the same
+particle $p$ at the same instant. The outer panels represent two
+alternative descriptions by $O$, so both use $\bG$; they are not two
+independent physical observers. Each arrow maps that description into
+the one fixed report of $O^{+}$. Its rotation $\bQ_k$ acts on a position
+vector, while $\bc_k$ locates the outer panel's origin in the plus
+frame: $\bx^{+}=\bQ_k\bx_k+\bc_k$ for $k=1,2$.}
+\label{fig:ch9three}
+\end{figure}
+
+Thus $\bQ_k$ maps vectors from the $O$ frame to the $O^{+}$ frame,
+whereas $\bc_k$ is a translation measured in the latter. In particular,
+$\bQ_k\bx_k+\bc_k$ is the plus-frame position of $p$, and the two
+routes must give the same result. From the perspective of $O^{+}$,
+the positions are therefore related by (compare \eqr{7.3})
+\begin{equation}
+   \bQ_{1}(t)\bx_{1}+\bc_{1}(t)=\bx^{+}=\bQ_{2}(t)\bx_{2}+\bc_{2}(t),
+   \tag{9.6}\label{eq:9.6}
+\end{equation}
+and from \eqr{7.8} and \eqr{7.33}, the associated velocities and
+velocity gradients are related by
+\begin{equation}
+   \bQ_{1}\bv_{1}+\dot\bQ_{1}\bQ_{1}^{t}(\bx^{+}-\bc_{1})+\dot\bc_{1}
+   =\bv^{+}
+   =\bQ_{2}\bv_{2}+\dot\bQ_{2}\bQ_{2}^{t}(\bx^{+}-\bc_{2})+\dot\bc_{2}
+   \tag{9.7}\label{eq:9.7}
+\end{equation}
+and
+\begin{equation}
+   \bQ_{1}\bL_{1}\bQ_{1}^{t}+\dot\bQ_{1}\bQ_{1}^{t}
+   =\bL^{+}
+   =\bQ_{2}\bL_{2}\bQ_{2}^{t}+\dot\bQ_{2}\bQ_{2}^{t},
+   \tag{9.8}\label{eq:9.8}
+\end{equation}
+respectively, whereas \eqr{7.37} implies that
+$\rho_{1}=\rho^{+}=\rho_{2}$ and $\theta_{1}=\theta^{+}=\theta_{2}$.
+The last two are scalar readings, so no $\bQ_k$ is needed to compare
+them. By contrast, the velocity in \eqr{9.7} acquires the velocity of
+the moving frame, and its gradient in \eqr{9.8} acquires the frame's
+angular rate $\dot\bQ_k\bQ_k^{t}$. Denoting the common scalar readings
+simply by $\rho$ and $\theta$, we then have, from
+\eqr{9.5} applied to each of the two relative motions in turn,
+\begin{equation}
+\begin{aligned}
+   \bQ_{1}\bG(\bx_{1},\bv_{1},\theta,\rho,\bL_{1};p)\bQ_{1}^{t}
+   &=\bG^{+}(\bx^{+},\bv^{+},\theta^{+},\rho^{+},\bL^{+};p)\\
+   &=\bQ_{2}\bG(\bx_{2},\bv_{2},\theta,\rho,\bL_{2};p)\bQ_{2}^{t},
+\end{aligned}
+   \tag{9.9}\label{eq:9.9}
+\end{equation}
+Both lines in \eqr{9.9} produce the \emph{same} $O^{+}$ stress from the
+\emph{same} plus-frame data. Thus the middle value can be eliminated;
+what remains is a restriction on the one function used in both outer
+panels of Figure~\ref{fig:ch9three}:
+\begin{equation}
+   \bG(\bx_{2},\bv_{2},\theta,\rho,\bL_{2};p)
+   =\bQ\,\bG(\bx_{1},\bv_{1},\theta,\rho,\bL_{1};p)\,\bQ^{t}
+   \tag{9.10}\label{eq:9.10}
+\end{equation}
+on the constitutive equation used by $O$, where
+\begin{equation}
+   \bQ=\bQ_{2}^{t}\bQ_{1}\colon\Et\to\Et
+   \tag{9.11}\label{eq:9.11}
+\end{equation}
+is an arbitrary orthogonal tensor mapping $\Et$ to itself.
+
+The passage from \eqr{9.9} to \eqr{9.10} is worth doing in full, since
+the same manipulation recurs three times below. The two ends of
+\eqr{9.9} are equal, so
+\[
+   \bQ_{1}\bG_{1}\bQ_{1}^{t}=\bQ_{2}\bG_{2}\bQ_{2}^{t},
+\]
+where $\bG_{k}$ abbreviates
+$\bG(\bx_{k},\bv_{k},\theta,\rho,\bL_{k};p)$. Multiply on the left by
+$\bQ_{2}^{t}$ and on the right by $\bQ_{2}$. The right-hand side becomes
+$\bQ_{2}^{t}\bQ_{2}\bG_{2}\bQ_{2}^{t}\bQ_{2}=\I\bG_{2}\I=\bG_{2}$,
+because $\bQ_{2}^{t}\bQ_{2}=\I$ is the identity on $\Et$ by
+Proposition~\ref{prop:orth}. The left-hand side becomes
+$(\bQ_{2}^{t}\bQ_{1})\bG_{1}(\bQ_{1}^{t}\bQ_{2})$, and
+$\bQ_{1}^{t}\bQ_{2}=(\bQ_{2}^{t}\bQ_{1})^{t}=\bQ^{t}$ by
+Proposition~\ref{prop:transpose}. That is \eqr{9.10}.
+
+Two features of $\bQ$ defined by \eqr{9.11} deserve notice. It is
+orthogonal, being a product of two orthogonal tensors
+(Proposition~\ref{prop:orth}). And it maps $\Et$ to $\Et$, not to
+$\mathbb{E}^{3+}$: the trip out to the second observer's space and back
+has cancelled. In the diagram, $\bQ_{1}$ takes a first-panel vector
+into the middle panel, then $\bQ_{2}^{t}$ takes it back into the third
+panel. So the restriction \eqr{9.10} is a statement made
+entirely within the frame of $O$, which is what makes it usable, and the
+second observer has served only as a bookkeeping device.
+
+\subsection*{The relative motion of the two descriptions}
+
+Straightforward manipulations making use of \eqr{9.6} to \eqr{9.8}
+express $\bx_{2},\bv_{2},\bL_{2}$ in terms of $\bx_{1},\bv_{1},\bL_{1}$.
+We do them now; Problem 1 assembles the same computations as a
+systematic verification.
+
+From \eqr{9.6}, $\bQ_{2}\bx_{2}=\bQ_{1}\bx_{1}+\bc_{1}-\bc_{2}$;
+multiplying on the left by $\bQ_{2}^{t}$ and using
+$\bQ_{2}^{t}\bQ_{2}=\I$ and \eqr{9.11},
+\begin{equation}
+   \bx_{2}=\bQ\bx_{1}+\bd(t),
+   \qquad\text{where }\bd(t)=\bQ_{2}^{t}(\bc_{1}-\bc_{2}),
+   \tag{9.12}\label{eq:9.12}
+\end{equation}
+Here $\bd$ is the shift between the two outer origins, expressed in
+$O$'s vector space: go from origin $2$ to origin $1$ in the plus frame
+by $\bc_{1}-\bc_{2}$, then use $\bQ_{2}^{t}$ to express that displacement
+in the second outer frame. This is why the shift appears even if the
+axes have the same orientation. Applying the same treatment to
+\eqr{9.7} gives
+\[
+   \bv_{2}=\bQ\bv_{1}+\be,
+   \qquad
+   \be=\bQ_{2}^{t}\Big[\dot\bQ_{1}\bQ_{1}^{t}(\bx^{+}-\bc_{1})
+   -\dot\bQ_{2}\bQ_{2}^{t}(\bx^{+}-\bc_{2})+\dot\bc_{1}-\dot\bc_{2}\Big],
+\]
+so that
+\begin{equation}
+   \bv_{2}=\bQ\bv_{1}+\be,
+   \tag{9.13}\label{eq:9.13}
+\end{equation}
+where $\be$ is a function of $\bx^{+}$ and $t$.
+
+The velocity gradient takes one more step, and it is worth doing in full
+because the whole chapter rests on its consequence. By definition
+$\bL_{2}=\grad_{2}\bv_{2}$, the gradient taken with respect to
+$\bx_{2}$. Two ingredients are needed.
+
+First, differentiate \eqr{9.12} to get the velocity in the form the chain
+rule wants. Holding the material point fixed and using $\dot\bx_{1}=
+\bv_{1}$,
+\[
+   \bv_{2}=\dot\bx_{2}=\dot\bQ\bx_{1}+\bQ\bv_{1}+\dot\bd(t),
+\]
+which is \eqr{9.13} again with $\be=\dot\bQ\bx_{1}+\dot\bd$ written out.
+
+Second, the chain rule needs $\partial\bx_{1}/\partial\bx_{2}$. Invert
+\eqr{9.12}: since $\bQ$ is orthogonal,
+$\bx_{1}=\bQ^{t}\big(\bx_{2}-\bd\big)$, and $\bQ$ and $\bd$ depend on $t$
+alone, so
+\[
+   \frac{\partial\bx_{1}}{\partial\bx_{2}}=\bQ^{t}.
+\]
+
+Now differentiate. Of the three terms in $\bv_{2}$, the last, $\dot\bd$,
+is a function of $t$ alone and has zero gradient. The other two go
+through the chain rule:
+\[
+\begin{aligned}
+   \bL_{2}=\grad_{2}\bv_{2}
+   &=\frac{\partial}{\partial\bx_{1}}
+     \big(\dot\bQ\bx_{1}+\bQ\bv_{1}\big)\,
+     \frac{\partial\bx_{1}}{\partial\bx_{2}}\\
+   &=\big(\dot\bQ+\bQ\,\grad_{1}\bv_{1}\big)\bQ^{t}
+    =\dot\bQ\bQ^{t}+\bQ\bL_{1}\bQ^{t},
+\end{aligned}
+\]
+using $\partial(\dot\bQ\bx_{1})/\partial\bx_{1}=\dot\bQ$ because
+$\dot\bQ$ does not depend on position, and $\grad_{1}\bv_{1}=\bL_{1}$.
+So
+\[
+   \bL_{2}=\bQ\bL_{1}\bQ^{t}+\dot\bQ\bQ^{t}.
+\]
+
+Split this into symmetric and skew parts. The term $\bQ\bL_{1}\bQ^{t}$
+splits cleanly, because conjugation by an orthogonal tensor preserves
+symmetry and skewness: $(\bQ\bA\bQ^{t})^{t}=\bQ\bA^{t}\bQ^{t}$, so
+$\bQ\bD_{1}\bQ^{t}$ is symmetric and $\bQ\bW_{1}\bQ^{t}$ is skew. The
+term $\dot\bQ\bQ^{t}$ is skew outright, by Problem 1(c) of Chapter 4
+applied to the orthogonal $\bQ$. Since the symmetric and skew parts of a
+tensor are unique, Problem 14 of Chapter 1, we may read off
+\[
+   \bD_{2}=\bQ\bD_{1}\bQ^{t}
+   \qquad\text{and}\qquad
+   \bW_{2}=\bQ\bW_{1}\bQ^{t}+\dot\bQ\bQ^{t},
+\]
+in which $\bQ$ is given by \eqr{9.11}.
+
+That asymmetry is the whole point of the section. The stretching $\bD$
+transforms by conjugation alone, with nothing left over, so it is
+objective in the sense of Chapter 7. The spin $\bW$ picks up the extra
+$\dot\bQ\bQ^{t}$, which depends on how the second observer is turning and
+not on the material at all. A constitutive law written in terms of $\bW$
+would therefore make the stress depend on the observer's rotation, which
+is why the arguments of the response functions must be built from $\bD$
+and never from $\bW$ or $\bL$.
+
+\begin{remark}[a clash of symbols, and the book's numbering]
+\label{rem:ch9enote}
+The vector called $\be$ here is the book's, and it is not a basis
+vector. Throughout this chapter $\be$ without a subscript denotes the
+velocity offset of \eqr{9.13}, while $\be_{1},\be_{2},\be_{3}$ retain
+their usual meaning as a fixed orthonormal basis of $\Et$. The two never
+appear in the same formula, but the reader who is used to
+$\be_{i}$ should register the difference once.
+
+The book gathers the position and velocity statements under the single
+number \eqr{9.12} and the three velocity-gradient statements under
+\eqr{9.13}; here they are split so that each display carries the
+number the book prints beside it.
+\end{remark}
+
+The velocity-gradient statement is the one with a step in it, and the
+step is the identity
+\begin{equation}
+   \bQ_{2}^{t}\dot\bQ_{1}\bQ_{1}^{t}\bQ_{2}-\bQ_{2}^{t}\dot\bQ_{2}
+   =\dot\bQ\bQ^{t},
+   \qquad \bQ=\bQ_{2}^{t}\bQ_{1}.
+   \tag{$\ast\ast$}
+\end{equation}
+To see it, first rearrange \eqr{9.8}: multiplying
+$\bQ_{2}\bL_{2}\bQ_{2}^{t}=\bQ_{1}\bL_{1}\bQ_{1}^{t}
++\dot\bQ_{1}\bQ_{1}^{t}-\dot\bQ_{2}\bQ_{2}^{t}$ on the left by
+$\bQ_{2}^{t}$ and on the right by $\bQ_{2}$ gives
+\[
+   \bL_{2}=\bQ\bL_{1}\bQ^{t}
+   +\bQ_{2}^{t}\dot\bQ_{1}\bQ_{1}^{t}\bQ_{2}
+   -\bQ_{2}^{t}\dot\bQ_{2}\bQ_{2}^{t}\bQ_{2},
+\]
+and $\bQ_{2}^{t}\bQ_{2}=\I$ collapses the last term to
+$\bQ_{2}^{t}\dot\bQ_{2}$. Now compute $\dot\bQ\bQ^{t}$ directly. By the
+product rule, $\dot\bQ=\dot\bQ_{2}^{t}\bQ_{1}+\bQ_{2}^{t}\dot\bQ_{1}$,
+and $\bQ^{t}=\bQ_{1}^{t}\bQ_{2}$, so
+\[
+\begin{aligned}
+   \dot\bQ\bQ^{t}
+   &=\big(\dot\bQ_{2}^{t}\bQ_{1}+\bQ_{2}^{t}\dot\bQ_{1}\big)
+    \bQ_{1}^{t}\bQ_{2}
+   \\
+   &=\dot\bQ_{2}^{t}\big(\bQ_{1}\bQ_{1}^{t}\big)\bQ_{2}
+    +\bQ_{2}^{t}\dot\bQ_{1}\bQ_{1}^{t}\bQ_{2}
+   =\dot\bQ_{2}^{t}\bQ_{2}+\bQ_{2}^{t}\dot\bQ_{1}\bQ_{1}^{t}\bQ_{2},
+\end{aligned}
+\]
+using $\bQ_{1}\bQ_{1}^{t}=\I^{+}$, the identity on $\mathbb{E}^{3+}$.
+Finally differentiate $\bQ_{2}^{t}\bQ_{2}=\I$, whose right-hand side is
+constant:
+\[
+   \dot\bQ_{2}^{t}\bQ_{2}+\bQ_{2}^{t}\dot\bQ_{2}=\Ob
+   \quad\Longrightarrow\quad
+   \dot\bQ_{2}^{t}\bQ_{2}=-\bQ_{2}^{t}\dot\bQ_{2},
+\]
+which turns the previous display into exactly $(\ast\ast)$. Hence
+$\bL_{2}=\bQ\bL_{1}\bQ^{t}+\dot\bQ\bQ^{t}$.
+
+The split into $\bD$ and $\bW$ follows at once. Differentiating
+$\bQ\bQ^{t}=\I$ gives $\dot\bQ\bQ^{t}+\bQ\dot\bQ^{t}=\Ob$, that is
+$\dot\bQ\bQ^{t}=-\big(\dot\bQ\bQ^{t}\big)^{t}$: the tensor
+$\dot\bQ\bQ^{t}$ is skew. And for any $\bA$,
+$\Sym(\bQ\bA\bQ^{t})=\tfrac12\big(\bQ\bA\bQ^{t}
++\bQ\bA^{t}\bQ^{t}\big)=\bQ(\Sym\bA)\bQ^{t}$, using
+$(\bQ\bA\bQ^{t})^{t}=\bQ\bA^{t}\bQ^{t}$ from
+Proposition~\ref{prop:transpose}. Taking symmetric and skew parts of
+$\bL_{2}=\bQ\bL_{1}\bQ^{t}+\dot\bQ\bQ^{t}$ therefore puts the whole of
+$\dot\bQ\bQ^{t}$ into the skew part and none of it into the symmetric
+part, which is the content of $\bD_{2}=\bQ\bD_{1}\bQ^{t}$ and
+$\bW_{2}=\bQ\bW_{1}\bQ^{t}+\dot\bQ\bQ^{t}$.
+
+\begin{remark}[this is \eqr{7.34} in a mirror]\label{rem:ch9mirror}
+The pair $\bD_{2}=\bQ\bD_{1}\bQ^{t}$, $\bW_{2}=\bQ\bW_{1}\bQ^{t}+
+\dot\bQ\bQ^{t}$ is formally \eqr{7.34}, and the resemblance is not an
+accident, but the two statements are about different things and the
+difference matters.
+
+Equation \eqr{7.34} compares what $O$ sees with what $O^{+}$ sees:
+$\bD$ lives in $\Vt$ and $\bD^{+}$ in $\mathbb{E}^{3+}$, and $\bQ$ is
+the two-point tensor between them. The present statement compares two
+descriptions \emph{both belonging to $O$}, of two different relative
+motions of the same pair of observers; every tensor in it lives in
+$\Vt$ and $\bQ$ maps $\Vt$ to itself. That is precisely why \eqr{9.10}
+is a restriction on $\bG$ and \eqr{9.5} is not: a functional equation
+whose two sides are evaluated in the same space can be read as a
+constraint on the function, and one whose sides live in different spaces
+cannot.
+
+The mechanism that produces $\bW^{+}\neq\bQ\bW\bQ^{t}$ is the same in
+both: an observer who spins sees an extra rotation and no extra
+stretching. Remark~\ref{rem:Wtrap} of Chapter 4 warned that $\bW$ is not
+the spin of material fibres; the present formula says something
+stronger, that $\bW$ is not even a property of the material, since it
+can be changed by turning around.
+\end{remark}
+
+\subsection*{First choice: $\bQ=\I$, and the loss of $\bx$ and $\bv$}
+
+To derive a necessary condition for \eqr{9.10} we exploit the
+arbitrariness of $\bQ$ and select $\bQ(t)=\I$, the identity on $\Et$.
+Inserting this into \eqr{9.11} and left-multiplying by $\bQ_{2}$ gives
+$\bQ_{2}\I=\I^{+}\bQ_{1}$, where $\I^{+}$ is the identity on
+$\mathbb{E}^{3+}$. The left- and right-hand sides of this are simply
+$\bQ_{2}$ and $\bQ_{1}$, respectively, and our choice thus yields
+$\bQ_{2}=\bQ_{1}$.
+
+We find that $\be$ then reduces to a function of $t$ alone, given by
+\begin{equation}
+   \be(t)=\bQ_{1}^{t}\big(\dot\bc_{1}-\dot\bc_{2}\big)
+   +\dot\bQ_{1}^{t}\big(\bc_{1}-\bc_{2}\big),
+   \tag{9.14}\label{eq:9.14}
+\end{equation}
+and that \eqr{9.10} reduces, on dropping the subscript $1$, to
+\begin{equation}
+   \bG(\bx+\bd,\bv+\be,\theta,\rho,\bL;p)
+   =\bG(\bx,\bv,\theta,\rho,\bL;p),
+   \tag{9.15}\label{eq:9.15}
+\end{equation}
+for arbitrary $\bd$ and $\be$.
+
+Setting $\bQ_{2}=\bQ_{1}$ in the expression for $\be$ displayed before
+\eqr{9.13}, the two terms containing $\bx^{+}$ cancel:
+\[
+\begin{aligned}
+   \be&=\bQ_{1}^{t}\Big[\dot\bQ_{1}\bQ_{1}^{t}(\bx^{+}-\bc_{1})
+       -\dot\bQ_{1}\bQ_{1}^{t}(\bx^{+}-\bc_{2})
+       +\dot\bc_{1}-\dot\bc_{2}\Big]\\
+      &=\bQ_{1}^{t}\Big[\dot\bQ_{1}\bQ_{1}^{t}(\bc_{2}-\bc_{1})
+       +\dot\bc_{1}-\dot\bc_{2}\Big]\\
+      &=-\Big(\bQ_{1}^{t}\dot\bQ_{1}\bQ_{1}^{t}\Big)(\bc_{1}-\bc_{2})
+       +\bQ_{1}^{t}(\dot\bc_{1}-\dot\bc_{2}).
+\end{aligned}
+\]
+The bracketed tensor simplifies. Differentiating
+$\bQ_{1}\bQ_{1}^{t}=\I^{+}$ gives
+$\dot\bQ_{1}\bQ_{1}^{t}=-\bQ_{1}\dot\bQ_{1}^{t}$; multiplying on the
+left by $\bQ_{1}^{t}$ and using $\bQ_{1}^{t}\bQ_{1}=\I$,
+\[
+   \bQ_{1}^{t}\dot\bQ_{1}\bQ_{1}^{t}=-\dot\bQ_{1}^{t}.
+\]
+Substituting gives \eqr{9.14}. The dependence on $\bx^{+}$ has gone,
+which is what had to be shown: $\be$ is a function of $t$ alone.
+
+\begin{remark}[a misprint in the printed \eqr{9.14}]\label{rem:ch9mis14}
+The book prints the second term of \eqr{9.14} as
+$\dot\bQ_{1}\bQ_{1}^{t}(\bc_{1}-\bc_{2})$. That expression cannot be
+right, and the reason is visible without any calculation. The vectors
+$\bc_{k}$ are elements of $\mathbb{E}^{3+}$, since \eqr{9.6} adds them
+to $\bQ_{k}\bx_{k}$ there. Now $\bQ_{1}^{t}$ carries
+$\mathbb{E}^{3+}$ to $\Et$ and $\dot\bQ_{1}$ carries $\Et$ back to
+$\mathbb{E}^{3+}$, so $\dot\bQ_{1}\bQ_{1}^{t}(\bc_{1}-\bc_{2})$ lands
+in $\mathbb{E}^{3+}$; but $\be$ must lie in $\Vt$, because \eqr{9.13}
+adds it to $\bQ\bv_{1}$ there. One transpose is missing, and the
+calculation above supplies it: the term is
+$\dot\bQ_{1}^{t}(\bc_{1}-\bc_{2})$.
+
+There is a one-line check of the corrected formula that also explains
+it. With $\bQ_{2}=\bQ_{1}$ we have $\bQ=\I$, so \eqr{9.12} reads
+$\bx_{2}=\bx_{1}+\bd(t)$ with $\bd=\bQ_{1}^{t}(\bc_{1}-\bc_{2})$.
+Differentiating this at fixed material point gives
+$\bv_{2}=\bv_{1}+\dot\bd$, and
+\[
+   \dot\bd=\big(\bQ_{1}^{t}(\bc_{1}-\bc_{2})\big)^{\textstyle\cdot}
+   =\dot\bQ_{1}^{t}(\bc_{1}-\bc_{2})
+   +\bQ_{1}^{t}(\dot\bc_{1}-\dot\bc_{2}),
+\]
+which is \eqr{9.14} as corrected. So $\be$ is nothing more mysterious
+than $\dot\bd$, as of course it must be when the two descriptions differ
+by a pure translation.
+\end{remark}
+
+It follows from \eqr{9.15} that the constitutive function is insensitive
+to variations of its first two arguments, and hence that it is
+independent of those arguments. The quantifier is what carries the
+conclusion, and it is worth checking that we really have it. The vectors
+$\bc_{1}$ and $\bc_{2}$ are arbitrary functions of time, so at the
+instant under consideration $\bc_{1}-\bc_{2}$ and its derivative
+$\dot\bc_{1}-\dot\bc_{2}$ may be assigned independently and arbitrarily;
+by \eqr{9.12} and \eqr{9.14} the same is then true of $\bd$ and $\be$.
+A simple instance is $\bQ_{1}=\bQ_{2}=\I$, $\bc_{1}=\bze$ and
+$\bc_{2}=\ba(t)$. Then $\bx_{1}=\bx^{+}$,
+$\bx_{2}=\bx^{+}-\ba(t)$, and $\bv_{2}=\bv_{1}-\dot\ba(t)$.
+At $t^{*}$ we may prescribe $\ba(t^{*})$ and $\dot\ba(t^{*})$
+independently, so the position shift and velocity shift really are
+independent choices.
+A function whose value is unchanged when its first two arguments are
+shifted by arbitrary amounts cannot depend on them: fix $\bx_{0}$ and
+$\bv_{0}$, and for any $\bx,\bv$ choose $\bd=\bx_{0}-\bx$ and
+$\be=\bv_{0}-\bv$, whereupon \eqr{9.15} gives
+$\bG(\bx,\bv,\ldots)=\bG(\bx_{0},\bv_{0},\ldots)$, a value independent
+of $\bx$ and $\bv$. We thus arrive at the major simplification
+\begin{equation}
+   \bG(\bx,\bv,\theta,\rho,\bL;p)=\bG(\theta,\rho,\bL;p)
+   \tag{9.16}\label{eq:9.16}
+\end{equation}
+for some function $\bG$. Substituting back into \eqr{9.10}, and using
+$\bL_{2}=\bQ\bL_{1}\bQ^{t}+\bOm$ with $\bOm=\dot\bQ\bQ^{t}$, we find
+that this function must be such that
+\begin{equation}
+   \bG(\theta,\rho,\bQ\bL\bQ^{t}+\bOm;p)
+   =\bQ\,\bG(\theta,\rho,\bL;p)\,\bQ^{t}
+   \tag{9.17}\label{eq:9.17}
+\end{equation}
+for arbitrary orthogonal $\bQ(t)\colon\Et\to\Et$, with
+$\bOm=\dot\bQ\bQ^{t}$.
+
+\begin{remark}[the same letter for two functions]\label{rem:ch9samelet}
+Equation \eqr{9.16} writes $\bG$ on both sides although the two are
+different functions: on the left a function of five arguments, on the
+right a function of three. The abuse is the book's and it is harmless
+provided one reads the argument list, but it is the same abuse as
+Remark~\ref{rem:decorations} warned about for $\bv$, $\hat\bv$,
+$\tilde\bv$, and it is worth naming. From \eqr{9.17} onward $\bG$ always
+means the three-argument function, and after \eqr{9.21} it means the
+function of $(\theta,\rho,\bD;p)$: three different objects, one letter,
+distinguished only by what is fed in.
+\end{remark}
+
+\subsection*{Second choice: an arbitrary spin, and the loss of $\bW$}
+
+At any fixed instant $t^{*}$, say, we may choose $\bQ$ and $\bOm$
+independently. This is the crucial observation, and it is not obvious,
+because $\bOm=\dot\bQ\bQ^{t}$ is built from $\bQ$: one might expect the
+value of $\bQ$ at an instant to constrain the value of $\bOm$ there. It
+does not, and an explicit family of $\bQ(t)$ shows why. With reference
+to \eqr{C.24} of Appendix C, consider the orthogonal tensor
+\begin{equation}
+   \bQ(t)=\exp\!\big((t-t^{*})\hat{\bOm}\big)\,\hat\bQ,
+   \tag{9.18}\label{eq:9.18}
+\end{equation}
+in which $\hat{\bOm}$ and $\hat\bQ$, respectively, are arbitrary fixed
+skew and orthogonal tensors. The product $(t-t^{*})\hat{\bOm}$ is
+\emph{inside} the exponential: the exponential acts on a tensor, and
+$\hat\bQ$ is the orientation we prescribe at the selected instant.
+The hat marks a chosen constant, while the star marks evaluation at
+$t^{*}$.
+
+To see the construction immediately, let $s=t-t^{*}$. The defining
+series of the tensor exponential begins
+\[
+   \exp(s\hat{\bOm})=\I+s\hat{\bOm}+O(s^{2}).
+\]
+At $t=t^{*}$, $s=0$, so every positive-power term vanishes and
+$\exp(\Ob)=\I$. Therefore
+\[
+   \boxed{\bQ(t^{*})=\exp(\Ob)\hat\bQ=\hat\bQ}.
+\]
+The derivative at this same instant is
+$\dot\bQ(t^{*})=\hat{\bOm}\hat\bQ$. Multiplying by
+$\bQ(t^{*})^{t}=\hat\bQ^{t}$ gives
+\[
+   \dot\bQ(t^{*})\bQ(t^{*})^{t}
+   =\hat{\bOm}\hat\bQ\hat\bQ^{t}=\hat{\bOm}.
+\]
+Thus the chosen orientation and the chosen angular rate are genuinely
+independent instantaneous data. It remains to check that \eqr{9.18}
+is an admissible orthogonal motion for every $t$. Write
+$\bA(s)=\exp(s\hat{\bOm})$, so
+that $\bA(0)=\I$ and $\bA'(s)=\hat{\bOm}\bA(s)$. Then
+\[
+   \big(\bA^{t}\bA\big)'=\big(\bA'\big)^{t}\bA+\bA^{t}\bA'
+   =\bA^{t}\hat{\bOm}^{t}\bA+\bA^{t}\hat{\bOm}\bA
+   =\bA^{t}\big(-\hat{\bOm}+\hat{\bOm}\big)\bA=\Ob,
+\]
+using $\hat{\bOm}^{t}=-\hat{\bOm}$. So $\bA^{t}\bA$ is constant in $s$
+and equals its value $\I$ at $s=0$: the exponential of a skew tensor is
+orthogonal, and a product of orthogonal tensors is orthogonal.
+
+Moreover, at every $t$,
+\[
+   \dot\bQ\bQ^{t}
+   =\hat{\bOm}\bA(t-t^{*})\hat\bQ
+    \big[\bA(t-t^{*})\hat\bQ\big]^{t}
+   =\hat{\bOm}\bA\hat\bQ\hat\bQ^{t}\bA^{t}
+   =\hat{\bOm}\bA\bA^{t}=\hat{\bOm},
+\]
+so in particular $\dot\bQ\bQ^{t}\rest{t^{*}}=\hat{\bOm}$. The two fixed
+tensors $\hat\bQ$ and $\hat{\bOm}$ were chosen independently, which
+establishes the claim. From \eqr{9.17}, evaluated at $t=t^{*}$,
+\begin{equation}
+   \bG\big(\theta,\rho,\hat\bQ(\bD^{*}+\bW^{*})\hat\bQ^{t}
+   +\hat{\bOm};p\big)
+   =\hat\bQ\,\bG(\theta,\rho,\bL^{*};p)\,\hat\bQ^{t},
+   \tag{9.19}\label{eq:9.19}
+\end{equation}
+where $\bL^{*}$ is the velocity gradient at the instant $t^{*}$, and
+$\bD^{*}=\Sym\bL^{*}$ and $\bW^{*}=\Skw\bL^{*}$ are the associated
+stretching and spin tensors of \eqr{4.7}.
+
+Now, since the material point $p$ is fixed in this discussion, all
+arguments of the constitutive function depend on time alone; in
+particular $\bW^{*}$ is one fixed skew tensor, not a field. We are thus
+free to choose $\hat{\bOm}=-\bW^{*}$, which is admissible precisely
+because $\bW^{*}$ is skew. Setting $\hat\bQ=\I$ as well, the left-hand
+side of \eqr{9.19} has argument
+\[
+   \I(\bD^{*}+\bW^{*})\I-\bW^{*}=\bD^{*},
+\]
+so the two outer descriptions have aligned axes at $t^{*}$ but can
+still rotate relative to one another at that instant. The imposed
+angular rate cancels the spin in $\bL^{*}=\bD^{*}+\bW^{*}$ without
+altering the stretching. This is a local choice at the selected $p$ and
+$t^{*}$, which is all that a pointwise constitutive equation requires.
+The right-hand side is $\I\bG(\theta,\rho,\bL^{*};p)\I
+=\bG(\theta,\rho,\bL^{*};p)$. We arrive at
+\begin{equation}
+   \bG(\theta,\rho,\bL^{*};p)=\bG(\theta,\rho,\bD^{*};p).
+   \tag{9.20}\label{eq:9.20}
+\end{equation}
+Since $t^{*}$ is arbitrary, we conclude that, for \eqr{9.17} to hold, it
+is necessary that
+\begin{equation}
+   \bG(\theta,\rho,\bL;p)=\bG(\theta,\rho,\bD;p)
+   \tag{9.21}\label{eq:9.21}
+\end{equation}
+at all $t$, and hence that the stress can depend on the velocity
+gradient only through the stretching tensor.
+
+On substituting back into \eqr{9.17} and recalling
+$\bD_{2}=\bQ\bD_{1}\bQ^{t}$, we find that this dependence must be such
+that
+\begin{equation}
+   \bG(\theta,\rho,\bQ\bD\bQ^{t};p)
+   =\bQ\,\bG(\theta,\rho,\bD;p)\,\bQ^{t}
+   \tag{9.22}\label{eq:9.22}
+\end{equation}
+for all orthogonal $\bQ(t)\colon\Et\to\Et$. The substitution is one
+line. By \eqr{9.21} the function sees only the symmetric part of its
+third argument, and the symmetric part of $\bQ\bL\bQ^{t}+\bOm$ is
+$\bQ\bD\bQ^{t}$, since $\bOm$ is skew and
+$\Sym(\bQ\bL\bQ^{t})=\bQ(\Sym\bL)\bQ^{t}$ as shown above. So the left
+side of \eqr{9.17} is the left side of \eqr{9.22}, and \eqr{9.21}
+applied on the right of \eqr{9.17} turns $\bL$ into $\bD$ there too.
+
+Since this function delivers the values of the Cauchy stress, it must
+also be symmetric: $\bT=\bT^{t}$ was extracted in Chapter 6 from the
+balance of moment of momentum, and it must therefore hold identically in
+the arguments of $\bG$.
+
+\begin{remark}[what \eqr{9.21} really rules out]\label{rem:ch9noW}
+It is tempting to read \eqr{9.21} as a technical simplification. It is
+not; it is a prohibition with observable content, and the cleanest way
+to see it is to ask what a fluid whose stress depended on $\bW$ would
+do.
+
+Consider a body of such a fluid at rest on a turntable, rotating rigidly
+with the table. By Remark~\ref{rem:Drigid}, rigid motion has
+$\bD=\Ob$ but $\bW\neq\Ob$. A stress depending on $\bW$ would therefore
+be non-zero, and it would depend on how fast the table turned. But an
+observer riding the table sees a fluid at rest, with $\bW=\Ob$ in her
+frame, and would compute a different stress. Since the two are looking
+at the same material and the stress is what it is, one of them is wrong,
+and there is no principle to say which. The only escape is that the
+stress does not depend on $\bW$ at all.
+
+This is the constitutive twin of Remark~\ref{rem:whyL} of Chapter 4,
+which asked why one works with $\bL$ rather than $\dot\bF$. Here the
+question is pushed one stage further: of the two halves of $\bL$, only
+the half that survives a change of observer can carry material
+information, and \eqr{7.34} identifies that half as $\bD$.
+\end{remark}
+
+%-----------------------------------------------------------------------
+\subsection{Isotropic symmetric tensor-valued functions of a symmetric
+tensor}\label{sec:ch9isotropic}
+%-----------------------------------------------------------------------
+
+Dropping the passive variables $\theta$, $\rho$ and $p$ for
+convenience, we seek a general representation of a symmetric
+tensor-valued function $\bG$, of an arbitrary symmetric tensor $\bD$,
+satisfying
+\begin{equation}
+   \bG(\bQ\bD\bQ^{t})=\bQ\,\bG(\bD)\,\bQ^{t}
+   \tag{9.23}\label{eq:9.23}
+\end{equation}
+for all orthogonal $\bQ(t)\colon\Et\to\Et$. Such a function is said to
+be \emph{isotropic}, despite the fact that \eqr{9.22} pertains to frame
+invariance rather than to the notion of isotropic material symmetry, the
+latter to be discussed in Chapter 11.
+
+\begin{remark}[two things called isotropy]\label{rem:ch9twoisos}
+The clash of names is unfortunate and it is worth separating the two
+statements before the proof, since they have different sources and
+different scopes.
+
+\emph{Isotropic material symmetry} is a statement about the symmetry
+group, $\mathcal{G}_{\kappa^{*}(p_{0})}=\Orth^{+}$ for a solid,
+$\mathcal{G}=U$ for a fluid; it says that no direction in a particular
+reference configuration is distinguished. It is a property some
+materials have and others do not, and Section 8.2 placed it on a scale
+running from the trivial group up to $U$.
+
+\emph{Isotropy of a function} in the sense of \eqr{9.23} is a property
+of a map, and here it was \emph{derived}: it came from \eqr{9.22}, which
+came from frame indifference. Every fluid of this class has it,
+including a hypothetical fluid with no material symmetry at all, because
+the two observers of Section~\ref{sec:ch9mfi} would still have to agree.
+
+The two coincide for the class treated here only because a fluid happens
+to be isotropic as a material as well, its group $U$ containing
+$\Orth^{+}$; for a solid the two come apart completely, and Chapter 10
+and beyond have to keep them apart.
+\end{remark}
+
+We will prove that the most general function of this type is of the form
+\begin{equation}
+   \bG(\bD)=\varphi_{0}(I_{1},I_{2},I_{3})\I
+   +\varphi_{1}(I_{1},I_{2},I_{3})\bD
+   +\varphi_{2}(I_{1},I_{2},I_{3})\bD^{2},
+   \tag{9.24}\label{eq:9.24}
+\end{equation}
+where $\varphi_{0,1,2}$ are scalar-valued functions of the principal
+invariants of $\bD$ (see \eqr{3.3}):
+\begin{equation}
+   I_{1}(\bD)=\tr\bD,\qquad
+   I_{2}(\bD)=\tfrac12\big[I_{1}^{2}-\tr(\bD^{2})\big]
+   \qquad\text{and}\qquad
+   I_{3}(\bD)=\det\bD .
+   \tag{9.25}\label{eq:9.25}
+\end{equation}
+
+\begin{remark}[why the series stops at $\bD^{2}$]\label{rem:ch9CH}
+Before the proof, the answer to the question the statement provokes.
+Nothing in \eqr{9.23} forbids $\bD^{3}$, $\bD^{4}$ and so on from
+appearing: each of them satisfies $\bQ\bD^{n}\bQ^{t}=(\bQ\bD\bQ^{t})^{n}$
+and so is an isotropic function of $\bD$ in its own right. The series
+stops because the higher powers are not new.
+
+The Cayley--Hamilton theorem, Problem 7(b) of Chapter 3, states that
+every symmetric $\bD$ satisfies its own characteristic equation,
+\[
+   \bD^{3}-I_{1}\bD^{2}+I_{2}\bD-I_{3}\I=\Ob ,
+\]
+so that
+\[
+   \bD^{3}=I_{1}\bD^{2}-I_{2}\bD+I_{3}\I .
+\]
+Multiplying by $\bD$ and substituting for $\bD^{3}$ again expresses
+$\bD^{4}$ in terms of $\I,\bD,\bD^{2}$ with coefficients that are again
+polynomials in the invariants, and by induction every power does the
+same. So $\{\I,\bD,\bD^{2}\}$ spans everything that could be built from
+$\bD$ by multiplication, and \eqr{9.24} is not a truncation of an
+infinite series but a complete statement.
+
+The proof given below never invokes Cayley--Hamilton explicitly. It
+reaches the same place by counting dimensions: Part 3 shows that
+$\{\I,\bD,\bD^{2}\}$ is linearly independent and that the space it must
+span is three-dimensional, so three elements are exactly enough and a
+fourth would be redundant. The two arguments are the same fact seen from
+opposite ends, and it is worth having both, because the dimension count
+explains \emph{why} Cayley--Hamilton has degree three: the space of
+tensors diagonal in a fixed basis of $\Et$ has dimension three, and a
+polynomial identity is forced as soon as one has four elements of it.
+\end{remark}
+
+The proof of this important result is in four parts.
+
+\subsection*{Part 1: an isotropic scalar function is a function of the
+invariants}
+
+Suppose the scalar-valued function $\varphi(\bD)$ is isotropic, i.e.,
+$\varphi(\bQ\bD\bQ^{t})=\varphi(\bD)$. We show that it is necessary and
+sufficient that $\varphi(\bD)=\bar\varphi(I_{1},I_{2},I_{3})$ for some
+function $\bar\varphi$.
+
+To prove necessity, it suffices to show that $\varphi$ is determined by
+the invariants, i.e., that $\varphi(\bA)=\varphi(\bB)$ whenever
+$I_{k}(\bA)=I_{k}(\bB)$, $k=1,2,3$. Here $\bA$ and $\bB$ are arbitrary
+symmetric tensors. The step deserves a word: to say that a function of
+$\bD$ ``is'' a function of the three invariants is to say that its value
+never distinguishes two tensors that the invariants do not distinguish.
+If that holds, one may define $\bar\varphi$ on triples of numbers by
+choosing any $\bD$ with those invariants and setting
+$\bar\varphi(I_{1},I_{2},I_{3})=\varphi(\bD)$, and the definition is
+unambiguous exactly because of the property just stated.
+
+Thus, suppose that $I_{k}(\bA)=I_{k}(\bB)$. From \eqr{3.2} the principal
+values are the roots of
+$\lambda^{3}-I_{1}\lambda^{2}+I_{2}\lambda-I_{3}=0$, a polynomial built
+from the invariants alone, so $\bA$ and $\bB$ share the same principal
+values. Their spectral representations, Theorem~\ref{thm:spectral}, are
+\begin{equation}
+   \bA=\sum_{i}\lambda_{i}\bu_{i}\otimes\bu_{i}
+   \qquad\text{and}\qquad
+   \bB=\sum_{i}\lambda_{i}\bv_{i}\otimes\bv_{i},
+   \tag{9.26}\label{eq:9.26}
+\end{equation}
+where $\{\bu_{i}\}$ and $\{\bv_{i}\}$ are orthonormal sets of principal
+vectors. We use them to construct the orthogonal tensor
+$\tilde\bQ=\bu_{i}\otimes\bv_{i}$, summed on $i$.
+
+That $\tilde\bQ$ is orthogonal, and that $\bA=\tilde\bQ\bB\tilde\bQ^{t}$,
+are both computations with the dyad product rule
+$(\ba\otimes\bb)(\bc\otimes\bd)=(\ip\bb\bc)\,\ba\otimes\bd$ of
+Lemma~\ref{lem:dyadprod}. For orthogonality, using
+$\tilde\bQ^{t}=\bv_{i}\otimes\bu_{i}$ and
+$\ip{\bu_{i}}{\bu_{j}}=\dd_{ij}$,
+\[
+   \tilde\bQ^{t}\tilde\bQ
+   =(\bv_{i}\otimes\bu_{i})(\bu_{j}\otimes\bv_{j})
+   =\dd_{ij}\,\bv_{i}\otimes\bv_{j}
+   =\bv_{i}\otimes\bv_{i}=\I ,
+\]
+the last step being the resolution of the identity on the orthonormal
+basis $\{\bv_{i}\}$. For the conjugation, in two stages,
+\[
+   \tilde\bQ\bB=(\bu_{i}\otimes\bv_{i})
+   \Big(\sum_{j}\lambda_{j}\bv_{j}\otimes\bv_{j}\Big)
+   =\sum_{i,j}\lambda_{j}\dd_{ij}\,\bu_{i}\otimes\bv_{j}
+   =\sum_{i}\lambda_{i}\,\bu_{i}\otimes\bv_{i},
+\]
+and then
+\[
+   \big(\tilde\bQ\bB\big)\tilde\bQ^{t}
+   =\Big(\sum_{i}\lambda_{i}\bu_{i}\otimes\bv_{i}\Big)
+    (\bv_{k}\otimes\bu_{k})
+   =\sum_{i,k}\lambda_{i}\dd_{ik}\,\bu_{i}\otimes\bu_{k}
+   =\sum_{i}\lambda_{i}\,\bu_{i}\otimes\bu_{i}=\bA .
+\]
+Recalling that $\varphi(\tilde\bQ\bB\tilde\bQ^{t})=\varphi(\bB)$ by
+hypothesis, we arrive at $\varphi(\bA)=\varphi(\bB)$, and so $\varphi$
+is determined by the invariants, as claimed.
+
+To prove sufficiency, suppose
+$\varphi(\bA)=\bar\varphi(I_{1}(\bA),I_{2}(\bA),I_{3}(\bA))$. Then for
+any orthogonal $\bQ$,
+\[
+\begin{aligned}
+   I_{1}(\bQ\bA\bQ^{t})&=\tr(\bQ\bA\bQ^{t})=\tr(\bQ^{t}\bQ\bA)
+     =\tr\bA=I_{1}(\bA),\\
+   I_{2}(\bQ\bA\bQ^{t})
+     &=\tfrac12\big[I_{1}^{2}-\tr\big(\bQ\bA\bQ^{t}\bQ\bA\bQ^{t}\big)\big]
+      =\tfrac12\big[I_{1}^{2}-\tr\big(\bQ\bA^{2}\bQ^{t}\big)\big]
+      =I_{2}(\bA),\\
+   I_{3}(\bQ\bA\bQ^{t})&=\det(\bQ\bA\bQ^{t})
+     =(\det\bQ)^{2}\det\bA=I_{3}(\bA),
+\end{aligned}
+\]
+so that $\varphi(\bA)=\varphi(\bQ\bA\bQ^{t})$. Three properties were
+used and each is from Chapter 1: the cyclic property of the trace,
+Theorem~\ref{thm:trace}; the collapse $\bQ^{t}\bQ=\I$ in the middle of
+$\bQ\bA\bQ^{t}\bQ\bA\bQ^{t}$, giving $\bQ\bA^{2}\bQ^{t}$; and the
+product rule for determinants, Theorem~\ref{thm:det}, together with
+$\det\bQ=\pm1$ from Proposition~\ref{prop:orth}, so that $(\det\bQ)^{2}
+=1$ whether $\bQ$ is a rotation or a reflection.
+
+\subsection*{Part 2: $\bG(\bD)$ is coaxial with $\bD$}
+
+Let $\eta_{i}$ be principal values of $\bD$, and let $\bnu_{i}$ be the
+associated principal vectors, so that
+$\bD=\sum_{i}\eta_{i}\bnu_{i}\otimes\bnu_{i}$. We show that $\bnu_{i}$
+are also principal vectors of $\bG(\bD)$.
+
+To prove this claim consider the orthogonal tensor
+$\bar\bQ=2\bnu_{1}\otimes\bnu_{1}-\I$, representing a $180^{\circ}$
+rotation about the axis $\bnu_{1}$, i.e., $\bar\bQ\bnu_{1}=\bnu_{1}$,
+$\bar\bQ\bnu_{2}=-\bnu_{2}$ and $\bar\bQ\bnu_{3}=-\bnu_{3}$. That
+$\bar\bQ$ is what it is claimed to be takes two lines. It is symmetric,
+being a combination of $\I$ and a symmetric dyad, and
+\[
+   \bar\bQ^{2}=\big(2\bnu_{1}\otimes\bnu_{1}-\I\big)
+               \big(2\bnu_{1}\otimes\bnu_{1}-\I\big)
+   =4\,\bnu_{1}\otimes\bnu_{1}-2\,\bnu_{1}\otimes\bnu_{1}
+    -2\,\bnu_{1}\otimes\bnu_{1}+\I=\I ,
+\]
+using $(\bnu_{1}\otimes\bnu_{1})(\bnu_{1}\otimes\bnu_{1})
+=|\bnu_{1}|^{2}\bnu_{1}\otimes\bnu_{1}=\bnu_{1}\otimes\bnu_{1}$; so
+$\bar\bQ^{t}\bar\bQ=\bar\bQ^{2}=\I$ and $\bar\bQ$ is orthogonal. Its
+action on the principal basis is read off directly:
+$\bar\bQ\bnu_{1}=2\bnu_{1}-\bnu_{1}=\bnu_{1}$ and, for $i=2,3$,
+$\bar\bQ\bnu_{i}=2(\ip{\bnu_{1}}{\bnu_{i}})\bnu_{1}-\bnu_{i}=-\bnu_{i}$.
+Its principal values are therefore $1,-1,-1$ and $\det\bar\bQ=1$: it is
+a rotation, through $180^{\circ}$, about $\bnu_{1}$.
+
+From \eqr{9.23}, and using $\bQ(\ba\otimes\bb)\bQ^{t}
+=(\bQ\ba)\otimes(\bQ\bb)$,
+\begin{equation}
+   \bar\bQ\,\bG(\bD)\,\bar\bQ^{t}
+   =\bG\Big(\sum_{i}\eta_{i}\,\bar\bQ\bnu_{i}\otimes\bar\bQ\bnu_{i}\Big)
+   =\bG\Big(\sum_{i}\eta_{i}\,\bnu_{i}\otimes\bnu_{i}\Big)
+   =\bG(\bD),
+   \tag{9.27}\label{eq:9.27}
+\end{equation}
+the middle equality holding because each sign change appears twice in a
+tensor product and $(-\bnu_{i})\otimes(-\bnu_{i})
+=\bnu_{i}\otimes\bnu_{i}$. This is the whole trick of Part 2: the
+rotation $\bar\bQ$ moves the principal vectors but leaves $\bD$ itself
+exactly where it was, so \eqr{9.23} says that it must leave $\bG(\bD)$
+where it was too.
+
+Thus $\bar\bQ\,\bG(\bD)=\bG(\bD)\,\bar\bQ$, on multiplying \eqr{9.27} on
+the right by $\bar\bQ$ and using $\bar\bQ^{t}\bar\bQ=\I$, and
+\begin{equation}
+   \bar\bQ\,\bG(\bD)\bnu_{1}=\bG(\bD)\,\bar\bQ\bnu_{1}=\bG(\bD)\bnu_{1}.
+   \tag{9.28}\label{eq:9.28}
+\end{equation}
+Therefore $\bG(\bD)\bnu_{1}$ is also an axis of $\bar\bQ$, meaning a
+vector that $\bar\bQ$ leaves fixed. But this axis is unique, up to
+scaling: for a rotation through an angle other than zero the fixed
+vectors form a one-dimensional subspace, which is the statement proved
+in Appendix C and visible here directly, since $\bar\bQ\bw=\bw$ with
+$\bw=w_{i}\bnu_{i}$ forces $w_{1}\bnu_{1}-w_{2}\bnu_{2}-w_{3}\bnu_{3}
+=w_{1}\bnu_{1}+w_{2}\bnu_{2}+w_{3}\bnu_{3}$, hence $w_{2}=w_{3}=0$.
+Therefore $\bG(\bD)\bnu_{1}=\beta_{1}(\bD)\bnu_{1}$ for some scalar
+function $\beta_{1}$, and $\bnu_{1}$ is a principal vector of
+$\bG(\bD)$. Repeating this argument with $\bnu_{1}$ replaced by
+$\bnu_{2}$ or $\bnu_{3}$, we conclude that $\{\bnu_{i}\}$ is a principal
+basis for $\bG(\bD)$, as claimed, and hence that
+\begin{equation}
+   \bG(\bD)=\sum_{i}\beta_{i}(\bD)\,\bnu_{i}\otimes\bnu_{i},
+   \tag{9.29}\label{eq:9.29}
+\end{equation}
+for some scalar-valued functions $\beta_{i}$. Figure~\ref{fig:ch9coaxial}
+draws the conclusion: stretching and stress share their principal axes,
+so the planes on which the fluid is stretching fastest carry no shear
+traction at all.
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{B}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.3mm]},thick},
+   tn/.style={-{Stealth[length=2.3mm]},thick,blue!55!black}]
+% ============ panel 1 : the stretching D ============
+\begin{scope}[xshift=0cm]
+  \draw[guide] (-1.5,0)--(1.5,0);
+  \draw[guide] (0,-1.5)--(0,1.5);
+  \draw[thick,fill=gray!8] (-0.95,-0.62) rectangle (0.95,0.62);
+  % principal axes
+  \draw[ar] (0,0)--(1.35,0) node[right,font=\small] {$\bnu_{1}$};
+  \draw[ar] (0,0)--(0,1.35) node[above,font=\small] {$\bnu_{2}$};
+  % stretching arrows: eta1 > 0 outward, eta2 < 0 inward
+  \draw[ar,red!65!black] (0.95,0.30)--(1.45,0.30);
+  \draw[ar,red!65!black] (-0.95,0.30)--(-1.45,0.30);
+  \node[font=\footnotesize,text=red!65!black,anchor=west] at (1.10,0.60)
+     {$\eta_{1}>0$};
+  \draw[ar,red!65!black] (0.30,1.12)--(0.30,0.72);
+  \draw[ar,red!65!black] (0.30,-1.12)--(0.30,-0.72);
+  \node[font=\footnotesize,text=red!65!black,anchor=north west]
+     at (0.42,-1.02) {$\eta_{2}<0$};
+  \node[font=\small,anchor=north] at (0,-1.85) {$\bD$: how it stretches};
+\end{scope}
+% ============ panel 2 : the stress G(D) ============
+\begin{scope}[xshift=6.2cm]
+  \draw[guide] (-1.5,0)--(1.5,0);
+  \draw[guide] (0,-1.5)--(0,1.5);
+  \draw[thick,fill=gray!8] (-0.95,-0.62) rectangle (0.95,0.62);
+  \draw[ar] (0,0)--(1.35,0) node[right,font=\small] {$\bnu_{1}$};
+  \draw[ar] (0,0)--(0,1.35) node[above,font=\small] {$\bnu_{2}$};
+  % normal tractions on the faces, along the same axes
+  \draw[tn] (0.95,0.00)--(1.50,0.00);
+  \draw[tn] (-0.95,0.00)--(-1.50,0.00);
+  \node[font=\footnotesize,text=blue!55!black,anchor=south west]
+     at (1.00,0.06) {$\beta_{1}$};
+  \draw[tn] (0.00,0.62)--(0.00,1.17);
+  \draw[tn] (0.00,-0.62)--(0.00,-1.17);
+  \node[font=\footnotesize,text=blue!55!black,anchor=south west]
+     at (0.06,0.70) {$\beta_{2}$};
+  % the forbidden shear traction
+  \draw[gray!60,-{Stealth[length=2.0mm]},densely dashed]
+     (0.95,-0.30)--(0.95,0.32);
+  \draw[gray!75,thick] (0.80,-0.14)--(1.10,0.16);
+  \draw[gray!75,thick] (1.10,-0.14)--(0.80,0.16);
+  \node[font=\footnotesize,text=gray!75,anchor=west] at (1.16,-0.42)
+     {no shear};
+  \node[font=\small,anchor=north] at (0,-1.85)
+     {$\bG(\bD)$: how it pushes};
+\end{scope}
+% ============ the arrow between them ============
+\draw[mapar] (2.05,0.05)--(3.95,0.05);
+\node[font=\small,anchor=south] at (3.00,0.15) {$\bG$};
+\node[font=\footnotesize,text=gray!85,align=center,anchor=north]
+   at (3.00,-0.05) {same axes,\\ new numbers};
+\end{tikzpicture}
+\caption{What Part 2 proves. The stretching $\bD$ has principal axes
+$\{\bnu_{i}\}$ and principal values $\eta_{i}$, which say at what rate
+material fibres along those axes are lengthening or shortening. Equation
+\eqr{9.29} says that the stress $\bG(\bD)$ has \emph{the same} axes,
+with new principal values $\beta_{i}$. Mechanically this means that a
+plane whose normal is a principal direction of stretching carries a
+purely normal traction: no shear stress acts on it. The argument for
+this is \eqr{9.27}: a $180^{\circ}$ turn about $\bnu_{1}$ leaves $\bD$
+untouched, so by \eqr{9.23} it must leave $\bG(\bD)$ untouched, and the
+only directions a rotation fixes are along its own axis. Nothing about
+the material has been used, only the requirement that two observers
+agree.}
+\label{fig:ch9coaxial}
+\end{figure}
+
+\subsection*{Part 3: $\{\I,\bD,\bD^{2}\}$ is a basis for the diagonal
+tensors}
+
+We show that the set $\{\I,\bD,\bD^{2}\}$ is linearly independent. To
+prove this, we first note that since the constitutive function $\bG$ is
+defined for all symmetric $\bD$, it is defined for $\bD$ having distinct
+principal values $\eta_{i}$. For such $\bD$, we will assume that $\I$,
+$\bD$ and $\bD^{2}$ are linearly dependent and reach a contradiction.
+Thus, we assume that
+\begin{equation}
+   \Ob=a\I+b\bD+c\bD^{2}
+   =\sum_{i}\big(a+b\eta_{i}+c\eta_{i}^{2}\big)\,
+     \bnu_{i}\otimes\bnu_{i},
+   \tag{9.30}\label{eq:9.30}
+\end{equation}
+with at least one element of $\{a,b,c\}$ unequal to zero. The middle
+step used the spectral representation three times: $\I=\sum_{i}
+\bnu_{i}\otimes\bnu_{i}$, $\bD=\sum_{i}\eta_{i}\bnu_{i}\otimes\bnu_{i}$
+and, by Remark~\ref{rem:powers}, $\bD^{2}=\sum_{i}\eta_{i}^{2}
+\bnu_{i}\otimes\bnu_{i}$. Since the dyads $\bnu_{i}\otimes\bnu_{i}$ are
+themselves linearly independent, which follows on applying the
+right-hand side of \eqr{9.30} to $\bnu_{k}$ and using orthonormality,
+\eqr{9.30} implies that $a+b\eta_{i}+c\eta_{i}^{2}=0$ for $i=1,2,3$, and
+hence that the $\eta_{i}$ are all the roots of the same quadratic
+equation. But such equations have at most two distinct roots, contrary
+to our choice of $\bD$. This contradiction implies that the premise is
+false, and hence that the set $\{\I,\bD,\bD^{2}\}$ is linearly
+independent, as claimed.
+
+Note that
+\begin{equation}
+   \I,\bD,\bD^{2}\in
+   S=\operatorname{Span}\{\bnu_{1}\otimes\bnu_{1},
+   \bnu_{2}\otimes\bnu_{2},\bnu_{3}\otimes\bnu_{3}\},
+   \tag{9.31}\label{eq:9.31}
+\end{equation}
+a three-dimensional vector space. Since $n$ linearly independent
+elements of an $n$-dimensional vector space constitute a basis for that
+space, by Definition~\ref{def:dim} and Theorem~\ref{thm:coord}, we have
+\begin{equation}
+   S=\operatorname{Span}\{\I,\bD,\bD^{2}\}.
+   \tag{9.32}\label{eq:9.32}
+\end{equation}
+
+\subsection*{Part 4: assembling the representation}
+
+It follows from \eqr{9.29} that $\bG(\bD)\in S$. Thus, \eqr{9.32}
+implies that there are unique scalars $\psi_{0}(\bD)$, $\psi_{1}(\bD)$
+and $\psi_{2}(\bD)$ such that
+\begin{equation}
+   \bG(\bD)=\psi_{0}(\bD)\I+\psi_{1}(\bD)\bD+\psi_{2}(\bD)\bD^{2}.
+   \tag{9.33}\label{eq:9.33}
+\end{equation}
+To see this explicitly, we combine it with \eqr{9.29} to get
+\begin{equation}
+   \beta_{i}(\bD)=\psi_{0}+\psi_{1}\eta_{i}+\psi_{2}\eta_{i}^{2};
+   \qquad i=1,2,3,
+   \tag{9.34}\label{eq:9.34}
+\end{equation}
+i.e.,
+\begin{equation}
+   \begin{pmatrix}
+      1&\eta_{1}&\eta_{1}^{2}\\
+      1&\eta_{2}&\eta_{2}^{2}\\
+      1&\eta_{3}&\eta_{3}^{2}
+   \end{pmatrix}
+   \begin{Bmatrix}\psi_{0}\\ \psi_{1}\\ \psi_{2}\end{Bmatrix}
+   =\begin{Bmatrix}\beta_{1}\\ \beta_{2}\\ \beta_{3}\end{Bmatrix},
+   \tag{9.35}\label{eq:9.35}
+\end{equation}
+in which the coefficient matrix has determinant
+$(\eta_{1}-\eta_{2})(\eta_{2}-\eta_{3})(\eta_{3}-\eta_{1})$. This is
+non-zero for the family of $\bD$'s considered. Then, since the
+$\eta_{i}$ are determined by the $I_{k}(\bD)$, it follows that the
+$\psi$'s are determined by $\bD$.
+
+The determinant is the Vandermonde determinant and it is worth
+evaluating rather than quoting, since the whole of Part 4 turns on its
+not vanishing. Subtract the first row from the second and from the
+third, which changes no determinant:
+\[
+\begin{aligned}
+   \det\begin{pmatrix}
+      1&\eta_{1}&\eta_{1}^{2}\\
+      1&\eta_{2}&\eta_{2}^{2}\\
+      1&\eta_{3}&\eta_{3}^{2}\end{pmatrix}
+   &=\det\begin{pmatrix}
+      1&\eta_{1}&\eta_{1}^{2}\\
+      0&\eta_{2}-\eta_{1}&\eta_{2}^{2}-\eta_{1}^{2}\\
+      0&\eta_{3}-\eta_{1}&\eta_{3}^{2}-\eta_{1}^{2}\end{pmatrix}\\[3pt]
+   &=(\eta_{2}-\eta_{1})(\eta_{3}-\eta_{1})
+    \det\begin{pmatrix}1&\eta_{2}+\eta_{1}\\
+                       1&\eta_{3}+\eta_{1}\end{pmatrix},
+\end{aligned}
+\]
+where the common factors have been taken out of the second and third
+rows using $\eta^{2}-\eta_{1}^{2}=(\eta-\eta_{1})(\eta+\eta_{1})$, and
+the expansion along the first column has been performed. The remaining
+two-by-two determinant is $\eta_{3}-\eta_{2}$, so
+\[
+   \det=(\eta_{2}-\eta_{1})(\eta_{3}-\eta_{1})(\eta_{3}-\eta_{2})
+   =(\eta_{1}-\eta_{2})(\eta_{2}-\eta_{3})(\eta_{3}-\eta_{1}),
+\]
+the second form following from the first by changing the sign of two of
+the three factors. It vanishes if and only if two of the $\eta_{i}$
+coincide, which the choice of $\bD$ has excluded.
+
+\begin{remark}[a misprint in the printed \eqr{9.35}]\label{rem:ch9mis35}
+The book prints the determinant as
+$(\eta_{1}-\eta_{1})(\eta_{2}-\eta_{3})(\eta_{3}-\eta_{1})$, whose first
+factor is identically zero and whose vanishing would destroy the
+argument. The intended factor is $\eta_{1}-\eta_{2}$, as the evaluation
+above confirms.
+\end{remark}
+
+Now, from \eqr{9.33} we have
+\begin{equation}
+\begin{aligned}
+   &\bG(\bQ\bD\bQ^{t})-\bQ\,\bG(\bD)\,\bQ^{t}\\
+   &\qquad=\bQ\Big\{\big[\psi_{0}(\bQ\bD\bQ^{t})-\psi_{0}(\bD)\big]\I
+    +\big[\psi_{1}(\bQ\bD\bQ^{t})-\psi_{1}(\bD)\big]\bD\\
+   &\qquad\qquad
+    +\big[\psi_{2}(\bQ\bD\bQ^{t})-\psi_{2}(\bD)\big]\bD^{2}\Big\}\bQ^{t},
+\end{aligned}
+   \tag{9.36}\label{eq:9.36}
+\end{equation}
+where we have used $\bQ\bQ^{t}=\I$ and $(\bQ\bD\bQ^{t})^{2}
+=\bQ\bD^{2}\bQ^{t}$. Writing out the step: \eqr{9.33} applied at the
+argument $\bQ\bD\bQ^{t}$ gives
+\[
+   \bG(\bQ\bD\bQ^{t})=\psi_{0}(\bQ\bD\bQ^{t})\I
+   +\psi_{1}(\bQ\bD\bQ^{t})\bQ\bD\bQ^{t}
+   +\psi_{2}(\bQ\bD\bQ^{t})\bQ\bD^{2}\bQ^{t},
+\]
+and the first term may be written $\bQ\I\bQ^{t}$, so every term on the
+right carries $\bQ\cdots\bQ^{t}$ and the common factors may be taken
+outside; subtracting $\bQ\,\bG(\bD)\,\bQ^{t}$, itself expanded by
+\eqr{9.33}, leaves \eqr{9.36}.
+
+We impose \eqr{9.23}, which makes the left-hand side of \eqr{9.36}
+vanish, and left- and right-multiply the resulting equation by $\bQ^{t}$
+and $\bQ$ respectively, which removes the outer factors. Using the
+result of Part 3, that $\{\I,\bD,\bD^{2}\}$ is linearly independent and
+so the only vanishing combination is the one with zero coefficients, we
+obtain $\psi_{i}(\bQ\bD\bQ^{t})=\psi_{i}(\bD)$. Finally, we apply the
+result of Part 1 to conclude that
+$\psi_{i}(\bD)=\bar\psi_{i}(I_{1},I_{2},I_{3})$ and substitute into
+\eqr{9.33} to arrive at \eqr{9.24}. Conversely, it is a simple matter to
+confirm that \eqr{9.24} ensures the isotropy of $\bG(\bD)$: the
+calculation is the one just performed, run in reverse, and Problem 3
+carries out its exact counterpart for the heat flux.
+
+This result subsumes the case in which $\bD$ has only two distinct
+principal values, or just one. The first of these is covered by taking
+$\varphi_{2}=0$, and the third by taking
+$\varphi_{1}=\varphi_{2}=0$.
+
+\begin{remark}[why the degenerate cases are not a gap]
+\label{rem:ch9degen}
+Parts 3 and 4 both assumed the $\eta_{i}$ distinct, so the argument as
+given proves \eqr{9.24} only on that set of $\bD$'s, and the sentence
+above disposes of the rest rather briskly. The reason it may be brisk is
+worth stating.
+
+If exactly two principal values coincide, say $\eta_{2}=\eta_{3}$, then
+$\{\I,\bD\}$ is still linearly independent but $\bD^{2}$ is now a
+combination of the two, since the quadratic $a+b\eta+c\eta^{2}$ can be
+made to vanish at the two distinct values $\eta_{1}$ and $\eta_{2}$
+without all coefficients vanishing. So the span $S$ has dropped to
+dimension two and two coefficients suffice; setting $\varphi_{2}=0$ is
+one legitimate way of writing the answer, though not the only one, since
+the decomposition is no longer unique. If all three coincide then
+$\bD=\eta\I$, $S$ has dimension one, and $\bG(\bD)$ is a multiple of
+$\I$.
+
+What is being said, then, is not that the theorem fails on the
+degenerate set but that the representation ceases to be unique there.
+Uniqueness of the coefficients holds where the principal values are
+distinct; existence holds everywhere. And if the $\varphi_{k}$ are
+required to be continuous, their values on the degenerate set are
+already forced by their values nearby.
+\end{remark}
+
+Reinstating the passive variables, we conclude that the stress at a
+material point $p$ in a viscous fluid is of the form
+\begin{equation}
+\begin{aligned}
+   \bT&=\varphi_{0}(I_{1},I_{2},I_{3},\theta,\rho;p)\I
+       +\varphi_{1}(I_{1},I_{2},I_{3},\theta,\rho;p)\bD\\
+      &\qquad+\varphi_{2}(I_{1},I_{2},I_{3},\theta,\rho;p)\bD^{2},
+\end{aligned}
+   \tag{9.37}\label{eq:9.37}
+\end{equation}
+where the $I_{k}$ are the principal invariants of $\bD$. It is a matter
+of experiment to determine the three functions $\varphi_{0}$,
+$\varphi_{1}$ and $\varphi_{2}$ in terms of the five variables $I_{1}$,
+$I_{2}$, $I_{3}$, $\theta$ and $\rho$. While this task presents a
+formidable challenge, it is far more tractable than that presented by
+the original constitutive hypothesis embodied in \eqr{9.3}.
+
+\begin{remark}[the size of the reduction]\label{rem:ch9count}
+The gain is worth counting, because it is the reason theorems of this
+kind are proved at all.
+
+Equation \eqr{9.3} asks for six functions, the independent components of
+a symmetric $\bT$, of eight scalar arguments: three components of $\bx$,
+three of $\bv$, plus $\theta$ and $\rho$, and then nine more from $\bL$,
+seventeen in all. To measure such a thing is out of the question.
+
+Equation \eqr{9.37} asks for three functions of five arguments, and the
+five are all scalars with direct physical meaning. Better still, the
+tensorial structure is now completely fixed: whatever the material, the
+stress must be a combination of $\I$, $\bD$ and $\bD^{2}$ and of nothing
+else. An experiment no longer has to discover the form of the answer,
+only three numbers at each value of five parameters.
+
+Every step of the reduction came from a principle rather than from
+data: fluidity removed $\bF$, frame indifference removed $\bx$, $\bv$
+and $\bW$, and isotropy fixed the tensorial form. That is the return on
+Chapters 7 and 8.
+\end{remark}
+
+Assuming the $\varphi$'s to be continuous functions of the invariants,
+we observe that the stress reduces to
+\begin{equation}
+   \bT\rest{\bD=\Ob}=-\tilde p(\theta,\rho;p)\I
+   \tag{9.38}\label{eq:9.38}
+\end{equation}
+in the absence of stretching, where
+$\tilde p=-\varphi_{0}(0,0,0,\theta,\rho;p)$ is the \emph{pressure}. The
+step is immediate once one notices that all three invariants vanish with
+$\bD$: $I_{1}(\Ob)=\tr\Ob=0$, $I_{2}(\Ob)=0$ and $I_{3}(\Ob)=\det\Ob=0$.
+So the arguments of the $\varphi$'s go to $(0,0,0,\theta,\rho)$ and,
+$\bD$ and $\bD^{2}$ having vanished, only the term in $\I$ survives.
+
+If \eqr{9.38} holds in the presence of stretching, then the fluid is
+\emph{inviscid}. The latter model is descriptive in regions exterior to
+``boundary layers'' in which the effects of viscosity are important. The
+inviscid fluid model therefore plays a major role in the theories of
+aero- and hydro-dynamics.
+
+\begin{remark}[what \eqr{9.38} says about a fluid at rest]
+\label{rem:ch9pressure}
+Equation \eqr{9.38} is the constitutive statement that a fluid at rest
+cannot support a shear stress, and it has been derived rather than
+assumed. It is worth seeing that it is genuinely a theorem here.
+
+The traction on a surface with unit normal $\bn$ is $\bT\bn$, and with
+$\bT=-\tilde p\I$ this is $-\tilde p\bn$: whatever the orientation of
+the surface, the traction is along its own normal and of the same
+magnitude. A fluid at rest therefore pushes equally hard in every
+direction, which is Pascal's principle, and it is a consequence of
+\eqr{9.37} together with the continuity of the $\varphi$'s.
+
+What made it work is that the only tensor available at $\bD=\Ob$ is
+$\I$, and $\I$ has no preferred direction. A solid at rest can carry
+shear because its constitutive function still has $\bF$ to build a
+tensor from, and $\bF$ does have preferred directions. The whole
+difference between a fluid and a solid, in the end, is which tensors
+survive into the list.
+\end{remark}
+%=======================================================================
+\section{The heat flux}\label{sec:ch9heat}
+%=======================================================================
+
+Beginning with \eqr{8.31}, we may proceed, as in the passage from
+\eqr{9.1} to \eqr{9.22}, to conclude that the heat flux is given
+constitutively in the form
+\begin{equation}
+   \bq=\bg(\theta,\rho,\bD,\grad\theta;p),
+   \tag{9.39}\label{eq:9.39}
+\end{equation}
+in the frame of $O$, where the function $\bg$ is such that
+\begin{equation}
+   \bg(\theta,\rho,\bQ\bD\bQ^{t},\bQ\grad\theta;p)
+   =\bQ\,\bg(\theta,\rho,\bD,\grad\theta;p)
+   \tag{9.40}\label{eq:9.40}
+\end{equation}
+for all orthogonal $\bQ\colon\Et\to\Et$.
+
+The repetition is genuine and only two things change. The heat flux is a
+vector, so \eqr{8.32} carries a single factor $\bQ$ rather than the two
+of \eqr{8.35}, and \eqr{9.40} inherits that. And the list retains
+$\grad\theta$, which \eqr{8.33} had dropped from the stress; under the
+change of frame it transforms as a spatial vector,
+$\grad^{+}\theta^{+}=\bQ\grad\theta$, as was shown in Section 8.4, so it
+appears inside $\bg$ with a $\bQ$ attached to it. Everything else is
+word for word: fluidity replaces $\bF$ by $\rho$ and removes $\kappa$;
+the choice $\bQ=\I$ removes $\bx$ and $\bv$; the choice
+$\hat{\bOm}=-\bW^{*}$ removes $\bW$.
+
+We will show that the general form of such a function is
+\begin{equation}
+   \bg(\theta,\rho,\bD,\grad\theta;p)=\bK\grad\theta,
+   \tag{9.41}\label{eq:9.41}
+\end{equation}
+where
+\begin{equation}
+\begin{aligned}
+   \bK(\theta,\rho,\bD,\grad\theta;p)
+   &=\phi_{0}(I_{1},\ldots,I_{6},\theta,\rho;p)\I
+    +\phi_{1}(I_{1},\ldots,I_{6},\theta,\rho;p)\bD\\
+   &\qquad+\phi_{2}(I_{1},\ldots,I_{6},\theta,\rho;p)\bD^{2},
+\end{aligned}
+   \tag{9.42}\label{eq:9.42}
+\end{equation}
+with
+\begin{equation}
+\begin{aligned}
+   I_{4}(\bD,\grad\theta)&=\ip{\grad\theta}{\bD(\grad\theta)},\\
+   I_{5}(\bD,\grad\theta)&=\ip{\grad\theta}{\bD^{2}(\grad\theta)},\\
+   I_{6}(\grad\theta)&=|\grad\theta| .
+\end{aligned}
+   \tag{9.43}\label{eq:9.43}
+\end{equation}
+
+\begin{remark}[$\bK$ here is not the $\bK$ of Chapter 7]
+\label{rem:ch9Kwarn}
+The letter is overloaded and the two objects are unrelated. The $\bK$ of
+\eqr{7.14} is the fixed orthogonal two-point tensor relating the
+reference placements adopted by two observers, $\bX^{+}=\bK\bX+\bc^{+}$;
+it maps $\hVt$ to $\hat{\mathbb{E}}^{3+}$ and it played its part in
+Section 8.4. The $\bK$ of \eqr{9.42} is the \emph{thermal conductivity
+tensor}: it maps $\Vt$ to itself, it is not orthogonal, it need not even
+be invertible, and it depends on the state of the fluid. The two never
+meet in the same formula in this chapter, since Chapter 7's $\bK$
+disappeared along with $\kappa$ at \eqr{9.3}.
+
+The scalar $K$ of \eqr{9.59} and \eqr{9.61} is a third object, the
+conductivity of an isotropic conductor, and it is what $\bK$ becomes
+when $\bD=\Ob$.
+\end{remark}
+
+To simplify the notation we again suppress the passive variables and
+write \eqr{9.40} as
+\begin{equation}
+   \bg(\bQ\bD\bQ^{t},\bQ\bd)=\bQ\,\bg(\bD,\bd),
+   \tag{9.44}\label{eq:9.44}
+\end{equation}
+for all symmetric $\bD\colon\Et\to\Et$ and all $\bd=\grad\theta\in\Et$,
+where $\bQ\colon\Et\to\Et$ is an arbitrary orthogonal tensor. The letter
+$\bd$ is the book's and it is not the translation vector of \eqr{9.12},
+which has finished its work; from here to the end of the section
+$\bd$ means the temperature gradient.
+
+For $\bQ=-\I$ this yields
+\begin{equation}
+   \bg(\bD,-\bd)=-\bg(\bD,\bd).
+   \tag{9.45}\label{eq:9.45}
+\end{equation}
+The choice is legitimate and instructive. The tensor $-\I$ is
+orthogonal, since $(-\I)^{t}(-\I)=\I$, though improperly so:
+$\det(-\I)=(-1)^{3}\det\I=-1$ by Problem 21(a) of Chapter 1. It is
+available because \eqr{9.44} was demanded for \emph{all} orthogonal
+$\bQ$, reflections included, and not merely for rotations. Its effect on
+the two arguments is different: it leaves the tensor alone, since
+$(-\I)\bD(-\I)^{t}=\bD$, the two sign changes cancelling, while it
+reverses the vector. So \eqr{9.44} becomes \eqr{9.45}, which says that
+reversing the temperature gradient reverses the heat flux and changes
+nothing else. Physically that is the statement that the fluid has no
+built-in sense of direction which could make heat run more easily one
+way than the other.
+
+Our proof is again in four parts.
+
+\subsection*{Part 1: even dependence on $\bd$ is dependence on
+$\bd\otimes\bd$}
+
+Suppose $\varphi(\bD,\bd)=\varphi(\bD,-\bd)$. We show that $\varphi$
+then depends on $\bd$ via $\bd\otimes\bd$. Dropping the passive variable
+$\bD$, our task is to show that if $\psi(\bd)=\psi(-\bd)$, then
+$\psi(\bd)=\bar\psi(\bd\otimes\bd)$, i.e., that $\psi(\ba)=\psi(\bb)$
+whenever $\ba\otimes\ba=\bb\otimes\bb$.
+
+Suppose, then, that the latter is true. Apply the tensor equation
+$\ba\otimes\ba=\bb\otimes\bb$ first to $\ba$ and then to $\bb$, using
+$(\bu\otimes\bv)\bw=(\ip\bv\bw)\bu$ from Definition~\ref{def:tp}. It
+follows that
+\begin{equation}
+   |\ba|^{2}\ba=(\ip\ba\bb)\bb
+   \qquad\text{and}\qquad
+   |\bb|^{2}\bb=(\ip\ba\bb)\ba,
+   \tag{9.46}\label{eq:9.46}
+\end{equation}
+which imply that $|\ba|=|\bb|$ and $(\ip\ba\bb)^{2}=|\ba|^{2}|\bb|^{2}$.
+Both implications come from taking inner products. Dotting
+\eqr{9.46}$_{1}$ with $\ba$ gives $|\ba|^{4}=(\ip\ba\bb)^{2}$, and
+dotting \eqr{9.46}$_{2}$ with $\bb$ gives $|\bb|^{4}=(\ip\ba\bb)^{2}$;
+so $|\ba|^{4}=|\bb|^{4}$, and since norms are non-negative,
+$|\ba|=|\bb|$, whence $(\ip\ba\bb)^{2}=|\ba|^{4}=|\ba|^{2}|\bb|^{2}$.
+
+But by Definition~\ref{def:angle} there is $\alpha\in\Rn$ such that
+$\ip\ba\bb=|\ba||\bb|\cos\alpha$. Then $\cos\alpha=\pm1$ and either of
+\eqr{9.46} gives $\bb=\pm\ba$: from \eqr{9.46}$_{1}$,
+$\ip\ba\bb=\pm|\ba||\bb|=\pm|\ba|^{2}$, so
+$|\ba|^{2}\ba=\pm|\ba|^{2}\bb$ and, if $\ba\neq\bze$, $\bb=\pm\ba$;
+while if $\ba=\bze$ then $\ba\otimes\ba=\Ob$ forces $\bb=\bze$ as well.
+The solution $\bb=\ba$ trivially yields $\psi(\bb)=\psi(\ba)$, and the
+solution $\bb=-\ba$ gives $\psi(\bb)=\psi(-\ba)$. But
+$\psi(\ba)=\psi(-\ba)$ by hypothesis, and therefore
+$\psi(\ba)=\psi(\bb)$ whenever $\ba\otimes\ba=\bb\otimes\bb$. Thus,
+$\psi(\bd)=\bar\psi(\bd\otimes\bd)$ for some function $\bar\psi$, as
+claimed. Conversely, if $\psi(\bd)=\bar\psi(\bd\otimes\bd)$, then it
+follows immediately that $\psi(\bd)=\psi(-\bd)$, since
+$(-\bd)\otimes(-\bd)=\bd\otimes\bd$.
+
+\begin{remark}[the point of trading $\bd$ for $\bd\otimes\bd$]
+\label{rem:ch9dyad}
+The manoeuvre looks like a change of notation and is not. A function of
+$\bd$ that happens to be even is an awkward object: the evenness is a
+constraint one must remember to impose, and it is invisible in the
+formula. A function of $\bd\otimes\bd$ has the evenness built into its
+argument, so no constraint has to be carried.
+
+The exchange is exactly Remark~\ref{rem:whyphione}'s principle applied
+in reverse. There one fed an identity its most trivial input to make one
+side collapse. Here one changes variables so that a symmetry becomes
+invisible, which is the standard way of disposing of a symmetry: not by
+enforcing it at every step, but by working in variables that cannot
+violate it. The same idea produced $\bC=\bF^{t}\bF$ in Chapter 2, whose
+whole merit is that it cannot see the rotation in $\bF$.
+\end{remark}
+
+\subsection*{Part 2: $\{\bd,\bD\bd,\bD^{2}\bd\}$ is a basis}
+
+We show that if $\bd$ is arbitrary and $\bD$ is an arbitrary symmetric
+tensor, then $\{\bd,\bD\bd,\bD^{2}\bd\}$ is a basis for $\Et$. We again
+discuss only the case in which the principal values $\eta_{i}$ of $\bD$
+are distinct. Thus, we assume these vectors to be linearly dependent,
+i.e., that
+\begin{equation}
+   a\bd+b\bD\bd+c\bD^{2}\bd=\bze,
+   \tag{9.47}\label{eq:9.47}
+\end{equation}
+with at least one element of $\{a,b,c\}$ unequal to zero. Using the
+spectral decomposition of $\bD$, we write this as
+\begin{equation}
+   \sum_{i}\big(a+b\eta_{i}+c\eta_{i}^{2}\big)d_{i}\bnu_{i}=\bze,
+   \qquad\text{where }d_{i}=\ip{\bnu_{i}}\bd .
+   \tag{9.48}\label{eq:9.48}
+\end{equation}
+The rewriting is the calculation of Part 3 of the previous section with
+a vector attached. With $\bD=\sum_{i}\eta_{i}\bnu_{i}\otimes\bnu_{i}$
+and $\bD^{2}=\sum_{i}\eta_{i}^{2}\bnu_{i}\otimes\bnu_{i}$, and with
+$\bd=\sum_{i}d_{i}\bnu_{i}$ resolved on the principal basis,
+\[
+   \bD\bd=\sum_{i}\eta_{i}d_{i}\bnu_{i},
+   \qquad
+   \bD^{2}\bd=\sum_{i}\eta_{i}^{2}d_{i}\bnu_{i},
+\]
+and collecting the three terms of \eqr{9.47} on each $\bnu_{i}$ gives
+\eqr{9.48}. Since $\{\bnu_{i}\}$ is a basis, each coefficient must
+vanish separately:
+$\big(a+b\eta_{i}+c\eta_{i}^{2}\big)d_{i}=0$ for each $i$. As $\bd$ is
+arbitrary we may take all $d_{i}\neq0$, and this requires
+$a+b\eta_{i}+c\eta_{i}^{2}=0$ for $i=1,2,3$. This is the contradiction
+encountered previously: three distinct numbers cannot all be roots of
+one quadratic unless that quadratic is identically zero. It follows that
+$a$, $b$, $c$ all vanish and hence that the set
+$\{\bd,\bD\bd,\bD^{2}\bd\}$ is linearly independent. Three independent
+vectors in the three-dimensional $\Et$ form a basis, by
+Theorem~\ref{thm:coord}, and every vector, in particular the value
+$\bg(\bD,\bd)$, is a combination of them. Thus,
+\begin{equation}
+   \bg(\bD,\bd)=\psi_{0}(\bD,\bd)\bd+\psi_{1}(\bD,\bd)\bD\bd
+   +\psi_{2}(\bD,\bd)\bD^{2}\bd .
+   \tag{9.49}\label{eq:9.49}
+\end{equation}
+
+\begin{remark}[why the heat flux is forced to be a linear map of
+$\grad\theta$]\label{rem:ch9linq}
+Equation \eqr{9.49} already contains \eqr{9.41}, and it is worth seeing
+why, since the linearity of $\bq$ in $\grad\theta$ is usually presented
+as a modelling assumption named after Fourier and is here a consequence.
+
+Collect the three terms of \eqr{9.49}: each is a tensor applied to
+$\bd$, so
+\[
+   \bg(\bD,\bd)=\big[\psi_{0}\I+\psi_{1}\bD+\psi_{2}\bD^{2}\big]\bd
+   =\bK\bd .
+\]
+The dependence of $\bq$ on the temperature gradient is therefore
+\emph{through a tensor acting on it}, and that much is exact, however
+violent the temperature gradient. What is not linear, at this stage, is
+the tensor $\bK$ itself: its coefficients $\psi_{i}$ still depend on
+$\bd$ and will be shown in Part 4 to depend on it through the three
+scalars $I_{4},I_{5},I_{6}$. Fourier's law is the further statement that
+this residual dependence may be neglected, which is the content of
+\eqr{9.61}.
+
+So the structure ``flux $=$ tensor times gradient'' is forced by frame
+indifference alone, and only the constancy of the tensor is a
+constitutive assumption. This is a good example of what representation
+theorems buy: not the answer, but the shape of the answer.
+\end{remark}
+
+\subsection*{Part 3: the coefficients are even in $\bd$}
+
+From the result of Part 2, applied at $-\bd$ and using
+$\bD(-\bd)=-\bD\bd$ and $\bD^{2}(-\bd)=-\bD^{2}\bd$, we have
+\begin{equation}
+   \bg(\bD,-\bd)=-\psi_{0}(\bD,-\bd)\bd-\psi_{1}(\bD,-\bd)\bD\bd
+   -\psi_{2}(\bD,-\bd)\bD^{2}\bd .
+   \tag{9.50}\label{eq:9.50}
+\end{equation}
+Imposing \eqr{9.45}, that is, adding \eqr{9.50} to \eqr{9.49} and
+requiring the sum to vanish, yields
+\begin{equation}
+\begin{aligned}
+   &\big[\psi_{0}(\bD,\bd)-\psi_{0}(\bD,-\bd)\big]\bd
+   +\big[\psi_{1}(\bD,\bd)-\psi_{1}(\bD,-\bd)\big]\bD\bd\\
+   &\qquad+\big[\psi_{2}(\bD,\bd)-\psi_{2}(\bD,-\bd)\big]\bD^{2}\bd
+   =\bze,
+\end{aligned}
+   \tag{9.51}\label{eq:9.51}
+\end{equation}
+and therefore $\psi_{i}(\bD,\bd)=\psi_{i}(\bD,-\bd)$, $i=0,1,2$, by the
+linear independence established in Part 2. It then follows from Part 1
+that
+\begin{equation}
+   \psi_{i}(\bD,\bd)=\bar\psi_{i}(\bD,\bd\otimes\bd);
+   \qquad i=0,1,2 .
+   \tag{9.52}\label{eq:9.52}
+\end{equation}
+Thus,
+\begin{equation}
+\begin{aligned}
+   &\bg(\bQ\bD\bQ^{t},\bQ\bd)-\bQ\,\bg(\bD,\bd)\\
+   &\quad=\big[\bar\psi_{0}(\bQ\bD\bQ^{t},\bQ\bd\otimes\bQ\bd)
+     -\bar\psi_{0}(\bD,\bd\otimes\bd)\big]\bQ\bd\\
+   &\qquad+\big[\bar\psi_{1}(\bQ\bD\bQ^{t},\bQ\bd\otimes\bQ\bd)
+     -\bar\psi_{1}(\bD,\bd\otimes\bd)\big]\bQ\bD\bd\\
+   &\qquad+\big[\bar\psi_{2}(\bQ\bD\bQ^{t},\bQ\bd\otimes\bQ\bd)
+     -\bar\psi_{2}(\bD,\bd\otimes\bd)\big]\bQ\bD^{2}\bd .
+\end{aligned}
+   \tag{9.53}\label{eq:9.53}
+\end{equation}
+Two identities were used in assembling the right-hand side, and both are
+worth naming. Evaluating \eqr{9.49} at the arguments
+$(\bQ\bD\bQ^{t},\bQ\bd)$ produces terms
+$(\bQ\bD\bQ^{t})^{n}\bQ\bd=\bQ\bD^{n}\bQ^{t}\bQ\bd=\bQ\bD^{n}\bd$ for
+$n=0,1,2$, which are the three vectors displayed; and \eqr{9.52}
+evaluated there involves
+$(\bQ\bd)\otimes(\bQ\bd)=\bQ(\bd\otimes\bd)\bQ^{t}$, written in the
+book's shorthand as $\bQ\bd\otimes\bQ\bd$.
+
+Imposing \eqr{9.44}, which makes the left side of \eqr{9.53} vanish,
+left-multiplying by $\bQ^{t}$, which converts the three vectors
+$\bQ\bd,\bQ\bD\bd,\bQ\bD^{2}\bd$ back into $\bd,\bD\bd,\bD^{2}\bd$, and
+invoking the result of Part 2, we conclude that
+\begin{equation}
+   \bar\psi_{i}(\bQ\bD\bQ^{t},\bQ\bd\otimes\bQ\bd)
+   =\bar\psi_{i}(\bD,\bd\otimes\bd);
+   \qquad i=0,1,2,
+   \tag{9.54}\label{eq:9.54}
+\end{equation}
+for all orthogonal $\bQ$.
+
+\subsection*{Part 4: the six invariants determine an isotropic scalar}
+
+Suppose $\varphi(\bD,\bd\otimes\bd)
+=\varphi(\bQ\bD\bQ^{t},\bQ\bd\otimes\bQ\bd)$ for all orthogonal $\bQ$.
+We demonstrate that $\varphi$ is then determined by $I_{1}$ to $I_{6}$,
+i.e., that $\varphi(\bA,\ba\otimes\ba)=\varphi(\bB,\bb\otimes\bb)$
+whenever
+\begin{equation}
+\begin{aligned}
+   &\big\{I_{1}(\bA),I_{2}(\bA),I_{3}(\bA),
+     I_{4}(\bA,\ba),I_{5}(\bA,\ba),I_{6}(\ba)\big\}\\
+   &\qquad=\big\{I_{1}(\bB),I_{2}(\bB),I_{3}(\bB),
+     I_{4}(\bB,\bb),I_{5}(\bB,\bb),I_{6}(\bb)\big\},
+\end{aligned}
+   \tag{9.55}\label{eq:9.55}
+\end{equation}
+where $I_{1}$ to $I_{6}$ are defined in \eqr{9.25} and \eqr{9.43}.
+
+Thus, suppose these two sets are equal. Then the invariants $I_{1}$,
+$I_{2}$, $I_{3}$ of $\bA$ and $\bB$ coincide and \eqr{9.26} holds in
+particular, implying that $\bA=\tilde\bQ\bB\tilde\bQ^{t}$ and
+$\bA^{2}=\tilde\bQ\bB^{2}\tilde\bQ^{t}$, where
+$\tilde\bQ=\bu_{i}\otimes\bv_{i}$ is orthogonal. The second follows from
+the first by squaring:
+$\tilde\bQ\bB\tilde\bQ^{t}\tilde\bQ\bB\tilde\bQ^{t}
+=\tilde\bQ\bB^{2}\tilde\bQ^{t}$.
+
+Let
+\begin{equation}
+   c_{i}=\big(\ip{\tilde\bQ^{t}\ba}{\bv_{i}}\big)^{2}
+        -\big(\ip\bb{\bv_{i}}\big)^{2}.
+   \tag{9.56}\label{eq:9.56}
+\end{equation}
+Then the three equations expressing the equality of $I_{4}$, $I_{5}$ and
+$I_{6}$ in \eqr{9.55} may be summarized in the matrix form
+\begin{equation}
+   \begin{pmatrix}
+     1&1&1\\
+     \lambda_{1}&\lambda_{2}&\lambda_{3}\\
+     \lambda_{1}^{2}&\lambda_{2}^{2}&\lambda_{3}^{2}
+   \end{pmatrix}
+   \begin{Bmatrix}c_{1}\\ c_{2}\\ c_{3}\end{Bmatrix}
+   =\begin{Bmatrix}0\\ 0\\ 0\end{Bmatrix},
+   \tag{9.57}\label{eq:9.57}
+\end{equation}
+where $\lambda_{i}$ are the principal values of $\bA$ and $\bB$.
+
+The three rows deserve to be written out, since each is a small
+computation and the pattern of powers is what makes the system
+invertible. Throughout, $\bc=\tilde\bQ^{t}\ba$, and $\{\bv_{i}\}$ is an
+orthonormal basis, so that $|\bw|^{2}=\sum_{i}(\ip\bw{\bv_{i}})^{2}$ for
+every $\bw$.
+
+\emph{Row 1, from $I_{6}$.} Equality of $|\ba|$ and $|\bb|$ gives
+$|\ba|^{2}=|\bb|^{2}$, and $|\bc|=|\tilde\bQ^{t}\ba|=|\ba|$ because
+$\tilde\bQ$ is orthogonal and orthogonal tensors preserve norms
+(Proposition~\ref{prop:orth}). Hence
+\[
+   \sum_{i}\big(\ip\bc{\bv_{i}}\big)^{2}=|\bc|^{2}=|\ba|^{2}=|\bb|^{2}
+   =\sum_{i}\big(\ip\bb{\bv_{i}}\big)^{2},
+   \qquad\text{i.e.}\qquad
+   \sum_{i}c_{i}=0 .
+\]
+
+\emph{Row 2, from $I_{4}$.} Using $\bA=\tilde\bQ\bB\tilde\bQ^{t}$ and
+the definition of the transpose,
+\[
+   I_{4}(\bA,\ba)=\ip\ba{\bA\ba}
+   =\ip\ba{\tilde\bQ\bB\tilde\bQ^{t}\ba}
+   =\ip{\tilde\bQ^{t}\ba}{\bB\tilde\bQ^{t}\ba}
+   =\ip\bc{\bB\bc}
+   =\sum_{i}\lambda_{i}\big(\ip\bc{\bv_{i}}\big)^{2},
+\]
+the last step by the spectral form of $\bB$ in \eqr{9.26}. Likewise
+$I_{4}(\bB,\bb)=\sum_{i}\lambda_{i}(\ip\bb{\bv_{i}})^{2}$, so equality
+of the two gives $\sum_{i}\lambda_{i}c_{i}=0$.
+
+\emph{Row 3, from $I_{5}$.} Identical, with
+$\bA^{2}=\tilde\bQ\bB^{2}\tilde\bQ^{t}$ in place of $\bA$ and
+$\bB^{2}=\sum_{i}\lambda_{i}^{2}\bv_{i}\otimes\bv_{i}$ in place of
+$\bB$: $\sum_{i}\lambda_{i}^{2}c_{i}=0$.
+
+As we are concerned with tensors having distinct principal values, the
+determinant of the coefficient matrix,
+$(\lambda_{1}-\lambda_{2})(\lambda_{2}-\lambda_{3})
+(\lambda_{3}-\lambda_{1})$, is nonzero, and therefore all the $c_{i}$
+vanish, i.e.,
+\[
+   \ip{\tilde\bQ^{t}\ba}{\bv_{i}}=\pm\ip\bb{\bv_{i}};
+   \qquad i=1,2,3 .
+\]
+The matrix of \eqr{9.57} is the transpose of the one in \eqr{9.35}, and
+transposition does not change a determinant, so the evaluation performed
+there serves here unchanged.
+
+\begin{remark}[a step in the book's proof that needs one more line]
+\label{rem:ch9signfix}
+At this point the book concludes ``$\ba=\pm\tilde\bQ\bb$'' and finishes.
+The conclusion is true but does not follow from what has been proved,
+and the gap is worth repairing rather than stepping over, because the
+repair is short and because the naive reading is genuinely false.
+
+What the vanishing of the $c_{i}$ gives is three sign ambiguities, one
+for each $i$, and nothing says they are the same sign. They need not be.
+Take $\bA=\bB$ diagonal on $\{\bv_{i}\}=\{\be_{i}\}$ with distinct
+$\lambda_{i}$, so that $\tilde\bQ=\I$ is an admissible choice, and take
+$\ba=\be_{1}+\be_{2}$, $\bb=\be_{1}-\be_{2}$. All six invariants agree,
+since $I_{6}$ sees $|\ba|=|\bb|=\sqrt2$ and $I_{4},I_{5}$ see
+$\lambda_{1}+\lambda_{2}$ and $\lambda_{1}^{2}+\lambda_{2}^{2}$ in both
+cases. But $\bb\neq\pm\ba$, and $\ba\otimes\ba\neq\bb\otimes\bb$.
+
+The repair is to absorb the three signs into an orthogonal tensor. Fix
+$s_{i}\in\{+1,-1\}$ with $\ip{\tilde\bQ^{t}\ba}{\bv_{i}}
+=s_{i}\ip\bb{\bv_{i}}$, taking $s_{i}=+1$ when both sides vanish, and
+set
+\[
+   \bS=\sum_{i}s_{i}\,\bv_{i}\otimes\bv_{i}.
+\]
+Then $\bS$ is orthogonal, since
+$\bS^{t}\bS=\sum_{i}s_{i}^{2}\bv_{i}\otimes\bv_{i}
+=\sum_{i}\bv_{i}\otimes\bv_{i}=\I$; and $\bS$ commutes with $\bB$,
+indeed $\bS\bB\bS^{t}=\sum_{i}s_{i}^{2}\lambda_{i}
+\bv_{i}\otimes\bv_{i}=\bB$, because both are diagonal on the same basis.
+Moreover
+\[
+   \tilde\bQ^{t}\ba=\sum_{i}\big(\ip{\tilde\bQ^{t}\ba}{\bv_{i}}\big)\bv_{i}
+   =\sum_{i}s_{i}\big(\ip\bb{\bv_{i}}\big)\bv_{i}=\bS\bb,
+   \qquad\text{so}\qquad \ba=\tilde\bQ\bS\bb .
+\]
+Put $\hat\bQ=\tilde\bQ\bS$, orthogonal as a product of orthogonal
+tensors. Then $\hat\bQ\bb=\ba$ and
+\[
+   \hat\bQ\bB\hat\bQ^{t}=\tilde\bQ\bS\bB\bS^{t}\tilde\bQ^{t}
+   =\tilde\bQ\bB\tilde\bQ^{t}=\bA .
+\]
+So the pair $(\bB,\bb)$ is carried onto the pair $(\bA,\ba)$ by a single
+orthogonal tensor, which is all the argument needs. In the
+counterexample above, $\hat\bQ=\operatorname{diag}(1,-1,1)$ does the
+job: it fixes $\bA$ and sends $\bb$ to $\ba$.
+
+The book's version is recoverable in the special case where all three
+signs happen to agree, and the general case differs only in that the
+sign pattern is itself a symmetry of $\bB$ and may be absorbed. Nothing
+in the conclusion changes.
+\end{remark}
+
+With $\hat\bQ$ so constructed, $\ba\otimes\ba
+=\hat\bQ\bb\otimes\hat\bQ\bb$, and the equality of the two sets of
+scalars $I_{1}$ to $I_{6}$ has been shown to imply that the two pairs
+are related by an orthogonal transformation. Finally, as
+$\varphi(\bB,\bb\otimes\bb)
+=\varphi(\hat\bQ\bB\hat\bQ^{t},\hat\bQ\bb\otimes\hat\bQ\bb)$ by
+hypothesis, we have
+$\varphi(\bA,\ba\otimes\ba)=\varphi(\bB,\bb\otimes\bb)$, as claimed.
+
+Collecting these results and reinstating the passive variables, we
+conclude that the heat flux is given by \eqr{9.41} and \eqr{9.42}. This
+subsumes the cases in which the stretching tensor has only one or two
+distinct principal values. Conversely, it is a straightforward matter to
+show that \eqr{9.41} and \eqr{9.42} yield \eqr{9.40} for all orthogonal
+$\bQ\colon\Et\to\Et$, and hence that the two statements are equivalent;
+Problem 3 does it.
+
+Further, assuming the $\phi$'s in \eqr{9.42} to be continuous functions
+of the $I_{k}$, $k=1,\ldots,6$, it follows from the continuity of this
+representation with respect to $\grad\theta$ that
+\begin{equation}
+   \bg(\theta,\rho,\bD,\bze;p)=\bze,
+   \tag{9.58}\label{eq:9.58}
+\end{equation}
+so that there is no heat conduction in the absence of a temperature
+gradient; and, from its continuity with respect to $\bD$, that
+\begin{equation}
+   \bg(\theta,\rho,\Ob,\grad\theta;p)=K(I_{6},\theta,\rho;p)\grad\theta,
+   \tag{9.59}\label{eq:9.59}
+\end{equation}
+for some scalar function $K$.
+
+Both statements are read off \eqr{9.41} and \eqr{9.42}. For \eqr{9.58},
+setting $\grad\theta=\bze$ makes the explicit factor $\grad\theta$ in
+\eqr{9.41} vanish, and the tensor $\bK$ multiplying it stays bounded
+because the $\phi$'s are continuous and $I_{4},I_{5},I_{6}$ all tend to
+zero with $\grad\theta$; a bounded tensor applied to the zero vector is
+the zero vector. For \eqr{9.59}, setting $\bD=\Ob$ kills the second and
+third terms of \eqr{9.42} outright and sends $I_{1}$ through $I_{5}$ to
+zero, leaving $\bK=\phi_{0}(0,\ldots,0,I_{6},\theta,\rho;p)\I$, a
+multiple of the identity; calling that multiple $K$ gives \eqr{9.59}.
+Notice that $I_{6}=|\grad\theta|$ survives, so the conductivity of a
+fluid at rest may still depend on the magnitude, though not on the
+direction, of the temperature gradient.
+
+%-----------------------------------------------------------------------
+\subsection*{The Newtonian fluid and the Fourier law}
+%-----------------------------------------------------------------------
+
+Empirical facts indicate that fluids of the present class, such as air
+and water, are well described by constitutive equations for the stress
+and heat flux that are linear in $\bD$ and $\grad\theta$, respectively,
+and that the heat flux is insensitive to $\bD$. Recalling that $I_{2}$
+and $I_{3}$ are nonlinear functions of $\bD$, whereas $I_{1}=\tr\bD$ is
+linear, the relevant expression for the stress is given by the
+\emph{Newtonian fluid}
+\begin{equation}
+   \bT=\big[-\tilde p(\theta,\rho;p)+\lambda(\theta,\rho;p)\tr\bD\big]\I
+   +2\mu(\theta,\rho;p)\bD,
+   \tag{9.60}\label{eq:9.60}
+\end{equation}
+where $\tilde p$ is the pressure in the absence of flow, and $\lambda$,
+$\mu$ are viscosity coefficients; and that for the heat flux, by the
+\emph{Fourier law}
+\begin{equation}
+   \bq=K(\theta,\rho;p)\grad\theta,
+   \tag{9.61}\label{eq:9.61}
+\end{equation}
+where $K$ is the thermal conductivity.
+
+The passage from \eqr{9.37} to \eqr{9.60} is a linearisation and it is
+worth carrying out, because it is where the two viscosities are born and
+because the reader should see exactly which terms were discarded.
+
+The three invariants scale differently with $\bD$. Replacing $\bD$ by
+$\eps\bD$ for a small number $\eps$ and using \eqr{9.25},
+\[
+   I_{1}(\eps\bD)=\eps I_{1}(\bD),\qquad
+   I_{2}(\eps\bD)=\eps^{2}I_{2}(\bD),\qquad
+   I_{3}(\eps\bD)=\eps^{3}I_{3}(\bD),
+\]
+the second because both $I_{1}^{2}$ and $\tr(\bD^{2})$ are quadratic,
+the third by Problem 21(a) of Chapter 1 again. So to first order in
+$\eps$ only $I_{1}$ is active, and the Taylor expansions of the three
+coefficient functions about $\bD=\Ob$ read
+\[
+\begin{aligned}
+   \varphi_{0}\big(I_{1},I_{2},I_{3},\theta,\rho;p\big)
+     &=\varphi_{0}(0,0,0,\theta,\rho;p)
+      +\frac{\partial\varphi_{0}}{\partial I_{1}}
+       \bigg|_{(0,0,0)}\!\!I_{1}+o(\eps)\\
+     &=-\tilde p(\theta,\rho;p)+\lambda(\theta,\rho;p)\tr\bD+o(\eps),\\
+   \varphi_{1}\big(I_{1},I_{2},I_{3},\theta,\rho;p\big)
+     &=\varphi_{1}(0,0,0,\theta,\rho;p)+O(\eps)
+      =2\mu(\theta,\rho;p)+O(\eps),
+\end{aligned}
+\]
+in which the two viscosities are \emph{defined} by
+\[
+   \lambda(\theta,\rho;p)
+   =\frac{\partial\varphi_{0}}{\partial I_{1}}\bigg|_{\bD=\Ob},
+   \qquad
+   2\mu(\theta,\rho;p)=\varphi_{1}\rest{\bD=\Ob},
+\]
+and $\tilde p$ is the pressure already named at \eqr{9.38}. The third
+term of \eqr{9.37} contributes $\varphi_{2}\bD^{2}$, which is
+$O(\eps^{2})$ whatever $\varphi_{2}$ does, and the correction to
+$\varphi_{1}$ multiplies $\bD$ and so is $O(\eps^{2})$ as well.
+Dropping everything of second order and higher leaves \eqr{9.60}
+exactly.
+
+So the two viscosities are not independent postulates. They are the two
+numbers left when the general response \eqr{9.37} is differentiated once
+with respect to the stretching at the state of rest: $\lambda$ measures
+how the isotropic part of the stress responds to a rate of volume
+change, and $2\mu$ is the value of $\varphi_{1}$ at rest, measuring how
+the stress responds to the stretching itself. Everything the material
+might do at second order in $\bD$ has been discarded, and a fluid for
+which that is a bad approximation is called non-Newtonian.
+
+The reduction of \eqr{9.41} to \eqr{9.61} is the same operation applied
+to $\bK$: set $\phi_{1}=\phi_{2}=0$, which is the statement that the
+heat flux is insensitive to $\bD$, and evaluate $\phi_{0}$ at
+$I_{6}=0$, which discards the dependence on the magnitude of the
+temperature gradient allowed by \eqr{9.59}. What remains is a scalar
+conductivity $K(\theta,\rho;p)$ and the linear law \eqr{9.61}.
+
+\begin{remark}[the sign convention in \eqr{9.61}]\label{rem:ch9Ksign}
+Fourier's law is more often written $\bq=-k\grad\theta$ with $k\geq0$,
+and the reader should be warned that \eqr{9.61} has no minus sign in
+front, so that $K=-k$ and $K$ will turn out in \eqr{9.80} to be
+\emph{non-positive}. The convention is forced by the definition of $\bq$
+in Chapter 6 and not chosen for convenience.
+
+Recall \eqr{6.166}: the heating influx through a surface with unit
+normal $\bn$ is $h=-\ip\bq\bn$, the minus sign being inserted so that
+$\ip\bq\bn>0$ means heat flowing \emph{out} through that surface. Heat
+runs from hot to cold, that is, opposite to $\grad\theta$, which points
+uphill in temperature by Remark~\ref{rem:slope}. So $\bq$ and
+$\grad\theta$ point in opposite directions and the coefficient relating
+them is negative. Both conventions describe the same physics; the only
+danger is in mixing them, and the inequality \eqr{9.80} below is where
+the sign is settled by thermodynamics rather than by taste.
+\end{remark}
+
+%-----------------------------------------------------------------------
+\subsection*{The Navier--Stokes equations}
+%-----------------------------------------------------------------------
+
+The Newtonian fluid is the point at which constitutive theory meets the
+balance laws, and the meeting produces the equations that carry the
+whole of classical fluid mechanics. Substitute \eqr{9.60} into the local
+balance of linear momentum \eqr{6.109}, $\rho\dot\bv=\rho\bb+\dvg\bT$,
+taking $\lambda$ and $\mu$ uniform in space so that they pass through
+the divergence.
+
+The stress splits into three pieces and each is differentiated
+separately. For a scalar field $\varphi$,
+\[
+   \big[\dvg(\varphi\I)\big]_{i}=(\varphi\dd_{ij})_{,j}=\varphi_{,i},
+   \qquad\text{so}\qquad
+   \dvg(\varphi\I)=\grad\varphi ,
+\]
+which handles the first two pieces with $\varphi=-\tilde p$ and
+$\varphi=\lambda\dvg\bv$, the latter using $\tr\bD=\tr\bL=\dvg\bv$ from
+Proposition~\ref{prop:divv}. For the third, with
+$D_{ij}=\tfrac12(v_{i,j}+v_{j,i})$ from \eqr{4.7},
+\[
+   \big[\dvg(2\mu\bD)\big]_{i}=2\mu D_{ij,j}
+   =\mu\big(v_{i,jj}+v_{j,ij}\big)
+   =\mu\big(\Delta v_{i}+(\dvg\bv)_{,i}\big),
+\]
+where $\Delta=\partial_{j}\partial_{j}$ is the Laplacian and the second
+term was recognised by exchanging the order of the two derivatives,
+$v_{j,ij}=v_{j,ji}=(\dvg\bv)_{,i}$, which is legitimate for a twice
+continuously differentiable velocity field. Collecting,
+\[
+   \dvg\bT=-\grad\tilde p+(\lambda+\mu)\grad(\dvg\bv)+\mu\Delta\bv ,
+\]
+and the balance of linear momentum becomes
+\[
+   \rho\big[\bv'+(\grad\bv)\bv\big]
+   =-\grad\tilde p+(\lambda+\mu)\grad(\dvg\bv)+\mu\Delta\bv+\rho\bb ,
+\]
+in which $\dot\bv=\bv'+(\grad\bv)\bv$ is \eqr{2.21}. These are the
+\emph{Navier--Stokes equations} for a compressible Newtonian fluid.
+Together with conservation of mass \eqr{6.14}, an equation of state
+giving $\tilde p$ in terms of $\theta$ and $\rho$, and the energy
+balance \eqr{6.168} with Fourier's law in it, they close the system.
+
+When the fluid is treated as incompressible, $\dvg\bv=0$ deletes the
+middle term and $\tilde p$ is replaced by the reaction pressure $p$ of
+\eqr{9.83} below:
+\[
+   \rho\big[\bv'+(\grad\bv)\bv\big]=-\grad p+\mu\Delta\bv+\rho\bb ,
+   \qquad \dvg\bv=0 .
+\]
+This is the form in which the equations are almost always met, and every
+one of Problems 5 to 12 is an exercise in solving it.
+
+\begin{remark}[what was postulated and what was derived]
+\label{rem:ch9NSderived}
+It is worth being explicit about the status of each ingredient, because
+the Navier--Stokes equations are usually introduced as a physical
+hypothesis and they are not one.
+
+\emph{Derived:} that the stress depends on the motion only through
+$\bD$; that it is isotropic in $\bD$; that it is therefore of the form
+\eqr{9.37}; that the heat flux is a tensor times $\grad\theta$; and,
+below, that $\mu\geq0$, $\kappa\geq0$ and $K\leq0$. None of this was
+assumed. It follows from fluidity, from the requirement that two
+observers describe the same material, and from the second law.
+
+\emph{Assumed:} that the response is local and of first order, which was
+the constitutive hypothesis of Chapter 8; and that the dependence on
+$\bD$ and on $\grad\theta$ may be truncated at first order, which is the
+step from \eqr{9.37} to \eqr{9.60}. That is all.
+
+The second assumption is the only one with a free parameter in it, and
+it is the one that fails first in practice. Polymer solutions, blood and
+molten plastics are all fluids by the definition of Chapter 8, and all
+of them satisfy \eqr{9.37}; what they do not satisfy is linearity, and
+the models used for them keep $\varphi_{2}$, or allow the $\varphi$'s to
+depend on the invariants, or abandon the locality assumption altogether
+in favour of a memory functional, as the discussion of viscoelasticity
+in Section 8.1 described.
+\end{remark}
+
+Regarding the constitutive functions for the Helmholtz energy and the
+entropy, the only consequences of frame invariance and symmetry under
+the unimodular group that are required for our purposes are that these
+functions are determined by the list
+$\{\theta,\rho,\bD,\grad\theta\}$. We write these simply as
+$\psi(\theta,\rho,\bD,\grad\theta;p)$ and
+$\eta(\theta,\rho,\bD,\grad\theta;p)$, respectively.
+
+\begin{remark}[$\psi$ has been used for two things]\label{rem:ch9psi}
+The coefficient functions in the proofs of
+Section~\ref{sec:ch9isotropic} and of this section were called
+$\psi_{0},\psi_{1},\psi_{2}$, following the book, and the free energy is
+also called $\psi$. The two have nothing to do with each other. The
+$\psi_{i}$ appeared only inside the proofs, where the passive variables
+were suppressed, and they were renamed $\varphi_{i}$ and $\phi_{i}$ the
+moment the proofs ended. From \eqr{9.62} onward $\psi$ always means the
+Helmholtz free energy per unit mass of \eqr{6.186}, and it never carries
+a subscript.
+\end{remark}
+%=======================================================================
+\section{Thermodynamical considerations}\label{sec:ch9thermo}
+%=======================================================================
+
+The stress, energy and entropy must be related if the balance laws and
+the Clausius--Duhem inequality are to be satisfied. To see this we
+invoke the latter inequality, \eqr{6.187},
+\[
+   -\rho\big(\dot\psi+\eta\dot\theta\big)+\ip\bT\bL
+   -\theta^{-1}\ip\bq{\grad\theta}\ \geq\ 0 ,
+\]
+at the material point $p\in B$ for a process consisting of arbitrary
+values of $\theta$, $\rho$, $\bD$ and $\grad\theta$. In principle the
+balance laws for energy and momentum, together with the constitutive
+equations, furnish the energy supply $r$ and body force $\bb$ required
+to effect this process. Here, we note that $\theta$ and $\grad\theta$
+can be specified independently at any one point.
+
+\begin{remark}[the licence that makes the whole argument work]
+\label{rem:ch9licence}
+Everything in this section rests on the claim that the fields entering
+the inequality may be assigned at will, and that claim deserves scrutiny
+because it looks like cheating: surely a fluid cannot be made to do
+anything one likes.
+
+It can, and the reason is in the sentence above. The Clausius--Duhem
+inequality is required to hold in \emph{every} admissible process, and a
+process is admissible if it satisfies the balance laws. Now the balance
+of energy \eqr{6.168} contains the heat supply $r$, which is at our
+disposal: whatever $\bv$ and $\theta$ we prescribe, we may solve
+\eqr{6.168} for the $r$ that makes the energy balance hold. Likewise the
+balance of linear momentum \eqr{6.109} contains the body force $\bb$,
+and we may solve it for the $\bb$ that makes the momentum balance hold.
+So no choice of fields can be ruled inadmissible on the grounds of
+violating a balance law; the balance laws merely say what supply and
+what force would be needed.
+
+This is the Coleman--Noll argument, sketched in general at the end of
+Chapter 8 and carried out in full here. It is worth noticing what it
+would cost to reject it. If one insisted that $r$ and $\bb$ be given in
+advance, the set of admissible processes would shrink, the inequality
+would be demanded of fewer of them, and fewer restrictions would follow.
+The conclusions of this section are therefore the strongest ones
+available, and they are strongest precisely because the supplies are
+free.
+
+The last sentence before this remark makes the point that carries the
+most weight below: $\theta$ and $\grad\theta$ are independent at a
+point. A field and its gradient at one place constrain each other not at
+all, since one may add to $\theta$ any function vanishing at the point
+with arbitrary gradient there.
+\end{remark}
+
+Proceeding, we use the chain rule to obtain
+\begin{equation}
+   \dot\psi=\psi_{\theta}\dot\theta+\psi_{\rho}\dot\rho
+   +\ip{\psi_{\bD}}{\dot\bD}
+   +\ip{\psi_{\grad\theta}}{(\grad\theta)^{\textstyle\cdot}},
+   \tag{9.62}\label{eq:9.62}
+\end{equation}
+where subscripts are used to denote derivatives with respect to scalar,
+tensor or vector variables. So $\psi_{\theta}$ and $\psi_{\rho}$ are
+ordinary partial derivatives, $\psi_{\bD}$ is the symmetric tensor
+representing the derivative of $\psi$ with respect to $\bD$ in the
+tensor inner product of Definition~\ref{def:tip}, and
+$\psi_{\grad\theta}$ is the vector representing the derivative with
+respect to $\grad\theta$ in the inner product of $\Et$. Both
+representations exist and are unique by Theorem~\ref{thm:riesz}, applied
+in $\Et$ and in the nine-dimensional space $\Lin$ respectively; this is
+the same double construction that produced the gradient in Chapter 1.
+
+Invoking \eqr{6.17}$_{1}$ in the form $\dot\rho=-\rho\tr\bD
+=-\rho\,\ip\I\bD$ and recalling that $\bT$ is symmetric, we thus reduce
+the Clausius--Duhem inequality to the form
+\begin{equation}
+\begin{aligned}
+   &-\rho\big(\psi_{\theta}+\eta\big)\dot\theta
+   -\rho\,\ip{\psi_{\bD}}{\dot\bD}
+   -\rho\,\ip{\psi_{\grad\theta}}{(\grad\theta)^{\textstyle\cdot}}\\
+   &\qquad+\ip{\big(\bT+\rho^{2}\psi_{\rho}\I\big)}\bD
+   -\theta^{-1}\ip\bq{\grad\theta}\ \geq\ 0 .
+\end{aligned}
+   \tag{9.63}\label{eq:9.63}
+\end{equation}
+
+Three substitutions were made and each is worth isolating.
+
+\emph{The density rate.} Conservation of mass in the form \eqr{6.17} is
+$\dot\rho+\rho\dvg\bv=0$, and $\dvg\bv=\tr\bL=\tr\bD$ because the trace
+of a skew tensor vanishes. So $\dot\rho=-\rho\tr\bD$, and $\tr\bD$ is
+$\ip\I\bD$ by Theorem~\ref{thm:tip}, since $\ip\I\bD=\dd_{ij}D_{ij}
+=D_{ii}$. The term $-\rho\psi_{\rho}\dot\rho$ of \eqr{9.62}, carried
+into the inequality with its factor $-\rho$, therefore becomes
+\[
+   -\rho\,\psi_{\rho}\,\dot\rho=-\rho\psi_{\rho}(-\rho\ip\I\bD)
+   =\ip{\big(\rho^{2}\psi_{\rho}\I\big)}\bD ,
+\]
+which is where the second half of the bracket
+$\bT+\rho^{2}\psi_{\rho}\I$ comes from.
+
+\emph{The stress power.} $\ip\bT\bL=\ip\bT{(\bD+\bW)}
+=\ip\bT\bD+\ip\bT\bW=\ip\bT\bD$, the last term vanishing because $\bT$
+is symmetric and $\bW$ skew (Lemma~\ref{lem:symskw}). So the stress
+does no work on the spin, which is the same fact that made a rigid body
+dissipate nothing.
+
+\emph{Nothing else moved.} The remaining terms of \eqr{9.62} are carried
+across unchanged, each multiplied by $-\rho$, and the term
+$-\rho\eta\dot\theta$ of \eqr{6.187} is collected with
+$-\rho\psi_{\theta}\dot\theta$ to give the first bracket.
+
+At any fixed instant, $t^{*}$ say, the lists $\{\theta,\bD,\grad\theta\}$
+and $\{\dot\theta,\dot\bD,(\grad\theta)^{\textstyle\cdot}\}$ can be
+assigned independently. Accordingly this inequality is of the form
+\begin{equation}
+   \ip{\ba(\bz)}\bw+b(\bz)\ \geq\ 0
+   \tag{9.64}\label{eq:9.64}
+\end{equation}
+for arbitrary, independent values of the arrays
+\begin{equation}
+   \bz=(\theta,\rho,\bD,\grad\theta)
+   \qquad\text{and}\qquad
+   \bw=\big(\dot\theta,\dot\bD,(\grad\theta)^{\textstyle\cdot}\big),
+   \tag{9.65}\label{eq:9.65}
+\end{equation}
+where
+\begin{equation}
+   \ba(\bz)=\big(-\rho(\psi_{\theta}+\eta),\,-\rho\psi_{\bD},\,
+   -\rho\psi_{\grad\theta}\big)
+   \tag{9.66}\label{eq:9.66}
+\end{equation}
+and
+\begin{equation}
+   b(\bz)=\ip{\big(\bT+\rho^{2}\psi_{\rho}\I\big)}\bD
+   -\theta^{-1}\ip\bq{\grad\theta}.
+   \tag{9.67}\label{eq:9.67}
+\end{equation}
+
+The arrays $\ba$ and $\bw$ each carry $1+6+3=10$ independent numbers, a
+scalar together with a symmetric tensor and a vector, and $\ip\ba\bw$
+means the sum of the three separate inner products, one in $\Rn$, one in
+the space of symmetric tensors and one in $\Et$. That is a genuine inner
+product on the ten-dimensional space of such arrays, so
+$|\ba|^{2}=\ip\ba\ba$ vanishes only when all three entries do.
+
+To derive a necessary condition for \eqr{9.64}, we choose
+$\bw=\dd\,\ba(\bz)$ with $\dd\in\Rn$ arbitrary. Then
+$\dd|\ba|^{2}+b\geq0$. If $|\ba|\neq0$, then this is violated for
+$\dd<-b/|\ba|^{2}$, contrary to the requirement that it be satisfied for
+all $\dd$. Hence the necessary conditions
+\begin{equation}
+   \ba(\bz)=(0,\Ob,\bze)
+   \qquad\text{and}\qquad
+   b(\bz)\geq0
+   \tag{9.68}\label{eq:9.68}
+\end{equation}
+for \eqr{9.64}, which are obviously also sufficient. The choice of $\bw$
+is legitimate exactly because $\bw$ and $\bz$ are independent: $\ba$ is
+a function of $\bz$ alone, so once $\bz$ is fixed the vector $\ba(\bz)$
+is a fixed array and $\dd\ba(\bz)$ is an admissible value of $\bw$ for
+every real $\dd$. Sufficiency is immediate: if $\ba=0$ then \eqr{9.64}
+reads $b\geq0$ whatever $\bw$ is.
+
+We conclude that $\psi_{\bD}=\Ob$ and $\psi_{\grad\theta}=\bze$, and
+hence that the free energy is a function $\psi(\theta,\rho;p)$ of
+$\theta$ and $\rho$, and that
+\begin{equation}
+   \eta=-\psi_{\theta},
+   \tag{9.69}\label{eq:9.69}
+\end{equation}
+so that the entropy is also a function of $\theta$ and $\rho$. This
+leaves the residual dissipation inequality
+\begin{equation}
+   \ip{\big(\bT+\rho^{2}\psi_{\rho}\I\big)}\bD
+   -\theta^{-1}\ip\bq{\grad\theta}\ \geq\ 0 ,
+   \tag{9.70}\label{eq:9.70}
+\end{equation}
+restricting the stress and heat flux jointly, for all values of
+$\theta$, $\rho$, $\bD$ and $\grad\theta$. Moreover, as the material
+point $p$ and the instant $t^{*}$ are arbitrary, these conclusions hold
+at all material points and at all instants.
+
+\begin{remark}[three results, and none of them assumed]
+\label{rem:ch9three}
+Equation \eqr{9.68} has just delivered three statements of very
+different character from a single inequality, and they are worth
+separating.
+
+\emph{The free energy is not viscous.} $\psi_{\bD}=\Ob$ says that the
+stretching does not enter the stored energy at all. A fluid stores
+energy by being compressed, not by being sheared, and no matter how
+violently it is being deformed its free energy is the same as that of
+the same fluid at rest at the same $\theta$ and $\rho$. Viscosity is
+confined to the stress, where it dissipates rather than stores.
+
+\emph{The entropy is not an independent constitutive function.}
+Equation \eqr{9.69} determines $\eta$ once $\psi$ is known. Of the four
+members of the response set $C=\{\bT,\bq,\psi,\eta\}$ of \eqr{8.4}, one
+has just been eliminated, and \eqr{9.74} below will show that part of a
+second is determined by $\psi$ as well.
+
+\emph{Heat conduction cannot be stored either.} $\psi_{\grad\theta}
+=\bze$ removes the temperature gradient from the energy, which is the
+statement that a body does not become able to do work merely by being
+unevenly heated.
+
+The pattern is the one flagged in Chapter 8: a term linear in a
+quantity that may be given any value, with a coefficient that cannot
+depend on it, must have vanishing coefficient. Here the free quantities
+are the rates $\dot\theta$, $\dot\bD$ and
+$(\grad\theta)^{\textstyle\cdot}$, and the reason they are free is that
+$\psi$ was allowed to depend on $\theta,\rho,\bD,\grad\theta$ but on
+none of their rates.
+\end{remark}
+
+\subsection*{The thermodynamic pressure}
+
+Consider a process for which $\grad\theta$ vanishes at a particular
+point and instant, and let
+\begin{equation}
+   f(\bD)=\ip{\big(\bT+\rho^{2}\psi_{\rho}\I\big)}\bD
+   \tag{9.71}\label{eq:9.71}
+\end{equation}
+in which $\theta$ and $\rho$ are fixed. Then $f(\Ob)=0$ and
+$f(\bD)\geq0$ for all symmetric $\bD$, so that $f$ is minimized, and
+hence stationary, at $\bD=\Ob$, i.e.,
+\begin{equation}
+   \ip{\big(\bT\rest{\bD=\Ob}+\rho^{2}\psi_{\rho}\I\big)}{\dl\bD}=0
+   \qquad\text{for all symmetric }\dl\bD .
+   \tag{9.72}\label{eq:9.72}
+\end{equation}
+This implies that
+\begin{equation}
+   \bT\rest{\bD=\Ob}=-\rho^{2}\psi_{\rho}\I
+   \tag{9.73}\label{eq:9.73}
+\end{equation}
+and hence, from \eqr{9.38}, that
+\begin{equation}
+   \tilde p(\theta,\rho;p)=\rho^{2}\psi_{\rho}.
+   \tag{9.74}\label{eq:9.74}
+\end{equation}
+This is called the \emph{thermodynamic pressure}.
+
+The three steps each deserve a line. That $f(\Ob)=0$ is immediate from
+\eqr{9.71}, since every term carries a factor $\bD$. That $f(\bD)\geq0$
+is \eqr{9.70} with $\grad\theta=\bze$. A differentiable function that is
+non-negative everywhere and zero at a point attains a minimum there, so
+its derivative vanishes there, and the derivative of \eqr{9.71} in the
+direction of an arbitrary symmetric increment $\dl\bD$ is what
+\eqr{9.72} writes down: $\bT$ and $\psi_{\rho}$ are held at their values
+at $\bD=\Ob$ because differentiating the product would produce a second
+term carrying the factor $\bD$, which vanishes there. Finally,
+\eqr{9.72} says that a fixed symmetric tensor is orthogonal to every
+symmetric tensor, hence orthogonal to itself, hence zero by the positive
+definiteness of the tensor inner product, Theorem~\ref{thm:tip}. That
+the arbitrary increment had to be \emph{symmetric} costs nothing here,
+because the tensor in the bracket is itself symmetric and could not have
+been detected by a skew increment anyway.
+
+\begin{remark}[what \eqr{9.74} accomplishes]\label{rem:ch9thermop}
+Before \eqr{9.74} the fluid had two independent scalar functions of
+$(\theta,\rho)$ describing its equilibrium: the free energy $\psi$,
+which is a thermodynamic object, and the pressure $\tilde p$, which was
+introduced in \eqr{9.38} as a purely mechanical one, the value of
+$-\varphi_{0}$ at zero stretching. Nothing had connected them.
+
+Equation \eqr{9.74} connects them, and the connection is not an
+identity but a consequence of the second law. It says that the pressure
+a fluid at rest exerts on its container is $\rho^{2}$ times the rate at
+which its stored energy rises with density, which is the familiar
+statement that pressure is the resistance to compression measured
+energetically. Written per unit volume rather than per unit mass, with
+$v=1/\rho$ the specific volume, the chain rule gives
+$\partial\psi/\partial v=\psi_{\rho}(\dl\rho/\dl v)
+=-\rho^{2}\psi_{\rho}$, so \eqr{9.74} reads
+$\tilde p=-\partial\psi/\partial v$: the pressure is minus the
+derivative of the free energy with respect to volume at fixed
+temperature. That is the definition of pressure in classical
+thermodynamics, recovered here from continuum mechanics.
+
+Together with \eqr{9.69}, $\eta=-\psi_{\theta}$, the whole equilibrium
+response of the fluid is now packed into the single function
+$\psi(\theta,\rho;p)$. Two derivatives of it give the entropy and the
+pressure, and nothing else about equilibrium remains to be measured.
+\end{remark}
+
+\subsection*{The signs of the viscosities}
+
+Invoking \eqr{9.70} for the Newtonian fluid model \eqr{9.60}, again with
+$\grad\theta=\bze$, yields
+\begin{equation}
+   \lambda(\tr\bD)^{2}+2\mu\,\ip\bD\bD\ \geq\ 0 ,
+   \tag{9.75}\label{eq:9.75}
+\end{equation}
+for all symmetric $\bD$. The reduction uses \eqr{9.74} to cancel two
+terms. With $\tilde p=\rho^{2}\psi_{\rho}$,
+\[
+   \bT+\rho^{2}\psi_{\rho}\I
+   =\big[-\tilde p+\lambda\tr\bD\big]\I+2\mu\bD+\tilde p\,\I
+   =\lambda(\tr\bD)\I+2\mu\bD ,
+\]
+so that the pressure disappears entirely from the dissipation, and
+\[
+   \ip{\big(\lambda(\tr\bD)\I+2\mu\bD\big)}\bD
+   =\lambda(\tr\bD)\ip\I\bD+2\mu\ip\bD\bD
+   =\lambda(\tr\bD)^{2}+2\mu\,\ip\bD\bD ,
+\]
+using $\ip\I\bD=\tr\bD$ once more.
+
+To derive necessary conditions for \eqr{9.75} we invoke the orthogonal
+decomposition
+\begin{equation}
+   \bD=\Dev\bD+\tfrac13(\tr\bD)\I,
+   \tag{9.76}\label{eq:9.76}
+\end{equation}
+where $\Dev\bD$ is the deviatoric part of $\bD$ (see Problem 15 of
+Chapter 1 and Definition~\ref{def:splits}). Our inequality becomes
+\begin{equation}
+   \kappa(\tr\bD)^{2}+2\mu\,|\Dev\bD|^{2}\ \geq\ 0 ,
+   \tag{9.77}\label{eq:9.77}
+\end{equation}
+for all $\bD$, where
+\begin{equation}
+   \kappa=\lambda+\tfrac23\mu .
+   \tag{9.78}\label{eq:9.78}
+\end{equation}
+
+The passage from \eqr{9.75} to \eqr{9.77} is the whole point of
+introducing \eqr{9.76} and is worth doing slowly. The decomposition is
+orthogonal in the sense of Proposition~\ref{prop:splits}: the spherical
+and deviatoric parts satisfy $\ip{\Sph\bA}{\Dev\bB}=0$, so Pythagoras
+applies and
+\[
+\begin{aligned}
+   |\bD|^{2}&=|\Dev\bD|^{2}+\big|\tfrac13(\tr\bD)\I\big|^{2}
+   \\
+   &=|\Dev\bD|^{2}+\tfrac19(\tr\bD)^{2}|\I|^{2}
+   =|\Dev\bD|^{2}+\tfrac13(\tr\bD)^{2},
+\end{aligned}
+\]
+where $|\I|^{2}=\ip\I\I=\dd_{ij}\dd_{ij}=3$. Substituting into
+\eqr{9.75},
+\[
+   \lambda(\tr\bD)^{2}+2\mu\Big[|\Dev\bD|^{2}
+   +\tfrac13(\tr\bD)^{2}\Big]
+   =\Big(\lambda+\tfrac23\mu\Big)(\tr\bD)^{2}+2\mu|\Dev\bD|^{2},
+\]
+which is \eqr{9.77} with $\kappa$ as defined. The gain is that the two
+surviving terms involve \emph{independent} pieces of $\bD$: one may
+change $\tr\bD$ without touching $\Dev\bD$ and conversely, which is
+exactly what \eqr{9.75} did not permit, since $\ip\bD\bD$ mixes them.
+
+Consider two flows, the first with $\bD=\I$ (so that $\Dev\bD=\Ob$) and
+the second with $\bD=\tfrac12(\ba\otimes\bb+\bb\otimes\ba)$, where
+$\ip\ba\bb=0$, the latter yielding $\tr\bD=0$ and hence $\bD=\Dev\bD$.
+These yield the necessary and sufficient conditions
+\begin{equation}
+   \kappa\geq0
+   \qquad\text{and}\qquad
+   \mu\geq0 .
+   \tag{9.79}\label{eq:9.79}
+\end{equation}
+
+The two evaluations are short. For the first, $\tr\I=3$ and
+$\Dev\I=\I-\tfrac13\cdot3\cdot\I=\Ob$, so \eqr{9.77} reads
+$9\kappa\geq0$, giving $\kappa\geq0$. For the second, using
+$\tr(\ba\otimes\bb)=\ip\ba\bb$ from Theorem~\ref{thm:trace},
+\[
+   \tr\bD=\tfrac12\big(\ip\ba\bb+\ip\bb\ba\big)=0 ,
+\]
+so the first term of \eqr{9.77} drops out and $\Dev\bD=\bD$. Its
+magnitude is computed with the dyad rule of Lemma~\ref{lem:dyadprod} and
+$\ip\ba\bb=0$:
+\[
+\begin{aligned}
+   \bD^{2}&=\tfrac14\big(\ba\otimes\bb+\bb\otimes\ba\big)
+     \big(\ba\otimes\bb+\bb\otimes\ba\big)\\
+   &=\tfrac14\Big[(\ip\bb\ba)\,\ba\otimes\bb
+     +(\ip\bb\bb)\,\ba\otimes\ba
+     +(\ip\ba\ba)\,\bb\otimes\bb
+     +(\ip\ba\bb)\,\bb\otimes\ba\Big]\\
+   &=\tfrac14\Big[|\bb|^{2}\,\ba\otimes\ba+|\ba|^{2}\,\bb\otimes\bb\Big],
+\end{aligned}
+\]
+so that, taking the trace and using $\tr(\ba\otimes\ba)=|\ba|^{2}$,
+\[
+   |\bD|^{2}=\ip\bD\bD=\tr\big(\bD\bD^{t}\big)=\tr\big(\bD^{2}\big)
+   =\tfrac12|\ba|^{2}|\bb|^{2}>0
+\]
+for $\ba,\bb\neq\bze$. Hence \eqr{9.77} reads
+$\mu|\ba|^{2}|\bb|^{2}\geq0$ and $\mu\geq0$ follows. Sufficiency is
+immediate: if $\kappa\geq0$ and $\mu\geq0$ then both terms of
+\eqr{9.77} are non-negative for every $\bD$, since $(\tr\bD)^{2}$ and
+$|\Dev\bD|^{2}$ are squares.
+
+Because the second form of $\bD$ represents a shear flow, we refer to
+$\mu$ as the \emph{shear viscosity}, whereas $\kappa$ is the \emph{bulk
+viscosity}. Figure~\ref{fig:ch9viscosity} shows the two test motions and
+the split of the stress that goes with them.
+
+\begin{figure}[htbp]\centering
+\renewcommand{\thefigure}{C}
+\begin{tikzpicture}[scale=1.0,
+   ar/.style={-{Stealth[length=2.2mm]},thick},
+   fr/.style={-{Stealth[length=2.2mm]},thick,blue!55!black}]
+% =============== panel 1 : bulk ===============
+\begin{scope}[xshift=0cm]
+  \draw[thick,fill=gray!10] (-0.62,-0.62) rectangle (0.62,0.62);
+  \draw[guide] (-1.05,-1.05) rectangle (1.05,1.05);
+  % expansion arrows on the four faces
+  \foreach \a in {0,90,180,270}{
+     \draw[ar,red!65!black] (\a:0.62) -- (\a:1.05);}
+  % restoring tractions inward
+  \foreach \a in {45,135,225,315}{
+     \draw[fr] (\a:1.22) -- (\a:0.90);}
+  \node[font=\small,anchor=north] at (0,-1.55) {$\bD=\tfrac13(\tr\bD)\I$};
+  \node[font=\footnotesize,anchor=north,align=center] at (0,-1.95)
+     {shape kept, volume changing\\ $\Dev\bD=\Ob$};
+  \node[font=\footnotesize,text=blue!55!black,anchor=north] at (0,-2.62)
+     {resisted by $\kappa$};
+  \node[font=\footnotesize,anchor=north,align=center,text=gray!85]
+     at (0,-3.05) {dissipation\\ $\kappa(\tr\bD)^{2}$};
+\end{scope}
+% =============== panel 2 : shear ===============
+\begin{scope}[xshift=5.4cm]
+  \draw[guide] (-0.62,-0.62) rectangle (0.62,0.62);
+  \draw[thick,fill=gray!10]
+     (-0.92,-0.62)--(-0.32,0.62)--(0.92,0.62)--(0.32,-0.62)--cycle;
+  % shearing arrows on top and bottom
+  \draw[ar,red!65!black] (0.10,0.80)--(0.75,0.80);
+  \draw[ar,red!65!black] (-0.10,-0.80)--(-0.75,-0.80);
+  % resisting shear tractions
+  \draw[fr] (0.62,0.66)--(0.02,0.66);
+  \draw[fr] (-0.62,-0.66)--(-0.02,-0.66);
+  \node[font=\small,anchor=north] at (0,-1.55) {$\bD=\Dev\bD$};
+  \node[font=\footnotesize,anchor=north,align=center] at (0,-1.95)
+     {volume kept, shape changing\\ $\tr\bD=0$};
+  \node[font=\footnotesize,text=blue!55!black,anchor=north] at (0,-2.62)
+     {resisted by $\mu$};
+  \node[font=\footnotesize,anchor=north,align=center,text=gray!85]
+     at (0,-3.05) {dissipation\\ $2\mu|\Dev\bD|^{2}$};
+\end{scope}
+% =============== the stress decomposition ===============
+\node[font=\small,anchor=north west,align=left] at (-1.55,-3.75)
+  {$\bT=\underbrace{-\tilde p\,\I}_{\text{equilibrium}}
+    \;+\;\underbrace{\kappa(\tr\bD)\I}_{\text{bulk}}
+    \;+\;\underbrace{2\mu\,\Dev\bD}_{\text{shear}}$};
+\node[font=\footnotesize,text=gray!85,anchor=north west,align=left]
+  at (4.70,-3.85)
+  {Stokes' condition is $\kappa=0$:\\
+   the spherical part of $\bT$ is then\\
+   $-\tilde p\,\I$ in every flow.};
+\end{tikzpicture}
+\caption{The two viscosities, and the two motions that isolate them.
+Any $\bD$ splits by \eqr{9.76} into a part that changes volume without
+changing shape and a part that changes shape without changing volume,
+and the split is orthogonal, so the dissipation \eqr{9.77} splits with
+it into two independent non-negative pieces. Feeding \eqr{9.77} the
+first motion alone forces $\kappa\geq0$; feeding it the second forces
+$\mu\geq0$. The decomposition of the stress shown below the panels is
+\eqr{9.60} rewritten with \eqr{9.76} and \eqr{9.78}, and it is the
+cleanest form of the Newtonian law: an equilibrium pressure, a bulk
+viscous pressure proportional to the rate of volume change, and a shear
+stress proportional to the rate of shape change.}
+\label{fig:ch9viscosity}
+\end{figure}
+
+\begin{remark}[Stokes' condition]\label{rem:ch9stokes}
+Written with \eqr{9.76} and \eqr{9.78}, the Newtonian law \eqr{9.60}
+becomes
+\[
+   \bT=\big[-\tilde p+\kappa\tr\bD\big]\I+2\mu\Dev\bD ,
+\]
+since $2\mu\bD=2\mu\Dev\bD+\tfrac23\mu(\tr\bD)\I$ and the second piece
+joins the spherical term. Taking the trace and dividing by three,
+\[
+   \tfrac13\tr\bT=-\tilde p+\kappa\tr\bD ,
+\]
+because $\tr(\Dev\bD)=0$. The quantity $-\tfrac13\tr\bT$ is the
+\emph{mean normal pressure}, the average over all orientations of the
+normal traction, and it is what a pressure gauge in a moving fluid
+reports. The display says that it agrees with the thermodynamic pressure
+$\tilde p$ of \eqr{9.74} only when $\kappa\tr\bD=0$.
+
+\emph{Stokes' condition} is the assumption $\kappa=0$, equivalently
+$\lambda=-\tfrac23\mu$, which makes the two pressures agree in every
+flow whatever. Three things should be said about it.
+
+It is admissible: \eqr{9.79}$_{1}$ requires $\kappa\geq0$ and $\kappa=0$
+sits at the edge of that range, so nothing in the second law forbids it.
+
+It is not forced: the same inequality permits any $\kappa>0$, and
+measured bulk viscosities of polyatomic gases and of water are not zero.
+The bulk viscosity is the resistance a fluid offers to being compressed
+\emph{quickly}, which arises when the energy fed into compression takes
+time to redistribute among the internal degrees of freedom of the
+molecules. A monatomic gas has no such degrees of freedom, and for it
+kinetic theory gives $\kappa=0$ exactly.
+
+It rarely matters: in an incompressible flow $\tr\bD=0$ and the term
+$\kappa\tr\bD$ vanishes identically, so $\kappa$ never appears. That is
+why Stokes' condition can be carried for a century in textbooks without
+doing much harm, and why it shows itself mainly in the absorption of
+sound, where compression is both rapid and unavoidable.
+\end{remark}
+
+\subsection*{The sign of the conductivity}
+
+Invoking \eqr{9.70} for the classical Fourier law \eqr{9.61}, with
+$\bD=\Ob$, we conclude that $K|\grad\theta|^{2}\leq0$ and hence that the
+thermal conductivity is non-positive:
+\begin{equation}
+   K\leq0 .
+   \tag{9.80}\label{eq:9.80}
+\end{equation}
+Setting $\bD=\Ob$ kills the first term of \eqr{9.70} entirely, leaving
+\[
+   -\theta^{-1}\ip\bq{\grad\theta}\geq0 ,
+   \qquad\text{i.e.}\qquad
+   -\theta^{-1}K\,\ip{\grad\theta}{\grad\theta}
+   =-\theta^{-1}K|\grad\theta|^{2}\geq0 .
+\]
+The absolute temperature is positive, so $\theta^{-1}>0$ and the
+inequality is equivalent to $K|\grad\theta|^{2}\leq0$; since
+$|\grad\theta|^{2}>0$ for any non-vanishing temperature gradient, and
+$\grad\theta$ may be assigned freely, $K\leq0$ follows.
+
+In turn, these inequalities ensure that a model consisting of the
+Newtonian fluid and Fourier's law satisfy the Clausius--Duhem inequality
+without qualification, i.e., for all processes. The check is one line
+now that the pieces are assembled: substituting \eqr{9.60} and
+\eqr{9.61} into \eqr{9.70} and using \eqr{9.74}, \eqr{9.77} and the
+computation above,
+\[
+   \underbrace{\kappa(\tr\bD)^{2}}_{\geq0}
+   +\underbrace{2\mu|\Dev\bD|^{2}}_{\geq0}
+   +\underbrace{\big(-\theta^{-1}K\big)|\grad\theta|^{2}}_{\geq0}
+   \ \geq\ 0 ,
+\]
+a sum of three separately non-negative terms, for every $\bD$ and every
+$\grad\theta$. Sufficiency has therefore been established alongside
+necessity, and the three inequalities $\kappa\geq0$, $\mu\geq0$,
+$K\leq0$ are exactly what compatibility with the second law amounts to
+for this model.
+
+\begin{remark}[what the second law has and has not said]
+\label{rem:ch9whatCD}
+The three inequalities are the entire thermodynamic content of the
+Newtonian--Fourier model, and it is worth being precise about their
+force.
+
+They are inequalities, not equations: thermodynamics tells us the sign
+of $\mu$ but not its size, and no argument of this chapter could
+determine that a particular fluid has $\mu=10^{-3}$ rather than
+$10^{-5}$ in SI units. Measuring the magnitudes is what experiment is
+for; forbidding the wrong sign is what the second law is for.
+
+Each has a plain physical reading. $\mu\geq0$ says that shearing a fluid
+warms it and never cools it: a fluid with $\mu<0$ would accelerate
+spontaneously, converting heat from its surroundings into ordered
+motion. $\kappa\geq0$ says the same of compression. $K\leq0$, which is
+$k=-K\geq0$ in the usual convention, says heat runs from hot to cold.
+
+And each was derived from one inequality, \eqr{6.187}, by feeding it
+suitably chosen processes: a purely dilatational flow, a purely
+shearing flow, and a temperature gradient at rest. That is the same
+technique as everywhere else in this chapter and in Chapter 8. A
+statement required to hold for \emph{all} inputs is tested against the
+inputs that make everything but one term vanish, and each such test
+yields one restriction. Remark~\ref{rem:whyphione} of Chapter 5 named
+the principle.
+\end{remark}
+
+At this stage a remark is in order concerning our a priori omission of
+the temperature gradient from the list of independent variables in the
+constitutive function for the stress, which was made without
+justification at \eqr{8.33}. If one does not omit the temperature
+gradient, then it is possible to show that the leading-order model
+emerging for small values of $|\bD|$ and $|\grad\theta|$ is precisely
+the Newtonian--Fourier model; and that, to satisfy the Clausius--Duhem
+inequality, the associated stress must be independent of the temperature
+gradient. The details of the fairly lengthy argument may be found in the
+reference cited by the book. So the omission costs nothing: what was
+assumed for convenience turns out to be forced.
+
+%-----------------------------------------------------------------------
+\subsection*{The incompressible Newtonian fluid}
+%-----------------------------------------------------------------------
+
+Many fluids are approximately incompressible under feasible conditions,
+including small deviations in temperature. Their motions are therefore
+approximately isochoric, satisfying $J=1$ very nearly. It is thus
+appropriate to impose the constraint $\dot J=0$ at a material point.
+This in turn is equivalent to $0=\tr\bD=\ip\I\bD$, by
+$\dot J=J\tr\bL$ from Problem 2 of Chapter 4 together with $J>0$ and
+$\tr\bL=\tr\bD$, reducing the dissipation inequality \eqr{9.70} to
+\begin{equation}
+   \ip{\Dev\bT}{\Dev\bD}-\theta^{-1}\ip\bq{\grad\theta}\ \geq\ 0 ,
+   \tag{9.81}\label{eq:9.81}
+\end{equation}
+where, for the incompressible Newtonian fluid,
+\begin{equation}
+   \Dev\bT=2\mu\Dev\bD=2\mu\bD .
+   \tag{9.82}\label{eq:9.82}
+\end{equation}
+
+The reduction of the first term of \eqr{9.70} uses the constraint twice.
+First, $\ip{(\rho^{2}\psi_{\rho}\I)}\bD=\rho^{2}\psi_{\rho}\tr\bD=0$, so
+the pressure term drops out on its own. Second, splitting $\bT$ by
+\eqr{9.76},
+\[
+   \ip\bT\bD=\ip{\big(\Dev\bT+\tfrac13(\tr\bT)\I\big)}\bD
+   =\ip{\Dev\bT}\bD+\tfrac13(\tr\bT)\tr\bD
+   =\ip{\Dev\bT}{\Dev\bD},
+\]
+since $\tr\bD=0$ makes both the second term vanish and $\bD=\Dev\bD$.
+Equation \eqr{9.82} is then \eqr{9.60} with $\tr\bD=0$: the term in
+$\lambda$ is gone and $\Dev(-\tilde p\I)=\Ob$, leaving only $2\mu\bD$,
+which is already deviatoric.
+
+The foregoing argument yields only \eqr{9.79}$_{2}$. That is not an
+oversight but a necessity: the flow that produced $\kappa\geq0$ was
+$\bD=\I$, which has $\tr\bD=3\neq0$ and is no longer an admissible
+motion. A constraint removes processes from the admissible set, and a
+smaller set yields fewer restrictions. The bulk viscosity of an
+incompressible fluid is not merely unrestricted, it is meaningless,
+since the motion that would reveal it cannot occur.
+
+Moreover, conservation of mass, i.e., $(\rho J)^{\textstyle\cdot}=0$
+from \eqr{6.17}, then implies that $\dot\rho=0$, and hence that $\rho$
+is fixed at a material point. It therefore enters the functions $\psi$,
+$\eta$ and $\mu$ as a fixed parameter.
+
+Thermodynamic considerations do not restrict the spherical part of the
+stress, which is thus constitutively indeterminate and hence outside the
+purview of our earlier discussion about observer consensus concerning
+material response. The stress is thus of the form
+\begin{equation}
+   \bT=-p(\bx,t)\I+2\mu\bD,
+   \tag{9.83}\label{eq:9.83}
+\end{equation}
+where $p(\bx,t)$ is entirely arbitrary. With $\bD=\Sym(\grad\bv)$, the
+linear momentum balance is a vector equation for the determination of
+$\bv$, $\rho$ and $p$, assuming the body force to be assigned.
+Conservation of mass provides the additional equation
+\begin{equation}
+   \rho'+\ip{\grad\rho}\bv=0,
+   \tag{9.84}\label{eq:9.84}
+\end{equation}
+where $(\cdot)'$ is the time derivative in the spatial description, and
+the constraint furnishes the final equation
+\begin{equation}
+   \dvg\bv=0 .
+   \tag{9.85}\label{eq:9.85}
+\end{equation}
+
+Thus, we have five equations for the five variables consisting of
+$\rho$, $p$ and the components of $\bv$. Clearly, this system would be
+overdetermined, and hence generally insoluble, if not for the presence
+of the additional unknown function $p$. Accordingly the latter takes
+whatever values that may be necessary to furnish a solution to the
+problem at hand.
+
+\begin{remark}[why the pressure is not a constitutive quantity]
+\label{rem:ch9react}
+This is the first appearance of a reactive stress and it is the theme
+of Chapter 10, so it is worth stating carefully what has happened.
+
+Every stress met before \eqr{9.83} was delivered by a constitutive
+function: give the state, and the function returns the stress. The $p$
+of \eqr{9.83} is not of that kind. It is not returned by any function
+of $(\theta,\rho,\bD)$, and it cannot be, because the argument that
+would have determined it has been withdrawn. Look back at \eqr{9.72}:
+the spherical part of $\bT$ was pinned by testing the dissipation
+against an increment $\dl\bD$ with $\tr\dl\bD\neq0$, and under the
+constraint no such increment exists. What determines $p$ instead is the
+equations of motion together with the boundary data, which is to say the
+problem rather than the material.
+
+The counting in the last paragraph is the practical form of the same
+statement. Before the constraint, five unknowns $(\rho,\bv)$ and five
+equations. Imposing $\dvg\bv=0$ adds a sixth equation without adding an
+unknown, and the system would be overdetermined; the reactive pressure
+is the sixth unknown that restores the balance. A constraint and its
+reaction always arrive in pairs, and \eqr{9.85} and the $p$ of
+\eqr{9.83} are one such pair.
+
+Two consequences worth carrying forward. The pressure in an
+incompressible fluid can be changed by an arbitrary constant without
+changing the motion, since only $\grad p$ enters the equation of motion,
+so $p$ is determined only up to that constant by the field equations and
+is pinned by a boundary condition. And, despite being constitutively
+indeterminate, $p$ is not observer dependent: Problem 4 shows that all
+observers agree on its value, which is what makes it a legitimate
+physical field rather than a bookkeeping device.
+\end{remark}
+%=======================================================================
+\setcounter{problemenv}{0}
+\section{Problems}\label{sec:problems:c9}
+%=======================================================================
+
+%-----------------------------------------------------------------------
+\begin{problem}[The two relative motions, verified]
+Verify \eqr{9.12} to \eqr{9.14}.
+\end{problem}
+
+\begin{solution}
+The three statements were established in the text; the purpose of
+collecting them here is to see that all three come from one operation
+performed on \eqr{9.6}, \eqr{9.7} and \eqr{9.8} in turn, and to record
+where the corrected \eqr{9.14} comes from.
+
+\textbf{The operation.} Each of \eqr{9.6} to \eqr{9.8} has the shape
+``something built from $\bQ_{1},\bc_{1}$ equals the same thing built
+from $\bQ_{2},\bc_{2}$''. In each case we solve for the object carrying
+the subscript $2$ by moving everything else to the other side and
+multiplying by $\bQ_{2}^{t}$, which is legitimate because
+$\bQ_{2}^{t}\bQ_{2}=\I$ on $\Et$ (Proposition~\ref{prop:orth}). The
+combination $\bQ_{2}^{t}\bQ_{1}$ that appears is named $\bQ$ in
+\eqr{9.11}.
+
+\textbf{(a) Position, \eqr{9.12}.} From \eqr{9.6},
+$\bQ_{2}\bx_{2}=\bQ_{1}\bx_{1}+\bc_{1}-\bc_{2}$. Multiplying on the left
+by $\bQ_{2}^{t}$,
+\[
+   \bx_{2}=\big(\bQ_{2}^{t}\bQ_{1}\big)\bx_{1}
+   +\bQ_{2}^{t}\big(\bc_{1}-\bc_{2}\big)
+   =\bQ\bx_{1}+\bd(t),
+   \qquad \bd(t)=\bQ_{2}^{t}(\bc_{1}-\bc_{2}),
+\]
+which is \eqr{9.12}. Note that $\bd$ depends on $t$ alone, since
+$\bQ_{2}$, $\bc_{1}$ and $\bc_{2}$ do.
+
+\textbf{(b) Velocity, \eqr{9.13}.} From \eqr{9.7},
+\[
+   \bQ_{2}\bv_{2}=\bQ_{1}\bv_{1}
+   +\dot\bQ_{1}\bQ_{1}^{t}\big(\bx^{+}-\bc_{1}\big)
+   -\dot\bQ_{2}\bQ_{2}^{t}\big(\bx^{+}-\bc_{2}\big)
+   +\dot\bc_{1}-\dot\bc_{2},
+\]
+and multiplying on the left by $\bQ_{2}^{t}$ gives
+$\bv_{2}=\bQ\bv_{1}+\be$ with
+\[
+   \be=\bQ_{2}^{t}\Big[\dot\bQ_{1}\bQ_{1}^{t}(\bx^{+}-\bc_{1})
+   -\dot\bQ_{2}\bQ_{2}^{t}(\bx^{+}-\bc_{2})
+   +\dot\bc_{1}-\dot\bc_{2}\Big].
+\]
+Every symbol on the right is a function of $t$ except $\bx^{+}$, so
+$\be$ is a function of $\bx^{+}$ and $t$, as claimed. It is worth
+noticing why $\bx^{+}$ and not $\bx_{1}$ or $\bx_{2}$: the two frame
+changes were both written from the standpoint of $O^{+}$ in \eqr{9.6},
+so $\bx^{+}$ is the one position both descriptions share.
+
+\textbf{(c) Velocity gradient, \eqr{9.13} continued.} From \eqr{9.8},
+$\bQ_{2}\bL_{2}\bQ_{2}^{t}=\bQ_{1}\bL_{1}\bQ_{1}^{t}
++\dot\bQ_{1}\bQ_{1}^{t}-\dot\bQ_{2}\bQ_{2}^{t}$. Multiplying on the left
+by $\bQ_{2}^{t}$ and on the right by $\bQ_{2}$, and cancelling
+$\bQ_{2}^{t}\bQ_{2}=\I$ where it appears,
+\[
+   \bL_{2}=\bQ\bL_{1}\bQ^{t}
+   +\bQ_{2}^{t}\dot\bQ_{1}\bQ_{1}^{t}\bQ_{2}-\bQ_{2}^{t}\dot\bQ_{2}.
+\]
+That the last two terms are $\dot\bQ\bQ^{t}$ was shown in the text at
+$(\ast\ast)$, and the split into $\bD_{2}=\bQ\bD_{1}\bQ^{t}$ and
+$\bW_{2}=\bQ\bW_{1}\bQ^{t}+\dot\bQ\bQ^{t}$ followed from the skewness of
+$\dot\bQ\bQ^{t}$.
+
+\textbf{(d) Equation \eqr{9.14}.} With the choice $\bQ=\I$, which forces
+$\bQ_{2}=\bQ_{1}$, the terms in $\bx^{+}$ of part (b) cancel and, as
+computed in the text,
+\[
+   \boxed{\ \be(t)=\bQ_{1}^{t}\big(\dot\bc_{1}-\dot\bc_{2}\big)
+   +\dot\bQ_{1}^{t}\big(\bc_{1}-\bc_{2}\big)
+   =\dot\bd(t).\ }
+\]
+Remark~\ref{rem:ch9mis14} records that the printed \eqr{9.14} carries
+$\dot\bQ_{1}\bQ_{1}^{t}$ where $\dot\bQ_{1}^{t}$ belongs, and gives both
+the space-counting reason and the one-line check $\be=\dot\bd$.
+
+\emph{What the verification is for.} It is not decoration. The whole of
+Section~\ref{sec:ch9mfi} rests on the claim that $\bd$ and $\be$ may be
+prescribed arbitrarily and independently, and that claim is readable
+only from the explicit formulas: $\bd$ and $\be$ are built from
+$\bc_{1}-\bc_{2}$ and its derivative, and those two may indeed be
+assigned at will at any one instant because $\bc_{1}$ and $\bc_{2}$ are
+arbitrary functions of time. Had $\be$ retained its dependence on
+$\bx^{+}$, the step from \eqr{9.15} to \eqr{9.16} would have failed,
+since one cannot shift the velocity argument of $\bG$ by an amount that
+itself depends on position without also disturbing $\bL$.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[The same laws as the second observer writes them]
+What are the counterparts of \eqr{9.37} and \eqr{9.41} in the frame of
+$O^{+}$?
+\end{problem}
+
+\begin{solution}
+The short answer is that they are the same equations with stars on every
+symbol and \emph{no stars on the response functions}, and the content of
+the problem is to see that the second statement is a theorem rather than
+a notational convenience.
+
+\textbf{The dictionary.} From Chapter 7 and Section 8.4 we need
+\[
+   \bT^{+}=\bQ\bT\bQ^{t}\ \eqr{7.40},\qquad
+   \bq^{+}=\bQ\bq\ \eqr{7.44},\qquad
+   \bD^{+}=\bQ\bD\bQ^{t}\ \eqr{7.34},
+\]
+\[
+   \theta^{+}=\theta,\quad \rho^{+}=\rho\ \eqr{7.37},\qquad
+   \grad^{+}\theta^{+}=\bQ\grad\theta .
+\]
+
+\textbf{The invariants are absolute scalars.} Part 1 of
+Section~\ref{sec:ch9isotropic} already showed
+$I_{k}(\bQ\bD\bQ^{t})=I_{k}(\bD)$ for $k=1,2,3$. For the three of
+\eqr{9.43}, with $\bd=\grad\theta$,
+\[
+\begin{aligned}
+   I_{4}^{+}&=\ip{\bQ\bd}{\bQ\bD\bQ^{t}\bQ\bd}
+     =\ip{\bQ\bd}{\bQ\bD\bd}=\ip\bd{\bQ^{t}\bQ\bD\bd}
+     =\ip\bd{\bD\bd}=I_{4},\\
+   I_{5}^{+}&=\ip{\bQ\bd}{\big(\bQ\bD\bQ^{t}\big)^{2}\bQ\bd}
+     =\ip{\bQ\bd}{\bQ\bD^{2}\bd}=\ip\bd{\bD^{2}\bd}=I_{5},\\
+   I_{6}^{+}&=|\bQ\bd|=|\bd|=I_{6},
+\end{aligned}
+\]
+using $\bQ^{t}\bQ=\I$ throughout and, in the last line, that orthogonal
+tensors preserve norms (Proposition~\ref{prop:orth}). So $O$ and
+$O^{+}$ compute the same six numbers.
+
+\textbf{The stress.} Conjugate \eqr{9.37} by $\bQ$, term by term. Using
+$\bQ\I\bQ^{t}=\bQ\bQ^{t}=\I^{+}$ and
+$\bQ\bD^{2}\bQ^{t}=(\bQ\bD\bQ^{t})^{2}=(\bD^{+})^{2}$,
+\[
+\begin{aligned}
+   \bT^{+}=\bQ\bT\bQ^{t}
+   &=\varphi_{0}(I_{1},I_{2},I_{3},\theta,\rho;p)\,\bQ\I\bQ^{t}\\
+   &\quad+\varphi_{1}(\cdots)\,\bQ\bD\bQ^{t}
+    +\varphi_{2}(\cdots)\,\bQ\bD^{2}\bQ^{t}\\
+   &=\varphi_{0}(I_{1},I_{2},I_{3},\theta,\rho;p)\,\I^{+}\\
+   &\quad+\varphi_{1}(\cdots)\,\bD^{+}
+    +\varphi_{2}(\cdots)\,(\bD^{+})^{2},
+\end{aligned}
+\]
+the scalars passing through the conjugation untouched. Now replace each
+argument by its starred equal, which changes nothing numerically:
+\[
+   \boxed{\
+   \bT^{+}=\varphi_{0}\big(I^{+}_{1},I^{+}_{2},I^{+}_{3},
+     \theta^{+},\rho^{+};p\big)\I^{+}
+   +\varphi_{1}(\cdots)\bD^{+}
+   +\varphi_{2}(\cdots)(\bD^{+})^{2}. \ }
+\]
+
+\textbf{The heat flux.} From \eqr{9.41},
+\[
+   \bq^{+}=\bQ\bq=\bQ\bK\grad\theta
+   =\big(\bQ\bK\bQ^{t}\big)\bQ\grad\theta
+   =\bK^{+}\grad^{+}\theta^{+},
+\]
+where the middle step inserted $\bQ^{t}\bQ=\I$, and where, by the same
+conjugation as for the stress,
+\[
+   \boxed{\
+\begin{aligned}
+   \bK^{+}&=\bQ\bK\bQ^{t}\\
+   &=\phi_{0}\big(I^{+}_{1},\ldots,I^{+}_{6},\theta^{+},\rho^{+};p\big)
+     \I^{+}\\
+   &\quad+\phi_{1}(\cdots)\bD^{+}+\phi_{2}(\cdots)(\bD^{+})^{2}.
+\end{aligned}\ }
+\]
+
+\textbf{What has been shown.} The functions $\varphi_{k}$ and $\phi_{k}$
+appearing in the starred equations are \emph{the same functions} that
+appear in the unstarred ones, evaluated at the starred arguments. Not
+merely functions of the same form: the same functions. That is material
+frame indifference discharged in the concrete case, and it is what
+Remark~\ref{rem:ch9defn} said was at stake. It is also what makes a
+table of measured viscosities meaningful, since a laboratory on a
+rotating planet and a laboratory in free fall will fill in the same
+table.
+
+The one quantity that behaves differently is $\bW$, and it is instructive
+that it has already been eliminated. Had the stress been allowed to
+depend on $\bW$, the conjugation above would have produced
+$\bQ\bW\bQ^{t}$ where \eqr{7.34} demands $\bW^{+}=\bQ\bW\bQ^{t}+\bOm$,
+and the two observers would have needed different functions.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[Sufficiency of the heat-flux representation]
+Show that \eqr{9.41} and \eqr{9.42} satisfy \eqr{9.40} for arbitrary
+orthogonal $\bQ\colon\Et\to\Et$.
+\end{problem}
+
+\begin{solution}
+Section~\ref{sec:ch9heat} proved that \eqr{9.40} \emph{implies}
+\eqr{9.41} and \eqr{9.42}. This is the converse, and with it the two
+statements are equivalent, which is what entitles one to use the
+representation in place of the frame-indifference requirement.
+
+Write $\bd=\grad\theta$ and suppress the passive variables, so that what
+must be shown is
+\[
+   \bg(\bQ\bD\bQ^{t},\bQ\bd)=\bQ\,\bg(\bD,\bd)
+\]
+for $\bg(\bD,\bd)=\bK(\bD,\bd)\bd$ with
+$\bK=\phi_{0}\I+\phi_{1}\bD+\phi_{2}\bD^{2}$ and the $\phi_{k}$
+functions of $I_{1},\ldots,I_{6}$.
+
+\textbf{Step 1: the arguments of the $\phi$'s do not move.} This was
+computed in Problem 2: $I_{k}(\bQ\bD\bQ^{t},\bQ\bd)=I_{k}(\bD,\bd)$ for
+$k=1,\ldots,6$. Hence
+\[
+   \phi_{k}\big(I_{1}(\bQ\bD\bQ^{t},\bQ\bd),\ldots\big)
+   =\phi_{k}\big(I_{1}(\bD,\bd),\ldots\big),
+\]
+and we may write $\phi_{k}$ for both without ambiguity. This is the step
+that uses the specific list \eqr{9.43}: any other scalar built from
+$\bD$ and $\bd$ that failed to be invariant would break the argument
+here.
+
+\textbf{Step 2: the tensor conjugates.} Evaluating \eqr{9.42} at the
+transformed arguments and using $\I=\bQ\I\bQ^{t}$ and
+$(\bQ\bD\bQ^{t})^{2}=\bQ\bD^{2}\bQ^{t}$,
+\[
+\begin{aligned}
+   \bK\big(\bQ\bD\bQ^{t},\bQ\bd\big)
+   &=\phi_{0}\I+\phi_{1}\bQ\bD\bQ^{t}+\phi_{2}\bQ\bD^{2}\bQ^{t}\\
+   &=\bQ\big[\phi_{0}\I+\phi_{1}\bD+\phi_{2}\bD^{2}\big]\bQ^{t}
+    =\bQ\,\bK(\bD,\bd)\,\bQ^{t}.
+\end{aligned}
+\]
+
+\textbf{Step 3: apply it to $\bQ\bd$.} Therefore
+\[
+   \bg\big(\bQ\bD\bQ^{t},\bQ\bd\big)
+   =\bK\big(\bQ\bD\bQ^{t},\bQ\bd\big)\,\bQ\bd
+   =\bQ\bK\bQ^{t}\bQ\bd
+   =\bQ\bK\bd
+   =\bQ\,\bg(\bD,\bd),
+\]
+using $\bQ^{t}\bQ=\I$ in the third equality. Hence
+\[
+   \boxed{\ \bg(\theta,\rho,\bQ\bD\bQ^{t},\bQ\grad\theta;p)
+   =\bQ\,\bg(\theta,\rho,\bD,\grad\theta;p)\ }
+\]
+for every orthogonal $\bQ$, which is \eqr{9.40}.
+
+\emph{A check on the odd part.} Setting $\bQ=-\I$ recovers \eqr{9.45}:
+$\bK$ is unchanged, since $(-\I)\bD(-\I)^{t}=\bD$ and the invariants are
+even in $\bd$, while $\bd$ reverses, so $\bg$ reverses. That the
+representation automatically satisfies the reflection condition, without
+any further assumption, is the payoff of Part 1 of
+Section~\ref{sec:ch9heat}: the coefficients were forced to depend on
+$\bd$ only through $\bd\otimes\bd$, which cannot see the sign.
+
+The same three steps, with the vector $\bd$ deleted and the outer
+factor $\bQ^{t}$ retained, prove the converse half of the stress
+representation promised after \eqr{9.36}.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[Observers agree on the reaction pressure]
+Show that all observers agree on the value of $p$ in \eqr{9.83}.
+\end{problem}
+
+\begin{solution}
+The point of the problem is that $p$ is \emph{not} delivered by a
+constitutive function, as Remark~\ref{rem:ch9react} stressed, so the
+agreement of observers cannot be inferred from \eqr{9.5} in the way
+Problem 2 inferred it for $\bT$. It has to be shown separately, and it
+follows from the constraint.
+
+\textbf{Route 1: take the trace.} Apply $\tr$ to \eqr{9.83}, using
+linearity of the trace and $\tr\I=3$:
+\[
+   \tr\bT=-p\,\tr\I+2\mu\tr\bD=-3p+2\mu\,\dvg\bv=-3p,
+\]
+the last step by the constraint \eqr{9.85}. Hence
+\[
+   p=-\tfrac13\tr\bT .
+\]
+So $p$, though not constitutively determined, is a definite function of
+the stress: it is the mean normal pressure. Now
+\[
+   \tr\bT^{+}=\tr\big(\bQ\bT\bQ^{t}\big)=\tr\big(\bQ^{t}\bQ\bT\big)
+   =\tr\bT
+\]
+by \eqr{7.40} and the cyclic property of the trace,
+Theorem~\ref{thm:trace}. The observer $O^{+}$ writes \eqr{9.83} in the
+form $\bT^{+}=-p^{+}\I^{+}+2\mu\bD^{+}$ with $\tr\bD^{+}=\dvg^{+}\bv^{+}
+=\dvg\bv=0$ by \eqr{7.56}, so the same computation gives
+$p^{+}=-\tfrac13\tr\bT^{+}$. Therefore
+\[
+   \boxed{\ p^{+}=-\tfrac13\tr\bT^{+}=-\tfrac13\tr\bT=p .\ }
+\]
+
+\textbf{Route 2: conjugate the constitutive equation.} The same
+conclusion, obtained without dividing by three, shows where it could
+have failed. Conjugating \eqr{9.83},
+\[
+   \bT^{+}=\bQ\bT\bQ^{t}=\bQ\big(-p\I+2\mu\bD\big)\bQ^{t}
+   =-p\,\I^{+}+2\mu\,\bD^{+},
+\]
+using $\bQ\I\bQ^{t}=\I^{+}$ and $\bD^{+}=\bQ\bD\bQ^{t}$, and noting that
+$\mu=\hat\mu(\theta,\rho;p)$ is unchanged because $\theta$ and $\rho$
+are absolute scalars by \eqr{7.37}. But $O^{+}$ writes
+$\bT^{+}=-p^{+}\I^{+}+2\mu\bD^{+}$. Subtracting,
+$(p^{+}-p)\I^{+}=\Ob^{+}$, and since $\I^{+}\neq\Ob^{+}$ the scalar
+factor must vanish.
+
+\emph{Why this matters.} A quantity that is determined by the problem
+rather than by the material might have been expected to be
+observer dependent, and if it were, \eqr{9.83} would be an equation two
+observers could not both write. The reason it is not is visible in Route
+1: the constraint $\tr\bD=0$ makes the viscous stress traceless, so the
+trace of $\bT$ isolates $p$ exactly, and the trace is an invariant.
+Chapter 10 generalises this: the reactive stress associated with any
+constraint is determined up to a multiplier, and the multiplier is
+always an absolute scalar for the same reason.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[Axial flow along a pipe, and the elliptical cross
+section]
+Consider an incompressible viscous liquid described by \eqr{9.83}, and
+take $\mu$ to be constant. Consider the steady flow (that is,
+$\bv'=\bze$) defined by $\bv=f(x_{1},x_{2})\be_{3}$.
+(a) Show that such a motion is isochoric, as required for
+incompressible fluids.
+(b) Assuming zero body force, show that the pressure depends on $x_{3}$
+only and that the pressure gradient $\dl p/\dl x_{3}=P$, a constant.
+Thus reduce the problem to the equation $\Delta f=P/\mu$, where $\Delta$
+is the two-dimensional Laplacian.
+(c) Solve this problem for flow through a pipe with an elliptical cross
+section in the $x_{1},x_{2}$ plane with major and minor axes aligned
+with the $x_{1},x_{2}$ axes, respectively. The semi-axis lengths are $a$
+and $b<a$. Assume the no-slip condition, $\bv=\bze$ on the boundary.
+\emph{Hint:} if $\varphi(x_{1},x_{2})=0$ is the equation of the
+boundary, then $c\varphi$, for an appropriate constant $c$, also solves
+the governing differential equation.
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} The velocity has components $v_{1}=v_{2}=0$ and
+$v_{3}=f(x_{1},x_{2})$. By Proposition~\ref{prop:divv},
+\[
+   \dvg\bv=v_{i,i}=v_{1,1}+v_{2,2}+v_{3,3}
+   =0+0+\frac{\partial f(x_{1},x_{2})}{\partial x_{3}}=0 ,
+\]
+since $f$ does not depend on $x_{3}$. So $\dvg\bv=0$, which is
+\eqr{9.85}, and by \eqr{6.17} together with $\dot J=J\dvg\bv$ from
+Problem 2 of Chapter 4 this is $\dot J=0$: the motion is isochoric.
+
+Two features of the field conspire here and it is worth noticing which.
+The velocity points along $\be_{3}$, so only $v_{3,3}$ could contribute
+to the divergence; and $v_{3}$ is independent of $x_{3}$, so that
+derivative vanishes. A flow along a fixed direction whose speed varies
+only across that direction is automatically isochoric.
+
+\textbf{(b)} We need $\dvg\bT$ and $\dot\bv$.
+
+\emph{The velocity gradient and the acceleration.} By
+Theorem~\ref{thm:gradvcart}, $L_{ij}=v_{i,j}$, and the only non-zero
+entries are $L_{31}=f_{,1}$ and $L_{32}=f_{,2}$, so
+\[
+   \bL=f_{,1}\,\be_{3}\otimes\be_{1}+f_{,2}\,\be_{3}\otimes\be_{2}.
+\]
+Then, using $(\bu\otimes\bv)\bw=(\ip\bv\bw)\bu$ and
+$\ip{\be_{1}}{\be_{3}}=\ip{\be_{2}}{\be_{3}}=0$,
+\[
+   \bL\bv=f\big[f_{,1}(\ip{\be_{1}}{\be_{3}})
+   +f_{,2}(\ip{\be_{2}}{\be_{3}})\big]\be_{3}=\bze ,
+\]
+so by \eqr{2.21} the material acceleration is
+$\dot\bv=\bv'+\bL\bv=\bze$. The fluid is not accelerating at all: each
+particle moves in a straight line at constant speed, since it never
+leaves the line on which $f$ takes its value.
+
+\emph{The divergence of the stress.} Since $\mu$ is constant and
+$\dvg\bv=0$, the calculation performed after \eqr{9.61} gives
+\[
+   \dvg\bT=-\grad p+\mu\Delta_{3}\bv ,
+\]
+where $\Delta_{3}=\partial_{j}\partial_{j}$ is the three-dimensional
+Laplacian. Applied to $\bv=f\be_{3}$ with $f$ independent of $x_{3}$,
+\[
+   \Delta_{3}\bv=\big(f_{,11}+f_{,22}+f_{,33}\big)\be_{3}
+   =\big(f_{,11}+f_{,22}\big)\be_{3}=(\Delta f)\,\be_{3},
+\]
+$\Delta$ now denoting the two-dimensional Laplacian in $x_{1},x_{2}$, as
+the problem asks.
+
+\emph{The equation of motion.} With $\bb=\bze$ and $\dot\bv=\bze$,
+\eqr{6.109} reduces to $\dvg\bT=\bze$, that is
+\[
+   -\grad p+\mu(\Delta f)\be_{3}=\bze .
+\]
+Resolving on the fixed basis,
+\[
+   p_{,1}=0,\qquad p_{,2}=0,\qquad p_{,3}=\mu\,\Delta f .
+\]
+The first two say that $p$ does not vary across the pipe:
+$p=p(x_{3},t)$. But then $p_{,3}$ is a function of $x_{3}$ and $t$
+alone, while the right-hand side $\mu\Delta f$ is a function of
+$x_{1},x_{2}$ alone. A function of one set of variables can equal a
+function of a disjoint set only if both are constant, so
+\[
+   \boxed{\ \frac{\dl p}{\dl x_{3}}=P=\text{const},
+   \qquad \Delta f=\frac{P}{\mu}. \ }
+\]
+In particular $p$ is steady as well as being a function of $x_{3}$
+alone, and $p=Px_{3}+p_{0}$.
+
+The argument is worth pausing on: nothing was assumed about $p$ beyond
+what the equations of motion say, and the constancy of the pressure
+gradient, which is normally quoted as an assumption in textbook
+treatments of pipe flow, has been derived. The physical content is that
+a unidirectional flow can be driven only by a uniform push along the
+pipe.
+
+\textbf{(c)} Let
+\[
+   \varphi(x_{1},x_{2})=\frac{x_{1}^{2}}{a^{2}}
+   +\frac{x_{2}^{2}}{b^{2}}-1 ,
+\]
+so that $\varphi=0$ is the boundary ellipse and $\varphi<0$ inside.
+Following the hint, try $f=c\varphi$. Then
+\[
+   \Delta\varphi=\varphi_{,11}+\varphi_{,22}
+   =\frac{2}{a^{2}}+\frac{2}{b^{2}}
+   =2\,\frac{a^{2}+b^{2}}{a^{2}b^{2}},
+\]
+a constant, which is the ``lucky coincidence'' the hint refers to: the
+Laplacian of a quadratic is constant, and the right-hand side $P/\mu$ is
+also constant, so the two can be matched by one choice of $c$. Requiring
+$c\Delta\varphi=P/\mu$,
+\[
+   c=\frac{P}{\mu}\cdot\frac{a^{2}b^{2}}{2(a^{2}+b^{2})} .
+\]
+The no-slip condition is satisfied automatically, since $f=c\varphi=0$
+wherever $\varphi=0$. Hence
+\[
+   \boxed{\ \bv=\frac{P\,a^{2}b^{2}}{2\mu(a^{2}+b^{2})}
+   \left(\frac{x_{1}^{2}}{a^{2}}+\frac{x_{2}^{2}}{b^{2}}-1\right)
+   \be_{3}. \ }
+\]
+
+\emph{Reading the answer.} Inside the ellipse the bracket is negative,
+so the flow is along $+\be_{3}$ exactly when $P<0$: the fluid runs from
+high pressure to low, as it must. The maximum speed is on the axis,
+\[
+   |v|_{\max}=\frac{|P|\,a^{2}b^{2}}{2\mu(a^{2}+b^{2})} ,
+\]
+and the profile is a paraboloid over the elliptical cross section.
+
+\emph{Two checks.} First, the volume flux. With
+$x_{1}=a\varrho\cos\vartheta$, $x_{2}=b\varrho\sin\vartheta$, so that
+$\varphi=\varrho^{2}-1$ and $\dl a=ab\,\varrho\,\dl\varrho\,\dl\vartheta$,
+\[
+\begin{aligned}
+   Q&=\int f\,\dl a
+   =c\,ab\int_{0}^{2\pi}\!\!\int_{0}^{1}
+     \big(\varrho^{2}-1\big)\varrho\,\dl\varrho\,\dl\vartheta
+   \\
+   &=2\pi c\,ab\Big[\tfrac14-\tfrac12\Big]
+   =-\frac{\pi\,c\,ab}{2}
+   =-\frac{\pi P a^{3}b^{3}}{4\mu(a^{2}+b^{2})} .
+\end{aligned}
+\]
+Setting $a=b=R$ gives $Q=-\pi PR^{4}/8\mu$, which is the
+Hagen--Poiseuille law for a circular pipe and agrees with Problem 6(b)
+below. Second, the stress: with $f=c\varphi$,
+\[
+   \bD=\Sym\bL=\tfrac12\Big[f_{,1}
+   \big(\be_{3}\otimes\be_{1}+\be_{1}\otimes\be_{3}\big)
+   +f_{,2}\big(\be_{3}\otimes\be_{2}+\be_{2}\otimes\be_{3}\big)\Big],
+\]
+which has zero trace, as \eqr{9.85} requires, and gives a wall shear
+traction of magnitude $\mu|\grad f|$ directed along the pipe. The
+pressure drop over a length $\ell$ pays for the total wall friction:
+that is the balance \eqr{6.109} integrated over a slug of fluid, and it
+is a useful way to remember why $P$ had to be constant.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[Two classical unidirectional flows]
+Use the same model to solve the following problems, in which the body
+force is zero.
+(a) Steady flow of the form $\bv=v_{1}(x_{2})\be_{1}$, with
+$v_{1}(0)=0$ and $v_{1}(d)=V$. Obtain a restriction on $p$ and use it to
+find the function $v_{1}(x_{2})$.
+(b) Steady pipe flow $\bv=w(r)\be_{3}$ in polar coordinates, inside a
+pipe of radius $a$, with $w(a)=0$. Again obtain a restriction on $p$ and
+use it to find $w(r)$.
+\end{problem}
+
+\begin{solution}
+\textbf{(a) Plane Couette--Poiseuille flow.} The velocity has
+$v_{1}=v_{1}(x_{2})$, $v_{2}=v_{3}=0$, so
+\[
+   \dvg\bv=v_{1,1}=0
+\]
+because $v_{1}$ is independent of $x_{1}$: the flow is isochoric, and
+\eqr{9.85} is satisfied. The velocity gradient has the single non-zero
+entry $L_{12}=v_{1}'$, so
+\[
+   \bL=v_{1}'(x_{2})\,\be_{1}\otimes\be_{2},
+   \qquad
+   \bL\bv=v_{1}'v_{1}\big(\ip{\be_{2}}{\be_{1}}\big)\be_{1}=\bze ,
+\]
+and again $\dot\bv=\bv'+\bL\bv=\bze$.
+
+With $\mu$ constant, $\dvg\bv=0$ and $\bb=\bze$, the equation of motion
+$\dvg\bT=\bze$ reads
+\[
+   -\grad p+\mu\Delta_{3}\bv=\bze ,
+   \qquad
+   \Delta_{3}\bv=v_{1}''(x_{2})\,\be_{1},
+\]
+whose three components are
+\[
+   p_{,1}=\mu v_{1}''(x_{2}),\qquad p_{,2}=0,\qquad p_{,3}=0 .
+\]
+The last two give $p=p(x_{1},t)$; then $p_{,1}$ is a function of
+$x_{1}$ and $t$ while $\mu v_{1}''$ is a function of $x_{2}$, so both
+are the same constant:
+\[
+   \boxed{\ p=Px_{1}+p_{0},\qquad
+   \mu v_{1}''=P=\text{const}.\ }
+\]
+This is the restriction on $p$: it is linear in $x_{1}$ and independent
+of $x_{2}$ and $x_{3}$.
+
+Integrating $v_{1}''=P/\mu$ twice,
+\[
+   v_{1}(x_{2})=\frac{P}{2\mu}x_{2}^{2}+Ax_{2}+B .
+\]
+The condition $v_{1}(0)=0$ gives $B=0$; the condition $v_{1}(d)=V$ gives
+$\frac{P}{2\mu}d^{2}+Ad=V$, hence $A=V/d-Pd/2\mu$. Therefore
+\[
+   \boxed{\ v_{1}(x_{2})=\frac{P}{2\mu}\,x_{2}\big(x_{2}-d\big)
+   +\frac{V x_{2}}{d}. \ }
+\]
+
+The answer is the sum of two classical flows and it is worth separating
+them. With $P=0$ it is $v_{1}=Vx_{2}/d$, plane \emph{Couette} flow: a
+linear profile driven purely by the moving wall at $x_{2}=d$, with no
+pressure gradient. With $V=0$ it is the parabola
+$v_{1}=Px_{2}(x_{2}-d)/2\mu$, plane \emph{Poiseuille} flow, driven
+purely by the pressure gradient and vanishing at both walls. That the
+general solution is their sum is a consequence of the linearity of the
+problem, which itself came from the vanishing of the acceleration: the
+Navier--Stokes equations are nonlinear only through $(\grad\bv)\bv$, and
+that term is absent here.
+
+The wall traction is worth recording, since it is what one measures. On
+the plane $x_{2}=0$ with normal $\be_{2}$, \eqr{9.83} gives
+\[
+   \bT\be_{2}=-p\be_{2}+2\mu\bD\be_{2}
+   =-p\be_{2}+\mu v_{1}'(0)\be_{1},
+\]
+since $\bD=\tfrac12v_{1}'(\be_{1}\otimes\be_{2}
++\be_{2}\otimes\be_{1})$. The shear stress at the wall is therefore
+$\mu v_{1}'(0)=\mu V/d-Pd/2$, which for pure Couette flow is the
+familiar $\mu V/d$.
+
+\textbf{(b) Hagen--Poiseuille flow.} This is the case
+$f=w(r)$ of Problem 5 with $r^{2}=x_{1}^{2}+x_{2}^{2}$, so parts (a) and
+(b) of that problem apply verbatim: the motion is isochoric, the
+pressure satisfies $p=p(x_{3})$ with
+\[
+   \boxed{\ \frac{\dl p}{\dl x_{3}}=P=\text{const}\ }
+\]
+and the governing equation is $\Delta w=P/\mu$ with $\Delta$ the
+two-dimensional Laplacian.
+
+For a function of $r$ alone the two-dimensional Laplacian is
+\[
+   \Delta w=\dvg(\grad w)
+   =\frac{1}{r}\big(r\,w'\big)' ,
+\]
+which follows from \eqr{1.122} and the polar divergence formula quoted
+in Example~\ref{ex:divpolar}: $\grad w=w'(r)\ber$ by \eqr{1.122}, since
+$w$ depends on neither $\theta$ nor $z$, and then
+$\dvg(w_{r}\ber)=w_{r,r}+w_{r}/r$ with $w_{r}=w'$, which is
+$w''+w'/r=\frac1r(rw')'$.
+
+Hence $\big(rw'\big)'=Pr/\mu$, and integrating,
+\[
+   r\,w'=\frac{P}{2\mu}r^{2}+C_{1},
+   \qquad
+   w'=\frac{P}{2\mu}r+\frac{C_{1}}{r},
+   \qquad
+   w=\frac{P}{4\mu}r^{2}+C_{1}\ln r+C_{2}.
+\]
+Boundedness of the velocity on the axis forces $C_{1}=0$, since $\ln r$
+diverges as $r\to0$; and $w(a)=0$ gives $C_{2}=-Pa^{2}/4\mu$. Therefore
+\[
+   \boxed{\ w(r)=\frac{P}{4\mu}\big(r^{2}-a^{2}\big),
+   \qquad \bv=w(r)\be_{3}. \ }
+\]
+Again $P<0$ for flow along $+\be_{3}$, and the profile is a paraboloid
+with maximum speed $|P|a^{2}/4\mu$ on the axis.
+
+\emph{The flux.} Integrating over the cross section,
+\[
+   Q=\int_{0}^{a}w(r)\,2\pi r\,\dl r
+   =\frac{\pi P}{2\mu}\int_{0}^{a}\big(r^{3}-a^{2}r\big)\dl r
+   =\frac{\pi P}{2\mu}\Big[\frac{a^{4}}{4}-\frac{a^{4}}{2}\Big]
+   =-\frac{\pi P a^{4}}{8\mu},
+\]
+the Hagen--Poiseuille law, in agreement with the elliptical result of
+Problem 5(c) at $a=b$. The fourth power of the radius is the reason a
+small change in the calibre of a pipe, or of an artery, changes the flow
+so much: halving $a$ at fixed pressure gradient divides the flux by
+sixteen.
+
+\emph{The wall shear.} On $r=a$ the exterior normal of the fluid is
+$\ber$, and with $\bD=\tfrac12w'(\ber\otimes\be_{3}
++\be_{3}\otimes\ber)$,
+\[
+   \bT\ber=-p\,\ber+\mu w'(a)\,\be_{3}
+   =-p\,\ber+\frac{Pa}{2}\be_{3},
+\]
+so the fluid drags the wall along the flow direction. Over a length
+$\ell$ of pipe the total wall force is $2\pi a\ell\cdot|P|a/2
+=\pi a^{2}\ell|P|$, which is exactly the pressure difference $|P|\ell$
+acting on the cross-sectional area $\pi a^{2}$: the slug of fluid is in
+equilibrium, as $\dot\bv=\bze$ requires.
+\end{solution}
+%-----------------------------------------------------------------------
+\begin{problem}[Rigid rotation, and the shape of the free surface]
+The same liquid experiences a steady velocity field of the form
+$\bv=r\omega\,\bet$ in a polar coordinate system, where $\omega$ is a
+constant. Assume the density $\rho$ of the fluid to be uniform and
+independent of time in the spatial description.
+(a) Describe this motion in words. Is mass conservation satisfied?
+(b) Evaluate the tensors $\bL$, $\bD$, $\bW$.
+(c) Suppose the fluid is subjected to the uniform gravitational body
+force $\bb=-g\be_{3}$, with $g$ constant. Derive the equation $z(r)$ of
+the surface of the liquid if the surface is exposed to the air and the
+air exerts the uniform atmospheric pressure $p_{a}$, a constant, on the
+entire surface. Ignore the viscosity of the air.
+\end{problem}
+
+\begin{solution}
+Throughout, $\{\ber,\bet,\be_{3}\}$ is the cylindrical polar frame of
+\eqr{1.116}, with $\be_{3}$ the axis and $z=x_{3}$.
+
+\textbf{(a)} The azimuthal speed is $v_{\theta}=r\omega$, so every
+particle travels on a circle about the $\be_{3}$ axis, and the angular
+rate $v_{\theta}/r=\omega$ is the same on every circle. The whole body of
+fluid therefore turns as a rigid body at angular velocity $\omega$ about
+$\be_{3}$: nothing is being sheared, stretched or compressed. This is
+the case $f=\omega$ of the family $\bv=rf(r)\bet$ treated in Problem 10
+of Chapter 4.
+
+Mass conservation is \eqr{6.14}, $\rho'+\dvg(\rho\bv)=0$. By Problem
+24(c) of Chapter 1, $\dvg(\rho\bv)=\ip{\grad\rho}\bv+\rho\dvg\bv$, and
+the hypotheses give $\rho'=0$ and $\grad\rho=\bze$, since $\rho$ is
+uniform and time independent in the spatial description. So the
+requirement reduces to $\rho\dvg\bv=0$, that is $\dvg\bv=0$. From part
+(b) below, $\tr\bL=\omega\big(\ip{\bet}{\ber}-\ip{\ber}{\bet}\big)=0$,
+so
+\[
+   \boxed{\ \dvg\bv=0\quad\text{and mass conservation is satisfied}.\ }
+\]
+It could hardly be otherwise: a rigid motion moves no material relative
+to any other, so it cannot change any density.
+
+\textbf{(b)} Problem 10 of Chapter 4 gives, for $\bv=rf(r)\bet$,
+\[
+\begin{aligned}
+   \bL&=(rf)'\,\bet\otimes\ber-f\,\ber\otimes\bet,
+   \quad
+   \bD\\
+   &=\frac{rf'}{2}\big(\ber\otimes\bet+\bet\otimes\ber\big),
+   \quad
+   \bW=\frac{2f+rf'}{2}\big(\bet\otimes\ber-\ber\otimes\bet\big).
+\end{aligned}
+\]
+With $f=\omega$ constant, $f'=0$ and $(rf)'=\omega$, so
+\[
+   \boxed{\ \bL=\omega\big(\bet\otimes\ber-\ber\otimes\bet\big),
+   \qquad \bD=\Ob,
+   \qquad \bW=\bL. \ }
+\]
+The axial vector of $\bW$ is $\bw=\omega\be_{3}$, so the vorticity is
+$\crl\bv=2\omega\be_{3}$. That $\bD=\Ob$ is the characterisation of
+rigid motion recorded in Remark~\ref{rem:Drigid}, and it is the fact
+that makes part (c) easy: by \eqr{9.83} the viscous stress
+$2\mu\bD$ vanishes identically, so
+\[
+   \bT=-p\I
+\]
+throughout the fluid, exactly as if the liquid were inviscid. A rigid
+rotation costs no viscous dissipation, which is why a bucket of water
+spun up long enough eventually turns with no internal friction at all.
+
+\textbf{(c)} The material acceleration is
+$\dot\bv=\bv'+\bL\bv$ by \eqr{2.21}, with $\bv'=\bze$ because the field
+is steady. Using the dyad rule and $\ip{\ber}{\bet}=0$,
+$\ip{\bet}{\bet}=1$,
+\[
+   \bL\bv=\omega\big(\bet\otimes\ber-\ber\otimes\bet\big)
+     \big(r\omega\,\bet\big)
+   =r\omega^{2}\Big[\big(\ip{\ber}{\bet}\big)\bet
+     -\big(\ip{\bet}{\bet}\big)\ber\Big]
+   =-r\omega^{2}\,\ber ,
+\]
+the centripetal acceleration, directed inward and of magnitude
+$r\omega^{2}$ as it must be.
+
+The equation of motion \eqr{6.109} with $\bT=-p\I$ and
+$\dvg(-p\I)=-\grad p$ reads
+\[
+   -\rho r\omega^{2}\,\ber=-\grad p-\rho g\,\be_{3},
+   \qquad\text{i.e.}\qquad
+   \grad p=\rho r\omega^{2}\,\ber-\rho g\,\be_{3}.
+\]
+Resolving on the polar frame with \eqr{1.122},
+$\grad p=p_{,r}\ber+\tfrac1r p_{,\theta}\bet+p_{,z}\be_{3}$, gives
+\[
+   p_{,r}=\rho\omega^{2}r,\qquad p_{,\theta}=0,\qquad p_{,z}=-\rho g .
+\]
+The second says $p$ is axisymmetric. The first and third integrate
+independently, since each right-hand side involves only its own
+variable, to
+\[
+   p=\tfrac12\rho\omega^{2}r^{2}-\rho g z+C ,
+\]
+with $C$ a constant. That the two integrations are consistent may be
+checked by cross-differentiating: $\partial_{z}(\rho\omega^{2}r)=0
+=\partial_{r}(-\rho g)$, so the field $\grad p$ is indeed a gradient.
+
+On the free surface $z=z(r)$ the air exerts the uniform pressure
+$p_{a}$, and since the air is inviscid by hypothesis its traction is
+$-p_{a}\bn$; the liquid's traction there is $-p\bn$ by $\bT=-p\I$, and
+the two must balance, so $p=p_{a}$ on the surface. Hence
+\[
+   p_{a}=\tfrac12\rho\omega^{2}r^{2}-\rho g\,z(r)+C ,
+\]
+and solving for $z$,
+\[
+   \boxed{\ z(r)=z_{0}+\frac{\omega^{2}r^{2}}{2g},
+   \qquad z_{0}=z(0)=\frac{C-p_{a}}{\rho g}. \ }
+\]
+
+The free surface is a paraboloid of revolution, rising with the square
+of the distance from the axis, and its shape depends on neither $\rho$
+nor $p_{a}$: the constant $z_{0}$, which fixes the height of the vertex,
+is set by the amount of liquid in the vessel. The result is the
+principle of the liquid-mirror telescope, whose parabolic reflector is a
+dish of spinning mercury, and of the rotating furnace used to cast
+telescope blanks. The focal length is $g/2\omega^{2}$, read off by
+comparing $z=r^{2}/4F$ with the boxed formula.
+
+Notice what did the work. The viscosity never appeared, because
+$\bD=\Ob$ removed it; the whole problem is the balance between the
+pressure gradient and the centripetal acceleration, and $\omega^{2}r$ in
+the acceleration is what produces $r^{2}$ in the surface.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[Circular Couette flow in an annulus]
+Suppose this liquid experiences a steady velocity field of the kind
+described in Problem 10 of Chapter 4, $\bv=rf(r)\bet$, and suppose the
+body force vanishes.
+(a) Find the function $f$ for the problem of flow in an annulus bounded
+by cylinders of radii $a$ and $b>a$. The inner and outer cylinders spin
+at the constant rates $\omega_{a}$ and $\omega_{b}$, respectively, about
+the $\be_{3}$ axis. Assume the no-slip condition, i.e., the fluid
+velocity matches the cylindrical wall velocities at $r=a,b$.
+(b) Calculate the torque per unit length of the $\be_{3}$ axis needed to
+drive each cylinder.
+(c) Find the ratio $\omega_{b}/\omega_{a}$ corresponding to irrotational
+flow, i.e., the ratio needed to nullify the vorticity everywhere in the
+fluid.
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} From Problem 10 of Chapter 4, with $v_{\theta}=rf(r)$,
+\[
+   \bD=\frac{rf'}{2}\big(\ber\otimes\bet+\bet\otimes\ber\big),
+   \qquad \tr\bD=rf'\,\ip{\ber}{\bet}=0,
+\]
+so the flow is isochoric for every $f$ and \eqr{9.85} imposes nothing.
+By \eqr{9.83} the stress is
+\[
+   \bT=-p\I+2\mu\bD
+   =-p\I+\mu rf'\big(\ber\otimes\bet+\bet\otimes\ber\big),
+\]
+whose polar components are $T_{rr}=T_{\theta\theta}=T_{zz}=-p$ and
+$T_{r\theta}=T_{\theta r}=\mu rf'$, all other components zero.
+
+\emph{The divergence of the stress.} Split it as
+$\dvg\bT=-\grad p+\dvg(2\mu\bD)$, the first piece by
+$\dvg(\varphi\I)=\grad\varphi$ and \eqr{1.122}, the second by the polar
+formula \eqr{1.162} of Example~\ref{ex:divpolar} applied to
+$\bA=2\mu\bD$, whose only non-zero components $A_{r\theta}=A_{\theta r}
+=\mu rf'$ depend on $r$ alone. Reading \eqr{1.162} line by line,
+\[
+\begin{aligned}
+   \ber\cdot\dvg(2\mu\bD)&=A_{rr,r}
+     +\tfrac1r\big(A_{rr}-A_{\theta\theta}+A_{r\theta,\theta}\big)=0,\\
+   \bet\cdot\dvg(2\mu\bD)&=A_{\theta r,r}
+     +\tfrac1r\big(A_{\theta r}+A_{r\theta}+A_{\theta\theta,\theta}\big)\\
+   &=\mu\big(rf'\big)'+\frac{2\mu rf'}{r}
+     =\mu\big(rf''+3f'\big),\\
+   \be_{3}\cdot\dvg(2\mu\bD)&=A_{zr,r}
+     +\tfrac1r\big(A_{zr}+A_{z\theta,\theta}\big)=0,
+\end{aligned}
+\]
+where $(rf')'=f'+rf''$ was expanded in the second line.
+
+\emph{The acceleration.} As in Problem 7, $\bv'=\bze$ and
+\[
+   \bL\bv=\Big[(rf)'\bet\otimes\ber-f\,\ber\otimes\bet\Big]
+     \big(rf\,\bet\big)
+   =-rf^{2}\,\ber=-\frac{v_{\theta}^{2}}{r}\,\ber .
+\]
+
+\emph{The equations of motion.} With $\bb=\bze$, \eqr{6.109} resolves
+into
+\[
+   -\rho rf^{2}=-p_{,r},
+   \qquad
+   0=-\frac{p_{,\theta}}{r}+\mu\big(rf''+3f'\big),
+   \qquad
+   0=-p_{,z}.
+\]
+The $\bet$ component gives $p_{,\theta}=\mu r(rf''+3f')$, whose
+right-hand side is a function of $r$ alone. Integrating around a circuit
+of constant $r$, and requiring $p$ to be single valued, forces
+\[
+   0=\oint p_{,\theta}\,\dl\theta=2\pi\mu r\big(rf''+3f'\big),
+\]
+hence $p_{,\theta}=0$ and
+\[
+   rf''+3f'=0 .
+\]
+This is the governing equation, and it integrates in one step once one
+notices that
+\[
+   \big(r^{3}f'\big)'=3r^{2}f'+r^{3}f''=r^{2}\big(3f'+rf''\big)=0 .
+\]
+Therefore $r^{3}f'=-2B$ for a constant $-2B$, so $f'=-2B/r^{3}$ and
+\[
+   f(r)=A+\frac{B}{r^{2}}
+\]
+with $A$ a second constant.
+
+\emph{The boundary conditions.} No slip at $r=a$ means the fluid's
+azimuthal speed equals the wall's, $af(a)=a\omega_{a}$, i.e.
+$f(a)=\omega_{a}$; similarly $f(b)=\omega_{b}$. Thus
+\[
+   A+\frac{B}{a^{2}}=\omega_{a},
+   \qquad
+   A+\frac{B}{b^{2}}=\omega_{b}.
+\]
+Subtracting, $B\big(a^{-2}-b^{-2}\big)=\omega_{a}-\omega_{b}$, and since
+$a^{-2}-b^{-2}=(b^{2}-a^{2})/a^{2}b^{2}$,
+\[
+\begin{aligned}
+   B&=\frac{a^{2}b^{2}\big(\omega_{a}-\omega_{b}\big)}{b^{2}-a^{2}},
+   \qquad
+   A=\omega_{a}-\frac{B}{a^{2}}
+   \\
+   &=\frac{\omega_{a}(b^{2}-a^{2})-b^{2}(\omega_{a}-\omega_{b})}
+          {b^{2}-a^{2}}
+   =\frac{b^{2}\omega_{b}-a^{2}\omega_{a}}{b^{2}-a^{2}} .
+\end{aligned}
+\]
+Hence
+\[
+   \boxed{\ f(r)=\frac{b^{2}\omega_{b}-a^{2}\omega_{a}}{b^{2}-a^{2}}
+   +\frac{a^{2}b^{2}\big(\omega_{a}-\omega_{b}\big)}
+          {\big(b^{2}-a^{2}\big)r^{2}},
+   \qquad
+   \bv=rf(r)\,\bet . \ }
+\]
+The pressure follows by quadrature from $p_{,r}=\rho rf^{2}$ and is not
+needed below. This is \emph{circular Couette flow}, the flow between
+rotating cylinders used since Couette's own measurements to determine
+$\mu$.
+
+Two limits check the answer. If $\omega_{a}=\omega_{b}=\omega$ then
+$B=0$ and $A=\omega$, so $f=\omega$ and the fluid turns rigidly with the
+apparatus, which is Problem 7. If $b\to\infty$ with $\omega_{b}=0$ then
+$A\to0$ and $B\to a^{2}\omega_{a}$, giving $f=a^{2}\omega_{a}/r^{2}$,
+the potential vortex of Problem 10 of Chapter 4.
+
+\textbf{(b)} The traction exerted by the fluid on a cylindrical surface
+whose normal into the fluid is $\ber$ is $\bT\ber$. From the components
+above, and using $(\ber\otimes\bet)\ber=(\ip{\bet}{\ber})\ber=\bze$ and
+$(\bet\otimes\ber)\ber=\bet$,
+\[
+   \bT\ber=-p\,\ber+\mu rf'\,\bet,
+   \qquad\text{with}\qquad
+   \mu rf'=-\frac{2\mu B}{r^{2}} .
+\]
+The pressure part is radial and exerts no moment about the axis, since
+$\ber\times\ber=\bze$; only the shear part contributes, and
+$\ber\times\bet=\be_{3}$.
+
+\emph{Inner cylinder.} The surface $r=a$ has area $2\pi a$ per unit
+length, and the force per unit area exerted on the cylinder by the fluid
+is $\bT\ber$ evaluated at $r=a$, because the exterior normal of the
+fluid there is $-\ber$ and Newton's third law reverses the sign twice.
+The moment per unit length about the axis is
+\[
+   \bmm_{a}=\int_{0}^{2\pi}\big(a\ber\big)\times
+   \big(\bT\ber\big)\,a\,\dl\theta
+   =2\pi a^{2}\Big(-\frac{2\mu B}{a^{2}}\Big)\be_{3}
+   =-4\pi\mu B\,\be_{3}.
+\]
+The torque that must be applied externally to keep the inner cylinder
+turning steadily is minus this, since the cylinder's angular momentum is
+constant:
+\[
+   \boxed{\ \bmm^{\text{ext}}_{a}=+4\pi\mu B\,\be_{3}
+   =\frac{4\pi\mu a^{2}b^{2}\big(\omega_{a}-\omega_{b}\big)}
+          {b^{2}-a^{2}}\,\be_{3}\quad\text{per unit length}. \ }
+\]
+
+\emph{Outer cylinder.} Here the exterior normal of the fluid is $+\ber$,
+so the traction on the cylinder from the fluid is $-\bT\ber$ evaluated
+at $r=b$, and
+\[
+   \bmm_{b}=\int_{0}^{2\pi}\big(b\ber\big)\times
+   \big(-\bT\ber\big)\,b\,\dl\theta
+   =-2\pi b^{2}\Big(-\frac{2\mu B}{b^{2}}\Big)\be_{3}
+   =+4\pi\mu B\,\be_{3},
+\]
+so the external torque required is
+\[
+   \boxed{\ \bmm^{\text{ext}}_{b}=-4\pi\mu B\,\be_{3}
+   =-\bmm^{\text{ext}}_{a}. \ }
+\]
+
+The two external torques are equal and opposite, as they must be: the
+fluid between the cylinders has constant angular momentum, so the total
+moment exerted on it vanishes, and every unit of angular momentum fed in
+at one wall leaves at the other. Notice also that the torque is
+independent of $r$: the moment transmitted across any cylindrical
+surface $a<r<b$ is $2\pi r^{2}\cdot(-2\mu B/r^{2})=-4\pi\mu B$, the same
+number, which is exactly the statement that angular momentum is being
+conducted radially at a uniform rate. That is what makes the device a
+viscometer: measure the torque, know $B$, and hence $\mu$.
+
+\textbf{(c)} The vorticity is twice the axial vector of $\bW$, and from
+Problem 10 of Chapter 4,
+\[
+   \bW=\frac{2f+rf'}{2}\big(\bet\otimes\ber-\ber\otimes\bet\big),
+   \qquad
+   \bw=\frac{2f+rf'}{2}\,\be_{3}=\frac{1}{2r}\big(r^{2}f\big)'\be_{3}.
+\]
+Irrotational flow requires $\big(r^{2}f\big)'=0$, i.e. $r^{2}f$
+constant, i.e. $A=0$ in $f=A+B/r^{2}$. From the expression for $A$ above,
+\[
+   b^{2}\omega_{b}-a^{2}\omega_{a}=0,
+   \qquad\text{i.e.}\qquad
+   \boxed{\ \frac{\omega_{b}}{\omega_{a}}=\frac{a^{2}}{b^{2}} .\ }
+\]
+
+The flow is then the potential vortex $f=B/r^{2}$ of Chapter 4, in which
+every particle circles the axis while no particle turns about its own
+centre: a paddle wheel set in the fluid would be carried around without
+rotating. Yet $\bD\neq\Ob$ throughout, so the fluid is being sheared and
+the torque of part (b) is not zero; with $A=0$ we have
+$B=a^{2}\omega_{a}$ and the required torque is $4\pi\mu a^{2}\omega_{a}$
+per unit length. Vanishing vorticity and vanishing dissipation are
+entirely different conditions, and this problem separates them cleanly.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[Archimedes]
+Suppose a configuration $\kappa_{t}$ of a body is completely immersed in
+an incompressible fluid of constant density. The body and fluid are in
+equilibrium in a uniform gravitational field.
+(a) Show that the force on the body, due to the pressure distribution at
+its boundary, is equal to the weight of the fluid that is displaced by
+the body.
+(b) Show that the moment of this pressure distribution, relative to the
+centroid of the body, is zero. \emph{Hint:} the centroid is located at
+$\bx_{c}=V^{-1}\int_{\kappa_{t}}\bx\,\dl v$, where $V$ is the volume of
+$\kappa_{t}$.
+(c) Revisit this problem for the case in which the body is only partly
+immersed in the fluid.
+\end{problem}
+
+\begin{solution}
+\textbf{The pressure field.} In equilibrium the fluid is at rest, so
+$\bv=\bze$, hence $\bD=\Ob$ and by \eqr{9.83} $\bT=-p\I$ throughout the
+fluid. The equation of motion \eqr{6.109} with $\dot\bv=\bze$ and
+$\bb=-g\be_{3}$ reduces to
+\[
+\begin{aligned}
+   \bze&=\dvg\bT+\rho\bb=-\grad p-\rho g\be_{3},
+   \qquad\text{so}\qquad
+   \grad p\\
+   &=-\rho g\,\be_{3},
+   \qquad p=p_{0}-\rho g x_{3},
+\end{aligned}
+\]
+with $\rho$ and $g$ constant. This is the hydrostatic pressure, and the
+whole problem is the geometry of integrating it over a surface.
+
+\textbf{(a)} The force on the body is the resultant of the tractions its
+boundary receives from the fluid,
+\[
+   \bff=\int_{\partial\kappa_{t}}\bT\bn\,\dl a
+   =-\int_{\partial\kappa_{t}}p\,\bn\,\dl a ,
+\]
+$\bn$ being the exterior unit normal of the body. Now $p$ is defined
+only in the fluid, but the formula $p=p_{0}-\rho gx_{3}$ makes sense
+everywhere, so we may use it to extend $p$ smoothly into the region
+$\kappa_{t}$ occupied by the body. The values assigned there are
+fictitious and no physical claim is made about them; they exist only to
+let the divergence theorem be applied. With that extension,
+\eqr{5.7}$_{1}$ gives
+\[
+   \int_{\partial\kappa_{t}}p\,\bn\,\dl a
+   =\int_{\kappa_{t}}\grad p\,\dl v
+   =\int_{\kappa_{t}}\big(-\rho g\be_{3}\big)\dl v
+   =-\rho g V\,\be_{3},
+\]
+$V$ being the volume of $\kappa_{t}$. Therefore
+\[
+   \boxed{\ \bff=\rho g V\,\be_{3}. \ }
+\]
+The force is vertical, upward, and of magnitude $\rho gV$, which is
+precisely the weight of the fluid that would occupy the volume $V$: the
+weight of the displaced fluid. This is Archimedes' law of buoyancy.
+
+The argument is worth reading once more for what it does not use. It
+does not use the shape of the body, nor its material, nor its density,
+nor whether it is in equilibrium under gravity alone. All it uses is the
+hydrostatic pressure field on the surface and the divergence theorem,
+which is why the same $\rho gV$ applies to a stone, a submarine and a
+balloon.
+
+\textbf{(b)} With $\by=\bx-\bx_{c}$, the moment about the centroid is
+\[
+   \bmm_{c}=\int_{\partial\kappa_{t}}\by\times\big(-p\bn\big)\,\dl a ,
+   \qquad
+   m_{i}=-\int_{\partial\kappa_{t}}\eps_{ijk}\,y_{j}\,p\,n_{k}\,\dl a .
+\]
+Apply \eqr{5.4} with the scalar field $y_{j}p$, one $j$ at a time, and
+then use the product rule together with $y_{j,k}=\dd_{jk}$:
+\[
+   m_{i}=-\eps_{ijk}\int_{\kappa_{t}}\big(y_{j}p\big)_{,k}\,\dl v
+   =-\eps_{ijk}\int_{\kappa_{t}}
+     \big(\dd_{jk}\,p+y_{j}\,p_{,k}\big)\dl v
+   =-\eps_{ijk}\int_{\kappa_{t}}y_{j}\,p_{,k}\,\dl v ,
+\]
+the term in $\dd_{jk}$ dropping out because $\eps_{ijk}\dd_{jk}=0$: the
+permutation symbol is antisymmetric in $j$ and $k$ while $\dd_{jk}$ is
+symmetric, and Lemma~\ref{lem:symskw} disposes of the contraction. With
+$p_{,k}=-\rho g\,\dd_{k3}$,
+\[
+   m_{i}=\rho g\,\eps_{ij3}\int_{\kappa_{t}}y_{j}\,\dl v .
+\]
+But by the definition of the centroid,
+\[
+   \int_{\kappa_{t}}y_{j}\,\dl v
+   =\int_{\kappa_{t}}\big(x_{j}-x_{cj}\big)\dl v
+   =V x_{cj}-V x_{cj}=0 ,
+\]
+so
+\[
+   \boxed{\ \bmm_{c}=\bze . \ }
+\]
+The buoyant force therefore acts through the centroid of the body, which
+in this fully immersed case is also the centroid of the displaced fluid.
+That point is called the \emph{centre of buoyancy}.
+
+\textbf{(c)} Now let the body be partly immersed, with the free surface
+of the liquid at $x_{3}=0$, the submerged part of the body occupying the
+region $R$, and the wetted part of its boundary called
+$\partial_{w}$, the dry part $\partial_{d}$. Take
+\[
+   p=p_{a}-\rho g x_{3}\ \text{ for } x_{3}<0,
+   \qquad
+   p=p_{a}\ \text{ for } x_{3}>0,
+\]
+the second because the air is treated as weightless and exerts the
+uniform atmospheric pressure $p_{a}$, as in Problem 7(c).
+
+\emph{The force.} Split the surface integral and add and subtract the
+constant part:
+\[
+   \bff=-\int_{\partial_{d}}p_{a}\bn\,\dl a
+   -\int_{\partial_{w}}\big(p_{a}-\rho gx_{3}\big)\bn\,\dl a
+   =-p_{a}\int_{\partial\kappa_{t}}\bn\,\dl a
+   +\rho g\int_{\partial_{w}}x_{3}\,\bn\,\dl a .
+\]
+The first integral vanishes by \eqr{5.9}: a closed surface has zero
+total normal, which is Remark~\ref{rem:piolawhat}'s observation that
+uniform pressure all round pushes a body nowhere. For the second, close
+$\partial_{w}$ with the plane waterline section $A_{0}$, the part of the
+plane $x_{3}=0$ cut off inside the body, on which the exterior normal of
+$R$ is $+\be_{3}$ and on which $x_{3}=0$. That piece contributes
+nothing, so, by \eqr{5.7}$_{1}$ and $\grad x_{3}=\be_{3}$,
+\[
+   \int_{\partial_{w}}x_{3}\bn\,\dl a
+   =\int_{\partial R}x_{3}\bn\,\dl a-\int_{A_{0}}x_{3}\be_{3}\,\dl a
+   =\int_{R}\grad x_{3}\,\dl v-\bze
+   =V_{\text{sub}}\,\be_{3},
+\]
+$V_{\text{sub}}$ being the submerged volume. Hence
+\[
+   \boxed{\ \bff=\rho g V_{\text{sub}}\,\be_{3} :\ }
+\]
+the weight of the displaced fluid again, with $V_{\text{sub}}$ in place
+of $V$.
+
+\emph{The moment.} Repeat part (b) with the same splitting. The
+atmospheric part contributes
+\[
+   -p_{a}\eps_{ijk}\int_{\partial\kappa_{t}}y_{j}n_{k}\,\dl a
+   =-p_{a}\eps_{ijk}\int_{\kappa_{t}}\dd_{jk}\,\dl v=0 ,
+\]
+and the hydrostatic part, closed with $A_{0}$ as before,
+\[
+   \rho g\,\eps_{ijk}\int_{\partial_{w}}x_{3}y_{j}n_{k}\,\dl a
+   =\rho g\,\eps_{ijk}\int_{R}\big(\dd_{3k}y_{j}+x_{3}\dd_{jk}\big)\dl v
+   =\rho g\,\eps_{ij3}\int_{R}y_{j}\,\dl v ,
+\]
+the second term again killed by $\eps_{ijk}\dd_{jk}=0$. Writing
+$\bx_{b}=V_{\text{sub}}^{-1}\int_{R}\bx\,\dl v$ for the centroid of the
+submerged volume,
+$\int_{R}y_{j}\dl v=V_{\text{sub}}(x_{bj}-x_{cj})$, and using
+$\eps_{ij3}u_{j}=(\bu\times\be_{3})_{i}$,
+\[
+   \boxed{\ \bmm_{c}=\rho gV_{\text{sub}}
+   \big(\bx_{b}-\bx_{c}\big)\times\be_{3}
+   =\big(\bx_{b}-\bx_{c}\big)\times\bff . \ }
+\]
+
+So the moment about the body's centroid no longer vanishes; it is the
+moment of the buoyant force applied at the centre of buoyancy $\bx_{b}$,
+which for a partly immersed body is the centroid of the \emph{submerged}
+volume and not of the body. Part (b) is the special case $R=\kappa_{t}$,
+$\bx_{b}=\bx_{c}$, in which the moment vanishes.
+
+This is the whole of elementary ship stability. The weight acts down
+through $\bx_{c}$ and the buoyancy up through $\bx_{b}$; if the two are
+not on the same vertical line there is a couple, which rights the vessel
+or capsizes it according to which way it turns. Since $\bx_{b}$ moves as
+the hull heels while $\bx_{c}$ does not, whether the couple restores or
+overturns depends on the shape of the waterline section, and that is why
+$A_{0}$ appeared in the calculation at all.
+\end{solution}
+%-----------------------------------------------------------------------
+\begin{problem}[The thermal energy balance for an incompressible fluid]
+Consider an incompressible Newtonian fluid in which the absolute
+temperature field is $\theta(\bx,t)$. Suppose the internal energy per
+unit mass $\eps$ is some function $\hat\eps(\theta)$ of temperature, and
+suppose the internal heat supply vanishes. Derive the thermal energy
+balance
+\[
+   \ip\bT\bL=\dvg\bq ,
+\]
+where $\bq$ is the spatial heat flux, assuming that the temperature does
+not vary with time at a material point, so that the material derivative
+$\dot\theta$ is zero. Under what restrictions does this remain valid for
+temperature fields that are steady in the sense of the spatial
+description, $\theta'=0$?
+\end{problem}
+
+\begin{solution}
+\textbf{The derivation.} The local balance of energy is \eqr{6.168},
+\[
+   \rho\dot\eps=\ip\bT\bL-\dvg\bq+\rho r .
+\]
+The internal heat supply vanishes, $r=0$. The internal energy is
+$\eps=\hat\eps(\theta)$, a function of the temperature alone, so by the
+chain rule for material derivatives
+\[
+   \dot\eps=\hat\eps'(\theta)\,\dot\theta ,
+\]
+and the hypothesis $\dot\theta=0$ makes this vanish. Substituting both
+into \eqr{6.168},
+\[
+   0=\ip\bT\bL-\dvg\bq,
+   \qquad\text{i.e.}\qquad
+   \boxed{\ \ip\bT\bL=\dvg\bq . \ }
+\]
+
+\textbf{What the balance says.} For the incompressible Newtonian fluid
+\eqr{9.83} the left-hand side simplifies. Using $\ip\bT\bL=\ip\bT\bD$,
+which holds because $\bT$ is symmetric and $\bW$ skew
+(Lemma~\ref{lem:symskw}),
+\[
+   \ip\bT\bD=\ip{\big(-p\I+2\mu\bD\big)}\bD
+   =-p\,\tr\bD+2\mu\,\ip\bD\bD=2\mu|\bD|^{2},
+\]
+since $\tr\bD=\dvg\bv=0$ by \eqr{9.85}. So the balance reads
+\[
+   2\mu|\bD|^{2}=\dvg\bq .
+\]
+The left-hand side is the rate at which mechanical work is being
+degraded into heat by viscosity, per unit volume, and by $\mu\geq0$ it
+is never negative. The right-hand side is the rate at which heat leaves
+a unit volume by conduction. The equation says that in a steady state
+the two must match exactly at every point: the fluid is a furnace whose
+output is set by how hard it is being sheared, and the temperature field
+arranges itself so that conduction carries exactly that much heat away.
+
+With Fourier's law \eqr{9.61} and constant $K$, $\dvg\bq=K\Delta\theta$
+and the balance becomes $2\mu|\bD|^{2}=K\Delta\theta$. Since $K\leq0$ by
+\eqr{9.80}, the temperature is superharmonic wherever the fluid is being
+sheared, $\Delta\theta\leq0$, which is the analytic form of the
+statement that the interior is hotter than a purely conducting profile
+would make it.
+
+\textbf{The restriction for $\theta'=0$.} If instead the field is steady
+in the spatial description, $\theta'=0$, then by \eqr{2.20}
+\[
+   \dot\theta=\theta'+\ip{\grad\theta}\bv=\ip{\grad\theta}\bv ,
+\]
+which need not vanish. The energy balance is then
+\[
+   \rho\,\hat\eps'(\theta)\,\ip{\grad\theta}\bv=\ip\bT\bL-\dvg\bq ,
+\]
+and the stated form survives if and only if the extra term is zero.
+Excluding the degenerate possibilities $\hat\eps'=0$, which would be a
+fluid with no heat capacity, and $\bv=\bze$, the condition is
+\[
+   \boxed{\ \ip{\grad\theta}\bv=0 :\ }
+\]
+the velocity must be everywhere tangent to the isothermal surfaces, so
+that no particle is convected from one isotherm to another. Streamlines
+must lie in surfaces of constant temperature.
+
+This is exactly the distinction of Remark~\ref{rem:twoclocks} of
+Chapter 5 between the two clocks. A field steady at a fixed \emph{place}
+is not steady for a fixed \emph{particle} unless the particle stays on a
+level set of the field, and the convective term $\ip{\grad\theta}\bv$ is
+the toll for crossing. The condition is not artificial: it holds exactly
+in the circular Couette flow of Problem 8 with $\theta=\theta(r)$, since
+there $\grad\theta=\theta'(r)\ber$ by \eqr{1.122} while
+$\bv=rf\bet$, and $\ip{\ber}{\bet}=0$. That is what makes Problem 11
+solvable in the form stated.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[The temperature field between rotating cylinders]
+For the Newtonian fluid and the Fourier law, solve the thermal energy
+balance equation for the flow of Problem 8, assuming the temperature
+$\theta$ to be a function of $r$. Assume the viscosity $\mu$ and
+conductivity $K$ to be constant; this is realistic if the temperature
+does not vary significantly at a material point. The inner and outer
+cylinders are held at the fixed temperatures $\theta_{a}$ and
+$\theta_{b}$, respectively.
+\end{problem}
+
+\begin{solution}
+\textbf{Admissibility.} With $\theta=\theta(r)$ and $\bv=rf(r)\bet$,
+Problem 10 has just shown that $\ip{\grad\theta}\bv=0$, so the balance
+$2\mu|\bD|^{2}=\dvg\bq$ applies as it stands.
+
+\textbf{The dissipation.} From Problem 8,
+$\bD=\gamma(\ber\otimes\bet+\bet\otimes\ber)$ with
+$\gamma=\tfrac12rf'$, and $f=A+B/r^{2}$ gives $f'=-2B/r^{3}$, so
+\[
+   rf'=-\frac{2B}{r^{2}},
+   \qquad
+   \gamma=-\frac{B}{r^{2}} .
+\]
+Its magnitude follows from Theorem~\ref{thm:tip},
+$\ip{(\ba\otimes\bb)}{(\bc\otimes\bd)}=(\ip\ba\bc)(\ip\bb\bd)$, applied
+to the four cross terms with $\{\ber,\bet\}$ orthonormal:
+\[
+   |\bD|^{2}=\gamma^{2}\big[\,1+0+0+1\,\big]=2\gamma^{2}
+   =\frac{2B^{2}}{r^{4}} ,
+\]
+so that the heat generated per unit volume is
+\[
+   2\mu|\bD|^{2}=\frac{4\mu B^{2}}{r^{4}} .
+\]
+Note that it is largest at the inner cylinder and falls off as
+$r^{-4}$: the shearing is concentrated where the gap curves most.
+
+\textbf{The conduction.} With $\bq=K\grad\theta$, $K$ constant, and
+$\theta$ a function of $r$ alone, \eqr{1.122} gives
+$\grad\theta=\theta'(r)\ber$ and the polar divergence of
+Example~\ref{ex:divpolar} gives
+\[
+   \dvg\bq=K\Big(\theta''+\frac{\theta'}{r}\Big)
+   =\frac{K}{r}\big(r\theta'\big)' .
+\]
+
+\textbf{The equation and its solution.} The balance is therefore
+\[
+   \frac{K}{r}\big(r\theta'\big)'=\frac{4\mu B^{2}}{r^{4}},
+   \qquad\text{i.e.}\qquad
+   \big(r\theta'\big)'=\frac{4\mu B^{2}}{K}\,r^{-3}.
+\]
+Integrating once,
+\[
+   r\theta'=\frac{4\mu B^{2}}{K}\cdot\frac{r^{-2}}{-2}+C_{1}
+   =-\frac{2\mu B^{2}}{K r^{2}}+C_{1},
+   \qquad
+   \theta'=-\frac{2\mu B^{2}}{K r^{3}}+\frac{C_{1}}{r},
+\]
+and again,
+\[
+   \theta(r)=\frac{\mu B^{2}}{K r^{2}}+C_{1}\ln r+C_{2},
+\]
+since $\int-2\mu B^{2}K^{-1}r^{-3}\dl r=\mu B^{2}K^{-1}r^{-2}$.
+
+It is convenient to name the particular integral. Put
+\[
+   \Theta(r)=\theta(r)-\frac{\mu B^{2}}{Kr^{2}} ,
+\]
+so that $\Theta=C_{1}\ln r+C_{2}$ is the general radial solution of
+$\Delta\Theta=0$. The boundary conditions $\theta(a)=\theta_{a}$ and
+$\theta(b)=\theta_{b}$ become
+\[
+   \Theta(a)=\theta_{a}-\frac{\mu B^{2}}{Ka^{2}},
+   \qquad
+   \Theta(b)=\theta_{b}-\frac{\mu B^{2}}{Kb^{2}} ,
+\]
+and the harmonic function taking prescribed values at $r=a$ and $r=b$ is
+\[
+   \Theta(r)=\Theta(a)
+   +\big[\Theta(b)-\Theta(a)\big]\frac{\ln(r/a)}{\ln(b/a)} .
+\]
+Hence
+\[
+   \boxed{\
+   \theta(r)=\frac{\mu B^{2}}{Kr^{2}}
+   +\Big(\theta_{a}-\frac{\mu B^{2}}{Ka^{2}}\Big)
+   +\left[\Big(\theta_{b}-\frac{\mu B^{2}}{Kb^{2}}\Big)
+   -\Big(\theta_{a}-\frac{\mu B^{2}}{Ka^{2}}\Big)\right]
+   \frac{\ln(r/a)}{\ln(b/a)} , \ }
+\]
+with
+\[
+   B=\frac{a^{2}b^{2}\big(\omega_{a}-\omega_{b}\big)}{b^{2}-a^{2}}
+\]
+from Problem 8.
+
+\textbf{Reading the answer.} The solution is the sum of two pieces and
+they have different origins.
+
+The logarithmic piece is what one would get with no flow at all: it is
+the steady conduction profile between two cylinders held at different
+temperatures, and it is the two-dimensional analogue of the linear
+profile in a slab. It carries all the dependence on $\theta_{a}$ and
+$\theta_{b}$.
+
+The piece proportional to $\mu B^{2}/K$ is viscous heating, and it
+vanishes when $B=0$, that is, when the two cylinders turn at the same
+rate and the fluid rotates rigidly. That is the expected answer, since
+by Problem 7 a rigid rotation has $\bD=\Ob$ and dissipates nothing.
+
+The sign of the heating term is worth checking, since $K$ is negative
+by \eqr{9.80}. Take $\theta_{a}=\theta_{b}=\theta_{0}$, so that the
+walls are at a common temperature and any departure must be due to
+dissipation. Then
+\[
+   \theta(r)-\theta_{0}=\frac{\mu B^{2}}{K}
+   \left[\Big(\frac{1}{r^{2}}-\frac{1}{a^{2}}\Big)
+   +\Big(\frac{1}{a^{2}}-\frac{1}{b^{2}}\Big)
+   \frac{\ln(r/a)}{\ln(b/a)}\right].
+\]
+Write $s=\ln r$. The bracket is a convex function of $s$, namely
+$e^{-2s}$, plus a linear function of $s$, and it vanishes at both ends
+$r=a$ and $r=b$; a convex function vanishing at the ends of an interval
+is non-positive inside it. So the bracket is $\leq0$, and since
+$K\leq0$ and $\mu\geq0$ the product is $\geq0$:
+\[
+   \theta(r)\geq\theta_{0}\qquad\text{for }a\leq r\leq b .
+\]
+The interior is warmer than the walls, and heat flows outward to both of
+them. That is what the second law demanded, and it is reassuring to see
+the two sign conditions $\mu\geq0$ and $K\leq0$ cooperating to produce
+it: had either sign been reversed the fluid would cool itself by being
+stirred.
+\end{solution}
+
+%-----------------------------------------------------------------------
+\begin{problem}[A spherically symmetric flow]
+An incompressible Newtonian fluid with a constant shear viscosity
+experiences a spherically symmetric velocity field
+$\bv=v(r)\berho$ in the spatial description, where $r=|\bx|$ and
+$\berho=r^{-1}\bx$. There are no body forces acting, and the problem is
+steady in the sense that $\bv'=\bze$ and $\rho'=0$.
+(a) Obtain an expression for the spatial velocity gradient $\bL$.
+Assuming $v(a)=v_{a}$ to be a known constant, find the function $v(r)$
+consistent with the incompressibility constraint, that is, consistent
+with the motion being isochoric.
+(b) What is the material acceleration? Consider a spherical material
+surface of radius $a$ at time $t=0$. Assuming $v_{a}>0$, what is the
+time at which the radius of the material surface doubles? \emph{Hint:}
+switch to the referential description.
+(c) Solve the equation of motion to obtain the pressure field $p(\bx)$,
+assuming that $\bT\to-p_{\infty}\I$ as $r\to\infty$, where $p_{\infty}$
+is a known constant. \emph{Hint:} use the Cartesian-coordinate formula
+for the divergence of a tensor, together with $r_{,i}=r^{-1}x_{i}$.
+\end{problem}
+
+\begin{solution}
+\textbf{(a) The velocity gradient.} Write the field in Cartesian
+components. With $\berho=\bx/r$,
+\[
+   v_{i}=\phi(r)\,x_{i},
+   \qquad\text{where}\qquad
+   \phi(r)=\frac{v(r)}{r} .
+\]
+By Theorem~\ref{thm:gradvcart}, $L_{ij}=v_{i,j}$, and using the product
+rule with $x_{i,j}=\dd_{ij}$ and $r_{,j}=x_{j}/r$ from \eqr{1.124},
+\[
+   L_{ij}=\phi'(r)\,r_{,j}\,x_{i}+\phi\,\dd_{ij}
+   =\phi\,\dd_{ij}+\frac{\phi'}{r}\,x_{i}x_{j},
+\]
+that is,
+\[
+   \boxed{\ \bL=\phi\,\I+r\phi'\,\berho\otimes\berho
+   =\frac{v}{r}\,\I+\Big(v'-\frac{v}{r}\Big)\,
+   \berho\otimes\berho , \ }
+\]
+where $\bx\otimes\bx=r^{2}\berho\otimes\berho$ was used, and where
+$r\phi'=r\,(v/r)'=r\cdot\frac{v'r-v}{r^{2}}=v'-v/r$.
+
+Two things are visible at once. The tensor is symmetric, so
+\[
+   \bD=\bL,\qquad \bW=\Ob :
+\]
+the flow is irrotational, which is what one expects of a purely radial
+field. And its trace is
+\[
+   \tr\bL=3\phi+r\phi'\,|\berho|^{2}
+   =3\frac{v}{r}+v'-\frac{v}{r}=v'+\frac{2v}{r},
+\]
+using $\tr(\berho\otimes\berho)=|\berho|^{2}=1$ from
+Theorem~\ref{thm:trace}.
+
+The constraint \eqr{9.85} is $\dvg\bv=\tr\bL=0$, so
+\[
+   v'+\frac{2v}{r}=0
+   \qquad\Longleftrightarrow\qquad
+   \big(r^{2}v\big)'=r^{2}v'+2rv=r\Big(rv'+2v\Big)=0 .
+\]
+Hence $r^{2}v$ is constant, and evaluating it at $r=a$ gives
+$r^{2}v=a^{2}v_{a}$:
+\[
+   \boxed{\ v(r)=\frac{a^{2}v_{a}}{r^{2}} . \ }
+\]
+This is the flow from a point source: the volume crossing any sphere of
+radius $r$ per unit time is $4\pi r^{2}v(r)=4\pi a^{2}v_{a}$, the same
+for every $r$, which is what incompressibility means for a radial flow.
+Substituting $v'=-2v/r$ back into $\bL$,
+\[
+   \bL=\bD=\frac{a^{2}v_{a}}{r^{3}}
+   \big(\I-3\,\berho\otimes\berho\big),
+\]
+whose trace is $\frac{a^{2}v_{a}}{r^{3}}(3-3)=0$, as it must be.
+
+\textbf{(b) The acceleration, and the doubling time.} By \eqr{2.21} and
+$\bv'=\bze$,
+\[
+   \dot\bv=\bL\bv=\bL\big(v\berho\big)
+   =v\Big[\frac{v}{r}\berho+\Big(v'-\frac{v}{r}\Big)\berho\Big]
+   =v\,v'\,\berho ,
+\]
+using $(\berho\otimes\berho)\berho=|\berho|^{2}\berho=\berho$. With
+$v=a^{2}v_{a}/r^{2}$ and $v'=-2a^{2}v_{a}/r^{3}$,
+\[
+   \boxed{\ \dot\bv=-\frac{2a^{4}v_{a}^{2}}{r^{5}}\,\berho . \ }
+\]
+The acceleration points inward although the flow is outward: a particle
+moving away from the origin is decelerating, because the same volume
+flux is spread over an ever larger sphere.
+
+For the doubling time, switch to the referential description as the hint
+suggests. A material point that starts at radius $R_{0}$ stays on the
+radius through its starting point, by symmetry, and its distance $R(t)$
+from the origin obeys
+\[
+   \dot R=v(R)=\frac{a^{2}v_{a}}{R^{2}} ,
+\]
+which is $\dl R/\dl t$ evaluated following the particle, that is, the
+material derivative. Separating variables,
+\[
+   R^{2}\,\dl R=a^{2}v_{a}\,\dl t,
+   \qquad
+   \frac{R^{3}}{3}=a^{2}v_{a}t+\text{const}.
+\]
+The material surface in question is the sphere $R=a$ at $t=0$, so the
+constant is $a^{3}/3$ and
+\[
+   R(t)^{3}=a^{3}+3a^{2}v_{a}t .
+\]
+Every point of the surface obeys the same equation, so the surface
+remains a sphere, which is why a single scalar suffices. Setting
+$R=2a$,
+\[
+   8a^{3}=a^{3}+3a^{2}v_{a}t
+   \qquad\Longrightarrow\qquad
+   \boxed{\ t=\frac{7a}{3v_{a}} . \ }
+\]
+
+\textbf{(c) The pressure.} Follow the hint and compute $\dvg\bD$ in
+Cartesian components. From part (a),
+\[
+   D_{ij}=a^{2}v_{a}\left[\frac{\dd_{ij}}{r^{3}}
+   -\frac{3x_{i}x_{j}}{r^{5}}\right],
+\]
+and, using $r_{,j}=x_{j}/r$ throughout,
+\[
+\begin{aligned}
+   \left(\frac{1}{r^{3}}\right)_{,j}&=-\frac{3}{r^{4}}r_{,j}
+   =-\frac{3x_{j}}{r^{5}},\\
+   \left(\frac{x_{i}x_{j}}{r^{5}}\right)_{,j}
+   &=\frac{x_{i}+3x_{i}}{r^{5}}
+   -\frac{5x_{i}x_{j}x_{j}}{r^{6}}\cdot\frac1r\\
+   &=\frac{4x_{i}}{r^{5}}-\frac{5x_{i}}{r^{5}}
+   =-\frac{x_{i}}{r^{5}},
+\end{aligned}
+\]
+the middle expression using $\dd_{ij}x_{j}=x_{i}$, $x_{i}\dd_{jj}
+=3x_{i}$ and $x_{j}x_{j}=r^{2}$. Hence
+\[
+   D_{ij,j}=a^{2}v_{a}\left[-\frac{3x_{i}}{r^{5}}
+   -3\Big(-\frac{x_{i}}{r^{5}}\Big)\right]=0 ,
+   \qquad\text{that is}\qquad
+   \dvg\bD=\bze .
+\]
+The viscous force per unit volume vanishes identically. Equivalently,
+$\Delta\bv=\bze$, which is visible directly from
+$v_{i}=a^{2}v_{a}x_{i}/r^{3}=-a^{2}v_{a}(1/r)_{,i}$ together with the
+harmonicity of $1/r$ away from the origin.
+
+Therefore $\dvg\bT=-\grad p$, and the equation of motion \eqr{6.109}
+with $\bb=\bze$ gives
+\[
+   \grad p=-\rho\dot\bv=\frac{2\rho a^{4}v_{a}^{2}}{r^{5}}\,\berho .
+\]
+Since $\berho=\grad r$ by \eqr{1.124}, this is $p_{,r}=2\rho
+a^{4}v_{a}^{2}r^{-5}$ with no angular dependence, and integrating,
+\[
+   p=-\frac{\rho a^{4}v_{a}^{2}}{2r^{4}}+C ,
+\]
+which may be verified by differentiating: $\frac{\dl}{\dl r}
+\big(-\tfrac12\rho a^{4}v_{a}^{2}r^{-4}\big)
+=2\rho a^{4}v_{a}^{2}r^{-5}$.
+
+The constant is fixed by the condition at infinity. As $r\to\infty$ the
+stretching $\bD$ decays like $r^{-3}$, so $\bT\to-p\I$, and matching
+with $\bT\to-p_{\infty}\I$ requires $p\to p_{\infty}$. Hence
+$C=p_{\infty}$ and
+\[
+   \boxed{\ p(\bx)=p_{\infty}-\frac{\rho a^{4}v_{a}^{2}}{2r^{4}},
+   \qquad
+   \bT=-p\,\I+\frac{2\mu a^{2}v_{a}}{r^{3}}
+   \big(\I-3\,\berho\otimes\berho\big). \ }
+\]
+
+\emph{A check, and a surprise.} Because $\bW=\Ob$, the tensor $\bL$ is
+symmetric and
+\[
+   \dot\bv=\bL\bv=\bL^{t}\bv=(\grad\bv)^{t}\bv
+   =\tfrac12\grad\big(|\bv|^{2}\big),
+\]
+the last step being the identity computed in Problem 1 of Chapter 5,
+$\big[(\grad\bv)^{t}\bv\big]_{i}=v_{j,i}v_{j}
+=\tfrac12(v_{j}v_{j})_{,i}$. So the equation of motion integrates at
+once to
+\[
+   p+\tfrac12\rho|\bv|^{2}=\text{const},
+\]
+which is Bernoulli's theorem; with $|\bv|=a^{2}v_{a}/r^{2}$ it
+reproduces the boxed pressure exactly.
+
+The surprise is that Bernoulli's theorem, an inviscid result, is exact
+here for a viscous fluid. The reason is that the viscous force
+$\mu\Delta\bv$ vanishes identically for this particular field, even
+though the viscous stress $2\mu\bD$ does not. Viscosity is present in
+the stress, and a sphere of fluid does feel a viscous traction, but the
+tractions on opposite faces of every material element balance, so the
+net viscous force is zero and the motion is governed by the Euler
+equations. Such flows are rare and valuable: they are the cases in which
+the nonlinear and the viscous terms of the Navier--Stokes equations can
+both be handled exactly.
+\end{solution}

@@ -1,0 +1,917 @@
+BOLUM 9: Viscous Fluids
+Kitap sayfalari: PDF 193-212
+========================================================================
+
+----- PDF sayfa 193 -----
+Chapter 9
+Viscous Fluids
+For ﬂuids the constitutive equation (8.33) for the stress, in the frame
+of O, satisﬁes the material symmetry condition
+ˆTκ(x, v, θ, F , L; X) = ˆTκ(x, v, θ, FR, L; X)
+(9.1)
+for all ﬁxed R ∈U, the unimodular group. To derive a necessary
+condition for this we consider a ﬁxed instant t∗, say, and select
+R = J1/3(1tF )−1 in which 1 is the ﬁxed shifter (see (2.68)) in the
+frame of O and F is ﬁxed at the value F (X, t∗), with determinant J.
+In terms of components, 1tF = δiAFiB ˆEA⊗ˆEB. The shifter is needed
+here to ensure that R is a referential tensor, in accordance with (8.8).
+With reference to Problem 21(a) of Chapter 1, this choice furnishes
+a ﬁxed unimodular R, and implies that
+ˆTκ(x, v, θ, Fκ, L; X) = ˆTκ(x, v, θ, J1/31, L; X).
+(9.2)
+Conversely, this satisﬁes (9.1) for all unimodular R and is thus also
+suﬃcient for ﬂuidity at the instant t∗. This instant is arbitrary, how-
+ever, and so this holds at all instants. Further, from (2.59) and the
+conservation of mass, we have that J = ρκ(X)/ρ. Thus, the stress at
+X is determined by the list {x, v, θ, ρ, L}. Then, using X = κ(p) —
+see (2.3) — we may eliminate the reference conﬁguration from the
+constitutive function altogether and write
+T = G(x, v, θ, ρ, L; p).
+(9.3)
+179
+
+----- PDF sayfa 194 -----
+180
+Principles of Continuum Mechanics
+9.1
+Material frame indiﬀerence
+Of course any other observer, O+ say, can follow the same line of
+reasoning to conclude that the stress is expressible in the form
+T + = G+(x+, v+, θ+, ρ+, L+; p),
+(9.4)
+for some suitable constitutive function G+. This function is related
+to G by
+G+(x+, v+, θ+, ρ+, L+; p) = QG(x, v, θ, ρ, L; p)Qt,
+(9.5)
+where Q(t): E3 →E3+ is the orthogonal tensor associated with the
+change of frame. We wish to use this statement to derive restrictions
+on the constitutive function G pertaining to O. That pertaining to
+O+, if desired, can then be obtained a posteriori.
+Following [13], consider two relative motions of the observers,
+characterized by orthogonal tensors Q1(t) and Q2(t), and vectors
+c1(t) and c2(t), respectively. From the perspective of O+, the posi-
+tions x1 and x2 of p, as perceived by O, are related by (cf. (7.3))
+Q1(t)x1 + c1(t) = x+ = Q2(t)x2 + c2(t),
+(9.6)
+and from (7.8) and (7.33), the associated velocities and velocity gra-
+dients are related by
+Q1v1 + ˙Q1Qt
+1(x+ −c1) + ˙c1 = v+ = Q2v2 + ˙Q2Qt
+2(x+ −c2) + ˙c2
+(9.7)
+and
+Q1L1Qt
+1 + ˙Q1Qt
+1 = L+ = Q2L2Qt
+2 + ˙Q2Qt
+2,
+(9.8)
+respectively, whereas (7.37) implies that ρ1 = ρ+ = ρ2 and θ1 =
+θ+ = θ2. Denoting these simply by ρ and θ, we then have
+Q1G(x1, v1, θ, ρ, L1; p)Qt
+1 = G+(x+, v+, θ+, ρ+, L+; p)
+= Q2G(x2, v2, θ, ρ, L2; p)Qt
+2,
+(9.9)
+and hence the restriction
+G(x2, v2, θ, ρ, L2; p) = QG(x1, v1, θ, ρ, L1; p)Qt
+(9.10)
+
+----- PDF sayfa 195 -----
+Viscous Fluids
+181
+on the constitutive equation used by O, where
+Q = Qt
+2Q1: E3 →E3
+(9.11)
+is an arbitrary orthogonal tensor mapping E3 to itself.
+Straightforward manipulations making use of (9.6)–(9.8) yield
+x2 = Qx1 +d(t),
+where d(t) = Qt
+2(c1 −c2),
+and
+v2 = Qv1 +e,
+(9.12)
+where e is a function of x+ and t, and
+L2 = QL1Qt + ˙QQt;
+hence D2 = QD1Qt
+and
+W2 = QW 1Qt + ˙QQt,
+(9.13)
+in which Q is given by (9.11).
+To derive a necessary condition for (9.10) we exploit the arbitrari-
+ness of Q and select Q(t) = I, the identity on E3. Inserting this into
+(9.11) and left-multiplying by Q2 gives Q2I = I+Q1, where I+ is
+the identity on E3+. The left- and right-hand sides of this are simply
+Q2 and Q1, respectively, and our choice thus yields Q2 = Q1. We
+ﬁnd that e then reduces to a function of t alone, given by
+e(t) = Qt
+1( ˙c1 −˙c2) + ˙Q1Qt
+1(c1 −c2),
+(9.14)
+and that (9.10) reduces, on dropping the subscript 1, to
+G(x + d, v + e, θ, ρ, L; p) = G(x, v, θ, ρ, L; p),
+(9.15)
+for arbitrary d and e. It follows that the constitutive function is
+insensitive to variations of its ﬁrst two arguments, and hence that
+it is independent of those arguments. We thus arrive at the major
+simpliﬁcation
+G(x, v, θ, ρ, L; p) = G(θ, ρ, L; p)
+(9.16)
+for some function G. Substituting back into (9.10), we ﬁnd that this
+function must be such that
+G(θ, ρ, QLQt + Ω; p) = QG(θ, ρ, L; p)Qt
+(9.17)
+for arbitrary orthogonal Q(t): E3 →E3, with Ω = ˙QQt.
+
+----- PDF sayfa 196 -----
+182
+Principles of Continuum Mechanics
+At any ﬁxed instant t∗, say, we may choose Q and Ω indepen-
+dently. For example, with reference to (C.24) of Appendix C, consider
+the orthogonal tensor
+Q(t) = [exp(t −t∗) ˆΩ] ˆQ,
+(9.18)
+in which ˆΩ and ˆQ, respectively, are arbitrary ﬁxed skew and orthog-
+onal tensors. Then, Q(t∗) = ˆQ and
+˙QQt
+|t∗= ˆΩ, and from (9.17),
+evaluated at t = t∗,
+G(θ, ρ, ˆQ(D∗+ W∗) ˆQt + ˆΩ; p) = ˆQG(θ, ρ, L∗; p) ˆQt,
+(9.19)
+where L∗is the velocity gradient at the instant t∗, and D∗= SymL∗
+and W∗= SkwL∗are the associated stretching and spin tensors.
+Now, since the material point p is ﬁxed in this discussion, all argu-
+ments of the constitutive function depend on time alone. We are thus
+free to choose ˆΩ = −W∗. Setting ˆQ = I, we arrive at
+G(θ, ρ, L∗; p) = G(θ, ρ, D∗; p).
+(9.20)
+Since t∗is arbitrary, we conclude that, for (9.17) to hold, it is neces-
+sary that
+G(θ, ρ, L; p) = G(θ, ρ, D; p)
+(9.21)
+at all t, and hence that the stress can depend on the velocity gradient
+only through the stretching tensor. On substituting back into (9.17)
+and recalling (9.13), we ﬁnd that this dependence must be such that
+G(θ, ρ, QDQt; p) = QG(θ, ρ, D; p)Qt
+(9.22)
+for all orthogonal Q(t): E3 →E3. Since this function delivers the
+values of the Cauchy stress, it must also be symmetric.
+9.1.1
+Isotropic symmetric tensor-valued functions
+of a symmetric tensor
+Dropping the passive variables θ, ρ and p for convenience, we seek a
+general representation of a symmetric tensor-valued function G, of
+an arbitrary symmetric tensor D, satisfying
+G(QDQt) = QG(D)Qt
+(9.23)
+
+----- PDF sayfa 197 -----
+Viscous Fluids
+183
+for all orthogonal Q(t): E3 →E3. Such a function is said to be
+isotropic, despite the fact that (9.22) pertains to frame invariance
+rather than to the notion of isotropic material symmetry, the latter
+to be discussed in Chapter 11.
+We will prove that the most general function of this type is of the
+form
+G(D) = ϕ0(I1, I2, I3)I + ϕ1(I1, I2, I3)D + ϕ2(I1, I2, I3)D2,
+(9.24)
+where ϕ0,1,2 are scalar-valued functions of the principal invariants of
+D (see (3.3)):
+I1(D) = trD,
+I2(D) = 1
+2[I2
+1 −tr(D2)]
+and
+I3(D) = det D.
+(9.25)
+The proof of this important result is in four parts.
+Part 1
+Suppose
+the
+scalar-valued
+function
+ϕ(D)
+is
+isotropic,
+i.e.,
+ϕ(QDQt) = ϕ(D). We show that it is necessary and suﬃcient
+that ϕ(D) = ¯ϕ(I1, I2, I3) for some function ¯ϕ. To prove necessity,
+it suﬃces to show that ϕ is determined by the invariants, i.e., that
+ϕ(A) = ϕ(B) whenever Ik(A) = Ik(B); k = 1, 2, 3. Here, A and B
+are arbitrary symmetric tensors. Thus, suppose that Ik(A) = Ik(B).
+From (3.2), we have that A and B share the same principal values.
+Their spectral representations are
+A =
+
+λiui ⊗ui
+and
+B =
+
+λivi ⊗vi,
+(9.26)
+where {ui} and {vi} are orthonormal sets of principal vectors. We
+use them to construct the orthogonal tensor ˜Q = ui ⊗vi. Thus,
+A = ˜QB ˜Qt. Recalling that ϕ( ˜QB ˜Qt) = ϕ(B) by hypothesis, we
+arrive at ϕ(A) = ϕ(B), and so ϕ is determined by the invariants, as
+claimed.
+To prove suﬃciency, suppose ϕ(A) = ¯ϕ(I1(A), I2(A), I3(A)).
+Then for any orthogonal Q, I1(QAQt) = tr(QAQt) = tr(QtQA) =
+I1(A), I2(QAQt) = 1
+2[I2
+1−tr(QAQtQAQt)] = 1
+2[I2
+1−tr(QA2Qt)] =
+I2(A), and I3(QAQt) = det(QAQt) = (det Q)2 det A = I3(A), so
+that ϕ(A) = ϕ(QAQt).
+
+----- PDF sayfa 198 -----
+184
+Principles of Continuum Mechanics
+Part 2
+Let ηi be principal values of D, and let νi be the associated principal
+vectors, so that D =  ηiνi ⊗νi. We show that νi are also principal
+vectors of G(D). To prove this claim consider the orthogonal tensor
+¯Q = 2ν1 ⊗ν1 −I, representing a 180◦rotation about the axis ν1,
+i.e., ¯Qν1 = ν1, ¯Qν2 = −ν2 and ¯Qν3 = −ν3. From (9.23),
+¯QG(D) ¯Qt = G
+
+ηi ¯Qνi ⊗¯Qνi
+
+= G
+
+ηiνi ⊗νi
+
+= G(D).
+(9.27)
+Thus, ¯QG(D) = G(D) ¯Q and
+¯QG(D)ν1 = G(D) ¯Qν1 = G(D)ν1.
+(9.28)
+Therefore, G(D)ν1 is also an axis of ¯
+Q. But this axis is unique
+(Appendix C); therefore, G(D)ν1 = β1(D)ν1 for some scalar func-
+tion β1, and ν1 is a principal vector of G(D). Repeating this argu-
+ment with ν1 replaced by ν2 or ν3, we conclude that {νi} is a
+principal basis for G(D), as claimed, and hence that
+G(D) =
+
+βi(D)νi ⊗νi,
+(9.29)
+for some scalar-valued functions βi.
+Part 3
+We show that the set {I, D, D2} is linearly independent. To prove
+this, we ﬁrst note that since the constitutive function G is deﬁned
+for all symmetric D, it is deﬁned for D having distinct principal
+values ηi. For such D, we will assume that I, D and D2 are linearly
+dependent and reach a contradiction. Thus, we assume that
+O = aI + bD + cD2 =
+
+(a + bηi + cη2
+i )νi ⊗νi,
+(9.30)
+with at least one element of {a, b, c} unequal to zero. This implies
+that a + bηi + cη2
+i = 0 for i = 1, 2, 3, and hence that the ηi are
+all the roots of the same quadratic equation. But such equations
+have at most two distinct roots, contrary to our choice of D. This
+contradiction implies that the premise is false, and hence that the
+set {I, D, D2} is linearly independent, as claimed.
+
+----- PDF sayfa 199 -----
+Viscous Fluids
+185
+Note that
+I, D, D2 ∈S = Span{ν1 ⊗ν1, ν2 ⊗ν2, ν3 ⊗ν3},
+(9.31)
+a three-dimensional vector space. Since n linearly independent ele-
+ments of an n-dimensional vector space constitute a basis for that
+space, we have
+S = Span{I, D, D2}.
+(9.32)
+Part 4
+It follows from (9.29) that G(D) ∈S. Thus, (9.32) implies that there
+are unique scalars ψ0(D), ψ1(D) and ψ2(D) such that
+G(D) = ψ0(D)I + ψ1(D)D + ψ2(D)D2.
+(9.33)
+To see this explicitly, we combine it with (9.29) to get
+βi(D) = ψ0 + ψ1ηi + ψ2η2
+i ;
+i = 1, 2, 3,
+(9.34)
+i.e.,
+⎛
+⎜
+⎝
+1 η1 η2
+1
+1 η2 η2
+2
+1 η3 η2
+3
+⎞
+⎟
+⎠
+⎧
+⎪
+⎨
+⎪
+⎩
+ψ0
+ψ1
+ψ2
+⎫
+⎪
+⎬
+⎪
+⎭
+=
+⎧
+⎪
+⎨
+⎪
+⎩
+β1
+β2
+β3
+⎫
+⎪
+⎬
+⎪
+⎭
+,
+(9.35)
+in which the coeﬃcient matrix has determinant (η1 −η1) (η2 −
+η3) (η3 −η1) . This is non-zero for the family of D′s considered. Then,
+since the ηi are determined by the Ik(D), it follows that the ψ′s are
+determined by D.
+Now, from (9.33) we have
+G(QDQt) −QG(D)Qt
+= Q{[ψ0(QDQt) −ψ0(D)]I + [ψ1(QDQt) −ψ1(D)]D
++ [ψ2(QDQt) −ψ2(D)]D2}Qt,
+(9.36)
+where we have used QQt = I and (QDQt)2 = QD2Qt. We
+impose (9.23) and left- and right-multiply the resulting equation
+by Qt and Q respectively. Using the result of Part 3, we obtain
+
+----- PDF sayfa 200 -----
+186
+Principles of Continuum Mechanics
+ψi(QDQt) = ψi(D). Finally, we apply the result of Part 1 to con-
+clude that ψi(D) = ¯ψi(I1, I2, I3) and substitute into (9.33) to arrive
+at (9.24). Conversely, it is a simple matter to conﬁrm that (9.24)
+ensures the isotropy of G(D).
+This result subsumes the case in which D has only two distinct
+principal values, or just one. The ﬁrst of these is covered by taking
+ϕ2 = 0, and the third by taking ϕ1 = ϕ2 = 0 [3].
+Reinstating the passive variables, we conclude that the stress at
+a material point p in a viscous ﬂuid is of the form
+T = ϕ0(I1, I2, I3, θ, ρ; p)I + ϕ1(I1, I2, I3, θ, ρ; p)D
++ ϕ2(I1, I2, I3, θ, ρ; p)D2,
+(9.37)
+where the Ik are the principal invariants of D. It is a matter of
+experiment to determine the three functions ϕ0, ϕ1 and ϕ2 in terms
+of the ﬁve variables I1, I2, I3, θ and ρ. While this task presents a
+formidable challenge, it is far more tractable than that presented by
+the original constitutive hypothesis embodied in (9.3).
+Assuming the ϕ′s to be continuous functions of the invariants, we
+observe that the stress reduces to
+T|D=O = −˜p(θ, ρ; p)I
+(9.38)
+in the absence of stretching, where ˜p = −ϕ0(0, 0, 0, θ, ρ; p) is the
+pressure. If this holds in the presence of stretching, then the ﬂuid
+is inviscid. The latter model is descriptive in regions exterior to
+“boundary layers” in which the eﬀects of viscosity are important.
+The inviscid ﬂuid model therefore plays a major role in the theories
+of aero- and hydro-dynamics.
+9.2
+The heat ﬂux
+Beginning with (8.31), we may proceed, as in the passage from (9.1)
+to (9.22), to conclude that the heat ﬂux is given constitutively in the
+form
+q = g(θ, ρ, D, gradθ; p),
+(9.39)
+in the frame of O, where the function g is such that
+g(θ, ρ, QDQt, Qgradθ; p) = Qg(θ, ρ, D, gradθ; p)
+(9.40)
+
+----- PDF sayfa 201 -----
+Viscous Fluids
+187
+for all orthogonal Q: E3 →E3. We will show that the general form
+of such a function is
+g(θ, ρ, D, gradθ; p) = Kgradθ,
+(9.41)
+where
+K(θ, ρ, D, gradθ; p) = φ0(I1, . . . , I6, θ, ρ; p)I + φ1(I1, . . . , I6, θ, ρ; p)D
++ φ2(I1, . . . , I6, θ, ρ; p)D2,
+(9.42)
+with
+I4(D, gradθ) = gradθ · D(gradθ), I5(D, gradθ) = gradθ · D2(gradθ)
+and I6(gradθ) = |gradθ|.
+(9.43)
+To simplify the notation we again suppress the passive variables
+and write (9.40) as
+g(QDQt, Qd) = Qg(D, d),
+(9.44)
+for all symmetric D: E3 →E3 and all d = gradθ ∈E3, where Q:
+E3 →E3 is an arbitrary orthogonal tensor. For Q = −I this yields
+g(D, −d) = −g(D, d).
+(9.45)
+Our proof is again in four parts.
+Part 1
+Suppose ϕ(D, d) = ϕ(D, −d). We show that ϕ then depends on d
+via d ⊗d. Dropping the passive variable D, our task is to show that
+if ψ(d) = ψ(−d), then ψ(d) = ¯ψ(d ⊗d), i.e., that ψ(a) = ψ(b)
+whenever a ⊗a = b ⊗b. Suppose, then, that the latter is true. It
+follows that
+|a|2 a = (a · b)b
+and
+|b|2 b = (a · b)a,
+(9.46)
+which imply that |a| = |b| and (a · b)2 = |a|2 |b|2 . But from (1.5)
+there is α ∈R such that a · b = |a| |b| cos α. Then, cos α = ±1 and
+either of (9.46) gives b = ±a. The solution b = a trivially yields
+ψ(b) = ψ(a), and the solution b = −a gives ψ(b) = ψ(−a). But
+ψ(a) = ψ(−a) by hypothesis, and therefore ψ(a) = ψ(b) when-
+ever a ⊗a = b ⊗b. Thus, ψ(d) = ¯ψ(d ⊗d) for some function ¯ψ,
+
+----- PDF sayfa 202 -----
+188
+Principles of Continuum Mechanics
+as claimed. Conversely, if ψ(d) = ¯ψ(d ⊗d), then it follows immedi-
+ately that ψ(d) = ψ(−d).
+Part 2
+We show that if d is arbitrary and D is an arbitrary symmetric
+tensor, then {d, Dd, D2d} is a basis for E3. We again discuss only
+the case in which the principal values ηi of D are distinct. Thus, we
+assume these vectors to be linearly dependent, i.e., that
+ad + bDd + cD2d = 0,
+(9.47)
+with at least one element of {a, b, c} unequal to zero. Using the spec-
+tral decomposition of D, we write this as
+
+(a + bηi + cη2
+i )diνi = 0,
+where di = νi · d.
+(9.48)
+As d is arbitrary, this requires that a + bηi + cη2
+i = 0; i = 1, 2, 3. This
+is the contradiction encountered previously. It follows that a, b, c all
+vanish and hence that the set {d, Dd, D2d} is linearly independent.
+Thus,
+g(D, d) = ψ0(D, d)d + ψ1(D, d)Dd + ψ2(D, d)D2d.
+(9.49)
+Part 3
+From the result of Part 2, we have
+g(D, −d) = −ψ0(D, −d)d −ψ1(D, −d)Dd −ψ2(D, −d)D2d.
+(9.50)
+Imposing (9.45) yields
+[ψ0(D, d) −ψ0(D, −d)]d + [ψ1(D, d) −ψ1(D, −d)]Dd
++ [ψ2(D, d) −ψ2(D, −d)]D2d = 0,
+(9.51)
+and therefore ψi(D, d) = ψi(D, −d); i = 0, 1, 2. It then follows from
+Part 1 that
+ψi(D, d) = ¯ψi(D, d ⊗d);
+i = 0, 1, 2.
+(9.52)
+
+----- PDF sayfa 203 -----
+Viscous Fluids
+189
+Thus,
+g(QDQt, Qd) −Qg(D, d)
+= [ ¯ψ0(QDQt, Qd ⊗Qd) −¯ψ0(D, d ⊗d)]Qd
++ [ ¯ψ1(QDQt, Qd ⊗Qd) −¯ψ1(D, d ⊗d)]QDd
++ [ ¯ψ2(QDQt, Qd ⊗Qd) −¯ψ2(D, d ⊗d)]QD2d.
+(9.53)
+Imposing (9.44), left-multiplying by Qt and invoking the result of
+Part 2, we conclude that
+¯ψi(QDQt, Qd ⊗Qd) = ¯ψi(D, d ⊗d);
+i = 0, 1, 2,
+(9.54)
+for all orthogonal Q.
+Part 4
+Suppose ϕ(D, d ⊗d) = ϕ(QDQt, Qd ⊗Qd) for all orthogonal Q.
+We demonstrate that ϕ is then determined by I1 −I6, i.e., that
+ϕ(A, a ⊗a) = ϕ(B, b ⊗b) whenever
+{I1(A), I2(A), I3(A), I4(A, a), I5(A, a), I6(a)}
+= {I1(B), I2(B), I3(B), I4(B, b), I5(B, b), I6(b)},
+(9.55)
+where I1 −I6 are deﬁned in (9.25) and (9.43). Thus, suppose these
+two sets are equal. Then the invariants I1, I2, I3 of A and B coin-
+cide and (9.26) holds in particular, implying that A = ˜QB ˜Qt and
+A2 = ˜QB2 ˜Qt, where ˜Q = ui ⊗vi is orthogonal.
+Let
+ci = ( ˜
+Qta · vi)2 −(b · vi)2.
+(9.56)
+Then the three equations expressing the equality of I4, I5 and I6 in
+(9.55) may be summarized in the matrix form
+⎛
+⎜
+⎝
+1
+1
+1
+λ1 λ2 λ3
+λ2
+1 λ2
+2 λ2
+2
+⎞
+⎟
+⎠
+⎧
+⎪
+⎨
+⎪
+⎩
+c1
+c2
+c3
+⎫
+⎪
+⎬
+⎪
+⎭
+=
+⎧
+⎪
+⎨
+⎪
+⎩
+0
+0
+0
+⎫
+⎪
+⎬
+⎪
+⎭
+,
+(9.57)
+where λi are the principal values of A and B. As we are concerned
+with tensors having distinct principal values, the determinant of the
+
+----- PDF sayfa 204 -----
+190
+Principles of Continuum Mechanics
+coeﬃcient matrix, (λ1 −λ2)(λ2 −λ3)(λ3 −λ1), is nonzero, and there-
+fore all the ci vanish, i.e., ˜
+Qta · vi = ±b · vi; i = 1, 2, 3. Since {vi}
+is a basis for E3 it follows that a = ± ˜Qb. Thus, the equality of
+the two sets of scalars I1 −I6 implies that a ⊗a =
+˜Qb ⊗˜Qb.
+Finally, as ϕ(B, b ⊗b) = ϕ( ˜QB ˜Qt, ˜Qb ⊗˜Qb) by hypothesis, we
+have ϕ(A, a ⊗a) = ϕ(B, b ⊗b), as claimed.
+Collecting these results and reinstating the passive variables, we
+conclude that the heat ﬂux is given by (9.41) and (9.42). This sub-
+sumes the cases in which the stretching tensor has only one or two
+distinct principal values. Conversely, it is a straightforward matter
+to show that (9.41) and (9.42) yield (9.40) for all orthogonal Q:
+E3 →E3, and hence that the two statements are equivalent. Fur-
+ther, assuming the φ′s in (9.42) to be continuous functions of the
+Ik; k = 1, . . . , 6, it follows from the continuity of this representation
+with respect to gradθ that
+g(θ, ρ, D, 0; p) = 0,
+(9.58)
+so that there is no heat conduction in the absence of a temperature
+gradient; and, from its continuity with respect to D, that
+g(θ, ρ, O, gradθ; p) = K(I6, θ, ρ; p)gradθ,
+(9.59)
+for some scalar function K.
+Empirical facts indicate that ﬂuids of the present class, such as
+air and water, are well described by constitutive equations for the
+stress and heat ﬂux that are linear in D and gradθ, respectively, and
+that the heat ﬂux is insensitive to D. Recalling that I2 and I3 are
+nonlinear functions of D, whereas I1 = trD is linear, the relevant
+expression for the stress is given by the Newtonian ﬂuid
+T = [−˜p(θ, ρ; p) + λ(θ, ρ; p)trD]I + 2μ(θ, ρ; p)D,
+(9.60)
+where ˜p is the pressure in the absence of ﬂow, and λ, μ are viscosity
+coeﬃcients; and that for the heat ﬂux, by the Fourier law
+q = K(θ, ρ; p)gradθ,
+(9.61)
+where K is the thermal conductivity.
+Regarding the constitutive functions for the Helmholtz energy and
+the entropy, the only consequences of frame invariance and symme-
+try under the unimodular group that are required for our purposes
+
+----- PDF sayfa 205 -----
+Viscous Fluids
+191
+are that these functions are determined by the list {θ, ρ, D, gradθ}.
+We write these simply as ψ(θ, ρ, D, gradθ; p) and η(θ, ρ, D, gradθ; p),
+respectively.
+9.3
+Thermodynamical considerations
+The stress, energy and entropy must be related if the balance laws
+and the Clausius–Duhem inequality are to be satisﬁed. To see this we
+invoke the latter inequality (see (6.187)) at the material point p ∈B
+for a process consisting of arbitrary values of θ, ρ, D and gradθ. In
+principle the balance laws for energy and momentum, together with
+the constitutive equations, furnish the energy supply r and body force
+b required to eﬀect this process. Here, we note that θ and gradθ can
+be speciﬁed independently at any one point.
+Proceeding, we use the chain rule to obtain
+˙ψ = ψθ ˙θ + ψρ ˙ρ + ψD · ˙D + ψgradθ · (gradθ)·,
+(9.62)
+where subscripts are used to denote derivatives with respect to scalar,
+tensor or vector variables. Invoking (6.17)1 in the form ˙ρ = −ρtrD =
+−ρI · D and recalling that T is symmetric, we thus reduce the
+Clausius–Duhem inequality to the form
+−ρ(ψθ + η) ˙θ −ρψD · ˙D −ρψgradθ · (gradθ)·
++ (T + ρ2ψρI) · D −θ−1q · gradθ ≥0.
+(9.63)
+At
+any
+ﬁxed
+instant,
+t∗
+say,
+the
+lists
+{θ, D, gradθ}
+and
+{ ˙θ, ˙D, (gradθ)·} can be assigned independently. Accordingly this
+inequality is of the form
+a(z) · w + b(z) ≥0
+(9.64)
+for arbitrary, independent values of the arrays
+z = (θ, ρ, D, gradθ)
+and
+w = ( ˙θ, ˙D, (gradθ)·),
+(9.65)
+where
+a(z) = (−ρ(ψθ + η), −ρψD, −ρψgradθ)
+(9.66)
+
+----- PDF sayfa 206 -----
+192
+Principles of Continuum Mechanics
+and
+b(z) = (T + ρ2ψρI) · D −θ−1q · gradθ.
+(9.67)
+To derive a necessary condition for (9.64), we choose w = δa(z)
+with δ ∈R arbitrary. Then, δ |a|2 + b ≥0. If |a| ̸= 0, then this
+is violated for δ < −b/ |a|2 , contrary to the requirement that it be
+satisﬁed for all δ. Hence, the necessary conditions
+a(z) = (0, O, 0)
+and
+b(z) ≥0
+(9.68)
+for (9.64), which are obviously also suﬃcient. We conclude that ψD =
+O and ψgradθ = 0, and hence that that the free energy is a function
+ψ(θ, ρ; p) of θ and ρ, and that
+η = −ψθ,
+(9.69)
+so that the entropy is also a function of θ and ρ. This leaves the
+residual dissipation inequality
+(T + ρ2ψρI) · D −θ−1q · gradθ ≥0,
+(9.70)
+restricting the stress and heat ﬂux jointly, for all values of θ, ρ, D
+and gradθ. Moreover, as the material point p and the instant t∗are
+arbitrary, these conclusions hold at all material points and at all
+instants.
+Consider a process for which gradθ vanishes at a particular point
+and instant, and let
+f(D) = (T + ρ2ψρI) · D
+(9.71)
+in which θ and ρ are ﬁxed. Then, f(O) = 0 and f(D) ≥0 for all
+symmetric D, so that f is minimized — and hence stationary — at
+D = O, i.e.,
+(T|D=O + ρ2ψρI) · dD = 0
+for all symmetric dD.
+(9.72)
+This implies that
+T|D=O = −ρ2ψρI
+(9.73)
+and hence, from (9.38), that
+˜p(θ, ρ; p) = ρ2ψρ.
+(9.74)
+This is called the thermodynamic pressure.
+
+----- PDF sayfa 207 -----
+Viscous Fluids
+193
+Invoking (9.70) for the Newtonian ﬂuid model (9.60), again with
+gradθ = 0, yields
+λ(trD)2 + 2μD · D ≥0,
+(9.75)
+for all symmetric D. To derive necessary conditions for this we invoke
+the orthogonal decomposition
+D = devD + 1
+3(trD)I,
+(9.76)
+where devD is the deviatoric part of D (see Problem 15 of
+Chapter 1). Our inequality becomes
+κ(trD)2 + 2μ |devD|2 ≥0,
+(9.77)
+for all D, where
+κ = λ + 2
+3μ.
+(9.78)
+Consider two ﬂows, the ﬁrst with D = I (devD = O) and the
+second with D =
+1
+2(a ⊗b + b ⊗a), where a · b = 0, the latter
+yielding trD = 0 and hence D = devD. These yield the necessary
+and suﬃcient conditions
+κ ≥0
+and
+μ ≥0.
+(9.79)
+Because the second form of D represents a shear ﬂow, we refer to μ
+as the shear viscosity, whereas κ is the bulk viscosity.
+Invoking (9.70) for the classical Fourier law (9.61), with D = O,
+we conclude that K |gradθ|2 ≤0 and hence that the thermal con-
+ductivity is non-positive:
+K ≤0.
+(9.80)
+In turn, these inequalities ensure that a model consisting of the New-
+tonian ﬂuid and Fourier’s law satisfy the Clausius–Duhem inequality
+without qualiﬁcation, i.e., for all processes.
+At this stage a remark is in order concerning our a priori omission
+of the temperature gradient from the list of independent variables in
+the constitutive function for the stress. If one does not omit the
+
+----- PDF sayfa 208 -----
+194
+Principles of Continuum Mechanics
+temperature gradient, then it is possible to show that the leading-
+order model emerging for small values of |D| and |gradθ| is precisely
+the Newtonian–Fourier model; and that, to satisfy the Clausius–
+Duhem inequality, the associated stress must be independent of the
+temperature gradient. The details of the fairly lengthy argument may
+be found in Chapter 4 of [21].
+Many ﬂuids are approximately incompressible under feasible con-
+ditions, including small deviations in temperature. Their motions are
+therefore approximately isochoric, satisfying J = 1 very nearly. It is
+thus appropriate to impose the constraint ˙J = 0 at a material point.
+This in turn is equivalent to 0 = trD = I·D, reducing the dissipation
+inequality (9.70) to
+devT · devD −θ−1q · gradθ ≥0,
+(9.81)
+where, for the incompressible Newtonian ﬂuid,
+devT = 2μdevD = 2μD.
+(9.82)
+The foregoing argument yields only (9.79)2. Moreover, conservation
+of mass, i.e., (ρJ)· = 0, then implies that ˙ρ = 0, and hence that ρ is
+ﬁxed at a material point. It therefore enters the functions ψ, η and μ
+as a ﬁxed parameter.
+Thermodynamic considerations do not restrict the spherical part
+of the stress, which is thus constitutively indeterminate and hence
+outside the purview of our earlier discussion about observer consen-
+sus concerning material response. The stress is thus of the form
+T = −p(x, t)I + 2μD,
+(9.83)
+where p(x, t) is entirely arbitrary. With D = Sym(gradv), the linear
+momentum balance is a vector equation for the determination of v, ρ
+and p, assuming the body force to be assigned. Conservation of mass
+provides the additional equation
+ρ′ + gradρ · v = 0,
+(9.84)
+where (·)′ is the time derivative in the spatial description, and the
+constraint furnishes the ﬁnal equation
+divv = 0.
+(9.85)
+
+----- PDF sayfa 209 -----
+Viscous Fluids
+195
+Thus, we have ﬁve equations for the ﬁve variables consisting of ρ, p
+and the components of v. Clearly, this system would be overdeter-
+mined, and hence generally insoluble, if not for the presence of the
+additional unknown function p. Accordingly the latter takes whatever
+values that may be necessary to furnish a solution to the problem
+at hand.
+9.4
+Problems
+1. Verify (9.12)–(9.14).
+2. What are the counterparts of (9.37) and (9.41) in the frame of
+O+?
+3. Show that (9.41) and (9.42) satisfy (9.40) for arbitrary orthogo-
+nal Q: E3 →E3.
+4. Show that all observers agree on the value of p in (9.83).
+5. Consider an incompressible viscous liquid described by (9.83),
+and take μ to be constant. Consider the steady ﬂow (i.e, v′ = 0)
+deﬁned by v = f(x1, x2)e3.
+(a) Show that such a motion is isochoric (as required for incom-
+pressible ﬂuids).
+(b) Assuming zero body force, show that the pressure depends
+on x3 only and that the pressure gradient dp/dx3 = P,
+a constant. Thus, reduce the problem to the equation
+Δf = P/μ, where Δ is the two-dimensional Laplacian (Δf =
+div(gradf)).
+(c) Solve this problem for ﬂow through a pipe with an ellipti-
+cal cross-section in the x1, x2 plane with major and minor
+axes aligned with the x1, x2 axes, respectively. The semi-
+axis lengths are a and b(< a). Assume the no slip condition
+(v = 0 on the boundary). [Hint: If φ(x1, x2) = 0 is the
+equation of the boundary, then cφ, where c is an appropri-
+ate constant, also solves the governing diﬀerential equation
+(a lucky coincidence in this problem!)].
+6. Use the same model to solve the following problems, in which
+the body force is zero.
+
+----- PDF sayfa 210 -----
+196
+Principles of Continuum Mechanics
+(a) Steady ﬂow of the form: v = v1(x2)e1, with v1(0) = 0 and
+v1(d) = V. Obtain a restriction on p and use it to ﬁnd the
+function v1(x2).
+(b) Steady pipe ﬂow: v = w(r)e3 in polar coordinates, inside a
+pipe of radius a. Assume w(a) = 0. Again, obtain a restric-
+tion on p and use it to ﬁnd the function w(r).
+7. The same liquid experiences a steady velocity ﬁeld of the form
+v = rωeθ
+in a polar coordinate system, where ω is a constant. Assume the
+density ρ of the ﬂuid to be uniform and independent of time in
+the spatial description.
+(a) Describe
+this
+motion
+in
+words.
+Is
+mass
+conservation
+satisﬁed?
+(b) Evaluate the tensors L, D, W .
+(c) Suppose the ﬂuid is subjected to the uniform gravitational
+body force b = −ge3 (g = const.). Derive the equation
+z(r) of the surface of the liquid if the surface is exposed
+to the air and the air exerts the uniform atmospheric pres-
+sure pa(= const.) on the entire surface. Ignore the viscosity
+of the air.
+8. Suppose this liquid experiences a steady velocity ﬁeld of the kind
+described in Problem 10 of Chapter 4, and suppose the body force
+vanishes.
+(a) Find the function f in that velocity ﬁeld for the problem of
+ﬂow in an annulus bounded by cylinders of radii a and b(> a).
+The inner and outer cylinders spin at the constant rates ωa
+and ωb, respectively, about the e3 axis. Assume the “no-slip”
+condition, i.e., the ﬂuid velocity matches the cylindrical wall
+velocities at r = a, b.
+(b) Calculate the torque per unit length of the e3 axis needed to
+drive each cylinder.
+(c) Find the ratio ωb/ωa corresponding to irrotational ﬂow,
+i.e., the ratio needed to nullify the vorticity everywhere in
+the ﬂuid.
+
+----- PDF sayfa 211 -----
+Viscous Fluids
+197
+9. Suppose a conﬁguration κt of a body is completely immersed in
+an incompressible ﬂuid of constant density. The body and ﬂuid
+are in equilibrium in a uniform gravitational ﬁeld.
+(a) Show that the force on the body, due to the pressure distri-
+bution at its boundary, is equal to the weight of the ﬂuid that
+is displaced by the body. [Remark: This is the famous Law
+of Buoyancy discovered by Archimedes in the year 246 BC!]
+(b) Show that the moment of this pressure distribution, relative
+to the centroid of the body, is zero. [Hint: The centroid is
+located at xc = V −1 
+κt xdv, where V = volume of κt.]
+(c) Revisit this problem for the case in which the body is only
+partly immersed in the ﬂuid.
+10. Consider an incompressible Newtonian ﬂuid in which the abso-
+lute temperature ﬁeld is θ(x, t). Suppose the internal energy per
+unit mass ε is some function ˆε(θ) of temperature, and suppose
+the internal heat supply vanishes.
+(a) Derive the thermal energy balance
+T · L = divq,
+where q is the spatial heat ﬂux, assuming that the tempera-
+ture does not vary with time at a material point (thus, the
+material derivative ˙θ is zero). Under what restrictions does
+this remain valid for temperature ﬁelds that are steady in
+the sense of the spatial description (θ′ = 0)?
+11. For the Newtonian ﬂuid and the Fourier law, solve this thermal
+energy balance equation for the ﬂow of Problem 8 above, assum-
+ing the temperature θ to be a function of r. Assume the viscosity
+μ and conductivity K to be constant (this is realistic if the tem-
+perature does not vary signiﬁcantly at a material point). The
+inner and outer cylinders are held at the ﬁxed temperatures θa
+and θb, respectively.
+12. An incompressible Newtonian ﬂuid with a constant shear viscos-
+ity experiences a spherically symmetric velocity ﬁeld v = v(r)eρ
+in the spatial description, where r = |x| and eρ = r−1x. There
+are no body forces acting, and the problem is steady (in the sense
+that v′ = 0 and ρ′ = 0).
+
+----- PDF sayfa 212 -----
+198
+Principles of Continuum Mechanics
+(a) Obtain an expression for the spatial velocity gradient L.
+Assuming v(a) = va to be a known constant, ﬁnd the func-
+tion v(r) consistent with the incompressibility constraint
+(i.e., consistent with the motion being isochoric).
+(b) What is the material acceleration? Consider a spherical
+material surface of radius a at time t = 0. Assuming va > 0,
+what is the time at which the radius of the material surface
+doubles? [Hint: Switch to the referential description.]
+(c) Solve the equation of motion to obtain the pressure ﬁeld
+p(x), assuming that T →−p∞I as r →∞, where p∞is a
+known constant. [Hint: Use the Cartesian-coordinate formula
+for the divergence of a tensor, together with r,i = r−1xi.]
