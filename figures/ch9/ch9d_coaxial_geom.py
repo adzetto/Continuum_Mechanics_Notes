@@ -14,8 +14,8 @@ import sys
 
 sys.dont_write_bytecode = True
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, HERE)
-import fs9geom as G  # noqa: E402
+sys.path.insert(0, os.path.join(HERE, os.pardir, 'common'))
+import fsgeom as G  # noqa: E402
 
 HX, HY = 22.0, 14.0      # pt, half-sides of the element
 TRI = 14.0               # pt, triad arrows

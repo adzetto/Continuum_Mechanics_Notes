@@ -17,8 +17,8 @@ import numpy as np
 
 sys.dont_write_bytecode = True
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, HERE)
-import fs9geom as G  # noqa: E402
+sys.path.insert(0, os.path.join(HERE, os.pardir, 'common'))
+import fsgeom as G  # noqa: E402
 
 A = 18.0              # pt, half-side of the square
 E = 0.25              # stretch dt*eta, exaggerated

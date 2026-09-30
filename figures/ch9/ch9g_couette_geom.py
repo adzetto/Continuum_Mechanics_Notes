@@ -16,8 +16,8 @@ import numpy as np
 
 sys.dont_write_bytecode = True
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, HERE)
-import fs9geom as G  # noqa: E402
+sys.path.insert(0, os.path.join(HERE, os.pardir, 'common'))
+import fsgeom as G  # noqa: E402
 
 SV = 64.0            # pt per V
 SD = 74.0            # pt per d

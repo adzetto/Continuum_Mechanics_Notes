@@ -1,4 +1,4 @@
-r"""fscheck9.py -- automatic checks of a Chapter 9 figure PDF (house style v3).
+r"""fscheck.py -- automatic checks of a figure PDF of the notes (house style v3).
 
 Rules, as for the course figures (style/v3/fscheck.py):
   1. label clearance: the ink of every label keeps >= 1.5 pt from the ink of
@@ -14,7 +14,7 @@ less than 2 pt apart, belong to one label (subscripts, under-tildes,
 primes, products such as Q x); every ink pixel goes to the label whose glyph
 boxes hold it.  Filled areas without a stroke (element and region
 fills, fraction rules) are not lines.
-Usage:  python fscheck9.py fig.pdf [--verbose]
+Usage:  python fscheck.py fig.pdf [--verbose]
 """
 import sys
 

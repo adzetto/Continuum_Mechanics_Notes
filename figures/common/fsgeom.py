@@ -1,7 +1,8 @@
-r"""fs9geom.py -- small geometry helpers shared by the ch9*_geom.py generators.
+r"""fsgeom.py -- small geometry helpers shared by the *_geom.py generators
+of the figures of the notes (figures/chN/).
 
-Everything is computed here in page points and written to ch9*_geom.tex as
-\def macros; the bodies only style what the generators computed.
+Everything is computed in page points and written to <name>_geom.tex as
+\def macros; the figure bodies only style what the generators computed.
 """
 import math
 
@@ -84,3 +85,36 @@ class Out:
     def write(self, fn):
         with open(fn, 'w') as f:
             f.write('\n'.join(self.lines) + '\n')
+
+
+class Camera:
+    """Orthographic trimetric camera of the course figures: azimuth 35.0 deg,
+    elevation 20.4 deg; y up, x to the right and down, z towards the viewer
+    (left and down).  Unit images on the page:
+        e_x = (cos az, -sin az sin el), e_y = (0, cos el),
+        e_z = (-sin az, -cos az sin el).
+    page(P, scale) maps model points (n x 3) to page points (n x 2);
+    toward is the unit vector pointing from the scene to the viewer, so a
+    face with outward normal n is seen from outside iff n . toward > 0.
+    """
+
+    def __init__(self, az=35.0, el=20.4):
+        a, e = math.radians(az), math.radians(el)
+        self.ex = np.array([math.cos(a), -math.sin(a) * math.sin(e)])
+        self.ey = np.array([0.0, math.cos(e)])
+        self.ez = np.array([-math.sin(a), -math.cos(a) * math.sin(e)])
+        u = np.array([self.ex[0], self.ey[0], self.ez[0]])
+        v = np.array([self.ex[1], self.ey[1], self.ez[1]])
+        self.toward = np.cross(u, v)
+
+    def page(self, P, scale=1.0):
+        P = np.atleast_2d(np.asarray(P, dtype=float))
+        Q = scale * (np.outer(P[:, 0], self.ex) + np.outer(P[:, 1], self.ey)
+                     + np.outer(P[:, 2], self.ez))
+        return Q[0] if Q.shape[0] == 1 else Q
+
+    def faces_viewer(self, normal):
+        return float(np.dot(normal, self.toward)) > 0.0
+
+
+HOUSE = Camera()
